@@ -32,3 +32,5 @@ root-context.xml
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
 replay_pid*
+Hobby/target/m2e-wtp/web-resources/META-INF/maven/com.team/controller/pom.properties
+Hobby/target/m2e-wtp/web-resources/META-INF/MANIFEST.MF
