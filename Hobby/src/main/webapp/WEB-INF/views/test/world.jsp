@@ -5,6 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	table{
+		width: 600px; border-collapse: collapse; text-align: center; margin: auto;
+	}
+	table, th, td{
+		border: 1px solid black; padding: 3px;
+	}
+	h1{text-align: center;}
+</style>
 </head>
 <body>
 	<h1>world</h1>
