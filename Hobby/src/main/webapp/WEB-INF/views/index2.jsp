@@ -12,21 +12,20 @@
 
 	function go_group() {
 		location.href = "/group.do"
-
 	}
 
 	function go_login() {
 		location.href = "/login.do"
-
 	}
+	
 	function go_signup() {
 		location.href = "/signup.do"
 
 	}
 	function go_hello() {
 		location.href = "/hello.do"
-
 	}
+	
 	function go_world() {
 		location.href = "/world.do"
 
