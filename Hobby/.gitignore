@@ -8,6 +8,8 @@ MANIFEST
 pom.properties
 **/pom.properties
 root-context.xml
+*.properties
+
 
 # Log file
 *.log
