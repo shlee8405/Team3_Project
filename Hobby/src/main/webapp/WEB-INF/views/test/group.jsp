@@ -8,5 +8,7 @@
 </head>
 <body>
 	<h1>group</h1>
+	
+	<p>새로운 내용</p>
 </body>
 </html>
