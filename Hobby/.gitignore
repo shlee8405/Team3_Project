@@ -6,6 +6,7 @@ MANIFEST
 **/MANIFEST.MF
 **/MANIFEST.*
 pom.properties
+**/pom.properties
 root-context.xml
 
 # Log file
