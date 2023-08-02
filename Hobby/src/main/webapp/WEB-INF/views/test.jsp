@@ -7,8 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>group</h1>
-	
-	<p>새로운 내용</p>
+테스트 합니다.
 </body>
 </html>
