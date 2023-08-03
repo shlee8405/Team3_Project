@@ -39,17 +39,17 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto ">
-				<li class="nav-item active"><a class="nav-link" href="#">캠핑장
-						<span class="sr-only">(current)</span>
+				<li class="nav-item "><a class="nav-link" href="/camp.do">캠핑장 <span
+						class="sr-only">(current)</span>
 				</a></li>
 
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="/group.do" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> 캠핑모임 </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+				<li class="nav-item dropdown active"><a
+					class="nav-link dropdown-toggle" href="/group.do"
+					id="navbarDropdown" role="button" data-toggle="dropdown"
+					aria-haspopup="true" aria-expanded="false"> 캠핑모임 </a>
+					<div class="dropdown-menu " aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="/group.do">캠핑모임 생성</a> <a
-							class="dropdown-item" href="/groupList.do">캠핑모임 참가</a>
+							class="dropdown-item active" href="/groupList.do">캠핑모임 참가</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">test</a>
 					</div></li>
@@ -62,8 +62,6 @@
 
 
 
-
-
 	<div class="input-group mt-5">
 		<input type="text" class="form-control" placeholder="Search this blog">
 		<div class="input-group-append">
@@ -72,20 +70,20 @@
 			</button>
 		</div>
 	</div>
-	
-	
-	
+
+
+
 	<!-- 나중에 jstl foreach로 할거임 -->
 	<div class="container mt-5">
 		<table>
-			<thead> 
+			<thead>
 				<th>캠핑장 이름</th>
 				<th>연락처</th>
 				<th>좌표x</th>
 				<th>좌표y</th>
 				<th>몰루</th>
 			</thead>
-			
+
 			<tbody>
 				<td>1</td>
 				<td>2</td>
@@ -94,7 +92,7 @@
 				<td>5</td>
 			</tbody>
 		</table>
-	
+
 	</div>
 
 

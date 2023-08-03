@@ -21,6 +21,13 @@ public class MyController {
 		ModelAndView mv = new ModelAndView("test/group");
 		return mv;
 	}
+	
+	@GetMapping("/groupList.do") 
+	public ModelAndView goGroupList() {
+		ModelAndView mv = new ModelAndView("test/groupList");
+		return mv;
+	}
+
 	@GetMapping("/login.do")
 	public ModelAndView goLogin() {
 		ModelAndView mv = new ModelAndView("test/login");
@@ -41,6 +48,17 @@ public class MyController {
 		ModelAndView mv = new ModelAndView("test/world");
 		return mv;
 	}
-
+	@GetMapping("/test.do")
+	public ModelAndView goTest() {
+		ModelAndView mv = new ModelAndView("test");
+		return mv;
+	}
+	
+	@GetMapping("/home.do")
+	public ModelAndView goHome() {
+		ModelAndView mv = new ModelAndView("index");
+		return mv;
+	}
+	
 	
 }	

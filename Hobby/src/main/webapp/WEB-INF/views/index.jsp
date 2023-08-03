@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<html>
 <head>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <meta http-equiv="x-ua-compatible" content="ie=edge" />
 <title>Material Design for Bootstrap</title>
+<link rel="stylesheet" href="resources/css/style.css" />
 <!-- Font Awesome -->
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.11.2/css/all.css" />
@@ -15,12 +17,7 @@
 <!-- MDB -->
 <link rel="stylesheet" href="resources/css/mdb.min.css" />
 <!-- Custom styles -->
-<link rel="stylesheet" href="resources/css/style.css" />
-</head>
-<body>
-	<!--Main Navigation-->
-	<header>
-		<style>
+<style>
 /* Carousel styling */
 #introCarousel, .carousel-inner, .carousel-item, .carousel-item.active {
 	height: 100vh;
@@ -61,7 +58,47 @@
 	color: #fff !important;
 }
 </style>
+<script type="text/javascript" src="resources/js/mdb.min.js"></script>
+<!-- Custom scripts -->
+<script type="text/javascript" src="resources/js/script.js">
+	
+</script>
+<script type="text/javascript"
+	src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.1/mdb.min.js"></script>
+<script type="text/javascript">
+	function go_camp() {
+		location.href = "/camp.do"
+	}
 
+	function go_group() {
+		location.href = "/group.do"
+	}
+
+	function go_login() {
+		location.href = "/login.do"
+
+	}
+	function go_signup() {
+		location.href = "/signup.do"
+
+	}
+	function go_hello() {
+		location.href = "/hello.do"
+
+	}
+	function go_world() {
+		location.href = "/world.do"
+
+	}
+	function go_test() {
+		location.href = "/test.do"
+
+	}
+</script>
+</head>
+<body>
+	<!--Main Navigation-->
+	<header>
 		<!-- Navbar -->
 		<nav class="navbar navbar-expand-lg navbar-dark d-none d-lg-block"
 			style="z-index: 2000;">
@@ -131,15 +168,12 @@
 					<div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
 						<div
 							class="d-flex justify-content-center align-items-center h-100">
-							<div class="text-white text-center">
-								<h1 class="mb-3">Learn Bootstrap 5 with MDB</h1>
-								<h5 class="mb-4">Best & free guide of responsive web design</h5>
-								<a class="btn btn-outline-light btn-lg m-2"
-									href="https://www.youtube.com/watch?v=c9B4TPnak1A"
-									role="button" rel="nofollow" target="_blank">Start tutorial</a>
-								<a class="btn btn-outline-light btn-lg m-2"
-									href="https://mdbootstrap.com/docs/standard/" target="_blank"
-									role="button">Download MDB UI KIT</a>
+
+
+							<div class="text-center">
+								<a href="" class="btn btn-default btn-rounded mb-4"
+									data-toggle="modal" data-target="#modalLoginForm">Launch
+									Modal Login Form</a>
 							</div>
 						</div>
 					</div>
@@ -186,7 +220,10 @@
 		</div>
 		<!-- Carousel wrapper -->
 	</header>
-	<!--Main Navigation-->
+
+
+
+
 
 	<!--Main layout-->
 	<main class="mt-5">
@@ -204,6 +241,7 @@
 									<th>회원가입</th>
 									<th>Hello</th>
 									<th>World</th>
+									<th>modal</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -226,6 +264,8 @@
 									<td>
 										<button onclick="go_world()">World</button>
 									</td>
+									<td><button onclick="go_test()">TEST</button></td>
+									
 								</tr>
 							</tbody>
 						</table>
@@ -276,35 +316,6 @@
 	</footer>
 	<!--Footer-->
 	<!-- MDB -->
-	<script type="text/javascript" src="resources/js/mdb.min.js"></script>
-	<!-- Custom scripts -->
-	<script type="text/javascript" src="resources/js/script.js">
-	</script>
-	<script type="text/javascript">
-	function go_camp() {
-		location.href = "/camp.do"
-	}
 
-	function go_group() {
-		location.href = "/group.do"
-
-	}
-
-	function go_login() {
-		location.href = "/login.do"
-
-	}
-	function go_signup() {
-		location.href = "/signup.do"
-
-	}
-	function go_hello() {
-		location.href = "/hello.do"
-
-	}
-	function go_world() {
-		location.href = "/world.do"
-
-	}</script>
 </body>
 </html>
