@@ -12,12 +12,43 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 </head>
+<style>
+	.b{
+		border: solid 1px black;
+	}
+</style>
 <body>
-    z
     <h1>hello world</h1>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-6 col-sm-6 b">hi</div>
+			<div class="col-md-3 col-sm-6 b">hi</div>
+			<div class="col-md-3 col-sm-12 b">hi</div>
+		</div>
+		<div class="row">
+			<div class="col-md-4 offset-md-4 b">hi</div>
+			<div class="col-md-4 b">hi</div>
+			</div>
+	</div>
+	
+	<h1 class="display-1">hihihihihihi</h1>
+	<kbd><kbd> 컨트롤 </kbd></kbd>
+	
+	<div class="container2">
+		<div class="row2">
+			<div class="col-md-4 b">
+				<img class="img-fluid rounded-circle" src="/resources/img/Audi-R8.jpg">
+			</div>
+			<div class="col-md-4 b">
+				<img class="img-fluid img-thumbnail" src="/resources/img/Audi-R8.jpg">
+			</div>
+			<div class="col-md-4 b">
+				<img src="/resources/img/Audi-R8.jpg">
+			</div>
+		</div>
+	</div>
 
-
-<!-- Button trigger modal -->
+	<!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
     Launch demo modal
   </button>
