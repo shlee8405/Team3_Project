@@ -83,6 +83,7 @@
 		</div>
 	</div>
 	
+
 	<!-- 나중에 jstl foreach로 할거임 -->
 	<div class="container mt-5">
 		<table id="test1">
@@ -107,6 +108,7 @@
 			</tbody>
 		</table>
 	</div>
+  
 
 
 
