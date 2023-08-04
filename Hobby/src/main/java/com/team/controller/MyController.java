@@ -14,9 +14,14 @@ public class MyController {
 
 	@GetMapping("/camp.do")
 	public ModelAndView goCamp() {
-		ModelAndView mv = new ModelAndView("test/camp");
-		return mv;
+	    ModelAndView mv = new ModelAndView("test/camp");
+	    String[] test = {"장소", "010 0000 0000", "3321.321", "4321.321", "5"};
+	    String[] test1 = {"장소2", "010 3333 3330", "11.321", "321.321", "3"};
+	    mv.addObject("test", test); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
+	    mv.addObject("test1", test1); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
+	    return mv;
 	}
+	
 	@GetMapping("/group.do")
 	public ModelAndView goGroup() {
 		ModelAndView mv = new ModelAndView("test/groupAdd");
@@ -28,6 +33,10 @@ public class MyController {
 	@GetMapping("/groupList.do") 
 	public ModelAndView goGroupList() {
 		ModelAndView mv = new ModelAndView("test/groupList");
+		String[] test3 = {"장소", "010 0000 0000", "15", "휴일", "5"};
+	    String[] test4 = {"장소2", "010 3333 3330", "20", "안휴일", "3"};
+	    mv.addObject("test3", test3); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
+	    mv.addObject("test4", test4); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
 		return mv;
 	}
 
