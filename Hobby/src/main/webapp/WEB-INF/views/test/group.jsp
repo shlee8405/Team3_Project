@@ -7,6 +7,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
 
+<script type="text/javascript">
+function grouplist_go() {
+	location.href = "/groupList.do";
+}
+</script>
+
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
 	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
@@ -48,8 +54,8 @@
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> 캠핑모임 </a>
 					<div class="dropdown-menu active" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/group.do">캠핑모임 생성</a> <a
-							class="dropdown-item" href="/groupList.do">캠핑모임 참가</a>
+						<a class="dropdown-item" href="/group.do">캠핑모임 생성</a> 
+						<a	class="dropdown-item" href="/groupList.do">캠핑모임 참가</a>
 						<div class="dropdown-divider"></div>
 						<a class="dropdown-item" href="#">test</a>
 					</div></li>
@@ -58,11 +64,6 @@
 			<a class="nav-link" href="/login.do">로그인 <span class="sr-only">(current)</span></a>
 		</div>
 	</nav>
-
-
-
-
-
 
 
 	<div class="input-group mt-5">
@@ -80,10 +81,10 @@
 	<div class="container mt-5">
 		<table>
 			<thead> 
-				<th>캠핑장 이름</th>
-				<th>연락처</th>
-				<th>좌표x</th>
-				<th>좌표y</th>
+				<th>모임 이름</th>
+				<th>대표 연락처</th>
+				<th>인원?</th>
+				<th>공지?</th>
 				<th>몰루</th>
 			</thead>
 			
@@ -95,10 +96,7 @@
 				<td>5</td>
 			</tbody>
 		</table>
-	
 	</div>
-
-
 
 
 
