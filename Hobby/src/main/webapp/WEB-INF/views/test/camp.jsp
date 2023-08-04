@@ -1,11 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Document</title>
+
+<style type="text/css">
+    #test1 {
+        border: 1px solid black;
+    }
+    #test1 th,td {
+        border: 1px solid black;
+        text-align: center; /* 테이블 셀의 텍스트를 가운데 정렬 */
+    }
+</style>
 
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
@@ -26,7 +37,6 @@
 	crossorigin="anonymous"></script>
 </head>
 <body>
-
 
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="/home.do">LOGO 자리</a>
@@ -73,11 +83,10 @@
 		</div>
 	</div>
 	
-	
-	
+
 	<!-- 나중에 jstl foreach로 할거임 -->
 	<div class="container mt-5">
-		<table>
+		<table id="test1">
 			<thead> 
 				<th>캠핑장 이름</th>
 				<th>연락처</th>
@@ -85,17 +94,21 @@
 				<th>좌표y</th>
 				<th>몰루</th>
 			</thead>
-			
 			<tbody>
-				<td>1</td>
-				<td>2</td>
-				<td>3</td>
-				<td>4</td>
-				<td>5</td>
+				<tr>
+					<c:forEach var="k" items="${test}">
+						<td>${k}</td>
+					</c:forEach>
+				</tr>
+				<tr>
+					<c:forEach var="k" items="${test1}">
+						<td>${k}</td>
+					</c:forEach>
+				</tr>
 			</tbody>
 		</table>
-	
 	</div>
+  
 
 
 
