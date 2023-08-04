@@ -83,6 +83,18 @@
 		</div>
 	</div>
 	
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+	<p>테스트입니다.</p>
+	<p>안녕하세요</p>
+	<p>반가워요</p>
+	<p>test</p>
+	
+=======
+	
+	
+>>>>>>> refs/heads/sy
 	<!-- 나중에 jstl foreach로 할거임 -->
 	<div class="container mt-5">
 		<table id="test1">
@@ -111,6 +123,6 @@
 
 
 
-
+>>>>>>> refs/heads/main
 </body>
 </html>

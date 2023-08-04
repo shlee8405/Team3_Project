@@ -1,6 +1,7 @@
 package com.team.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 
@@ -23,8 +24,10 @@ public class MyController {
 	
 	@GetMapping("/group.do")
 	public ModelAndView goGroup() {
-		ModelAndView mv = new ModelAndView("test/group");
-		return mv;
+		ModelAndView mv = new ModelAndView("test/groupAdd");
+			String[] test = {"제목", "이름", "010 0000 0000", "4321.321", "5"};
+		    mv.addObject("test", test); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
+		    return mv;
 	}
 	
 	@GetMapping("/groupList.do") 
@@ -68,6 +71,9 @@ public class MyController {
 		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
-	
-	
+	@PostMapping("/test_groupSend.do")
+	public ModelAndView goGroupAddForm() {
+		ModelAndView mv = new ModelAndView("test/groupList");
+		return mv;
+	}
 }	
