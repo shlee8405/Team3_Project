@@ -15,8 +15,12 @@ public class MyController {
 	@GetMapping("/camp.do")
 	public ModelAndView goCamp() {
 	    ModelAndView mv = new ModelAndView("test/camp");
+	    
+	    // 여기서 commons에서 JSON 형태로 데이터 받음
 	    String[] test = {"장소", "010 0000 0000", "3321.321", "4321.321", "5"};
 	    String[] test1 = {"장소2", "010 3333 3330", "11.321", "321.321", "3"};
+	    
+	    // 캠핑장 리스트를 model에 보내기
 	    mv.addObject("test", test); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
 	    mv.addObject("test1", test1); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
 	    return mv;
@@ -25,9 +29,10 @@ public class MyController {
 	@GetMapping("/group.do")
 	public ModelAndView goGroup() {
 		ModelAndView mv = new ModelAndView("test/groupAdd");
-			String[] test = {"제목", "이름", "010 0000 0000", "4321.321", "5"};
-		    mv.addObject("test", test); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
-		    return mv;
+		
+		String[] test = {"제목", "이름", "010 0000 0000", "4321.321", "5"};
+		mv.addObject("test", test); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
+		return mv;
 	}
 	
 	@GetMapping("/groupList.do") 
