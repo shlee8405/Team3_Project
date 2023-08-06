@@ -20,7 +20,6 @@ import org.w3c.dom.NodeList;
 @Controller
 public class APIController {
 
-	
 	@GetMapping("/campAllList.do")
 	public ModelAndView getCampAllList() {
 		ModelAndView mv = new ModelAndView("redirect:/camp.do");
@@ -29,3 +28,5 @@ public class APIController {
 		return mv;
 	}
 }
+
+

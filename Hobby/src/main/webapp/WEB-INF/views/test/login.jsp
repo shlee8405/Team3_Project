@@ -198,68 +198,12 @@ a:hover{
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-</head>
-<style>
-	.b{
-		border: solid 1px black;
-	}
-</style>
-<body>
-    <h1>hello world</h1>
-	<div class="container-fluid">
-		<div class="row">
-			<div class="col-md-6 col-sm-6 b">hi</div>
-			<div class="col-md-3 col-sm-6 b">hi</div>
-			<div class="col-md-3 col-sm-12 b">hi</div>
-		</div>
-		<div class="row">
-			<div class="col-md-4 offset-md-4 b">hi</div>
-			<div class="col-md-4 b">hi</div>
-			</div>
-	</div>
-	
-	<h1 class="display-1">hihihihihihi</h1>
-	<kbd><kbd> 컨트롤 </kbd></kbd>
-	
-	<div class="container2">
-		<div class="row2">
-			<div class="col-md-4 b">
-				<img class="img-fluid rounded-circle" src="/resources/img/Audi-R8.jpg">
-			</div>
-			<div class="col-md-4 b">
-				<img class="img-fluid img-thumbnail" src="/resources/img/Audi-R8.jpg">
-			</div>
-			<div class="col-md-4 b">
-				<img src="/resources/img/Audi-R8.jpg">
-			</div>
-		</div>
-	</div>
 
-	<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-    Launch demo modal
-  </button>
-  
-  <!-- Modal -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          ...
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
-        </div>
-      </div>
-    </div>
-  </div>
+
+
+</head>
+<body>
+
 	<div class="container">
 		<h2>Login Page</h2> 
 
@@ -305,7 +249,74 @@ a:hover{
 				                    <input type="submit" class="login_btn" value="Login">
 				                    
 				                    <div class="login_api">
-                					<a href=""><img src="resources/images/kakao_login_btn.png" style="width:100%; height:50px; margin-top: 2rem;"></a>
+                					<a href="#" id="kakaoLoginBtn"><img src="resources/images/kakao_login_btn.png" style="width:100%; height:50px; margin-top: 2rem;"></a>
+                					
+                					<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+
+									<ul>
+										<li onclick="kakaoLogin();">
+									      <a href="javascript:void(0)">
+									          <span>카카오 로그인</span>
+									      </a>
+										</li>
+										<li onclick="kakaoLogout();">
+									      <a href="javascript:void(0)">
+									          <span>카카오 로그아웃</span>
+									      </a>
+										</li>
+									</ul>
+									<!-- 카카오 스크립트 -->
+									<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+									
+									<script>
+									document.addEventListener("DOMContentLoaded", function() {
+									    document.getElementById("kakaoLoginBtn").addEventListener("click", function() {
+									        kakaoLogin();
+									    });
+									});
+									</script>
+									
+									
+									<script>
+									Kakao.init('c6915a815f664f1b0e24428d4202b72f'); //발급받은 키 중 javascript키를 사용해준다.
+									console.log(Kakao.isInitialized()); // sdk초기화여부판단
+									//카카오로그인
+									function kakaoLogin() {
+									    Kakao.Auth.login({
+									      success: function (response) {
+									        Kakao.API.request({
+									          url: '/v2/user/me',
+									          success: function (response) {
+									        	  console.log(response)
+									          },
+									          fail: function (error) {
+									            console.log(error)
+									          },
+									        })
+									      },
+									      fail: function (error) {
+									        console.log(error)
+									      },
+									    })
+									  }
+									
+									//카카오로그아웃  
+									function kakaoLogout() {
+									    if (Kakao.Auth.getAccessToken()) {
+									      Kakao.API.request({
+									        url: '/v1/user/unlink',
+									        success: function (response) {
+									        	console.log(response)
+									        },
+									        fail: function (error) {
+									          console.log(error)
+									        },
+									      })
+									      Kakao.Auth.setAccessToken(undefined)
+									    }
+									  }  
+									</script>
+                					
            							</div>
 
             						<div class="login_api">
