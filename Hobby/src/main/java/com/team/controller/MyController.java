@@ -1,17 +1,20 @@
 package com.team.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-
-import java.util.List;
-
-import org.springframework.stereotype.Controller;
+import com.team.user.service.UserService;
+import com.team.user.vo.UserVO;
 
 @Controller
 public class MyController {
-
+	
+	@Autowired
+	private UserService userService;
+	
 	@GetMapping("/camp.do")
 	public ModelAndView goCamp() {
 	    ModelAndView mv = new ModelAndView("test/camp");
@@ -50,21 +53,26 @@ public class MyController {
 		ModelAndView mv = new ModelAndView("test/login");
 		return mv;
 	}
+	
 	@GetMapping("/signup.do")
 	public ModelAndView goSignup() {
 		ModelAndView mv = new ModelAndView("test/signup");
+		System.out.println("running get mapping '/signup.do'");
 		return mv;
 	}
+	
 	@GetMapping("/hello.do")
 	public ModelAndView goHello() {
 		ModelAndView mv = new ModelAndView("test/hello");
 		return mv;
 	}
+	
 	@GetMapping("/world.do")
 	public ModelAndView goWorld() {
 		ModelAndView mv = new ModelAndView("test/world");
 		return mv;
 	}
+	
 	@GetMapping("/test.do")
 	public ModelAndView goTest() {
 		ModelAndView mv = new ModelAndView("test");
@@ -72,13 +80,39 @@ public class MyController {
 	}
 	
 	@GetMapping("/home.do")
-	public ModelAndView goHome() {
+	public ModelAndView goHome() /*홈으로 가기*/ {
 		ModelAndView mv = new ModelAndView("index");
 		return mv;
 	}
+	
 	@PostMapping("/test_groupSend.do")
 	public ModelAndView goGroupAddForm() {
 		ModelAndView mv = new ModelAndView("test/groupList");
 		return mv;
 	}
+	
+	
+	
+	@PostMapping("/signupOk.do")
+	public ModelAndView signUpNormal(UserVO vo) /*회원가입 DB처리*/{
+		ModelAndView mv = new ModelAndView("redirect:/signup.do");
+		System.out.println("running post mapping '/singupOK.do'");
+		int result = 0;
+		try {
+			result = userService.addUser(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		if(result > 0 ) {
+			System.out.println("userService.addUser(vo) success!");
+		} else {
+			System.out.println("userService.addUser(vo) fail!");
+		}
+		
+		return mv;
+	}
+	
+	
+	
 }	
