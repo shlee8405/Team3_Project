@@ -42,10 +42,13 @@ public class APIController {
 					NodeList facltNm = (NodeList) camp.getElementsByTagName("facltNm");
 					NodeList intro = (NodeList) camp.getElementsByTagName("intro");
 					NodeList direction =  (NodeList) camp.getElementsByTagName("direction");
+					NodeList mapX =  (NodeList) camp.getElementsByTagName("mapX");
+					NodeList mapY =  (NodeList) camp.getElementsByTagName("mapY");
+				
 					
 					System.out.println("facltNm is "+ facltNm.item(0).getTextContent());
-					System.out.println("intro is "+ intro.item(0).getTextContent());
-					System.out.println("direction is "+ direction.item(0).getTextContent());
+					System.out.println("mapX is "+ mapX.item(0).getTextContent());
+					System.out.println("mapY is "+ mapY.item(0).getTextContent());
 				}
 			}
 		} catch (Exception e) {
