@@ -18,7 +18,6 @@ import org.xml.sax.SAXException;
 @Controller
 public class APIController {
 
-	XMLParser parser = new XMLParser();
 
 	@GetMapping("/campAllList.do")
 	public ModelAndView getCampAllList() {
