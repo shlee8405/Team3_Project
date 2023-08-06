@@ -9,8 +9,8 @@
 	</select>
 	
 	<insert id="addUser" parameterType="uvo">
-		insert INTO USERS (u_id, u_pw, u_name, u_birthday)
-		VALUES(#{u_id}, #{u_pw}, #{u_name}, #{u_birthday})
+		insert INTO USERS (u_id, u_pw, u_name, u_birthday, u_email, u_phone)
+		VALUES(#{u_id}, #{u_pw}, #{u_name}, #{u_birthday}, #{u_email}, #{u_phone})
 	</insert>
 	
 	
