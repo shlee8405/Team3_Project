@@ -35,41 +35,46 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-	
-	
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script type="text/javascript">
+
 $(document).ready(function(){
 
-$("#allList").on("click", function() {
-	$("#out").empty();
-	$.ajax({
-		url : "https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=10&pageNo=1&MobileOS=WEB&MobileApp=AppTest&serviceKey=0jWBRiz0RJmRmzfMZ23uO9m7juS3aBNXJskrlUMMHsm15eOVy9oSxTPqJGoOVceVRR1oUCq%2BHjjzFSStiMpsdw%3D%3D&_type=xml.xml",
-		method : "get",
-		dataType : "xml",
-		success : function(data) {
-			var table = "<table>";
-			table +="<thead><tr><th>이름</th><th>정보</th><th>사진</th></tr></thead>";
-			table += "<tbody>";
-			// 원하는 태그 검색
-			$(data).find("item").each(function() {
-				var name = $(this).find("facltNm").text();						
-				var desc = $(this).find("featureNm").text();
-				var image = $(this).find("firstImageUrl").text();
-				table += "<tr>";
-				table += "<td>"+ name +"</td><td>"+desc+"</td>";
-				table += "<td><img src="+image+" style='width:100px; height:auto;'></td>";
-				table += "</tr>";
-			});
-			table += "</tbody></table>";
-			$("#out").append(table);
-		},
-		error : function() {
-			alert("가져오기 실패");
-		}
+	$("#allList").on("click", function() {
+		$("#out").empty();
+		$.ajax({
+			url : "https://apis.data.go.kr/B551011/GoCamping/basedList?numOfRows=10&pageNo=1&MobileOS=WEB&MobileApp=AppTest&serviceKey=0jWBRiz0RJmRmzfMZ23uO9m7juS3aBNXJskrlUMMHsm15eOVy9oSxTPqJGoOVceVRR1oUCq%2BHjjzFSStiMpsdw%3D%3D&_type=xml.xml",
+			method : "get",
+			dataType : "xml",
+			success : function(data) {
+				var table = "<table>";
+				table +="<thead><tr><th>이름</th><th>정보</th><th>사진</th></tr></thead>";
+				table += "<tbody>";
+				// 원하는 태그 검색
+				$(data).find("item").each(function() {
+					var name = $(this).find("facltNm").text();						
+					var desc = $(this).find("featureNm").text();
+					var image = $(this).find("firstImageUrl").text();
+					table += "<tr>";
+					table += "<td>"+ name +"</td><td>"+desc+"</td>";
+					table += "<td><img src="+image+" style='width:100px; height:auto;'></td>";
+					table += "</tr>";
+				});
+				table += "</tbody></table>";
+				$("#out").append(table);
+			},
+			error : function() {
+				alert("가져오기 실패");
+			}
+		});
 	});
+	
+	
 });
-});
+
+function getCampList2() {
+	location.href="/campAllList.do";
+}
 </script>
 </head>
 <body>
@@ -107,6 +112,11 @@ $("#allList").on("click", function() {
 
 	
 	<div id="allList"> 전체보기 (눌러주세요) </div>
+	<div id="allList2"> 
+	<button onclick="getCampList2()">
+	전체보기 (java)
+	</button>
+	</div>
 
 
 
@@ -167,10 +177,6 @@ $("#allList").on("click", function() {
 		<h2>데이터 불러오면 변경될 공간</h2>
 		</div>
 	</div>
-
-
-
-
-
-</body>
+	
+	</body>
 </html>
