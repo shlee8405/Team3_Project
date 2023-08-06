@@ -7,6 +7,31 @@
 	
 
 
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<!--  MariaDB 연결 -->
+		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
+		<property name="url" value="jdbc:mariadb://localhost:3306/team" />
+		<property name="username" value="team" />
+		<property name="password" value="1111" /> 
+	</bean>
+	
+	
+	<!-- myBatis의 config 역할 (오라클과 mybatis 연결, mapper 위치) -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="configLocation" value="classpath:mybatis-config.xml" />
+	</bean>
+	
+	
+	
+	<!-- DAO 에서 사용할 Sq	lSessionTemplate클래스를 객체로 만들자 -->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactory" />
+	</bean>
+	
+	
+
+
 		<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:annotation-config />
 	<context:component-scan base-package="com.team.*" />
