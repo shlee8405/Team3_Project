@@ -222,6 +222,11 @@ a:hover {
 				$('#inputbirthday').trigger("focus");
 				return;
 			}
+			if(!$('#inputemail').val()){
+				alert("이메일을 입력하세요");
+				$('#inputemail').trigger("focus");
+				return;
+			}
 			f.action="/signupOk.do";
 			f.submit();
 		} else {
@@ -292,6 +297,15 @@ a:hover {
 									<div class="div">
 										<h5>생년월일</h5>
 										<input type="text" class="input" id="inputbirthday" name="u_birthday">
+									</div>
+								</div>
+								<div class="input-div one">
+									<div class="i">
+										<i class="fas fa-user"></i>
+									</div>
+									<div class="div">
+										<h5>이메일</h5>
+										<input type="text" class="input" id="inputemail" name="u_email">
 									</div>
 								</div>
 								<div class="input-div one">

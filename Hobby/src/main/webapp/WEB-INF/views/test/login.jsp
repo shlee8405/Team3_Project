@@ -206,7 +206,7 @@ a:hover{
 
 	<div class="container">
 		<h2>Login Page</h2> 
-
+	
 		<!-- Button to Open the Modal -->
 		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
 
@@ -329,7 +329,10 @@ a:hover{
 			</div>
 		</div>
 	</div>
+	
 </body>
+<!-- 네이버 로그인 api -->
+<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
 <script type="text/javascript">
 document.addEventListener("DOMContentLoaded", function() {
   var inputs = document.querySelectorAll(".input");

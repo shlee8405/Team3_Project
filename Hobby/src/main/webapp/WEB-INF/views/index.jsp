@@ -94,6 +94,10 @@
 		location.href = "/test.do"
 
 	}
+	function go_map() {
+		location.href = "/map.do"
+
+	}
 </script>
 </head>
 <body>
@@ -242,6 +246,7 @@
 									<th>Hello</th>
 									<th>World</th>
 									<th>modal</th>
+									<th>지도</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -265,7 +270,9 @@
 										<button onclick="go_world()">World</button>
 									</td>
 									<td><button onclick="go_test()">TEST</button></td>
-									
+									<td>
+										<button onclick="go_map()">지도</button>
+									</td>
 								</tr>
 							</tbody>
 						</table>

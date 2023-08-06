@@ -6,46 +6,7 @@
 
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-.search-select{
-    display:flex;
-    justify-content: center;
-    margin: 0px 0px 50px 200px;
-}
-.selectbox{
-    position: relative; 
-    border: 1px solid #686868; 
-    left: -198px; 
-    width:5rem; 
-    height:3rem;
-    text-align:center
-}
-.search {
-    width: 26rem;
-    height:3rem; 
-    border: 1px solid #686868; 
-    margin-left:-198px;
-}
-.submit {
-    position: absolute;
-    width: 5.5rem;
-    height:47.99px;
-    border:none;
-    background: #686868;
-    color: #fff; 
-    cursor:pointer;
 
-}
-.title-txt{
-	text-align: center;
-	margin-bottom: 30px;
-	margin-top: 30px;
-}
-button2{
-	text-align: right;
-}
-
-</style>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" 
 integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" 
@@ -63,8 +24,8 @@ crossorigin="anonymous">
   integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
   crossorigin="anonymous"></script>
 
+<link rel="stylesheet" href="/resources/css/groupAdd.css">
 </head>
-
 <body>
 	<div class="col-md-12">
                   <h2 class="title-txt">캠프 모임</h2>
