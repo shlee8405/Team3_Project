@@ -96,7 +96,9 @@
 	}
 	function go_map() {
 		location.href = "/map.do"
-
+	}
+	function go_admin() {
+		location.href = "/adminHome.do"
 	}
 </script>
 </head>
@@ -247,6 +249,7 @@
 									<th>World</th>
 									<th>modal</th>
 									<th>지도</th>
+									<th>관리자</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -272,6 +275,9 @@
 									<td><button onclick="go_test()">TEST</button></td>
 									<td>
 										<button onclick="go_map()">지도</button>
+									</td>
+									<td>
+										<button onclick="go_admin()">관리자</button>
 									</td>
 								</tr>
 							</tbody>

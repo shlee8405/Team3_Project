@@ -2,7 +2,7 @@ package com.team.user.vo;
 
 public class UserVO {
 
-	private String u_idx, u_id, u_pw, u_name, u_birthday, u_email, u_phone,u_terms, u_status;
+	private String u_idx, u_id, u_nickname, u_pw, u_name,  u_email, u_birthday, u_phone, u_ban,u_terms, u_status;
 
 	public String getU_id() {
 		return u_id;
@@ -75,6 +75,23 @@ public class UserVO {
 	public void setU_phone(String u_phone) {
 		this.u_phone = u_phone;
 	}
+
+	public String getU_nickname() {
+		return u_nickname;
+	}
+
+	public void setU_nickname(String u_nickname) {
+		this.u_nickname = u_nickname;
+	}
+
+	public String getU_ban() {
+		return u_ban;
+	}
+
+	public void setU_ban(String u_ban) {
+		this.u_ban = u_ban;
+	}
+	
 	
 	
 	
