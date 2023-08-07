@@ -12,9 +12,15 @@
 	
 	<typeAliases>
 		<typeAlias type="com.team.user.vo.UserVO" alias="uvo" />
+		<typeAlias type="com.team.group.vo.GroupVO" alias="gvo" />
+		<typeAlias type="com.team.report.vo.ReportVO" alias="rvo" />
+		<typeAlias type="com.team.qna.vo.QnaVO" alias="qvo" />
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="mappers/user-mapper.xml" />
+		<mapper resource="mappers/group-mapper.xml" />
+		<mapper resource="mappers/report-mapper.xml" />
+		<mapper resource="mappers/qna-mapper.xml" />
 	</mappers>
 </configuration>

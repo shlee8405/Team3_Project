@@ -1,5 +1,7 @@
 package com.team.user.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,4 +18,10 @@ public class UserServiceImpl implements UserService{
 	public int addUser(UserVO vo) {
 		return userDAO.addUser(vo);
 	}
+
+	@Override
+	public List<UserVO> getAllUsers() {
+		return userDAO.getAllUsers();
+	}
+	
 }

@@ -1,11 +1,19 @@
 package com.team.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team.group.service.GroupService;
+import com.team.group.vo.GroupVO;
+import com.team.qna.service.QnaService;
+import com.team.qna.vo.QnaVO;
+import com.team.report.service.ReportService;
+import com.team.report.vo.ReportVO;
 import com.team.user.service.UserService;
 import com.team.user.vo.UserVO;
 
@@ -15,9 +23,18 @@ public class MyController {
 	@Autowired
 	private UserService userService;
 	
+	@Autowired
+	private GroupService groupService;
+	
+	@Autowired
+	private QnaService qnaService;
+	
+	@Autowired
+	private ReportService reportService;
+	
 	@GetMapping("/camp.do")
 	public ModelAndView goCamp() {
-	    ModelAndView mv = new ModelAndView("test/camp");
+	    ModelAndView mv = new ModelAndView("camp/camp");
 	    
 	    // 여기서 commons에서 JSON 형태로 데이터 받음
 	    String[] test = {"장소", "010 0000 0000", "3321.321", "4321.321", "5"};
@@ -31,7 +48,7 @@ public class MyController {
 	
 	@GetMapping("/group.do")
 	public ModelAndView goGroup() {
-		ModelAndView mv = new ModelAndView("test/groupAdd");
+		ModelAndView mv = new ModelAndView("group/groupAdd");
 		
 		String[] test = {"제목", "이름", "010 0000 0000", "4321.321", "5"};
 		mv.addObject("test", test); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
@@ -40,7 +57,7 @@ public class MyController {
 	
 	@GetMapping("/groupList.do") 
 	public ModelAndView goGroupList() {
-		ModelAndView mv = new ModelAndView("test/groupList");
+		ModelAndView mv = new ModelAndView("group/groupList");
 		String[] test3 = {"장소", "010 0000 0000", "15", "휴일", "5"};
 	    String[] test4 = {"장소2", "010 3333 3330", "20", "안휴일", "3"};
 	    mv.addObject("test3", test3); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
@@ -85,13 +102,53 @@ public class MyController {
 		return mv;
 	}
 	
-	@PostMapping("/test_groupSend.do")
-	public ModelAndView goGroupAddForm() {
-		ModelAndView mv = new ModelAndView("test/groupList");
+	@GetMapping("/adminHome.do")
+	public ModelAndView goAdminHome() /*관리자 홈*/ {
+		return new ModelAndView("admin/home");
+	}
+	
+	@GetMapping("/adminUser.do")
+	public ModelAndView goAdminUser() /*관리자 유저*/ {
+		ModelAndView mv = new ModelAndView("admin/user");
+		List<UserVO> list = userService.getAllUsers();
+		mv.addObject("list", list);
+		return mv;
+	}
+	
+	@GetMapping("/adminGroup.do")
+	public ModelAndView goAdminGroup() /*관리자 그룹*/ {
+		ModelAndView mv =  new ModelAndView("admin/group");
+		List<GroupVO> list = groupService.getAllGroups();
+		mv.addObject("list", list);
+		return mv;
+	}
+	
+	@GetMapping("/adminQNA.do")
+	public ModelAndView goAdminQNA() /*관리자 1대1*/ {
+		ModelAndView mv = new ModelAndView("admin/qna");
+		List<QnaVO> list = qnaService.getAllQna();
+		mv.addObject("list", list);
+		return mv;
+	}
+	
+	@GetMapping("/adminReport.do")
+	public ModelAndView goAdminReport() /*관리자 신고*/ {
+		ModelAndView mv = new ModelAndView("admin/report");
+		List<ReportVO> list = reportService.getAllReports();
+		mv.addObject("list", list);
 		return mv;
 	}
 	
 	
+	
+	
+	@PostMapping("/test_groupSend.do")
+	public ModelAndView goGroupAddForm() {
+		ModelAndView mv = new ModelAndView("group/groupList");
+		return mv;
+	}
+	
+
 	
 	@PostMapping("/signupOk.do")
 	public ModelAndView signUpNormal(UserVO vo) /*회원가입 DB처리*/{
