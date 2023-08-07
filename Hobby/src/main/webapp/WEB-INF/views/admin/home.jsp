@@ -45,6 +45,9 @@
 		location.href = "/adminReport.do"
 	}
 	
+	function go_home() {
+		location.href = "/home.do"
+	}
 	
 </script>
 </head>
@@ -69,6 +72,9 @@
 				<th> 
 					신고 목록
 				</th>
+				<th>
+					홈으로
+				</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -87,6 +93,9 @@
 				</td>
 				<td>
 					<button onclick="go_adminReport()">신고 목록</button>
+				</td>
+				<td>
+					<button onclick="go_home()">홈으로</button>
 				</td>
 			</tr>
 		</tbody>
