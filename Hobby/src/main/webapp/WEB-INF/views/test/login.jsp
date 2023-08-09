@@ -256,7 +256,7 @@ a:hover{
 									<ul>
 										<li onclick="kakaoLogin();">
 									      <a href="javascript:void(0)">
-									          <span>카카오 로그인</span>
+									          <span>카카오1로그인</span>
 									      </a>
 										</li>
 										<li onclick="kakaoLogout();">
