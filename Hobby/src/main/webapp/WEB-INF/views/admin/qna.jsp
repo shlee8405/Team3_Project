@@ -6,8 +6,83 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script type="text/javascript">
+	function go_admin() {
+		location.href = "/adminHome.do"
+	}
+	
+	function go_adminUser() {
+		location.href = "/adminUser.do"
+	}
+	
+	function go_adminGroup() {
+		location.href = "/adminGroup.do"
+	}
+	
+	function go_adminQNA() {
+		location.href = "/adminQNA.do"
+	}
+	
+	function go_adminReport() {
+		location.href = "/adminReport.do"
+	}
+	
+	function go_home() {
+		location.href = "/home.do"
+	}
+	
+</script>
 </head>
 <body>
+
+<h1>관리자 1대1 문의 관리 페이지</h1>
+<!-- 나중에 사이드바 나 메뉴바로 변경 예정 -->
+	<table>
+		<thead>
+			<tr>
+				<th>
+					 관지자 홈
+				</th>
+				<th> 
+					회원 관리
+				</th>
+				<th> 
+					캠핑모임 관리
+				</th>
+				<th> 
+					1대1 문의
+				</th>
+				<th> 
+					신고 목록
+				</th>
+				<th>
+					홈으로
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+					<button onclick="go_admin()">관리자 홈</button>
+				</td>
+				<td>
+					<button onclick="go_adminUser()">회원 관리</button>
+				</td>
+				<td>
+					<button onclick="go_adminGroup()">캠핑모임 관리</button>
+				</td>
+				<td>
+					<button onclick="go_adminQNA()">1대1 문의</button>
+				</td>
+				<td>
+					<button onclick="go_adminReport()">신고 목록</button>
+				</td>
+				<td>
+					<button onclick="go_home()">홈으로</button>
+				</td>
+			</tr>
+		</tbody>
+	</table>
 
 	<table>
 		<thead>

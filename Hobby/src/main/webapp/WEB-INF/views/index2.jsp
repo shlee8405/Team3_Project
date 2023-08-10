@@ -16,19 +16,30 @@
 
 	function go_login() {
 		location.href = "/login.do"
+
 	}
-	
 	function go_signup() {
 		location.href = "/signup.do"
+	}
 
-	}
-	function go_hello() {
-		location.href = "/hello.do"
-	}
-	
 	function go_world() {
 		location.href = "/world.do"
+	}
 
+	function go_map() {
+		location.href = "/map.do"
+	}
+
+	function go_cusser() {
+		location.href = "/cusSer.do"
+	}
+
+	function go_mypage() {
+		location.href = "/myPage.do"
+	}
+
+	function go_admin() {
+		location.href = "/adminHome.do"
 	}
 </script>
 
@@ -62,42 +73,62 @@ input {
 </head>
 <body>
 
-	<h1>Hello World</h1>
-	<h2 class="m2"> hello</h2>
-	<table>
-		<thead>
-			<tr>
-				<th>캠핑장</th>
-				<th>캠핑장모임</th>
-				<th>로그인</th>
-				<th>회원가입</th>
-				<th>Hello</th>
-				<th>World</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<button onclick="go_camp()">캠핑장</button>
-				</td>
-				<td>
-					<button onclick="go_group()">캠핑장모임</button>
-				</td>
-				<td>
-					<button onclick="go_login()">로그인</button>
-				</td>
-				<td>
-					<button onclick="go_signup()">회원가입</button>
-				</td>
-				<td>
-					<button onclick="go_hello()">Hello</button>
-				</td>
-				<td>
-					<button onclick="go_world()">World</button>
-				</td>
-				
-			</tr>
-		</tbody>
-	</table>
+	<main class="mt-5">
+		<div class="container">
+			<!--Section: Content-->
+			<section>
+				<div class="row justify-content-center">
+					<div class="col-auto">
+						<table class="table table-responsive">
+							<thead>
+								<tr>
+									<th>캠핑장</th>
+									<th>캠핑장모임</th>
+									<th>고객센터</th>
+									<th>마이페이지</th>
+									<th>관리자</th>
+									<th>로그인</th>
+									<th>회원가입</th>
+									<th>지도</th>
+									<th>hello</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>
+										<button onclick="go_camp()" class="btn btn-primary">캠핑장</button>
+									</td>
+									<td>
+										<button onclick="go_group()" class="btn btn-primary">캠핑장모임</button>
+									</td>
+									<td>
+										<button onclick="go_cusser()" class="btn btn-primary">고객센터</button>
+									</td>
+									<td><button onclick="go_mypage()" class="btn btn-primary">마이페이지</button></td>
+
+									<td>
+										<button onclick="go_admin()" class="btn btn-primary">관리자</button>
+									</td>
+									<td>
+										<button onclick="go_login()">로그인</button>
+									</td>
+									<td>
+										<button onclick="go_signup()">회원가입</button>
+									</td>
+									<td>
+										<button onclick="go_map()">지도</button>
+									</td>
+									<td>
+										<button onclick="go_hello()">Hello</button>
+									</td>
+
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+		</div>
+	</main>
 </body>
 </html>
