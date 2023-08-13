@@ -32,8 +32,18 @@ public class MyController {
 	@Autowired
 	private ReportService reportService;
 	
+	//홈 control
+	@GetMapping("/home.do")
+	public ModelAndView goHome() /*홈으로 가기. 현재 index 2로 되어있음*/ {
+		ModelAndView mv = new ModelAndView("index2");
+		return mv;
+	}
+	
+	
+	
+	//캠핑장 관련 controls
 	@GetMapping("/camp.do")
-	public ModelAndView goCamp() {
+	public ModelAndView goCamp() /*캠핑장 메인 페이지*/ {
 	    ModelAndView mv = new ModelAndView("camp/camp");
 	    
 	    // 여기서 commons에서 JSON 형태로 데이터 받음
@@ -46,8 +56,12 @@ public class MyController {
 	    return mv;
 	}
 	
+	
+	
+	
+	//모임 관련 controls
 	@GetMapping("/group.do")
-	public ModelAndView goGroup() {
+	public ModelAndView goGroup() /**/ {
 		ModelAndView mv = new ModelAndView("group/groupAdd");
 		
 		String[] test = {"제목", "이름", "010 0000 0000", "4321.321", "5"};
@@ -56,7 +70,7 @@ public class MyController {
 	}
 	
 	@GetMapping("/groupList.do") 
-	public ModelAndView goGroupList() {
+	public ModelAndView goGroupList() /**/ {
 		ModelAndView mv = new ModelAndView("group/groupList");
 		String[] test3 = {"장소", "010 0000 0000", "15", "휴일", "5"};
 	    String[] test4 = {"장소2", "010 3333 3330", "20", "안휴일", "3"};
@@ -65,43 +79,63 @@ public class MyController {
 		return mv;
 	}
 
-	@GetMapping("/login.do")
-	public ModelAndView goLogin() {
-		ModelAndView mv = new ModelAndView("test/login");
+	
+	
+	
+	
+	//고객센터 관련 controls
+	@GetMapping("/cusSer.do")
+	public ModelAndView goCusSer()  /*고객센터 메인*/ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerMain");
 		return mv;
 	}
 	
-	@GetMapping("/signup.do")
-	public ModelAndView goSignup() {
-		ModelAndView mv = new ModelAndView("test/signup");
-		System.out.println("running get mapping '/signup.do'");
+	@GetMapping("/cusSerFAQ.do")
+	public ModelAndView goCusSerFAQ() /*자주하는 질문 페이지*/ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerFAQ");
 		return mv;
 	}
 	
-	@GetMapping("/hello.do")
-	public ModelAndView goHello() {
-		ModelAndView mv = new ModelAndView("test/hello");
+	@GetMapping("/cusSerAsk.do")
+	public ModelAndView goCusSerAsk() /*1대1 문의 페이지*/ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerAsk");
 		return mv;
 	}
 	
-	@GetMapping("/world.do")
-	public ModelAndView goWorld() {
-		ModelAndView mv = new ModelAndView("test/world");
+	@GetMapping("/cusSerReport.do")
+	public ModelAndView goCusSerReport() {
+		ModelAndView mv = new ModelAndView("cusser/cusSerReport");
 		return mv;
 	}
 	
-	@GetMapping("/test.do")
-	public ModelAndView goTest() {
-		ModelAndView mv = new ModelAndView("test");
+	
+	
+	
+	
+	//마이페이지 관련 controls
+	@GetMapping("/myPage.do") 
+	public ModelAndView goMyPage() /*마이페이지 메인*/ {
+		ModelAndView mv = new ModelAndView("user/myPageMain");
 		return mv;
 	}
 	
-	@GetMapping("/home.do")
-	public ModelAndView goHome() /*홈으로 가기*/ {
-		ModelAndView mv = new ModelAndView("index");
+	@GetMapping("/myPageOneList.do") 
+	public ModelAndView goMyPageOneList() /*나의 정보 보기*/ {
+		ModelAndView mv = new ModelAndView("user/myPageOneList");
 		return mv;
 	}
 	
+	@GetMapping("/myPageEdit.do") 
+	public ModelAndView goMyPageEdit() /*나의 정보 수정*/ {
+		ModelAndView mv = new ModelAndView("user/myPageEdit");
+		return mv;
+	}
+	
+	
+	
+	
+	
+	// 관리자 관련 controls
 	@GetMapping("/adminHome.do")
 	public ModelAndView goAdminHome() /*관리자 홈*/ {
 		return new ModelAndView("admin/home");
@@ -141,6 +175,48 @@ public class MyController {
 	
 	
 	
+	
+	
+	
+	//회원가입, 로그인 controls
+	@GetMapping("/login.do")
+	public ModelAndView goLogin() {
+		ModelAndView mv = new ModelAndView("test/login");
+		return mv;
+	}
+	
+	@GetMapping("/signup.do")
+	public ModelAndView goSignup() {
+		ModelAndView mv = new ModelAndView("test/signup");
+		System.out.println("running get mapping '/signup.do'");
+		return mv;
+	}
+
+	
+	
+	
+	
+	
+	
+	//쓰레기
+	@GetMapping("/hello.do")
+	public ModelAndView goHello() {
+		ModelAndView mv = new ModelAndView("test/hello");
+		return mv;
+	}
+	
+	@GetMapping("/world.do")
+	public ModelAndView goWorld() {
+		ModelAndView mv = new ModelAndView("test/world");
+		return mv;
+	}
+	
+	@GetMapping("/test.do")
+	public ModelAndView goTest() {
+		ModelAndView mv = new ModelAndView("test");
+		return mv;
+	}
+
 	
 	@PostMapping("/test_groupSend.do")
 	public ModelAndView goGroupAddForm() {
