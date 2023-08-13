@@ -17,47 +17,7 @@
 <!-- MDB -->
 <link rel="stylesheet" href="resources/css/mdb.min.css" />
 <!-- Custom styles -->
-<style>
-/* Carousel styling */
-#introCarousel, .carousel-inner, .carousel-item, .carousel-item.active {
-	height: 100vh;
-}
 
-.carousel-item:nth-child(1) {
-	background-image:
-		url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center;
-}
-
-.carousel-item:nth-child(2) {
-	background-image:
-		url('https://mdbootstrap.com/img/Photos/Others/images/77.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center;
-}
-
-.carousel-item:nth-child(3) {
-	background-image:
-		url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg');
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center center;
-}
-
-/* Height for devices larger than 576px */
-@media ( min-width : 992px) {
-	#introCarousel {
-		margin-top: -58.59px;
-	}
-}
-
-.navbar .nav-link {
-	color: #fff !important;
-}
-</style>
 <script type="text/javascript" src="resources/js/mdb.min.js"></script>
 <!-- Custom scripts -->
 <script type="text/javascript" src="resources/js/script.js">
@@ -101,6 +61,7 @@
 		location.href = "/adminHome.do"
 	}
 </script>
+<link rel="stylesheet" href="/resources/css/index.css">
 </head>
 <body>
 	<!--Main Navigation-->
