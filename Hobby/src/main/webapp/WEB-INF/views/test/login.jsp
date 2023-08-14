@@ -15,7 +15,6 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<meta name ="google-signin-client_id" content="516212483548-l0von8bqb97k9ao0pjaea7c5g9asouvp.apps.googleusercontent.com">
 <link rel="stylesheet" href="/resources/css/login.css">
 </head>
 <body>
@@ -26,9 +25,7 @@
     <form action="" method="">
         <div class="wrap">
             <div class="login">
-                <a href="index.html">
-                    <h3 style="font-size:50px;  font-family: 'Noto Sans KR', sans-serif;">/캠핑.do</h3>
-                </a>
+                    <h3 style="font-size:50px;  font-family: 'Noto Sans KR', sans-serif;">/캠핑.DO</h3>
                 <!--이메일 입력-->
                 <div class="login_id">
                     <h4 style=" font-family: 'Noto Sans KR', sans-serif;">아이디</h4>
@@ -126,6 +123,7 @@
     }
   }
 </script>
+
 
 </body>
 
