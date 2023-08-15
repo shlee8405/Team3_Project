@@ -101,6 +101,51 @@ public class APIController {
 		return mv;
 	}
 	
+	// 캠핑장 검색
+	@GetMapping("/campSearch.do")
+	public List<CampVO> getSearchList(@RequestParam(defaultValue = "1") int pageNo, @RequestParam String keyword) throws URISyntaxException, UnsupportedEncodingException {
+			
+			// 리퀘스트 파라미터
+			int numOfRows = 5; 	// 보여줄 리스트 개수
+			//int pageNo = 1; 	// 페이지 번호
+			
+			String apiUrl = targetUrl + "/searchList"
+					+ "?numOfRows=" + numOfRows
+					+ "&pageNo=" + pageNo
+					+ "&MobileOS=" + mobileOS
+					+ "&MobileApp=" +  mobileApp
+					+ "&serviceKey=" + serviceKey
+					+ "&_type=json"
+					+ "&keyword=" + URLEncoder.encode(keyword, StandardCharsets.UTF_8.toString());
+					
+			// 자바 URI클래스를 사용. URL전송 할 때 문자열 그대로 날아가는 것이 아닌 한번 인코딩 해서 보내준다.
+			URI uri = new URI(apiUrl);
+			ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+			
+			//Body 정보만 필요하기 때문에
+			JSONObject jsonResponse = new JSONObject(response.getBody());
+			
+			JSONArray item = jsonResponse.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item");
+			
+			// CampVO타입으로 dataList라는 빈 배열 선언
+			List<CampVO> dataList = new ArrayList<>();
+			
+			for (int i = 0; i < item.length(); i++) {
+				JSONObject oneItem = item.getJSONObject(i);
+
+				CampVO cvo = new CampVO();
+				cvo.setFacltNm(oneItem.getString("facltNm"));
+				cvo.setAddr1(oneItem.getString("addr1"));
+				cvo.setLineIntro(oneItem.getString("lineIntro"));
+				// 나중에 필요한거 더 추가........
+				dataList.add(cvo);
+			}
+			
+			//ModelAndView mv = new ModelAndView("camp/camp_list");
+			//mv.addObject("dataList", dataList);
+			return dataList;
+		}
+	
 	
 	// 캠핑장 상세보기 호출하기
 	@GetMapping("/campDetail.do")

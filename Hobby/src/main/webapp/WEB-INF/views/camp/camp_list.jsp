@@ -45,12 +45,49 @@
 	/* 페이지 로드시에도 한번 호출되도록 */
 	$('#more-btn').trigger("click");
 	});
+	
+	
+	function doSearch() {
+		var pageNo = 0;
+		var keyword = $("#searchBox").val();
+		
+		$.ajax({
+			url: "/campSearch.do",
+			method : "get",
+			data : {
+				pageNo: pageNo,
+				keyword: keyword
+			},
+			dataType : "json", 
+			success : function(data) {
+				var list = "";
+				
+				// $.each() 함수를 사용하여 서버에서 받아온 데이터를 반복적으로 처리하는 HTML 내용을 생성
+				$.each(data, function (index, item) {
+					list += "<div>"
+					+ "<a href='/campDetail.do?keyword=" + item.facltNm + "'>" + item.facltNm + "</a>"
+					+ "<p>" + item.addr1 + "</p>"
+					+ "<p>" + item.lineIntro + "</p>"
+					+ "</div>";
+				});
+				 $("#camp-list").html(list);
+			},
+	        error: function() {
+	            alert("검색 실패");
+	      }
+	  });
+}
 </script>
 </head>
 	<body>
+		<input type="text" id="searchBox" placeholder="캠핑장 이름을 입력하세요"/>
+   		<button onclick="doSearch()">검색</button>
+   		<br><br><br>
+    
 		<div id="camp-list">
 			<!-- 이 안에 내용 들어감 -->
 		</div>
+	
 		
 		<button id="more-btn">더보기</button>
 	</body>
