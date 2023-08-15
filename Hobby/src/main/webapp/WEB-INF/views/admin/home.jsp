@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,68 +8,22 @@
 <title>Insert title here</title>
 
 <style type="text/css">
-body {
-	padding-top: 80px;
+
+main {
+    display:flex;
+    flex-direction: row;
 }
 
-#sidebar {
-	position: fixed;
-	top: 50px;
-	left: 220px;
-	width: 220px;
-	margin-left: -220px;
-	border: none;
-	border-radius: 0;
-	overflow-y: auto;
-	background-color: #222;
-	bottom: 0;
-	overflow-x: hidden;
-	padding-bottom: 40px;
+
+.sidebar-link {
+color:#ffffff!important;
+
 }
 
-.side-bar>li>a {
-	color: #eee;
-	width: 220px;
-}
-
-.side-bar li a:hover, .side-bar li a:focus {
-	background-color: #092A00;
-}
-
-#sidebar .side-bar > li:hover > a {
-    background-color: #092A00;
-    color: white;
-    font-weight: bold;
-}
-
-.tmargin {
-	margin-top: 15px;
-}
-
-navbar {
-	color: white;
-}
 </style>
 
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-<link rel="stylesheet"
-	href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.2.3/animate.min.css">
-<!--
-<link rel="stylesheet" href="resources/css/styles.css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-		 -->
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
-<script
-	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
 	function go_admin() {
@@ -97,202 +52,85 @@ navbar {
 </script>
 </head>
 <body>
+<main>
+    <div class="flex-shrink-0 p-3  " style="height:100vh; width: 280px; background-color: #0f4200; color:white;">
+        <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom border-2 sidebar-link">
+        <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
+        <span class="fs-5 fw-semibold">/CAMPING.do</span>
+        </a>
+        <ul class="list-unstyled ps-0">
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+            대시보드
+            </button>
+            <div class="collapse" id="dashboard-collapse" style="">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="/adminHome.do" class="ps-4 link-dark rounded sidebar-link">11</a></li>
+                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">22</a></li>
+                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">33</a></li>
+            </ul>
+            </div>
+        </li>
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#user-collapse" aria-expanded="false">
+            유저관리
+            </button>
+            <div class="collapse" id="user-collapse" style="">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="/adminUser.do" class="ps-4 link-dark rounded sidebar-link">사용자 리스트</a></li>
+                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">관리자 테이블</a></li>
+                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">ㅁㄴㅇㄹ</a></li>
+            </ul>
+            </div>
+        </li>
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#groups-collapse" aria-expanded="false">
+            캠핑모임 관리
+            </button>
+            <div class="collapse" id="groups-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="/adminGroup.do" class="ps-4 link-dark rounded sidebar-link">모임 리스트</a></li>
+                <li><a href="#" class="ps-4 ink-dark rounded sidebar-link">모임 생성</a></li>
+                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">ㅁㄴㅇㄹ</a></li>
+            </ul>
+            </div>
+        </li>
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#cusser-collapse" aria-expanded="false">
+            고객지원
+            </button>
+            <div class="collapse" id="cusser-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">F A Q</a></li>
+                <li><a href="/adminQNA.do" class="ps-4 ink-dark rounded sidebar-link">1대1 문의</a></li>
+                <li><a href="/adminReport.do" class="ps-4 link-dark rounded sidebar-link">신고</a></li>
+            </ul>
+            </div>
+        </li>
+        <li class="border-top border-2 my-3"></li>
+        <li class="mb-1">
+            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+            계정
+            </button>
+            <div class="collapse" id="account-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li><a href="/home.do" class="ps-4 link-dark rounded sidebar-link">로그아웃</a></li>
+            </ul>
+            </div>
+        </li>
+        </ul>
+    </div>
 
 
-	<nav class="navbar navbar-inverse navbar-fixed-top"
-		style="background-color: #0F4200;">
-		<div class="container">
-			<div class="navbar-header">
-				<button class="navbar-toggle" data-toggle="collapse"
-					data-target=".navbar-collapse">
-					<span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
-				<a class="navbar-brand" href="/">관리자 홈</a>
-			</div>
-			<div class="collapse navbar-collapse">
-				<ul class="nav navbar-nav navbar-right">
-					<li><a href="#"><span class="glyphicon glyphicon-user">&nbsp;</span>Hello
-							Admin</a></li>
-					<li class="active"><a title="View Website" href="#"><span
-							class="glyphicon glyphicon-globe"></span></a></li>
-					<li><a href="#">Logout</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav> 
-	
-	
-	<div class="container-fluid" >
-		<div class="col-md-3" >
-
-			<div id="sidebar"  style="background-color: #0F4200;" >
-				<div class="container-fluid tmargin" >
-					<div class="input-group">
-						<input type="text" class="form-control" placeholder="Search..." />
-						<span class="input-group-btn">
-							<button class="btn btn-default">
-								<span class="glyphicon glyphicon-search"></span>
-							</button>
-						</span>
-					</div>
-				</div>
-
-				<ul class="nav navbar-nav side-bar" >
-					<li class="side-bar tmargin"><a href="#"><span
-							class="glyphicon glyphicon-list">&nbsp;</span>대쉬보드</a></li>
-					<li class="side-bar"><a href="#"><span
-							class="glyphicon glyphicon-flag">&nbsp;</span>Purok</a>
-						<li class="side-bar dropdown">
-						    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-						        <span class="glyphicon glyphicon-flag">&nbsp;</span>Purok <span class="caret"></span>
-						    </a>
-						    <ul class="dropdown-menu" role="menu">
-						        <li><a href="#">Button 1</a></li>
-						        <li><a href="#">Button 2</a></li>
-						        <li><a href="#">Button 3</a></li>
-						    </ul>
-						</li>		
-					<li class="side-bar"><a href="#"><span
-							class="glyphicon glyphicon-star">&nbsp;</span>Blotter</a></li>
-					<li class="side-bar"><a href="#"><span
-							class="glyphicon glyphicon-certificate">&nbsp;</span>Officials</a></li>
-
-					<li class="side-bar"><a href="#"><span
-							class="glyphicon glyphicon-signal">&nbsp;</span>Statistics</a></li>
-					<li class="side-bar"><a href="#"><span
-							class="glyphicon glyphicon-cog">&nbsp;</span>Settings</a></li>
-
-				</ul>
-			</div>
-		</div>
-		
-		<div class="col-md-9 animated bounce">
-			<h1 class="page-header">Dashboard</h1>
-			<ul class="breadcrumb">
-				<li><span class="glyphicon glyphicon-home">&nbsp;</span>Home</li>
-				<li><a href="#">Dashboard</a></li>
-			</ul>
-			<table class="table table-hover">
-				<thead>
-					<th>&nbsp;</th>
-					<th class="text-center">#</th>
-					<th>Title</th>
-					<th class="text-center">Author</th>
-					<th>Status</th>
-
-				</thead>
-				<tbody>
-					<!--
-          <tr>
-            <td><input type="checkbox" /></td>
-            <td class="text-center">1</td>
-            <td width="70%">Lorem ipsum dolor sit amet, consectetur adipisicing elit...</td>
-            <td class="text-center" width="10%">Admin</td>
-            <td><span class="label label-info">Pending</span></td>
-          </tr>
--->
-					<!-- START CONTENT END -->
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td class="text-center">1</td>
-						<td width="70%">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit...</td>
-						<td class="text-center" width="10%">Admin</td>
-						<td><span class="label label-info"><span
-								class="glyphicon glyphicon-time">&nbsp;</span>Pending</span></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td class="text-center">1</td>
-						<td width="70%">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit...</td>
-						<td class="text-center" width="10%">Admin</td>
-						<td><span class="label label-success"><span
-								class="glyphicon glyphicon-ok-sign">&nbsp;</span>Live</span></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td class="text-center">1</td>
-						<td width="70%">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit...</td>
-						<td class="text-center" width="10%">Admin</td>
-						<td><span class="label label-success"><span
-								class="glyphicon glyphicon-ok-sign">&nbsp;</span>Live</span></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td class="text-center">1</td>
-						<td width="70%">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit...</td>
-						<td class="text-center" width="10%">Admin</td>
-						<td><span class="label label-success"><span
-								class="glyphicon glyphicon-ok-sign">&nbsp;</span>Live</span></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td class="text-center">1</td>
-						<td width="70%">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit...</td>
-						<td class="text-center" width="10%">Admin</td>
-						<td><span class="label label-success"><span
-								class="glyphicon glyphicon-ok-sign">&nbsp;</span>Live</span></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td class="text-center">1</td>
-						<td width="70%">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit...</td>
-						<td class="text-center" width="10%">Admin</td>
-						<td><span class="label label-success"><span
-								class="glyphicon glyphicon-ok-sign">&nbsp;</span>Live</span></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td class="text-center">1</td>
-						<td width="70%">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit...</td>
-						<td class="text-center" width="10%">Admin</td>
-						<td><span class="label label-success"><span
-								class="glyphicon glyphicon-ok-sign">&nbsp;</span>Live</span></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td class="text-center">1</td>
-						<td width="70%">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit...</td>
-						<td class="text-center" width="10%">Admin</td>
-						<td><span class="label label-success"><span
-								class="glyphicon glyphicon-ok-sign">&nbsp;</span>Live</span></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td class="text-center">1</td>
-						<td width="70%">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit...</td>
-						<td class="text-center" width="10%">Admin</td>
-						<td><span class="label label-success"><span
-								class="glyphicon glyphicon-ok-sign">&nbsp;</span>Live</span></td>
-					</tr>
-					<tr>
-						<td><input type="checkbox" /></td>
-						<td class="text-center">1</td>
-						<td width="70%">Lorem ipsum dolor sit amet, consectetur
-							adipisicing elit...</td>
-						<td class="text-center" width="10%">Admin</td>
-						<td><span class="label label-success"><span
-								class="glyphicon glyphicon-ok-sign">&nbsp;</span>Live</span></td>
-					</tr>
-
-					<!-- DUMP CONTENT END -->
-
-				</tbody>
-
-			</table>
-		</div>
-	</div>
+   
 
 
+    <div>
+        hi
+    </div>
+   
+
+</main>
 
 </body>
 </html>
