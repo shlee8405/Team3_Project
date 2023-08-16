@@ -6,6 +6,7 @@ public class CampVO {
 	 facltNm : 야영장명
 	 lineIntro : 한줄소개
 	 addr1 : 전체 주소
+	 doNm : 주소(시,도)
 	 mapX : 경도(X)
 	 mapY : 위도(Y)
 	 tel : 전화번호 
@@ -17,7 +18,9 @@ public class CampVO {
 	 firstImageUrl : 이미지
 	 */
 	
-	private String contentId, facltNm, lineIntro, addr1, mapX, mapY, tel, operDeCl, lctCl, induty, posblFcltyCl, featureNm, firstImageUrl;
+	private String contentId, facltNm, lineIntro, addr1, mapX, mapY, 
+				   tel, operDeCl, lctCl, induty, posblFcltyCl, featureNm, 
+				   firstImageUrl, doNm;
 
 	public String getContentId() {
 		return contentId;
@@ -121,5 +124,13 @@ public class CampVO {
 
 	public void setFirstImageUrl(String firstImageUrl) {
 		this.firstImageUrl = firstImageUrl;
+	}
+
+	public String getDoNm() {
+		return doNm;
+	}
+
+	public void setDoNm(String doNm) {
+		this.doNm = doNm;
 	}
 }
