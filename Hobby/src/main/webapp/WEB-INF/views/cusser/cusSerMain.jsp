@@ -5,6 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	table{
+		border: 1px solid black;
+	}
+	
+	.button-Q{
+		padding: 10px;
+	}
+</style>
 <script type="text/javascript">
 
 
@@ -78,7 +87,6 @@ function go_home() {
 			</tr>
 		</tbody>
 	</table>
-
-
+	
 </body>
 </html>

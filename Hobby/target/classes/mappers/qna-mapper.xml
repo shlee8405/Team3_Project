@@ -5,8 +5,15 @@
 <mapper namespace="qna">
 	
 	<select id="allList" resultType="qvo">
-		select * from qna 
+		SELECT q.*, u.u_name
+		FROM qna q
+		JOIN users u ON q.u_idx = u.u_idx
 	</select>
+	
+	<insert id="insert" parameterType="qvo">
+		INSERT INTO qna(q_content,q_response,u_idx)
+		VALUES(#{q_content},#{q_response},1);
+	</insert>
 	
 </mapper>
 

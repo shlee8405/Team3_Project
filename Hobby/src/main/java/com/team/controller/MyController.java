@@ -5,9 +5,12 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team.faq.service.FaqService;
+import com.team.faq.vo.FaqVO;
 import com.team.group.service.GroupService;
 import com.team.group.vo.GroupVO;
 import com.team.qna.service.QnaService;
@@ -31,6 +34,9 @@ public class MyController {
 	
 	@Autowired
 	private ReportService reportService;
+	
+	@Autowired
+	private FaqService faqService;
 	
 	//홈 control
 	@GetMapping("/home.do")
@@ -78,8 +84,6 @@ public class MyController {
 	    mv.addObject("test4", test4); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
 		return mv;
 	}
-
-	
 	
 	
 	
@@ -93,17 +97,37 @@ public class MyController {
 	@GetMapping("/cusSerFAQ.do")
 	public ModelAndView goCusSerFAQ() /*자주하는 질문 페이지*/ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerFAQ");
+		List<FaqVO> list = faqService.getList();
+		mv.addObject("list", list);
 		return mv;
 	}
 	
 	@GetMapping("/cusSerAsk.do")
-	public ModelAndView goCusSerAsk() /*1대1 문의 페이지*/ {
+	public ModelAndView goCusSerAsk() /*내가 한 1대1 문의 목록 페이지*/ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerAsk");
+		List<QnaVO> list = qnaService.getAllQna();
+		mv.addObject("alllist", list);
+		return mv;
+	}
+	
+	@GetMapping("/go_inquiry.do")
+	public ModelAndView goinquiry() /*1대1 문의 작성 페이지로 이동*/ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerQ");
+		List<QnaVO> list = qnaService.getAllQna();
+		mv.addObject("alllist", list);
+		return mv;
+	}
+	
+	@PostMapping("/insert_QNA.do")
+	public ModelAndView insert_QNA(QnaVO qvo)/*1대1 문의 넣기*/{
+		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
+		int res = qnaService.getInsert(qvo);
+		System.out.println(qvo.getQ_content());
 		return mv;
 	}
 	
 	@GetMapping("/cusSerReport.do")
-	public ModelAndView goCusSerReport() {
+	public ModelAndView goCusSerReport() /*신고 페이지*/{
 		ModelAndView mv = new ModelAndView("cusser/cusSerReport");
 		return mv;
 	}

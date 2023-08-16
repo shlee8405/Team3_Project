@@ -5,80 +5,105 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+	#bbs table {
+	    width:800px;
+	    margin:0 auto;
+	    margin-top:20px;
+	    border:1px solid black;
+	    border-collapse:collapse;
+	    font-size:14px;
+	    
+	}
+	
+	#bbs table caption {
+	    font-size:20px;
+	    font-weight:bold;
+	    margin-bottom:10px;
+	}
+	
+	#bbs table th {
+	    text-align:center;
+	    border:1px solid black;
+	    padding:4px 10px;
+	}
+	
+	#bbs table td {
+	    text-align:left;
+	    border:1px solid black;
+	    padding:4px 10px;
+	}
+	
+	.no {width:15%}
+	.subject {width:30%}
+	.writer {width:20%}
+	.reg {width:20%}
+	.hit {width:15%}
+	.title{background:lightsteelblue}
+	.odd {background:silver}
+</style>
 <script type="text/javascript">
-
-
-function go_cusser() {
-	location.href="/cusSer.do"	
-}
-
-function go_cusserFAQ() {
-	location.href="/cusSerFAQ.do"
-}
-
-
-function go_cusserAsk() {
-	location.href="/cusSerAsk.do"
-}
-
-function go_cusserReport() {
-	location.href="/cusSerReport.do"
-}
-
-function go_home() {
-	location.href="/home.do"
-}
-
+	function sendData(f) {
+		// 다른 방법
+		if(f.title.value.trim().length <=0){
+			alert("제목을 입력하세요");
+			f.title.focus();
+			return;
+		}
+		
+		if(f.writer.value.trim().length <=0){
+			alert("작성자를 입력하세요");
+			f.writer.focus();
+			return;
+		}
+		
+		if(f.content.value.trim().length <=0){
+			alert("내용을 입력하세요");
+			f.content.focus();
+			return;
+		}
+		
+		f.action="/go_inquiry.do";
+		f.submit();
+	}
+	
+	function list_go(f) {
+		f.action="/cusSerAsk.do";
+		f.submit();
+	}
 </script>
-
 </head>
 <body>
-
-<h1>신고 페이지</h1>
-
-
-	<!-- 나중에 사이드바 나 메뉴바로 변경 예정 -->
-<table>
-		<thead>
-			<tr>
-				<th>
-					고객센터 메인
-				</th>
-				<th> 
-					자주묻는질문
-				</th>
-				<th> 
-					1:1 문의
-				</th>
-				<th> 
-					신고하기
-				</th>
-				<th>
-					홈
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<button onclick="go_cusser()">고객센터 메인</button>
-				</td>
-				<td>
-					<button onclick="go_cusserFAQ()">자주묻는질문</button>
-				</td>
-				<td>
-					<button onclick="go_cusserAsk()">1:1 문의</button>
-				</td>
-				<td>
-					<button onclick="go_cusserReport()">신고하기</button>
-				</td>
-				<td>
-					<button onclick="go_home()">홈으로</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-
-
+	<div id="bbs">
+	<form method="post" encType="multipart/form-data">
+		<table summary="게시판 글쓰기">
+			<caption>신고 게시판</caption>
+			<tbody>
+				<tr>
+					<th>제목:</th>
+					<td><input type="text" name="title" size="45"/></td>
+				</tr>
+				<tr>
+					<th>작성자: </th>
+					<td></td>
+				</tr>
+				<tr>
+					<th>내용:</th>
+					<td><textarea name="content" cols="50" 
+							rows="8" id="content"></textarea></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: center;">
+						<input type="button" value="보내기" onclick="sendData(this.form)"/>
+						<input type="reset" value="다시"/>
+						<input type="button" value="목록" onclick="list_go(this.form)"/>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</form>
+	</div>
+	
 </body>
 </html>
+

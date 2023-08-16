@@ -17,4 +17,9 @@ public class QnaServiceImpl implements QnaService {
 	public List<QnaVO> getAllQna() {
 		return qnaDAO.getAllQna();
 	}
+	
+	@Override
+	public int getInsert(QnaVO qvo) {
+		return qnaDAO.getInsert(qvo);
+	}
 }
