@@ -11,7 +11,7 @@
 	}
 
 	function go_group() {
-		location.href = "/group.do"
+		location.href = "/groupList.do"
 	}
 
 	function go_login() {
