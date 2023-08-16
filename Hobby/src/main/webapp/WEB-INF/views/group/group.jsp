@@ -9,7 +9,7 @@
 
 <script type="text/javascript">
 function grouplist_go() {
-	location.href = "/groupList.do";
+	location.href = "";
 }
 </script>
 
