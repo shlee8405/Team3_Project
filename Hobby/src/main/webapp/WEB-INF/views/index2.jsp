@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function go_camp() {
-		location.href = "/campList.do"
+		location.href = "/campMain.do"
 	}
 
 	function go_group() {
