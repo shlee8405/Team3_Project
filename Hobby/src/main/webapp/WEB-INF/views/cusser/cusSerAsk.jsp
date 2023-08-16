@@ -8,7 +8,8 @@
 <style type="text/css">
     table {
         border-collapse: collapse;
-        width: 100%;
+        width: 50%;
+        margin: 0 auto;
     }
 
     table, th, td {
@@ -55,7 +56,7 @@ function go_inquiry() {
 </head>
 <body>
 
-<h1 class="text-center">자주하는 질문</h1>
+<h1 class="text-center">1:1 문의</h1>
 
 <div class="text-center">
     <table>
@@ -113,13 +114,14 @@ function go_inquiry() {
             </tr>
         </thead>
         <c:forEach var="k" items="${alllist}" varStatus="loop">
-                <tr>
-                    <td>${loop.index + 1}</td>
-                    <td>${k.u_name}</td>
-                    <td>${k.q_content}</td>
-                    <td>${k.q_response}</td>
-                </tr>
-            </c:forEach>
+		    <tr>
+		        <td>${loop.index + 1}</td>
+		        <td style="white-space: nowrap;">${k.u_name}</td>
+		        <td>${k.q_content}</td>
+		        <td>${k.q_response}</td>
+		    </tr>
+		</c:forEach>
+
     </table>
 </div>
 

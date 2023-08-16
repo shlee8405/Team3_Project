@@ -121,16 +121,17 @@ public class MyController {
 	}
 	
 	@PostMapping("/insert_QNA.do")
-	public ModelAndView insert_QNA(QnaVO qvo)/*1대1 문의 넣기*/{
+	public ModelAndView insert_QNA(@ModelAttribute("qvo") QnaVO qvo)/*1대1 문의 넣기*/{
 		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
 		int res = qnaService.getInsert(qvo);
-		System.out.println(qvo.getQ_content());
 		return mv;
 	}
 	
 	@GetMapping("/cusSerReport.do")
-	public ModelAndView goCusSerReport() /*신고 페이지*/{
+	public ModelAndView goCusSerReport() /*신고 페이지로 이동*/{
 		ModelAndView mv = new ModelAndView("cusser/cusSerReport");
+		List<ReportVO> list = reportService.getAllReports();
+		mv.addObject("list", list);
 		return mv;
 	}
 	
