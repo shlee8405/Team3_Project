@@ -8,6 +8,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>캠핑장 리스트</title>
 <%-- jQuery 라이브러리 CDN --%>
+<style type="text/css">
+.camp-image {
+    width: 200px;
+    height: auto;
+}
+</style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script type="text/javascript">
 	/* html문서가 준비되면 실행 */
@@ -28,6 +34,7 @@
 					// $.each() 함수를 사용하여 서버에서 받아온 데이터를 반복적으로 처리하는 HTML 내용을 생성
 					$.each(data, function (index, item) {
 						list += "<div>"
+						+ "<img class='camp-image' src='" + item.firstImageUrl + "' alt='Camp Image'><br>"
 						+ "<a href='/campDetail.do?keyword=" + item.facltNm + "'>" + item.facltNm + "</a>"
 						+ "<p>" + item.addr1 + "</p>"
 						+ "<p>" + item.lineIntro + "</p>"
