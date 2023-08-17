@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.faq.service.FaqService;
@@ -85,6 +86,12 @@ public class MyController {
 	@GetMapping("/cusSer.do")
 	public ModelAndView goCusSer() /* 고객센터 메인 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerMain");
+		List<FaqVO> F_list = faqService.getList();
+		List<QnaVO> Q_list = qnaService.getAllQna();
+		List<ReportVO> R_list = reportService.getAllReports();
+		mv.addObject("R_list", R_list);
+		mv.addObject("F_list", F_list);
+		mv.addObject("Q_list", Q_list);
 		return mv;
 	}
 
@@ -112,9 +119,10 @@ public class MyController {
 		return mv;
 	}
 	
-	@PostMapping("/insert_QNA.do")
-	public ModelAndView insert_QNA(@ModelAttribute("qvo") QnaVO qvo)/*1대1 문의 넣기*/{
+	@RequestMapping("/insert_QNA.do")
+	public ModelAndView insert_QNA(QnaVO qvo)/*1대1 문의 넣기*/{
 		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
+		System.out.println(qvo.getQ_content()); 
 		int res = qnaService.getInsert(qvo);
 		return mv;
 	}

@@ -108,15 +108,18 @@ function go_inquiry() {
         <thead>
             <tr>
                 <th>번호</th>
-                <th>작성자</th>
+                <th>피해자</th>
+                <th>가해자</th>
                 <th>제목</th>
                 <th>내용</th>
             </tr>
         </thead>
         <c:forEach var="k" items="${list}" varStatus="loop">
 		    <tr>
-		        <td>${loop.index + 1}</td>
-		        <td style="white-space: nowrap;"></td>
+		        <td>${loop.count}</td>
+		        <td>${k.u_idx1}</td>
+		        <td>${k.u_idx2}</td>
+		        <td>${k.r_title}</td>
 		        <td>${k.r_content}</td>
 		    </tr>
 		</c:forEach>
@@ -125,7 +128,7 @@ function go_inquiry() {
 </div>
 
 <div class="text-center">
-    <button class="btn" onclick="go_inquiry()">문의하기</button>
+    <button class="btn" onclick="go_inquiry()">신고하기</button>
 </div>
 
 </body>

@@ -79,7 +79,7 @@
                 </tr>
                 <tr>
                     <th>작성자:</th>
-                    <td>${alllist[0].u_name}</td>
+                    <td><input type="text" name="u_name" size="45"/></td>
                 </tr>
                 <tr>
                     <th>내용:</th>
