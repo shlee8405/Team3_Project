@@ -25,6 +25,11 @@
             height: auto;
         }
     </style>
+<script type="text/javascript">
+	function group_write_go() {
+		location.href= "/group_writeForm.do";
+	}
+</script>
 </head>
 <body>
     <h3>모임</h3>
@@ -36,15 +41,16 @@
                 </div>
             </c:when>
             <c:otherwise>
-                <c:forEach var="k" items="${posts}">
+                <c:forEach var="k" items="${glist}">
                     <div class="board-item">
-                        <img class="thumbnail" src="${k[2]}" alt="Thumbnail">
-                        <h4>${k[0]}</h4>
-                        <p>${k[1]}</p>
+                        <img class="thumbnail" src="${k.g_fname}" alt="Thumbnail">
+                        <h4>${k.g_title}</h4>
+                        <p>${k.g_desc}</p>
                     </div>
                 </c:forEach>
             </c:otherwise>
         </c:choose>
     </div>
+    <button onclick="group_write_go()">글쓰기</button>
 </body>
 </html>
