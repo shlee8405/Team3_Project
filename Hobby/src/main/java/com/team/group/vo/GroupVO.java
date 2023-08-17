@@ -1,7 +1,15 @@
 package com.team.group.vo;
 
 public class GroupVO {
-	private String g_idx, g_title, g_desc, g_date, g_location, g_maxPeople, g_curPeople, g_link, g_status, u_idx;
+	private String g_idx, g_title, g_desc, g_date, g_location, g_maxPeople, g_curPeople, g_link, g_status, g_fname, u_idx;
+
+	public String getG_fname() {
+		return g_fname;
+	}
+
+	public void setG_fname(String g_fname) {
+		this.g_fname = g_fname;
+	}
 
 	public String getG_idx() {
 		return g_idx;
