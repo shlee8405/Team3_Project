@@ -16,4 +16,8 @@ public class ReportDAO {
 	public List<ReportVO> getAllReports() {
 		return sqlSessionTemplate.selectList("report.allList");
 	}
+	
+	public int getReportInsert(ReportVO rvo) {
+		return sqlSessionTemplate.insert("report.insert",rvo);
+	}
 }

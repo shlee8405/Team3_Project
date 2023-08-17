@@ -7,9 +7,14 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team.faq.service.FaqService;
+import com.team.faq.vo.FaqVO;
 import com.team.group.service.GroupService;
 import com.team.group.vo.GroupVO;
 import com.team.qna.service.QnaService;
@@ -33,6 +38,9 @@ public class MyController {
 
 	@Autowired
 	private ReportService reportService;
+
+	@Autowired
+	private FaqService faqService;
 
 	// 홈 control
 	@GetMapping("/home.do")
@@ -79,24 +87,79 @@ public class MyController {
 	@GetMapping("/cusSer.do")
 	public ModelAndView goCusSer() /* 고객센터 메인 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerMain");
+		List<FaqVO> F_list = faqService.getList();
+		List<QnaVO> Q_list = qnaService.getAllQna();
+		List<ReportVO> R_list = reportService.getAllReports();
+		mv.addObject("R_list", R_list);
+		mv.addObject("F_list", F_list);
+		mv.addObject("Q_list", Q_list);
 		return mv;
 	}
 
 	@GetMapping("/cusSerFAQ.do")
 	public ModelAndView goCusSerFAQ() /* 자주하는 질문 페이지 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerFAQ");
+		List<FaqVO> list = faqService.getList();
+		mv.addObject("list", list);
 		return mv;
 	}
 
-	@GetMapping("/cusSerAsk.do")
+	@RequestMapping("/cusSerAsk.do")
 	public ModelAndView goCusSerAsk() /* 1대1 문의 페이지 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerAsk");
+		List<QnaVO> list = qnaService.getAllQna();
+		mv.addObject("alllist", list);
 		return mv;
 	}
 
-	@GetMapping("/cusSerReport.do")
-	public ModelAndView goCusSerReport() {
+	@GetMapping("/go_inquiry.do")
+	public ModelAndView goinquiry() /* 1대1 문의 작성 페이지로 이동 */ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerQ");
+		List<QnaVO> list = qnaService.getAllQna();
+		mv.addObject("alllist", list);
+		return mv;
+	}
+
+	@PostMapping("/insert_QNA.do")
+	public ModelAndView insert_QNA(QnaVO qvo)/* 1대1 문의 넣기 */ {
+		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
+		int res = qnaService.getInsert(qvo);
+		return mv;
+	}
+
+	@GetMapping("/go_AskDetail.do") /* 1:1 상세 페이지 */
+	public ModelAndView goAskDetail(@ModelAttribute("q_idx") String q_idx) {
+		ModelAndView mv = new ModelAndView("cusser/cusSerAskDetail");
+		QnaVO qvo = qnaService.Detail(q_idx);
+		mv.addObject("qvo", qvo);
+		return mv;
+	}
+
+	@PostMapping("/go_deleteQ.do") /* 문의 삭제 */
+	public ModelAndView goDeleteQ(@RequestParam("q_idx") String q_idx) {
+		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
+		int res = qnaService.DeleteQ(q_idx);
+		return mv;
+	}
+
+	@RequestMapping("/cusSerReport.do")
+	public ModelAndView goCusSerReport() /* 신고 목록 페이지로 이동 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerReport");
+		List<ReportVO> list = reportService.getAllReports();
+		mv.addObject("list", list);
+		return mv;
+	}
+
+	@GetMapping("/report.do")
+	public ModelAndView goReport()/* 신고 작성 페이지로 이동 */ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerR");
+		return mv;
+	}
+
+	@PostMapping("/report_insert.do") /* 신고 넣기 */
+	public ModelAndView goReportInsert(ReportVO rvo) {
+		ModelAndView mv = new ModelAndView("redirect:/cusSerReport.do");
+		int res = reportService.getReportInsert(rvo);
 		return mv;
 	}
 
