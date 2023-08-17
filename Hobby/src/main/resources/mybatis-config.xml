@@ -16,6 +16,7 @@
 		<typeAlias type="com.team.report.vo.ReportVO" alias="rvo" />
 		<typeAlias type="com.team.qna.vo.QnaVO" alias="qvo" />
 		<typeAlias type="com.team.faq.vo.FaqVO" alias="fvo" />
+		<typeAlias type="com.team.myinfo.vo.MyinfoVO" alias="mvo" />
 	</typeAliases>
 	
 	<mappers>
@@ -24,5 +25,6 @@
 		<mapper resource="mappers/report-mapper.xml" />
 		<mapper resource="mappers/qna-mapper.xml" />
 		<mapper resource="mappers/faq-mapper.xml" />
+		<mapper resource="mappers/mypage-mapper.xml" />
 	</mappers>
 </configuration>
