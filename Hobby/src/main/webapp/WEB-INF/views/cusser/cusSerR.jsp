@@ -56,12 +56,12 @@
             return;
         } */
         
-        f.action="/insert_QNA.do"; // 수정: 여기서 작은 따옴표를 삭제하고 세미콜론 추가
+        f.action="/report_insert.do"; // 수정: 여기서 작은 따옴표를 삭제하고 세미콜론 추가
         f.submit();
     }
     
     function list_go(f) {
-        f.action="/cusSerAsk.do";
+        f.action="/cusSerReport.do";
         f.submit();
     }
 </script>
@@ -71,15 +71,15 @@
     <div id="bbs">
     <form method="post">
         <table>
-            <caption>문의 게시판</caption>
+            <caption>신고 게시판</caption>
             <tbody>
                 <tr>
                     <th>작성자:</th>
-                    <td><input type="text" name="q_name" size="45"/></td>
+                    <td><input type="text" name="r_name" size="45"/></td>
                 </tr>
                 <tr>
                     <th>내용:</th>
-                    <td><textarea name="q_content" cols="50" rows="8" id="content"></textarea></td>
+                    <td><textarea name="r_content" cols="50" rows="8" id="content"></textarea></td>
                 </tr>
                 <tr>
                     <td colspan="2" style="text-align: center;">

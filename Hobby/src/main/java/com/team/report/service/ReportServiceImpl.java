@@ -17,4 +17,9 @@ public class ReportServiceImpl implements ReportService{
 	public List<ReportVO> getAllReports() {
 		return reportDAO.getAllReports();
 	}
+	
+	@Override
+	public int getReportInsert(ReportVO rvo) {
+		return reportDAO.getReportInsert(rvo);
+	}
 }

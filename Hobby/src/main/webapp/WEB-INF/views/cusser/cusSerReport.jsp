@@ -12,8 +12,15 @@
         margin: 0 auto;
     }
 
-    table, th, td {
+    th {
         border: 1px solid black;
+        white-space: nowrap; /* Add this line */
+        padding: 5px;
+    }
+
+    table, td {
+        border: 1px solid black;
+        padding: 5px;
     }
 
     .faq-buttons {
@@ -49,14 +56,14 @@ function go_home() {
 	location.href="/home.do"
 }
 
-function go_inquiry() {
-	location.href="/go_inquiry.do"
+function go_report() {
+	location.href="/report.do"
 }
 </script>
 </head>
 <body>
 
-<h1 class="text-center">1:1 문의</h1>
+<h1 class="text-center">신고 내역</h1>
 
 <div class="text-center">
     <table>
@@ -108,8 +115,6 @@ function go_inquiry() {
         <thead>
             <tr>
                 <th>번호</th>
-                <th>피해자</th>
-                <th>가해자</th>
                 <th>제목</th>
                 <th>내용</th>
             </tr>
@@ -117,9 +122,7 @@ function go_inquiry() {
         <c:forEach var="k" items="${list}" varStatus="loop">
 		    <tr>
 		        <td>${loop.count}</td>
-		        <td>${k.u_idx1}</td>
-		        <td>${k.u_idx2}</td>
-		        <td>${k.r_title}</td>
+		        <td>${k.r_name}</td>
 		        <td>${k.r_content}</td>
 		    </tr>
 		</c:forEach>
@@ -128,7 +131,7 @@ function go_inquiry() {
 </div>
 
 <div class="text-center">
-    <button class="btn" onclick="go_inquiry()">신고하기</button>
+    <button class="btn" onclick="go_report()">신고하기</button>
 </div>
 
 </body>

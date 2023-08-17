@@ -139,8 +139,6 @@
     <thead>
         <tr>
             <th>번호</th>
-            <th>피해자</th>
-            <th>가해자</th>
             <th>제목</th>
             <th>내용</th>
         </tr>
@@ -149,9 +147,7 @@
         <c:forEach var="report" items="${R_list}" varStatus="loop">
             <tr>
                 <td>${loop.count}</td>
-                <td>${report.u_idx1}</td>
-		        <td>${report.u_idx2}</td>
-                <td>${report.r_title}</td>
+                <td>${report.r_name}</td>
                 <td>${report.r_content}</td>
             </tr>
         </c:forEach>
