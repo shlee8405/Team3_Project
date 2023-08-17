@@ -143,14 +143,7 @@ public class MyController {
 		return new ModelAndView("admin/home");
 	}
 	
-	@GetMapping("/adminUser.do")
-	public ModelAndView goAdminUser() /*관리자 유저*/ {
-		ModelAndView mv = new ModelAndView("admin/user");
-		List<UserVO> list = userService.getAllUsers();
-		mv.addObject("list", list);
-		return mv;
-	}
-	
+
 	@GetMapping("/adminGroup.do")
 	public ModelAndView goAdminGroup() /*관리자 그룹*/ {
 		ModelAndView mv =  new ModelAndView("admin/group");
