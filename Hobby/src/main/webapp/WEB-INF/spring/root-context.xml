@@ -30,9 +30,10 @@
 	</bean>
 	
 	
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
+	
 
-
-		<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:annotation-config />
 	<context:component-scan base-package="com.team.*" />
 	
