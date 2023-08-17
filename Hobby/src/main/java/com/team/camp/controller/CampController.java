@@ -12,7 +12,6 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -102,6 +101,7 @@ public class CampController {
 		return mv;
 	}
 	
+	
 	// 캠핑장 검색
 	@GetMapping("/campSearch.do")
 	public List<CampVO> getSearchList(@RequestParam(defaultValue = "1") int pageNo, @RequestParam String keyword) throws URISyntaxException, UnsupportedEncodingException {
@@ -131,7 +131,7 @@ public class CampController {
 			// CampVO타입으로 dataList라는 빈 배열 선언
 			List<CampVO> dataList = new ArrayList<>();
 			
-			for (int i = 0; i < item.length(); i++) {
+			for (int i = 0; i < Math.min(item.length(), numOfRows); i++) { // 최대 numOfRows개만 저장
 				JSONObject oneItem = item.getJSONObject(i);
 
 				CampVO cvo = new CampVO();
@@ -146,7 +146,7 @@ public class CampController {
 			//mv.addObject("dataList", dataList);
 			return dataList;
 		}
-	
+
 	
 	// 캠핑장 상세보기 호출하기
 	@GetMapping("/campDetail.do")
