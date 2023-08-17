@@ -100,6 +100,9 @@
 	function go_admin() {
 		location.href = "/adminHome.do"
 	}
+	function go_mypage(){
+		location.href = "/mypage.do"
+	}
 </script>
 </head>
 <body>
@@ -250,6 +253,7 @@
 									<th>modal</th>
 									<th>지도</th>
 									<th>관리자</th>
+									<th>마이페이지</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -278,6 +282,9 @@
 									</td>
 									<td>
 										<button onclick="go_admin()">관리자</button>
+									</td>
+									<td>
+										<button onclick="go_mypage()">마이페이지</button>
 									</td>
 								</tr>
 							</tbody>
