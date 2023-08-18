@@ -29,4 +29,8 @@ public class QnaDAO {
 	public int DeleteQ(String q_idx) {
 		return sqlSessionTemplate.update("qna.delete",q_idx);
 	}
+	
+	public int UpdateQna(QnaVO qvo) {
+		return sqlSessionTemplate.update("qna.update",qvo);
+	}
 }

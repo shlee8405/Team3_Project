@@ -2,7 +2,16 @@ package com.team.report.vo;
 
 public class ReportVO {
 	
-	private String r_idx, r_name,r_content,r_status;
+	private String r_idx, r_name,r_content,r_status,r_response;
+	
+	
+	public String getR_response() {
+		return r_response;
+	}
+
+	public void setR_response(String r_response) {
+		this.r_response = r_response;
+	}
 
 	public String getR_idx() {
 		return r_idx;

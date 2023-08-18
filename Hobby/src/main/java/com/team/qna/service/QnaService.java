@@ -17,4 +17,7 @@ public interface QnaService {
 	
 	// 삭제
 	int DeleteQ(String q_idx);
+	
+	// 수정
+	int UpdateQna(QnaVO qvo);
 }

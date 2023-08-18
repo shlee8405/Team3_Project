@@ -32,4 +32,9 @@ public class QnaServiceImpl implements QnaService {
 	public int DeleteQ(String q_idx) {
 		return qnaDAO.DeleteQ(q_idx);
 	}
+	
+	@Override
+	public int UpdateQna(QnaVO qvo) {
+		return qnaDAO.UpdateQna(qvo);
+	}
 }

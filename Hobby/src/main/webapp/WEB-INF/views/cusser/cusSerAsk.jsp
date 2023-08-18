@@ -132,7 +132,7 @@ function go_AskDetail() {
                                     <a href="/go_AskDetail.do?q_idx=${k.q_idx}">답변보기</a>
                                 </c:when>
                                 <c:otherwise>
-                                    &nbsp; <!-- 빈 칸으로 대체 -->
+                                    <a href="/go_AskDelete.do?q_idx=${k.q_idx}">수정하기</a>
                                 </c:otherwise>
                             </c:choose>
                         </td>
