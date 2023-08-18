@@ -8,6 +8,11 @@
 		select * from report 
 	</select>
 	
+	<insert id="insert" parameterType="rvo">
+		insert into report (r_content,r_name)
+		values(#{r_content},#{r_name})
+	</insert>
+	
 </mapper>
 
 

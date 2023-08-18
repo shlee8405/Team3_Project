@@ -8,4 +8,7 @@ public interface ReportService {
 
 	// 신고 전체보기
 	public List<ReportVO> getAllReports();
+	
+	// 신고하기
+	int getReportInsert(ReportVO rvo);
 }

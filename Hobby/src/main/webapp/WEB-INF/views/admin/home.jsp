@@ -65,9 +65,8 @@ color:#ffffff!important;
             </button>
             <div class="collapse" id="dashboard-collapse" style="">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="/adminHome.do" class="ps-4 link-dark rounded sidebar-link">11</a></li>
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">22</a></li>
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">33</a></li>
+                <li><a href="/adminHome.do" class="ps-4 link-dark rounded sidebar-link">페이지 조회수</a></li>
+                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">페이지 이미지 설정	</a></li>
             </ul>
             </div>
         </li>
