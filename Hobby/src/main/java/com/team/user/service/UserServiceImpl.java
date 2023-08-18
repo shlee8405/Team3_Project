@@ -14,14 +14,21 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserDAO userDAO;
 	
-	@Override
-	public int addUser(UserVO vo) {
-		return userDAO.addUser(vo);
-	}
+	
 
 	@Override
 	public List<UserVO> getAllUsers() {
 		return userDAO.getAllUsers();
 	}
+
+
+
+	@Override
+	public int getUserInsert(UserVO uvo) {
+		return userDAO.getUserInsert(uvo);
+	}
+
+	
+	
 	
 }

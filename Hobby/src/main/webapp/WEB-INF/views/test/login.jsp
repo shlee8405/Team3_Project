@@ -21,19 +21,19 @@
 	<title>캠핑 : 로그인</title>
 </head>
 <body>
-    <form action="" method="">
+    <form action="login.do" method="post">
         <div class="wrap">
             <div class="login">
                     <h3 style="font-size:50px;  font-family: 'Noto Sans KR', sans-serif;">/캠핑.DO</h3>
                 <!--이메일 입력-->
-                <div class="login_id">
+                <div class="u_id">
                     <h4 style=" font-family: 'Noto Sans KR', sans-serif;">아이디</h4>
-                    <input type="text" name="m_id" class="pos" placeholder="ID(아이디)">
+                    <input type="text" name="u_id" class="pos" placeholder="ID(아이디)">
                 </div>
                 <!--비밀번호 입력-->
-                <div class="login_pw">
+                <div class="u_pw">
                     <h4 style=" font-family: 'Noto Sans KR', sans-serif;">비밀번호</h4>
-                    <input type="password" name="m_pw" class="pos" placeholder="비밀번호">
+                    <input type="password" name="u_pw" class="pos" placeholder="비밀번호">
                 </div>
                 <!--로그인 버튼-->
                 <div class="submit">
@@ -70,7 +70,7 @@
                 <div class="login_api">
   <a href="javascript:void(0)" id="kakaoLoginBtn"><img src="resources/images/kakao_login_btn.png" style="width:100%; height:50px; "></a>
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-</div>
+</div>	
 
 
 

@@ -15,14 +15,14 @@ public class UserDAO {
 	private SqlSessionTemplate sqlSessionTemplate;
 	
 	
-	//유저 추가
-	public int addUser(UserVO vo) {
-		return sqlSessionTemplate.insert("user.addUser", vo);
-	};
 	
 	//전체 보기
 	public List<UserVO> getAllUsers() {
 		List<UserVO> list = sqlSessionTemplate.selectList("user.allList");
 		return list;
 	}
+	public int getUserInsert(UserVO uvo) {
+		return sqlSessionTemplate.insert("user.addUser", uvo);
+	}
+	
 }
