@@ -16,6 +16,9 @@
 		<typeAlias type="com.team.report.vo.ReportVO" alias="rvo" />
 		<typeAlias type="com.team.qna.vo.QnaVO" alias="qvo" />
 		<typeAlias type="com.team.myinfo.vo.MyinfoVO" alias="mvo" />
+		<typeAlias type="com.team.mypagemain.vo.MypageMainVO" alias="mmvo" />
+		<typeAlias type="com.team.myinfoupdate.vo.MyinfoUpdateVO" alias="upvo" />
+		<typeAlias type="com.team.myqna.vo.MyQnaVO" alias="mqvo" />
 	</typeAliases>
 	
 	<mappers>
