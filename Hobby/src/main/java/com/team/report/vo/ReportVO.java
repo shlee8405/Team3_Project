@@ -2,7 +2,7 @@ package com.team.report.vo;
 
 public class ReportVO {
 	
-	private String r_idx, u_idx1,u_idx2,r_content,r_status;
+	private String r_idx, r_name,r_content,r_status;
 
 	public String getR_idx() {
 		return r_idx;
@@ -12,20 +12,12 @@ public class ReportVO {
 		this.r_idx = r_idx;
 	}
 
-	public String getU_idx1() {
-		return u_idx1;
+	public String getR_name() {
+		return r_name;
 	}
 
-	public void setU_idx1(String u_idx1) {
-		this.u_idx1 = u_idx1;
-	}
-
-	public String getU_idx2() {
-		return u_idx2;
-	}
-
-	public void setU_idx2(String u_idx2) {
-		this.u_idx2 = u_idx2;
+	public void setR_name(String r_name) {
+		this.r_name = r_name;
 	}
 
 	public String getR_content() {
@@ -43,7 +35,6 @@ public class ReportVO {
 	public void setR_status(String r_status) {
 		this.r_status = r_status;
 	}
-	
 	
 	
 }

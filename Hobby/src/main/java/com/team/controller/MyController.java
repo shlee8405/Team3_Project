@@ -5,11 +5,19 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+<<<<<<< HEAD
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+=======
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+>>>>>>> refs/heads/main2
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team.faq.service.FaqService;
+import com.team.faq.vo.FaqVO;
 import com.team.group.service.GroupService;
 import com.team.group.vo.GroupVO;
 import com.team.qna.service.QnaService;
@@ -33,6 +41,9 @@ public class MyController {
 
 	@Autowired
 	private ReportService reportService;
+
+	@Autowired
+	private FaqService faqService;
 
 	// 홈 control
 	@GetMapping("/home.do")
@@ -75,11 +86,25 @@ public class MyController {
 		mv.addObject("test4", test4); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
 		return mv;
 	}
+	/*
+	 * @GetMapping("/groupList.do") public ModelAndView goGroupList() { ModelAndView
+	 * mv = new ModelAndView("group/groupList"); String[] test3 = {"장소",
+	 * "010 0000 0000", "15", "휴일", "5"}; String[] test4 = {"장소2", "010 3333 3330",
+	 * "20", "안휴일", "3"}; mv.addObject("test3", test3); // 모델 속성에 대한 키 "testArray"를
+	 * 명시적으로 제공 mv.addObject("test4", test4); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
+	 * return mv; }
+	 */
 
 	// 고객센터 관련 controls
 	@GetMapping("/cusSer.do")
 	public ModelAndView goCusSer() /* 고객센터 메인 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerMain");
+		List<FaqVO> F_list = faqService.getList();
+		List<QnaVO> Q_list = qnaService.getAllQna();
+		List<ReportVO> R_list = reportService.getAllReports();
+		mv.addObject("R_list", R_list);
+		mv.addObject("F_list", F_list);
+		mv.addObject("Q_list", Q_list);
 		return mv;
 	}
 
@@ -130,8 +155,93 @@ public class MyController {
 	public ModelAndView goAdminUser() /* 관리자 유저 */ {
 		ModelAndView mv = new ModelAndView("admin/user");
 		List<UserVO> list = userService.getAllUsers();
+		List<FaqVO> list = faqService.getList();
 		mv.addObject("list", list);
 		return mv;
+	}
+
+	@RequestMapping("/cusSerAsk.do")
+	public ModelAndView goCusSerAsk() /* 1대1 문의 페이지 */ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerAsk");
+		List<QnaVO> list = qnaService.getAllQna();
+		mv.addObject("alllist", list);
+		return mv;
+	}
+
+	@GetMapping("/go_inquiry.do")
+	public ModelAndView goinquiry() /* 1대1 문의 작성 페이지로 이동 */ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerQ");
+		List<QnaVO> list = qnaService.getAllQna();
+		mv.addObject("alllist", list);
+		return mv;
+	}
+
+	@PostMapping("/insert_QNA.do")
+	public ModelAndView insert_QNA(QnaVO qvo)/* 1대1 문의 넣기 */ {
+		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
+		int res = qnaService.getInsert(qvo);
+		return mv;
+	}
+
+	@GetMapping("/go_AskDetail.do") /* 1:1 상세 페이지 */
+	public ModelAndView goAskDetail(@ModelAttribute("q_idx") String q_idx) {
+		ModelAndView mv = new ModelAndView("cusser/cusSerAskDetail");
+		QnaVO qvo = qnaService.Detail(q_idx);
+		mv.addObject("qvo", qvo);
+		return mv;
+	}
+
+	@PostMapping("/go_deleteQ.do") /* 문의 삭제 */
+	public ModelAndView goDeleteQ(@RequestParam("q_idx") String q_idx) {
+		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
+		int res = qnaService.DeleteQ(q_idx);
+		return mv;
+	}
+
+	@RequestMapping("/cusSerReport.do")
+	public ModelAndView goCusSerReport() /* 신고 목록 페이지로 이동 */ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerReport");
+		List<ReportVO> list = reportService.getAllReports();
+		mv.addObject("list", list);
+		return mv;
+	}
+
+	@GetMapping("/report.do")
+	public ModelAndView goReport()/* 신고 작성 페이지로 이동 */ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerR");
+		return mv;
+	}
+
+	@PostMapping("/report_insert.do") /* 신고 넣기 */
+	public ModelAndView goReportInsert(ReportVO rvo) {
+		ModelAndView mv = new ModelAndView("redirect:/cusSerReport.do");
+		int res = reportService.getReportInsert(rvo);
+		return mv;
+	}
+
+	// 마이페이지 관련 controls
+	@GetMapping("/myPage.do")
+	public ModelAndView goMyPage() /* 마이페이지 메인 */ {
+		ModelAndView mv = new ModelAndView("user/myPageMain");
+		return mv;
+	}
+
+	@GetMapping("/myPageOneList.do")
+	public ModelAndView goMyPageOneList() /* 나의 정보 보기 */ {
+		ModelAndView mv = new ModelAndView("user/myPageOneList");
+		return mv;
+	}
+
+	@GetMapping("/myPageEdit.do")
+	public ModelAndView goMyPageEdit() /* 나의 정보 수정 */ {
+		ModelAndView mv = new ModelAndView("user/myPageEdit");
+		return mv;
+	}
+
+	// 관리자 관련 controls
+	@GetMapping("/adminHome.do")
+	public ModelAndView goAdminHome() /* 관리자 홈 */ {
+		return new ModelAndView("admin/home");
 	}
 
 	@GetMapping("/adminGroup.do")
@@ -209,5 +319,24 @@ public class MyController {
 	 * 
 	 * return mv; }
 	 */
+	@PostMapping("/signupOk.do")
+	public ModelAndView signUpNormal(UserVO vo) /* 회원가입 DB처리 */ {
+		ModelAndView mv = new ModelAndView("redirect:/signup.do");
+		System.out.println("running post mapping '/singupOK.do'");
+		int result = 0;
+		try {
+			result = userService.addUser(vo);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		if (result > 0) {
+			System.out.println("userService.addUser(vo) success!");
+		} else {
+			System.out.println("userService.addUser(vo) fail!");
+		}
+
+		return mv;
+	}
 
 }

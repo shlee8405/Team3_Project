@@ -6,14 +6,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style type="text/css">
-    table {
+     table {
         border-collapse: collapse;
         width: 50%;
         margin: 0 auto;
     }
 
-    table, th, td {
+    th {
         border: 1px solid black;
+        white-space: nowrap; /* Add this line */
+        padding: 5px;
+    }
+
+    table, td {
+        border: 1px solid black;
+        padding: 5px;
     }
 
     .faq-buttons {
@@ -49,17 +56,15 @@ function go_home() {
 	location.href="/home.do"
 }
 
-function go_inquiry() {
-	location.href="/go_inquiry.do"
-}
-function go_AskDetail() {
-	location.href="/go_AskDetail.do?q_idx=" + q_idx;
+function go_delete(f) {
+    // q_idx 값을 URL 파라미터로 전달하여 delete 페이지로 이동합니다
+	location.href = "/go_deleteQ.do";
 }
 </script>
 </head>
 <body>
 
-<h1 class="text-center">1:1 문의</h1>
+<h1 class="text-center">1:1 문의 상세내역</h1>
 
 <div class="text-center">
     <table>
@@ -107,46 +112,33 @@ function go_AskDetail() {
 <div class="table-margin"></div> <!-- 10px 간격용 div -->
 
 <div class="text-center">
+<form method="post">
     <table>
-        <thead>
             <tr>
-                <th>번호</th>
                 <th>작성자</th>
-                <th>제목</th>
-                <th>내용</th>
+                <td>${qvo.q_name}</td>
             </tr>
-        </thead>
-        <c:forEach var="k" items="${alllist}" varStatus="loop">
             <tr>
-                <c:choose>
-                    <c:when test="${k.q_status == 0}">
-                        <td colspan="4">삭제된 문의입니다</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td>${loop.count}</td>
-                        <td style="white-space: nowrap;">${k.q_name}</td>
-                        <td>${k.q_content}</td>
-                        <td>
-                            <c:choose>
-                                <c:when test="${not empty k.q_response}">
-                                    <a href="/go_AskDetail.do?q_idx=${k.q_idx}">답변보기</a>
-                                </c:when>
-                                <c:otherwise>
-                                    &nbsp; <!-- 빈 칸으로 대체 -->
-                                </c:otherwise>
-                            </c:choose>
-                        </td>
-                    </c:otherwise>
-                </c:choose>
+           		<th>질문</th>
+                <td>${qvo.q_content}</td>
             </tr>
-        </c:forEach>
+            <tr>
+           		<th>답변</th>
+                <td>${qvo.q_response}</td>
+            </tr>
+            <tr>
+               <td><input type="hidden" name="q_idx" value="${qvo.q_idx}"></td>
+            </tr>
+            <tr>
+	            <td>	
+			   		<button class="btn" onclick="go_delete(this.form)">삭제</button>
+			    </td>
+		    </tr>
     </table>
+</form>
 </div>
 
 
-<div class="text-center">
-    <button class="btn" onclick="go_inquiry()">문의하기</button>
-</div>
 
 </body>
 </html>
