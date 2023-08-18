@@ -7,6 +7,20 @@
 	<select id="myinfo" resultType="mvo">
 		select * from USERS 
 	</select>
+	
+	<select id="mypagemain" resultType="mmvo">
+		select * from CWISH 
+	</select>
+	
+	<update id="myinfoupdate" parameterType="upvo">
+        update USERS set u_name=#{u_name}, u_pw=#{u_pw}, u_phone=#{u_phone},
+        u_email=#{u_email} where u_idx = #{u_idx}
+    </update>
+    
+    <select id="myqna" resultType="mqvo">
+		select * from qna
+	</select>
+    
 </mapper>
 
 
