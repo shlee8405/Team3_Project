@@ -9,10 +9,12 @@
 	</select>
 	
 	<insert id="addUser" parameterType="uvo">
-		insert INTO USERS (u_id, u_pw, u_name, u_birthday, u_email, u_phone)
+		insert INTO USERS(u_id, u_pw, u_name, u_birthday, u_email, u_phone)
 		VALUES(#{u_id}, #{u_pw}, #{u_name}, #{u_birthday}, #{u_email}, #{u_phone})
 	</insert>
-	
+	<select id="checkEmailDuplicate" resultType="uvo" parameterType="String">
+ 		 SELECT * FROM USERS WHERE u_email = #{email}
+	</select>
 	
 </mapper>
 
