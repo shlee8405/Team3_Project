@@ -20,6 +20,7 @@
 		<typeAlias type="com.team.mypagemain.vo.MypageMainVO" alias="mmvo" />
 		<typeAlias type="com.team.myinfoupdate.vo.MyinfoUpdateVO" alias="upvo" />
 		<typeAlias type="com.team.myqna.vo.MyQnaVO" alias="mqvo" />
+		<typeAlias type="com.team.camp.vo.CampVO" alias="cvo" />
 	</typeAliases>
 	
 	<mappers>
@@ -29,5 +30,6 @@
 		<mapper resource="mappers/qna-mapper.xml" />
 		<mapper resource="mappers/faq-mapper.xml" />
 		<mapper resource="mappers/mypage-mapper.xml" />
+		<mapper resource="mappers/camp-mapper.xml" />
 	</mappers>
 </configuration>

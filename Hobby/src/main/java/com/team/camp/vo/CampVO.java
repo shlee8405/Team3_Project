@@ -22,6 +22,16 @@ public class CampVO {
 				   tel, operDeCl, lctCl, induty, posblFcltyCl, featureNm, 
 				   firstImageUrl, doNm;
 
+	private int likesCount;
+	
+	public int getLikesCount() {
+		return likesCount;
+	}
+
+	public void setLikesCount(int likesCount) {
+		this.likesCount = likesCount;
+	}
+
 	public String getContentId() {
 		return contentId;
 	}
