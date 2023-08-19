@@ -6,6 +6,7 @@ import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import org.json.JSONArray;
@@ -18,12 +19,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team.camp.service.CampService;
 import com.team.camp.vo.CampVO;
 
 @RestController
 public class CampController {
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private CampService campService;
 	
 	// 공통파라미터 전역 선언
 	private final String targetUrl = "https://apis.data.go.kr/B551011/GoCamping";
@@ -123,15 +128,16 @@ public class CampController {
 			URI uri = new URI(apiUrl);
 			ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
 			
-			//Body 정보만 필요하기 때문에
+			// Body 정보만 필요하기 때문에
 			JSONObject jsonResponse = new JSONObject(response.getBody());
 			
 			JSONArray item = jsonResponse.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item");
 			
+			
 			// CampVO타입으로 dataList라는 빈 배열 선언
 			List<CampVO> dataList = new ArrayList<>();
 			
-			for (int i = 0; i < Math.min(item.length(), numOfRows); i++) { // 최대 numOfRows개만 저장
+			for (int i = 0; i < item.length(); i++) {
 				JSONObject oneItem = item.getJSONObject(i);
 
 				CampVO cvo = new CampVO();
@@ -141,6 +147,7 @@ public class CampController {
 				// 나중에 필요한거 더 추가........
 				dataList.add(cvo);
 			}
+			
 			
 			//ModelAndView mv = new ModelAndView("camp/camp_list");
 			//mv.addObject("dataList", dataList);
@@ -214,4 +221,11 @@ public class CampController {
 		mv.addObject("cvo", cvo);
 		return mv;
 	}
+	
+	@GetMapping("/campReview.do")
+	public ModelAndView goCampReview() {
+		ModelAndView mv = new ModelAndView("camp/camp_review");
+		return mv;
+	}
+	
 }

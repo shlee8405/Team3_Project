@@ -33,10 +33,6 @@
 				data : dataObj,
 				dataType : "json", 
 				success : function(data) {
-					if(data.length == 0) {
-			            alert("마지막 페이지입니다");
-			            return;  // 추가된 데이터가 없으므로 이후 코드 실행을 중단합니다.
-			        }
 					
 					var list = "";
 					
@@ -53,7 +49,7 @@
 					pageNo++;  // 더보기 버튼 클릭할 때마다 pageNo 1씩 증가
 				},
 				error : function() {
-					alert("가져오기 실패");
+					alert("마지막 페이지 입니다.");
 				}
 			});
 		}
@@ -64,6 +60,9 @@
 		searchMode = true; // 검색 모드 활성화
 		searchKeyword = $("#searchBox").val(); // var 키워드 제거
 	 	
+		 // 검색 버튼을 누른 후, 서치 박스의 내용을 초기화
+	    $("#searchBox").val("");
+		
 		$("#camp-list").empty(); // 초기화
 		pageNo = 1; // 페이지 번호 초기화
 		
