@@ -74,15 +74,6 @@ public class MyController {
 		return mv;
 	}
 
-	@GetMapping("/groupList.do")
-	public ModelAndView goGroupList() /**/ {
-		ModelAndView mv = new ModelAndView("group/groupList");
-		String[] test3 = { "장소", "010 0000 0000", "15", "휴일", "5" };
-		String[] test4 = { "장소2", "010 3333 3330", "20", "안휴일", "3" };
-		mv.addObject("test3", test3); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
-		mv.addObject("test4", test4); // 모델 속성에 대한 키 "testArray"를 명시적으로 제공
-		return mv;
-	}
 	/*
 	 * @GetMapping("/groupList.do") public ModelAndView goGroupList() { ModelAndView
 	 * mv = new ModelAndView("group/groupList"); String[] test3 = {"�옣�냼",
@@ -108,50 +99,6 @@ public class MyController {
 	@GetMapping("/cusSerFAQ.do")
 	public ModelAndView goCusSerFAQ() /* �옄二쇳븯�뒗 吏덈Ц �럹�씠吏� */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerFAQ");
-		return mv;
-	}
-
-	@GetMapping("/cusSerAsk.do")
-	public ModelAndView goCusSerAsk() /* 1대1 문의 페이지 */ {
-		ModelAndView mv = new ModelAndView("cusser/cusSerAsk");
-		return mv;
-	}
-
-	@GetMapping("/cusSerReport.do")
-	public ModelAndView goCusSerReport() {
-		ModelAndView mv = new ModelAndView("cusser/cusSerReport");
-		return mv;
-	}
-
-	// 마이페이지 관련 controls
-	@GetMapping("/myPage.do")
-	public ModelAndView goMyPage() /* 마이페이지 메인 */ {
-		ModelAndView mv = new ModelAndView("user/myPageMain");
-		return mv;
-	}
-
-	@GetMapping("/myPageOneList.do")
-	public ModelAndView goMyPageOneList() /* 나의 정보 보기 */ {
-		ModelAndView mv = new ModelAndView("user/myPageOneList");
-		return mv;
-	}
-
-	@GetMapping("/myPageEdit.do")
-	public ModelAndView goMyPageEdit() /* 나의 정보 수정 */ {
-		ModelAndView mv = new ModelAndView("user/myPageEdit");
-		return mv;
-	}
-
-	// 관리자 관련 controls
-	@GetMapping("/adminHome.do")
-	public ModelAndView goAdminHome() /* 관리자 홈 */ {
-		return new ModelAndView("admin/home");
-	}
-
-	@GetMapping("/adminUser.do")
-	public ModelAndView goAdminUser() /* 관리자 유저 */ {
-		ModelAndView mv = new ModelAndView("admin/user");
-		List<UserVO> list = userService.getAllUsers();
 		List<FaqVO> list = faqService.getList();
 		mv.addObject("list", list);
 		return mv;
@@ -344,25 +291,13 @@ public class MyController {
 		return mv;
 	}
 
-	/*
-	 * @PostMapping("/signupOk.do") public ModelAndView signUpNormal(UserVO vo) 회원가입
-	 * DB처리{ ModelAndView mv = new ModelAndView("redirect:/signup.do");
-	 * System.out.println("running post mapping '/singupOK.do'"); int result = 0;
-	 * try { result = userService.addUser(vo); } catch (Exception e) {
-	 * e.printStackTrace(); }
-	 * 
-	 * if(result > 0 ) { System.out.println("userService.addUser(vo) success!"); }
-	 * else { System.out.println("userService.addUser(vo) fail!"); }
-	 * 
-	 * return mv; }
-	 */
 	@PostMapping("/signupOk.do")
 	public ModelAndView signUpNormal(UserVO vo) /* �쉶�썝媛��엯 DB泥섎━ */ {
 		ModelAndView mv = new ModelAndView("redirect:/signup.do");
 		System.out.println("running post mapping '/singupOK.do'");
 		int result = 0;
 		try {
-			result = userService.addUser(vo);
+			result = userService.getUserInsert(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
