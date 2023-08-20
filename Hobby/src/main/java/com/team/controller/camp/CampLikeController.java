@@ -1,4 +1,4 @@
-package com.team.controller;
+package com.team.controller.camp;
 
 
 import java.util.HashMap;

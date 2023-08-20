@@ -1,4 +1,4 @@
-package com.team.controller;
+package com.team.controller.camp;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URI;
@@ -217,6 +217,10 @@ public class CampController {
 		
 		// 나중에 필요한거 더 추가........
 
+		// DB에 저장된 좋아요 수를 가져와서 화면에 보낸다.
+		int likesCount = campService.getLikes(cvo.getFacltNm());
+		cvo.setLikesCount(likesCount);
+		
 		ModelAndView mv = new ModelAndView("camp/camp_detail");
 		mv.addObject("cvo", cvo);
 		return mv;
@@ -227,5 +231,4 @@ public class CampController {
 		ModelAndView mv = new ModelAndView("camp/camp_review");
 		return mv;
 	}
-	
 }
