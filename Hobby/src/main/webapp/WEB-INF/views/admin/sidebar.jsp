@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +21,7 @@ main {
 color:#ffffff!important;
 
 }
+
 
 </style>
 
@@ -49,15 +52,13 @@ color:#ffffff!important;
 	function go_home() {
 		location.href = "/home.do"
 	}
-	
-	$('#myModal').on('shown.bs.modal', function () {
-		  $('#myInput').trigger('focus')
-		})
+
+  
 </script>
 </head>
 <body>
-<main>
-    <div class="flex-shrink-0 p-3  " style="height:100vh; width: 280px; background-color: #0f4200; color:white;">
+    <!-- SIDE BAR ( NAV BAR )-->
+    <div class="flex-shrink-0 p-3  " style="height:100vh; width: 15%; background-color: #0f4200; color:white;">
         <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom border-2 sidebar-link">
         <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
         <span class="fs-5 fw-semibold">/CAMPING.do</span>
@@ -83,7 +84,6 @@ color:#ffffff!important;
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li><a href="/adminUser.do" class="ps-4 link-dark rounded sidebar-link">사용자 리스트</a></li>
                 <li><a href="#" class="ps-4 link-dark rounded sidebar-link">관리자 테이블</a></li>
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">ㅁㄴㅇㄹ</a></li>
             </ul>
             </div>
         </li>
@@ -126,123 +126,7 @@ color:#ffffff!important;
     </div>
 
 
-   
 
-
-    <div>
-        
-<h1>관리자 1대1 문의 관리 페이지</h1>
-<!-- 나중에 사이드바 나 메뉴바로 변경 예정 -->
-	<table>
-		<thead>
-			<tr>
-				<th>
-					 관지자 홈
-				</th>
-				<th> 
-					회원 관리
-				</th>
-				<th> 
-					캠핑모임 관리
-				</th>
-				<th> 
-					1대1 문의
-				</th>
-				<th> 
-					신고 목록
-				</th>
-				<th>
-					홈으로
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<button onclick="go_admin()">관리자 홈</button>
-				</td>
-				<td>
-					<button onclick="go_adminUser()">회원 관리</button>
-				</td>
-				<td>
-					<button onclick="go_adminGroup()">캠핑모임 관리</button>
-				</td>
-				<td>
-					<button onclick="go_adminQNA()">1대1 문의</button>
-				</td>
-				<td>
-					<button onclick="go_adminReport()">신고 목록</button>
-				</td>
-				<td>
-					<button onclick="go_home()">홈으로</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-
-	<table>
-		<thead>
-			<tr style="background-color: #99ccff">
-				<th>qna index</th>
-				<th>문의 내용</th>
-				<th>문의 답장</th>
-				<th>문의한 사용자 (index)</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:choose>
-				<c:when test="${empty list}">
-					<tr>
-						<td colspan="4"><h2>원하는 정보가 존재하지 않습니다.</h2></td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="k" items="${list}" varStatus="vs">
-						<tr>
-							<td>${k.q_idx}</td>
-							<td>${k.q_content}</td>
-							<td>${k.q_response}</td>
-							<td>${k.u_idx}</td>
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-		</tbody>
-	</table>
-
-    </div>
-   <!-- Button trigger modal -->
-<div class="btn">
-<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@getbootstrap">Open modal for @getbootstrap</button>
-</div>
-<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">1대1 문의</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <form>
-          <div class="mb-3">
-            <label for="recipient-name" class="col-form-label">1대1 문의자:</label>
-            <input type="text" class="form-control" id="recipient-name">
-          </div>
-          <div class="mb-3">
-            <label for="message-text" class="col-form-label">답변:</label>
-            <textarea class="form-control" id="message-text"></textarea>
-          </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Send message</button>
-      </div>
-    </div>
-  </div>
-</div>
-
-</main>
 
 </body>
 </html>

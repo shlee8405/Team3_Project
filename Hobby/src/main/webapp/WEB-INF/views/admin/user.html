@@ -388,56 +388,157 @@ color:#ffffff!important;
         <!-- SECOND CONTAINER () -->
         <div id="test2" class="container mt-4" style="background-color: rgba(200, 200, 200, 0.3); height:55vh; width: 90%;  box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
-        display:none;" >
-
-         <H1>유저 추가 폼 들어갈 곳</H1>
-        <div class="dropdown open">
-            <button class="btn btn-secondary btn-sm dropdown-toggle" type="button" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
-                    aria-expanded="false">
-                        Dropdown Sized
-                    </button>
-            <div class="dropdown-menu" aria-labelledby="triggerId">
-                <a class="dropdown-item" href="#">Action</a>
-                <a class="dropdown-item disabled" href="#">Disabled action</a>
-                <h6 class="dropdown-header">Section header</h6>
-                <a class="dropdown-item" href="#">Action</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">After divider action</a>
-            </div>
-        </div>
-
+        display:block;" >
+    
+         <div class="ps-4 pt-5 text-center container" style="align-items: center;">
+                 <form action="/" method="post">
+                    
+                    <div class="row">
+                        <h1>일반 유저 생성</h1>
+                    </div>
+                    
+                    <div class="row justify-content-md-center">
+                       <div class="col col-lg-2" style="align-items: flex-start;">
+                            <label for="u_id">아이디</label>
+                        </div>
+                        <div class="col col-lg-2">
+                            <input type="text" name="u_id" id="u_id" required>
+                        </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-2">
+                            <label for="u_name">이름</label> 
+                        </div>
+                        <div class="col col-lg-2">
+                            <input type="text" name="u_name" id="u_name"required>
+                        </div>
+                    </div>
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-2">
+                            <label for="u_pw">비밀번호 :</label>
+                        </div>
+                        <div class="col col-lg-2">
+                            <input type="password" name="u_pw" id="u_pw"required>
+                        </div>
+                    <div class="row justify-content-md-center"></div>
+                        <div class="col col-lg-2">
+                            <label for="confirm_pw">비밀번호 확인 :</label> 
+                        </div>
+                        <div class="col col-lg-2">
+                            <input type="password" name="confirm_pw" id="confirm_pw"required></label>
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-2">
+                            <label for="email">이메일 :</label>
+                        </div>
+                        <div class="col col-lg-2">
+                            <input type="email" name="u_email" id="u_email"required>
+                        </div>
+                    </div>
+    
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-2">
+                            <label for="u_phone">Phone Number: </label>
+                        </div>
+                        <div class="col col-lg-2">
+                            <input type="tel" name="u_phone" id="u_phone"required>
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-md-center"></div>
+                    <div><label for="license">Read and agree to our license/terms?<input type="checkbox" name="license" id="license" required></label></div>
+                    
+                    <div class="row justify-content-md-center">
+                            <div class="col col-lg-1"></div>
+                            <div class="col col-lg-1"></div>
+                            <div class="col col-lg-1"></div>
+                            <div class="col col-lg-1"><input type="submit" value="유저 생성"  style="float:right;"></div>
+                            <div class="col col-lg-1"><input type="reset" value="취소" style="float:left;"> </div>
+                      
+                    </div>
+                </form>
+         </div>
+        
+         
+         
         </div>
 
         <!-- THIRD CONTAINER () -->
         <div id="test3" class="container mt-4" style="background-color: rgba(200, 200, 200, 0.3); height:55vh; width: 90%;  box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.25);
         border-radius: 10px;
         display:none;" >
-
-         <H1>관리자 생성 폼 들어갈 곳</H1>
-
-        <div class="container">
-            <form>
-                <div class="mb-3 row">
-                    <label for="inputName" class="col-4 col-form-label">Name</label>
-                    <div class="col-8">
-                        <input type="text" class="form-control" name="inputName" id="inputName" placeholder="Name">
+  <div class="ps-4 pt-5 text-center container" style="align-items: center;">
+                 <form action="/" method="post">
+                    
+                    <div class="row">
+                        <h1>관리자 계정 생성</h1>
                     </div>
-                </div>
-                <fieldset class="mb-3 row">
-                    <legend class="col-form-legend col-4">Group name</legend>
-                    <div class="col-8">
-                        you can use radio and checkboxes here
+                    
+                    <div class="row justify-content-md-center">
+                       <div class="col col-lg-2" style="align-items: flex-start;">
+                            <label for="u_id">아이디</label>
+                        </div>
+                        <div class="col col-lg-2">
+                            <input type="text" name="u_id" id="u_id" required>
+                        </div>
                     </div>
-                </fieldset>
-                <div class="mb-3 row">
-                    <div class="offset-sm-4 col-sm-8">
-                        <button type="submit" class="btn btn-primary">Action</button>
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-2">
+                            <label for="u_name">이름</label> 
+                        </div>
+                        <div class="col col-lg-2">
+                            <input type="text" name="u_name" id="u_name"required>
+                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
-        </div>
-
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-2">
+                            <label for="u_pw">비밀번호 :</label>
+                        </div>
+                        <div class="col col-lg-2">
+                            <input type="password" name="u_pw" id="u_pw"required>
+                        </div>
+                    <div class="row justify-content-md-center"></div>
+                        <div class="col col-lg-2">
+                            <label for="confirm_pw">비밀번호 확인 :</label> 
+                        </div>
+                        <div class="col col-lg-2">
+                            <input type="password" name="confirm_pw" id="confirm_pw"required></label>
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-2">
+                            <label for="email">이메일 :</label>
+                        </div>
+                        <div class="col col-lg-2">
+                            <input type="email" name="u_email" id="u_email"required>
+                        </div>
+                    </div>
+    
+                    <div class="row justify-content-md-center">
+                        <div class="col col-lg-2">
+                            <label for="u_phone">Phone Number: </label>
+                        </div>
+                        <div class="col col-lg-2">
+                            <input type="tel" name="u_phone" id="u_phone"required>
+                        </div>
+                    </div>
+                    
+                    <div class="row justify-content-md-center"></div>
+                    <div><label for="license">Read and agree to our license/terms?<input type="checkbox" name="license" id="license" required></label></div>
+                    
+                    <div class="row justify-content-md-center">
+                            <div class="col col-lg-1"></div>
+                            <div class="col col-lg-1"></div>
+                            <div class="col col-lg-1"></div>
+                            <div class="col col-lg-1"><input type="submit" value="유저 생성"  style="float:right;"></div>
+                            <div class="col col-lg-1"><input type="reset" value="취소" style="float:left;"> </div>
+                      
+                    </div>
+                </form>
+         </div>
 
    </div>
  
