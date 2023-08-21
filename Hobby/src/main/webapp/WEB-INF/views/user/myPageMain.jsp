@@ -9,15 +9,21 @@
 
 
 function go_mypagemain() {
-	location.href = "/myPage.do"
+	location.href = "/myPagemain.do"
 }
 
-function go_mypageonelist() {
-	location.href = "/myPageOneList.do"
+function go_mypage() {
+	location.href = "/mypage.do"
 }
 
 function go_mypageedit() {
 	location.href = "/myPageEdit.do"
+}
+function go_myqna(){
+	location.href = "/myqna.do"
+}
+function go_myreview(){
+	location.href = "/myreview.do"
 }
 
 function go_home() {
@@ -45,6 +51,12 @@ function go_home() {
 				<th> 
 					나의 정보 수정
 				</th>
+				<th> 
+					나의 1:1 문의 내역
+				</th>
+				<th> 
+					나의 리뷰
+				</th>
 				<th>
 					홈
 				</th>
@@ -56,10 +68,16 @@ function go_home() {
 					<button onclick="go_mypagemain()">마이페이지 메인</button>
 				</td>
 				<td>
-					<button onclick="go_mypageonelist()">나의 정보 보기</button>
+					<button onclick="go_mypage()">나의 정보 보기</button>
 				</td>
 				<td>
 					<button onclick="go_mypageedit()">나의 정보 수정</button>
+				</td>
+				<td>
+					<button onclick="go_myqna()">나의 1:1문의 내역</button>
+				</td>
+				<td>
+					<button onclick="go_myreview()">나의 리뷰</button>
 				</td>
 				<td>
 					<button onclick="go_home()">홈으로</button>

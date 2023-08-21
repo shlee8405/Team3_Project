@@ -17,4 +17,20 @@ public class QnaDAO {
 	public List<QnaVO> getAllQna() {
 		return sqlSessionTemplate.selectList("qna.allList");
 	}
+	
+	public int getInsert(QnaVO qvo) {
+		return sqlSessionTemplate.insert("qna.insert",qvo);
+	}
+	
+	public QnaVO Detail(String q_idx) {
+		return sqlSessionTemplate.selectOne("qna.detail",q_idx);
+	}
+	
+	public int DeleteQ(String q_idx) {
+		return sqlSessionTemplate.update("qna.delete",q_idx);
+	}
+	
+	public int UpdateQna(QnaVO qvo) {
+		return sqlSessionTemplate.update("qna.update",qvo);
+	}
 }

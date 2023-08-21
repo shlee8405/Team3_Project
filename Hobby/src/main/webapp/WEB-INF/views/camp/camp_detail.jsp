@@ -5,9 +5,46 @@
 <head>
 <meta charset="UTF-8">
 <title>캠핑장 상세보기</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<style type="text/css">
+.button-container {
+    display: flex;
+}
+
+#like-button, #whish-button { 
+    display: inline-block;
+    margin-right: 10px; /* 버튼 사이 간격 조절 */
+    background-color: #447CEC;
+    width: 90px;
+    height: 30px;
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    border: none; 
+    border-radius: 10px; 
+}
+  
+#whish-button { 
+    background-color: #E44C5C;
+}    
+</style>
 </head>
 <body>
 	<h1>${cvo.facltNm}</h1>
+	<!-- 좋아요 -->
+<div class="button-container">
+	<div class="like-section">
+		<button id="like-button" onclick="incrementLike('${cvo.facltNm}')">
+	        좋아요 <span id="like-count">${cvo.likesCount}</span>
+	    </button>
+	    
+	</div>
+	<div class="whish-section">
+		<button id="whish-button" onclick="incrementWhish('${cvo.facltNm}')">
+	        찜하기 <span id="whish-count">${cvo.likesCount}</span>
+	    </button>
+	</div>
+</div>
 	<p><font color="gray">${cvo.lineIntro}</font></p>
 	<p><img src='${cvo.firstImageUrl}' width="500px"></p>
 	<p><strong>주소 : </strong>${cvo.addr1}</p>
@@ -17,6 +54,8 @@
 	<p><strong>캠핑장 유형 : </strong>${cvo.induty}</p>
 	<p><strong>주변이용가능시설 : </strong>${cvo.posblFcltyCl}</p>
 	<p><strong>소개글 : </strong>${cvo.featureNm}</p>
+	
+	
 	
 	<%-- 카카오맵 api --%>
 		<h2>찾아오시는 길</h2>
@@ -45,5 +84,22 @@
 			// 아래 코드는 지도 위의 마커를 제거하는 코드이다
 			// marker.setMap(null);
 	</script>
+	
+	<script type="text/javascript">
+		function incrementLike(campName) {
+			//ajax 호출
+			$.ajax({
+				url: "/likeCamp.do",
+				type: "POST",
+				data: { facltNm : campName},
+				success: function(response) {
+					// 받아온 좋아요 수 화면에 업데이트
+					$('#like-count').text(response.likesCount);
+					
+				}
+			})
+		}
+	</script>
+<jsp:include page="camp_review.jsp" />
 </body>
 </html>
