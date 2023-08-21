@@ -90,6 +90,8 @@ public class MyController {
 		List<FaqVO> F_list = faqService.getList();
 		List<QnaVO> Q_list = qnaService.getAllQna();
 		List<ReportVO> R_list = reportService.getAllReports();
+		String[] test = {"번호","제목","내용"};
+		mv.addObject("test", test);
 		mv.addObject("R_list", R_list);
 		mv.addObject("F_list", F_list);
 		mv.addObject("Q_list", Q_list);
