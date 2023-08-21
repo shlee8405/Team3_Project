@@ -18,7 +18,11 @@
 	</select>
 	
 	<update id="delete" parameterType="String">
-		update qna set q_status = 1 where q_idx = #{q_idx}
+		update qna set q_status = 0 where q_idx = #{q_idx}
+	</update>
+	
+	<update id="update" parameterType="qvo">
+		update qna set q_name = #{q_name} , q_content = #{q_content} where q_idx = #{q_idx}
 	</update>
 </mapper>
 

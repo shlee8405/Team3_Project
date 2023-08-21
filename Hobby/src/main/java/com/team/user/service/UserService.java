@@ -6,9 +6,12 @@ import com.team.user.vo.UserVO;
 
 public interface UserService {
 
-	//회원가입
-	public int addUser(UserVO uvo);
+	
 	
 	//전체보기
 	public List<UserVO> getAllUsers();
+	
+	// 삽입
+	int getUserInsert(UserVO uvo);
+		
 }

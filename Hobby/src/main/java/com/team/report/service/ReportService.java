@@ -11,4 +11,7 @@ public interface ReportService {
 	
 	// 신고하기
 	int getReportInsert(ReportVO rvo);
+	
+	// 신고 상세
+	ReportVO Detail(String r_idx);
 }

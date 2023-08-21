@@ -128,18 +128,41 @@ public class MyController {
 		return mv;
 	}
 
-	@GetMapping("/go_AskDetail.do") /* 1:1 상세 페이지 */
-	public ModelAndView goAskDetail(@ModelAttribute("q_idx") String q_idx) {
+	@GetMapping("/go_AskDetail.do")
+	public ModelAndView goAskDetail(@ModelAttribute("q_idx") String q_idx)/* 1:1 상세 페이지 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerAskDetail");
 		QnaVO qvo = qnaService.Detail(q_idx);
 		mv.addObject("qvo", qvo);
 		return mv;
 	}
 
-	@PostMapping("/go_deleteQ.do") /* 문의 삭제 */
-	public ModelAndView goDeleteQ(@RequestParam("q_idx") String q_idx) {
+	@RequestMapping("/go_updateQ.do") /* 문의 페이지로 이동 */
+	public ModelAndView goUpdateQ(@ModelAttribute("q_idx") String q_idx) {
+		ModelAndView mv = new ModelAndView("cusser/cusSerUpdate");
+		QnaVO qvo = qnaService.Detail(q_idx);
+		mv.addObject("qvo", qvo);
+		return mv;
+	}
+
+	@RequestMapping("/Update_QNA.do") /* 문의 수정 */
+	public ModelAndView goUpdateQna(QnaVO qvo) {
+		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
+		int res = qnaService.UpdateQna(qvo);
+		return mv;
+	}
+
+	@RequestMapping("/go_deleteQ.do") /* 문의 삭제 */
+	public ModelAndView goDeleteQ(@ModelAttribute("q_idx") String q_idx) {
 		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
 		int res = qnaService.DeleteQ(q_idx);
+		return mv;
+	}
+	
+	@GetMapping("/go_AskDelete.do")
+	public ModelAndView goAskDelete(@ModelAttribute("q_idx") String q_idx)/* 삭제 페이지로 이동 */ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerAskDelete");
+		QnaVO qvo = qnaService.Detail(q_idx);
+		mv.addObject("qvo", qvo);
 		return mv;
 	}
 
@@ -148,6 +171,14 @@ public class MyController {
 		ModelAndView mv = new ModelAndView("cusser/cusSerReport");
 		List<ReportVO> list = reportService.getAllReports();
 		mv.addObject("list", list);
+		return mv;
+	}
+	
+	@GetMapping("/go_ReportDetail.do")
+	public ModelAndView goReportDetail(@ModelAttribute("r_idx") String r_idx)/* 신고 상세 페이지 */ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerReportDetail");
+		ReportVO rvo = reportService.Detail(r_idx);
+		mv.addObject("rvo", rvo);
 		return mv;
 	}
 
@@ -266,7 +297,7 @@ public class MyController {
 		System.out.println("running post mapping '/singupOK.do'");
 		int result = 0;
 		try {
-			result = userService.addUser(vo);
+			result = userService.getUserInsert(vo);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

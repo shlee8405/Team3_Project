@@ -13,6 +13,9 @@
 		values(#{r_content},#{r_name})
 	</insert>
 	
+	<select id="detail" parameterType="String" resultType="rvo">
+		select * from report where r_idx = #{r_idx}
+	</select>
 </mapper>
 
 

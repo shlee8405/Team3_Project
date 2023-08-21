@@ -115,17 +115,35 @@ function go_report() {
         <thead>
             <tr>
                 <th>번호</th>
+                <th>작성자</th>
                 <th>제목</th>
                 <th>내용</th>
             </tr>
         </thead>
         <c:forEach var="k" items="${list}" varStatus="loop">
-		    <tr>
-		        <td>${loop.count}</td>
-		        <td>${k.r_name}</td>
-		        <td>${k.r_content}</td>
-		    </tr>
-		</c:forEach>
+            <tr>
+                <c:choose>
+                    <c:when test="${k.r_status == 0}">
+                        <td colspan="4">삭제된 문의입니다</td>
+                    </c:when>
+                    <c:otherwise>
+                        <td>${loop.count}</td>
+                        <td style="white-space: nowrap;">${k.r_name}</td>
+                        <td>${k.r_content}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${not empty k.r_response}">
+                                    <a href="/go_ReportDetail.do?q_idx=${k.r_idx}">답변보기</a>
+                                </c:when>
+                                <c:otherwise>
+                                    <a href="/go_ReportDelete.do?q_idx=${k.r_idx}">수정하기</a>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                    </c:otherwise>
+                </c:choose>
+            </tr>
+        </c:forEach>
 
     </table>
 </div>

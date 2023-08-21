@@ -5,36 +5,25 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+
 <style type="text/css">
-     table {
+    table {
         border-collapse: collapse;
         width: 50%;
         margin: 0 auto;
     }
 
-    th {
-        border: 1px solid black;
-        white-space: nowrap; /* Add this line */
+    th, td {
+        border: 2px solid black;
         padding: 5px;
-    }
-
-    table, td {
-        border: 1px solid black;
-        padding: 5px;
-    }
-
-    .faq-buttons {
         text-align: center;
-    }
-
-    .table-margin {
-        margin-top: 10px;
     }
 
     .text-center {
         text-align: center;
     }
 </style>
+
 <script type="text/javascript">
 function go_cusser() {
 	location.href="/cusSer.do"	
@@ -57,8 +46,7 @@ function go_home() {
 }
 
 function go_delete(f) {
-    // q_idx 값을 URL 파라미터로 전달하여 delete 페이지로 이동합니다
-	location.href = "/go_deleteQ.do";
+    // Add your delete logic here
 }
 </script>
 </head>
@@ -109,9 +97,6 @@ function go_delete(f) {
     </table>
 </div>
 
-<div class="table-margin"></div> <!-- 10px 간격용 div -->
-
-<div class="text-center">
 <form method="post">
     <table>
             <tr>
@@ -126,19 +111,8 @@ function go_delete(f) {
            		<th>답변</th>
                 <td>${qvo.q_response}</td>
             </tr>
-            <tr>
-               <td><input type="hidden" name="q_idx" value="${qvo.q_idx}"></td>
-            </tr>
-            <tr>
-	            <td>	
-			   		<button class="btn" onclick="go_delete(this.form)">삭제</button>
-			    </td>
-		    </tr>
     </table>
 </form>
-</div>
-
-
 
 </body>
 </html>
