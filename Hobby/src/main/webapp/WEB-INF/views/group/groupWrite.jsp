@@ -51,6 +51,16 @@
 			f.subject.focus();
 			return;
 		}
+		if(f.g_maxPeople.value.trim().length <=0){
+			alert("총인원을 입력하세요");
+			f.subject.focus();
+			return;
+		}
+		if(f.g_intro.value.trim().length <=0){
+			alert("모임소개를 입력하세요");
+			f.subject.focus();
+			return;
+		}
 		if(f.g_desc.value.trim().length <=0){
 			alert("내용을 입력하세요");
 			f.g_desc.focus();
@@ -80,32 +90,40 @@
 <body>
 	<h2>그룹글쓰기폼</h2>
 		<div id="bbs">
-	<form method="post" encType="multipart/form-data">
+	<form method="post" enctype="multipart/form-data">
 		<table summary="게시판 글쓰기">
 			<caption>모임 개설하기</caption>
 			<tbody>
 				<tr>
-					<th>* 제목:</th>
+					<th>제목</th>
 					<td><input type="text" name="g_title" size="45"/></td>
 				</tr>
 				<tr>
-					<th>작성자:</th>
-					<td><input type="text" name="g_name" readonly/></td>
+					<th>작성자</th>
+					<td><input type="text" name="u_idx" value="1" readonly /></td>
 				</tr>
 				<tr>
-					<th>썸네일 이미지:</th>  <!-- 첨부파일 유효성검사 해주자 -->
-					<td><input type="file" name="g_fname"/></td>
+					<th>모임 총인원</th>
+					<td><input type="number" name="g_maxPeople" /></td>
 				</tr>
 				<tr>
-					<th>* 날짜:</th>
+					<th>썸네일 이미지</th>  <!-- 첨부파일 유효성검사 해주자 -->
+					<td><input type="file" name="file"/></td>
+				</tr>
+				<tr>
+					<th>모임 소개</th>  <!-- 첨부파일 유효성검사 해주자 -->
+					<td><input type="text" name="g_intro" size="60"/></td>
+				</tr>
+				<tr>
+					<th>날짜</th>
 					<td><input type="date" name="g_date" size="10" id="g_date"/></td>
 				</tr>
 				<tr>
-					<th>* 캠핑 장소:</th>
+					<th>캠핑 장소</th>
 					<td><input type="text" name="g_location" id="g_location" /></td>
 				</tr>
 				<tr>
-					<th>* 내용:</th>
+					<th>내용</th>
 					<td><textarea name="g_desc" cols="60" rows="10" id="g_desc"></textarea></td>
 				</tr>
 				<tr>
