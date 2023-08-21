@@ -94,7 +94,7 @@
             for (var i = 0; i < contents.length; i++) {
                 contents[i].style.display = "block";
             }
-            toggleButton.innerText = "닫기";
+            toggleButton.innerText = "FAQ닫기";
             allContentVisible = true;
         } else {
             for (var i = 0; i < contents.length; i++) {
@@ -115,7 +115,7 @@
             for (var i = 0; i < qnaContents.length; i++) {
                 qnaContents[i].style.display = "table-row";
             }
-            toggleButton.innerText = "닫기";
+            toggleButton.innerText = "QnA닫기";
             allQnaVisible = true;
         } else {
             for (var i = 0; i < qnaContents.length; i++) {
@@ -136,7 +136,7 @@
             for (var i = 0; i < ReportContents.length; i++) {
                 ReportContents[i].style.display = "table-row";
             }
-            toggleButton.innerText = "닫기";
+            toggleButton.innerText = "신고 목록 닫기";
             allReportVisible = true;
         } else {
             for (var i = 0; i < ReportContents.length; i++) {
