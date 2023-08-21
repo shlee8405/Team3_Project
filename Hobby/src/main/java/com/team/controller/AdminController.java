@@ -16,11 +16,11 @@ public class AdminController {
 	private UserService userService;
 	
 	
-	@GetMapping("/adminUser.do")
-	public ModelAndView goAdminUser() /* 관리자 유저 */ {
-		ModelAndView mv = new ModelAndView("admin/user");
-		List<UserVO> list = userService.getAllUsers();
-		mv.addObject("list", list);
-		return mv;
-	}
+//	@GetMapping("/adminUser.do")
+//	public ModelAndView goAdminUser() /* 관리자 유저 */ {
+//		ModelAndView mv = new ModelAndView("admin/user");
+//		List<UserVO> list = userService.getAllUsers();
+//		mv.addObject("list", list);
+//		return mv;
+//	}
 }
