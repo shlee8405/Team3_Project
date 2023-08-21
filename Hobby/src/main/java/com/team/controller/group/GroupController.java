@@ -19,7 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.team.group.service.GroupService;
 import com.team.group.vo.GroupVO;
 
-
+@Controller
 public class GroupController {
 	@Autowired
 	private GroupService groupService;
