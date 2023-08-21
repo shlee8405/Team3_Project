@@ -83,9 +83,9 @@ public class MyController {
 	 * 紐⑤뜽 �냽�꽦�뿉 ���븳 �궎 "testArray"瑜� 紐낆떆�쟻�쑝濡� �젣怨� return mv; }
 	 */
 
-	// 怨좉컼�꽱�꽣 愿��젴 controls
+	// 고객센터 controls
 	@GetMapping("/cusSer.do")
-	public ModelAndView goCusSer() /* 怨좉컼�꽱�꽣 硫붿씤 */ {
+	public ModelAndView goCusSer() /* 고객센터 메인 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerMain");
 		List<FaqVO> F_list = faqService.getList();
 		List<QnaVO> Q_list = qnaService.getAllQna();
@@ -97,7 +97,7 @@ public class MyController {
 	}
 
 	@GetMapping("/cusSerFAQ.do")
-	public ModelAndView goCusSerFAQ() /* �옄二쇳븯�뒗 吏덈Ц �럹�씠吏� */ {
+	public ModelAndView goCusSerFAQ() /* FAQ페이지 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerFAQ");
 		List<FaqVO> list = faqService.getList();
 		mv.addObject("list", list);
