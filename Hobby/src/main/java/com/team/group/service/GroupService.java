@@ -11,4 +11,6 @@ public interface GroupService {
 	public int getGroupWriteOk(GroupVO gvo);
 	
 	public GroupVO getGroupOnelist(String g_idx);
+	
+	public int getGroupDelete(GroupVO g_idx);
 }
