@@ -20,7 +20,7 @@ public class CampVO {
 	
 	private String contentId, facltNm, lineIntro, addr1, mapX, mapY, 
 				   tel, operDeCl, lctCl, induty, posblFcltyCl, featureNm, 
-				   firstImageUrl, doNm;
+				   firstImageUrl, doNm, message, u_id;
 
 	private int likesCount;
 	
@@ -30,6 +30,22 @@ public class CampVO {
 
 	public void setLikesCount(int likesCount) {
 		this.likesCount = likesCount;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getU_id() {
+		return u_id;
+	}
+
+	public void setU_id(String u_id) {
+		this.u_id = u_id;
 	}
 
 	public String getContentId() {
