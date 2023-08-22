@@ -133,7 +133,7 @@ color:#ffffff!important;
                 <div class="col-10"></div>
                 <div class="col"> <div class="d-grid gap-2">
                     
-                <button type="button" name="" id="" class="btn btn-primary">Button</button>
+                <button type="button" name="" id="" class="btn btn-success">Button</button>
                 </div></div>
             </div>
         </div>
@@ -142,10 +142,10 @@ color:#ffffff!important;
         <!-- TOGGLE BUTTON CONTAINER -->
         <div class="container mt-4 ps-5 p-1 col-6">
             <input type="button" class="btn-check" id="btn-check" autocomplete="off" onclick="hidetest()" checked>
-            <label class="btn btn-primary" for="btn-check">캠핑 모임 리스트</label>
+            <label class="btn btn-success" for="btn-check">캠핑 모임 리스트</label>
 
             <input type="button" class="btn-check" id="btn-check2" autocomplete="off" onclick="hidetest2()">
-            <label class="btn btn-primary" for="btn-check2">캠핑 모임 생성</label>
+            <label class="btn btn-success" for="btn-check2">캠핑 모임 생성</label>
         </div>
         
 
