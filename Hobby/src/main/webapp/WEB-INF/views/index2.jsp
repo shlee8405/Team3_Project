@@ -41,6 +41,10 @@
 	function go_admin() {
 		location.href = "/adminHome.do"
 	}
+	
+	function go_shltest() { /* 실험용. 나중에 삭제할 예정*/
+		location.href ="/shltest.do"
+	}
 </script>
 
 
@@ -91,6 +95,7 @@ input {
 									<th>회원가입</th>
 									<th>지도</th>
 									<th>hello</th>
+									<th>SHL_TEST</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -120,6 +125,9 @@ input {
 									</td>
 									<td>
 										<button onclick="go_hello()">Hello</button>
+									</td>
+									<td>
+										<button onclick="go_shltest()">SHL TEST</button>
 									</td>
 
 								</tr>

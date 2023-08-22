@@ -15,7 +15,7 @@ public class AdminController {
 	@Autowired
 	private UserService userService;
 	
-	
+
 //	@GetMapping("/adminUser.do")
 //	public ModelAndView goAdminUser() /* 관리자 유저 */ {
 //		ModelAndView mv = new ModelAndView("admin/user");
@@ -23,4 +23,12 @@ public class AdminController {
 //		mv.addObject("list", list);
 //		return mv;
 //	}
+	
+	
+	@GetMapping("/shltest.do")
+	public ModelAndView goSHLTEST() {
+		ModelAndView mv = new ModelAndView("test/shl_test");
+		return mv;
+	}
 }
+
