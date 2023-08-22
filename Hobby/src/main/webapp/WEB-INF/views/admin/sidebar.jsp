@@ -77,29 +77,27 @@ color:#ffffff!important;
             </div>
         </li>
         <li class="mb-1">
-            <a class="btn btn-toggle align-items-center rounded collapsed sidebar-link" href="/adminUser.do">
+            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#user-collapse" aria-expanded="false">
             유저관리
-            </a>
-            <!-- "유저관리" button에서 a태그로 바꿔서 일단 주석 처리함. 나중에 필요하면 주석 제거 -->
-            <!-- <div class="collapse" id="user-collapse" style="">
+            </button>
+            <div class="collapse" id="user-collapse" style="">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li><a href="/adminUser.do" class="ps-4 link-dark rounded sidebar-link">사용자 리스트</a></li>
                 <li><a href="#" class="ps-4 link-dark rounded sidebar-link">관리자 테이블</a></li>
             </ul>
-            </div> -->
+            </div>
         </li>
         <li class="mb-1">
-            <a class="btn btn-toggle align-items-center rounded collapsed sidebar-link" href="/adminGroup.do">
+            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#groups-collapse" aria-expanded="false">
             캠핑모임 관리
-            </a>
-            <!-- "캠핑모임 관리 button에서 a태그로 바꿔서 일단 주석 처리함. 나중에 필요하면 주석 제거 -->
-            <!-- <div class="collapse" id="groups-collapse">
+            </button>
+            <div class="collapse" id="groups-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li><a href="/adminGroup.do" class="ps-4 link-dark rounded sidebar-link">모임 리스트</a></li>
                 <li><a href="#" class="ps-4 ink-dark rounded sidebar-link">모임 생성</a></li>
                 <li><a href="#" class="ps-4 link-dark rounded sidebar-link">ㅁㄴㅇㄹ</a></li>
             </ul>
-            </div> -->
+            </div>
         </li>
         <li class="mb-1">
             <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#cusser-collapse" aria-expanded="false">
