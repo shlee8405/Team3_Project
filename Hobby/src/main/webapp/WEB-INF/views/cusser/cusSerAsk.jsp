@@ -7,24 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<style type="text/css">
-    .navbar-custom {
-        background-color: #0F4200;
-    }
-    
-    .navbar-custom .navbar-brand,
-    .navbar-custom .navbar-nav .nav-link {
-        color: white;
-    }
-    
-    .footer-bar {
-	    background-color: #0F4200;
-	    height: 50px;
-	    position: fixed;
-	    bottom: 0;
-	    width: 100%;
-	}
-</style>
+
 <script type="text/javascript">
 function go_cusser() {
 	location.href="/cusSer.do"	
@@ -55,41 +38,12 @@ function go_AskDetail() {
 </script>
 </head>
 <body>
-
+<jsp:include page="../header.jsp"  />
 <h1 class="text-center">1:1 문의</h1>
-
-<nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">고객센터</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/cusSer.do" onclick="go_cusser()">고객센터 메인</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cusSerFAQ.do" onclick="go_cusserFAQ()">자주묻는질문</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cusSerAsk.do" onclick="go_cusserAsk()">1:1 문의</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/go_AskDelete.do" onclick="go_cusserReport()">신고하기</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/home.do" onclick="go_home()">홈으로</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
 <div class="table-margin"></div> <!-- 10px 간격용 div -->
 
-<div class="container mt-5 mb-5">
+<div style="position:relative; top:200px; z-index:1;">
     <!-- QnA 내용 -->
     <div class="table-responsive">
         <table class="table table-bordered table-hover">

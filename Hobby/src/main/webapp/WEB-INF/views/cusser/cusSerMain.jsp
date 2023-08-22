@@ -13,15 +13,6 @@
         padding-bottom: 50px;
     }
     
-    .navbar-custom {
-        background-color: #0F4200;
-    }
-    
-    .navbar-custom .navbar-brand,
-    .navbar-custom .navbar-nav .nav-link {
-        color: white;
-    }
-    
     .qna-title {
         font-weight: bold;
     }
@@ -51,6 +42,7 @@
 	    position: fixed;
 	    bottom: 0;
 	    width: 100%;
+	    z-index: 100;
 	}
 	
 	.qna-box {
@@ -149,36 +141,10 @@
 </script>
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">고객센터</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/cusSer.do" onclick="go_cusser()">고객센터 메인</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cusSerFAQ.do" onclick="go_cusserFAQ()">자주묻는질문</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cusSerAsk.do" onclick="go_cusserAsk()">1:1 문의</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/go_AskDelete.do" onclick="go_cusserReport()">신고하기</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/home.do" onclick="go_home()">홈으로</a>
-                </li>
-            </ul>
-        </div>
-    </div>
-</nav>
 
-<div class="container mt-5 mb-5">
+<jsp:include page="../header.jsp"  />
+<div style="position:relative; top:200px; z-index:1;">
+	<div class="container mt-5 mb-5">
     <!-- FAQ 버튼 -->
     <div class="button-group">
         <button class="toggle-button" id="toggle-all" onclick="toggleAllContent()">FAQ</button>
@@ -247,5 +213,6 @@
 
 <div class="footer-bar"></div>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+</div>
 </body>
 </html>

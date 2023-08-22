@@ -28,6 +28,8 @@ body {
     line-height: 65px;
     text-align: center;
     background-color:#637F42;
+    position: fixed;
+    top: 0;
   
 }
 
@@ -382,7 +384,7 @@ body {
     <nav class="nav">
         <div class="container">
             <div class="logo">
-                <a href="#"><img src="/resources/images/logo3.png" style="width:200px; position:relative; top:-25px; margin:0;"></a>
+                <a href="/home.do"><img src="/resources/images/logo3.png" style="width:200px; position:relative; top:-25px; margin:0;"></a>
             </div>
             <div id="mainListDiv" class="main_list">
                 <ul class="navlinks">
@@ -403,8 +405,7 @@ body {
 
 <!-- Jquery needed -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="js/scripts.js"></script>
-
+	
 <!-- Function used to shrink nav bar removing paddings and adding black background -->
     <script>
         $(window).scroll(function() {
