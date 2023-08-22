@@ -77,15 +77,19 @@
 </script>
 </head>
 	<body>
-		<input type="text" id="searchBox" placeholder="캠핑장 이름을 입력하세요"/>
-   		<button type="button" onclick="doSearch()">검색</button>
-   		<br><br><br>
-    
-		<div id="camp-list">
-			<!-- 이 안에 내용 들어감 -->
+		<jsp:include page="../header.jsp"  />
+		<div style="position:relative; top:200px; z-index:1;">
+			<input type="text" id="searchBox" placeholder="캠핑장 이름을 입력하세요"/>
+	   		<button type="button" onclick="doSearch()">검색</button>
+	   		<br><br><br>
+	    
+			<div id="camp-list">
+				<!-- 이 안에 내용 들어감 -->
+			</div>
+		
+			<button id="more-btn">더보기</button>
 		</div>
 	
 		
-		<button id="more-btn">더보기</button>
 	</body>
 </html>
