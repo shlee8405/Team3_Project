@@ -1,51 +1,89 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>마이페이지 main</title>
+    <title>마이페이지</title>
+	 <link rel="stylesheet" type="text/css" href="styles.css">
+    <style type="text/css">
 
-<style type="text/css">
- #green-header {
-        background-color: green;
-        height: 30px; /* 높이 조절 (원하는 크기로 수정해주세요) */
-    }
-     #green-footer {
-        background-color: green;
-        height: 30px; /* 높이 조절 (원하는 크기로 수정해주세요) */
-    }
-     
-	a{text-decoration: none;}
-	table{
-		width:600px; border-collapse: collapse; text-align: center;
-	}
-	table, th, td{
-		border: 1px solid black; padding: 3px;	
-	}
-	div{width:600px; margin: auto; text-align: center;}
+.menu {
+	display: flex;
+	justify-content: space-around;
+	background-color: #f2f2f2;
+}
+
+.menu-item {
+	padding: 5px;
+	border: 1px solid; border-radius : 5px;
+	background-color: white;
+	border-radius: 5px;
+}
+
+a {
+	text-decoration: none;
+}
+
+table {
+	width: 600px;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+table, th, td {
+	border: 1px solid black;
+	padding: 3px;
+}
+
+div {
+	width: 600px;
+	margin: auto;
+	text-align: center;
+}
+.my-camping{
+	width: 600px;
+	margin: auto;
+	border-collapse: collapse;
+	text-align: center;
+}
+.my-capming th, .my-camping td{
+	border: 1px solid black;
+	padding: 3px;
+	background-color: white;
+}
 </style>
 </head>
 <body>
-    <div>
-    	<div class="header">
-        <div class="green-background"></div>
-        <div id="green-header"></div>
-        <h1 class="mypage-title">마이페이지</h1>
-    </div>
-    	
-    	<hr>
-    	<h2>내가 찜한 캠핑장 | 내가 작성한 리뷰 | 1:1 문의 | 회원정보 </h2>
-
-   <table>
+   <div>
+		<h1 class="mypage-title">마이페이지</h1>
+	</div>
+	<div class="menu">
+		<div class="menu-item">
+			<h5>내가 찜한 캠핑장</h5>
+		</div>
+		<div class="menu-item">
+			<h5>내가 작성한 리뷰</h5>
+		</div>
+		<div class="menu-item">
+			<h5>1:1 문의</h5>
+		</div>
+		<div class="menu-item">
+			<h5>회원정보</h5>
+		</div>
+	</div>
+	&nbsp;
+	&nbsp;
+	&nbsp;
+	
+   <table class="my-camping">
 		<thead>
-			<tr style="background-color: #99ccff">
-				<th>캠핑장 이름 </th>
-				<th>1 </th>
-				<th>2</th>
-				<th>3</th>
+			<tr style="background-color: #637F42">
+				<td class="label">캠핑장 이름</td>
+				<td class="user-info">${cw_idx}</td>
+			</tr>
+			<tr style="background-color: #637F42">
+				<td class="label">캠핑장 위치</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -67,9 +105,5 @@
 			</c:choose>
 		</tbody>
 	</table>
-    
-    <div id="green-footer"></div>
-        <div class="green-background"></div>
-    </div>
 </body>
 </html>
