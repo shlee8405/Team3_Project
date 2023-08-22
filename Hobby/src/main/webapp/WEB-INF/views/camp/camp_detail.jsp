@@ -86,16 +86,16 @@
 	</script>
 	
 	<script type="text/javascript">
-		function incrementLike(campName) {
+		function incrementLike(u_id, campName) {
 			//ajax 호출
 			$.ajax({
 				url: "/likeCamp.do",
 				type: "POST",
-				data: { facltNm : campName},
+				data: { u_id : u_id, facltNm : campName},
 				success: function(response) {
 					// 받아온 좋아요 수 화면에 업데이트
 					$('#like-count').text(response.likesCount);
-					
+					alert(response.message);
 				}
 			})
 		}

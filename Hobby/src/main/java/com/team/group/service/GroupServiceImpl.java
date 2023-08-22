@@ -18,4 +18,14 @@ public class GroupServiceImpl implements GroupService {
 		return groupDAO.getAllGroups();
 	}
 
+	@Override
+	public int getGroupWriteOk(GroupVO gvo) {
+		return groupDAO.getGroupWriteOk(gvo);
+	}
+
+	@Override
+	public GroupVO getGroupOnelist(String g_idx) {
+		return groupDAO.getGroupOnelist(g_idx);
+	}
+
 }
