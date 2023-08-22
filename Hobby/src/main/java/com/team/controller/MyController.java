@@ -111,6 +111,8 @@ public class MyController {
 	public ModelAndView goCusSerAsk() /* 1대1 문의 페이지 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerAsk");
 		List<QnaVO> list = qnaService.getAllQna();
+		String[] test = {"번호","제목","내용"};
+		mv.addObject("test", test);
 		mv.addObject("alllist", list);
 		return mv;
 	}

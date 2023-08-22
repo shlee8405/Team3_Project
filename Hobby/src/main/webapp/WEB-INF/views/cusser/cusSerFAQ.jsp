@@ -7,7 +7,6 @@
 <title>자주하는 질문</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- <link rel="stylesheet" type="text/css" href="resources/css/cusSerFAQ.css"> -->
 <style type="text/css">
     body {
         padding-top: 50px;
@@ -16,6 +15,7 @@
     
     .navbar-custom {
         background-color: #0F4200;
+        height: 100px;
     }
     
     .navbar-custom .navbar-brand,
@@ -43,10 +43,12 @@
     .footer-bar {
 	    background-color: #0F4200;
 	    height: 50px;
-	    position: fixed;
-	    bottom: 0;
 	    width: 100%;
+	    position: fixed;
+	    bottom: -50px; /* 초기에는 숨겨진 상태로 설정 */
+	    transition: bottom 0.3s ease-in-out; /* bottom 속성 변경에 애니메이션 적용 */
 	}
+
 	
 	.qna-box {
         padding: 1rem;
@@ -84,7 +86,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">고객센터</a>
+        <a class="navbar-brand" href=""><img src="/resources/images/logohorizontal3WHITE-removebg-preview_1.png" alt="로고 이미지"></a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -127,7 +129,8 @@
 </div>
 
 
-<div class="footer-bar"></div>
+<footer class="footer-bar fixed-bottom"></footer>
+
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
