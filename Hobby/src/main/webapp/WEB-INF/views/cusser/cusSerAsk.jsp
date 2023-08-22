@@ -5,9 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script type="text/javascript">
 function go_cusser() {
 	location.href="/cusSer.do"	
@@ -39,6 +40,7 @@ function go_AskDetail() {
 </head>
 <body>
 <jsp:include page="../header.jsp"  />
+<div style="position:relative; top:200px; z-index:1;">
 <h1 class="text-center">1:1 문의</h1>
 
 <div class="table-margin"></div> <!-- 10px 간격용 div -->
@@ -71,7 +73,7 @@ function go_AskDetail() {
 <div class="text-center">
     <button class="btn" onclick="go_inquiry()">문의하기</button>
 </div>
-<div class="footer-bar"></div>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
+
+</div>
 </body>
 </html>
