@@ -5,11 +5,11 @@
 <mapper namespace="mypage">
 	
 	<select id="myinfo" resultType="mvo">
-		select * from USERS 
+		select * from USERS where u_idx = #{u_idx}
 	</select>
 	
 	<select id="mypagemain" resultType="mmvo">
-		select * from CWISH 
+		select * from CWISH where cw_idx = #{cw_idx}
 	</select>
 	
 	<update id="myinfoupdate" parameterType="upvo">
@@ -18,7 +18,11 @@
     </update>
     
     <select id="myqna" resultType="mqvo">
-		select * from qna
+		select * from qna where q_idx = #{q_idx}
+	</select>
+	
+	<select id="myreview" resultType="mrvo">
+		select * from CREVIEW where cr_idx = #{cr_idx}
 	</select>
     
 </mapper>
