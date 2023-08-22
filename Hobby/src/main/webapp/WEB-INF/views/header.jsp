@@ -7,53 +7,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
-@import url('https://fonts.googleapis.com/css?family=Quicksand:400,500,700');
 html,
 body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Quicksand", sans-serif;
-    font-size: 62.5%;
-    font-size: 10px;
 	z-index: 5 !important;
 }
 
 /* Navbar section */
 
-.nav {
+.navHD {
     width: 100%;
     height: 65px;
     position: fixed;
     line-height: 65px;
     text-align: center;
     background-color:#637F42;
+    top: 0px;
   
 }
 
-.nav div.logo {
+.navHD, ::after, ::before {
+    box-sizing: content-box;
+}
+
+.navHD div.logo {
     float: left;
     width: auto;
     height: auto;
     padding-left: 3rem;
 }
 
-.nav div.logo a {
+.navHD div.logo a {
     text-decoration: none;
     color: #fff;
     font-size: 2.5rem;
 }
 
-.nav div.logo a:hover {
+.navHD div.logo a:hover {
     color: #00E676;
 }
 
-.nav div.main_list {
+.navHD div.main_list {
     height: 65px;
     float: right;
 }
 
-.nav div.main_list ul {
+.navHD div.main_list ul {
     width: 100%;
     height: 65px;
     display: flex;
@@ -62,21 +63,21 @@ body {
     padding: 0;
 }
 
-.nav div.main_list ul li {
+.navHD div.main_list ul li {
     width: auto;
     height: 65px;
     padding: 0;
     padding-right: 3rem;
 }
 
-.nav div.main_list ul li a {
+.navHD div.main_list ul li a {
     text-decoration: none;
     color: #fff;
     line-height: 65px;
     font-size: 2.4rem;
 }
 
-.nav div.main_list ul li a:hover {
+.navHD div.main_list ul li a:hover {
     color: #00E676;
 }
 
@@ -89,8 +90,8 @@ body {
     display: none;
 }
 
-.nav {
-    padding-top: 20px;
+.navHD {
+	padding-top: 20px;
     padding-bottom: 20px;
     -webkit-transition: all 0.4s ease;
     transition: all 0.4s ease;
@@ -109,19 +110,19 @@ body {
     .navTrigger {
         display: block;
     }
-    .nav div.logo {
+    .navHD div.logo {
         margin-left: 15px;
     }
-    .nav div.main_list {
+    .navHD div.main_list {
         width: 100%;
         height: 0;
         overflow: hidden;
     }
-    .nav div.show_list {
+    .navHD div.show_list {
         height: auto;
         display: none;
     }
-    .nav div.main_list ul {
+    .navHD div.main_list ul {
         flex-direction: column;
         width: 100%;
         height: 100vh;
@@ -132,17 +133,17 @@ body {
         /*same background color of navbar*/
         background-position: center top;
     }
-    .nav div.main_list ul li {
+    .navHD div.main_list ul li {
         width: 100%;
         text-align: right;
     }
-    .nav div.main_list ul li a {
+    .navHD div.main_list ul li a {
         text-align: center;
         width: 100%;
         font-size: 3rem;
         padding: 20px;
     }
-    .nav div.media_button {
+    .navHD div.media_button {
         display: block;
     }
 }
@@ -379,8 +380,8 @@ body {
     </script>
 </head>
 <body>
-    <nav class="nav">
-        <div class="container">
+    <nav class="navHD">
+        <div class="containerHD">
             <div class="logo">
                 <a href="#"><img src="/resources/images/logo3.png" style="width:200px; position:relative; top:-25px; margin:0;"></a>
             </div>
@@ -403,16 +404,15 @@ body {
 
 <!-- Jquery needed -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-    <script src="js/scripts.js"></script>
 
 <!-- Function used to shrink nav bar removing paddings and adding black background -->
     <script>
         $(window).scroll(function() {
             if ($(document).scrollTop() > 50) {
-                $('.nav').addClass('affix');
+                $('.navHD').addClass('affix');
                 console.log("OK");
             } else {
-                $('.nav').removeClass('affix');
+                $('.navHD').removeClass('affix');
             }
         });
     </script>
