@@ -24,7 +24,8 @@ body {
     line-height: 65px;
     text-align: center;
     background-color:#637F42;
-    top: 0px;
+    position: fixed;
+    top: 0;
   
 }
 

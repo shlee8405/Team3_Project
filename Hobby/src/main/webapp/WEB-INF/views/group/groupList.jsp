@@ -53,6 +53,8 @@
 </script>
 </head>
 <body>
+<jsp:include page="../header.jsp"  />
+<div style="position:relative; top:200px; z-index:1;">
     <h3>모임</h3>
     <div class="board-container">
         <c:choose>
@@ -73,5 +75,6 @@
         </c:choose>
     </div>
     <button onclick="group_write_go()">글쓰기</button>
+    </div>
 </body>
 </html>
