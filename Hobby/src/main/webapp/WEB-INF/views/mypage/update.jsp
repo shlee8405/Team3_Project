@@ -6,18 +6,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>마이페이지 update</title>
+    <title>마이페이지</title>
 
 <style type="text/css">
- #green-header {
-        background-color: green;
-        height: 30px; /* 높이 조절 (원하는 크기로 수정해주세요) */
-    }
-     #green-footer {
-        background-color: green;
-        height: 30px; /* 높이 조절 (원하는 크기로 수정해주세요) */
-    }
-     
+	.menu {
+	display: flex;
+	justify-content: space-around;
+	background-color: #f2f2f2;
+}
+
+.menu-item {
+	padding: 5px;
+	border: 1px solid; border-radius : 5px;
+	background-color: white;
+	border-radius: 5px;
+}
 	a{text-decoration: none;}
 	table{
 		width:600px; border-collapse: collapse; text-align: center;
@@ -30,27 +33,32 @@
 </head>
 <body>
     <div>
-    	<div class="header">
-        <div class="green-background"></div>
-        <div id="green-header"></div>
-        <h1 class="mypage-title">마이페이지</h1>
-    </div>
-    	
-    	<hr>
-    	<h2>내가 찜한 캠핑장 | 내가 작성한 리뷰 | 1:1 문의 | 회원정보 </h2>
-
+		<h1 class="mypage-title">마이페이지</h1>
+	</div>
+	<div class="menu">
+		<div class="menu-item">
+			<h5>내가 찜한 캠핑장</h5>
+		</div>
+		<div class="menu-item">
+			<h5>내가 작성한 리뷰</h5>
+		</div>
+		<div class="menu-item">
+			<h5>1:1 문의</h5>
+		</div>
+		<div class="menu-item">
+			<h5>회원정보</h5>
+		</div>
+	</div>
     <div>
-        <h2>프로필 수정</h2>
-        
-        <!-- Form for updating user profile -->
-        <!-- <form action="/updateProfile" method="post"> -->
-            <div>
-                <label for="nickname">닉네임</label>
-                <input type="text" id="nickname" name="nickname">
-            </div>
+        <h2>회원정보 수정</h2>
+        <hr>
             <div>
                 <label for="name">이름</label>
                 <input type="text" id="name" name="name">
+            </div>
+            <div>
+                <label for="id">아이디</label>
+                <input type="text" id="id" name="id">
             </div>
             <div>
                 <label for="email">이메일</label>
@@ -60,23 +68,9 @@
                 <label for="phone">휴대전화</label>
                 <input type="tel" id="phone" name="phone">
             </div>
-            <div>
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password">
-            </div>
-            <div>
-                <label for="newPassword">새 비밀번호</label>
-                <input type="password" id="newPassword" name="newPassword">
-            </div>
-            <div>
-                <label for="confirmPassword">비밀번호 확인</label>
-                <input type="password" id="confirmPassword" name="confirmPassword">
-            </div>
+            
             <button type="submit">완료</button>
         </form>
-    </div>
-    <div id="green-footer"></div>
-        <div class="green-background"></div>
-    </div>
+    
 </body>
 </html>

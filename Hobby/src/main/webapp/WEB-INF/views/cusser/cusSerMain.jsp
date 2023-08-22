@@ -239,7 +239,7 @@
                         <td>${k.r_name}</td>
                         <td>${k.r_content}</td>
                     </tr>
-                </c:forEach>
+                </c:forEach> 
             </tbody>
         </table>
     </div>
