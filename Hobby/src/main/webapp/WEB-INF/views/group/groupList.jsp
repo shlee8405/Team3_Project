@@ -1,117 +1,84 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .board-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            padding: 20px;
+        }
 
-<style type="text/css">
-    #test1 {
-        border: 1px solid black;
-    }
-    #test1 th,td {
-        border: 1px solid black;
-        text-align: center; /* 테이블 셀의 텍스트를 가운데 정렬 */
-    }
-</style>
+        .board-item {
+            border: 1px solid #ddd;
+            padding: 10px;
+            text-align: center;
+        }
 
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
+        .thumbnail {
+            width: 150px; /* Add "px" unit here */
+            height: auto;
+        }
+        #group_item{
+        	cursor: pointer;
+        }
+        #group_item.hovered {
+	      cursor: grab;
+	    }
+    </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<script type="text/javascript">
+	function group_write_go() {
+		alert("로그인이 필요합니다");
+		location.href= "/group_writeForm.do";
+	}
+	function go_groupOnelist(f) {
+		var div = document.getElementById("group_item");
+		div.classList.add("hovered");
+	      div.addEventListener("mouseleave", function() {
+	        div.classList.remove("hovered");
+	      });
+		
+		location.href= "/group_onelist.do?g_idx="+ f;
+	}
+	
+</script>
 
-<link rel="stylesheet" href="resources/css/styles.css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
 </head>
 <body>
-
-
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="/home.do">LOGO 자리</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto ">
-				<li class="nav-item "><a class="nav-link" href="/camp.do">캠핑장 <span
-						class="sr-only">(current)</span>
-				</a></li>
-
-				<li class="nav-item dropdown active"><a
-					class="nav-link dropdown-toggle" href="/group.do"
-					id="navbarDropdown" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> 캠핑모임 </a>
-					<div class="dropdown-menu " aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/group.do">캠핑모임 생성</a> <a
-							class="dropdown-item active" href="/groupList.do">캠핑모임 참가</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">test</a>
-					</div></li>
-
-			</ul>
-			<a class="nav-link" href="/login.do">로그인 <span class="sr-only">(current)</span></a>
-		</div>
-	</nav>
-
-
-
-
-	<div class="input-group mt-5">
-		<input type="text" class="form-control" placeholder="Search this blog">
-		<div class="input-group-append">
-			<button class="btn btn-secondary" type="button">
-				<i class="fa fa-search"></i>
-			</button>
-		</div>
-	</div>
-
-
-
-	<!-- 나중에 jstl foreach로 할거임 -->
-	<div class="container mt-5">
-		<table id="test1">
-			<thead> 
-				<th>캠핑장 이름</th>
-				<th>연락처</th>
-				<th>좌표x</th>
-				<th>좌표y</th>
-				<th>몰루</th>
-			</thead>
-			<tbody>
-				<tr>
-					<c:forEach var="k" items="${test3}">
-						<td>${k}</td>
-					</c:forEach>
-				</tr>
-				<tr>
-					<c:forEach var="k" items="${test4}">
-						<td>${k}</td>
-					</c:forEach>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-
-
-
-
-
+<jsp:include page="../header.jsp"  />
+<div style="position:relative; top:200px; z-index:1;">
+    <h3>모임</h3>
+    <div class="board-container">
+        <c:choose>
+            <c:when test="${empty glist}">
+                <div class="board-item">
+                    <h3>작성된 글이 없습니다.</h3>
+                </div>
+            </c:when>
+            <c:otherwise>
+                <c:forEach var="k" items="${glist}">
+    <div id="group_item" class="board-item" onclick="go_groupOnelist(${k.g_idx})">
+        <c:set var="thumbnailSrc" value="/resources/images/캠핑.png" />
+        <c:if test="${not empty k.g_fname}">
+            <c:set var="thumbnailSrc" value='/resources/images/${k.g_fname}' />
+        </c:if>
+        <img class="thumbnail" src="${pageContext.request.contextPath}${thumbnailSrc}">
+        <h4>${k.g_title}</h4>
+        <p>${k.g_intro}</p>
+    </div>
+</c:forEach>
+            </c:otherwise>
+        </c:choose>
+    </div>
+    <button id="write_btn" onclick="group_write_go()">글쓰기</button>
+    </div>
 </body>
 </html>
