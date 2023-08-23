@@ -88,8 +88,7 @@
 </script>
 </head>
 <body>
-<jsp:include page="../header.jsp"  />
-<div style="position:relative; top:200px; z-index:1;">
+
 	<h2>그룹글쓰기폼</h2>
 		<div id="bbs">
 	<form method="post" enctype="multipart/form-data">
@@ -173,6 +172,6 @@
 			});
 		}
     	</script>
-    	</div>
+    	
 </body>
 </html>
