@@ -34,6 +34,12 @@
 				dataType : "json", 
 				success : function(data) {
 					
+					// 검색결과가 없으면 dataList에 message 하나만 온다.
+			        if(data.length == 1 && data[0].message) {
+			            alert(data[0].message);
+			            return;  // 메시지만 있으므로 추가 작업을 하지 않고 반환
+			        }
+					
 					var list = "";
 					
 					// $.each() 함수를 사용하여 서버에서 받아온 데이터를 반복적으로 처리하는 HTML 내용을 생성
@@ -49,7 +55,7 @@
 					pageNo++;  // 더보기 버튼 클릭할 때마다 pageNo 1씩 증가
 				},
 				error : function() {
-					alert("마지막 페이지 입니다.");
+					alert("에러");
 				}
 			});
 		}
@@ -77,15 +83,19 @@
 </script>
 </head>
 	<body>
-		<input type="text" id="searchBox" placeholder="캠핑장 이름을 입력하세요"/>
-   		<button type="button" onclick="doSearch()">검색</button>
-   		<br><br><br>
-    
-		<div id="camp-list">
-			<!-- 이 안에 내용 들어감 -->
+		<jsp:include page="../header.jsp"  />
+		<div style="position:relative; top:200px; z-index:1;">
+			<input type="text" id="searchBox" placeholder="캠핑장 이름을 입력하세요"/>
+	   		<button type="button" onclick="doSearch()">검색</button>
+	   		<br><br><br>
+	    
+			<div id="camp-list">
+				<!-- 이 안에 내용 들어감 -->
+			</div>
+		
+			<button id="more-btn">더보기</button>
 		</div>
 	
 		
-		<button id="more-btn">더보기</button>
 	</body>
 </html>

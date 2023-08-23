@@ -8,9 +8,15 @@
 		select * from qna
 	</select>
 	
+	<select id="user">
+		SELECT q.q_idx, q.q_content, q.q_response, u.u_name
+		FROM qna q
+		JOIN USERs u ON q.u_idx = #{q.u_idx};
+	</select>
+	
 	<insert id="insert" parameterType="qvo">
-		INSERT INTO qna(q_content,q_name)
-		VALUES(#{q_content},#{q_name});
+		INSERT INTO qna(q_content,u_name)
+		VALUES(#{q_content},#{u_name});
 	</insert>
 	
 	<select id="detail" parameterType="String" resultType="qvo">

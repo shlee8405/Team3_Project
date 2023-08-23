@@ -1,7 +1,28 @@
 package com.team.group.vo;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class GroupVO {
-	private String g_idx, g_title, g_desc, g_date, g_location, g_maxPeople, g_curPeople, g_link, g_status, g_fname, u_idx;
+	private String g_idx, g_title, g_desc, g_date, g_location, g_maxPeople, g_curPeople, g_link, g_status, g_fname, u_idx, g_intro;
+
+	// file 파리미터를 저장할 이름
+	private MultipartFile file;
+	
+	public MultipartFile getFile() {
+		return file;
+	}
+
+	public void setFile(MultipartFile file) {
+		this.file = file;
+	}
+	
+	public String getG_intro() {
+		return g_intro;
+	}
+
+	public void setG_intro(String g_intro) {
+		this.g_intro = g_intro;
+	}
 
 	public String getG_fname() {
 		return g_fname;

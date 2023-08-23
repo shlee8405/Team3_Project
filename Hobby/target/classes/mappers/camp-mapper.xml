@@ -5,10 +5,17 @@
 <mapper namespace="camp">
 	
 	<!-- 좋아요 수 증가 쿼리 -->
-	<insert id="increaseLikeCount" parameterType="String">
-	    INSERT INTO camp_likes (facltNm, likes_count) VALUES (#{facltNm}, 1) 
+	<insert id="increaseLikeCount" parameterType="map">
+	    INSERT INTO camp_likes (u_id, facltNm, likes_count) 
+	    VALUES (#{u_id}, #{facltNm}, 1) 
 	    ON DUPLICATE KEY UPDATE likes_count = likes_count + 1
 	</insert>
+	
+	<!-- 좋아요 중복 체크 (사용자아 이미 좋아요 눌렀는지 확인)-->
+	<select id="checkLike" resultType="int">
+		SELECT COUNT(*) FROM camp_likes WHERE u_id = #{u_id} 
+		AND facltNm = #{facltNm}
+	</select>
 
 	<!-- 좋아요 수 조회 쿼리 -->
 	<select id="getLikeCount" resultType="int">

@@ -20,6 +20,7 @@
 		<typeAlias type="com.team.mypagemain.vo.MypageMainVO" alias="mmvo" />
 		<typeAlias type="com.team.myinfoupdate.vo.MyinfoUpdateVO" alias="upvo" />
 		<typeAlias type="com.team.myqna.vo.MyQnaVO" alias="mqvo" />
+		<typeAlias type="com.team.myreview.vo.MyReviewVO" alias="mrvo" />
 		<typeAlias type="com.team.camp.vo.CampVO" alias="cvo" />
 	</typeAliases>
 	

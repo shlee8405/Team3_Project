@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +21,7 @@ main {
 color:#ffffff!important;
 
 }
+
 
 </style>
 
@@ -49,164 +52,131 @@ color:#ffffff!important;
 	function go_home() {
 		location.href = "/home.do"
 	}
+
+    function hidetest() {
+        var x = document.getElementById("test");
+        var y = document.getElementById("test2");
+        var z = document.getElementById("test3");
+        var test4 = document.getElementById("test4");
+        y.style.display = "none";
+        z.style.display = "none";
+		test4.style.display = "none";
+        x.style.display = "block";
+    }
+
+    function hidetest2() {
+        var x = document.getElementById("test");
+        var y = document.getElementById("test2");
+        var z = document.getElementById("test3");
+        var test4 = document.getElementById("test4");
+        x.style.display = "none";
+        z.style.display = "none";
+		test4.style.display = "none";       
+        y.style.display = "block";
+    }
+
+    function hidetest3() {
+        var x = document.getElementById("test");
+        var y = document.getElementById("test2");
+        var z = document.getElementById("test3");
+        var test4 = document.getElementById("test4");
+        x.style.display = "none";
+        y.style.display = "none";
+        test4.style.display = "none";
+        z.style.display = "block";
+    }
+    
+    function hidetest4() {
+        var x = document.getElementById("test");
+        var y = document.getElementById("test2");
+        var z = document.getElementById("test3");
+        var test4 = document.getElementById("test4");
+        x.style.display = "none";
+        y.style.display = "none";
+        z.style.display = "none";
+        test4.style.display = "block";
+    }
+    
 </script>
 </head>
 <body>
 <main>
-    <div class="flex-shrink-0 p-3  " style="height:100vh; width: 280px; background-color: #0f4200; color:white;">
-        <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom border-2 sidebar-link">
-        <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-        <span class="fs-5 fw-semibold">/CAMPING.do</span>
-        </a>
-        <ul class="list-unstyled ps-0">
-        <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-            대시보드
-            </button>
-            <div class="collapse" id="dashboard-collapse" style="">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="/adminHome.do" class="ps-4 link-dark rounded sidebar-link">11</a></li>
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">22</a></li>
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">33</a></li>
-            </ul>
-            </div>
-        </li>
-        <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#user-collapse" aria-expanded="false">
-            유저관리
-            </button>
-            <div class="collapse" id="user-collapse" style="">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="/adminUser.do" class="ps-4 link-dark rounded sidebar-link">사용자 리스트</a></li>
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">관리자 테이블</a></li>
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">ㅁㄴㅇㄹ</a></li>
-            </ul>
-            </div>
-        </li>
-        <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#groups-collapse" aria-expanded="false">
-            캠핑모임 관리
-            </button>
-            <div class="collapse" id="groups-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="/adminGroup.do" class="ps-4 link-dark rounded sidebar-link">모임 리스트</a></li>
-                <li><a href="#" class="ps-4 ink-dark rounded sidebar-link">모임 생성</a></li>
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">ㅁㄴㅇㄹ</a></li>
-            </ul>
-            </div>
-        </li>
-        <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#cusser-collapse" aria-expanded="false">
-            고객지원
-            </button>
-            <div class="collapse" id="cusser-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">F A Q</a></li>
-                <li><a href="/adminQNA.do" class="ps-4 ink-dark rounded sidebar-link">1대1 문의</a></li>
-                <li><a href="/adminReport.do" class="ps-4 link-dark rounded sidebar-link">신고</a></li>
-            </ul>
-            </div>
-        </li>
-        <li class="border-top border-2 my-3"></li>
-        <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-            계정
-            </button>
-            <div class="collapse" id="account-collapse">
-            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="/home.do" class="ps-4 link-dark rounded sidebar-link">로그아웃</a></li>
-            </ul>
-            </div>
-        </li>
-        </ul>
-    </div>
+	<!-- SIDEBAR -->
+   	<jsp:include page="sidebar.jsp" />
 
 
-   
 
 
-    <div>
+    <!-- MAIN CONTAINER -->
+   <div class="container"  style="width: 85%;">
+
+
+
+		
+
+        <!-- FIRST CONTAINER ( USER LIST )-->
+        <div id="test" class="container mt-4" style="background-color: rgba(200, 200, 200, 0.3); height:75vh; width: 90%;  box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.25);
+        border-radius: 10px;
+        " >
         
-<h1>관리자 1대1 문의 관리 페이지</h1>
-<!-- 나중에 사이드바 나 메뉴바로 변경 예정 -->
-	<table>
-		<thead>
-			<tr>
-				<th>
-					 관지자 홈
-				</th>
-				<th> 
-					회원 관리
-				</th>
-				<th> 
-					캠핑모임 관리
-				</th>
-				<th> 
-					1대1 문의
-				</th>
-				<th> 
-					신고 목록
-				</th>
-				<th>
-					홈으로
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr>
-				<td>
-					<button onclick="go_admin()">관리자 홈</button>
-				</td>
-				<td>
-					<button onclick="go_adminUser()">회원 관리</button>
-				</td>
-				<td>
-					<button onclick="go_adminGroup()">캠핑모임 관리</button>
-				</td>
-				<td>
-					<button onclick="go_adminQNA()">1대1 문의</button>
-				</td>
-				<td>
-					<button onclick="go_adminReport()">신고 목록</button>
-				</td>
-				<td>
-					<button onclick="go_home()">홈으로</button>
-				</td>
-			</tr>
-		</tbody>
-	</table>
+        	<div class="row " style="justify-content:center;">
+				<h1>1대1 문의</h1>
+			</div>
+            <div class="table-responsive pt-4 ps-5 pe-5" style="height: 50vh; padding-bottom: 1rem;">
+                <table class="table 
+                table-hover	
+                table-sm
+                table-success   
+                align-middle
+                overflow-auto">
+                    <thead class="table-primary">
+                        <caption>Table Name</caption>
+                        <tr>
+                            <th> 문의 번호 </th>
+                            <th> 문의 내용 </th>
+                            <th> 답변 내용</th>
+                            <th> 문의자  </th>
+                            <th> 문의 처리 </th>
+                        </tr>
+                     </thead>
+                        <tbody class="table-group-divider">
+							<c:choose>
+									<c:when test="${empty list}">
+										<tr>
+											<td colspan="4"><h2>원하는 정보가 존재하지 않습니다.</h2></td>
+										</tr>
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="k" items="${list}" varStatus="vs">
+											<tr>
+												<td>${k.q_idx}</td>
+												<td>${k.q_content}</td>
+												<td>${k.q_response}</td>
+												<td>${k.u_idx}</td>
+												<td> 
+													<!-- if q_status == 1, show 답변 완료. else, show 답변하기 -->
+													<select class="form-control form-control"> 
+														<option> 답변하기 </option>
+														<option> 답변 완료 </option>
+													</select>
+												</td>
+											</tr>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
+                        </tbody>
+                </table> 
+            </div>
+            
+            
 
-	<table>
-		<thead>
-			<tr style="background-color: #99ccff">
-				<th>qna index</th>
-				<th>문의 내용</th>
-				<th>문의 답장</th>
-				<th>문의한 사용자 (index)</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:choose>
-				<c:when test="${empty list}">
-					<tr>
-						<td colspan="4"><h2>원하는 정보가 존재하지 않습니다.</h2></td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="k" items="${list}" varStatus="vs">
-						<tr>
-							<td>${k.q_idx}</td>
-							<td>${k.q_content}</td>
-							<td>${k.q_response}</td>
-							<td>${k.u_idx}</td>
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-		</tbody>
-	</table>
+        </div>
 
-    </div>
+
+
+   </div>
+ 
+
    
 
 </main>

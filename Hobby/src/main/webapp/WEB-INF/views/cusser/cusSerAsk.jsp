@@ -124,7 +124,7 @@ function go_AskDetail() {
                     </c:when>
                     <c:otherwise>
                         <td>${loop.count}</td>
-                        <td style="white-space: nowrap;">${k.q_name}</td>
+                        <td style="white-space: nowrap;">${k.u_name}</td>
                         <td>${k.q_content}</td>
                         <td>
                             <c:choose>

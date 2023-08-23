@@ -5,15 +5,17 @@
 <mapper namespace="group">
 	
 	<select id="allList" resultType="gvo">
-		select * from groups 
+		select * from groups where g_status = '1'
 	</select>
-	
+	<insert id="insert" parameterType="gvo">
+		insert into groups(g_title,g_intro, g_fname,g_maxPeople, g_date, g_location, g_desc,g_status, u_idx)
+		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_location},#{g_desc},1,#{u_idx})
+	</insert>
+	<select id="onelist" parameterType="String" resultType="gvo">
+		select * from groups where g_idx = #{g_idx}
+	</select>
+	<update id="delete" parameterType="gvo">
+		update groups
+		set g_status= '0' where g_idx = #{g_idx}
+	</update>
 </mapper>
-
-
-
-
-
-
-
-

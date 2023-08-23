@@ -17,4 +17,16 @@ public class GroupDAO {
 	public List<GroupVO> getAllGroups(){
 		return sqlSessionTemplate.selectList("group.allList");
 	}
+	
+	public int getGroupWriteOk(GroupVO gvo) {
+		return sqlSessionTemplate.insert("group.insert", gvo);
+	}
+	
+	public GroupVO getGroupOnelist(String g_idx) {
+		return sqlSessionTemplate.selectOne("group.onelist", g_idx);
+	}
+	
+	public int getGroupDelete(GroupVO gvo) {
+		return sqlSessionTemplate.update("group.delete", gvo);
+	}
 }
