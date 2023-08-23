@@ -10,15 +10,22 @@
 
 .menu {
 	display: flex;
-	justify-content: space-around;
 	background-color: #f2f2f2;
+	width: 100%;
+	height: 50px;
 }
 
 .menu-item {
-	padding: 5px;
-	border: 1px solid; border-radius : 5px;
+	flex:1;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid; 
 	background-color: white;
-	border-radius: 5px;
+	margin: 0;
+}
+.menu-item-wish{
+	background-color: #637F42;
+	color: white;
 }
 
 a {
@@ -37,7 +44,6 @@ table, th, td {
 }
 
 div {
-	width: 600px;
 	margin: auto;
 	text-align: center;
 }
@@ -55,21 +61,24 @@ div {
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"  />
+		<div style="position:relative; top:200px; z-index:1;">
+		
    <div>
 		<h1 class="mypage-title">마이페이지</h1>
 	</div>
 	<div class="menu">
-		<div class="menu-item">
-			<h5>내가 찜한 캠핑장</h5>
+		<div class="menu-item menu-item-wish">
+			<h2>내가 찜한 캠핑장</h2>
 		</div>
 		<div class="menu-item">
-			<h5>내가 작성한 리뷰</h5>
+			<h2>내가 작성한 리뷰</h2>
 		</div>
 		<div class="menu-item">
-			<h5>1:1 문의</h5>
+			<h2>1:1 문의</h2>
 		</div>
 		<div class="menu-item">
-			<h5>회원정보</h5>
+			<h2>회원정보</h2>
 		</div>
 	</div>
 	&nbsp;
@@ -90,15 +99,14 @@ div {
 			<c:choose>
 				<c:when test="${empty list}">
 					<tr>
-						<td colspan="4"><h2>원하는 정보가 존재하지 않습니다.</h2></td>
+						<td colspan="4"><h2>찜한 캠핑장이 없습니다.</h2></td>
 					</tr>
 				</c:when>
 				<c:otherwise>
 					<c:forEach var="k" items="${list}" varStatus="vs">
 						<tr>
-							<td>${k.cw_idx}</td>
-							<td>${k.u_idx}</td>
-							<td>${k.c_name}</td>
+							<td>${k.camp_id}</td>
+							<td>${k.facltNm}</td>
 						</tr>
 					</c:forEach>
 				</c:otherwise>

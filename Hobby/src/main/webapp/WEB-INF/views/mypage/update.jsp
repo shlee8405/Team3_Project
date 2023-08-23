@@ -9,17 +9,24 @@
     <title>마이페이지</title>
 
 <style type="text/css">
-	.menu {
+.menu {
 	display: flex;
-	justify-content: space-around;
 	background-color: #f2f2f2;
+	width: 100%;
+	height: 50px;
 }
 
 .menu-item {
-	padding: 5px;
-	border: 1px solid; border-radius : 5px;
+	flex:1;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid; 
 	background-color: white;
-	border-radius: 5px;
+	margin: 0;
+}
+.menu-item-info{
+	background-color: #637F42;
+	color: white;
 }
 	a{text-decoration: none;}
 	table{
@@ -28,10 +35,13 @@
 	table, th, td{
 		border: 1px solid black; padding: 3px;	
 	}
-	div{width:600px; margin: auto; text-align: center;}
+	div{   margin: auto; text-align: center;}
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"  />
+		<div style="position:relative; top:200px; z-index:1;">
+		
     <div>
 		<h1 class="mypage-title">마이페이지</h1>
 	</div>
@@ -45,7 +55,7 @@
 		<div class="menu-item">
 			<h5>1:1 문의</h5>
 		</div>
-		<div class="menu-item">
+		<div class="menu-item menu-item-info">
 			<h5>회원정보</h5>
 		</div>
 	</div>
