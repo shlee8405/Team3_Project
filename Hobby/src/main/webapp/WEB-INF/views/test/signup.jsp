@@ -1,17 +1,15 @@
 		<%@ page language="java" contentType="text/html; charset=UTF-8"
 			pageEncoding="UTF-8"%>
 		<!DOCTYPE html>
-		<html lang="en">
+		<html >
 		<head>
 		<title>signup</title>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-		
-		<meta charset="utf-8">
+		<meta charset="UTF-8">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<link rel="stylesheet"
 			href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-		<script
-			src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
+		
 		<script
 			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 		<script
@@ -94,33 +92,46 @@
 		        }
 		    }
 	
-		    function checkEmailDuplicate() {
-		    	var emailInput = document.getElementById("u_email");
-		        var emailStatus = document.getElementById("emailStatus");
-		        var submitButton = document.getElementById("submitButton");
-
-	
-		        var userEmail = emailInput.value;
-	
-		        simulateServerCheck(userEmail, function(isDuplicate) {
-		            if (isDuplicate) {
-		                emailStatus.textContent = "이미 사용 중인 이메일입니다.";
-		                emailStatus.style.color = "red";
-		                submitButton.disabled = true;
-		            } else {
-		                emailStatus.textContent = "사용 가능한 이메일입니다.";
-		                emailStatus.style.color = "green";
-		                submitButton.disabled = false;
+		/*  function checkEmailDuplicate() {
+		        var email = $('#u_email').val(); // 이메일 입력값을 가져옴
+		        $.ajax({
+		            url: '/emailCheck.do', // 중복확인을 처리하는 서버 URL (적절히 변경 필요)
+		            type: 'post', // POST 방식으로 요청
+		            data: { email: email }, // 서버로 전달할 데이터
+		            success: function(result) {
+		                if (result === "available") {
+		                    $('#emailDupCheckMsg').text("사용 가능한 이메일입니다.").css("color", "green");
+		                } else if (result === "duplicate") {
+		                    $('#emailDupCheckMsg').text("이미 사용 중인 이메일입니다.").css("color", "red");
+		                }
+		            },
+		            error: function() {
+		                $('#emailDupCheckMsg').text("에러가 발생했습니다.").css("color", "red");
 		            }
 		        });
-		    }
-	
-		    function simulateServerCheck(email, callback) {
-		        setTimeout(function() {
-		            var isDuplicate = email.includes("example.com");
-		            callback(isDuplicate);
-		        }, 1000);
-		    }
+		    } */
+		    $(document).ready(function() {
+				$("#emailBtn").click(function() {
+					var email = $('#u_email').val(); 
+					alert(email);
+					console.log(email)
+					$.ajax({
+						 url: '/emailCheck.do', // 중복확인을 처리하는 서버 URL (적절히 변경 필요)
+				            type: 'post', // POST 방식으로 요청
+				            data: email, // 서버로 전달할 데이터
+				            success: function(result) {
+				                if (result === "available") {
+				                    $('#emailDupCheckMsg').text("사용 가능한 이메일입니다.").css("color", "green");
+				                } else if (result === "duplicate") {
+				                    $('#emailDupCheckMsg').text("이미 사용 중인 이메일입니다.").css("color", "red");
+				                }
+				            },
+				            error: function() {
+				                $('#emailDupCheckMsg').text("에러가 발생했습니다.").css("color", "red");
+				            }
+				        });
+				});
+			});
 	</script>
 		</head>
 		<body>
@@ -135,11 +146,13 @@
 						<div class="textForm2">
 							<!--이메일 입력-->
 							<input type="email" class="u_email" name="u_email" id="u_email"
-								onblur="statusMail();" placeholder="*이메일을 입력해주세요." required>
+								 placeholder="*이메일을 입력해주세요." required>
 								<div class="emailchk">
 							<!--이메일 중복확인-->
-							<input type="button" class="bttn" value="중복확인" onclick="checkEmailDuplicate();">
-								 <span id="emailStatus"></span>
+							<button type="button" id="emailBtn" class="bttn" >중복확인</button>
+   							 <span id="emailDupCheckMsg"></span> <!-- 중복확인 결과를 나타내는 스팬 -->
+							
+
 								</div>
 						</div>
 						

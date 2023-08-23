@@ -35,6 +35,15 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getUserLogin(u_id);
 	}
 
+
+
+	@Override
+    public boolean isEmailDuplicate(String email) {
+        int count = userDAO.idCheck(email);
+        System.out.println("count" + count);
+        return count > 0;
+    }
+	
 	
 	
 	

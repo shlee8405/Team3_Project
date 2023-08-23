@@ -15,4 +15,6 @@ public interface UserService {
 	int getUserInsert(UserVO uvo);
 	
 	UserVO getUserLogin(String u_id);
+	
+	boolean isEmailDuplicate(String email);
 }

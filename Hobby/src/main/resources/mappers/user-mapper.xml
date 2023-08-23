@@ -12,12 +12,13 @@
 		insert INTO USERS(u_id, u_pw, u_name, u_birthday, u_email, u_phone)
 		VALUES(#{u_id}, #{u_pw}, #{u_name}, #{u_birthday}, #{u_email}, #{u_phone})
 	</insert>
-	<select id="checkEmailDuplicate" resultType="uvo" parameterType="String">
- 		 SELECT * FROM USERS WHERE u_email = #{email}
-	</select>
-	<select id="selectId" parameterType="String" resultType="uvo">
+		<select id="selectId" parameterType="String" resultType="uvo">
 		select * from users where u_id = #{u_id}
 	</select>
+	<!-- 아이디 중복 체크 -->
+	<select id="emailcount" parameterType="String" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM users WHERE u_email = #{u_email}
+    </select>
 </mapper>
 
 
