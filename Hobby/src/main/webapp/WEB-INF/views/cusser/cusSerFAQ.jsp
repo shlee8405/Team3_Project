@@ -44,7 +44,6 @@
 </style>
 
 <script type="text/javascript">
-// 이전의 JavaScript 코드는 그대로 사용하셔도 됩니다.
 	  function toggleContent(index) {
         var content = document.getElementById("content-" + index);
         var toggleButton = document.getElementById("toggle-" + index);
