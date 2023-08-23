@@ -1,10 +1,7 @@
 package com.team.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,4 +33,10 @@ public class UserController {
 		return mv;
 		
 	}
+	  @PostMapping("/login.do")
+	  public ModelAndView getUserLogin(UserVO uvo) {
+		  ModelAndView mv = new ModelAndView("index2");
+		  return mv;
+	  }
+	 
 }

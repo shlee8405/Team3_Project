@@ -24,5 +24,8 @@ public class UserDAO {
 	public int getUserInsert(UserVO uvo) {
 		return sqlSessionTemplate.insert("user.addUser", uvo);
 	}
+	public UserVO getUserLogin(String u_id) {
+		return sqlSessionTemplate.selectOne("user.selectId, u_id");
+	}
 	
 }

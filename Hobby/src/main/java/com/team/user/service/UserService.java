@@ -13,5 +13,6 @@ public interface UserService {
 	
 	// 삽입
 	int getUserInsert(UserVO uvo);
-		
+	
+	UserVO getUserLogin(String u_id);
 }

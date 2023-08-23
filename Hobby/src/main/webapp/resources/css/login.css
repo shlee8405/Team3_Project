@@ -133,12 +133,12 @@
  }
  
  
- .login_id {
+ .u_id {
    margin-top: 20px;
    width: 80%;
  }
  
- .login_id input {
+ .u_id input {
    width: 100%;
    height: 50px;
    border-radius: 30px;
@@ -148,12 +148,12 @@
    outline: none;
  }
  
- .login_pw {
+ .u_pw {
    margin-top: 20px;
    width: 80%;
  }
  
- .login_pw input {
+ .u_pw input {
    width: 100%;
    height: 50px;
    border-radius: 30px;

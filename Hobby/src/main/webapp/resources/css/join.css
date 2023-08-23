@@ -315,7 +315,7 @@
 
   
   
-  .u_id {
+  .u_nickname {
     width: 60%;
     border:none;
     outline:none;
@@ -325,6 +325,15 @@
     background: none;
   }
   
+  .u_id {
+    width: 60%;
+    border:none;
+    outline:none;
+    color: #636e72;
+    font-size:16px;
+    height:25px;
+    background: none;
+  }
   .u_pw {
     width: 60%;
     border:none;

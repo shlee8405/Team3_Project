@@ -15,7 +15,9 @@
 	<select id="checkEmailDuplicate" resultType="uvo" parameterType="String">
  		 SELECT * FROM USERS WHERE u_email = #{email}
 	</select>
-	
+	<select id="selectId" parameterType="String" resultType="uvo">
+		select * from users where u_id = #{u_id}
+	</select>
 </mapper>
 
 
