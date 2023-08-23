@@ -87,5 +87,27 @@ public class GroupController {
 			return null;
 		}
 	}
+	@PostMapping("/groupDelete.do")
+	public ModelAndView getGroupDelete(GroupVO gvo) {
+		ModelAndView mv = new ModelAndView("redirect:/groupList.do");
+		int result = groupService.getGroupDelete(gvo);
+		if (result == 1) {
+			
+		}else {
+			
+		}
+		return mv;
+	}
+	@PostMapping("/groupUpdate_Form.do")
+	public ModelAndView getGroupUpdateForm(String g_idx) {
+		ModelAndView mv = new ModelAndView("group/groupUpdate");
+		GroupVO gvo = groupService.getGroupOnelist(g_idx);
+		mv.addObject("gvo",gvo);
+		return mv;
+	}
+	
+	
+	
+	
 	
 }

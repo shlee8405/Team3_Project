@@ -88,6 +88,7 @@
 </script>
 </head>
 <body>
+
 	<h2>그룹글쓰기폼</h2>
 		<div id="bbs">
 	<form method="post" enctype="multipart/form-data">
@@ -171,5 +172,6 @@
 			});
 		}
     	</script>
+    	
 </body>
 </html>
