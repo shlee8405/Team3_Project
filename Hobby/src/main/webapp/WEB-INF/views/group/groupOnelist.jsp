@@ -14,11 +14,12 @@
 </style>
  <script>
  	function edit_go(f) {
-		f.action="/guestbook_edit_Form.do";
+		f.action="/groupUpdate_Form.do";
 		f.submit();
 	}
 	function delete_go(f) {
-		f.action="/guestbook_delete_Form.do";
+		var chk = confirm("정말 삭제할까요?");
+		f.action="/groupDelete.do";
 		f.submit();
 	}
       var count_party = 0;

@@ -130,12 +130,29 @@ public class CampController {
 			
 			// Body 정보만 필요하기 때문에
 			JSONObject jsonResponse = new JSONObject(response.getBody());
-			
-			JSONArray item = jsonResponse.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item");
+			int searchResult = jsonResponse.getJSONObject("response").getJSONObject("body").getInt("numOfRows");
 			
 			
 			// CampVO타입으로 dataList라는 빈 배열 선언
 			List<CampVO> dataList = new ArrayList<>();
+			
+			if (pageNo == 1 && searchResult == 0) {
+				// 검색 결과가 없는 경우
+			    CampVO cvo = new CampVO();
+			    cvo.setMessage("검색 결과가 없습니다.");
+			    dataList.add(cvo);
+			    return dataList;
+
+			} else if (pageNo > 1 && searchResult == 0) {
+				//겸색 결과는 있는데 마지막 페이지인 경우
+			    CampVO cvo = new CampVO();
+			    cvo.setMessage("마지막 페이지 입니다.");
+			    dataList.add(cvo);
+			    return dataList;
+			}
+			
+			// searchResult가 0보다 큰 경우 = 검색 결과 있음
+			JSONArray item = jsonResponse.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item");
 			
 			for (int i = 0; i < item.length(); i++) {
 				JSONObject oneItem = item.getJSONObject(i);

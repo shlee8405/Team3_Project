@@ -25,4 +25,8 @@ public class GroupDAO {
 	public GroupVO getGroupOnelist(String g_idx) {
 		return sqlSessionTemplate.selectOne("group.onelist", g_idx);
 	}
+	
+	public int getGroupDelete(GroupVO gvo) {
+		return sqlSessionTemplate.update("group.delete", gvo);
+	}
 }
