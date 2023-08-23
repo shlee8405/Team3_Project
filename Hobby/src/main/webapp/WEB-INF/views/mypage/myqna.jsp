@@ -9,36 +9,65 @@
     <title>나의 1:1문의</title>
 
 <style type="text/css">
- #green-header {
-        background-color: green;
-        height: 30px; /* 높이 조절 (원하는 크기로 수정해주세요) */
-    }
-     #green-footer {
-        background-color: green;
-        height: 30px; /* 높이 조절 (원하는 크기로 수정해주세요) */
-    }
-     
+.menu {
+	display: flex;
+	background-color: #f2f2f2;
+	width: 100%;
+	height: 50px;
+}
+
+.menu-item {
+	flex:1;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid; 
+	background-color: white;
+	margin: 0;
+}
+.menu-item-qna{
+	background-color: #637F42;
+	color: white;
+}
 	a{text-decoration: none;}
 	table{
-		width:600px; border-collapse: collapse; text-align: center;
+		width:100%; border-collapse: collapse; text-align: center;
+	}th, td{
+		padding: 8px;
+		text-align: center;
+		border-bottom: 1px solid #ddd;
 	}
-	table, th, td{
-		border: 1px solid black; padding: 3px;	
-	}
-	div{width:600px; margin: auto; text-align: center;}
+	tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
+
+    th {
+        background-color: #637F42;
+        color: white;
+    }
+	div{margin: auto; text-align: center;}
 </style>
 </head>
 <body>
+<jsp:include page="../header.jsp"  />
+		<div style="position:relative; top:200px; z-index:1;">
+		
     <div>
-    	<!-- <div class="header"> -->
-        <div class="green-background"></div>
-        <div id="green-header"></div>
-        <h1 class="mypage-title">마이페이지</h1>
-    </div>
-    	
-    	<hr>
-    	<h2>내가 찜한 캠핑장 | 내가 작성한 리뷰 | 1:1 문의 | 회원정보 </h2>
-
+		<h1 class="mypage-title">마이페이지</h1>
+	</div>
+    <div class="menu">
+		<div class="menu-item">
+			<h5>내가 찜한 캠핑장</h5>
+		</div>
+		<div class="menu-item">
+			<h5>내가 작성한 리뷰</h5>
+		</div>
+		<div class="menu-item menu-item-qna">
+			<h5>1:1 문의</h5>
+		</div>
+		<div class="menu-item">
+			<h5>회원정보</h5>
+		</div>
+	</div>
     <form action="/qna/submit" method="post">
         <input type="text" name="qContent" placeholder="문의 내용"><br>
         <input type="text" name="qName" placeholder="이름"><br>
@@ -59,8 +88,6 @@
         </tr>
     </table>
 
-    <div id="green-footer"></div>
-        <div class="green-background"></div>
-    </div>
+   
 </body>
 </html>
