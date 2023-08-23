@@ -19,15 +19,23 @@
 
 .menu {
 	display: flex;
-	justify-content: space-around;
 	background-color: #f2f2f2;
+	width: 100%;
+	height: 50px;
 }
 
 .menu-item {
-	padding: 5px;
-	border: 1px solid; border-radius : 5px;
+	flex: 1;
+	padding: 10px;
+	text-align: center;
+	border: 1px solid;
 	background-color: white;
-	border-radius: 5px;
+	margin: 0;
+}
+
+.menu-item-info {
+	background-color: #637F42;
+	color: white;
 }
 
 a {
@@ -46,53 +54,61 @@ table, th, td {
 }
 
 div {
-	width: 600px;
 	margin: auto;
 	text-align: center;
 }
+
 .user-table {
-  width: 600px;
-  border-collapse: collapse;
-  margin: auto;
-  text-align: center;
+	width: 600px;
+	border-collapse: collapse;
+	margin: auto;
+	text-align: center;
 }
 
 .user-table td {
-  padding: 8px;
-  border: 1px solid #ccc;
+	padding: 8px;
+	border: 1px solid #ccc;
 }
 
 .user-table .label {
-  font-weight: bold;
-  background-color: white;
+	font-weight: bold;
+	background-color: white;
 }
 
 .user-table .user-info {
-  background-color: white;
+	background-color: white;
 }
-
 </style>
+<script type="text/javascript">
+function sendData(f) {
+	f.action="/myPageEdit.do";
+	f.submit();
+}
+</script>
 </head>
 <body>
-	<div>
+
+	<jsp:include page="../header.jsp" />
+	<div style="position: relative; top: 200px; z-index: 1;">
 		<h1 class="mypage-title">마이페이지</h1>
-	</div>
-	<div class="menu">
-		<div class="menu-item">
-			<h5>내가 찜한 캠핑장</h5>
+
+		<div class="menu">
+			<div class="menu-item">
+				<h5>내가 찜한 캠핑장</h5>
+			</div>
+			<div class="menu-item">
+				<h5>내가 작성한 리뷰</h5>
+			</div>
+			<div class="menu-item">
+				<h5>1:1 문의</h5>
+			</div>
+			<div class="menu-item menu-item-info">
+				<h5>회원정보</h5>
+			</div>
 		</div>
-		<div class="menu-item">
-			<h5>내가 작성한 리뷰</h5>
-		</div>
-		<div class="menu-item">
-			<h5>1:1 문의</h5>
-		</div>
-		<div class="menu-item">
-			<h5>회원정보</h5>
-		</div>
-	</div>
 		<div class="user-info">
-  		<p class="section-title">내정보</p>
+		<form action="myPageEdit.do" method="post">
+			<p class="section-title">내정보</p>
 
 			<table class="user-table">
 				<tr>
@@ -112,10 +128,12 @@ div {
 					<td class="user-info">${u_email}</td>
 				</tr>
 			</table>
-	&nbsp;
+			&nbsp;
 			<div class="button-wrapper">
-				<a href="#" class="edit-button">수정</a>
+				<input type="submit" onclick="sendData(this.form)" value="수정">
 			</div>
+			</form>
 		</div>
+	</div>
 </body>
 </html>
