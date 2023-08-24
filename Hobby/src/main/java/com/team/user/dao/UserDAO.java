@@ -30,11 +30,18 @@ public class UserDAO {
 		return sqlSessionTemplate.selectOne("user.selectId, u_id");
 	}
 	
-	// 아이디 중복 확인
+	// 이메일 중복 확인
     public int idCheck(String u_email) {
     	System.out.println("dao string" + u_email);
     	int count = sqlSessionTemplate.selectOne("user.emailcount", u_email);
     	System.out.println("daocount" + count);
         return count;
+    }
+    // 아이디 중복 확인
+    public int idCheck2(String u_id) {
+    	System.out.println("dao string" + u_id);
+    	int count = sqlSessionTemplate.selectOne("user.idcount", u_id);
+    	System.out.println("daocount" + count);
+    	return count;
     }
 }

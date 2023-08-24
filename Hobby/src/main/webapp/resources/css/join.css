@@ -325,15 +325,7 @@
     background: none;
   }
   
-  .u_id {
-    width: 60%;
-    border:none;
-    outline:none;
-    color: #636e72;
-    font-size:16px;
-    height:25px;
-    background: none;
-  }
+  
   .u_pw {
     width: 60%;
     border:none;
@@ -363,6 +355,15 @@
     height:25px;
     background: none;
   }
+  .u_id {
+    width: 100%;
+    border:none;
+    outline:none;
+    color: #636e72;
+    font-size:16px;
+    height:25px;
+    background: none;
+  }
   
   .cellphoneNo {
     width: 100%;
@@ -381,7 +382,19 @@
       font-size: 20px;
   }
 
-  .emailchk .bttn{
+  .idchk .bttn{
+  position: absolute;
+      right: -120px;
+      top: -2px;
+      width: 110px;
+      height: 45px;
+      border-radius: 40px;
+      color: white;
+      background: #00498c;
+      border: 0;
+      cursor: pointer;
+  }
+   .bttn{
   position: absolute;
       right: -120px;
       top: -2px;
@@ -402,7 +415,27 @@
     height:25px;
     background: none;
   }
-  
+  #idBtn {
+  position: absolute;
+  right: -120px;
+  top: -2px;
+  width: 110px;
+  height: 45px;
+  border-radius: 40px;
+  color: white;
+  background: #00498c;
+  border: 0;
+  cursor: pointer;
+}
+
+#idDupCheckMsg {
+  position: absolute;
+  right: 0;
+  top: 100%;
+  font-size: 14px;
+  margin-top: 5px;
+  color: red; /* 중복시 빨간색으로 설정 */
+}	
   
   .btn:hover {
     background-position: right;
