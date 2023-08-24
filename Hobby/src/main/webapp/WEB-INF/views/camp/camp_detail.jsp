@@ -19,26 +19,34 @@
        border-bottom: 1px solid #dee2e6;
 	}
  	/* 탭 디자인 */
-		.nav-tabs .nav-item {
-		    flex: 1;  /* 균등한 너비 */
-		}
+	.nav-tabs .nav-item {
+		flex: 1;  /* 균등한 너비 */
+	}
 		
-		.nav-tabs .nav-link {
-		    border: 1px solid #ccc;
-		    border-radius: 5px;
-		    text-align: center;
-		    transition: background-color 0.3s;  /* 부드러운 효과 */
-		    color: #637F42;
-		}
+	.nav-tabs .nav-link {
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		text-align: center;
+		transition: background-color 0.3s;  /* 부드러운 효과 */
+		color: #637F42;
+	}
 		
-		.nav-tabs .nav-link:hover {
-		    background-color: #f7f7f7;  /* hover 시의 배경색 */
-		}
+	.nav-tabs .nav-link:hover {
+		background-color: #f7f7f7;  /* hover 시의 배경색 */
+	}
 		
-		.nav-tabs .nav-link.active {
-		    background-color: #637F42;  /* 활성화된 탭의 배경색 */
-		    color: white;  /* 활성화된 탭의 글자색 */
-		}
+	.nav-tabs .nav-link.active {
+		background-color: #637F42;  /* 활성화된 탭의 배경색 */
+		color: white;  /* 활성화된 탭의 글자색 */
+	}
+	.tab-content {
+        margin-bottom: 300px; /* 여백 크기를 원하는 값으로 조정 */
+    }
+    #title {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+}
 </style>
 </head>
 
@@ -120,15 +128,21 @@
     <div class="tab-content">
         <!-- 캠핑장 소개 -->
         <div class="tab-pane container active" id="campIntro">
-            <h4>소개글</h4>
+        <div id="title">
+        	<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
+        	<h2 id="review_title">소개글</h2>
+    	</div>
             <p>${cvo.featureNm}</p>
         </div>
         
         <!-- 위치정보 -->
         <div class="tab-pane container fade" id="locationInfo">
-            <h4>찾아오시는 길</h4>
-            <!-- 여기에 카카오맵 지도 추가하세요 -->
-            <div id="map" style="width: 100%; height: 400px;">카카오맵 지도</div>
+        <div id="title">
+        	<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
+        	<h2 id="review_title">찾아오시는 길</h2>
+    	</div>
+            <!-- 카카오맵 지도 -->
+            <div id="map" style="width: 100%; max-width: 700px; height: 400px; margin: 0 auto;"></div>
         </div>
         
         <!-- 후기 -->
