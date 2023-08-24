@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +9,9 @@
 <title>Insert title here</title>
 <style type="text/css">
 	a { text-decoration: none;}
-	table{width: 600px; border-collapse:collapse; text-align: center;}
+	table{width: 800px; border-collapse:collapse; text-align: center;}
 	table,th,td{border: 1px solid black; padding: 3px}
-	div{width: 600px; margin:auto; text-align: center;}
+	div{width: 800px; margin:auto; text-align: center;}
 	.btn{
 		background-color: #548C54;
 		width: 120px;
@@ -30,6 +31,10 @@
 	}
 </style>
  <script>
+ 	function list_go(f) {
+		f.action="/groupList.do";
+		f.submit();
+	}
  	function edit_go(f) {
 		f.action="/groupUpdate_Form.do";
 		f.submit();
@@ -98,11 +103,11 @@
 					</c:choose>
 				</tr>
 				<tr align="center">
-					<td bgcolor="#99ccff">날짜</td>
-					<td>${gvo.g_date}</td>
+				    <td bgcolor="#99ccff">캠핑 날짜</td>
+				    <td><fmt:formatDate value="${gvo.g_date}" pattern="yyyy-MM-dd" /></td>
 				</tr>
 				<tr align="center">
-					<td bgcolor="#99ccff">캠핑장소</td>
+					<td bgcolor="#99ccff">캠핑 장소</td>
 					<td>${gvo.g_location}</td>
 				</tr>
 				<tr align="center">
@@ -118,6 +123,8 @@
 					<tr align="center">
 						<td colspan="2">
 							<input type="hidden" name="g_idx" value="${gvo.g_idx}">
+							<input type="button" value="목록" onclick="list_go(this.form)" />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="button" value="수정" onclick="edit_go(this.form)" />
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="button" value="삭제" onclick="delete_go(this.form)" />
