@@ -73,4 +73,21 @@ public class UserController {
 	            return "available"; // 사용 가능한 이메일인 경우
 	        }
 	    }
+	 @RequestMapping("/idCheck.do")
+	    public String checkId(@RequestBody String id) {
+	        String decodedId2 = "";
+	        try {
+	            decodedId2 = URLDecoder.decode(id, "UTF-8");
+	        } catch (UnsupportedEncodingException e) {
+	            e.printStackTrace();
+	        }
+	        String decodedId = decodedId2.substring(0, decodedId2.length() - 1);
+			 System.out.println("controller id : "+decodedId);	        
+			 if (userService.isIdDuplicate(decodedId)) {
+	            return "duplicate";
+	        } else {
+	            // 사용 가능한 아이디인 경우
+	            return "available";
+	        }
+	    }
 }

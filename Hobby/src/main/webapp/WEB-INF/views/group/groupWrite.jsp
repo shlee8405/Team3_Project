@@ -116,7 +116,7 @@
 					<td><input type="text" name="g_intro" size="60"/></td>
 				</tr>
 				<tr>
-					<th>날짜</th>
+					<th>캠핑 날짜</th>
 					<td><input type="date" name="g_date" size="10" id="g_date"/></td>
 				</tr>
 				<tr>

@@ -43,6 +43,15 @@ public class UserServiceImpl implements UserService{
         System.out.println("count" + count);
         return count > 0;
     }
+
+
+
+	@Override
+	public boolean isIdDuplicate(String id) {
+		int count = userDAO.idCheck2(id);
+        System.out.println("count" + count);
+        return count > 0;
+	}
 	
 	
 	
