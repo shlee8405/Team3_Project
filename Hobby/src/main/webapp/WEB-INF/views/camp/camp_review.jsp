@@ -127,7 +127,7 @@
 <div id="container">
     <div id="header">
         <img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
-        <h2 id="review_title">후기</h2>
+        <h2 style="font-weight: bolder;">후기</h2>
     </div>
     <form name="review_write_box" id="review_write_box" method="post">
 <div class="text-head">
