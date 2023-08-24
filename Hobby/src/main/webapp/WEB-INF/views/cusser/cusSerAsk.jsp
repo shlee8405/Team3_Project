@@ -10,15 +10,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <style type="text/css">
-	.card{
+	.container {
 		margin: auto;
 		width: 50%;
+		background-color: #d4ead7; /* 변경된 배경색 */
+		padding: 20px; /* 내용과의 간격을 위해 추가 */
+		border-radius: 10px; /* 컨테이너 모서리 둥글게 */
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
 	}
 	
-	.sidebar-link {
-		color:#ffffff!important;
-	
-	}
 </style>
 
 <script type="text/javascript">
@@ -53,15 +53,11 @@ function go_AskDetail() {
 <body>
 <jsp:include page="../header.jsp" />
 <div style="position:relative; top:200px; z-index:1;">
-
-<%-- <jsp:include page="sidebar.jsp"/> --%>
-
-	<div class="card">
+	<div class="container">
       <div class="card-body">
-        <h5 class="card-title" style="font-size: 30px;">1:1 문의</h5>
-		<br><br>
         <!-- Default Table -->
-        <table class="table table-hover">
+        <table class="table caption-top">
+ 		 <caption>1:1 문의</caption>
           <thead>
             <tr>
               <th scope="col">번호</th>
@@ -71,25 +67,22 @@ function go_AskDetail() {
             </tr>
           </thead>
           <tbody>
-         
-          <c:forEach var="k" items="${alllist}" varStatus="loop">
-            <tr>
-              <td>${loop.count}</td>
-              <td>${k.u_name}</td>
-              <td>${k.q_content}</td>
-              <td>대기중</td>
-            </tr>
+            <c:forEach var="k" items="${alllist}" varStatus="loop">
+              <tr>
+                <td>${loop.count}</td>
+                <td>${k.u_name}</td>
+                <td>${k.q_content}</td>
+                <td>대기중</td>
+              </tr>
             </c:forEach>
           </tbody>
         </table>
         <!-- End Default Table Example -->
       </div>
+      <div class="text-end"> <!-- 오른쪽 정렬 -->
+        <button type="button" class="btn btn-success" onclick="go_inquiry()">문의하기</button>
+      </div>
     </div>
-<br>
-<div class="text-center">
-	<button type="button" class="btn btn-success" onclick="go_inquiry()">문의하기</button>
-</div>
-
 </div>
 </body>
 </html>
