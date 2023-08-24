@@ -91,12 +91,7 @@ body {
     display: none;
 }
 
-.navHD {
-	padding-top: 20px;
-    padding-bottom: 20px;
-    -webkit-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-}
+
 
 
 /* Media qurey section */

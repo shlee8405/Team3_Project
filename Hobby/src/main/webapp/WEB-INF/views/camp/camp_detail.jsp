@@ -5,101 +5,217 @@
 <head>
 <meta charset="UTF-8">
 <title>캠핑장 상세보기</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+<!-- <link> 태그(=스타일시트)는 <head> 내부에 위치한다. -->
+   <!-- 부트스트랩 CDN 추가 -->
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+   <link href="/assets/css/star.css" rel="stylesheet" />
+   
 <style type="text/css">
-.button-container {
+	/* 수평 라인만 표시하는 테이블 스타일 */
+    .horizontal-only-lines tr th, 
+    .horizontal-only-lines tr td {
+       border: none;
+       border-bottom: 1px solid #dee2e6;
+	}
+ 	/* 탭 디자인 */
+	.nav-tabs .nav-item {
+		flex: 1;  /* 균등한 너비 */
+	}
+		
+	.nav-tabs .nav-link {
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		text-align: center;
+		transition: background-color 0.3s;  /* 부드러운 효과 */
+		color: #637F42;
+	}
+		
+	.nav-tabs .nav-link:hover {
+		background-color: #f7f7f7;  /* hover 시의 배경색 */
+	}
+		
+	.nav-tabs .nav-link.active {
+		background-color: #637F42;  /* 활성화된 탭의 배경색 */
+		color: white;  /* 활성화된 탭의 글자색 */
+	}
+	.tab-content {
+        margin-bottom: 300px; /* 여백 크기를 원하는 값으로 조정 */
+    }
+    #title {
     display: flex;
+    align-items: center;
+    padding: 10px 0;
 }
-
-#like-button, #whish-button { 
-    display: inline-block;
-    margin-right: 10px; /* 버튼 사이 간격 조절 */
-    background-color: #447CEC;
-    width: 90px;
-    height: 30px;
-    color: white;
-    font-size: 15px;
-    font-weight: bold;
-    border: none; 
-    border-radius: 10px; 
-}
-  
-#whish-button { 
-    background-color: #E44C5C;
-}    
 </style>
 </head>
+
 <body>
-	<h1>${cvo.facltNm}</h1>
-	<!-- 좋아요 -->
-<div class="button-container">
-	<div class="like-section">
-		<button id="like-button" onclick="incrementLike('${cvo.facltNm}')">
-	        좋아요 <span id="like-count">${cvo.likesCount}</span>
-	    </button>
-	    
+	<!-- 헤더 -->
+	<jsp:include page="../header.jsp"  />
+		<div style="position:relative; top:200px; z-index:1;" >
+		
+	<div class="container mt-5">
+		<div class="row">
+			<!-- 캠핑장 이미지 -->
+        		<div class="col-md-6">
+        			<img src='${cvo.firstImageUrl}' width="500px" alt="캠핑장 이미지" class="img-fluid">
+        		</div>
+        		
+        <!-- 캠핑장 기본 정보 -->
+        <div class="col-md-6">
+            <!-- 캠핑장 제목 및 한줄 소개 -->
+            <h1>${cvo.facltNm}</h1>
+            <p><font color="gray">${cvo.lineIntro}</font></p>
+            
+         <!-- 테이블 정보 -->
+            <table class="table horizontal-only-lines">
+                <tr>
+                    <th>주소</th>
+                    <td>${cvo.addr1}</td>
+                </tr>
+                <tr>
+                    <th>문의처</th>
+                    <td>${cvo.tel}</td>
+                </tr>
+                <tr>
+                    <th>운영일</th>
+                    <td>${cvo.operDeCl}</td>
+                </tr>
+                <tr>
+                    <th>캠핑장환경</th>
+                    <td>${cvo.lctCl}</td>
+                </tr>
+                <tr>
+                    <th>캠핑장 유형</th>
+                    <td>${cvo.induty}</td>
+                </tr>
+                <tr>
+                    <th>주변이용가능시설</th>
+                    <td>${cvo.posblFcltyCl}</td>
+                </tr>
+            </table>
+		
+		<!-- 좋아요, 찜버튼 -->
+		<div class="d-flex justify-content-end mt-3">
+			<button class="btn btn-danger rounded-circle mr-2" onclick="addLike('pawj01', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
+			        <i class="fas fa-heart"></i>
+			</button>
+			    <span id="like-count">${cvo.likesCount}</span>
+			<button class="btn btn-primary rounded-circle" onclick="addToWishlist('pawj01', '${cvo.facltNm}')"  style="width: 50px; height: 50px;">
+			        <i class="fas fa-thumbs-up"></i>
+			 </button>
+		</div>
 	</div>
-	<div class="whish-section">
-		<button id="whish-button" onclick="incrementWhish('${cvo.facltNm}')">
-	        찜하기 <span id="whish-count">${cvo.likesCount}</span>
-	    </button>
-	</div>
+ </div>
 </div>
-	<p><font color="gray">${cvo.lineIntro}</font></p>
-	<p><img src='${cvo.firstImageUrl}' width="500px"></p>
-	<p><strong>주소 : </strong>${cvo.addr1}</p>
-	<p><strong>문의처 : </strong>${cvo.tel}</p>
-	<p><strong>운영일 : </strong>${cvo.operDeCl}</p>
-	<p><strong>캠핑장 환경 : </strong>${cvo.lctCl}</p>
-	<p><strong>캠핑장 유형 : </strong>${cvo.induty}</p>
-	<p><strong>주변이용가능시설 : </strong>${cvo.posblFcltyCl}</p>
-	<p><strong>소개글 : </strong>${cvo.featureNm}</p>
-	
-	
-	
-	<%-- 카카오맵 api --%>
-		<h2>찾아오시는 길</h2>
-		<div id="map" style="width: 500px; height: 400px;"></div>
-	<%-- 지도를 그리는 Javascript API를 불러오기 --%>
-		<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a447b9339cfa86beab10e8ff569b495"></script>
-		<script type="text/javascript">
-			var mapX = ${cvo.mapX} //API로부터 받은 캠핑장의 X좌표
-			var mapY = ${cvo.mapY} //API로부터 받은 캠핑장의 Y좌표
+
+	<!-- 탭 버튼 -->
+	<div class="container mt-5">
+    	<ul class="nav nav-tabs">
+        	<li class="nav-item">
+            	<a class="nav-link active" data-toggle="tab" href="#campIntro">캠핑장소개</a>
+       		</li>
+        	<li class="nav-item">
+            	<a class="nav-link" data-toggle="tab" href="#locationInfo">위치정보</a>
+        	</li>
+        	<li class="nav-item">
+            	<a class="nav-link" data-toggle="tab" href="#reviews">후기</a>
+        	</li>
+    	</ul>
+    	
+    <!-- 탭 컨텐츠 -->
+    <div class="tab-content">
+        <!-- 캠핑장 소개 -->
+        <div class="tab-pane container active" id="campIntro">
+        <div id="title">
+        	<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
+        	<h2 id="review_title">소개글</h2>
+    	</div>
+            <p>${cvo.featureNm}</p>
+        </div>
+        
+        <!-- 위치정보 -->
+        <div class="tab-pane container fade" id="locationInfo">
+        <div id="title">
+        	<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
+        	<h2 id="review_title">찾아오시는 길</h2>
+    	</div>
+            <!-- 카카오맵 지도 -->
+            <div id="map" style="width: 100%; max-width: 700px; height: 400px; margin: 0 auto;"></div>
+        </div>
+        
+        <!-- 후기 -->
+        <div class="tab-pane container fade" id="reviews">
+          <jsp:include page="camp_review.jsp" />
+    	</div>
+	</div>
+
+<!-- <script> 태그(스크립트)는 대부분 </body> 앞에 위치 -->
+<!-- 부트스트랩 JS 및 jQuery CDN 추가 -->
+<!-- 부트스트랩은 제이쿼리에 의존하므로 제이쿼리 스크립트를 부트스트랩 스크립트보다 먼저 로드 -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a447b9339cfa86beab10e8ff569b495"></script>
+<script type="text/javascript">
+	var mapX = ${cvo.mapX} //API로부터 받은 캠핑장의 X좌표
+	var mapY = ${cvo.mapY} //API로부터 받은 캠핑장의 Y좌표
 			
-			var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
-			var options = { //지도를 생성할 때 필요한 기본 옵션
-			center: new kakao.maps.LatLng(mapY, mapX), //지도의 중심좌표.
-			level: 3 //지도의 레벨(확대, 축소 정도)
-			};
+	var container = document.getElementById('map'); //지도를 담을 영역의 DOM 레퍼런스
+	var options = { //지도를 생성할 때 필요한 기본 옵션
+	center: new kakao.maps.LatLng(mapY, mapX), //지도의 중심좌표.
+	level: 3 //지도의 레벨(확대, 축소 정도)
+	};
 
-			var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
+	var map = new kakao.maps.Map(container, options); //지도 생성 및 객체 리턴
 			
-			var markerPosition  = new kakao.maps.LatLng(mapY, mapX);  // 마커가 표시될 위치 
-			var marker = new kakao.maps.Marker({  // 마커를 생성한다
-			    position: markerPosition
-			});
+	var markerPosition  = new kakao.maps.LatLng(mapY, mapX);  // 마커가 표시될 위치 
+	var marker = new kakao.maps.Marker({  // 마커를 생성한다
+		position: markerPosition
+	});
 
-			marker.setMap(map); // 마커가 지도 위에 표시되도록 설정한다
+	marker.setMap(map); // 마커가 지도 위에 표시되도록 설정한다
 
-			// 아래 코드는 지도 위의 마커를 제거하는 코드이다
-			// marker.setMap(null);
+	// #locationInfo 탭이 선택되었을 때 지도를 다시 그린다.
+	$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+	    if ($(e.target).attr('href') == '#locationInfo') {
+	        setTimeout(function() {
+	            map.relayout();
+	            map.setCenter(new kakao.maps.LatLng(mapY, mapX));  // 지도의 중심을 다시 설정
+	        }, 100);  // 도를 다시 그리는 코드를 100ms의 딜레이를 준 후 실행
+	    }
+	});
 	</script>
 	
 	<script type="text/javascript">
-		function incrementLike(u_id, campName) {
-			//ajax 호출
-			$.ajax({
-				url: "/likeCamp.do",
-				type: "POST",
-				data: { u_id : u_id, facltNm : campName},
-				success: function(response) {
-					// 받아온 좋아요 수 화면에 업데이트
-					$('#like-count').text(response.likesCount);
-					alert(response.message);
-				}
-			})
-		}
+	/* 찜하기 버튼 */
+	function addToWishlist(userId, campName) {
+    	$.ajax({
+    	    url: "/addWishlist.do",
+     		type: "POST",
+     		data: { userId: userId, facltNm: campName },
+      		success: function(response) {
+     	       alert(response.message);
+       	 	}
+    	})
+	};
+	
+	/* 좋아요 버튼 */
+	function addLike(userId, campName) {
+    	$.ajax({
+        	url: "/addLike.do",
+        	type: "POST",
+        	data: { userId: userId, facltNm: campName },
+        	success: function(response) {
+            	alert(response.message);
+           
+            $('#like-count').text(response.likesCount);/* 화면에 실시간으로 연동 */
+        	}
+    	});
+	};
 	</script>
-<jsp:include page="camp_review.jsp" />
-</body>
+	</div>
+	</body>
 </html>

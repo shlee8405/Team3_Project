@@ -33,4 +33,9 @@ public class GroupServiceImpl implements GroupService {
 		return groupDAO.getGroupDelete(gvo);
 	}
 
+	@Override
+	public int getGroupUpdate(GroupVO gvo) {
+		return groupDAO.getGroupUpdate(gvo);
+	}
+
 }

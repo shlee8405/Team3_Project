@@ -1,6 +1,7 @@
 package com.team.controller.group;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -106,6 +107,35 @@ public class GroupController {
 		return mv;
 	}
 	
+	@PostMapping("/groupUpdate.do")
+	public ModelAndView getGroupUpdate(GroupVO gvo, HttpServletRequest request,
+			//@ModelAttribute("cPage") String cPage,
+			@ModelAttribute("g_idx") String g_idx) {
+		ModelAndView mv = new ModelAndView();
+		String path = request.getSession().getServletContext().getRealPath("/resources/images");
+		MultipartFile f_param = gvo.getFile();
+		if (f_param.isEmpty()) {
+			gvo.setG_fname(gvo.getG_oldfname());
+		} else {
+			// 같은 이름의 파일 없도록 UUID 사용
+			UUID uuid = UUID.randomUUID();
+			String g_fname = uuid.toString() + "_" + gvo.getFile().getOriginalFilename();
+			gvo.setG_fname(g_fname);
+
+			// 이미지 저장
+			try {
+				byte[] in = gvo.getFile().getBytes();
+				File out = new File(path, g_fname);
+				FileCopyUtils.copy(in, out);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		int result = groupService.getGroupUpdate(gvo);
+		  
+		 mv.setViewName("redirect:/group_onelist.do?g_idx="+gvo.getG_idx());
+		return mv;
+	}
 	
 	
 	

@@ -1,10 +1,12 @@
 package com.team.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,4 +38,39 @@ public class UserController {
 		return mv;
 		
 	}
+	@PostMapping("/login.do")
+    public ModelAndView loginUser(UserVO uvo) {
+        ModelAndView mv = new ModelAndView();
+        UserVO user = userService.getUserLogin(uvo.getU_id());
+
+        if (user != null && user.getU_pw().equals(uvo.getU_pw())) {
+            // 로그인 성공
+            mv.setViewName("index2"); // 로그인 성공 시 이동할 페이지 설정
+            // 필요한 처리 추가
+        } else {
+            // 로그인 실패
+            mv.setViewName("test/login"); // 로그인 실패 시 이동할 페이지 설정
+            // 필요한 처리 추가
+        }
+
+        return mv;
+    }
+	 @RequestMapping("/emailCheck.do")
+	    public String checkEmail(@RequestBody String email) {
+		 String decodedEmail2 = "";
+		 try {
+			 decodedEmail2 = URLDecoder.decode(email, "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		 String decodedEmail = decodedEmail2.substring(0, decodedEmail2.length() - 1);
+		 System.out.println("controller email : "+decodedEmail);
+	        if (userService.isEmailDuplicate(decodedEmail)) {
+	        	System.out.println("test2");
+	            return "duplicate"; // 이미 사용 중인 이메일인 경우
+	        } else {
+	        	System.out.println("test3");
+	            return "available"; // 사용 가능한 이메일인 경우
+	        }
+	    }
 }

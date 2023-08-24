@@ -48,17 +48,17 @@
 		// 유효성 검사 
 		if(f.g_title.value.trim().length <=0){
 			alert("제목을 입력하세요");
-			f.subject.focus();
+			f.g_title.focus();
 			return;
 		}
 		if(f.g_maxPeople.value.trim().length <=0){
 			alert("총인원을 입력하세요");
-			f.subject.focus();
+			f.g_maxPeople.focus();
 			return;
 		}
 		if(f.g_intro.value.trim().length <=0){
 			alert("모임소개를 입력하세요");
-			f.subject.focus();
+			f.g_intro.focus();
 			return;
 		}
 		if(f.g_desc.value.trim().length <=0){
