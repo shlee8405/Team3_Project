@@ -1,10 +1,13 @@
 package com.team.group.vo;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.multipart.MultipartFile;
 
 public class GroupVO {
-	private String g_idx, g_title, g_desc, g_date, g_location, g_maxPeople, g_curPeople, g_link, g_status, g_fname, u_idx, g_intro;
-
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	private String g_idx, g_title, g_desc, g_location, g_maxPeople, g_curPeople, g_link, g_status, g_fname, g_oldfname, u_idx, g_intro;
+	private java.util.Date g_date;
+	
 	// file 파리미터를 저장할 이름
 	private MultipartFile file;
 	
@@ -16,6 +19,22 @@ public class GroupVO {
 		this.file = file;
 	}
 	
+	public java.util.Date getG_date() {
+		return g_date;
+	}
+
+	public void setG_date(java.util.Date g_date) {
+		this.g_date = g_date;
+	}
+
+	public String getG_oldfname() {
+		return g_oldfname;
+	}
+
+	public void setG_oldfname(String g_oldfname) {
+		this.g_oldfname = g_oldfname;
+	}
+
 	public String getG_intro() {
 		return g_intro;
 	}
@@ -54,14 +73,6 @@ public class GroupVO {
 
 	public void setG_desc(String g_desc) {
 		this.g_desc = g_desc;
-	}
-
-	public String getG_date() {
-		return g_date;
-	}
-
-	public void setG_date(String g_date) {
-		this.g_date = g_date;
 	}
 
 	public String getG_location() {

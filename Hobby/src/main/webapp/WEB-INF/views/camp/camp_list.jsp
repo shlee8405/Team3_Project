@@ -45,6 +45,8 @@
 					// $.each() 함수를 사용하여 서버에서 받아온 데이터를 반복적으로 처리하는 HTML 내용을 생성
 					$.each(data, function (index, dataList) {
 						list += "<div>"
+						+ "<img src='" + dataList.firstImageUrl + "' alt='캠핑장 이미지' width='200' height='200'>"
+						+ "<br>"
 						+ "<a href='/campDetail.do?keyword=" + dataList.facltNm + "'>" + dataList.facltNm + "</a>"
 						+ "<p>" + dataList.addr1 + "</p>"
 						+ "<p>" + dataList.lineIntro + "</p>"

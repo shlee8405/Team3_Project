@@ -48,17 +48,17 @@
 		// 유효성 검사 
 		if(f.g_title.value.trim().length <=0){
 			alert("제목을 입력하세요");
-			f.subject.focus();
+			f.g_title.focus();
 			return;
 		}
 		if(f.g_maxPeople.value.trim().length <=0){
 			alert("총인원을 입력하세요");
-			f.subject.focus();
+			f.g_maxPeople.focus();
 			return;
 		}
 		if(f.g_intro.value.trim().length <=0){
 			alert("모임소개를 입력하세요");
-			f.subject.focus();
+			f.g_intro.focus();
 			return;
 		}
 		if(f.g_desc.value.trim().length <=0){
@@ -116,7 +116,7 @@
 					<td><input type="text" name="g_intro" size="60"/></td>
 				</tr>
 				<tr>
-					<th>날짜</th>
+					<th>캠핑 날짜</th>
 					<td><input type="date" name="g_date" size="10" id="g_date"/></td>
 				</tr>
 				<tr>

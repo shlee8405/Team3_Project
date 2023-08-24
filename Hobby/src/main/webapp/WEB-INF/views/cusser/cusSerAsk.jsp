@@ -5,29 +5,22 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
 <style type="text/css">
-    table {
-        border-collapse: collapse;
-        width: 50%;
-        margin: 0 auto;
-    }
-
-    table, th, td {
-        border: 1px solid black;
-    }
-
-    .faq-buttons {
-        text-align: center;
-    }
-
-    .table-margin {
-        margin-top: 10px;
-    }
-
-    .text-center {
-        text-align: center;
-    }
+	.container {
+		margin: auto;
+		width: 50%;
+		background-color: #d4ead7; /* 변경된 배경색 */
+		padding: 20px; /* 내용과의 간격을 위해 추가 */
+		border-radius: 10px; /* 컨테이너 모서리 둥글게 */
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
+	}
+	
 </style>
+
 <script type="text/javascript">
 function go_cusser() {
 	location.href="/cusSer.do"	
@@ -58,95 +51,39 @@ function go_AskDetail() {
 </script>
 </head>
 <body>
-
-<h1 class="text-center">1:1 문의</h1>
-
-<div class="text-center">
-    <table>
-        <thead>
+<jsp:include page="../header.jsp" />
+<div style="position:relative; top:200px; z-index:1;">
+	<div class="container">
+      <div class="card-body">
+        <!-- Default Table -->
+        <table class="table caption-top">
+ 		 <caption>1:1 문의</caption>
+          <thead>
             <tr>
-                <th>
-                    고객센터 메인
-                </th>
-                <th> 
-                    자주묻는질문
-                </th>
-                <th> 
-                    1:1 문의
-                </th>
-                <th> 
-                    신고하기
-                </th>
-                <th>
-                    홈
-                </th>
+              <th scope="col">번호</th>
+              <th scope="col">제목</th>
+              <th scope="col">내용</th>
+              <th scope="col">상태</th>
             </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <button onclick="go_cusser()">고객센터 메인</button>
-                </td>
-                <td>
-                    <button onclick="go_cusserFAQ()">자주묻는질문</button>
-                </td>
-                <td>
-                    <button onclick="go_cusserAsk()">1:1 문의</button>
-                </td>
-                <td>
-                    <button onclick="go_cusserReport()">신고하기</button>
-                </td>
-                <td>
-                    <button onclick="go_home()">홈으로</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+          </thead>
+          <tbody>
+            <c:forEach var="k" items="${alllist}" varStatus="loop">
+              <tr>
+                <td>${loop.count}</td>
+                <td>${k.u_name}</td>
+                <td>${k.q_content}</td>
+                <td>대기중</td>
+              </tr>
+            </c:forEach>
+          </tbody>
+        </table>
+        <!-- End Default Table Example -->
+      </div>
+      <div class="text-end"> <!-- 오른쪽 정렬 -->
+        <button type="button" class="btn btn-success" onclick="go_inquiry()">문의하기</button>
+      </div>
+    </div>
 </div>
-
-<div class="table-margin"></div> <!-- 10px 간격용 div -->
-
-<div class="text-center">
-    <table>
-        <thead>
-            <tr>
-                <th>번호</th>
-                <th>작성자</th>
-                <th>제목</th>
-                <th>내용</th>
-            </tr>
-        </thead>
-        <c:forEach var="k" items="${alllist}" varStatus="loop">
-            <tr>
-                <c:choose>
-                    <c:when test="${k.q_status == 0}">
-                        <td colspan="4">삭제된 문의입니다</td>
-                    </c:when>
-                    <c:otherwise>
-                        <td>${loop.count}</td>
-                        <td style="white-space: nowrap;">${k.u_name}</td>
-                        <td>${k.q_content}</td>
-                        <td>
-                            <c:choose>
-                                <c:when test="${not empty k.q_response}">
-                                    <a href="/go_AskDetail.do?q_idx=${k.q_idx}">답변보기</a>
-                                </c:when>
-                                <c:otherwise>
-                                    <a href="/go_AskDelete.do?q_idx=${k.q_idx}">수정하기</a>
-                                </c:otherwise>
-                            </c:choose>
-                        </td>
-                    </c:otherwise>
-                </c:choose>
-            </tr>
-        </c:forEach>
-    </table>
-</div>
-
-
-<div class="text-center">
-    <button class="btn" onclick="go_inquiry()">문의하기</button>
-</div>
-
 </body>
 </html>
+</div>	

@@ -86,17 +86,23 @@ public class MyController {
 	// 고객센터 controls
 	@GetMapping("/cusSer.do")
 	public ModelAndView goCusSer() /* 고객센터 메인 */ {
-		ModelAndView mv = new ModelAndView("cusser/cusSerMain");
-		List<FaqVO> F_list = faqService.getList();
-		List<QnaVO> Q_list = qnaService.getAllQna();
-		List<ReportVO> R_list = reportService.getAllReports();
-		String[] test = {"번호","제목","내용"};
-		mv.addObject("test", test);
-		mv.addObject("R_list", R_list);
-		mv.addObject("F_list", F_list);
-		mv.addObject("Q_list", Q_list);
-		return mv;
+	    ModelAndView mv = new ModelAndView("cusser/cusSerMain");
+	    List<FaqVO> F_list = faqService.getList();
+	    List<QnaVO> Q_list = qnaService.getAllQna();
+	    List<ReportVO> R_list = reportService.getAllReports();
+	    
+	    // Use the first item's f_content and f_response
+	    if (!F_list.isEmpty()) {
+	        FaqVO firstFaq = F_list.get(0);
+	        mv.addObject("faqTitle", firstFaq.getF_content());
+	        mv.addObject("faqListText", firstFaq.getF_response());
+	    }
+	    mv.addObject("F_list", F_list);
+	    mv.addObject("R_list", R_list);
+	    mv.addObject("Q_list", Q_list);
+	    return mv;
 	}
+
 
 	@GetMapping("/cusSerFAQ.do")
 	public ModelAndView goCusSerFAQ() /* FAQ페이지 */ {

@@ -29,4 +29,8 @@ public class GroupDAO {
 	public int getGroupDelete(GroupVO gvo) {
 		return sqlSessionTemplate.update("group.delete", gvo);
 	}
+	
+	public int getGroupUpdate(GroupVO gvo) {
+		return sqlSessionTemplate.update("group.update", gvo);
+	}
 }

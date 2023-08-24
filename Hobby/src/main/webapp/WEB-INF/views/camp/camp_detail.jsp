@@ -19,91 +19,117 @@
        border-bottom: 1px solid #dee2e6;
 	}
  	/* 탭 디자인 */
-		.nav-tabs .nav-item {
-		    flex: 1;  /* 균등한 너비 */
-		}
+	.nav-tabs .nav-item {
+		flex: 1;  /* 균등한 너비 */
+	}
 		
-		.nav-tabs .nav-link {
-		    border: 1px solid #ccc;
-		    border-radius: 5px;
-		    text-align: center;
-		    transition: background-color 0.3s;  /* 부드러운 효과 */
-		    color: #637F42;
-		}
+	.nav-tabs .nav-link {
+		border: 1px solid #ccc;
+		border-radius: 5px;
+		text-align: center;
+		transition: background-color 0.3s;  /* 부드러운 효과 */
+		color: #637F42;
+		font-size: 20px; /* 원하는 크기로 조정 */
+	}
 		
-		.nav-tabs .nav-link:hover {
-		    background-color: #f7f7f7;  /* hover 시의 배경색 */
-		}
-		
-		.nav-tabs .nav-link.active {
-		    background-color: #637F42;  /* 활성화된 탭의 배경색 */
-		    color: white;  /* 활성화된 탭의 글자색 */
-		}
+	.nav-tabs .nav-link:hover {
+	background-color: #f7f7f7;  /* hover 시의 배경색 */
+	}
+	
+	/* 활성화된 탭 */
+	.nav-tabs .nav-link.active {   
+	background-color: #637F42;
+	color: white;
+	font-weight: bolder;
+	}
+	
+	.tab-content {
+    margin-bottom: 300px; /* 여백 크기를 원하는 값으로 조정 */
+    }
+    
+    #title {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+	}
+	
+	.table th {
+    font-weight: bold;
+  	}
 </style>
 </head>
 
 <body>
 	<!-- 헤더 -->
 	<jsp:include page="../header.jsp"  />
-		<div style="position:relative; top:200px; z-index:1;" >
+	<div style="position:relative; top:200px; z-index:1;">
 		
 	<div class="container mt-5">
 		<div class="row">
-			<!-- 캠핑장 이미지 -->
-        		<div class="col-md-6">
-        			<img src='${cvo.firstImageUrl}' width="500px" alt="캠핑장 이미지" class="img-fluid">
-        		</div>
-        		
-        <!-- 캠핑장 기본 정보 -->
-        <div class="col-md-6">
-            <!-- 캠핑장 제목 및 한줄 소개 -->
-            <h1>${cvo.facltNm}</h1>
-            <p><font color="gray">${cvo.lineIntro}</font></p>
-            
-         <!-- 테이블 정보 -->
-            <table class="table horizontal-only-lines">
-                <tr>
-                    <th>주소</th>
-                    <td>${cvo.addr1}</td>
-                </tr>
-                <tr>
-                    <th>문의처</th>
-                    <td>${cvo.tel}</td>
-                </tr>
-                <tr>
-                    <th>운영일</th>
-                    <td>${cvo.operDeCl}</td>
-                </tr>
-                <tr>
-                    <th>캠핑장환경</th>
-                    <td>${cvo.lctCl}</td>
-                </tr>
-                <tr>
-                    <th>캠핑장 유형</th>
-                    <td>${cvo.induty}</td>
-                </tr>
-                <tr>
-                    <th>주변이용가능시설</th>
-                    <td>${cvo.posblFcltyCl}</td>
-                </tr>
-            </table>
-		
-		<!-- 좋아요, 찜버튼 -->
-		<div class="d-flex justify-content-end mt-3">
-			<button class="btn btn-danger rounded-circle mr-2" onclick="addLike('pawj01', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
-			        <i class="fas fa-heart"></i>
-			</button>
-			    <span id="like-count">${cvo.likesCount}</span>
-			<button class="btn btn-primary rounded-circle" onclick="addToWishlist('pawj01', '${cvo.facltNm}')"  style="width: 50px; height: 50px;">
-			        <i class="fas fa-thumbs-up"></i>
-			 </button>
+			<!-- 캠핑장 제목과 한줄 소개-->
+			<div class="col-md-12" style="margin-bottom: 10px;">
+				<h1 style="font-weight: bolder;">${cvo.facltNm}</h1>
+				<br>
+				<p><font color="gray">${cvo.lineIntro}</font></p>
+			</div>
 		</div>
+
+		<hr style="border-top: 1px solid #dee2e6; margin: 20px 0;">
+			
+		<div class="container">
+			<div class="row">
+
+				<!-- 캠핑장 이미지 -->
+				<div class="col-md-6">
+					<img src='${cvo.firstImageUrl}' width="500px" hight="500px" alt="캠핑장 이미지" class="img-fluid">
+				</div>
+
+				<!-- 캠핑장 기본 정보 -->
+				<div class="col-md-6">
+					<!-- 테이블 정보 -->
+						<table class="table horizontal-only-lines">
+							<tr>
+								<th>주소</th>
+								<td>${cvo.addr1}</td>
+							</tr>
+							<tr>
+								<th>문의처</th>
+								<td>${cvo.tel}</td>
+							</tr>
+							<tr>
+								<th>운영일</th>
+								<td>${cvo.operDeCl}</td>
+							</tr>
+							<tr>
+								<th>캠핑장환경</th>
+								<td>${cvo.lctCl}</td>
+							</tr>
+							<tr>
+								<th>캠핑장 유형</th>
+								<td>${cvo.induty}</td>
+							</tr>
+							<tr>
+								<th>주변이용가능시설</th>
+								<td>${cvo.posblFcltyCl}</td>
+							</tr>
+						</table>
+		
+				<!-- 좋아요, 찜버튼 -->
+				<div class="d-flex justify-content-end mt-3">
+					<button class="btn btn-danger rounded-circle mr-2" onclick="addLike('pawj01', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
+			        <i class="fas fa-heart"></i> </button>
+			    		<%-- <span id="like-count">${cvo.likesCount}</span> --%>
+					<button class="btn btn-primary rounded-circle" onclick="addToWishlist('pawj01', '${cvo.facltNm}')"  style="width: 50px; height: 50px;">
+			        	<i class="fas fa-thumbs-up"></i></button>
+				</div>
+			</div>
+ 		</div>
 	</div>
- </div>
-</div>
+	
+	<hr style="border-top: 1px solid #dee2e6; margin: 10px;">
 
 	<!-- 탭 버튼 -->
-	<div class="container mt-5">
+	<div class="container mt-3">
     	<ul class="nav nav-tabs">
         	<li class="nav-item">
             	<a class="nav-link active" data-toggle="tab" href="#campIntro">캠핑장소개</a>
@@ -120,15 +146,21 @@
     <div class="tab-content">
         <!-- 캠핑장 소개 -->
         <div class="tab-pane container active" id="campIntro">
-            <h4>소개글</h4>
+        <div id="title">
+        	<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
+        	<h2 id="review_title" style="font-weight: bolder;">소개글</h2>
+    	</div>
             <p>${cvo.featureNm}</p>
         </div>
         
         <!-- 위치정보 -->
         <div class="tab-pane container fade" id="locationInfo">
-            <h4>찾아오시는 길</h4>
-            <!-- 여기에 카카오맵 지도 추가하세요 -->
-            <div id="map" style="width: 100%; height: 400px;">카카오맵 지도</div>
+        <div id="title">
+        	<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
+        	<h2 id="review_title" style="font-weight: bolder;">찾아오시는 길</h2>
+    	</div>
+            <!-- 카카오맵 지도 -->
+            <div id="map" style="width: 100%; max-width: 800px; height: 400px; margin: 0 auto;"></div>
         </div>
         
         <!-- 후기 -->

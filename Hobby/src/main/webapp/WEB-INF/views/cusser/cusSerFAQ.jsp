@@ -5,130 +5,80 @@
 <head>
 <meta charset="UTF-8">
 <title>자주하는 질문</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<!-- <link rel="stylesheet" type="text/css" href="resources/css/cusSerFAQ.css"> -->
-<style type="text/css">
-    body {
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
-    
-    .navbar-custom {
-        background-color: #0F4200;
-    }
-    
-    .navbar-custom .navbar-brand,
-    .navbar-custom .navbar-nav .nav-link {
-        color: white;
-    }
-    
-    .qna-title {
-        font-weight: bold;
-    }
-    
-    .qna-content {
-        display: none;
-        text-align: right; /* 추가: 텍스트를 오른쪽으로 정렬 */
-    }
-    
-    .toggle-button {
-        cursor: pointer;
-        text-decoration: underline;
-        margin-left: auto;
-        display: block; /* 추가: 버튼을 블록 요소로 설정하여 전체 너비를 차지하도록 함 */
-        text-align: right; /* 추가: 텍스트를 오른쪽으로 정렬 */
-    }
-    
-    .footer-bar {
-	    background-color: #0F4200;
-	    height: 50px;
-	    position: fixed;
-	    bottom: 0;
-	    width: 100%;
-	}
-	
-	.qna-box {
-        padding: 1rem;
-        transition: height 0.3s ease-in-out; /* 크기 변화에 애니메이션 적용 */
-        overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
-    }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-    .qna-content-visible {
-        height: auto; /* 답변 내용이 보일 때 크기를 자동으로 조절 */
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<style type="text/css">
+   h1 {
+        margin-top: 5px; /* Add space above the FAQ header */
+        text-align: center;
     }
+    
+    .container {
+        background-color: #d4ead7;
+        border-radius: 15px;
+        padding: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow to the bottom */
+        margin-bottom: 10px; /* Add space at the bottom of the container */
+    }
+    
+    .scroll-content::-webkit-scrollbar {
+       width: 0.5em;
+   }
+   
+   .scroll-content::-webkit-scrollbar-thumb {
+       background-color: #888;
+   }
+   
+   .scroll-content::-webkit-scrollbar-track {
+       background: transparent;
+   }
+    
+    .accordion-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+   }
+   
+   .accordion {
+        width: 70%;
+        margin: 10px auto;
+   }
 </style>
 
 <script type="text/javascript">
-// 이전의 JavaScript 코드는 그대로 사용하셔도 됩니다.
-	  function toggleContent(index) {
-        var content = document.getElementById("content-" + index);
-        var toggleButton = document.getElementById("toggle-" + index);
-        
-        if (content.style.display === "none") {
-            content.style.display = "table-row";
-            toggleButton.innerText = "닫기";
-            content.classList.add("qna-content-visible"); // 내용이 보일 때의 스타일 클래스 추가
-            content.style.backgroundColor = "#EFEFEF";
-        } else {
-            content.style.display = "none";
-            toggleButton.innerText = "답변";
-            content.classList.remove("qna-content-visible"); // 내용이 숨겨질 때의 스타일 클래스 제거
-            content.style.backgroundColor = "initial";
-        }
-    }
-    
+	  
 </script>
 </head>
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light navbar-custom fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="#">고객센터</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="/cusSer.do" onclick="go_cusser()">고객센터 메인</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cusSerFAQ.do" onclick="go_cusserFAQ()">자주묻는질문</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/cusSerAsk.do" onclick="go_cusserAsk()">1:1 문의</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/go_AskDelete.do" onclick="go_cusserReport()">신고하기</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/home.do" onclick="go_home()">홈으로</a>
-                </li>
-            </ul>
+<jsp:include page="../header.jsp"  />
+<div class="accordion-container">
+    <div class="container shadow-lg p-3 mb-5 bg-body-tertiary rounded">
+        <h1>FAQ</h1>
+        <!-- Content here -->
+        <div class="scroll-content">
+            <c:forEach var="k" items="${list}" varStatus="status">
+                <div class="accordion" id="accordionExample${status.index}">
+                    <div class="accordion-item">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.index}" aria-expanded="true" aria-controls="collapse${status.index}">
+                                ${k.f_content}
+                            </button>
+                        </h2>
+                        <div id="collapse${status.index}" class="accordion-collapse collapse ${status.index == 0 ? 'show' : ''}" data-bs-parent="#accordionExample${status.index}">
+                            <div class="accordion-body">
+                                ${k.f_response}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
         </div>
     </div>
-</nav>
-
-<div class="container mt-5 mb-5">
-    <h1 class="text-center mb-4">자주하는 질문</h1>
-	   <c:forEach var="k" items="${list}" varStatus="loop">
-	    <div class="card mt-3">
-	        <div class="card-header qna-title text-center" onclick="toggleContent(${loop.index})">${k.f_content}</div>
-	        <div class="card-body qna-content text-center" id="content-${loop.index}" style="display: none;">
-	            ${k.f_response}
-	        </div>
-	        <div class="card-footer">
-	            <span class="toggle-button" id="toggle-${loop.index}" onclick="toggleContent(${loop.index})">답변</span>
-	        </div>
-	    </div>
-	</c:forEach>
 </div>
 
-
-<div class="footer-bar"></div>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
