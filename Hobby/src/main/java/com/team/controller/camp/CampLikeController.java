@@ -23,29 +23,29 @@ public class CampLikeController {
 	
 	
 	// 좋아요 기능
-	@PostMapping("/likeCamp.do")
-	public ResponseEntity<Map<String, Object>> incrementLike(@RequestParam String u_id, @RequestParam String facltNm) {
-		System.out.println("좋아요 컨트롤러:::" + facltNm);
-		
-		// 좋아요 수 증가
-		int result = campService.increaseLikeCount(u_id, facltNm);
-		
-		// 빈 HashMap 생성
-		Map<String, Object> response = new HashMap<>();
-		
-		if (result > 0) {
-			// 업데이트 된 좋아요 수 가져오기
-			int likesCount = campService.getLikes(facltNm);
-			
-			// HashMap에 좋아요 수와 메시지를 담아서 보낸다.
-			response.put("likesCount", likesCount);
-			response.put("message", "좋아요 성공");
-		} else {
-			// result = 0이면 중복이라고 Service에서 설정함.
-			response.put("message", "이미 좋아요한 캠핑장입니다.");
+		@PostMapping("/addLike.do")
+		public Map<String, Object> addLike(@RequestParam String u_id, @RequestParam String facltNm) {
+		    // 좋아요 수 증가 또는 감소
+		    int result = campService.addLike(u_id, facltNm);
+		    
+		    Map<String, Object> response = new HashMap<>();
+		    
+		    System.out.println("addLike result:::" + result);
+
+		    if (result == 1) {
+		        response.put("message", "좋아요 성공");
+		    } else if (result == -1) {
+		        response.put("message", "좋아요 취소");
+		    } else {
+		        response.put("message", "좋아요 중복 또는 오류");
+		    }
+
+		    // 업데이트 된 좋아요 수 가져오기 : 화면에 바로 업데이트 시키기 위해 보냄.
+		    int likesCount = campService.getLikes(facltNm);
+		    response.put("likesCount", Integer.toString(likesCount));  // int를 String으로 변환하여 저장
+
+		    return response; // { message:"좋아요 성공", likesCount:"2" } 
 		}
-			return ResponseEntity.ok(response);
-	}
 	
 //	CREATE TABLE camp_likes (
 //	    camp_id INT AUTO_INCREMENT PRIMARY KEY, 
