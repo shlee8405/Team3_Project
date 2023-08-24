@@ -11,6 +11,23 @@
 	table{width: 600px; border-collapse:collapse; text-align: center;}
 	table,th,td{border: 1px solid black; padding: 3px}
 	div{width: 600px; margin:auto; text-align: center;}
+	.btn{
+		background-color: #548C54;
+		width: 120px;
+		height: 50px;
+		font-size: 22px;
+		font-weight: bold;
+		border-radius: 10px; 
+		color: #FFFCFC;
+		cursor: pointer;
+	}
+	#groupCount{
+	width:300px;
+	text-align: right;
+	padding-right: 30px;
+	font-size: 25px;
+	font-weight: bold;
+	}
 </style>
  <script>
  	function edit_go(f) {
@@ -26,19 +43,24 @@
       var maxClicks = ${gvo.g_maxPeople}; // 버튼을 누를 수 있는 최대 횟수
       function party_click() {
      	count_party++;
-          document.getElementById("count_party").innerHTML = count_party;
+      document.getElementById("count_party").innerHTML = count_party;
           if (count_party >= maxClicks) {
-              document.getElementById("myButton_ok").disabled = true;
+              $("#ok").css("display","none");
+              $("#no").css("display","block");
               $("")
           }
       }
       function party_click_no() {
-      	count_party--;
-      	document.getElementById("count_party").innerHTML = count_party;
-          if (count_party >= maxClicks) {
-              document.getElementById("myButton_ok").disabled = true;
+      document.getElementById("count_party").innerHTML = count_party;
+          if (count_party < 1) {
+              //document.getElementById("myButton_cancle").style.display = true;
+              $("#ok").css("display","block");
+              $("#no").css("display","none");
+          }else{
+      		count_party--;
           }
-	}
+	} 
+	
     </script>
 </head>
 <body>
@@ -51,12 +73,12 @@
 <form method="post">
 			<table>
 				<tr align="center">
-					<td bgcolor="#99ccff">작성자</td>
-					<td>${gvo.u_idx}</td>
-				</tr>
-				<tr align="center">
 					<td bgcolor="#99ccff">제  목</td>
 					<td>${gvo.g_title}</td>
+				</tr>
+				<tr align="center">
+					<td bgcolor="#99ccff">작성자</td>
+					<td>${gvo.u_idx}</td>
 				</tr>
 				<tr align="center">
 					<td bgcolor="#99ccff">모임소개</td>
@@ -84,6 +106,10 @@
 					<td>${gvo.g_location}</td>
 				</tr>
 				<tr align="center">
+					<td bgcolor="#99ccff">모임 정원</td>
+					<td>${gvo.g_maxPeople }</td>
+				</tr>
+				<tr align="center">
 					<td colspan="2" style="text-align: left">
 						<pre style="padding-left: 15px">${gvo.g_desc }</pre>
 					</td>
@@ -100,12 +126,13 @@
 				</tfoot>
 			</table>
 		</form>
-		<form method="post">
-			
-		</form>
-		<p style="width:300px; text-align: right; padding-right: 30px; font-size: 25px; font-weight: bold;"><span id="count_party">0</span>/${gvo.g_maxPeople}&nbsp;&nbsp;</p>
-		<div id="ok"><button id="myButton_ok" onclick="party_click()">참여</button></div>&nbsp;&nbsp;
-		<div id="no"><button id="myButton_cancle" onclick="party_click_no()">참여 취소</button></div>
+		<p id="groupCount"><span id="count_party">0</span>/${gvo.g_maxPeople}&nbsp;&nbsp;</p>
+		<div id="ok">
+			<button class="btn" id="myButton_ok" onclick="party_click()">참여</button>
+		</div>&nbsp;&nbsp;
+		<div id="no" style="display:none;">
+			<button class="btn" id="myButton_cancle" onclick="party_click_no()">참여 취소</button>
+		</div>
 			
 		</div>
 		</div>

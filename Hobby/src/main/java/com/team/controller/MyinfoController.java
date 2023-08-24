@@ -21,7 +21,6 @@ public class MyinfoController {
 	@Autowired
 	private MyinfoService myinfoService;
 
-	// 사용자 정보 조회
 	@GetMapping("/mypage.do")
 	public ModelAndView gomypage() {
 		ModelAndView mv = new ModelAndView("mypage/info");
@@ -29,5 +28,6 @@ public class MyinfoController {
 		mv.addObject("list", list);
 		return mv;
 	}
+
 
 }

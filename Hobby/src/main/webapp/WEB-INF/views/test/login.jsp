@@ -24,14 +24,14 @@
     <form action="login.do" method="post">
         <div class="wrap">
             <div class="login">
-                    <h3 style="font-size:50px;  font-family: 'Noto Sans KR', sans-serif;">/캠핑.DO</h3>
+                    <h3 style="font	-size:50px;  font-family: 'Noto Sans KR', sans-serif;">/캠핑.DO</h3>
                 <!--이메일 입력-->
                 <div class="u_id">
                     <h4 style=" font-family: 'Noto Sans KR', sans-serif;">아이디</h4>
                     <input type="text" name="u_id" class="pos" placeholder="ID(아이디)">
                 </div>
                 <!--비밀번호 입력-->
-                <div class="u_pw">
+                <div class="u_pw"> 
                     <h4 style=" font-family: 'Noto Sans KR', sans-serif;">비밀번호</h4>
                     <input type="password" name="u_pw" class="pos" placeholder="비밀번호">
                 </div>
@@ -71,6 +71,7 @@
   <a href="javascript:void(0)" id="kakaoLoginBtn"><img src="resources/images/kakao_login_btn.png" style="width:100%; height:50px; "></a>
   <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 </div>	
+				
 
 
 
@@ -122,8 +123,32 @@
     }
   }
 </script>
-
-
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- 네이버 로그인 버튼 노출 영역 -->
+    <div id="naver_id_login"></div>
+    <!-- //네이버 로그인 버튼 노출 영역 -->
+    <script type="text/javascript">
+    var naver_id_login = new naver_id_login("64LV1RLj1gi5COZg0EVh", "http://localhost:8090/home.do");
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("green", 70, 70);
+    naver_id_login.setDomain("http://localhost:8090");
+    naver_id_login.setState(state);	
+    naver_id_login.setPopup();
+    naver_id_login.init_naver_id_login();   
+</script>
+    <script type="text/javascript">
+  // 접근 토큰 값 출력	
+  alert(naver_id_login.oauthParams.access_token);
+  // 네이버 사용자 프로필 조회
+  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+  function naverSignInCallback() {
+    alert(naver_id_login.getProfileData('email'));
+    alert(naver_id_login.getProfileData('nickname'));
+    alert(naver_id_login.getProfileData('age'));
+  }
+</script>
 </body>
 
 </html>

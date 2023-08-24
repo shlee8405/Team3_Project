@@ -18,4 +18,8 @@
 		update groups
 		set g_status= '0' where g_idx = #{g_idx}
 	</update>
+	<update id="update" parameterType="gvo">
+		update groups set g_title= #{g_title},g_intro= #{g_intro},g_fname= #{g_fname},g_maxPeople= #{g_maxPeople},
+		g_date= #{g_date},g_location= #{g_location},g_desc= #{g_desc}, u_idx= #{u_idx} where g_idx = #{g_idx}
+	</update>
 </mapper>
