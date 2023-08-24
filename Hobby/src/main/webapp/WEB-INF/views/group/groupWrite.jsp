@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -117,7 +118,7 @@
 				</tr>
 				<tr>
 					<th>캠핑 날짜</th>
-					<td><input type="date" name="g_date" size="10" id="g_date"/></td>
+					<td><input type="datetime-local" name="g_date" size="10" id="g_date" /></td>
 				</tr>
 				<tr>
 					<th>캠핑 장소</th>

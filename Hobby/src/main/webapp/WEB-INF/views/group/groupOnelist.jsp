@@ -78,19 +78,19 @@
 <form method="post">
 			<table>
 				<tr align="center">
-					<td bgcolor="#99ccff">제  목</td>
+					<th bgcolor="#99ccff">제  목</th>
 					<td>${gvo.g_title}</td>
 				</tr>
 				<tr align="center">
-					<td bgcolor="#99ccff">작성자</td>
+					<th bgcolor="#99ccff">작성자</th>
 					<td>${gvo.u_idx}</td>
 				</tr>
 				<tr align="center">
-					<td bgcolor="#99ccff">모임소개</td>
+					<th bgcolor="#99ccff">모임소개</th>
 					<td>${gvo.g_intro }</td>
 				</tr>
 				<tr align="center">
-					<td bgcolor="#99ccff">썸네일</td>
+					<th bgcolor="#99ccff">썸네일</th>
 					<c:choose>
 						<c:when test="${empty gvo.g_fname }">
 							<td><b>첨부 파일 없음</b></td>
@@ -103,15 +103,15 @@
 					</c:choose>
 				</tr>
 				<tr align="center">
-				    <td bgcolor="#99ccff">캠핑 날짜</td>
-				    <td><fmt:formatDate value="${gvo.g_date}" pattern="yyyy-MM-dd" /></td>
+				    <th bgcolor="#99ccff">캠핑 날짜</th>
+				    <td>${gvo.g_date}</td>
 				</tr>
 				<tr align="center">
-					<td bgcolor="#99ccff">캠핑 장소</td>
+					<th bgcolor="#99ccff">캠핑 장소</th>
 					<td>${gvo.g_location}</td>
 				</tr>
 				<tr align="center">
-					<td bgcolor="#99ccff">모임 정원</td>
+					<th bgcolor="#99ccff">모임 정원</th>
 					<td>${gvo.g_maxPeople }</td>
 				</tr>
 				<tr align="center">
