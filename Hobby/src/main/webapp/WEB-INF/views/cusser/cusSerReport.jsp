@@ -9,9 +9,13 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
 <style type="text/css">
-    .card{
+    .container {
 		margin: auto;
 		width: 50%;
+		background-color: #d4ead7; /* 변경된 배경색 */
+		padding: 20px; /* 내용과의 간격을 위해 추가 */
+		border-radius: 10px; /* 컨테이너 모서리 둥글게 */
+		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
 	}
 </style>
 <script type="text/javascript">
@@ -42,17 +46,13 @@ function go_report() {
 </head>
 <body>
 
-<h1 class="text-center">신고 내역</h1>
-
-<jsp:include page="../header.jsp"  />
-<div style="position:relative; top:200px; z-index:1;">
-
-<div class="card">
+	<jsp:include page="../header.jsp"  />
+	<div style="position:relative; top:200px; z-index:1;">
+	
+	<div class="container">
       <div class="card-body">
-        <h5 class="card-title" style="font-size: 30px;">신고 내역</h5>
-		<br><br>
-        <!-- Default Table -->
-        <table class="table table-hover">
+        <table class="table caption-top">
+ 		 <caption>신고 목록</caption>
           <thead>
             <tr>
               <th scope="col">번호</th>
@@ -75,11 +75,10 @@ function go_report() {
         </table>
         <!-- End Default Table Example -->
       </div>
-    </div>
-<br>
-<div class="text-center">
-	<button type="button" class="btn btn-success" onclick="go_report()">신고하기</button>
-</div>
+	  <div class="text-end"> <!-- 오른쪽 정렬 -->
+        <button type="button" class="btn btn-success" onclick="go_inquiry()">신고하기</button>
+      </div>
+      </div>
 </div>
 </body>
 </html>
