@@ -4,6 +4,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="resources/css/summernote-lite.css">
 <style type="text/css">
     #bbs table {
         width:800px;
@@ -40,6 +44,9 @@
     .hit {width:15%}
     .title{background:lightsteelblue}
     .odd {background:silver}
+    
+    .note-btn-group{width: auto;}
+	.note-toolbar{width: auto;}
 </style>
 <script type="text/javascript">
     function sendData(f) {
@@ -68,11 +75,13 @@
 
 </head>
 <body>
+<jsp:include page="../header.jsp"  />
+	<div style="position:relative; top:200px; z-index:1;">
     <div id="bbs">
     <form method="post">
         <table>
-            <caption>문의 게시판</caption>
             <tbody>
+            <caption>문의 게시판</caption>
                 <tr>
                     <th>작성자:</th>
                     <td><input type="text" name="u_name" size="45"/></td>
@@ -92,5 +101,44 @@
         </table>
     </form>
     </div>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+    	<script src="resources/js/summernote-lite.js"></script>
+    	<script src="resources/js/lang/summernote-ko-KR2.js"></script>
+    	<script type="text/javascript">
+    	$(function(){
+    		$('#content').summernote({
+    			lang : 'ko-KR',
+    			height : 300,
+    			focus : true,
+    			callbacks : {
+    				onImageUpload :  function(files, editor){
+    					for (var i = 0; i < files.length; i++) {
+							sendImage(files[i], editor);
+						}
+    				}
+    			}
+			});
+    	});
+    	
+    	function sendImage(file, editor) {
+			var frm = new FormData();
+			frm.append("s_file",file);
+			$.ajax({
+				url : "/saveImg.do",
+				data : frm,
+				type : "post",
+				contentType : false,
+				processData : false,
+				dataType : "json",
+			}).done(function(data) {
+				var path = data.path;
+				var fname = data.fname;
+				alert("path : "+path+"\nfname : "+fname);
+				$("#content").summernote("editor.insertImage",path+"/"+fname);
+			});
+		}
+    	
+    	</script>
 </body>
 </html>

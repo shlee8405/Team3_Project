@@ -6,9 +6,21 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<style type="text/css">
+	.card{
+		margin: auto;
+		width: 50%;
+	}
+	
+	.sidebar-link {
+		color:#ffffff!important;
+	
+	}
+</style>
+
 <script type="text/javascript">
 function go_cusser() {
 	location.href="/cusSer.do"	
@@ -39,41 +51,46 @@ function go_AskDetail() {
 </script>
 </head>
 <body>
-<jsp:include page="../header.jsp"  />
+<jsp:include page="../header.jsp" />
 <div style="position:relative; top:200px; z-index:1;">
-<h1 class="text-center">1:1 문의</h1>
 
-<div class="table-margin"></div> <!-- 10px 간격용 div -->
+<%-- <jsp:include page="sidebar.jsp"/> --%>
 
-<div style="position:relative; top:200px; z-index:1;">
-    <!-- QnA 내용 -->
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover">
-            <thead>
-                    <tr class="qna-content-qna" style="display: none;">
-                        <td>${test[0]}</td>
-                        <td>${test[1]}</td>
-                        <td>${test[2]}</td>
-                    </tr>
-            </thead>
-            <tbody>
-                <c:forEach var="k" items="${alllist}" varStatus="loop">
-                    <tr class="qna-content-qna" style="display: none;">
-                        <td>${loop.count}</td>
-                        <td>${k.q_content}</td>
-                        <td>${k.q_response}</td>
-                    </tr>
-                </c:forEach>
-            </tbody>
+	<div class="card">
+      <div class="card-body">
+        <h5 class="card-title" style="font-size: 30px;">1:1 문의</h5>
+		<br><br>
+        <!-- Default Table -->
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th scope="col">번호</th>
+              <th scope="col">제목</th>
+              <th scope="col">내용</th>
+              <th scope="col">상태</th>
+            </tr>
+          </thead>
+          <tbody>
+         
+          <c:forEach var="k" items="${alllist}" varStatus="loop">
+            <tr>
+              <td>${loop.count}</td>
+              <td>${k.u_name}</td>
+              <td>${k.q_content}</td>
+              <td>대기중</td>
+            </tr>
+            </c:forEach>
+          </tbody>
         </table>
+        <!-- End Default Table Example -->
+      </div>
     </div>
-</div>
-
-
+<br>
 <div class="text-center">
-    <button class="btn" onclick="go_inquiry()">문의하기</button>
+	<button type="button" class="btn btn-success" onclick="go_inquiry()">문의하기</button>
 </div>
 
 </div>
 </body>
 </html>
+</div>	

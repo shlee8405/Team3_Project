@@ -10,57 +10,20 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style type="text/css">
-    body {
-        padding-top: 50px;
-        padding-bottom: 50px;
-    }
-    
-    .qna-title {
-        font-weight: bold;
-    }
-    
-    .qna-content {
-        display: none;
-        text-align: right; /* 추가: 텍스트를 오른쪽으로 정렬 */
-    }
-    
-    .toggle-button {
-        cursor: pointer;
-        text-decoration: underline;
-        margin-left: auto;
-        display: block; /* 추가: 버튼을 블록 요소로 설정하여 전체 너비를 차지하도록 함 */
-        text-align: right; /* 추가: 텍스트를 오른쪽으로 정렬 */
-    }
-    
-	.qna-box {
-        padding: 1rem;
-        transition: height 0.3s ease-in-out; /* 크기 변화에 애니메이션 적용 */
-        overflow: hidden; /* 내용이 넘칠 경우 숨김 처리 */
-    }
-
-    .qna-content-visible {
-        height: auto; /* 답변 내용이 보일 때 크기를 자동으로 조절 */
+   .accordion{
+	   	width: 30%;
+	   	margin: 0 auto;
+   	
+   }
+   
+   h1 {
+        margin-top: 50px; /* 제목 위쪽 여백 */
+        text-align: center; /* 제목을 가운데 정렬 */
     }
 </style>
 
 <script type="text/javascript">
-	  function toggleContent(index) {
-        var content = document.getElementById("content-" + index);
-        var toggleButton = document.getElementById("toggle-" + index);
-        
-        if (content.style.display === "none") {
-            content.style.display = "table-row";
-            toggleButton.innerText = "닫기";
-            content.classList.add("qna-content-visible"); // 내용이 보일 때의 스타일 클래스 추가
-            content.style.backgroundColor = "#EFEFEF";
-        } else {
-            content.style.display = "none";
-            toggleButton.innerText = "답변";
-            content.classList.remove("qna-content-visible"); // 내용이 숨겨질 때의 스타일 클래스 제거
-            content.style.backgroundColor = "initial";
-        }
-    }
-    
+	  
 </script>
 </head>
 <body>
@@ -68,20 +31,24 @@
 <jsp:include page="../header.jsp"  />
 <div style="position:relative; top:200px; z-index:1;">
 
-<div class="container mt-5 mb-5">
-    <h1 class="text-center mb-4">자주하는 질문</h1>
-	   <c:forEach var="k" items="${list}" varStatus="loop">
-	    <div class="card mt-3">
-	        <div class="card-header qna-title text-center" onclick="toggleContent(${loop.index})">${k.f_content}</div>
-	        <div class="card-body qna-content text-center" id="content-${loop.index}" style="display: none;">
-	            ${k.f_response}
-	        </div>
-	        <div class="card-footer">
-	            <span class="toggle-button" id="toggle-${loop.index}" onclick="toggleContent(${loop.index})">답변</span>
-	        </div>
-	    </div>
-	</c:forEach>
-</div>
+<h1>FAQ</h1>
+
+<c:forEach var="k" items="${list}" varStatus="status">
+    <div class="accordion" id="accordionExample${status.index}">
+      <div class="accordion-item">
+        <h2 class="accordion-header">
+          <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.index}" aria-expanded="true" aria-controls="collapse${status.index}">
+            ${k.f_content}
+          </button>
+        </h2>
+        <div id="collapse${status.index}" class="accordion-collapse collapse ${status.index == 0 ? 'show' : ''}" data-bs-parent="#accordionExample${status.index}">
+          <div class="accordion-body">
+            ${k.f_response}
+          </div>
+        </div>
+      </div>
+    </div>
+</c:forEach>
 
 </div>
 </body>
