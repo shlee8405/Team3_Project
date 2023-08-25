@@ -116,26 +116,26 @@ $(window).scroll(function() {
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body" >
-                <h6 style="">FAQ</h6>
+            	<div> <!-- 오른쪽 정렬 -->
+                	<a class="btn btn-light" href="/cusSerFAQ.do" role="button">FAQ</a>
+            	</div>
                 <!-- Offcanvas Navigation Links -->
                 <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown
+                    <button class="btn btn-light dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      QnA
                     </button>
                     <ul class="dropdown-menu">
-                      <li><button class="dropdown-item" type="button">Action</button></li>
-                      <li><button class="dropdown-item" type="button">Another action</button></li>
-                      <li><button class="dropdown-item" type="button">Something else here</button></li>
+					  <li><a class="dropdown-item" href="/cusSerAsk.do">문의 목록 보기</a></li>
+					  <li><a class="dropdown-item" href="/go_inquiry.do">문의 하기</a></li>
                     </ul>
                   </div>
                   <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Dropdown
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Report
                     </button>
                     <ul class="dropdown-menu">
-                      <li><button class="dropdown-item" type="button">Action</button></li>
-                      <li><button class="dropdown-item" type="button">Another action</button></li>
-                      <li><button class="dropdown-item" type="button">Something else here</button></li>
+					  <li><a class="dropdown-item" href="/cusSerReport.do">신고 목록 보기</a></li>
+					  <li><a class="dropdown-item" href="/report.do">신고하기</a></li>
                     </ul>
                   </div>
             </div>
