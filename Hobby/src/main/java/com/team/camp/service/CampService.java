@@ -9,5 +9,8 @@ public interface CampService {
 	int getLikes(String facltNm);
 
 	// 찜하기
-	// int addToWishlist(String userId, String facltNm);
+	int addWish(String userId, String facltNm);
+	
+	// 찜하기 수 가져오기
+	int getWish(String facltNm);
 }
