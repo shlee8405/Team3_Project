@@ -64,6 +64,16 @@
 </style>
 
 <script type="text/javascript">
+
+$(window).scroll(function() {
+    var scroll = $(window).scrollTop();
+    if (scroll > 50) { // 50px 이상 스크롤하면 배경색을 변경
+        $(".navbar").css("background-color", "#0F4200"); // Change this color if needed
+    } else {
+        $(".navbar").css("background-color", "#637F42"); // Original color
+    }
+});
+
     function go_cusser() {
         location.href = "/cusSer.do"
     }
