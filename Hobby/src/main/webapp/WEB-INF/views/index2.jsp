@@ -45,6 +45,14 @@
 	function go_shltest() { /* 실험용. 나중에 삭제할 예정*/
 		location.href ="/shltest.do"
 	}
+	
+	function checkU_id(){
+		location.href="/checkSession.do"
+	}
+	
+	function go_logOut() {
+		location.href="/logOut.do"
+	}
 </script>
 
 
@@ -96,6 +104,8 @@ input {
 									<th>지도</th>
 									<th>hello</th>
 									<th>SHL_TEST</th>
+									<th>세션에 저장된 u_idx 확인</th>
+									<th>로그아웃 (세션종료)</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -129,6 +139,13 @@ input {
 									<td>
 										<button onclick="go_shltest()">SHL TEST</button>
 									</td>
+									<td>
+										<button onclick="checkU_id()">sysout 세션 uidx</button>
+									</td>
+									<td>
+										<button onclick="go_logOut()">로그아웃(세션종료)</button>
+									</td>																				
+								
 
 								</tr>
 							</tbody>

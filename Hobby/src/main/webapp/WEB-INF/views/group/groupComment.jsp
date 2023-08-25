@@ -14,7 +14,7 @@ function comment_go(f) {
 		f.content.focus();
 		return;
 	}
-	f.action = "/";
+	f.action = "/groupCmtList.do";
 	f.submit();
 }
 
@@ -29,13 +29,13 @@ function comment_del(f) {
 	<div style="padding:50px; width:580px; margin: auto; ">
 		<form method="post">
 			<fieldset>
-				<p>이름 : <input type="text" name="writer" ></p>
+				<p>아이디 : ${k.u_idx}</p>
 				<p>내용 : <br>
 					<textarea rows="4" cols="40" name="content"></textarea>
 				 </p>
 				 <input type="button" value="댓글저장" onclick="comment_go(this.form)">
-				 <input type="hidden" name="b_idx" value="${bvo.b_idx}">
-				 <input type="hidden" name="cPage" value="${cPage}">
+				 <input type="hidden" name="gc_idx" value="${gcvo.gc_idx}">
+				 <%-- <input type="hidden" name="cPage" value="${cPage}"> --%>
 			 </fieldset>
 		</form>
 	</div>
@@ -43,15 +43,15 @@ function comment_del(f) {
 	
 	<%-- 댓글 출력 --%>
 	<div style="display: table;" >
-		<c:forEach var="k" items="${c_list}">
+		<c:forEach var="k" items="${gc_list}">
 		 <div style="border: 1px solid #cc00cc; width: 400px; margin: 20px; padding: 20px;">
 		 	<form method="post">
-		 		<p>이름 : ${k.writer}</p>
+		 		<p>이름 : ${k.u_idx}</p>
 		 		<p>내용 : ${k.content }</p>
 		 		<p>날짜 : ${k.write_date.substring(0,10)}</p>
 		 		<%-- 실제로는 로그인 성공해야 지만 삭제번트이 보여야 한다. --%>
 		 		<input type="button" value="댓글삭제" onclick="comment_del(this.form)">
-		 		<input type="hidden" value="${k.c_idx}" name="c_idx">
+		 		<input type="hidden" value="${c_idx}" name="c_idx">
 		 		<input type="hidden" value="${k.b_idx}" name="b_idx">
 		 		<input type="hidden" name="cPage" value="${cPage}">
 		 	</form>

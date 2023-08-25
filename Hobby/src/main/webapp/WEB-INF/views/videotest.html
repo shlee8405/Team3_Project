@@ -9,92 +9,489 @@
     <title>Document</title>
  
 
-    <link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-	crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-<link rel="stylesheet" href="resources/css/styles.css">
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
-	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-	crossorigin="anonymous"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
-	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-	crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="/src/main/webapp/resources/css/styles.css">
+<style>
+        body, html {
+          padding: 0;
+          margin:0;
+          height: 100%;
+        }
+
+        .section {
+          width: 100%;
+          height: 100%;
+          background-attachment: fixed;
+          background-size: 100% 100%;
+          position: relative;
+          background-color: white;
+          z-index: 2;
+        }
+
+        .section.three {
+            background-image: url(https://images.pexels.com/photos/17821306/pexels-photo-17821306.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+            background-size: autp 100% ;
+        }
+        .section.one {
+          background-image: url(https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1);
+        }
+
+        .section.two {
+          background: none;
+        }    
+
+        .sleep-video {
+            left: 0;
+            top: 0;
+            position: fixed;
+            width: 100%;
+            z-index: 1;
+        }
+
+
+
+
+        /* NAVBAR STYLE */
+        html,
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Navbar section */
+
+.navHD {
+    width: 100%;
+    height: 65px;
+    position: fixed;
+    line-height: 65px;
+    text-align: center;
+    background-color:rgba(4, 4, 4, 0);
+    position: fixed;
+    top: 0;
+    z-index: 3;
+  
+}
+
+.navHD, ::after, ::before {
+    box-sizing: content-box;
+}
+
+.navHD div.logo {
+    float: left;
+    width: auto;
+    height: auto;
+    padding-left: 3rem;
+}
+
+.navHD div.logo a {
+    text-decoration: none;
+    color: #fff;
+    font-size: 2.5rem;
+}
+
+.navHD div.logo a:hover {
+    color: #00E676;
+}
+
+.navHD div.main_list {
+    height: 65px;
+    float: right;
+}
+
+.navHD div.main_list ul {
+    width: 100%;
+    height: 65px;
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navHD div.main_list ul li {
+    width: auto;
+    height: 65px;
+    padding: 0;
+    padding-right: 3rem;
+}
+
+.navHD div.main_list ul li a {
+    text-decoration: none;
+    color: black;
+    line-height: 65px;
+    font-size: 2.4rem;
+}
+.affix div.main_list ul li a {
+    color: rgba(199, 196, 196, 0.637);
+}
+
+.navHD div.main_list ul li a:hover {
+    color: gray;
+}
+
+
+/* Home section */
+
+
+
+.navTrigger {
+    display: none;
+}
+
+.navHD {
+	padding-top: 20px;
+    padding-bottom: 20px;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
+
+
+/* Media qurey section */
+
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .container {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width:768px) {
+    .navTrigger {
+        display: block;
+    }
+    .navHD div.logo {
+        margin-left: 15px;
+    }
+    .navHD div.main_list {
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+    }
+    .navHD div.show_list {
+        height: auto;
+        display: none;
+    }
+    .navHD div.main_list ul {
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #111;
+        /*same background color of navbar*/
+        background-position: center top;
+    }
+    .navHD div.main_list ul li {
+        width: 100%;
+        text-align: right;
+    }
+    .navHD div.main_list ul li a {
+        text-align: center;
+        width: 100%;
+        font-size: 3rem;
+        padding: 20px;
+    }
+    .navHD div.media_button {
+        display: block;
+    }
+}
+
+
+.navTrigger {
+    cursor: pointer;
+    width: 30px;
+    height: 25px;
+    margin: auto;
+    position: absolute;
+    right: 30px;
+    top: 0;
+    bottom: 0;
+}
+
+.navTrigger i {
+    background-color: #fff;
+    border-radius: 2px;
+    content: '';
+    display: block;
+    width: 100%;
+    height: 4px;
+}
+
+.navTrigger i:nth-child(1) {
+    -webkit-animation: outT 0.8s backwards;
+    animation: outT 0.8s backwards;
+    -webkit-animation-direction: reverse;
+    animation-direction: reverse;
+}
+
+.navTrigger i:nth-child(2) {
+    margin: 5px 0;
+    -webkit-animation: outM 0.8s backwards;
+    animation: outM 0.8s backwards;
+    -webkit-animation-direction: reverse;
+    animation-direction: reverse;
+}
+
+.navTrigger i:nth-child(3) {
+    -webkit-animation: outBtm 0.8s backwards;
+    animation: outBtm 0.8s backwards;
+    -webkit-animation-direction: reverse;
+    animation-direction: reverse;
+}
+
+.navTrigger.active i:nth-child(1) {
+    -webkit-animation: inT 0.8s forwards;
+    animation: inT 0.8s forwards;
+}
+
+.navTrigger.active i:nth-child(2) {
+    -webkit-animation: inM 0.8s forwards;
+    animation: inM 0.8s forwards;
+}
+
+.navTrigger.active i:nth-child(3) {
+    -webkit-animation: inBtm 0.8s forwards;
+    animation: inBtm 0.8s forwards;
+}
+
+@-webkit-keyframes inM {
+    50% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(45deg);
+    }
+}
+
+@keyframes inM {
+    50% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+@-webkit-keyframes outM {
+    50% {
+        -webkit-transform: rotate(0deg);
+    }
+    100% {
+        -webkit-transform: rotate(45deg);
+    }
+}
+
+@keyframes outM {
+    50% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(45deg);
+    }
+}
+
+@-webkit-keyframes inT {
+    0% {
+        -webkit-transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        -webkit-transform: translateY(9px) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translateY(9px) rotate(135deg);
+    }
+}
+
+@keyframes inT {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(9px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(9px) rotate(135deg);
+    }
+}
+
+@-webkit-keyframes outT {
+    0% {
+        -webkit-transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        -webkit-transform: translateY(9px) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translateY(9px) rotate(135deg);
+    }
+}
+
+@keyframes outT {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(9px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(9px) rotate(135deg);
+    }
+}
+
+@-webkit-keyframes inBtm {
+    0% {
+        -webkit-transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        -webkit-transform: translateY(-9px) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translateY(-9px) rotate(135deg);
+    }
+}
+
+@keyframes inBtm {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-9px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-9px) rotate(135deg);
+    }
+}
+
+@-webkit-keyframes outBtm {
+    0% {
+        -webkit-transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        -webkit-transform: translateY(-9px) rotate(0deg);
+    }
+    100% {
+        -webkit-transform: translateY(-9px) rotate(135deg);
+    }
+}
+
+@keyframes outBtm {
+    0% {
+        transform: translateY(0px) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-9px) rotate(0deg);
+    }
+    100% {
+        transform: translateY(-9px) rotate(135deg);
+    }
+}
+
+.affix {
+    padding: 0;
+    background-color: black;
+    opacity:100%;
+    z-index:8;
+}
+
+.myH2 {
+	text-align:center;
+	font-size: 4rem;
+}
+.myP {
+	text-align: justify;
+	padding-left:15%;
+	padding-right:15%;
+	font-size: 20px;
+}
+@media all and (max-width:700px){
+	.myP {
+		padding:2%;
+	}
+}
+
+
+        /* NAVBAR STYLE END */
+
+
+</style>
+
 </head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
-    $("document").ready(function () {
-        $(this).add(   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-		<a class="navbar-brand" href="/home.do">LOGO 자리</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+    $('.navTrigger').click(function () {
+$(this).toggleClass('active');
+console.log("Clicked menu");
+$("#mainListDiv").toggleClass("show_list");
+$("#mainListDiv").fadeIn();
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto ">
-				<li class="nav-item "><a class="nav-link" href="/camp.do">캠핑장 <span
-						class="sr-only">(current)</span>
-				</a></li>
+});
 
-				<li class="nav-item dropdown active"><a
-					class="nav-link dropdown-toggle" href="/group.do"
-					id="navbarDropdown" role="button" data-toggle="dropdown"
-					aria-haspopup="true" aria-expanded="false"> 캠핑모임 </a>
-					<div class="dropdown-menu " aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/group.do">캠핑모임 생성</a> <a
-							class="dropdown-item active" href="/groupList.do">캠핑모임 참가</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">test</a>
-					</div></li>
-
-			</ul>
-			<a class="nav-link" href="/login.do">로그인 <span class="sr-only">(current)</span></a>
-		</div>
-	</nav>);
-    }) 
 </script>
   <body>
    
+    <!-- NAVBAR -->
 
+    <nav class="navHD">
+        <div class="containerHD">
+            <div class="logo">
+                <a href="#"><img src="/resources/images/logo3.png" style="width:200px; position:relative; top:-25px; margin:0;"></a>
+            </div>
+            <div id="mainListDiv" class="main_list">
+                <ul class="navlinks">
+                    <li><a href="#">캠핑장</a></li>
+                    <li><a href="#">캠핑모임</a></li>
+                    <li><a href="#">마이페이지</a></li>
+                    <li><a href="#">고객센터</a></li>
+                    <li><a href="#">로그인</a></li>
+                </ul>
+            </div>
+            <span class="navTrigger">
+                <i></i>
+                <i></i>
+                <i></i>
+            </span>
+        </div>
+    </nav>
+
+<!-- Jquery needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Function used to shrink nav bar removing paddings and adding black background -->
+    <script>
+        $(window).scroll(function() {
+            if ($(document).scrollTop() > 50) {
+                $('.navHD').addClass('affix');
+                console.log("OK");
+            } else {
+                $('.navHD').removeClass('affix');
+            }
+        });
+    </script>
+
+
+
+
+
+    <!-- NAVBAR END -->
+
+    <!-- <video src=""   loop muted autoplay>
+    </video> -->
  
-
-
-
-
-    <div class="bg-video-wrap">
-      <video src="/src/main/webapp/resources/video/video.mp4" loop muted autoplay>
+    <video class="sleep-video" loop muted autoplay>
+        <source src="/src/main/webapp/resources/video/video.mp4" type="video/mp4">
+        
       </video>
-      <div class="overlay">
-      </div>
-      <h1 class="mt-5 ">캠핑 가자
-      </h1>
-    </div>
 
-    <div class="content">
-        hi
-    </div>
-    <div class="content">
-        hi
-    </div>
-    <div class="content">
-        hi
-    </div>
-    <div class="content">
-        hi
-    </div>
-    <div class="content">
-        hi
-    </div>
-   
+      <div class="section two ">
+        <div class="row" style="position:absolute; left:30%;  top:33%; z-index: 9;">
+            <div class="col" style="margin-left:0px;font-weight:bolder;font-size: 10rem; color:transparent; text-shadow:  3px 3px 0px rgba(5,5,5, 0.2)">./CAMP.DO</div>
+        </div>
+      </div>
+      <div class="section one"></div>
+      <div class="section two"></div>
+      <div class="section three"></div>
+
   </body>
   </html>

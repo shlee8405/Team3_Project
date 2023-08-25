@@ -25,10 +25,21 @@ public class UserDAO {
 	public int getUserInsert(UserVO uvo) {
 		return sqlSessionTemplate.insert("user.addUser", uvo);
 	}
-	 // 아이디로 사용자 정보 가져오기 (로그인)
-	public UserVO getUserLogin(String u_id) {
-		return sqlSessionTemplate.selectOne("user.selectId, u_id");
+	 // 아이디로 인코딩 된 사용자 비밀번호 가져오기
+	public String getUserPass(UserVO uvo) {
+		return sqlSessionTemplate.selectOne("user.getPassWithId", uvo);
 	}
+	
+	// 유저 아이디 존재하는지 확인
+	public int getUserCount(String u_id) {
+		return sqlSessionTemplate.selectOne("user.getCountWithUid", u_id);
+	}
+	
+	// 유저 아이디로 uvo 가져오기
+	public UserVO getUserVoWithId(String u_id) {
+		return sqlSessionTemplate.selectOne("user.getUserVoWithId", u_id);
+	}
+	
 	
 	// 이메일 중복 확인
     public int idCheck(String u_email) {

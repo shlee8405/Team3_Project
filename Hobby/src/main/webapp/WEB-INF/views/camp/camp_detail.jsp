@@ -116,11 +116,13 @@
 		
 				<!-- 좋아요, 찜버튼 -->
 				<div class="d-flex justify-content-end mt-3">
-					<button class="btn btn-danger rounded-circle mr-2" onclick="addLike('pawj01', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
-			        <i class="fas fa-heart"></i> </button>
-			    		<%-- <span id="like-count">${cvo.likesCount}</span> --%>
-					<button class="btn btn-primary rounded-circle" onclick="addToWishlist('pawj01', '${cvo.facltNm}')"  style="width: 50px; height: 50px;">
+					<button class="btn btn-danger rounded-circle mr-2" onclick="addLike('user01', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
+			        <i class="fas fa-heart"></i></button>
+			    		 <span id="like-count">${cvo.likesCount}</span> 
+			    		 
+					<button class="btn btn-primary rounded-circle" onclick="addToWishlist('user03', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
 			        	<i class="fas fa-thumbs-up"></i></button>
+			    		<span id="wish-count">${cvo.wishCount}</span> 
 				</div>
 			</div>
  		</div>
@@ -209,29 +211,31 @@
 	
 	<script type="text/javascript">
 	/* 찜하기 버튼 */
-	function addToWishlist(userId, campName) {
+	function addToWishlist(u_id, campName) {
     	$.ajax({
     	    url: "/addWishlist.do",
      		type: "POST",
-     		data: { userId: userId, facltNm: campName },
+     		data: { u_id: u_id, facltNm: campName },
       		success: function(response) {
      	       alert(response.message);
+     	       
+     	      $('#wish-count').text(response.wishCount);/* 화면에 실시간으로 연동 */
        	 	}
     	})
 	};
 	
 	/* 좋아요 버튼 */
-	function addLike(userId, campName) {
-    	$.ajax({
-        	url: "/addLike.do",
-        	type: "POST",
-        	data: { userId: userId, facltNm: campName },
-        	success: function(response) {
-            	alert(response.message);
-           
-            $('#like-count').text(response.likesCount);/* 화면에 실시간으로 연동 */
-        	}
-    	});
+	function addLike(u_id, campName) {
+	    $.ajax({
+	        url: "/addLike.do",
+	        type: "POST",
+	        data: { u_id: u_id, facltNm: campName },
+	        success: function(response) {
+	            alert(response.message);
+	           
+	            $('#like-count').text(response.likesCount);/* 화면에 실시간으로 연동 */
+	        }
+	    });
 	};
 	</script>
 	</div>

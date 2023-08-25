@@ -126,7 +126,7 @@
 				</tr>
 				<tr>
 					<th>캠핑 날짜</th>
-					<td><input type="date" name="g_date" size="10" id="g_date" value="<fmt:formatDate value="${gvo.g_date}" pattern="yyyy-MM-DD" />"/></td>
+					<td><input type="datetime-local" name="g_date" size="10" id="g_date" /> | 수정전 모임 날짜 <input type="text" name="g_date1" value="${ gvo.g_date}" readonly/></td>
 				</tr>
 				<tr>
 					<th>캠핑 장소</th>

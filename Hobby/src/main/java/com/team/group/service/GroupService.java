@@ -2,6 +2,7 @@ package com.team.group.service;
 
 import java.util.List;
 
+import com.team.group.vo.GroupCmtVO;
 import com.team.group.vo.GroupVO;
 
 public interface GroupService {
@@ -15,4 +16,6 @@ public interface GroupService {
 	public int getGroupDelete(GroupVO g_idx);
 	
 	public int getGroupUpdate(GroupVO gvo);
+	
+	public List<GroupCmtVO> getCommList(String gc_idx);
 }
