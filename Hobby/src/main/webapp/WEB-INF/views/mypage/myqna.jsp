@@ -4,6 +4,11 @@
 <!DOCTYPE html>
 <html>
 <head>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>나의 1:1문의</title>
@@ -45,6 +50,29 @@
         color: white;
     }
 	div{margin: auto; text-align: center;}
+	.btn-custom{
+	background-color: white;
+	color: black;
+    border-color: #637F42;
+}
+.btn-custom:hover{ 
+background-color: #637F42;
+color: white;
+}
+.btn-custom:active{ 
+background-color: #637F42;
+color: black;
+color: white;
+}
+
+.btn-active{
+background-color: #637F42;
+color: black;
+color: white;
+}
+.btn-group {
+    display: flex; /* 요소들을 가로로 정렬 */
+}
 </style>
 </head>
 <body>
@@ -54,23 +82,24 @@
     <div>
 		<h1 class="mypage-title">마이페이지</h1>
 	</div>
-    <div class="menu">
-		<div class="menu-item">
-			<h5>내가 찜한 캠핑장</h5>
+    <!-- 메뉴바 -->
+		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
+			<input type="radio" class="btn-check btn-custom btn-comp" name="btnradio" id="btnradio1" autocomplete="off" checked>
+			<label class="btn btn-outline btn-custom btn-comp" for="btnradio1">내가 찜한 캠핑장</label>
+			<input type="radio" class="btn-check btn-custom btn-comp" name="btnradio" id="btnradio2" autocomplete="off">
+			<label class="btn btn-outline btn-custom btn-comp" for="btnradio2">내가 작성한 리뷰</label>
+			<input type="radio"class="btn-check btn-custom btn-comp" name="btnradio" id="btnradio3" autocomplete="off">
+			<label class="btn btn-outline btn-custom btn-comp" for="btnradio3">1:1문의 내역</label>
+			<input type="radio"class="btn-check btn-custom btn-comp" name="btnradio" id="btnradio4" autocomplete="off">
+			<label class="btn btn-outline btn-custom btn-comp" for="btnradio4">내 정보</label>
 		</div>
-		<div class="menu-item">
-			<h5>내가 작성한 리뷰</h5>
-		</div>
-		<div class="menu-item menu-item-qna">
-			<h5>1:1 문의</h5>
-		</div>
-		<div class="menu-item">
-			<h5>회원정보</h5>
-		</div>
-	</div>
+		<!-- 공백 -->
+		<div style="height: 50px;"></div>
+		
     <form action="/qna/submit" method="post">
         <input type="text" name="qContent" placeholder="문의 내용"><br>
         <input type="text" name="qName" placeholder="이름"><br>
+        <div style="height: 50px;"></div>
         <button type="submit">문의 등록</button>
     </form>
     <hr>
