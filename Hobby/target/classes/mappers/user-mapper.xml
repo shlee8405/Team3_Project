@@ -8,11 +8,26 @@
 		select * from USERS 
 	</select>
 	
-	<insert id="addUser" parameterType="uvo">
-		insert INTO USERS(u_id, u_pw, u_name, u_birthday, u_email, u_phone)
-		VALUES(#{u_id}, #{u_pw}, #{u_name}, #{u_birthday}, #{u_email}, #{u_phone})
+	<insert id="addUser" parameterType="uvo" >
+		insert INTO USERS(u_id, u_pw, u_name ,u_nickname, u_birthday, u_email, u_phone)
+		VALUES(#{u_id}, #{u_pw},#{u_name} ,#{u_nickname}, #{u_birthday}, #{u_email}, #{u_phone})
 	</insert>
-		<select id="selectId" parameterType="String" resultType="uvo">
+	
+	<!-- 인코딩 된 비밀번호 추출 -->
+	<select id="getPassWithId" parameterType="uvo" resultType="String" >
+		SELECT u_pw FROM users WHERE u_id = #{u_id} 
+	</select>
+	<!-- 아이디가 DB 에 존재하는지 확인 -->
+	<select id="getCountWithUid" parameterType="String" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM USERS WHERE u_id = #{u_id}
+	</select>
+	
+	<!-- 유저 아이디로 uvo 가져오기 -->
+	<select id="getUserVoWithId" parameterType="String" resultType="uvo">
+		select * from users where u_id = #{u_id} 
+	</select>
+	
+	<select id="selectId" parameterType="String" resultType="uvo">
 		select * from users where u_id = #{u_id}
 	</select>
 	<!-- 이메일 중복 체크 -->

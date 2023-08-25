@@ -22,8 +22,16 @@ public class CampVO {
 				   tel, operDeCl, lctCl, induty, posblFcltyCl, featureNm, 
 				   firstImageUrl, doNm, message, u_id;
 
-	private int likesCount;
+	private int likesCount, wishCount;
 	
+	public int getWishCount() {
+		return wishCount;
+	}
+
+	public void setWishCount(int wishCount) {
+		this.wishCount = wishCount;
+	}
+
 	public int getLikesCount() {
 		return likesCount;
 	}

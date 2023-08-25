@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team.group.dao.GroupDAO;
+import com.team.group.vo.GroupCmtVO;
 import com.team.group.vo.GroupVO;
 
 @Service
@@ -36,6 +37,12 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public int getGroupUpdate(GroupVO gvo) {
 		return groupDAO.getGroupUpdate(gvo);
+	}
+
+	@Override
+	public List<GroupCmtVO> getCommList(String gc_idx) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

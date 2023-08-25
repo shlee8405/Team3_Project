@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +21,7 @@ main {
 color:#ffffff!important;
 
 }
+
 
 </style>
 
@@ -49,16 +52,62 @@ color:#ffffff!important;
 	function go_home() {
 		location.href = "/home.do"
 	}
+
+    function hidetest() {
+        var x = document.getElementById("test");
+        var y = document.getElementById("test2");
+        var z = document.getElementById("test3");
+        var test4 = document.getElementById("test4");
+        y.style.display = "none";
+        z.style.display = "none";
+		test4.style.display = "none";
+        x.style.display = "block";
+    }
+
+    function hidetest2() {
+        var x = document.getElementById("test");
+        var y = document.getElementById("test2");
+        var z = document.getElementById("test3");
+        var test4 = document.getElementById("test4");
+        x.style.display = "none";
+        z.style.display = "none";
+		test4.style.display = "none";       
+        y.style.display = "block";
+    }
+
+    function hidetest3() {
+        var x = document.getElementById("test");
+        var y = document.getElementById("test2");
+        var z = document.getElementById("test3");
+        var test4 = document.getElementById("test4");
+        x.style.display = "none";
+        y.style.display = "none";
+        test4.style.display = "none";
+        z.style.display = "block";
+    }
+    
+    function hidetest4() {
+        var x = document.getElementById("test");
+        var y = document.getElementById("test2");
+        var z = document.getElementById("test3");
+        var test4 = document.getElementById("test4");
+        x.style.display = "none";
+        y.style.display = "none";
+        z.style.display = "none";
+        test4.style.display = "block";
+    }
+    
 </script>
 </head>
 <body>
 <main>
-    <!-- SIDEBAR -->
+	<!-- SIDEBAR -->
    	<jsp:include page="sidebar.jsp" />
 
-   
 
-  <!-- MAIN CONTAINER -->
+
+
+    <!-- MAIN CONTAINER -->
    <div class="container"  style="width: 85%;">
 
 
@@ -71,7 +120,7 @@ color:#ffffff!important;
         " >
         
         	<div class="row " style="justify-content:center;">
-				<h1>신고 목록</h1>
+				<h1>FAQ </h1>
 			</div>
             <div class="table-responsive pt-4 ps-5 pe-5" style="height: 50vh; padding-bottom: 1rem;">
                 <table class="table 
@@ -83,13 +132,15 @@ color:#ffffff!important;
                     <thead class="table-primary">
                         <caption>Table Name</caption>
                         <tr>
-                            <th> 신고 내용 </th>
-                            <th> 신고 처리 상태 </th>
-                            <th> ? </th>
+                            <th> FAQ 번호 </th>
+                            <th> 질문 </th>
+                            <th> 답변 </th>
+                            <th> 답변한 관리자 이름  </th>
                         </tr>
                      </thead>
                         <tbody class="table-group-divider">
-							<c:choose>
+	                        <!-- 일단 주석 -->
+							<%-- <c:choose>
 									<c:when test="${empty list}">
 										<tr>
 											<td colspan="4"><h2>원하는 정보가 존재하지 않습니다.</h2></td>
@@ -98,8 +149,10 @@ color:#ffffff!important;
 									<c:otherwise>
 										<c:forEach var="k" items="${list}" varStatus="vs">
 											<tr>
-												<td>${k.r_content}</td>
-												<td>${k.r_status}</td>
+												<td>${k.q_idx}</td>
+												<td>${k.q_content}</td>
+												<td>${k.q_response}</td>
+												<td>${k.u_idx}</td>
 												<td> 
 													<!-- if q_status == 1, show 답변 완료. else, show 답변하기 -->
 													<select class="form-control form-control"> 
@@ -110,7 +163,7 @@ color:#ffffff!important;
 											</tr>
 										</c:forEach>
 									</c:otherwise>
-								</c:choose>
+								</c:choose> --%>
                         </tbody>
                 </table> 
             </div>
@@ -125,6 +178,7 @@ color:#ffffff!important;
  
 
    
+
 </main>
 
 </body>

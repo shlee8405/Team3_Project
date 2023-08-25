@@ -1,27 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<title>Login</title>
-
-
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="/resources/css/login.css">
+	<title>Login</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="/resources/css/login.css">
 </head>
 <body>
-	<title>캠핑 : 로그인</title>
-</head>
-<body>
-    <form action="login.do" method="post">
+    <form action="/login.do" method="post">
         <div class="wrap">
             <div class="login">
                     <h3 style="font	-size:50px;  font-family: 'Noto Sans KR', sans-serif;">/캠핑.DO</h3>
@@ -37,40 +32,46 @@
                 </div>
                 <!--로그인 버튼-->
                 <div class="submit">
-                    <input style="  font-family: 'Noto Sans KR', sans-serif;" type="submit" value="로그인">
+                    <input style="font-family: 'Noto Sans KR', sans-serif;" type="submit" value="로그인">
                 </div>
                 <br>
-                <!--아이디 찾기-->
                 <div class="loginmenu">
+	                <!--아이디 찾기-->
                     <div class="schid">
                         <c:url var="findId" value="/IdRecovery.do" />
-                        <a href="idfind.html">
-                            <p style="font-family: 'Noto Sans KR', sans-serif;">아이디찾기</p>
+                        <a href="idfind.html"style="font-family: 'Noto Sans KR', sans-serif;">
+                          아이디찾기
                         </a>
                     </div>
                     <span style="margin-top: 8px;">|</span>
-                <!--비밀번호 찾기-->
-                <div class="schpw">
-                    <c:url var="findPwd" value="/PwdRecovery.do" />
-                    <a href="pwfind.html">
-                        <p style="  font-family: 'Noto Sans KR', sans-serif;">비밀번호찾기</p>
-                    </a>
-                </div>
-                <!--비밀번호 찾기-->
-                <span style="margin-top: 8px;">|</span>
-                <div class="schpw">
-                    <c:url var="findPwd" value="/PwdRecovery.do" />
-                    <a href="pwfind.html">
-                        <p style="  font-family: 'Noto Sans KR', sans-serif;">회원가입</p>
-                    </a>
-                </div>
-                </div>
+                	<!--비밀번호 찾기-->
+	                <div class="schpw">
+	                    <c:url var="findPwd" value="/PwdRecovery.do" />
+	                    <a href="pwfind.html" style="  font-family: 'Noto Sans KR', sans-serif;">
+	                       비밀번호찾기
+	                    </a>
+	                </div>
+	                <!--비밀번호 찾기-->
+	                <span style="margin-top: 8px;">|</span>
+	                <div class="schpw">
+	                    <c:url var="findPwd" value="/PwdRecovery.do" />
+	                    <a href="pwfind.html" style="  font-family: 'Noto Sans KR', sans-serif;">
+	                        회원가입
+	                    </a>
+	                </div>
+	            </div>
+	            
                 <br>
+                
                 <!--카카오 로그인 -->
                 <div class="login_api">
-  <a href="javascript:void(0)" id="kakaoLoginBtn"><img src="resources/images/kakao_login_btn.png" style="width:100%; height:50px; "></a>
-  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-</div>	
+				  <a href="javascript:void(0)" id="kakaoLoginBtn"><img src="resources/images/kakao_login_btn.png" style="width:100%; height:50px; "></a>
+				  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+				</div>	
+			</div>
+		</div>
+	</form>
+				
 				
 
 

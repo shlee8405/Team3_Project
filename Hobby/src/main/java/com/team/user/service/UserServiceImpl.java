@@ -31,12 +31,21 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public UserVO getUserLogin(String u_id) {
-		return userDAO.getUserLogin(u_id);
+	public String getUserPass(UserVO uvo) {
+		return userDAO.getUserPass(uvo);
 	}
 
 
+	@Override
+	public int getUserCount(String u_id) {
+		return userDAO.getUserCount(u_id);
+	}
 
+	@Override
+	public UserVO getUserVoWithId(String u_id) {
+		return userDAO.getUserVoWithId(u_id);
+	}
+	
 	@Override
     public boolean isEmailDuplicate(String email) {
         int count = userDAO.idCheck(email);
