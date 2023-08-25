@@ -25,6 +25,7 @@ body {
     text-align: center;
     background-color:#637F42;
     top: 0;
+    z-index: 10;
   
 }
 
