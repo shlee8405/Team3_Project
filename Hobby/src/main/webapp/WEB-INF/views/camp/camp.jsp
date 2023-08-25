@@ -165,8 +165,6 @@ function getCampList2() {
 		<h2>데이터 불러오면 변경될 공간</h2>
 		</div>
 	</div>
-<<<<<<< HEAD
-=======
 	
 	</body>
 	<%-- 지도api 연습 --%>
@@ -192,5 +190,5 @@ function getCampList2() {
 			// 아래 코드는 지도 위의 마커를 제거하는 코드이다
 			// marker.setMap(null);
 	</script>
->>>>>>> refs/heads/sy
+<h2>hi</h2>
 </html>
