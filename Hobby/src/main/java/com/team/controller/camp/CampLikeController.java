@@ -64,6 +64,8 @@ public class CampLikeController {
 		// 업데이트 된 찜하기 수 가져오기
 		int wishCount = campService.getWish(facltNm);
 		response.put("wishCount", Integer.toString(wishCount)); // int를 String으로 변환하여 저장
+		
+		System.out.println("wishCount::::" + wishCount);
 
 		return response; //
 	}

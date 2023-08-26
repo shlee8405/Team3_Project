@@ -120,7 +120,7 @@
 			        <i class="fas fa-heart"></i></button>
 			    		 <span id="like-count">${cvo.likesCount}</span> 
 			    		 
-					<button class="btn btn-primary rounded-circle" onclick="addToWishlist('user03', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
+					<button class="btn btn-primary rounded-circle" onclick="addToWishlist('user05', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
 			        	<i class="fas fa-thumbs-up"></i></button>
 			    		<span id="wish-count">${cvo.wishCount}</span> 
 				</div>
@@ -219,9 +219,9 @@
       		success: function(response) {
      	       alert(response.message);
      	       
-     	      $('#wish-count').text(response.wishCount);/* 화면에 실시간으로 연동 */
+     	      $('#wish-count').text(response.wishCount); /* 화면에 실시간으로 연동 */
        	 	}
-    	})
+    	});
 	};
 	
 	/* 좋아요 버튼 */
