@@ -22,11 +22,11 @@
 	<jsp:include page="../header.jsp" />
 	<div style="position: relative; top: 200px; z-index: 1;"></div>
 
-	<div class="container">
+	<div class="container2">
 <!-- 	<h3 class="h3">캠핑장 전체 리스트</h3>-->		
 <!--    <div class="row"> -->
 
-			<div class="col-md-3 col-sm-6" id="camp_list">
+			<div id="camp_list">
 				<!-- 이 안에 캠핑장 리스트 보여주기 -->
 				<!-- <div class="product-grid">
 						<div class="product-image">
@@ -63,24 +63,22 @@
 				console.log(data);
 				$.each(data, function (index, dataList) {
 					$("#camp_list").append(
-							"<div class='col-md-3 col-sm-6'>"
-							+"<div class='product-grid'>"
-							+"<div class='product-image'>"
-							+"<a href='#'>"
-							+"<img class='pic-1' src=" + dataList.firstImageUrl + ">" 
-							+"<img class='pic-2' src=" + dataList.firstImageUrl + ">" 
-							+"</a>" 
-							+"<span class='product-new-label'>" + dataList.doNm + "</span>" 
+							"<div class='product-grid'>"
+								+"<div class='product-image'>"
+									+"<a href='#'>"
+									+"<img class='pic-1' src=" + dataList.firstImageUrl + ">" 
+									+"<img class='pic-2' src=" + dataList.firstImageUrl + ">" 
+									+"</a>" 
+									+"<span class='product-new-label'>" + dataList.doNm + "</span>" 
+								+"</div>" 
+								+"<div class='product-content'>" 
+										+"<div class='price'>" 
+											+"<a class='title' href='/campDetail.do?keyword=" + dataList.facltNm + "'>" + dataList.facltNm + "</a>" 
+											+"<span class='addr1'>" + dataList.addr1 + "</span>" 
+										+"</div>" 
+									+"<a class='add-to-cart' href='#'>" + "View Details" + "</a>" 
+								+"</div>"
 							+"</div>" 
-							+"<div class='product-content'>" 
-							+"<div class='price'>" 
-							+"<a href='/campDetail.do?keyword=" + dataList.facltNm + ">" + dataList.facltNm + "</a>" 
-							+"<h3 class='title'>" + dataList.addr1 + "</h3>" 
-							+"</div>" 
-							+"<a class='add-to-cart' href='#'>" + "View Details" + "</a>" 
-							+"</div>"
-							+"</div>" 
-							+"</div>"
 	                    ); //append
 	                }); //each
 	            },

@@ -90,7 +90,7 @@ public class CampController {
 			cvo.setFacltNm(oneItem.getString("facltNm"));
 			cvo.setAddr1(oneItem.getString("addr1"));
 			cvo.setLineIntro(oneItem.getString("lineIntro"));
-			cvo.setDoNm(oneItem.getString("DoNm"));
+			cvo.setDoNm(oneItem.getString("doNm"));
 			// 나중에 필요한거 더 추가........
 			dataList.add(cvo);
 		}
