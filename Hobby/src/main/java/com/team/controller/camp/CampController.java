@@ -113,7 +113,7 @@ public class CampController {
 	public List<CampVO> getSearchList(@RequestParam(defaultValue = "1") int pageNo, @RequestParam String keyword) throws URISyntaxException, UnsupportedEncodingException {
 			
 			// 리퀘스트 파라미터
-			int numOfRows = 5; 	// 보여줄 리스트 개수
+			int numOfRows = 6; 	// 보여줄 리스트 개수
 			//int pageNo = 1; 	// 페이지 번호
 			
 			String apiUrl = targetUrl + "/searchList"

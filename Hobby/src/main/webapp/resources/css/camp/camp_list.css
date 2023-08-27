@@ -7,14 +7,6 @@
   margin-top: 125px; /* 헤더와의 거리를 원하는 값으로 설정하세요 */
 }
 
-.btn-group {
-	position: fixed;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;  /* 더보기 버튼이 다른 요소 위에 올라오도록 */
-}
-
 #camp_list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -29,12 +21,12 @@
     position: relative;
   	z-index: 1;
 	margin-top: 20px;  /* searchBox와의 거리 */
+	flex-wrap: wrap;
 }
 .addr1 {
    white-space: nowrap;
    text-overflow: ellipsis;
 }
-
 
 h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 
@@ -62,14 +54,22 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 .product-grid .social li a:hover:after,.product-grid .social li a:hover:before{opacity:1}
 .product-grid .product-discount-label,.product-grid .product-new-label{color:#fff;background-color:#4ce262;font-size:15px;text-transform:uppercase;padding:2px 7px;display:block;position:absolute;top:10px;left:0}
 .product-grid .product-discount-label{background-color:#333;left:auto;right:0}
-.product-grid .rating{color:#FFD200;font-size:12px;padding:12px 0 0;margin:0;list-style:none;position:relative;z-index:-1}
+.product-grid .rating{
+	color:#FFD200;
+	font-size:12px;
+	padding:0 0;
+	margin:0;
+	list-style:none;
+	position:relative;
+	z-index:-1}
 .product-grid .rating li.disable{color:rgba(0,0,0,.2)}
 .product-grid .product-content{
 	background-color:#fff;text-align:center;padding:12px 0;margin:0 auto;
 	position:absolute;left:0;right:0;bottom:-28px;z-index:1;transition:all .3s}
 .product-grid:hover .product-content{bottom:0}
 .product-grid .title{
-	    margin-top: 5px;
+	color : black;
+	margin-top: 5px;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
