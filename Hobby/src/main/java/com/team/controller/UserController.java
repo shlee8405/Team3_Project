@@ -18,6 +18,7 @@ import com.team.group.service.GroupService;
 import com.team.qna.service.QnaService;
 import com.team.report.service.ReportService;
 import com.team.user.service.UserService;
+import com.team.user.vo.KakaoVO;
 import com.team.user.vo.UserVO;
 
 @RestController
@@ -169,4 +170,30 @@ public class UserController {
 	            return "available";
 	        }
 	    }
+	 
+	 
+	 
+	 // 카카오 로그인. KakaoVO를 통해 id 받음
+	 @RequestMapping("/kakaoLogin.do")
+	 public ModelAndView kakaologin(@RequestBody KakaoVO kakaovo, 
+			 HttpServletResponse response, 
+			 HttpServletRequest request) {
+
+		 ModelAndView mv = new ModelAndView("index2");
+		 System.out.println("id is : " + kakaovo.getId() + " on /kakaoLogin.do");
+		 // 아이디 정상적으로 옴
+		 
+		 
+		 //db에 넣는코드
+		 
+		 // if(db에 KakaoVO.getId() 가 존재하지 않으면){
+			 // int res = userDAO.getInsert()
+		 //	 } 
+		 // else if (db에 kakaoVO.getID()가 존재하면) {
+		 	// proceed...
+		 //	 }
+		 
+		 // Session에 id 추가
+		 return mv;
+	 }
 }

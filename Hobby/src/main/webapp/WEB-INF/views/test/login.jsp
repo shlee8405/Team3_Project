@@ -96,6 +96,20 @@
           url: '/v2/user/me',
           success: function(response) {
             console.log(response);
+            console.log(response.id);
+            $.ajax({
+				 url: '/kakaoLogin.do', // 중복확인을 처리하는 서버 URL (적절히 변경 필요)
+		            type: 'post', // POST 방식으로 요청
+		            contentType: 'application/json; charset=utf-8',
+		            data: JSON.stringify(response), // 서버로 전달할 데이터
+		            success: function(result) {
+		            	location.href="/home.do";
+		            	//modal화 되면 여기에 모달 숨기기 넣으면 될듯
+		            },
+		            error: function(error) {
+		            	console.log(error);
+		            }
+		        });
           },
           fail: function(error) {
             console.log(error);
