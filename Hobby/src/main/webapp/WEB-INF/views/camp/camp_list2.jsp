@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>캠핑장 리스트</title>
+<title>캠핑장 리스트 (css 적용하기 전 원본)</title>
 <%-- jQuery 라이브러리 CDN --%>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script type="text/javascript">

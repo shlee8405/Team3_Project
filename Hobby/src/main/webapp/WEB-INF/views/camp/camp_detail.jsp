@@ -120,7 +120,7 @@
 			        <i class="fas fa-heart"></i></button>
 			    		 <span id="like-count">${cvo.likesCount}</span> 
 			    		 
-					<button class="btn btn-primary rounded-circle" onclick="addToWishlist('user05', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
+					<button class="btn btn-primary rounded-circle" onclick="addToWishlist('user01', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
 			        	<i class="fas fa-thumbs-up"></i></button>
 			    		<span id="wish-count">${cvo.wishCount}</span> 
 				</div>

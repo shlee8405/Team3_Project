@@ -1,4 +1,20 @@
 @charset "UTF-8";
+.searchBox {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin: auto;
+  margin-top: 125px; /* 헤더와의 거리를 원하는 값으로 설정하세요 */
+}
+
+.btn-group {
+	position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 999;  /* 더보기 버튼이 다른 요소 위에 올라오도록 */
+}
+
 #camp_list {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -10,12 +26,14 @@
     align-items: center;
     height: 100vh;  
     margin: 0;
+    position: relative;
+  	z-index: 1;
+	margin-top: 20px;  /* searchBox와의 거리 */
 }
 .addr1 {
    white-space: nowrap;
    text-overflow: ellipsis;
 }
-
 
 
 h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}

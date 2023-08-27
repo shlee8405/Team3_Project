@@ -42,7 +42,7 @@ public class CampController {
 	public List<CampVO> getCampList(@RequestParam(defaultValue = "1") int pageNo) throws URISyntaxException {
 		
 		// 리퀘스트 파라미터
-		int numOfRows = 5; 	// 보여줄 리스트 개수
+		int numOfRows = 6; 	// 보여줄 리스트 개수
 		//int pageNo = 1; 	// 페이지 번호
 		
 		String apiUrl = targetUrl + "/basedList"
@@ -161,8 +161,8 @@ public class CampController {
 				CampVO cvo = new CampVO();
 				cvo.setFacltNm(oneItem.getString("facltNm"));
 				cvo.setAddr1(oneItem.getString("addr1"));
-				cvo.setLineIntro(oneItem.getString("lineIntro"));
-				// 나중에 필요한거 더 추가........
+				cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
+				cvo.setDoNm(oneItem.getString("doNm"));
 				dataList.add(cvo);
 			}
 			
@@ -238,6 +238,10 @@ public class CampController {
 		// DB에 저장된 좋아요 수를 가져와서 화면에 보낸다.
 		int likesCount = campService.getLikes(cvo.getFacltNm());
 		cvo.setLikesCount(likesCount);
+		
+		// 찜하기 수 가져오기
+		int wishCount = campService.getWish(cvo.getFacltNm());
+		cvo.setWishCount(wishCount);
 		
 		ModelAndView mv = new ModelAndView("camp/camp_detail");
 		mv.addObject("cvo", cvo);
