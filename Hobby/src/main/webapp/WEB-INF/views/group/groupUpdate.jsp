@@ -86,6 +86,7 @@
 		f.action="/groupList.do";
 		f.submit();
 	}
+	
 </script>
 </head>
 <body>

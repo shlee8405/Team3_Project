@@ -42,6 +42,43 @@
     #listgroup {
         margin: auto; /* 수직 중앙 정렬 */
     }
+    /* paging */
+ol.paging {
+	list-style: none;
+}
+
+ol.paging li {
+	float: left;
+	margin-right: 8px;
+}
+
+ ol.paging li a {
+	display: block;
+	padding: 3px 7px;
+	border: 1px solid #00B3DC;
+	color: #2f313e;
+	font-weight: bold;
+}
+
+ol.paging li a:hover {
+	background: #00B3DC;
+	color: white;
+	font-weight: bold;
+}
+
+.disable {
+	padding: 3px 7px;
+	border: 1px solid silver;
+	color: silver;
+}
+
+.now {
+	padding: 3px 7px;
+	border: 1px solid #ff4aa5;
+	background: #ff4aa5;
+	color: white;
+	font-weight: bold;
+}
     </style>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -92,7 +129,47 @@
         </c:choose>
     </div>
     <button id="write_btn" onclick="group_write_go()">글쓰기</button>
+    <script type="text/javascript">
+    console.log("beginBlock: ${paging.beginBlock}");
+    console.log("endBlock: ${paging.endBlock}");
+    console.log("nowPage: ${paging.nowPage}");
+    console.log("totalPage: ${paging.totalPage}");
+    </script>
+    <ol class="paging">
+		<!-- 이전 버튼 -->
+
+		<c:choose>
+			<c:when test="${paging.beginBlock <= paging.pagePerBlock }">
+				<li class="disable">이전으로</li>
+			</c:when>
+			<c:otherwise>
+				<li><a href="/groupList.do?cPage=${paging.beginBlock-paging.pagePerBlock }">이전으로</a></li>
+			</c:otherwise>
+		</c:choose>
+							
+		<!-- 페이지번호들 -->
+		<c:forEach begin="${paging.beginBlock }" end="${paging.endBlock }" step="1" var="k">
+			<!--  현재 페이지는 링크 X, 나머지 페이지는 해당 페이지로 이동하게 링크 처리 -->
+			<c:if test="${ k == paging.nowPage}">
+				<li class="now">${k}</li>
+			</c:if>
+			<c:if test="${ k != paging.nowPage}">
+				<li><a href="/groupList.do?cPage=${k}">${k}</a></li>
+			</c:if>   		
+		</c:forEach>
+					
+		<!-- 이후 버튼 -->
+		<c:choose>
+			<c:when test="${paging.endBlock >= paging.totalPage }">
+				<li class="disable">다음으로</li>
+			</c:when>
+		<c:otherwise>
+			<li><a href="/groupList.do?cPage=${paging.nowPage+paging.pagePerBlock}">다음으로</a></li>
+		</c:otherwise>
+		</c:choose>
+	</ol>
     </div>
+    
     </div>
 </body>
 </html>

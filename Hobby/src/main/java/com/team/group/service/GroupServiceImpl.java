@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.team.group.dao.GroupDAO;
 import com.team.group.vo.GroupCmtVO;
 import com.team.group.vo.GroupVO;
+import com.team.user.vo.UserVO;
 
 @Service
 public class GroupServiceImpl implements GroupService {
@@ -15,10 +16,20 @@ public class GroupServiceImpl implements GroupService {
 	private GroupDAO groupDAO;
 	
 	@Override
+	public int getTotalCount() {
+		return groupDAO.getTotalCount();
+	}
+
+	@Override
 	public List<GroupVO> getAllGroups() {
 		return groupDAO.getAllGroups();
 	}
-
+	
+	@Override
+	public List<GroupVO> getAllGroups(int offset, int limit) {
+		return groupDAO.getAllGroups(offset, limit);
+	}
+	
 	@Override
 	public int getGroupWriteOk(GroupVO gvo) {
 		return groupDAO.getGroupWriteOk(gvo);
@@ -40,9 +51,19 @@ public class GroupServiceImpl implements GroupService {
 	}
 
 	@Override
-	public List<GroupCmtVO> getCommList(String gc_idx) {
-		// TODO Auto-generated method stub
-		return null;
+	public List<GroupCmtVO> getCommList(String g_idx) {
+		return groupDAO.getCommList(g_idx);
+	}
+	// 댓글아이디 출력 아직 적용 확인불가..
+	@Override
+	public UserVO getUserCmtInfo(String u_idx) {
+	    return groupDAO.getUserCmtInfo(u_idx);
 	}
 
+	@Override
+	public int getCommInsert(GroupCmtVO gcvo) {
+		return groupDAO.getCommInsert(gcvo);
+	}
+	
+	
 }

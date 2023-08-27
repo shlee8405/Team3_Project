@@ -30,6 +30,7 @@
 	font-weight: bold;
 	}
 </style>
+
  <script>
  	function list_go(f) {
 		f.action="/groupList.do";
@@ -65,7 +66,22 @@
       		count_party--;
           }
 	} 
-	
+      function comment_go(f) {
+    		 // 유효성 검사
+    		if(f.content.value.trim().length <=0){
+    			alert("내용을 입력해 주세요");
+    			f.content.focus();
+    			return;
+    		}
+    		
+    	    f.action = "/groupCmtList.do"
+    		f.submit();
+    	}
+
+    	function comment_del(f) {
+    		f.action = "/";
+    		f.submit();
+    	}
     </script>
 </head>
 <body>
@@ -123,6 +139,7 @@
 					<tr align="center">
 						<td colspan="2">
 							<input type="hidden" name="g_idx" value="${gvo.g_idx}">
+							<%-- <input type="hidden" value="${cPage}" name="cPage"> --%>
 							<input type="button" value="목록" onclick="list_go(this.form)" />
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="button" value="수정" onclick="edit_go(this.form)" />
@@ -140,8 +157,43 @@
 		<div id="no" style="display:none;">
 			<button class="btn" id="myButton_cancle" onclick="party_click_no()">참여 취소</button>
 		</div>
-			
+		</div>
+		
+		<%-- 댓글 입력 --%>
+	<div style="padding:50px; width:580px; margin: auto; ">
+		<form method="post">
+			<fieldset>
+				<p id="commId">아이디 : ${uvo.u_idx}</p>
+				<p >내용 : <br>
+					<textarea rows="4" cols="40" name="content"></textarea>
+				 </p>
+				 <input id="commIn" type="button" value="댓글저장" onclick="comment_go(this.form)">
+				 <input type="hidden" name="g_idx" value="${gvo.g_idx}">
+				 <input type="hidden" name="u_idx" value="${uvo.u_idx}">
+				 <input type="hidden" name="cPage" value="${cPage}">
+			 </fieldset>
+		</form>
+	</div>
+	<br><br><br>
+	
+	<%-- 댓글 출력 --%>
+	<div style="display: table;" >
+		<c:forEach var="k" items="${gc_list}">
+		 <div style="border: 1px solid #cc00cc; width: 400px; margin: 20px; padding: 20px;">
+		 	<form method="post">
+		 		<p>이름 : ${k.u_idx}</p>
+		 		<p>내용 : ${k.gc_content }</p>
+		 		<p>날짜 : ${k.gc_date}</p>
+		 		<%-- 실제로는 로그인 성공해야지만 삭제번트이 보여야 한다. --%>
+		 		<input type="button" value="댓글삭제" onclick="comment_del(this.form)">
+		 		<input type="hidden" value="${k.gc_idx}" name="gc_idx">
+		 		<input type="hidden" value="${k.g_idx}" name="g_idx">
+		 		<input type="hidden" name="cPage" value="${cPage}">
+		 	</form>
+		 </div>
+		</c:forEach>
 		</div>
 		</div>
+		
 </body>
 </html>

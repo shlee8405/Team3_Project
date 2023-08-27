@@ -33,6 +33,5 @@
 		<mapper resource="mappers/faq-mapper.xml" />
 		<mapper resource="mappers/mypage-mapper.xml" />
 		<mapper resource="mappers/camp-mapper.xml" />
-		<mapper resource="mappers/groupCmt-mapper.xml" />
 	</mappers>
 </configuration>
