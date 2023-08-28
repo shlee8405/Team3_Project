@@ -1,14 +1,20 @@
 package com.team.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.faq.service.FaqService;
@@ -117,9 +123,10 @@ public class MyController {
 	public ModelAndView goCusSerAsk() /* 1대1 문의 페이지 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerAsk");
 		List<QnaVO> list = qnaService.getAllQna();
-		mv.addObject("alllist", list);
+		mv.addObject("list", list);
 		return mv;
 	}
+	
 
 	@GetMapping("/go_inquiry.do")
 	public ModelAndView goinquiry() /* 1대1 문의 작성 페이지로 이동 */ {
@@ -130,7 +137,7 @@ public class MyController {
 	}
 
 	@PostMapping("/insert_QNA.do")
-	public ModelAndView insert_QNA(QnaVO qvo)/* 1대1 문의 넣기 */ {
+	public ModelAndView insert_QNA(QnaVO qvo, HttpServletRequest request)/* 1대1 문의 넣기 */ {
 		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
 		int res = qnaService.getInsert(qvo);
 		return mv;
@@ -144,7 +151,7 @@ public class MyController {
 		return mv;
 	}
 
-	@RequestMapping("/go_updateQ.do") /* 문의 페이지로 이동 */
+	@RequestMapping("/go_updateQ.do") /* 문의 수정 페이지로 이동 */
 	public ModelAndView goUpdateQ(@ModelAttribute("q_idx") String q_idx) {
 		ModelAndView mv = new ModelAndView("cusser/cusSerUpdate");
 		QnaVO qvo = qnaService.Detail(q_idx);
@@ -152,10 +159,13 @@ public class MyController {
 		return mv;
 	}
 
-	@RequestMapping("/Update_QNA.do") /* 문의 수정 */
+	@RequestMapping("/Update_QNA.do") /* 문의 수정하기 */
 	public ModelAndView goUpdateQna(QnaVO qvo) {
 		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
 		int res = qnaService.UpdateQna(qvo);
+		System.out.println(qvo.getQ_name());
+		System.out.println(qvo.getQ_content());
+		System.out.println(qvo.getQ_idx());
 		return mv;
 	}
 

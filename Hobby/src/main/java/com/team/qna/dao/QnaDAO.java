@@ -33,4 +33,5 @@ public class QnaDAO {
 	public int UpdateQna(QnaVO qvo) {
 		return sqlSessionTemplate.update("qna.update",qvo);
 	}
+	
 }

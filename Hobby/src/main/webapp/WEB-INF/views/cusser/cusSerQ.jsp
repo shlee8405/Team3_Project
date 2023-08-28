@@ -159,8 +159,8 @@
     <form method="post">
         <h3 class="mb-4">문의 게시판</h3>
         <div class="mb-3">
-            <label for="u_name" class="form-label">작성자:</label>
-            <input type="text" id="u_name" name="u_name" class="form-control"/>
+            <label for="q_name" class="form-label">작성자:</label>
+            <input type="text" id="q_name" name="q_name" class="form-control"/>
         </div>
         <div class="mb-3">
             <label for="q_content" class="form-label">내용:</label>
@@ -197,7 +197,7 @@
         var frm = new FormData();
         frm.append("s_file",file);
         $.ajax({
-            url : "/saveImg.do",
+            url : "/saveImage.do",
             data : frm,
             type : "post",
             contentType : false,

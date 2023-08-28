@@ -65,34 +65,14 @@
 
 <script type="text/javascript">
 
-$(window).scroll(function() {
-    var scroll = $(window).scrollTop();
-    if (scroll > 50) { // 50px 이상 스크롤하면 배경색을 변경
-        $(".navbar").css("background-color", "#0F4200"); // Change this color if needed
-    } else {
-        $(".navbar").css("background-color", "#637F42"); // Original color
-    }
-});
-
-    function go_cusser() {
-        location.href = "/cusSer.do"
-    }
-
-    function go_cusserFAQ() {
-        location.href = "/cusSerFAQ.do"
-    }
-
-    function go_cusserAsk() {
-        location.href = "/cusSerAsk.do"
-    }
-
-    function go_cusserReport() {
-        location.href = "/cusSerReport.do"
-    }
-
-    function go_home() {
-        location.href = "/home.do"
-    }
+	$(window).scroll(function() {
+	    var scroll = $(window).scrollTop();
+	    if (scroll > 50) { // 50px 이상 스크롤하면 배경색을 변경
+	        $(".navbar").css("background-color", "#0F4200"); // Change this color if needed
+	    } else {
+	        $(".navbar").css("background-color", "#637F42"); // Original color
+	    }
+	});
 
     function go_inquiry() {
         location.href = "/go_inquiry.do"
@@ -155,20 +135,38 @@ $(window).scroll(function() {
                             <th scope="col" class="text-center">번호</th>
                             <th scope="col" class="text-center">작성자</th>
                             <th scope="col" class="text-center">내용</th>
-                            <th scope="col" class="text-center">상태</th>
+                            <th scope="col" class="text-center">답변</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
-						<c:forEach var="k" items="alllist" varStatus="loop">
-						    <tr>
-						        <td>${loop.count}</td>
-						        <td>${QnAuser.u_name}</td>
-						        <td>${k.q_content}</td>
-						        <td>대기중</td>
-						    </tr>
-						</c:forEach>
-                        
-                    </tbody>
+				    <c:forEach var="k" items="${list}" varStatus="loop">
+				        <c:choose>
+				            <c:when test="${k.q_status == 0}">
+				                <tr>
+				                    <td colspan="4">삭제된 목록입니다</td>
+				                </tr>
+				            </c:when>
+				            <c:otherwise>
+				                <tr>
+				                    <td>${loop.count}</td>
+				                    <td>${k.q_name}</td>
+				                    <td>
+				                        <a href="/go_AskDetail.do?q_idx=${k.q_idx}">상세보기</a>
+				                    </td>
+				                    <td>
+				                        <c:if test="${k.q_response == null}">
+				                            대기중
+				                        </c:if>
+				                        <c:if test="${k.q_response != null}">
+				                            답변 완료
+				                        </c:if>
+				                    </td>
+				                </tr>
+				            </c:otherwise>
+				        </c:choose>
+				    </c:forEach>
+				</tbody>
+
                 </table>
                 <!-- End Default Table Example -->
             </div>
