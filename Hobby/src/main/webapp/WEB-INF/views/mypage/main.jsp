@@ -67,14 +67,17 @@ a {
 }
 
 table {
-	width: 600px;
-	border-collapse: collapse;
-	text-align: center;
+	width: 100%; border-collapse: collapse; text-align: center;
 }
-
-table, th, td {
-	border: 1px solid black;
-	padding: 3px;
+th, td {
+	padding: 8px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	vertical-align: center;
+}
+th {
+	background-color: #637F42;
+	color: white;
 }
 
 div {
@@ -145,32 +148,30 @@ color: white;
 		
 	<!-- 공백 -->
 	<div style="height: 100px;"></div>
-	
-	<table class="my-camping">
-		<thead>
+		<h1>내가 찜한 캠핑장</h1>
+		<table>
+			<thead>
 			<tr>
-				<td class="label">캠핑장 이름</td>
-				<td class="label">캠핑장 위치</td>
+				<th>번호</th>
+				<th>캠핑장 이름</th>
 			</tr>
-		</thead>
-		<tbody>
-			<c:choose>
-				<c:when test="${empty list}">
-					<tr>
-						<td colspan="4"><h2>찜한 캠핑장이 없습니다.</h2></td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="k" items="${list}" varStatus="vs">
-						<tr>
-							<td>${k.camp_id}</td>
-							<td>${k.facltNm}</td>
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:choose>
+	     			<c:when test="${empty list}">
+	     				<tr><td colspan="4"><h3>내가 찜한 캠핑장이 없습니다.</h3></td></tr>
+	     			</c:when>
+	     			<c:otherwise>
+	     			  <c:forEach var="k" items="${list}" varStatus="vs">
+	     			  	<tr>
+	     			  		<td>${vs.count }</td>
+	     			  		<td>${k.c_name }</td>
+	     			  	</tr>
+	     			  </c:forEach> 
+	     			</c:otherwise>
+	     		</c:choose>
+			</tbody>
+		</table>
 	</div>
 	<script type="text/javascript">
 		function goToPage(url){

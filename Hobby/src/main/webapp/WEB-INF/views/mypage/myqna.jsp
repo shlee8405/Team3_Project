@@ -93,25 +93,40 @@ color: white;
 		<div style="height: 50px;"></div>
 		
     <form action="/qna/submit" method="post">
-        <input type="text" name="qContent" placeholder="문의 내용"><br>
-        <input type="text" name="qName" placeholder="이름"><br>
+        <input type="text" name="qContent" placeholder="문의 제목"><br>
+        <input type="text" name="qName" placeholder="문의 내용"><br>
         <div style="height: 50px;"></div>
         <button type="submit">문의 등록</button>
     </form>
     <hr>
     <h2>문의 목록</h2>
     <table>
-        <tr>
-            <th>문의 내용</th>
-            <th>답변 내용</th>
-            <th>답변 상태</th>
-        </tr>
-        <tr th:each="qna : ${qnaList}">
-            <td th:text="${qna.q_content}"></td>
-            <td th:text="${qna.q_response}"></td>
-            <td th:text="${qna.q_status}"></td>
-        </tr>
-    </table>
+			<thead>
+			<tr>
+				<th>번호</th>
+				<th>문의 내용</th>
+				<th>답변 내용</th>
+				<th>상태</th>
+			</tr>
+			</thead>
+			<tbody>
+				<c:choose>
+	     			<c:when test="${empty list}">
+	     				<tr><td colspan="4"><h3>나의 문의 내역이 없습니다.</h3> </td></tr>
+	     			</c:when>
+	     			<c:otherwise>
+	     			  <c:forEach var="k" items="${list}" varStatus="vs">
+	     			  	<tr>
+	     			  		<td>${vs.count }</td>
+	     			  		<td>${k.q_context }</td>
+	     			  		<td>${k.q_response }</td>
+	     			  		<td>${k.q_status }</td>
+	     			  	</tr>
+	     			  </c:forEach> 
+	     			</c:otherwise>
+	     		</c:choose>
+			</tbody>
+		</table>
 
    <script type="text/javascript">
 		function goToPage(url){
