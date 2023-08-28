@@ -47,6 +47,13 @@
 	}
       var count_party = 0;
       var maxClicks = ${gvo.g_maxPeople}; // 버튼을 누를 수 있는 최대 횟수
+      
+      $(document).ready(function() {
+    	  // 버튼 클릭 이벤트를 설정합니다.
+    	  $('#myButton_ok').click(party_click); 
+    	  // 이벤트 핸들러를 여기에 더 추가할 수 있습니다.
+    	});
+      
       function party_click() {
      	count_party++;
       document.getElementById("count_party").innerHTML = count_party;
