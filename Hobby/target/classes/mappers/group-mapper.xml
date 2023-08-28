@@ -4,34 +4,34 @@
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="group">
 	<select id="count" resultType="int">
-		select count(*) from groups
+		select count(*) from GROUPS
 	</select>
 	
 	<select id="allList" parameterType="Map" resultType="gvo">
-		select * from groups where g_status = '1' order by g_idx desc limit #{limit} offset #{offset} 
+		select * from GROUPS where g_status = '1' order by g_idx desc <!-- limit #{limit} offset #{offset}  -->
 	</select>
 	
 	<select id="onelist" parameterType="String" resultType="gvo">
-		select * from groups where g_idx = #{g_idx}
+		select * from GROUPS where g_idx = #{g_idx}
 	</select>
 	
 	<insert id="insert" parameterType="gvo">
-		insert into groups(g_title,g_intro, g_fname,g_maxPeople, g_date, g_location, g_desc,g_status, u_idx)
+		insert into GROUPS(g_title,g_intro, g_fname,g_maxPeople, g_date, g_location, g_desc,g_status, u_idx)
 		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_location},#{g_desc},1,#{u_idx})
 	</insert>
 	
 	<update id="delete" parameterType="gvo">
-		update groups
+		update GROUPS
 		set g_status= '0' where g_idx = #{g_idx}
 	</update>
 	
 	<update id="update" parameterType="gvo">
-		update groups set g_title= #{g_title},g_intro= #{g_intro},g_fname= #{g_fname},g_maxPeople= #{g_maxPeople},
+		update GROUPS set g_title= #{g_title},g_intro= #{g_intro},g_fname= #{g_fname},g_maxPeople= #{g_maxPeople},
 		g_date= #{g_date},g_location= #{g_location},g_desc= #{g_desc}, u_idx= #{u_idx} where g_idx = #{g_idx}
 	</update>
 	
 	<select id="cmtList" parameterType="String" resultType="gcvo">
-		select * from groupComments where g_idx = #{g_idx}
+		select * from GROUPCOMMENTS where g_idx = #{g_idx}
 	</select>
 	
 	<select id="getUserCmtInfo" parameterType="String" resultType="uvo">
@@ -39,7 +39,7 @@
     </select>
     
     <insert id="cmtInsert" parameterType="gcvo">
-		insert into groupComments(gc_content, gc_date, u_idx, g_idx)
+		insert into GROUPCOMMENTS(gc_content, gc_date, u_idx, g_idx)
 		values(#{gc_content}, sysdate(), #{u_idx}, #{g_idx})
 	</insert>
     
