@@ -163,13 +163,13 @@
 	<div style="padding:50px; width:580px; margin: auto; ">
 		<form method="post">
 			<fieldset>
-				<p id="commId">아이디 : ${uvo.u_idx}</p>
+				<p id="commId">아이디 : <%=request.getSession().getServletContext().getAttribute("sessionUidx") %></p>
 				<p >내용 : <br>
 					<textarea rows="4" cols="40" name="content"></textarea>
 				 </p>
 				 <input id="commIn" type="button" value="댓글저장" onclick="comment_go(this.form)">
 				 <input type="hidden" name="g_idx" value="${gvo.g_idx}">
-				 <input type="hidden" name="u_idx" value="${uvo.u_idx}">
+				 <input type="hidden" name="u_idx" value="<%=request.getSession().getServletContext().getAttribute("sessionUidx") %>">
 				 <input type="hidden" name="cPage" value="${cPage}">
 			 </fieldset>
 		</form>
@@ -181,7 +181,7 @@
 		<c:forEach var="k" items="${gc_list}">
 		 <div style="border: 1px solid #cc00cc; width: 400px; margin: 20px; padding: 20px;">
 		 	<form method="post">
-		 		<p>이름 : ${k.u_idx}</p>
+		 		<p>아이디 : ${k.u_idx}</p>
 		 		<p>내용 : ${k.gc_content }</p>
 		 		<p>날짜 : ${k.gc_date}</p>
 		 		<%-- 실제로는 로그인 성공해야지만 삭제번트이 보여야 한다. --%>

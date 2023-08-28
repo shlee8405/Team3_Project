@@ -36,7 +36,7 @@ public class GroupCmtController {
 	@PostMapping("/groupCmtList.do")
 	public ModelAndView commentInsert(GroupCmtVO gcvo, @ModelAttribute("cPage") String cPage,
 			@ModelAttribute("g_idx") String g_idx, @RequestParam("u_idx") String u_idx) {
-		ModelAndView mv = new ModelAndView("redirect:/bbs_onelist.do");
+		ModelAndView mv = new ModelAndView("redirect:/group_onelist.do");
 		int result = groupService.getCommInsert(gcvo);
 		return mv;
 	}

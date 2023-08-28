@@ -54,13 +54,15 @@ public class GroupController {
 		String cPage = request.getParameter("cPage");
 		if (cPage == null) {
 			paging.setNowPage(1);
+			System.out.println(cPage+"1페");
 		} else {
 			paging.setNowPage(Integer.parseInt(cPage));
+			System.out.println(cPage+"그외페");
 		}
 
 		// offset = limit * (현재페이지-1);
 		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() - 1));
-
+		System.out.println(paging);
 		// 시작블록과 끝블록 구하기
 		paging.setBeginBlock(
 				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
