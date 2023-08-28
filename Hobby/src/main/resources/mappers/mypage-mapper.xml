@@ -22,7 +22,7 @@
 	</select>
 	
 	<select id="myreview" resultType="mrvo">
-		select * from CREVIEW where cr_idx = #{cr_idx}
+		select * from CREVIEW
 	</select>
     
 </mapper>
