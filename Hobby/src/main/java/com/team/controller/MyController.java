@@ -117,9 +117,7 @@ public class MyController {
 	public ModelAndView goCusSerAsk() /* 1대1 문의 페이지 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerAsk");
 		List<QnaVO> list = qnaService.getAllQna();
-		List<UserVO> QnAuser = userService.getQnAUser();
 		mv.addObject("alllist", list);
-		mv.addObject("QnAuser", QnAuser);
 		return mv;
 	}
 
