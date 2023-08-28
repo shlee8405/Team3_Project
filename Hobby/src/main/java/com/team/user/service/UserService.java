@@ -27,4 +27,7 @@ public interface UserService {
 	boolean isEmailDuplicate(String email);
 	// 아이디 로그인 확인
 	boolean isIdDuplicate(String id);
+	
+	
+	
 }

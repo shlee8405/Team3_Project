@@ -2,7 +2,7 @@ package com.team.qna.vo;
 
 public class QnaVO {
 	
-	private String q_idx, q_content, q_response , u_idx, u_name, q_status;
+	private String q_idx, q_content, q_response , u_idx, q_status;
 	
 	public String getQ_status() {
 		return q_status;
@@ -10,14 +10,6 @@ public class QnaVO {
 
 	public void setQ_status(String q_status) {
 		this.q_status = q_status;
-	}
-
-	public String getU_name() {
-		return u_name;
-	}
-
-	public void setU_name(String u_name) {
-		this.u_name = u_name;
 	}
 
 	public String getQ_idx() {

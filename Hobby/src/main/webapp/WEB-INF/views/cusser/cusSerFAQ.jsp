@@ -22,7 +22,7 @@
         padding: 20px;
         box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         margin-bottom: 10px;
-        height: auto%;
+        height: auto;
         width: 50%;
         max-height: 80vh;
         overflow-y: auto;
@@ -97,6 +97,21 @@ $(window).scroll(function() {
     }
 });
 
+$(document).ready(function() {
+    // 검색 버튼 클릭 이벤트
+    $("#search-button").click(function() {
+        var searchTerm = $("#search-input").val().toLowerCase();
+        $(".accordion").each(function() {
+            var content = $(this).find(".accordion-button").text().toLowerCase();
+            if (content.includes(searchTerm)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    });
+});
+
 </script>
 </head>
 <body>
@@ -142,24 +157,32 @@ $(window).scroll(function() {
         </div>
         
         <div class="container-fluid align-self-center">
-            <div class="scroll-content">
-            <c:forEach var="k" items="${list}" varStatus="status">
-                <div class="accordion" id="accordionExample${status.index}">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header">
-                            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.index}" aria-expanded="true" aria-controls="collapse${status.index}">
-                                ${k.f_content}
-                            </button>
-                        </h2>
-                        <div id="collapse${status.index}" class="accordion-collapse collapse ${status.index == 0 ? 'show' : ''}" data-bs-parent="#accordionExample${status.index}">
-                            <div class="accordion-body">
-                                ${k.f_response}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </c:forEach>
-        </div>
+		    <!-- 검색창 추가 -->
+		    <form class="d-flex justify-content-end mb-3" role="search" id="search-form">
+		        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+		        <button class="btn btn-outline-success" type="button" id="search-button">Search</button>
+		    </form>
+		    
+		    <div class="scroll-content">
+		        <c:forEach var="k" items="${list}" varStatus="status">
+		            <div class="accordion" id="accordionExample${status.index}">
+		                <div class="accordion-item">
+		                    <h2 class="accordion-header">
+		                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.index}" aria-expanded="true" aria-controls="collapse${status.index}">
+		                            ${k.f_content}
+		                        </button>
+		                    </h2>
+		                    <div id="collapse${status.index}" class="accordion-collapse collapse ${status.index == 0 ? 'show' : ''}" data-bs-parent="#accordionExample${status.index}">
+		                        <div class="accordion-body">
+		                            ${k.f_response}
+		                        </div>
+		                    </div>
+		                </div>
+		            </div>
+		        </c:forEach>
+		    </div>
+		</div>
+            
         </div>
 </div>
 

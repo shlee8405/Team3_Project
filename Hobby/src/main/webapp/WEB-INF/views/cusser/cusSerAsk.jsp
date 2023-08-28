@@ -153,20 +153,20 @@ $(window).scroll(function() {
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">번호</th>
-                            <th scope="col" class="text-center">제목</th>
+                            <th scope="col" class="text-center">작성자</th>
                             <th scope="col" class="text-center">내용</th>
                             <th scope="col" class="text-center">상태</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        <c:forEach var="k" items="${alllist}" varStatus="loop">
-                            <tr>
-                                <td>${loop.count}</td>
-                                <td>${k.u_name}</td>
-                                <td>${k.q_content}</td>
-                                <td>대기중</td>
-                            </tr>
-                        </c:forEach>
+						<c:forEach var="k" items="alllist" varStatus="loop">
+						    <tr>
+						        <td>${loop.count}</td>
+						        <td>${QnAuser.u_name}</td>
+						        <td>${k.q_content}</td>
+						        <td>대기중</td>
+						    </tr>
+						</c:forEach>
                         
                     </tbody>
                 </table>

@@ -38,6 +38,8 @@
 	<select id="idcount" parameterType="String" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM users WHERE u_id = #{u_id}
     </select>
+    
+    
 </mapper>
 
 

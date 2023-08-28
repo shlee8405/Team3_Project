@@ -9,15 +9,14 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="resources/css/summernote-lite.css">
 <style type="text/css">
-    .container {
-		margin: auto;
-		width: 50%;
-		background-color: #d4ead7; /* 변경된 배경색 */
-		padding: 20px; /* 내용과의 간격을 위해 추가 */
-		border-radius: 10px; /* 컨테이너 모서리 둥글게 */
-		box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
-		margin-top: 130px;
-	}
+    .container-fluid {
+        margin: auto;
+        width: 60%;
+        background-color: #637F42;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
     
     .report-form {
         padding: 20px;
@@ -53,6 +52,39 @@
     .report-form .note-btn-group {
         margin: 0;
     }
+    
+    .navbar {
+        height: auto;
+        min-height: 100vh;
+        width: 250px;
+   }
+   
+   .navbar-toggler {
+        margin: auto;
+   }
+   
+   .offcanvas {
+        width: 320px;
+        background-color: #637F42;
+   }
+   
+   .navbar-nav.flex-column {
+        align-items: center;
+   }
+   
+   .navbar-nav.flex-column .nav-item {
+        width: 100%;
+        text-align: center;
+   }
+
+   .offcanvas-body {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+   }
+   .dropdown {
+       margin-top: 10px;
+   }
 </style>
 <script type="text/javascript">
     function sendData(f) {
@@ -69,7 +101,47 @@
 </head>
 <body>
     <jsp:include page="../header.jsp"  />
-    <div class="container">
+    
+    <div class="d-flex">
+    
+    <nav class="navbar navbar-dark" style="background-color: #637F42; width: 80px;">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="color: black;"></span>
+            </button>
+        </nav>
+        <!-- Offcanvas Navbar Content -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: white;">고객센터</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body" >
+            	<div> <!-- 오른쪽 정렬 -->
+                	<a class="btn btn-light" href="/cusSerFAQ.do" role="button">FAQ</a>
+            	</div>
+                <!-- Offcanvas Navigation Links -->
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      QnA
+                    </button>
+                    <ul class="dropdown-menu">
+					  <li><a class="dropdown-item" href="/cusSerAsk.do">문의 목록 보기</a></li>
+					  <li><a class="dropdown-item" href="/go_inquiry.do">문의 하기</a></li>
+                    </ul>
+                  </div>
+                  <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Report
+                    </button>
+                    <ul class="dropdown-menu">
+					  <li><a class="dropdown-item" href="/cusSerReport.do">신고 목록 보기</a></li>
+					  <li><a class="dropdown-item" href="/report.do">신고하기</a></li>
+                    </ul>
+                  </div>
+            </div>
+        </div>
+    
+    <div class="container-fluid align-self-end">
         <div class="report-form">
             <form method="post">
                 <h3 class="mb-4">신고하기</h3>
@@ -126,6 +198,7 @@
                 });
             }
         </script>
+    </div>
     </div>
 </body>
 </html>

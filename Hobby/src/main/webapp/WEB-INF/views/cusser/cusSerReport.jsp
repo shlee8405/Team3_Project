@@ -129,7 +129,8 @@ $(window).scroll(function() {
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">번호</th>
-                            <th scope="col" class="text-center">제목</th>
+                            <th scope="col" class="text-center">피해자</th>
+                            <th scope="col" class="text-center">가해자</th>
                             <th scope="col" class="text-center">내용</th>
                             <th scope="col" class="text-center">상태</th>
                         </tr>
@@ -138,7 +139,8 @@ $(window).scroll(function() {
                         <c:forEach var="k" items="${list}" varStatus="loop">
                             <tr>
                                 <td>${loop.count}</td>
-                                <td>${k.r_name}</td>
+                                <td>${k.u_idx1}</td>
+                                <td>${k.u_idx2}</td>
                                 <td>${k.r_content}</td>
                                 <td>대기중</td>
                             </tr>
