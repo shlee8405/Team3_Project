@@ -96,6 +96,7 @@ ol.paging li a:hover {
 	      });
 		
 		location.href= "/group_onelist.do?g_idx="+ f;
+		console.log("g_idx");
 	}
 	
 </script>

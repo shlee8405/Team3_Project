@@ -54,7 +54,7 @@ public class GroupController {
 		String cPage = request.getParameter("cPage");
 		if (cPage == null) {
 			paging.setNowPage(1);
-			System.out.println(cPage+"1페");
+			System.out.println("1페");
 		} else {
 			paging.setNowPage(Integer.parseInt(cPage));
 			System.out.println(cPage+"그외페");

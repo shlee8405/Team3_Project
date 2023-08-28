@@ -30,7 +30,7 @@
 	font-weight: bold;
 	}
 </style>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script>
  	function list_go(f) {
 		f.action="/groupList.do";
@@ -68,12 +68,12 @@
 	} 
       function comment_go(f) {
     		 // 유효성 검사
-    		if(f.content.value.trim().length <=0){
+    		if(f.gc_content.value.trim().length <=0){
     			alert("내용을 입력해 주세요");
-    			f.content.focus();
+    			f.gc_content.focus();
     			return;
     		}
-    		
+    		console.log("u_idx")
     	    f.action = "/groupCmtList.do"
     		f.submit();
     	}
@@ -165,7 +165,7 @@
 			<fieldset>
 				<p id="commId">아이디 : <%=request.getSession().getServletContext().getAttribute("sessionUidx") %></p>
 				<p >내용 : <br>
-					<textarea rows="4" cols="40" name="content"></textarea>
+					<textarea rows="4" cols="40" name="gc_content"></textarea>
 				 </p>
 				 <input id="commIn" type="button" value="댓글저장" onclick="comment_go(this.form)">
 				 <input type="hidden" name="g_idx" value="${gvo.g_idx}">
@@ -183,8 +183,9 @@
 		 	<form method="post">
 		 		<p>아이디 : ${k.u_idx}</p>
 		 		<p>내용 : ${k.gc_content }</p>
-		 		<p>날짜 : ${k.gc_date}</p>
+		 		<p>날짜 : ${k.gc_date.substring(0,10)}</p>
 		 		<%-- 실제로는 로그인 성공해야지만 삭제번트이 보여야 한다. --%>
+		 		<input type="button" value="댓글수정" onclick="comment_update(this.form)"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 		 		<input type="button" value="댓글삭제" onclick="comment_del(this.form)">
 		 		<input type="hidden" value="${k.gc_idx}" name="gc_idx">
 		 		<input type="hidden" value="${k.g_idx}" name="g_idx">

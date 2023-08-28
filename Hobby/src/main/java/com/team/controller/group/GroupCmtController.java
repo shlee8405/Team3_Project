@@ -34,9 +34,13 @@ public class GroupCmtController {
 	private Paging paging;
 	
 	@PostMapping("/groupCmtList.do")
-	public ModelAndView commentInsert(GroupCmtVO gcvo, @ModelAttribute("cPage") String cPage,
-			@ModelAttribute("g_idx") String g_idx, @RequestParam("u_idx") String u_idx) {
+	public ModelAndView commentInsert(HttpServletRequest request, GroupCmtVO gcvo, @ModelAttribute("cPage") String cPage,
+	        @ModelAttribute("g_idx") String g_idx, @RequestParam("u_idx") String u_idx) {
 		ModelAndView mv = new ModelAndView("redirect:/group_onelist.do");
+		String gc_content = request.getParameter("gc_content");
+	    gcvo.setGc_content(gc_content);
+		gcvo.setU_idx(u_idx);
+		System.out.println("Debug u_idx: " + u_idx);
 		int result = groupService.getCommInsert(gcvo);
 		return mv;
 	}
