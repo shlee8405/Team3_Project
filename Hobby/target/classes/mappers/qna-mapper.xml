@@ -5,26 +5,30 @@
 <mapper namespace="qna">
 	
 	<select id="allList" resultType="qvo">
-		select * from qna where u_idx = 1
+		select * from QNA
 	</select>
 	
-	
+	<select id="user">
+		SELECT q.q_idx, q.q_content, q.q_response, u.u_name
+		FROM QNA q
+		JOIN USERS u ON q.u_idx = #{q.u_idx};
+	</select>
 	
 	<insert id="insert" parameterType="qvo">
-		INSERT INTO qna(q_content,u_name)
+		INSERT INTO QNA(q_content,u_name)
 		VALUES(#{q_content},#{u_name});
 	</insert>
 	
 	<select id="detail" parameterType="String" resultType="qvo">
-		select * from qna where q_idx = #{q_idx}
+		select * from QNA where q_idx = #{q_idx}
 	</select>
 	
 	<update id="delete" parameterType="String">
-		update qna set q_status = 0 where q_idx = #{q_idx}
+		update QNA set q_status = 0 where q_idx = #{q_idx}
 	</update>
 	
 	<update id="update" parameterType="qvo">
-		update qna set q_name = #{q_name} , q_content = #{q_content} where q_idx = #{q_idx}
+		update QNA set q_name = #{q_name} , q_content = #{q_content} where q_idx = #{q_idx}
 	</update>
 </mapper>
 

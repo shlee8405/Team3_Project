@@ -18,7 +18,7 @@
     </update>
     
     <select id="myqna" resultType="mqvo">
-		select * from qna where q_idx = #{q_idx}
+		select * from QNA where q_idx = #{q_idx}
 	</select>
 	
 	<select id="myreview" resultType="mrvo">

@@ -5,16 +5,16 @@
 <mapper namespace="report">
 	
 	<select id="allList" resultType="rvo">
-		select * from report 
+		select * from REPORT 
 	</select>
 	
 	<insert id="insert" parameterType="rvo">
-		insert into report (r_content,r_name)
+		insert into REPORT (r_content,r_name)
 		values(#{r_content},#{r_name})
 	</insert>
 	
 	<select id="detail" parameterType="String" resultType="rvo">
-		select * from report where r_idx = #{r_idx}
+		select * from REPORT where r_idx = #{r_idx}
 	</select>
 </mapper>
 
