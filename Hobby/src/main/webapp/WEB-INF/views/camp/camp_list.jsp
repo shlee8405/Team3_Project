@@ -61,7 +61,7 @@
                 	<input type="text" class="search-slt" placeholder="캠핑장 이름을 입력하세요.">
                 </div>
 				<div>
-                    <button type="button" class="btn btn-info wrn-btn">Search</button>
+                    <button type="button" class="btn btn-info wrn-btn" onclick="doSearch()">Search</button>
 				</div>
 			 </div>
 		</section>
@@ -187,10 +187,10 @@
 			
 			function doSearch() {
 				searchMode = true; // 검색 모드 활성화
-				searchKeyword = $("#camping_search").val(); // var 키워드 제거
+				searchKeyword = $(".search-slt").val(); // var 키워드 제거
 			 	
 				 // 검색 버튼을 누른 후, 서치 박스의 내용을 초기화
-			    $("#camping_search").val("");
+			    $(".search-slt").val("");
 				
 				$("#camp_list").empty(); // 초기화
 					pageNo = 1; // 페이지 번호 초기화
