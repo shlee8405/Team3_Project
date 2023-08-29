@@ -205,7 +205,7 @@ public class MyController {
 		return mv;
 	}
 	
-	@RequestMapping("/updateReport.do") /* 신고 수정하기 */
+	@RequestMapping("/updateReport.do") /* 신고  수정하기 */
 	public ModelAndView goUpdateReport(ReportVO rvo) {
 		ModelAndView mv = new ModelAndView("redirect:/cusSerReport.do");
 		int res = reportService.UpdateReport(rvo);
