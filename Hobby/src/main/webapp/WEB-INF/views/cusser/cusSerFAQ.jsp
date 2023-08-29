@@ -98,8 +98,19 @@ $(window).scroll(function() {
 });
 
 $(document).ready(function() {
+	$("#search-button").click(function() {
+        performSearch();
+    });
+
+    $("#search-input").keyup(function(event) {
+        if (event.keyCode === 13) {
+            performSearch();
+        }
+    });
+	
+	
     // 검색 버튼 클릭 이벤트
-    $("#search-button").click(function() {
+    function performSearch() {
         var searchTerm = $("#search-input").val().toLowerCase();
         $(".accordion").each(function() {
             var content = $(this).find(".accordion-button").text().toLowerCase();
@@ -109,7 +120,7 @@ $(document).ready(function() {
                 $(this).hide();
             }
         });
-    });
+    }
 });
 
 </script>
@@ -158,10 +169,10 @@ $(document).ready(function() {
         
         <div class="container-fluid align-self-center">
 		    <!-- 검색창 추가 -->
-		    <form class="d-flex justify-content-end mb-3" role="search" id="search-form">
-		        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
-		        <button class="btn btn-outline-success" type="button" id="search-button">Search</button>
-		    </form>
+		    <form class="d-flex justify-content-end mb-3" role="search" id="search-form" onsubmit="return false;">
+			    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+			    <button class="btn btn-success" type="button" id="search-button">Search</button>
+			</form>
 		    
 		    <div class="scroll-content">
 		        <c:forEach var="k" items="${list}" varStatus="status">

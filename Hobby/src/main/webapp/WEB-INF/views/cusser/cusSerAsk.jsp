@@ -80,6 +80,39 @@
     function go_AskDetail() {
         location.href = "/go_AskDetail.do?q_idx=" + q_idx;
     }
+    
+    
+    
+    $(document).ready(function() {
+        $("#search-button").click(function() {
+            performSearch();
+        });
+
+        $("#search-input").keyup(function(event) {
+            if (event.keyCode === 13) {
+                performSearch();
+            }
+        });
+
+        function performSearch() {
+            var searchTerm = $("#search-input").val().toLowerCase();
+            $(".table tbody tr").each(function() {
+                var number = $(this).find("td:nth-child(1)").text().toLowerCase();
+                var author = $(this).find("td:nth-child(2)").text().toLowerCase();
+                var content = $(this).find("td:nth-child(3)").text().toLowerCase();
+                var response = $(this).find("td:nth-child(4)").text().toLowerCase();
+
+                if (number.includes(searchTerm) || author.includes(searchTerm) || content.includes(searchTerm) || response.includes(searchTerm)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    });
+
+
+
 </script>
 </head>
 <body>
@@ -126,6 +159,13 @@
         </div>
 
         <div class="container-fluid align-self-end">
+        
+         <!-- 검색창 추가 -->
+		    <form class="d-flex justify-content-end mb-3" role="search" id="search-form" onsubmit="return false;">
+			    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+			    <button class="btn btn-success" type="button" id="search-button">Search</button>
+			</form>
+
             <div class="card-body">
                 <!-- Default Table -->
                 <table class="table caption-top" style="background-color: white; border-radius: 10px;">
