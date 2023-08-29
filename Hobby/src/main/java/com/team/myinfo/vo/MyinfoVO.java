@@ -2,7 +2,15 @@ package com.team.myinfo.vo;
 
 public class MyinfoVO {
 
-	private String u_id, u_nickname, u_pw, u_name, u_email, u_birthday , u_phone;
+	private String u_idx, u_id, u_nickname, u_pw, u_name, u_email, u_birthday , u_phone;
+
+	public String getU_idx() {
+		return u_idx;
+	}
+
+	public void setU_idx(String u_idx) {
+		this.u_idx = u_idx;
+	}
 
 	public String getU_id() {
 		return u_id;

@@ -19,5 +19,4 @@ public class MyQnaServiceImpl implements MyQnaService{
 		// TODO Auto-generated method stub
 		return myQnaDAO.getMyQna();
 	}
-	
 }
