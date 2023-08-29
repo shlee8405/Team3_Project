@@ -27,4 +27,14 @@ public class ReportServiceImpl implements ReportService{
 	public ReportVO Detail(String r_idx) {
 		return reportDAO.Detail(r_idx);
 	}
+	
+	@Override
+	public int UpdateReport(ReportVO rvo) {
+		return reportDAO.UpdateReport(rvo);
+	}
+	
+	@Override
+	public int DeleteReport(String r_idx) {
+		return reportDAO.DeleteReport(r_idx);
+	}
 }

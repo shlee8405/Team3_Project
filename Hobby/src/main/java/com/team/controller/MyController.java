@@ -130,21 +130,21 @@ public class MyController {
 
 	@GetMapping("/go_inquiry.do")
 	public ModelAndView goinquiry() /* 1대1 문의 작성 페이지로 이동 */ {
-		ModelAndView mv = new ModelAndView("cusser/cusSerQ");
+		ModelAndView mv = new ModelAndView("cusser/cusSerAskQ");
 		List<QnaVO> list = qnaService.getAllQna();
 		mv.addObject("alllist", list);
 		return mv;
 	}
 
-	@PostMapping("/insert_QNA.do")
-	public ModelAndView insert_QNA(QnaVO qvo, HttpServletRequest request)/* 1대1 문의 넣기 */ {
+	@PostMapping("/insert_QNA.do")/* 1대1 문의 넣기 */ 
+	public ModelAndView insert_QNA(QnaVO qvo, HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
 		int res = qnaService.getInsert(qvo);
 		return mv;
 	}
 
-	@GetMapping("/go_AskDetail.do")
-	public ModelAndView goAskDetail(@ModelAttribute("q_idx") String q_idx)/* 1:1 상세 페이지 */ {
+	@GetMapping("/go_AskDetail.do")/* 1:1 상세 페이지 */ 
+	public ModelAndView goAskDetail(@ModelAttribute("q_idx") String q_idx){
 		ModelAndView mv = new ModelAndView("cusser/cusSerAskDetail");
 		QnaVO qvo = qnaService.Detail(q_idx);
 		mv.addObject("qvo", qvo);
@@ -153,7 +153,7 @@ public class MyController {
 
 	@RequestMapping("/go_updateQ.do") /* 문의 수정 페이지로 이동 */
 	public ModelAndView goUpdateQ(@ModelAttribute("q_idx") String q_idx) {
-		ModelAndView mv = new ModelAndView("cusser/cusSerUpdate");
+		ModelAndView mv = new ModelAndView("cusser/cusSerAskUpdate");
 		QnaVO qvo = qnaService.Detail(q_idx);
 		mv.addObject("qvo", qvo);
 		return mv;
@@ -163,9 +163,6 @@ public class MyController {
 	public ModelAndView goUpdateQna(QnaVO qvo) {
 		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
 		int res = qnaService.UpdateQna(qvo);
-		System.out.println(qvo.getQ_name());
-		System.out.println(qvo.getQ_content());
-		System.out.println(qvo.getQ_idx());
 		return mv;
 	}
 
@@ -176,8 +173,8 @@ public class MyController {
 		return mv;
 	}
 	
-	@GetMapping("/go_AskDelete.do")
-	public ModelAndView goAskDelete(@ModelAttribute("q_idx") String q_idx)/* 삭제 페이지로 이동 */ {
+	@GetMapping("/go_AskDelete.do")/* 문의 삭제 페이지로 이동 */ 
+	public ModelAndView goAskDelete(@ModelAttribute("q_idx") String q_idx){
 		ModelAndView mv = new ModelAndView("cusser/cusSerAskDelete");
 		QnaVO qvo = qnaService.Detail(q_idx);
 		mv.addObject("qvo", qvo);
@@ -192,17 +189,39 @@ public class MyController {
 		return mv;
 	}
 	
-	@GetMapping("/go_ReportDetail.do")
-	public ModelAndView goReportDetail(@ModelAttribute("r_idx") String r_idx)/* 신고 상세 페이지 */ {
+	@GetMapping("/go_ReportDetail.do")/* 신고 상세 페이지 */ 
+	public ModelAndView goReportDetail(@ModelAttribute("r_idx") String r_idx){
 		ModelAndView mv = new ModelAndView("cusser/cusSerReportDetail");
 		ReportVO rvo = reportService.Detail(r_idx);
 		mv.addObject("rvo", rvo);
 		return mv;
 	}
+	
+	@RequestMapping("/go_updateReport.do") /* 신고 수정 페이지로 이동 */
+	public ModelAndView goUpdateReport(@ModelAttribute("r_idx") String r_idx) {
+		ModelAndView mv = new ModelAndView("cusser/cusSerReportUpdate");
+		ReportVO rvo = reportService.Detail(r_idx);
+		mv.addObject("rvo", rvo);
+		return mv;
+	}
+	
+	@RequestMapping("/updateReport.do") /* 신고 수정하기 */
+	public ModelAndView goUpdateReport(ReportVO rvo) {
+		ModelAndView mv = new ModelAndView("redirect:/cusSerReport.do");
+		int res = reportService.UpdateReport(rvo);
+		return mv;
+	}
+
+	@RequestMapping("/go_deleteReport.do") /* 신고 삭제 */
+	public ModelAndView goDeleteReport(@ModelAttribute("r_idx") String r_idx) {
+		ModelAndView mv = new ModelAndView("redirect:/cusSerReport.do");
+		int res = reportService.DeleteReport(r_idx);
+		return mv;
+	}
 
 	@GetMapping("/report.do")
 	public ModelAndView goReport()/* 신고 작성 페이지로 이동 */ {
-		ModelAndView mv = new ModelAndView("cusser/cusSerR");
+		ModelAndView mv = new ModelAndView("cusser/cusSerReportR");
 		return mv;
 	}
 

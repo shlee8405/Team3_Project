@@ -24,4 +24,12 @@ public class ReportDAO {
 	public ReportVO Detail(String r_idx) {
 		return sqlSessionTemplate.selectOne("report.detail", r_idx);
 	}
+	
+	public int UpdateReport(ReportVO rvo) {
+		return sqlSessionTemplate.update("report.update", rvo);
+	}
+	
+	public int DeleteReport(String r_idx) {
+		return sqlSessionTemplate.update("report.delete",r_idx);
+	}
 }

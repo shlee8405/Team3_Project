@@ -14,4 +14,10 @@ public interface ReportService {
 	
 	// 신고 상세
 	ReportVO Detail(String r_idx);
+	
+	// 신고 수정
+	int UpdateReport(ReportVO rvo);
+	
+	// 신고 삭제
+	int DeleteReport(String r_idx);
 }

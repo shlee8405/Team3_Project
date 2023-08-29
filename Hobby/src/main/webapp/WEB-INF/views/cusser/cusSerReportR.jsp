@@ -141,25 +141,25 @@
             </div>
         </div>
     
-    <div class="container-fluid align-self-end">
-        <div class="report-form">
-            <form method="post">
-                <h3 class="mb-4">신고하기</h3>
-                <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="floatingInput" placeholder="name@example.com">
-                  <label for="floatingInput">작성자</label>
-                </div>
-                <div class="mb-3">
-                    <label for="r_content" class="form-label">내용:</label>
-                    <textarea id="r_content" name="r_content" class="form-control" rows="8"></textarea>
-                </div>
-                <div class="text-center">
-                    <input type="button" class="btn btn-primary" value="보내기" onclick="sendData(this.form)"/>
-                    <input type="reset" class="btn btn-secondary" value="다시"/>
-                    <input type="button" class="btn btn-secondary" value="목록" onclick="list_go(this.form)"/>
-                </div>
-            </form>
-        </div>
+	    <div class="container-fluid align-self-end">
+	    <div class="report-form">
+	    <form method="post">
+	        <h3 class="mb-4">신고하기</h3>
+	        <div class="mb-3">
+	            <label for="r_name" class="form-label">작성자:</label>
+	            <input type="text" id="r_name" name="r_name" class="form-control"/>
+	        </div>
+	        <div class="mb-3">
+	            <label for="r_content" class="form-label">내용:</label>
+	            <textarea id="r_content" name="r_content" class="form-control" rows="8"></textarea>
+	        </div>
+	        <div class="text-center">
+	            <input type="button" class="btn btn-primary" value="보내기" onclick="sendData(this.form)"/>
+	            <input type="reset" class="btn btn-secondary" value="다시"/>
+	            <input type="button" class="btn btn-secondary" value="목록" onclick="list_go(this.form)"/>
+	        </div>
+	    </form>
+	    </div>
         <!-- Summernote 기능 유지 -->
         <script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
         <script src="resources/js/summernote-lite.js"></script>
@@ -184,7 +184,7 @@
                 var frm = new FormData();
                 frm.append("s_file",file);
                 $.ajax({
-                    url : "/saveImg.do",
+                    url : "/saveImage.do",
                     data : frm,
                     type : "post",
                     contentType : false,

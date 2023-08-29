@@ -5,7 +5,7 @@
 <mapper namespace="report">
 	
 	<select id="allList" resultType="rvo">
-		select * from REPORT 
+		select * from REPORT where u_idx1 = 1 
 	</select>
 	
 	<insert id="insert" parameterType="rvo">
@@ -16,6 +16,14 @@
 	<select id="detail" parameterType="String" resultType="rvo">
 		select * from REPORT where r_idx = #{r_idx}
 	</select>
+	
+	<update id="update" parameterType="rvo">
+		update REPORT set r_name = #{r_name},  r_content = #{r_content}  where r_idx = #{r_idx}
+	</update>
+	
+	<update id="delete" parameterType="String">
+		update REPORT set r_status = 0 where r_idx = #{r_idx}
+	</update>
 </mapper>
 
 

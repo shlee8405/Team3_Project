@@ -124,36 +124,56 @@ $(window).scroll(function() {
 
         <div class="container-fluid align-self-end">
             <div class="card-body">
+                <!-- Default Table -->
                 <table class="table caption-top" style="background-color: white; border-radius: 10px;">
-                    <caption class="text-center">신고 목록</caption>
+                    <caption class="text-center">1:1 문의</caption>
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">번호</th>
-                            <th scope="col" class="text-center">피해자</th>
-                            <th scope="col" class="text-center">가해자</th>
+                            <th scope="col" class="text-center">작성자</th>
                             <th scope="col" class="text-center">내용</th>
-                            <th scope="col" class="text-center">상태</th>
+                            <th scope="col" class="text-center">답변</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        <c:forEach var="k" items="${list}" varStatus="loop">
-                            <tr>
-                                <td>${loop.count}</td>
-                                <td>${k.u_idx1}</td>
-                                <td>${k.u_idx2}</td>
-                                <td>${k.r_content}</td>
-                                <td>대기중</td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
+				    <c:forEach var="k" items="${list}" varStatus="loop">
+				        <c:choose>
+				            <c:when test="${k.r_status == 0}">
+				                <tr>
+				                    <td colspan="4">삭제된 목록입니다</td>
+				                </tr>
+				            </c:when>
+				            <c:otherwise>
+				                <tr>
+				                    <td>${loop.count}</td>
+				                    <td>${k.r_name}</td>
+				                    <td>
+				                        <a href="/go_ReportDetail.do?r_idx=${k.r_idx}">상세보기</a>
+				                    </td>
+				                    <td>
+				                        <c:if test="${k.r_response == null}">
+				                            대기중
+				                        </c:if>
+				                        <c:if test="${k.r_response != null}">
+				                            답변 완료
+				                        </c:if>
+				                    </td>
+				                </tr>
+				            </c:otherwise>
+				        </c:choose>
+				    </c:forEach>
+				</tbody>
+
                 </table>
                 <!-- End Default Table Example -->
             </div>
-            <div class="text-end"> <!-- 오른쪽 정렬 -->
+            <div class="text-end">
+                <!-- 오른쪽 정렬 -->
                 <button type="button" class="btn btn-success" onclick="go_report()">신고하기</button>
             </div>
         </div>
     </div>
-    </body>
+</div>
+    
 </body>
 </html>

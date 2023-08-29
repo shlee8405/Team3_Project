@@ -99,6 +99,9 @@ $(window).scroll(function() {
     function go_AskDetail(q_idx) {
         location.href = "/go_updateQ.do?q_idx=" + q_idx;
     }
+    function go_Delete(q_idx) {
+        location.href = "/go_deleteQ.do?q_idx=" + q_idx;
+    }
 </script>
 </head>
 <body>
@@ -173,7 +176,8 @@ $(window).scroll(function() {
             </div>
             <div class="text-end">
                 <!-- 오른쪽 정렬 -->
-                <button type="button" class="btn btn-primary" onclick="go_AskDetail(${qvo.q_idx})">문의 수정하기</button>
+                <button type="button" class="btn btn-primary" onclick="go_AskDetail(${qvo.q_idx})">문의 수정</button>
+                <button type="button" class="btn btn-primary" onclick="go_Delete(${qvo.q_idx})">문의 삭제</button>
             </div>
         </div>
     </div>

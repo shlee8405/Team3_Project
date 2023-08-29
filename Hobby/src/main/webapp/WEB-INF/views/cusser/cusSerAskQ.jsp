@@ -19,38 +19,38 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
     
-    .bbs-form {
+    .ask-form {
         padding: 20px;
         background-color: #f8f9fa;
         border-radius: 10px;
     }
     
-    .bbs-form input[type="text"],
-    .bbs-form textarea {
+    .ask-form input[type="text"],
+    .ask-form textarea {
         width: 100%;
         padding: 10px;
         border-radius: 5px;
         border: 1px solid #ced4da;
     }
     
-    .bbs-form .note-toolbar {
+    .ask-form .note-toolbar {
         background-color: #f8f9fa;
         border-top: 1px solid #ced4da;
         margin-top: 10px;
         padding: 5px 0;
     }
     
-    .bbs-form .note-editing-area {
+    .ask-form .note-editing-area {
         border-radius: 5px;
         border: 1px solid #ced4da;
     }
     
-    .bbs-form .note-editor {
+    .ask-form .note-editor {
         border-radius: 5px;
         border: none;
     }
     
-    .bbs-form .note-btn-group {
+    .ask-form .note-btn-group {
         margin: 0;
     }
     
@@ -155,7 +155,7 @@
         </div>
 
     <div class="container-fluid align-self-end">
-    <div class="bbs-form">
+    <div class="ask-form">
     <form method="post">
         <h3 class="mb-4">문의 게시판</h3>
         <div class="mb-3">
