@@ -4,6 +4,7 @@
 
 
 
+
   <!DOCTYPE html>
   <html >
   <head>
@@ -17,6 +18,15 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <style>
+    @font-face{
+        font-family: MBCM;
+        src: url(/src/main/webapp/resources/fonts/MBCM.ttf);
+    }
+    @font-face {
+        font-family: TAEBAEK;
+        src: url(/src/main/webapp/resources/fonts/TAEBAEK.ttf);
+    }
+
         body, html {
           padding: 0;
           margin:0;
@@ -32,28 +42,130 @@
           background-color: white;
           z-index: 2;
         }
+        
+        /* The hero image */
+        .hero-image {
+        /* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
+        background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url("https://st2.depositphotos.com/8573964/12346/i/950/depositphotos_123466770-stock-photo-beach-in-the-morning-sun.jpg");
+        /* Set a specific height */
+        height: 70%;
+        /* Position and center the image to scale nicely on all screens */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        position: relative;
+        }
+
+        /* Place text in the middle of the image */
+        .hero-text {
+        text-align: center;
+        position: absolute;
+        top: 80%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: white;
+        }
+      /* 투명 */
+        .section.one {
+          background: none;
+          height:40%;
+          margin-left:0;
+        } 
+        .s1-text-title{
+            font-family: MBCM;
+            font-size:5em;
+        }
+        .s1-text-content{
+            font-family: TAEBAEK;
+            font-size:1.5em;
+            white-space: collapse balance;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .s2-text-title{
+            text-align:center;
+            font-family: MBCM;
+            font-size:4em;
+        }
+        .s2-text-content{
+            font-family: TAEBAEK;
+            font-size:1.0em;
+        }
+        .section.two {
+          background-color: rgba(204, 211, 207, 0.062);
+          height:170%;
+        }
+
 
         .section.three {
-            background-color: rgba(0, 0, 0, 0.4);
-          height:60%;
-        }
-        .section.one {
-          /* background-image: url(https://images.pexels.com/photos/1563356/pexels-photo-1563356.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1); */
-          background-color: rgba(5, 51, 27, 0.267);
-          height:60%;
+            height:30%;
+            background-color:white;
         }
 
-        /* 투명 */
-        .section.two {
-          background: none;
-        }    
-        .section.two.one{
-            height:40%;
+        .s3-text-title{
+            text-align:right;
+            font-family: MBCM;
+            font-size:4em;
         }
+        .s3-text-content{
+            font-family: TAEBAEK;
+            font-size:1.5em;
+            white-space: collapse balance;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+     
         .section.four{
-            background:none;
-            height:70%;
+            height:40%;
+            background-color: rgba(204, 211, 207, 0.062);
         }
+        .s4-text-title {
+            text-align:center;
+            font-family: MBCM;
+            font-size: 4em;
+        }
+        .s4-text-content {
+            font-family: TAEBAEK;
+            font-size:1.5em;
+            white-space: collapse balance;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+
+        .section.five {
+            height:40%;
+            background-color: gray;
+            margin-top:100px;
+        }
+
+        .s5-text-title {
+            text-align:center;
+            font-family: MBCM;
+            font-size: 4em;
+        }
+        .s5-text-content {
+            font-family: TAEBAEK;
+            font-size:0.5em;
+            font-weight: bold;
+            white-space: collapse balance;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+
+        .img {
+            filter: grayscale(100%);
+            -webkit-filter: grayscale(100%);
+        }
+
+        .img:hover {
+            filter: none;
+            -webkit-filter: grayscale(0);
+        }
+     
+      
+       
         .sleep-video {
             left: 0;
             top: 0;
@@ -492,79 +604,93 @@ $("#mainListDiv").fadeIn();
     <!-- <video src=""   loop muted autoplay>
     </video> -->
  
-    <video class="sleep-video" loop muted autoplay>
-        <source src="/resources/video/video.mp4" type="video/mp4">
+    <!-- <video class="sleep-video" loop muted autoplay>
+        <source src="/src/main/webapp/resources/video/video.mp4" type="video/mp4">
         
-      </video>
+      </video> -->
 
-      <div class="section two ">
-        <div class="row" style="position:absolute; left:30%;  top:33%; z-index: 9;">
-            <div class="col" style="margin-left:0px;font-weight:bolder;font-size: 10rem; color:transparent; text-shadow:  3px 3px 0px rgba(5,5,5, 0.2)">./CAMP.DO</div>
-        </div>
-      </div>
-      <div class="section one  w-100 " >
-        <div class="container" style="margin:10px; height:inherit; position:relative;">  
-            <div class="row mb-0 mt-5" > 
-                <h2 style="margin-top: 50px;">캠핑장</h2> 
+
+      <!-- 히어로 이미지 -->
+      <div class="hero-image">        
+            <div class="hero-text">
+                <h1>I am John Doe</h1>
+                <p>And I'm a Photographer</p>
+                <button>Hire me</button>
             </div>
-            <div class="row mt-5" style="width: 100%; flex-wrap: nowrap; align-items: center;">
-                <div class="card" style="width: 18rem; margin-right:20px; background-color: rgba(0, 0, 0, 0.2);">
-                    <img src="https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem; margin-right:20px; background-color: rgba(0, 0, 0, 0.2);">
-                    <img src="https://images.pexels.com/photos/1061640/pexels-photo-1061640.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem; margin-right:20px; background-color: rgba(0, 0, 0, 0.2);">
-                    <img src="https://images.pexels.com/photos/939723/pexels-photo-939723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
+      </div>
+
+      <!-- 소개글 -->
+    <div class="section one ">
+        <div class="row" style="position:absolute; left:10%; right:10%; top:5%; z-index: 9;">
+            <div class="s1-text-title">
+                /CAMP.do 캠핑
+            </div>
+            <div class="s1-text-content">
+                국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
+                대법원에 대법관을 둔다. 다만, 법률이 정하는 바에 의하여 대법관이 아닌 법관을 둘 수 있다. 여자의 근로는 특별한 보호를 받으며, 고용·임금 및 근로조건에 있어서 부당한 차별을 받지 아니한다. 국무총리 또는 행정각부의 장은 소관사무에 관하여 법률이나 대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다.
             </div>
         </div>
+    </div>
 
-      </div>
-      <div class="section two one"></div>
-      <div class="section three">
-        <div class="container" style="margin:10px; height:inherit; position:relative;">  
-            <div class="row mb-0 mt-5" > 
-                <h2 style="margin-top: 50px;">캠핑장</h2> 
+      <!-- 두번째 색션 -->
+    <div class="section two  w-100 " >
+        <div class="row" style="position:absolute; margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
+            <div class="s2-text-title">
+                요즘 핫한 캠핑장
             </div>
-            <div class="row mt-5" style="width: 100%; flex-wrap: nowrap; align-items: center;">
-                <div class="card" style="width: 18rem; margin-right:20px; background-color: rgba(0, 0, 0, 0.2);">
-                    <img src="https://images.pexels.com/photos/1687845/pexels-photo-1687845.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
+            <div class="s1-text-content">
+                국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
+            </div>
+            <div class="row">
+                <img class="img" src="/src/main/webapp/resources/images/beach01.jpg" alt="img1" width="500px" height="500px" style="width:500px; object-fit:cover; position: relative; margin-left:11.5vw; margin-top:2%; border-radius:1%">
+                        <img class="img" src="/src/main/webapp/resources/images/beach01.jpg" alt="img1" width="500px" height="500px" style="width:500px; object-fit:cover; position: relative; margin-left:2vw; margin-top:5%; border-radius:4%">
                 </div>
-                <div class="card" style="width: 18rem; margin-right:20px; background-color: rgba(0, 0, 0, 0.2);">
-                    <img src="https://images.pexels.com/photos/1061640/pexels-photo-1061640.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
-                <div class="card" style="width: 18rem; margin-right:20px; background-color: rgba(0, 0, 0, 0.2);">
-                    <img src="https://images.pexels.com/photos/939723/pexels-photo-939723.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" class="card-img-top" alt="...">
-                    <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                    </div>
-                </div>
+            <div class="row">
+                <img class="img" src="/src/main/webapp/resources/images/beach01.jpg" alt="img1" width="500px" height="500px" style="width:500px; object-fit:cover; position: relative; margin-left:11vw; margin-top:5%; border-radius: 20%;;">
+                <img class="img" src="/src/main/webapp/resources/images/beach01.jpg" alt="img1" width="500px" height="500px" style="width:500px; object-fit:cover; position: relative; margin-left:3vw; margin-top:16vh">
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 세번째 색션 -->
+    <div class="section three">
+        <div class="row" style="position:absolute; left:10%; right:10%; top:5%; z-index: 9;">
+            <div class="s3-text-title">
+                /CAMP.ing 의 이유 
+            </div>
+            <div class="s3-text-content">
+                국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
+                대법원에 대법관을 둔다. 다만, 법률이 정하는 바에 의하여 대법관이 아닌 법관을 둘 수 있다. 여자의 근로는 특별한 보호를 받으며, 고용·임금 및 근로조건에 있어서 부당한 차별을 받지 아니한다. 국무총리 또는 행정각부의 장은 소관사무에 관하여 법률이나 대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다.
             </div>
         </div>
-      </div>
-      <div class="section four"></div>
+    </div>
 
+    
+    <div class="section four">
+        <div class="row" style="position:absolute; margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
+            <div class="s4-text-title">
+                캠핑, together
+            </div>
+            <div class="s4-text-content">
+                국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
+                대법원에 대법관을 둔다. 다만, 법률이 정하는 바에 의하여 대법관이 아닌 법관을 둘 수 있다. 여자의 근로는 특별한 보호를 받으며, 고용·임금 및 근로조건에 있어서 부당한 차별을 받지 아니한다. 국무총리 또는 행정각부의 장은 소관사무에 관하여 법률이나 대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다.
+            </div>
+        </div>
+    </div>
+  
+        <div class="section five">
+            <div class="row" style="position:absolute; margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
+                <div class="s5-text-title">
+                    푸터 
+                </div>
+                <div class="s5-text-content">
+                    국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
+                    국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
+                    국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
+                </div>
+              
+        </div>
+    </div>
   </body>
-  </html>
+  </html>  
