@@ -44,17 +44,26 @@ a {
 	text-decoration: none;
 }
 
-table {
-	width: 600px;
-	border-collapse: collapse;
-	text-align: center;
-}
+table{width: 600px;
+    height: 300px;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto; /* 수평 가운데 정렬 */
+    margin-top: 100px;}
 
-table, th, td {
-	border: 1px solid black;
-	padding: 3px;
-}
+th, td{
+		padding: 8px;
+		text-align: center;
+		border-bottom: 1px solid #ddd;
+	}
+tr:nth-child(even) {
+        background-color: #f2f2f2;
+    }
 
+   th {
+        background-color: #637F42;
+        color: white;
+    }
 div {
 	margin: auto;
 	text-align: center;
@@ -130,26 +139,36 @@ function sendData(f) {
 		
 		<div class="user-info">
 		 <h4>내 정보</h4>
-		<form action="myPageEdit.do" method="post">
 		
-			<table class="user-table">
-				<tr>
-					<td class="label">이름</td>
-					<td class="user-info">이소연</td>
-				</tr>
-				<tr>
-					<td class="label">아이디</td>
-					<td class="user-info">${u_id}</td>
-				</tr>
-				<tr>
-					<td class="label">휴대전화</td>
-					<td class="user-info">${u_phone}</td>
-				</tr>
-				<tr>
-					<td class="label">이메일</td>
-					<td class="user-info">${u_email}</td>
-				</tr>
-			</table>
+		<form action="myPageEdit.do" method="post">
+		<table>
+				<c:choose>
+	     			<c:when test="${empty list}">
+	     				<tr><td colspan="4"><h3>나의 문의 내역이 없습니다.</h3> </td></tr>
+	     			</c:when>
+	     			<c:otherwise>
+	     			  <c:forEach var="k" items="${list}" varStatus="vs">
+	     			  	  <tr>
+                    <th>이름</th>
+                    <td>${k.u_name }</td>
+                </tr>
+                <tr>
+                    <th>아이디</th>
+                    <td>${k.u_id }</td>
+                </tr>
+                <tr>
+                    <th>휴대전화</th>
+                    <td>${k.u_phone }</td>
+                </tr>
+                <tr>
+                    <th>이메일</th>
+                    <td>${k.u_email }</td>
+                </tr>
+	     			  </c:forEach> 
+	     			</c:otherwise>
+	     		</c:choose>
+			</tbody>
+		</table>
 			&nbsp;
 			<div class="button-wrapper">
 				<input type="submit" onclick="sendData(this.form)" value="수정">

@@ -1,7 +1,7 @@
 package com.team.myqna.vo;
 
 public class MyQnaVO {
-	private String q_idx, q_content, q_response, q_name, q_status,u_idx ;
+	private String q_idx, q_content, q_response, q_name, q_status,u_idx, f_name ;
 
 	public String getQ_idx() {
 		return q_idx;
@@ -49,6 +49,14 @@ public class MyQnaVO {
 
 	public void setU_idx(String u_idx) {
 		this.u_idx = u_idx;
+	}
+
+	public String getF_name() {
+		return f_name;
+	}
+
+	public void setF_name(String f_name) {
+		this.f_name = f_name;
 	}
 
 }

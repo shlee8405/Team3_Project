@@ -5,7 +5,7 @@
 <mapper namespace="mypage">
 	
 	<select id="myinfo" resultType="mvo">
-		select * from USERS where u_idx = #{u_idx}
+		select * from USERS where u_idx = 1
 	</select>
 	
 	<select id="mypagemain" resultType="mmvo">
