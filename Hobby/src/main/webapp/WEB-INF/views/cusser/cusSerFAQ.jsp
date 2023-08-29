@@ -98,7 +98,7 @@ $(window).scroll(function() {
 });
 
 $(document).ready(function() {
-	$("#search-button").click(function() {
+    $("#search-button").click(function() {
         performSearch();
     });
 
@@ -107,8 +107,7 @@ $(document).ready(function() {
             performSearch();
         }
     });
-	
-	
+
     // 검색 버튼 클릭 이벤트
     function performSearch() {
         var searchTerm = $("#search-input").val().toLowerCase();
@@ -122,6 +121,7 @@ $(document).ready(function() {
         });
     }
 });
+
 
 </script>
 </head>

@@ -74,10 +74,37 @@ $(window).scroll(function() {
     }
 });
 
+$(document).ready(function() {
+    $("#search-button").click(function() {
+        performSearch();
+    });
+
+    $("#search-input").keyup(function(event) {
+        if (event.keyCode === 13) {
+            performSearch();
+        }
+    });
+
+    // 검색 버튼 클릭 이벤트
+    function performSearch() {
+        var searchTerm = $("#search-input").val().toLowerCase();
+        $(".table tbody tr").each(function() {
+            var name = $(this).find("td:nth-child(2)").text().toLowerCase();
+            var content = $(this).find("td:nth-child(3)").text().toLowerCase();
+            var response = $(this).find("td:nth-child(4)").text().toLowerCase();
+
+            if (name.includes(searchTerm) || content.includes(searchTerm) || response.includes(searchTerm)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+});
+
     function go_report() {
         location.href = "/report.do";
     }
-    
     
 </script>
 </head>
@@ -123,6 +150,14 @@ $(window).scroll(function() {
         </div>
 
         <div class="container-fluid align-self-end">
+		    <!-- 검색창 추가 -->
+		    <form class="d-flex justify-content-end mb-3" role="search" id="search-form" onsubmit="return false;">
+		        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+		        <button class="btn btn-success" type="button" id="search-button">Search</button>
+		    </form>
+		    
+		    <!-- ... rest of your content ... -->
+		
             <div class="card-body">
                 <!-- Default Table -->
                 <table class="table caption-top" style="background-color: white; border-radius: 10px;">
