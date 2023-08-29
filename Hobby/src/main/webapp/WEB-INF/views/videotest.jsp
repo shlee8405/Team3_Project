@@ -134,7 +134,7 @@
         
 
         .section.five {
-            height:40%;
+            height:20%;
             background-color: gray;
             margin-top:100px;
         }
@@ -166,15 +166,7 @@
      
       
        
-        .sleep-video {
-            left: 0;
-            top: 0;
-            position: fixed;
-            width: 100%;
-            z-index: 1;
-        }
-
-
+     
 
 
         /* NAVBAR STYLE */
@@ -623,7 +615,7 @@ $("#mainListDiv").fadeIn();
     <div class="section one ">
         <div class="row" style="position:absolute; left:10%; right:10%; top:5%; z-index: 9;">
             <div class="s1-text-title">
-                /CAMP.do 캠핑
+                /CAMP.do
             </div>
             <div class="s1-text-content">
                 국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
@@ -636,7 +628,7 @@ $("#mainListDiv").fadeIn();
     <div class="section two  w-100 " >
         <div class="row" style="position:absolute; margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
             <div class="s2-text-title">
-                요즘 핫한 캠핑장
+                /요즘 핫한 곳으로.go!
             </div>
             <div class="s1-text-content">
                 국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
@@ -657,7 +649,7 @@ $("#mainListDiv").fadeIn();
     <div class="section three">
         <div class="row" style="position:absolute; left:10%; right:10%; top:5%; z-index: 9;">
             <div class="s3-text-title">
-                /CAMP.ing 의 이유 
+                /CAMPing 의 이유.do 
             </div>
             <div class="s3-text-content">
                 국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
@@ -670,7 +662,7 @@ $("#mainListDiv").fadeIn();
     <div class="section four">
         <div class="row" style="position:absolute; margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
             <div class="s4-text-title">
-                캠핑, together
+                /캠핑, together.do
             </div>
             <div class="s4-text-content">
                 국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
@@ -682,7 +674,7 @@ $("#mainListDiv").fadeIn();
         <div class="section five">
             <div class="row" style="position:absolute; margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
                 <div class="s5-text-title">
-                    푸터 
+                    /푸터.do 
                 </div>
                 <div class="s5-text-content">
                     국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
