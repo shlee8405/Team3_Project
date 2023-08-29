@@ -31,7 +31,7 @@
 	</update>
 	
 	<select id="cmtList" parameterType="String" resultType="gcvo">
-		select * from GROUPCOMMENTS where g_idx = #{g_idx}
+		select * from GROUPCOMMENTS where g_idx = #{g_idx} and gc_status = '1'
 	</select>
 	
 	<select id="getUserCmtInfo" parameterType="String" resultType="uvo">
