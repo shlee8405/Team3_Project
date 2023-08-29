@@ -7,6 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+.containerHD {
+    justify-content: flex-end;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.logo {
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
+.navlinks {
+    flex-wrap: nowrap;
+}
+a {
+    white-space: nowrap;
+}
 html,
 body {
     margin: 0;
@@ -34,6 +50,7 @@ body {
 }
 
 .navHD div.logo {
+    margin-right: auto;
     float: left;
     width: auto;
     height: auto;
@@ -107,6 +124,7 @@ body {
         display: block;
     }
     .navHD div.logo {
+    margin-right: auto;
         margin-left: 15px;
     }
     .navHD div.main_list {
