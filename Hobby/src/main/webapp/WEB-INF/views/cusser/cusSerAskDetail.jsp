@@ -18,6 +18,11 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
     
+    .container-padding {
+        overflow-y: auto; /* 내용이 넘칠 경우 스크롤 생성 */
+        max-height: calc(650px); /* 최대 높이를 뷰포트 높이에서 헤더 높이를 뺀 값으로 제한 */
+    }
+    
     .table th, .table td {
         vertical-align: middle;
     }
@@ -149,14 +154,14 @@ $(window).scroll(function() {
 		
 		
 		<div class="container-fluid align-self-end">
+		<div class="card-body container-padding">
             <div class="card-body">
                 <!-- Default Table -->
                 <table class="table caption-top" style="background-color: white; border-radius: 10px;">
-                    <caption class="text-center">1:1 문의</caption>
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">작성자</th>
-                            <td>${qvo.q_name}</td>
+                            <td>${user.u_name}</td>
                         </tr>
                         <tr>
                             <th scope="col" class="text-center">내용</th>
@@ -179,6 +184,7 @@ $(window).scroll(function() {
                 <button type="button" class="btn btn-primary" onclick="go_AskDetail(${qvo.q_idx})">문의 수정</button>
                 <button type="button" class="btn btn-primary" onclick="go_Delete(${qvo.q_idx})">문의 삭제</button>
             </div>
+        </div>
         </div>
     </div>
 </div>

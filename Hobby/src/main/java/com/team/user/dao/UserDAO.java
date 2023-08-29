@@ -58,4 +58,10 @@ public class UserDAO {
     
     
     
+    
+    
+    public List<UserVO> getUsers(String u_idx) {
+    	return sqlSessionTemplate.selectList("user.one",u_idx);
+    }
+    
 }

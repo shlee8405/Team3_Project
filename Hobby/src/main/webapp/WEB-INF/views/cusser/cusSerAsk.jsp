@@ -189,7 +189,7 @@
 				            <c:otherwise>
 				                <tr>
 				                    <td>${loop.count}</td>
-				                    <td>${k.q_name}</td>
+				                    <td>${user.u_name}</td>
 				                    <td>
 				                        <a href="/go_AskDetail.do?q_idx=${k.q_idx}">상세보기</a>
 				                    </td>

@@ -30,4 +30,8 @@ public interface UserService {
 	
 	
 	
+	
+	// 유져 1명의 정보 가져오기
+	List<UserVO> getUsers(String u_idx);
+	
 }

@@ -19,8 +19,8 @@ public class QnaServiceImpl implements QnaService {
 	}
 	
 	@Override
-	public int getInsert(QnaVO qvo) {
-		return qnaDAO.getInsert(qvo);
+	public int getInsert(QnaVO qvo,String u_idx) {
+		return qnaDAO.getInsert(qvo,u_idx);
 	}
 	
 	@Override
@@ -36,5 +36,10 @@ public class QnaServiceImpl implements QnaService {
 	@Override
 	public int UpdateQna(QnaVO qvo) {
 		return qnaDAO.UpdateQna(qvo);
+	}
+	
+	@Override
+	public List<QnaVO> getQnAOne(String q_idx) {
+		return qnaDAO.getQnAOne(q_idx);
 	}
 }

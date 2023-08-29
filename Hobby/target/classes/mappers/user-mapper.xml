@@ -40,6 +40,12 @@
     </select>
     
     
+    
+    <select id="one" parameterType="String" resultType="uvo">
+    	select * from USERS where u_idx = #{u_idx}
+    </select>
+    
+    
 </mapper>
 
 

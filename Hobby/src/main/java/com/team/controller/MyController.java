@@ -120,34 +120,44 @@ public class MyController {
 
 
 	@RequestMapping("/cusSerAsk.do")
-	public ModelAndView goCusSerAsk() /* 1대1 문의 페이지 */ {
+	public ModelAndView goCusSerAsk(HttpServletRequest request) /* 1대1 문의 페이지 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerAsk");
-		List<QnaVO> list = qnaService.getAllQna();
+		String q_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(q_idx);
+		List<QnaVO> list = qnaService.getQnAOne(q_idx);
 		mv.addObject("list", list);
+		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
 	
 
 	@GetMapping("/go_inquiry.do")
-	public ModelAndView goinquiry() /* 1대1 문의 작성 페이지로 이동 */ {
+	public ModelAndView goinquiry(HttpServletRequest request) /* 1대1 문의 작성 페이지로 이동 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerAskQ");
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
 		List<QnaVO> list = qnaService.getAllQna();
 		mv.addObject("alllist", list);
+		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
 
 	@PostMapping("/insert_QNA.do")/* 1대1 문의 넣기 */ 
 	public ModelAndView insert_QNA(QnaVO qvo, HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
-		int res = qnaService.getInsert(qvo);
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		int res = qnaService.getInsert(qvo,u_idx);
 		return mv;
 	}
 
 	@GetMapping("/go_AskDetail.do")/* 1:1 상세 페이지 */ 
-	public ModelAndView goAskDetail(@ModelAttribute("q_idx") String q_idx){
+	public ModelAndView goAskDetail(@ModelAttribute("q_idx") String q_idx,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("cusser/cusSerAskDetail");
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
 		QnaVO qvo = qnaService.Detail(q_idx);
 		mv.addObject("qvo", qvo);
+		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
 
