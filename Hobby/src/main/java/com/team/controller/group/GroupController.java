@@ -125,7 +125,6 @@ public class GroupController {
 		ModelAndView mv = new ModelAndView("group/groupOnelist");
 		String g_idx = request.getParameter("g_idx");
 		String cPage = request.getParameter("cPage");
-		
 		// 사용자 정보 가져오기
         //UserVO userInfo = (UserVO) session.getAttribute("userInfo");
 		

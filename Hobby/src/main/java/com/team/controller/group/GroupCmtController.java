@@ -44,5 +44,15 @@ public class GroupCmtController {
 		int result = groupService.getCommInsert(gcvo);
 		return mv;
 	}
+	@PostMapping("/groupCmtDel.do")
+	public ModelAndView commentDel(@RequestParam("gc_idx") String gc_idx, @ModelAttribute("cPage") String cPage,
+			@ModelAttribute("g_idx") String g_idx) {
+		ModelAndView mv = new ModelAndView("redirect:/group_onelist.do");
+		//int result = groupService.commentDel(gc_idx);
+		return mv;
+	}
+	
+	
+	
 	
 }

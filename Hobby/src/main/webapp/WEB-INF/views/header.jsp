@@ -7,6 +7,22 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+.containerHD {
+    justify-content: flex-end;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.logo {
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
+.navlinks {
+    flex-wrap: nowrap;
+}
+a {
+    white-space: nowrap;
+}
 html,
 body {
     margin: 0;
@@ -48,6 +64,7 @@ body {
 }
 
 .navHD div.logo {
+    margin-right: auto;
     float: left;
     width: auto;
     height: auto;
@@ -119,7 +136,51 @@ body {
     .container {
         margin: 0;
     }
+
+@media screen and (max-width:768px) {
+    .navTrigger {
+        display: block;
+    }
+    .navHD div.logo {
+    margin-right: auto;
+        margin-left: 15px;
+    }
+    .navHD div.main_list {
+        width: 100%;
+        height: 0;
+        overflow: hidden;
+    }
+    .navHD div.show_list {
+        height: auto;
+        display: none;
+    }
+    .navHD div.main_list ul {
+        flex-direction: column;
+        width: 100%;
+        height: 100vh;
+        right: 0;
+        left: 0;
+        bottom: 0;
+        background-color: #111;
+        /*same background color of navbar*/
+        background-position: center top;
+    }
+    .navHD div.main_list ul li {
+        width: 100%;
+        text-align: right;
+    }
+    .navHD div.main_list ul li a {
+        text-align: center;
+        width: 100%;
+        font-size: 3rem;
+        padding: 20px;
+    }
+    .navHD div.media_button {
+        display: block;
+    }
+}
 } */
+>>>>>>> refs/remotes/origin/main
 
 
 
