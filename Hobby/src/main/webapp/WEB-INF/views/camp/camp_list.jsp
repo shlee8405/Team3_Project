@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>캠핑장 리스트(카드형태로 css 적용)</title>
+<title>캠핑장 리스트</title>
 
 <!-- bootstrap cdn -->
 <link rel="stylesheet" href="/resources/css/camp/camp_list.css">
@@ -67,7 +67,6 @@
 		</section>
 		</div>
 		
-
 			<div id="camp_list">
 				<!-- 이 안에 캠핑장 리스트 보여주기 -->
 				<!-- <div class="product-grid">
