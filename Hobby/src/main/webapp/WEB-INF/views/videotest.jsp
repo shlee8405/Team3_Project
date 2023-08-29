@@ -20,11 +20,11 @@
 <style>
     @font-face{
         font-family: MBCM;
-        src: url(/src/main/webapp/resources/fonts/MBCM.ttf);
+        src: url(/resources/fonts/MBCM.ttf);
     }
     @font-face {
         font-family: TAEBAEK;
-        src: url(/src/main/webapp/resources/fonts/TAEBAEK.ttf);
+        src: url(/resources/fonts/TAEBAEK.ttf);
     }
 
         body, html {
@@ -642,12 +642,12 @@ $("#mainListDiv").fadeIn();
                 국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
             </div>
             <div class="row">
-                <img class="img" src="/src/main/webapp/resources/images/beach01.jpg" alt="img1" width="500px" height="500px" style="width:500px; object-fit:cover; position: relative; margin-left:11.5vw; margin-top:2%; border-radius:1%">
-                        <img class="img" src="/src/main/webapp/resources/images/beach01.jpg" alt="img1" width="500px" height="500px" style="width:500px; object-fit:cover; position: relative; margin-left:2vw; margin-top:5%; border-radius:4%">
+                <img class="img" src="/resources/images/beach01.jpg" alt="img1" width="500px" height="500px" style="width:500px; object-fit:cover; position: relative; margin-left:11.5vw; margin-top:2%; border-radius:1%">
+                        <img class="img" src="/resources/images/beach01.jpg" alt="img1" width="500px" height="500px" style="width:500px; object-fit:cover; position: relative; margin-left:2vw; margin-top:5%; border-radius:4%">
                 </div>
             <div class="row">
-                <img class="img" src="/src/main/webapp/resources/images/beach01.jpg" alt="img1" width="500px" height="500px" style="width:500px; object-fit:cover; position: relative; margin-left:11vw; margin-top:5%; border-radius: 20%;;">
-                <img class="img" src="/src/main/webapp/resources/images/beach01.jpg" alt="img1" width="500px" height="500px" style="width:500px; object-fit:cover; position: relative; margin-left:3vw; margin-top:16vh">
+                <img class="img" src="/resources/images/beach01.jpg" alt="img1" width="500px" height="500px" style="width:500px; object-fit:cover; position: relative; margin-left:11vw; margin-top:5%; border-radius: 20%;;">
+                <img class="img" src="/resources/images/beach01.jpg" alt="img1" width="500px" height="500px" style="width:500px; object-fit:cover; position: relative; margin-left:3vw; margin-top:16vh">
             </div>
 
         </div>
