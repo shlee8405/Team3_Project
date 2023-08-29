@@ -102,7 +102,7 @@
 				</tr>
 				<tr>
 					<th>작성자</th>
-					<td><input type="text" name="u_idx" value="1" readonly /></td>
+					<td><input type="text" name="u_idx" value="<%=request.getSession().getServletContext().getAttribute("sessionUidx") %>" readonly /></td>
 				</tr>
 				<tr>
 					<th>모임 총인원</th>

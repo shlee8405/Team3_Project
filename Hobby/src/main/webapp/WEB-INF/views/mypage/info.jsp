@@ -118,16 +118,12 @@ function sendData(f) {
 		<h1 class="mypage-title">마이페이지</h1>
 
 			<!-- 메뉴바 -->
-		<div class="btn-group btn-custom" role="group" aria-label="Basic radio toggle button group">
-			<input type="radio" class="btn-check btn-custom" name="btnradio" id="btnradio1" autocomplete="off" checked>
-			<label class="btn btn-outline btn-custom" for="btnradio1">내가 찜한 캠핑장</label>
-			<input type="radio" class="btn-check btn-custom" name="btnradio" id="btnradio2" autocomplete="off">
-			<label class="btn btn-outline btn-custom" for="btnradio2">내가 작성한 리뷰</label>
-			<input type="radio"class="btn-check btn-custom" name="btnradio" id="btnradio3" autocomplete="off">
-			<label class="btn btn-outline btn-custom" for="btnradio3">1:1문의 내역</label>
-			<input type="radio"class="btn-check btn-custom" name="btnradio" id="btnradio4" autocomplete="off">
-			<label class="btn btn-outline btn-custom" for="btnradio4">내 정보</label>
-		</div>
+		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myqna.do')">1:1문의 내역</button>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
+            </div>
 		
 		<!-- 공백 -->
 		<div style="height: 50px;"></div>
@@ -161,5 +157,12 @@ function sendData(f) {
 			</form>
 		</div>
 	</div>
+	<script type="text/javascript">
+		function goToPage(url){
+			location.href = url;
+		}
+		 
+	</script>
+	
 </body>
 </html>
