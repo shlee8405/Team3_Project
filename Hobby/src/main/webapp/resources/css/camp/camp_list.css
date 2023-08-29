@@ -3,7 +3,7 @@
 #carouselExampleFade img {
 	/* 슬라이드 이미지 사이즈 */
 	width:2000px;
-	height:310px;
+	height:380px;
 }
 
 .searchBox {
@@ -11,8 +11,8 @@
   width: 100%;
   text-align: center;
   margin: auto;
-  margin-top: 43px; /* 헤더와의 거리를 원하는 값으로 설정하세요 */
-  margin-bottom: -40PX; /* BEST 캠핑장이랑 검색창 사이 간격 */
+  margin-top: 105px; /* 헤더와의 거리를 원하는 값으로 설정하세요 */
+  margin-bottom: -10px; /* BEST 캠핑장이랑 검색창 사이 간격 */
 }
 
 .schbox-wrap {
