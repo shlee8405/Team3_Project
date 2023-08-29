@@ -2,7 +2,7 @@
 #titleBox img {
 	/* 슬라이드 이미지 사이즈 */
 	width:2000px;
-	height:320px;
+	height:380px;
 }
 
 .container2{
@@ -13,9 +13,9 @@
     margin: 0;
     position: relative;
   	z-index: 1;
-	margin-top: 20px; 
+	margin-top: 43px; 
 	flex-wrap: wrap;
-	margin-top: -200px;
+	margin-top: -145px;
 }
 
 #titleBox {
