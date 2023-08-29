@@ -27,7 +27,7 @@ public class AdminController {
 	
 	@GetMapping("/shltest.do")
 	public ModelAndView goSHLTEST() {
-		ModelAndView mv = new ModelAndView("test/shl_test");
+		ModelAndView mv = new ModelAndView("videotest");
 		return mv;
 	}
 }

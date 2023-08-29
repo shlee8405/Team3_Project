@@ -45,6 +45,20 @@ body {
   
 }
 
+.footerHD {
+	width: 100%;
+	height:0px;
+	position: fixed;
+	line-height:65px;
+	text-align:center;
+    background-color:#0F4200;
+    bottom: 0;
+    z-index: 10;
+    padding:0;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s, opacity 0.3s linear;
+}
 .navHD, ::after, ::before {
     box-sizing: content-box;
 }
@@ -108,16 +122,20 @@ body {
     display: none;
 }
 
-
+.navHD {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
 
 
 /* Media qurey section */
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+/* @media screen and (min-width: 768px) and (max-width: 1024px) {
     .container {
         margin: 0;
     }
-}
 
 @media screen and (max-width:768px) {
     .navTrigger {
@@ -161,196 +179,11 @@ body {
         display: block;
     }
 }
+} */
+>>>>>>> refs/remotes/origin/main
 
 
-.navTrigger {
-    cursor: pointer;
-    width: 30px;
-    height: 25px;
-    margin: auto;
-    position: absolute;
-    right: 30px;
-    top: 0;
-    bottom: 0;
-}
 
-.navTrigger i {
-    background-color: #fff;
-    border-radius: 2px;
-    content: '';
-    display: block;
-    width: 100%;
-    height: 4px;
-}
-
-.navTrigger i:nth-child(1) {
-    -webkit-animation: outT 0.8s backwards;
-    animation: outT 0.8s backwards;
-    -webkit-animation-direction: reverse;
-    animation-direction: reverse;
-}
-
-.navTrigger i:nth-child(2) {
-    margin: 5px 0;
-    -webkit-animation: outM 0.8s backwards;
-    animation: outM 0.8s backwards;
-    -webkit-animation-direction: reverse;
-    animation-direction: reverse;
-}
-
-.navTrigger i:nth-child(3) {
-    -webkit-animation: outBtm 0.8s backwards;
-    animation: outBtm 0.8s backwards;
-    -webkit-animation-direction: reverse;
-    animation-direction: reverse;
-}
-
-.navTrigger.active i:nth-child(1) {
-    -webkit-animation: inT 0.8s forwards;
-    animation: inT 0.8s forwards;
-}
-
-.navTrigger.active i:nth-child(2) {
-    -webkit-animation: inM 0.8s forwards;
-    animation: inM 0.8s forwards;
-}
-
-.navTrigger.active i:nth-child(3) {
-    -webkit-animation: inBtm 0.8s forwards;
-    animation: inBtm 0.8s forwards;
-}
-
-@-webkit-keyframes inM {
-    50% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(45deg);
-    }
-}
-
-@keyframes inM {
-    50% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(45deg);
-    }
-}
-
-@-webkit-keyframes outM {
-    50% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(45deg);
-    }
-}
-
-@keyframes outM {
-    50% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(45deg);
-    }
-}
-
-@-webkit-keyframes inT {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@keyframes inT {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@-webkit-keyframes outT {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@keyframes outT {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@-webkit-keyframes inBtm {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-@keyframes inBtm {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-@-webkit-keyframes outBtm {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-@keyframes outBtm {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(-9px) rotate(135deg);
-    }
-}
 
 .affix {
     padding: 0;
@@ -359,7 +192,11 @@ body {
     z-index:8;
 }
 
-
+.affix2 {
+	height:50px;
+	visibility: visible;
+	opacity:1;
+}
 
 
 
@@ -408,11 +245,7 @@ body {
                     <li><a href="#">로그인</a></li>
                 </ul>
             </div>
-            <span class="navTrigger">
-                <i></i>
-                <i></i>
-                <i></i>
-            </span>
+          
         </div>
     </nav>
 
@@ -424,11 +257,24 @@ body {
         $(window).scroll(function() {
             if ($(document).scrollTop() > 50) {
                 $('.navHD').addClass('affix');
+                $('.footerHD').addClass('affix2');
                 console.log("OK");
             } else {
                 $('.navHD').removeClass('affix');
+                $('.footerHD').removeClass('affix2');
+            }
+            
+            if ($(document).scrollTop() > 200) {
+                $('.footerHD').addClass('affix2');
+            } else {
+                $('.footerHD').removeClass('affix2');
             }
         });
     </script>
+    
+    
+    <footer class="footerHD" >
+    	<div> hi</div>
+    </footer>
 </body>
 </html>
