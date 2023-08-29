@@ -9,7 +9,8 @@ pom.properties
 **/pom.properties
 root-context.xml
 *.properties
-
+.classpath
+.factorypath
 
 # Log file
 *.log
