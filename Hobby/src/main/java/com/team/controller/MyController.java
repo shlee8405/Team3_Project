@@ -1,14 +1,20 @@
 package com.team.controller;
 
+import java.io.File;
 import java.util.List;
+import java.util.UUID;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.faq.service.FaqService;
@@ -114,45 +120,59 @@ public class MyController {
 
 
 	@RequestMapping("/cusSerAsk.do")
-	public ModelAndView goCusSerAsk() /* 1대1 문의 페이지 */ {
+	public ModelAndView goCusSerAsk(HttpServletRequest request) /* 1대1 문의 페이지 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerAsk");
-		List<QnaVO> list = qnaService.getAllQna();
-		mv.addObject("alllist", list);
+		String q_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(q_idx);
+		List<QnaVO> list = qnaService.getQnAOne(q_idx);
+		mv.addObject("list", list);
+		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
+	
 
 	@GetMapping("/go_inquiry.do")
-	public ModelAndView goinquiry() /* 1대1 문의 작성 페이지로 이동 */ {
-		ModelAndView mv = new ModelAndView("cusser/cusSerQ");
+	public ModelAndView goinquiry(HttpServletRequest request) /* 1대1 문의 작성 페이지로 이동 */ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerAskQ");
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
 		List<QnaVO> list = qnaService.getAllQna();
 		mv.addObject("alllist", list);
+		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
 
-	@PostMapping("/insert_QNA.do")
-	public ModelAndView insert_QNA(QnaVO qvo)/* 1대1 문의 넣기 */ {
+	@PostMapping("/insert_QNA.do")/* 1대1 문의 넣기 */ 
+	public ModelAndView insert_QNA(QnaVO qvo, HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
-		int res = qnaService.getInsert(qvo);
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		int res = qnaService.getInsert(qvo,u_idx);
 		return mv;
 	}
 
-	@GetMapping("/go_AskDetail.do")
-	public ModelAndView goAskDetail(@ModelAttribute("q_idx") String q_idx)/* 1:1 상세 페이지 */ {
+	@GetMapping("/go_AskDetail.do")/* 1:1 상세 페이지 */ 
+	public ModelAndView goAskDetail(@ModelAttribute("q_idx") String q_idx,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("cusser/cusSerAskDetail");
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
 		QnaVO qvo = qnaService.Detail(q_idx);
 		mv.addObject("qvo", qvo);
+		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
 
-	@RequestMapping("/go_updateQ.do") /* 문의 페이지로 이동 */
-	public ModelAndView goUpdateQ(@ModelAttribute("q_idx") String q_idx) {
-		ModelAndView mv = new ModelAndView("cusser/cusSerUpdate");
+	@RequestMapping("/go_updateQ.do") /* 문의 수정 페이지로 이동 */
+	public ModelAndView goUpdateQ(@ModelAttribute("q_idx") String q_idx,HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("cusser/cusSerAskUpdate");
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
 		QnaVO qvo = qnaService.Detail(q_idx);
 		mv.addObject("qvo", qvo);
+		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
 
-	@RequestMapping("/Update_QNA.do") /* 문의 수정 */
+	@RequestMapping("/Update_QNA.do") /* 문의 수정하기 */
 	public ModelAndView goUpdateQna(QnaVO qvo) {
 		ModelAndView mv = new ModelAndView("redirect:/cusSerAsk.do");
 		int res = qnaService.UpdateQna(qvo);
@@ -166,40 +186,76 @@ public class MyController {
 		return mv;
 	}
 	
-	@GetMapping("/go_AskDelete.do")
-	public ModelAndView goAskDelete(@ModelAttribute("q_idx") String q_idx)/* 삭제 페이지로 이동 */ {
+	@GetMapping("/go_AskDelete.do")/* 문의 삭제 페이지로 이동 */ 
+	public ModelAndView goAskDelete(@ModelAttribute("q_idx") String q_idx){
 		ModelAndView mv = new ModelAndView("cusser/cusSerAskDelete");
 		QnaVO qvo = qnaService.Detail(q_idx);
 		mv.addObject("qvo", qvo);
 		return mv;
 	}
 
-	@RequestMapping("/cusSerReport.do")
-	public ModelAndView goCusSerReport() /* 신고 목록 페이지로 이동 */ {
+	@RequestMapping("/cusSerReport.do") /* 신고 목록 페이지로 이동 */ 
+	public ModelAndView goCusSerReport(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("cusser/cusSerReport");
-		List<ReportVO> list = reportService.getAllReports();
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
+		List<ReportVO> list = reportService.getReports(u_idx);
 		mv.addObject("list", list);
+		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
 	
-	@GetMapping("/go_ReportDetail.do")
-	public ModelAndView goReportDetail(@ModelAttribute("r_idx") String r_idx)/* 신고 상세 페이지 */ {
+	@GetMapping("/go_ReportDetail.do")/* 신고 상세 페이지 */ 
+	public ModelAndView goReportDetail(@ModelAttribute("r_idx") String r_idx,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("cusser/cusSerReportDetail");
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
 		ReportVO rvo = reportService.Detail(r_idx);
+		mv.addObject("user", Ulist.get(0));
 		mv.addObject("rvo", rvo);
+		return mv;
+	}
+	
+	@RequestMapping("/go_updateReport.do") /* 신고 수정 페이지로 이동 */
+	public ModelAndView goUpdateReport(@ModelAttribute("r_idx") String r_idx,HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("cusser/cusSerReportUpdate");
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
+		ReportVO rvo = reportService.Detail(r_idx);
+		mv.addObject("user", Ulist.get(0));
+		mv.addObject("rvo", rvo);
+		return mv;
+	}
+	
+	@RequestMapping("/updateReport.do") /* 신고 수정하기 */
+	public ModelAndView goUpdateReport(ReportVO rvo) {
+		ModelAndView mv = new ModelAndView("redirect:/cusSerReport.do");
+		int res = reportService.UpdateReport(rvo);
+		return mv;
+	}
+
+	@RequestMapping("/go_deleteReport.do") /* 신고 삭제 */
+	public ModelAndView goDeleteReport(@ModelAttribute("r_idx") String r_idx) {
+		ModelAndView mv = new ModelAndView("redirect:/cusSerReport.do");
+		int res = reportService.DeleteReport(r_idx);
 		return mv;
 	}
 
 	@GetMapping("/report.do")
-	public ModelAndView goReport()/* 신고 작성 페이지로 이동 */ {
-		ModelAndView mv = new ModelAndView("cusser/cusSerR");
+	public ModelAndView goReport(HttpServletRequest request)/* 신고 작성 페이지로 이동 */ {
+		ModelAndView mv = new ModelAndView("cusser/cusSerReportR");
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
+		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
 
 	@PostMapping("/report_insert.do") /* 신고 넣기 */
-	public ModelAndView goReportInsert(ReportVO rvo) {
+	public ModelAndView goReportInsert(ReportVO rvo,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("redirect:/cusSerReport.do");
-		int res = reportService.getReportInsert(rvo);
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
+		int res = reportService.getReportInsert(rvo,u_idx);
 		return mv;
 	}
 

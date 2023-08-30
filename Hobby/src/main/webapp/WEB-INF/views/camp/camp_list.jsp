@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>캠핑장 리스트(카드형태로 css 적용)</title>
+<title>캠핑장 리스트</title>
 
 <!-- bootstrap cdn -->
 <link rel="stylesheet" href="/resources/css/camp/camp_list.css">
@@ -24,14 +24,49 @@
 	
 	
 	<div class="container2">
-<!-- 	<h3 class="h3">캠핑장 전체 리스트</h3>-->		
-<!--    <div class="row"> -->
+	<!-- 	<h3 class="h3">캠핑장 전체 리스트</h3>-->		
+	<!--    <div class="row"> -->
 
 		<div class="searchBox">
-			<input type="text" id="camping_search" placeholder="캠핑장 이름을 입력하세요"/>
-		   	<button type="button" onclick="doSearch()">검색</button>
+			<!-- <input type="text" id="camping_search" placeholder="캠핑장 이름을 입력하세요"/>
+		   	<button type="button" onclick="doSearch()">검색</button> -->		
+	
+		<section>
+    		<div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+        		<div class="carousel-inner">
+            		<div class="carousel-item active">
+               			 <img src="resources/images/camp_search_box1.jpg" class="d-block w-100" alt="...">
+           			</div>
+            		<div class="carousel-item">
+                		<img src="resources/images/camp_search_box2.jpg" class="d-block w-100" alt="...">
+            		</div>
+            		<div class="carousel-item">
+                		<img src="resources/images/camp_search_box3.jpg" class="d-block w-100" alt="...">
+            		</div>
+            		<!--https://upload.wikimedia.org/wikipedia/commons/8/8d/Yarra_Night_Panorama%2C_Melbourne_-_Feb_2005.jpg-->
+        		</div>
+        		<a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+            		<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            		<span class="sr-only">Previous</span>
+        		</a>
+       			 <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+            		<span class="carousel-control-next-icon" aria-hidden="true"></span>
+            		<span class="sr-only">Next</span>
+        		</a>
+    		</div>
+		</section>
+		<section class="search-sec">
+   			<div class="schbox-wrap">
+       	    	<div>
+                	<input type="text" class="search-slt" placeholder="캠핑장 이름을 입력하세요.">
+                </div>
+				<div>
+                    <button type="button" class="btn btn-info wrn-btn" onclick="doSearch()">Search</button>
+				</div>
+			 </div>
+		</section>
 		</div>
-
+		
 			<div id="camp_list">
 				<!-- 이 안에 캠핑장 리스트 보여주기 -->
 				<!-- <div class="product-grid">
@@ -151,10 +186,10 @@
 			
 			function doSearch() {
 				searchMode = true; // 검색 모드 활성화
-				searchKeyword = $("#camping_search").val(); // var 키워드 제거
+				searchKeyword = $(".search-slt").val(); // var 키워드 제거
 			 	
 				 // 검색 버튼을 누른 후, 서치 박스의 내용을 초기화
-			    $("#camping_search").val("");
+			    $(".search-slt").val("");
 				
 				$("#camp_list").empty(); // 초기화
 					pageNo = 1; // 페이지 번호 초기화

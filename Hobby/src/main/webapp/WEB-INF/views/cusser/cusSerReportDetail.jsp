@@ -5,114 +5,180 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style type="text/css">
-    table {
-        border-collapse: collapse;
-        width: 50%;
-        margin: 0 auto;
+    .container-fluid {
+        margin: auto;
+        width: 40%;
+        background-color: #d4ead7;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    }
+    
+    .table th, .table td {
+        vertical-align: middle;
+    }
+    
+    .table th:first-child, .table td:first-child {
+        width: 10%;
+        font-size: 14px;
+        text-align: center; /* 가운데 정렬 추가 */
+        border: 1px solid #dee2e6; /* 테두리 추가 */
     }
 
-    th, td {
-        border: 2px solid black;
-        padding: 5px;
+    .navbar {
+        height: auto;
+        min-height: 100vh;
+        width: 250px;
+   }
+   
+   .navbar-toggler {
+        margin: auto;
+   }
+   
+   .offcanvas {
+        width: 320px;
+        background-color: #637F42;
+   }
+   
+   .navbar-nav.flex-column {
+        align-items: center;
+   }
+   
+   .navbar-nav.flex-column .nav-item {
+        width: 100%;
         text-align: center;
-    }
+   }
 
-    .text-center {
-        text-align: center;
-    }
+   .offcanvas-body {
+       display: flex;
+       flex-direction: column;
+       align-items: center;
+   }
+   .dropdown {
+       margin-top: 10px;
+   }
 </style>
 
+
 <script type="text/javascript">
+
+$(window).scroll(function() {
+    var scroll = $(window).scrollTop();
+    if (scroll > 50) { // 50px 이상 스크롤하면 배경색을 변경
+        $(".navbar").css("background-color", "#0F4200"); // Change this color if needed
+    } else {
+        $(".navbar").css("background-color", "#637F42"); // Original color
+    }
+});
+
 function go_cusser() {
-	location.href="/cusSer.do"	
+    location.href = "/cusSer.do"
 }
 
 function go_cusserFAQ() {
-	location.href="/cusSerFAQ.do"
+    location.href = "/cusSerFAQ.do"
 }
 
 function go_cusserAsk() {
-	location.href="/cusSerAsk.do"
+    location.href = "/cusSerAsk.do"
 }
 
 function go_cusserReport() {
-	location.href="/cusSerReport.do"
+    location.href = "/cusSerReport.do"
 }
 
 function go_home() {
-	location.href="/home.do"
+    location.href = "/home.do"
 }
 
-function go_delete(f) {
-    // Add your delete logic here
+function go_ReportUpdate(r_idx) {
+	location.href = "/go_updateReport.do?r_idx=" + r_idx;
+}
+function go_ReportDelete(r_idx) {
+	location.href = "/go_deleteReport.do?r_idx=" + r_idx;
 }
 </script>
 </head>
 <body>
 
-<h1 class="text-center">1:1 문의 상세내역</h1>
+<jsp:include page="../header.jsp" />
 
-<div class="text-center">
-    <table>
-        <thead>
-            <tr>
-                <th>
-                    고객센터 메인
-                </th>
-                <th> 
-                    자주묻는질문
-                </th>
-                <th> 
-                    1:1 문의
-                </th>
-                <th> 
-                    신고하기
-                </th>
-                <th>
-                    홈
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>
-                    <button onclick="go_cusser()">고객센터 메인</button>
-                </td>
-                <td>
-                    <button onclick="go_cusserFAQ()">자주묻는질문</button>
-                </td>
-                <td>
-                    <button onclick="go_cusserAsk()">1:1 문의</button>
-                </td>
-                <td>
-                    <button onclick="go_cusserReport()">신고하기</button>
-                </td>
-                <td>
-                    <button onclick="go_home()">홈으로</button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<div class="d-flex">
 
-<form method="post">
-    <table>
-            <tr>
-                <th>작성자</th>
-                <td>${rvo.r_name}</td>
-            </tr>
-            <tr>
-           		<th>신고내용</th>
-                <td>${rvo.r_content}</td>
-            </tr>
-            <tr>
-           		<th>답변</th>
-                <td>${rvo.r_response}</td>
-            </tr>
-    </table>
-</form>
+    <nav class="navbar navbar-dark" style="background-color: #637F42; width: 80px;">
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon" style="color: black;"></span>
+            </button>
+        </nav>
+        <!-- Offcanvas Navbar Content -->
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <div class="offcanvas-header">
+                <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: white;">고객센터</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body" >
+            	<div> <!-- 오른쪽 정렬 -->
+                	<a class="btn btn-light" href="/cusSerFAQ.do" role="button">FAQ</a>
+            	</div>
+                <!-- Offcanvas Navigation Links -->
+                <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      QnA
+                    </button>
+                    <ul class="dropdown-menu">
+					  <li><a class="dropdown-item" href="/cusSerAsk.do">문의 목록 보기</a></li>
+					  <li><a class="dropdown-item" href="/go_inquiry.do">문의 하기</a></li>
+                    </ul>
+                  </div>
+                  <div class="dropdown">
+                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                      Report
+                    </button>
+                    <ul class="dropdown-menu">
+					  <li><a class="dropdown-item" href="/cusSerReport.do">신고 목록 보기</a></li>
+					  <li><a class="dropdown-item" href="/report.do">신고하기</a></li>
+                    </ul>
+                  </div>
+            </div>
+        </div>
 
+		<div class="container-fluid align-self-end">
+		            <div class="card-body">
+		                <!-- Default Table -->
+		                <table class="table caption-top" style="background-color: white; border-radius: 10px;">
+		                    <caption class="text-center">수정하기</caption>
+		                    <thead>
+		                        <tr>
+		                            <th scope="col" class="text-center">작성자</th>
+		                            <td>${user.u_name}</td>
+		                        </tr>
+		                        <tr>
+		                            <th scope="col" class="text-center">내용</th>
+		                            <td>${rvo.r_content}</td>
+		                        </tr>
+		                        <tr>
+		                            <th scope="col" class="text-center">답변</th>
+		                            <td>${rvo.r_response}</td>
+		                        </tr>
+		                        <tr>
+		                            <th scope="col" class="text-center">상태</th>
+		                            <td>대기중</td>
+		                        </tr>
+		                    </thead>
+		                </table>
+		                <!-- End Default Table Example -->
+		            </div>
+		            <div class="text-end">
+		                <!-- 오른쪽 정렬 -->
+		                <button type="button" class="btn btn-primary" onclick="go_ReportUpdate(${rvo.r_idx})">신고 수정</button>
+		                <button type="button" class="btn btn-primary" onclick="go_ReportDelete(${rvo.r_idx})">신고 삭제</button>
+		            </div>
+		        </div>
+		    </div>
+		</div>
 </body>
 </html>

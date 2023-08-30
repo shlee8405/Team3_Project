@@ -27,6 +27,7 @@ public interface UserService {
 	boolean isEmailDuplicate(String email);
 	// 아이디 로그인 확인
 	boolean isIdDuplicate(String id);
+
 	 // 이메일로 아이디 찾기
 	 String findIdByEmail(String email);
 	 	// 비밀번호 리셋을 위한 이메일로 유저 찾기
@@ -39,4 +40,13 @@ public interface UserService {
 	    boolean updateUserPassword(String u_id, String newPassword);
 
 	 
+
+	
+	
+	
+	
+	// 유져 1명의 정보 가져오기
+	List<UserVO> getUsers(String u_idx);
+	
+
 }

@@ -96,6 +96,7 @@ ol.paging li a:hover {
 	      });
 		
 		location.href= "/group_onelist.do?g_idx="+ f;
+		console.log("g_idx");
 	}
 	
 </script>
@@ -129,12 +130,7 @@ ol.paging li a:hover {
         </c:choose>
     </div>
     <button id="write_btn" onclick="group_write_go()">글쓰기</button>
-    <script type="text/javascript">
-    console.log("beginBlock: ${paging.beginBlock}");
-    console.log("endBlock: ${paging.endBlock}");
-    console.log("nowPage: ${paging.nowPage}");
-    console.log("totalPage: ${paging.totalPage}");
-    </script>
+    
     <ol class="paging">
 		<!-- 이전 버튼 -->
 

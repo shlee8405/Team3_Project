@@ -1,7 +1,7 @@
+<%@page import="java.sql.ResultSet"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,7 +13,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>나의 리뷰</title>
-
 <style type="text/css">
 th, td {
 	padding: 8px;
@@ -40,14 +39,10 @@ th, td {
 	background-color: #637F42;
 	color: white;
 }
-a {
-	text-decoration: none;
-}
+a {text-decoration: none;}
 
 table {
-	width: 100%;
-	border-collapse: collapse;
-	text-align: center;
+	width: 100%; border-collapse: collapse; text-align: center;
 }
 
 
@@ -60,10 +55,7 @@ th {
 	color: white;
 }
 
-div {
-	margin: auto;
-	text-align: center;
-}
+div {margin: auto; text-align: center;}
 .btn-custom{
 	background-color: white;
 	color: black;
@@ -98,42 +90,48 @@ color: white;
 		</div>
 		<!-- 메뉴바 -->
 		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
-			<input type="radio" class="btn-check btn-custom btn-comp" name="btnradio" id="btnradio1" autocomplete="off" checked>
-			<label class="btn btn-outline btn-custom btn-comp" for="btnradio1">내가 찜한 캠핑장</label>
-			<input type="radio" class="btn-check btn-custom btn-comp" name="btnradio" id="btnradio2" autocomplete="off">
-			<label class="btn btn-outline btn-custom btn-comp" for="btnradio2">내가 작성한 리뷰</label>
-			<input type="radio"class="btn-check btn-custom btn-comp" name="btnradio" id="btnradio3" autocomplete="off">
-			<label class="btn btn-outline btn-custom btn-comp" for="btnradio3">1:1문의 내역</label>
-			<input type="radio"class="btn-check btn-custom btn-comp" name="btnradio" id="btnradio4" autocomplete="off">
-			<label class="btn btn-outline btn-custom btn-comp" for="btnradio4">내 정보</label>
-		</div>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myqna.do')">1:1문의 내역</button>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
+            </div>
 		<div style="height: 100px;"></div>
+		<h1>내가 쓴 리뷰</h1>
 		<table>
 			<thead>
 			<tr>
 				<th>번호</th>
 				<th>제목</th>
-				<th>작성자</th>
-				<th>등록일</th>
+				<th>내용</th>
+				<th>별점</th>
+				<th>날짜</th>
 			</tr>
 			</thead>
 			<tbody>
 				<c:choose>
-					<c:when test="${empty list}">
-					<tr>
-						<td colspan="4"><h2>원하는 정보가 존재하지 않습니다.</h2></td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="k" items="${list}" varStatus="vs">
-						<tr>
-							<td>${k.cr_content}</td> <!-- 보류 -->
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
+	     			<c:when test="${empty list}">
+	     				<tr><td colspan="4"><h3>내가 작성한 리뷰가 없습니다.</h3> </td></tr>
+	     			</c:when>
+	     			<c:otherwise>
+	     			  <c:forEach var="k" items="${list}" varStatus="vs">
+	     			  	<tr>
+	     			  		<td>${vs.count }</td>
+	     			  		<td>${k.c_name }</td>
+	     			  		<td>${k.cr_content }</td>
+	     			  		<td>${k.cr_star }</td>
+	     			  		<td>${k.cr_date }</td>
+	     			  		<%-- <td>${k.regdate.substring(0,10)}</td> --%>
+	     			  	</tr>
+	     			  </c:forEach> 
+	     			</c:otherwise>
+	     		</c:choose>
 			</tbody>
 		</table>
 		</div>
+		<script type="text/javascript">
+		function goToPage(url){
+			location.href = url;
+		}
+	</script>
 </body>
 </html>

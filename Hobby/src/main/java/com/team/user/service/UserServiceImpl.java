@@ -97,4 +97,17 @@ public class UserServiceImpl implements UserService{
 
 	
 
+
+
+	
+	
+	
+	
+	@Override
+	public List<UserVO> getUsers(String u_idx) {
+		return userDAO.getUsers(u_idx);
+	}
+	
+	
+
 }

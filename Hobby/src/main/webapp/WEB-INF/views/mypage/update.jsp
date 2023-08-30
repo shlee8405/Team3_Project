@@ -14,6 +14,13 @@
     <title>마이페이지</title>
 
 <style type="text/css">
+table{width: 600px;
+    height: 300px;
+    border-collapse: collapse;
+    text-align: center;
+    margin: 0 auto; /* 수평 가운데 정렬 */
+    margin-top: 100px;}
+    
 .btn-custom{
 	background-color: white;
 	color: black;
@@ -67,6 +74,12 @@ color: white;
 	}
 	div{   margin: auto; text-align: center;}
 </style>
+<script type="text/javascript">
+	function save_go(f) {
+		f.action="/myPageEdit.do";
+		f.submit();
+	}
+</script>
 </head>
 <body>
 <jsp:include page="../header.jsp"  />
@@ -76,39 +89,53 @@ color: white;
 		<h1 class="mypage-title">마이페이지</h1>
 	</div>
 	<!-- 메뉴바 -->
-		<div class="btn-group btn-custom" role="group" aria-label="Basic radio toggle button group">
-			<input type="radio" class="btn-check btn-custom" name="btnradio" id="btnradio1" autocomplete="off" checked>
-			<label class="btn btn-outline btn-custom" for="btnradio1">내가 찜한 캠핑장</label>
-			<input type="radio" class="btn-check btn-custom" name="btnradio" id="btnradio2" autocomplete="off">
-			<label class="btn btn-outline btn-custom" for="btnradio2">내가 작성한 리뷰</label>
-			<input type="radio"class="btn-check btn-custom" name="btnradio" id="btnradio3" autocomplete="off">
-			<label class="btn btn-outline btn-custom" for="btnradio3">1:1문의 내역</label>
-			<input type="radio"class="btn-check btn-custom" name="btnradio" id="btnradio4" autocomplete="off">
-			<label class="btn btn-outline btn-custom" for="btnradio4">내 정보</label>
-		</div>
+		<!-- 메뉴바 -->
+		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myqna.do')">1:1문의 내역</button>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
+            </div>
 		<!-- 공백 -->
 		<div style="height: 50px;"></div>
 		<div class="user-info">
         <h4>회원정보 수정</h4>
-            <div>
-                <label for="name">이름</label>
-                <input type="text" id="name" name="name">
-            </div>
-            <div>
-                <label for="id">아이디</label>
-                <input type="text" id="id" name="id">
-            </div>
-            <div>
-                <label for="email">이메일</label>
-                <input type="email" id="email" name="email">
-            </div>
-            <div>
-                <label for="phone">휴대전화</label>
-                <input type="tel" id="phone" name="phone">
-            </div>
-            
-            <button type="submit">완료</button>
-            </div>
+            <table>
+				<tr align="center">
+					<td bgcolor="#637F42">이름</td>
+					<td><input type="text" name="name" value="${vo.u_name }" size ="20"/></td>
+				</tr>
+				<tr align="center">
+					<td bgcolor="#637F42">아이디</td>
+					<td><input type="text" name="id" value="${vo.u_id }" size ="20"/></td>
+				</tr>
+				<tr align="center">
+					<td bgcolor="#637F42">휴대전화</td>
+					<td><input type="text" name="phone" value="${vo.u_phone }" size ="20"/></td>
+				</tr>
+				<tr align="center">
+					<td bgcolor="#637F42">이메일</td>
+					<td><input type="text" name="email" value="${vo.u_email }" size ="20"/></td>
+				</tr>
+				
+				<tfoot>
+					<tr align="center">
+						<td colspan="2">
+							<input type="hidden" name="idx" value="${vo.idx}">
+							<input type="button" value="수정" onclick="save_go(this.form)" />
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+							<input type="reset" value="취소" />
+						</td>
+					</tr>
+				</tfoot>
+			</table>
+			</div>
+			
     </div>
+    <script type="text/javascript">
+		function goToPage(url){
+			location.href = url;
+		}
+	</script>
 </body>
 </html>

@@ -8,15 +8,9 @@
 		select * from QNA
 	</select>
 	
-	<select id="user">
-		SELECT q.q_idx, q.q_content, q.q_response, u.u_name
-		FROM QNA q
-		JOIN USERS u ON q.u_idx = #{q.u_idx};
-	</select>
-	
-	<insert id="insert" parameterType="qvo">
-		INSERT INTO QNA(q_content,u_name)
-		VALUES(#{q_content},#{u_name});
+	<insert id="insert" parameterType="map">
+		INSERT INTO QNA(q_content,q_name,f_name,u_idx)
+		VALUES(#{qvo.q_content},#{qvo.q_name},#{qvo.f_name},#{u_idx})
 	</insert>
 	
 	<select id="detail" parameterType="String" resultType="qvo">
@@ -30,6 +24,10 @@
 	<update id="update" parameterType="qvo">
 		update QNA set q_name = #{q_name} , q_content = #{q_content} where q_idx = #{q_idx}
 	</update>
+	
+	<select id="QnAOne" parameterType="String" resultType="qvo">
+		select * from QNA where u_idx = #{u_idx}
+	</select>
 </mapper>
 
 

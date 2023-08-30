@@ -65,34 +65,14 @@
 
 <script type="text/javascript">
 
-$(window).scroll(function() {
-    var scroll = $(window).scrollTop();
-    if (scroll > 50) { // 50px 이상 스크롤하면 배경색을 변경
-        $(".navbar").css("background-color", "#0F4200"); // Change this color if needed
-    } else {
-        $(".navbar").css("background-color", "#637F42"); // Original color
-    }
-});
-
-    function go_cusser() {
-        location.href = "/cusSer.do"
-    }
-
-    function go_cusserFAQ() {
-        location.href = "/cusSerFAQ.do"
-    }
-
-    function go_cusserAsk() {
-        location.href = "/cusSerAsk.do"
-    }
-
-    function go_cusserReport() {
-        location.href = "/cusSerReport.do"
-    }
-
-    function go_home() {
-        location.href = "/home.do"
-    }
+	$(window).scroll(function() {
+	    var scroll = $(window).scrollTop();
+	    if (scroll > 50) { // 50px 이상 스크롤하면 배경색을 변경
+	        $(".navbar").css("background-color", "#0F4200"); // Change this color if needed
+	    } else {
+	        $(".navbar").css("background-color", "#637F42"); // Original color
+	    }
+	});
 
     function go_inquiry() {
         location.href = "/go_inquiry.do"
@@ -100,6 +80,39 @@ $(window).scroll(function() {
     function go_AskDetail() {
         location.href = "/go_AskDetail.do?q_idx=" + q_idx;
     }
+    
+    
+    
+    $(document).ready(function() {
+        $("#search-button").click(function() {
+            performSearch();
+        });
+
+        $("#search-input").keyup(function(event) {
+            if (event.keyCode === 13) {
+                performSearch();
+            }
+        });
+
+        function performSearch() {
+            var searchTerm = $("#search-input").val().toLowerCase();
+            $(".table tbody tr").each(function() {
+                var number = $(this).find("td:nth-child(1)").text().toLowerCase();
+                var author = $(this).find("td:nth-child(2)").text().toLowerCase();
+                var content = $(this).find("td:nth-child(3)").text().toLowerCase();
+                var response = $(this).find("td:nth-child(4)").text().toLowerCase();
+
+                if (number.includes(searchTerm) || author.includes(searchTerm) || content.includes(searchTerm) || response.includes(searchTerm)) {
+                    $(this).show();
+                } else {
+                    $(this).hide();
+                }
+            });
+        }
+    });
+
+
+
 </script>
 </head>
 <body>
@@ -146,6 +159,13 @@ $(window).scroll(function() {
         </div>
 
         <div class="container-fluid align-self-end">
+        
+         <!-- 검색창 추가 -->
+		    <form class="d-flex justify-content-end mb-3" role="search" id="search-form" onsubmit="return false;">
+			    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+			    <button class="btn btn-success" type="button" id="search-button">Search</button>
+			</form>
+
             <div class="card-body">
                 <!-- Default Table -->
                 <table class="table caption-top" style="background-color: white; border-radius: 10px;">
@@ -153,22 +173,40 @@ $(window).scroll(function() {
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">번호</th>
-                            <th scope="col" class="text-center">제목</th>
+                            <th scope="col" class="text-center">작성자</th>
                             <th scope="col" class="text-center">내용</th>
-                            <th scope="col" class="text-center">상태</th>
+                            <th scope="col" class="text-center">답변</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        <c:forEach var="k" items="${alllist}" varStatus="loop">
-                            <tr>
-                                <td>${loop.count}</td>
-                                <td>${k.u_name}</td>
-                                <td>${k.q_content}</td>
-                                <td>대기중</td>
-                            </tr>
-                        </c:forEach>
-                        
-                    </tbody>
+				    <c:forEach var="k" items="${list}" varStatus="loop">
+				        <c:choose>
+				            <c:when test="${k.q_status == 0}">
+				                <tr>
+				                    <td colspan="4">삭제된 목록입니다</td>
+				                </tr>
+				            </c:when>
+				            <c:otherwise>
+				                <tr>
+				                    <td>${loop.count}</td>
+				                    <td>${user.u_name}</td>
+				                    <td>
+				                        <a href="/go_AskDetail.do?q_idx=${k.q_idx}">상세보기</a>
+				                    </td>
+				                    <td>
+				                        <c:if test="${k.q_response == null}">
+				                            대기중
+				                        </c:if>
+				                        <c:if test="${k.q_response != null}">
+				                            답변 완료
+				                        </c:if>
+				                    </td>
+				                </tr>
+				            </c:otherwise>
+				        </c:choose>
+				    </c:forEach>
+				</tbody>
+
                 </table>
                 <!-- End Default Table Example -->
             </div>

@@ -15,10 +15,11 @@ public class CampVO {
 	 induty : 캠핑장 유형 (ex: 자동차 야영장)
 	 posblFcltyCl : 주변이용가능시설
 	 featureNm : 소개글
+	 intro : 소개글
 	 firstImageUrl : 이미지
 	 */
 	
-	private String contentId, facltNm, lineIntro, addr1, mapX, mapY, 
+	private String contentId, facltNm, lineIntro, addr1, mapX, mapY, intro, 
 				   tel, operDeCl, lctCl, induty, posblFcltyCl, featureNm, 
 				   firstImageUrl, doNm, message, u_id;
 
@@ -150,6 +151,14 @@ public class CampVO {
 
 	public void setFeatureNm(String featureNm) {
 		this.featureNm = featureNm;
+	}
+
+	public String getIntro() {
+		return intro;
+	}
+
+	public void setIntro(String intro) {
+		this.intro = intro;
 	}
 
 	public String getFirstImageUrl() {

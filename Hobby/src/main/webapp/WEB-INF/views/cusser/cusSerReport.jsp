@@ -74,10 +74,37 @@ $(window).scroll(function() {
     }
 });
 
+$(document).ready(function() {
+    $("#search-button").click(function() {
+        performSearch();
+    });
+
+    $("#search-input").keyup(function(event) {
+        if (event.keyCode === 13) {
+            performSearch();
+        }
+    });
+
+    // 검색 버튼 클릭 이벤트
+    function performSearch() {
+        var searchTerm = $("#search-input").val().toLowerCase();
+        $(".table tbody tr").each(function() {
+            var name = $(this).find("td:nth-child(2)").text().toLowerCase();
+            var content = $(this).find("td:nth-child(3)").text().toLowerCase();
+            var response = $(this).find("td:nth-child(4)").text().toLowerCase();
+
+            if (name.includes(searchTerm) || content.includes(searchTerm) || response.includes(searchTerm)) {
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+});
+
     function go_report() {
         location.href = "/report.do";
     }
-    
     
 </script>
 </head>
@@ -123,35 +150,65 @@ $(window).scroll(function() {
         </div>
 
         <div class="container-fluid align-self-end">
+		    <!-- 검색창 추가 -->
+		    <form class="d-flex justify-content-end mb-3" role="search" id="search-form" onsubmit="return false;">
+		        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+		        <button class="btn btn-success" type="button" id="search-button">Search</button>
+		    </form>
+		    
+		    <!-- ... rest of your content ... -->
+		
             <div class="card-body">
+                <!-- Default Table -->
                 <table class="table caption-top" style="background-color: white; border-radius: 10px;">
-                    <caption class="text-center">신고 목록</caption>
+                    <caption class="text-center">신고 내역</caption>
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">번호</th>
-                            <th scope="col" class="text-center">제목</th>
+                            <th scope="col" class="text-center">작성자</th>
                             <th scope="col" class="text-center">내용</th>
-                            <th scope="col" class="text-center">상태</th>
+                            <th scope="col" class="text-center">답변</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
-                        <c:forEach var="k" items="${list}" varStatus="loop">
-                            <tr>
-                                <td>${loop.count}</td>
-                                <td>${k.r_name}</td>
-                                <td>${k.r_content}</td>
-                                <td>대기중</td>
-                            </tr>
-                        </c:forEach>
-                    </tbody>
+				    <c:forEach var="k" items="${list}" varStatus="loop">
+				        <c:choose>
+				            <c:when test="${k.r_status == 0}">
+				                <tr>
+				                    <td colspan="4">삭제된 목록입니다</td>
+				                </tr>
+				            </c:when>
+				            <c:otherwise>
+				                <tr>
+				                    <td>${loop.count}</td>
+						            <td>${user.u_name}</td>
+				                    <td>
+				                        <a href="/go_ReportDetail.do?r_idx=${k.r_idx}">상세보기</a>
+				                    </td>
+				                    <td>
+				                        <c:if test="${k.r_response == null}">
+				                            대기중
+				                        </c:if>
+				                        <c:if test="${k.r_response != null}">
+				                            답변 완료
+				                        </c:if>
+				                    </td>
+				                </tr>
+				            </c:otherwise>
+				        </c:choose>
+				    </c:forEach>
+				</tbody>
+
                 </table>
                 <!-- End Default Table Example -->
             </div>
-            <div class="text-end"> <!-- 오른쪽 정렬 -->
+            <div class="text-end">
+                <!-- 오른쪽 정렬 -->
                 <button type="button" class="btn btn-success" onclick="go_report()">신고하기</button>
             </div>
         </div>
     </div>
-    </body>
+</div>
+    
 </body>
 </html>

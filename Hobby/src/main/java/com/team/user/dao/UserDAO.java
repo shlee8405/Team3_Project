@@ -57,6 +57,7 @@ public class UserDAO {
     	System.out.println("daocount" + count);
     	return count;
     }
+
     // 이메일로 아이디 찾기
     public String findIdByEmail(String u_email) {
         return sqlSessionTemplate.selectOne("user.findIdByEmail", u_email);
@@ -75,4 +76,15 @@ public class UserDAO {
     }
     
     
+
+    
+    
+    
+    
+    
+    public List<UserVO> getUsers(String u_idx) {
+    	return sqlSessionTemplate.selectList("user.one",u_idx);
+    }
+    
+
 }

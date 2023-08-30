@@ -83,13 +83,13 @@ public class CampController {
 			 mapX : 경도(X)
 			 mapY : 위도(Y)
 			 featureNm : 소개글
+			 intro : 소개글
 			 */
 			
 			CampVO cvo = new CampVO();
-			cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
 			cvo.setFacltNm(oneItem.getString("facltNm"));
+			cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
 			cvo.setAddr1(oneItem.getString("addr1"));
-			cvo.setLineIntro(oneItem.getString("lineIntro"));
 			cvo.setDoNm(oneItem.getString("doNm"));
 			// 나중에 필요한거 더 추가........
 			dataList.add(cvo);
@@ -160,6 +160,7 @@ public class CampController {
 
 				CampVO cvo = new CampVO();
 				cvo.setFacltNm(oneItem.getString("facltNm"));
+				cvo.setIntro(oneItem.getString("intro"));
 				cvo.setAddr1(oneItem.getString("addr1"));
 				cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
 				cvo.setDoNm(oneItem.getString("doNm"));
@@ -229,6 +230,7 @@ public class CampController {
 		cvo.setLctCl(firstData.getString("lctCl"));
 		cvo.setInduty(firstData.getString("induty"));
 		cvo.setPosblFcltyCl(firstData.getString("posblFcltyCl"));
+		cvo.setIntro(firstData.getString("intro"));
 		cvo.setFeatureNm(firstData.getString("featureNm"));
 		cvo.setMapX(firstData.getString("mapX"));
 		cvo.setMapY(firstData.getString("mapY"));

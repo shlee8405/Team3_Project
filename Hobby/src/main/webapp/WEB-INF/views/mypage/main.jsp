@@ -17,7 +17,26 @@
 <script
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
+	crossorigin="anonymous" ></script>
+<script type="text/javascript">
+
+function check(){
+	var form = document.btnradio;
+	if(form.btnradio[0].checked == true){
+		form.action="/myPagemain.do";
+	}
+	else if(form.btnradio[1].checked == true){
+		form.action = "/myreview.do";
+	}
+	else if(form.btnradio[2].checked == true){
+		form.action = "/myqna.do";
+	}
+	else{
+		form.action = "/mypage.do";
+	}
+	form.submit();
+}
+</script>
 <meta charset="UTF-8">
 <title>마이페이지</title>
 <link rel="stylesheet" type="text/css" href="styles.css">
@@ -48,14 +67,17 @@ a {
 }
 
 table {
-	width: 600px;
-	border-collapse: collapse;
-	text-align: center;
+	width: 100%; border-collapse: collapse; text-align: center;
 }
-
-table, th, td {
-	border: 1px solid black;
-	padding: 3px;
+th, td {
+	padding: 8px;
+	text-align: center;
+	border-bottom: 1px solid #ddd;
+	vertical-align: center;
+}
+th {
+	background-color: #637F42;
+	color: white;
 }
 
 div {
@@ -106,12 +128,6 @@ color: white;
 
 
 </style>
-
-<script type="text/javascript">
-	  function myreview_go()() {
-		location.href="/myreview.do"
-	}
-</script>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
@@ -121,45 +137,46 @@ color: white;
 			<h1 class="mypage-title">마이페이지</h1>
 		</div>
 		<!-- 메뉴바 -->
-		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
-			<input type="radio" class="btn-check btn-custom btn-comp" name="btnradio" id="btnradio1" autocomplete="off" checked>
-			<label class="btn btn-outline btn-custom btn-comp" for="btnradio1">내가 찜한 캠핑장</label>
-			<input type="radio" class="btn-check btn-custom btn-comp" name="btnradio" id="btnradio2" autocomplete="off">
-			<label class="btn btn-outline btn-custom btn-comp" for="btnradio2">내가 작성한 리뷰</label>
-			<input type="radio"class="btn-check btn-custom btn-comp" name="btnradio" id="btnradio3" autocomplete="off">
-			<label class="btn btn-outline btn-custom btn-comp" for="btnradio3">1:1문의 내역</label>
-			<input type="radio"class="btn-check btn-custom btn-comp" name="btnradio" id="btnradio4" autocomplete="off">
-			<label class="btn btn-outline btn-custom btn-comp" for="btnradio4">내 정보</label>
-		</div>
+		<form name="form1" method="post" >
+		 <div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myqna.do')">1:1문의 내역</button>
+                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
+            </div>
+		</form>
 		
 	<!-- 공백 -->
 	<div style="height: 100px;"></div>
-	
-	<table class="my-camping">
-		<thead>
+		<h1>내가 찜한 캠핑장</h1>
+		<table>
+			<thead>
 			<tr>
-				<td class="label">캠핑장 이름</td>
-				<td class="label">캠핑장 위치</td>
+				<th>번호</th>
+				<th>캠핑장 이름</th>
 			</tr>
-		</thead>
-		<tbody>
-			<c:choose>
-				<c:when test="${empty list}">
-					<tr>
-						<td colspan="4"><h2>찜한 캠핑장이 없습니다.</h2></td>
-					</tr>
-				</c:when>
-				<c:otherwise>
-					<c:forEach var="k" items="${list}" varStatus="vs">
-						<tr>
-							<td>${k.camp_id}</td>
-							<td>${k.facltNm}</td>
-						</tr>
-					</c:forEach>
-				</c:otherwise>
-			</c:choose>
-		</tbody>
-	</table>
+			</thead>
+			<tbody>
+				<c:choose>
+	     			<c:when test="${empty list}">
+	     				<tr><td colspan="4"><h3>내가 찜한 캠핑장이 없습니다.</h3></td></tr>
+	     			</c:when>
+	     			<c:otherwise>
+	     			  <c:forEach var="k" items="${list}" varStatus="vs">
+	     			  	<tr>
+	     			  		<td>${vs.count }</td>
+	     			  		<td>${k.c_name }</td>
+	     			  	</tr>
+	     			  </c:forEach> 
+	     			</c:otherwise>
+	     		</c:choose>
+			</tbody>
+		</table>
 	</div>
+	<script type="text/javascript">
+		function goToPage(url){
+			location.href = url;
+		}
+	</script>
 </body>
 </html>

@@ -10,7 +10,7 @@ public interface QnaService {
 	public List<QnaVO> getAllQna();
 	
 	// 1대1 문의 넣기
-	int getInsert(QnaVO qvo);
+	int getInsert(QnaVO qvo,String u_idx);
 	
 	// 상세 보기
 	QnaVO Detail(String q_idx);
@@ -20,4 +20,7 @@ public interface QnaService {
 	
 	// 수정
 	int UpdateQna(QnaVO qvo);
+	
+	// 로그인 문의 가져오기
+	List<QnaVO> getQnAOne(String q_idx);
 }

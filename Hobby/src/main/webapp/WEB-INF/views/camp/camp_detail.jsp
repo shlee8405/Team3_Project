@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,22 +9,12 @@
 <title>캠핑장 상세보기</title>
 <!-- <link> 태그(=스타일시트)는 <head> 내부에 위치한다. -->
    <!-- 부트스트랩 CDN 추가 -->
+   <link rel="stylesheet" href="/resources/css/camp/camp_detail.css">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
    <link href="/assets/css/star.css" rel="stylesheet" />
-   
+ 
 <style type="text/css">
-	/* 수평 라인만 표시하는 테이블 스타일 */
-    .horizontal-only-lines tr th, 
-    .horizontal-only-lines tr td {
-       border: none;
-       border-bottom: 1px solid #dee2e6;
-	}
- 	/* 탭 디자인 */
-	.nav-tabs .nav-item {
-		flex: 1;  /* 균등한 너비 */
-	}
-		
 	.nav-tabs .nav-link {
 		border: 1px solid #ccc;
 		border-radius: 5px;
@@ -31,10 +23,6 @@
 		color: #637F42;
 		font-size: 20px; /* 원하는 크기로 조정 */
 	}
-		
-	.nav-tabs .nav-link:hover {
-	background-color: #f7f7f7;  /* hover 시의 배경색 */
-	}
 	
 	/* 활성화된 탭 */
 	.nav-tabs .nav-link.active {   
@@ -42,20 +30,6 @@
 	color: white;
 	font-weight: bolder;
 	}
-	
-	.tab-content {
-    margin-bottom: 300px; /* 여백 크기를 원하는 값으로 조정 */
-    }
-    
-    #title {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
-	}
-	
-	.table th {
-    font-weight: bold;
-  	}
 </style>
 </head>
 
@@ -63,16 +37,27 @@
 	<!-- 헤더 -->
 	<jsp:include page="../header.jsp"  />
 	<div style="position:relative; top:200px; z-index:1;">
+	
+<div class="container2">
+	<div class="carousel-inner" id="titleBox">
+   	 <div class="carousel-item active">
+       	 <img src="resources/images/camp_titleBox_img.jpg" class="d-block w-100" alt="...">
+       	 <div class="carousel-caption d-none d-md-block">
+            	<h1>${cvo.facltNm}</h1>
+           		<p>${cvo.lineIntro}</p>
+     	   </div>
+    	</div>
+	</div>
 		
-	<div class="container mt-5">
-		<div class="row">
+	<div class="container3">
+		<%-- <div class="row">
 			<!-- 캠핑장 제목과 한줄 소개-->
 			<div class="col-md-12" style="margin-bottom: 10px;">
 				<h1 style="font-weight: bolder;">${cvo.facltNm}</h1>
 				<br>
 				<p><font color="gray">${cvo.lineIntro}</font></p>
 			</div>
-		</div>
+		</div> --%>
 
 		<hr style="border-top: 1px solid #dee2e6; margin: 20px 0;">
 			
@@ -148,12 +133,22 @@
     <div class="tab-content">
         <!-- 캠핑장 소개 -->
         <div class="tab-pane container active" id="campIntro">
-        <div id="title">
-        	<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
-        	<h2 id="review_title" style="font-weight: bolder;">소개글</h2>
-    	</div>
-            <p>${cvo.featureNm}</p>
-        </div>
+	        <div id="title">
+	        	<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
+	        	<h2 id="review_title" style="font-weight: bolder;">소개글</h2>
+	    	</div>
+            	<p><c:choose>
+        			<c:when test="${fn:length(cvo.featureNm) > fn:length(cvo.intro)}">
+            			<p>${cvo.featureNm}</p>
+       				</c:when>
+        			<c:when test="${fn:length(cvo.intro) >= fn:length(cvo.featureNm)}">
+            			<p>${cvo.intro}</p>
+        			</c:when>
+        			<c:otherwise>
+            			<p>정보를 준비 중 입니다.</p>
+        			</c:otherwise>
+    			</c:choose></p>
+       		</div>
         
         <!-- 위치정보 -->
         <div class="tab-pane container fade" id="locationInfo">
@@ -239,5 +234,6 @@
 	};
 	</script>
 	</div>
+</div>
 	</body>
 </html>

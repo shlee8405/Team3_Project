@@ -7,6 +7,32 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+    
+    @font-face{
+        font-family: MBCM;
+        src: url(/resources/fonts/MBCM.ttf);
+    }
+    @font-face {
+        font-family: TAEBAEK;
+        src: url(/resources/fonts/TAEBAEK.ttf);
+    }
+    
+.containerHD {
+    justify-content: flex-end;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.logo {
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+}
+.navlinks {
+    flex-wrap: nowrap;
+}
+a {
+    white-space: nowrap;
+}
 html,
 body {
     margin: 0;
@@ -29,11 +55,26 @@ body {
   
 }
 
+.footerHD {
+	width: 100%;
+	height:0px;
+	position: fixed;
+	line-height:65px;
+	text-align:center;
+    background-color:#0F4200;
+    bottom: 0;
+    z-index: 10;
+    padding:0;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0s, opacity 0.3s linear;
+}
 .navHD, ::after, ::before {
     box-sizing: content-box;
 }
 
 .navHD div.logo {
+    margin-right: auto;
     float: left;
     width: auto;
     height: auto;
@@ -72,14 +113,15 @@ body {
 }
 
 .navHD div.main_list ul li a {
+ 	font-family: MBCM;
     text-decoration: none;
     color: #fff;
     line-height: 65px;
-    font-size: 2.4rem;
+    font-size: 2.0rem;
 }
 
 .navHD div.main_list ul li a:hover {
-    color: #00E676;
+    color: green;
 }
 
 
@@ -91,22 +133,27 @@ body {
     display: none;
 }
 
-
+.navHD {
+    padding-top: 20px;
+    padding-bottom: 20px;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+}
 
 
 /* Media qurey section */
 
-@media screen and (min-width: 768px) and (max-width: 1024px) {
+/* @media screen and (min-width: 768px) and (max-width: 1024px) {
     .container {
         margin: 0;
     }
-}
 
 @media screen and (max-width:768px) {
     .navTrigger {
         display: block;
     }
     .navHD div.logo {
+    margin-right: auto;
         margin-left: 15px;
     }
     .navHD div.main_list {
@@ -126,7 +173,7 @@ body {
         left: 0;
         bottom: 0;
         background-color: #111;
-        /*same background color of navbar*/
+        /*same background color of navbar
         background-position: center top;
     }
     .navHD div.main_list ul li {
@@ -143,196 +190,10 @@ body {
         display: block;
     }
 }
+} */
 
 
-.navTrigger {
-    cursor: pointer;
-    width: 30px;
-    height: 25px;
-    margin: auto;
-    position: absolute;
-    right: 30px;
-    top: 0;
-    bottom: 0;
-}
 
-.navTrigger i {
-    background-color: #fff;
-    border-radius: 2px;
-    content: '';
-    display: block;
-    width: 100%;
-    height: 4px;
-}
-
-.navTrigger i:nth-child(1) {
-    -webkit-animation: outT 0.8s backwards;
-    animation: outT 0.8s backwards;
-    -webkit-animation-direction: reverse;
-    animation-direction: reverse;
-}
-
-.navTrigger i:nth-child(2) {
-    margin: 5px 0;
-    -webkit-animation: outM 0.8s backwards;
-    animation: outM 0.8s backwards;
-    -webkit-animation-direction: reverse;
-    animation-direction: reverse;
-}
-
-.navTrigger i:nth-child(3) {
-    -webkit-animation: outBtm 0.8s backwards;
-    animation: outBtm 0.8s backwards;
-    -webkit-animation-direction: reverse;
-    animation-direction: reverse;
-}
-
-.navTrigger.active i:nth-child(1) {
-    -webkit-animation: inT 0.8s forwards;
-    animation: inT 0.8s forwards;
-}
-
-.navTrigger.active i:nth-child(2) {
-    -webkit-animation: inM 0.8s forwards;
-    animation: inM 0.8s forwards;
-}
-
-.navTrigger.active i:nth-child(3) {
-    -webkit-animation: inBtm 0.8s forwards;
-    animation: inBtm 0.8s forwards;
-}
-
-@-webkit-keyframes inM {
-    50% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(45deg);
-    }
-}
-
-@keyframes inM {
-    50% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(45deg);
-    }
-}
-
-@-webkit-keyframes outM {
-    50% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(45deg);
-    }
-}
-
-@keyframes outM {
-    50% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(45deg);
-    }
-}
-
-@-webkit-keyframes inT {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@keyframes inT {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@-webkit-keyframes outT {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@keyframes outT {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@-webkit-keyframes inBtm {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-@keyframes inBtm {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-@-webkit-keyframes outBtm {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-@keyframes outBtm {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(-9px) rotate(135deg);
-    }
-}
 
 .affix {
     padding: 0;
@@ -341,7 +202,11 @@ body {
     z-index:8;
 }
 
-
+.affix2 {
+	height:50px;
+	visibility: visible;
+	opacity:1;
+}
 
 
 
@@ -365,13 +230,60 @@ body {
     </style>
 
     <script>
-        $('.navTrigger').click(function () {
-    $(this).toggleClass('active');
-    console.log("Clicked menu");
-    $("#mainListDiv").toggleClass("show_list");
-    $("#mainListDiv").fadeIn();
+	$('.navTrigger').click(function () {
+    	$(this).toggleClass('active');
+    	console.log("Clicked menu");
+    	$("#mainListDiv").toggleClass("show_list");
+    	$("#mainListDiv").fadeIn();
+	});	
+	
+	function go_camp() {
+		location.href = "/campMain.do"
+	}
 
-});
+	function go_group() {
+		location.href = "/groupList.do"
+	}
+
+	function go_login() {
+		location.href = "/login.do"
+
+	}
+	function go_signup() {
+		location.href = "/signup.do"
+	}
+
+	function go_world() {
+		location.href = "/world.do"
+	}
+
+	function go_map() {
+		location.href = "/map.do"
+	}
+
+	function go_cusser() {
+		location.href = "/cusSer.do"
+	}
+
+	function go_mypage() {
+		location.href = "/myPage.do"
+	}
+
+	function go_admin() {
+		location.href = "/adminHome.do"
+	}
+	
+	function go_shltest() { /* 실험용. 나중에 삭제할 예정*/
+		location.href ="/shltest.do"
+	}
+	
+	function checkU_id(){
+		location.href="/checkSession.do"
+	}
+	
+	function go_logOut() {
+		location.href="/logOut.do"
+	}
 
     </script>
 </head>
@@ -379,25 +291,24 @@ body {
     <nav class="navHD">
         <div class="containerHD">
             <div class="logo">
-                <a href="#"><img src="/resources/images/logo3.png" style="width:200px; position:relative; top:-25px; margin:0;"></a>
+                <a href="/home.do"><img src="/resources/images/logo3.png" style="width:200px; position:relative; top:-25px; margin:0;"></a>
             </div>
             <div id="mainListDiv" class="main_list">
                 <ul class="navlinks">
-                    <li><a href="#">캠핑장</a></li>
-                    <li><a href="#">캠핑모임</a></li>
-                    <li><a href="#">마이페이지</a></li>
-                    <li><a href="#">고객센터</a></li>
-                    <li><a href="#">로그인</a></li>
+                    <li><a href="/adminHome.do" style="text-family:sans-seriff; font-size: 1rem;">관리자</a></li>
+                     <li><a href="/checkSession.do" style="text-family:sans-seriff; font-size: 1rem;">sysout sessionIdx</a></li>
+                      <li><a href="/logOut.do" style="text-family:sans-seriff; font-size: 1rem;">로그아웃</a></li>
+                    <li><a href="/campMain.do">/캠핑장.do</a></li>
+                    <li><a href="/groupList.do">/캠핑모임.do</a></li>
+                    <li><a href="/myPage.do">/마이페이지.do</a></li>
+                    <li><a href="/cusSer.do">/고객센터.do</a></li>
+                    <li><a href="/login.do">/로그인.do</a></li>
                 </ul>
             </div>
-            <span class="navTrigger">
-                <i></i>
-                <i></i>
-                <i></i>
-            </span>
+          
         </div>
     </nav>
-
+	
 <!-- Jquery needed -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
@@ -406,11 +317,24 @@ body {
         $(window).scroll(function() {
             if ($(document).scrollTop() > 50) {
                 $('.navHD').addClass('affix');
+                $('.footerHD').addClass('affix2');
                 console.log("OK");
             } else {
                 $('.navHD').removeClass('affix');
+                $('.footerHD').removeClass('affix2');
+            }
+            
+            if ($(document).scrollTop() > 200) {
+                $('.footerHD').addClass('affix2');
+            } else {
+                $('.footerHD').removeClass('affix2');
             }
         });
     </script>
+    
+    
+    <footer class="footerHD" >
+    	<div> hi</div>
+    </footer>
 </body>
 </html>

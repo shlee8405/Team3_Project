@@ -5,16 +5,28 @@
 <mapper namespace="report">
 	
 	<select id="allList" resultType="rvo">
-		select * from REPORT 
+		select * from REPORT
 	</select>
 	
-	<insert id="insert" parameterType="rvo">
-		insert into REPORT (r_content,r_name)
-		values(#{r_content},#{r_name})
+	<insert id="insert" parameterType="map">
+		insert into REPORT (r_content,u_idx1)
+		values(#{rvo.r_content},#{u_idx})
 	</insert>
 	
 	<select id="detail" parameterType="String" resultType="rvo">
 		select * from REPORT where r_idx = #{r_idx}
+	</select>
+	
+	<update id="update" parameterType="rvo">
+		update REPORT set r_name = #{r_name},  r_content = #{r_content}  where r_idx = #{r_idx}
+	</update>
+	
+	<update id="delete" parameterType="String">
+		update REPORT set r_status = 0 where r_idx = #{r_idx}
+	</update>
+	
+	<select id="List" parameterType="String" resultType="rvo">
+		select * from REPORT where u_idx1 = #{u_idx}
 	</select>
 </mapper>
 
