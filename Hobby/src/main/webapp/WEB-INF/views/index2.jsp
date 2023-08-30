@@ -9,7 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
- 
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
@@ -49,12 +50,10 @@
 
         .section {
           width: 100%;
-          height: 100%;
-          background-attachment: fixed;
-          background-size: 100% 100%;
           position: relative;
           background-color: white;
           z-index: 2;
+          margin-bottom:2rem;
         }
         
         /* The hero image */
@@ -82,8 +81,9 @@
       /* 투명 */
         .section.one {
           background: none;
-          height:40%;
           margin-left:0;
+          display: inline-block;
+          padding: 0px 1vw;
         } 
         .s1-text-title{
             font-family: MBCM;
@@ -92,7 +92,7 @@
         .s1-text-content{
             font-family: TAEBAEK;
             font-size:1.5em;
-            white-space: collapse balance;
+            /* white-space: collapse balance; */
             overflow: hidden;
             text-overflow: ellipsis;
         }
@@ -106,14 +106,16 @@
             font-size:1.0em;
         }
         .section.two {
-          background-color: rgba(204, 211, 207, 0.062);
-          height:170%;
+          	background-color: rgba(204, 211, 207, 0.062);
+			display: inline-block;
         }
 
 
         .section.three {
-            height:30%;
+            display: inline-block;
+            height:auto;
             background-color:white;
+            padding: 0px 1vw;
         }
 
         .s3-text-title{
@@ -124,13 +126,12 @@
         .s3-text-content{
             font-family: TAEBAEK;
             font-size:1.5em;
-            white-space: collapse balance;
             overflow: hidden;
             text-overflow: ellipsis;
         }
      
         .section.four{
-            height:40%;
+            display: inline-block;
             background-color: rgba(204, 211, 207, 0.062);
         }
         .s4-text-title {
@@ -141,16 +142,15 @@
         .s4-text-content {
             font-family: TAEBAEK;
             font-size:1.5em;
-            white-space: collapse balance;
             overflow: hidden;
             text-overflow: ellipsis;
         }
         
 
-        .section.five {
-            height:20%;
-            background-color: gray;
-            margin-top:100px;
+      	.section.five{
+            display: inline-block;
+            background-color: rgba(0, 0, 0, 0.52);
+            margin-bottom:0px;
         }
 
         .s5-text-title {
@@ -162,7 +162,6 @@
             font-family: TAEBAEK;
             font-size:0.5em;
             font-weight: bold;
-            white-space: collapse balance;
             overflow: hidden;
             text-overflow: ellipsis;
         }
@@ -180,370 +179,381 @@
      
       
        
-     
+     	
 
 
         /* NAVBAR STYLE */
         html,
-body {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-/* Navbar section */
-
-.navHD {
-    width: 100%;
-    height: 65px;
-    position: fixed;
-    line-height: 65px;
-    text-align: center;
-    background-color:rgba(4, 4, 4, 0);
-    position: fixed;
-    top: 0;
-    z-index: 3;
-  
-}
-
-.navHD, ::after, ::before {
-    box-sizing: content-box;
-}
-
-.navHD div.logo {
-    float: left;
-    width: auto;
-    height: auto;
-    padding-left: 3rem;
-}
-
-.navHD div.logo a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 2.5rem;
-}
-
-.navHD div.logo a:hover {
-    color: #00E676;
-}
-
-.navHD div.main_list {
-    height: 65px;
-    float: right;
-}
-
-.navHD div.main_list ul {
-    width: 100%;
-    height: 65px;
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.navHD div.main_list ul li {
-    width: auto;
-    height: 65px;
-    padding: 0;
-    padding-right: 3rem;
-}
-
-.navHD div.main_list ul li a {
- 	font-family: MBCM;
-    text-decoration: none;
-    color: rgba(255,255,255,0.8);
-    line-height: 65px;
-    font-size: 2.0rem;
-}
-.affix div.main_list ul li a {
-    color: rgba(199, 196, 196, 0.637);
-}
-
-.navHD div.main_list ul li a:hover {
-    color: gray;
-}
-
-
-/* Home section */
-
-
-
-.navTrigger {
-    display: none;
-}
-
-.navHD {
-	padding-top: 20px;
-    padding-bottom: 20px;
-    -webkit-transition: all 0.4s ease;
-    transition: all 0.4s ease;
-}
-
-
-/* Media qurey section */
-
-@media screen and (min-width: 768px) and (max-width: 1024px) {
-    .container {
-        margin: 0;
-    }
-}
-
-@media screen and (max-width:768px) {
-    .navTrigger {
-        display: block;
-    }
-    .navHD div.logo {
-        margin-left: 15px;
-    }
-    .navHD div.main_list {
-        width: 100%;
-        height: 0;
-        overflow: hidden;
-    }
-    .navHD div.show_list {
-        height: auto;
-        display: none;
-    }
-    .navHD div.main_list ul {
-        flex-direction: column;
-        width: 100%;
-        height: 100vh;
-        right: 0;
-        left: 0;
-        bottom: 0;
-        background-color: #111;
-        /*same background color of navbar*/
-        background-position: center top;
-    }
-    .navHD div.main_list ul li {
-        width: 100%;
-        text-align: right;
-    }
-    .navHD div.main_list ul li a {
-        text-align: center;
-        width: 100%;
-        font-size: 3rem;
-        padding: 20px;
-    }
-    .navHD div.media_button {
-        display: block;
-    }
-}
+		body {
+		    margin: 0;
+		    padding: 0;
+		    box-sizing: border-box;
+		}
+		
+		/* Navbar section */
+		.navHD {
+		    width: 100%;
+		    height: 65px;
+		    position: fixed;
+		    line-height: 65px;
+		    text-align: center;
+		    background-color:rgba(4, 4, 4, 0);
+		    position: fixed;
+		    top: 0;
+		    z-index: 3;
+		  
+		}
+		
+		.navHD, ::after, ::before {
+		    box-sizing: content-box;
+		}
+		
+		.navHD div.logo {
+		    float: left;
+		    width: auto;
+		    height: auto;
+		    padding-left: 3rem;
+		}
+		
+		.navHD div.logo a {
+		    text-decoration: none;
+		    color: #fff;
+		    font-size: 2.5rem;
+		}
+		
+		.navHD div.logo a:hover {
+		    color: #00E676;
+		}
+		
+		.navHD div.main_list {
+		    height: 65px;
+		    float: right;
+		}
+		
+		.navHD div.main_list ul {
+		    width: 100%;
+		    height: 65px;
+		    display: flex;
+		    list-style: none;
+		    margin: 0;
+		    padding: 0;
+		}
+		
+		.navHD div.main_list ul li {
+		    width: auto;
+		    height: 65px;
+		    padding: 0;
+		    padding-right: 3rem;
+		}
+		
+		.navHD div.main_list ul li a {
+		 	font-family: MBCM;
+		    text-decoration: none;
+		    color: rgba(255,255,255,0.8);
+		    line-height: 65px;
+		    font-size: 2.0rem;
+		}
+		.affix div.main_list ul li a {
+		    color: rgba(199, 196, 196, 0.637);
+		}
+		
+		.navHD div.main_list ul li a:hover {
+		    color: gray;
+		}
+		
+		
+		/* Home section */
+		.containerHD {
+        justify-content: flex-end;
+        display: flex;
+        flex-wrap: nowrap;
+	    }
+	    .logo {
+	        margin-right: auto;
+	        display: flex;
+	        align-items: center;
+	    }
+	    .navlinks {
+	        flex-wrap: nowrap;
+	    }
+	    a {
+	        white-space: nowrap;
+	    }
+		
+		
+		.navTrigger {
+		    display: none;
+		}
+		
+		.navHD {
+			padding-top: 20px;
+		    padding-bottom: 20px;
+		    -webkit-transition: all 0.4s ease;
+		    transition: all 0.4s ease;
+		}
 
 
-.navTrigger {
-    cursor: pointer;
-    width: 30px;
-    height: 25px;
-    margin: auto;
-    position: absolute;
-    right: 30px;
-    top: 0;
-    bottom: 0;
-}
-
-.navTrigger i {
-    background-color: #fff;
-    border-radius: 2px;
-    content: '';
-    display: block;
-    width: 100%;
-    height: 4px;
-}
-
-.navTrigger i:nth-child(1) {
-    -webkit-animation: outT 0.8s backwards;
-    animation: outT 0.8s backwards;
-    -webkit-animation-direction: reverse;
-    animation-direction: reverse;
-}
-
-.navTrigger i:nth-child(2) {
-    margin: 5px 0;
-    -webkit-animation: outM 0.8s backwards;
-    animation: outM 0.8s backwards;
-    -webkit-animation-direction: reverse;
-    animation-direction: reverse;
-}
-
-.navTrigger i:nth-child(3) {
-    -webkit-animation: outBtm 0.8s backwards;
-    animation: outBtm 0.8s backwards;
-    -webkit-animation-direction: reverse;
-    animation-direction: reverse;
-}
-
-.navTrigger.active i:nth-child(1) {
-    -webkit-animation: inT 0.8s forwards;
-    animation: inT 0.8s forwards;
-}
-
-.navTrigger.active i:nth-child(2) {
-    -webkit-animation: inM 0.8s forwards;
-    animation: inM 0.8s forwards;
-}
-
-.navTrigger.active i:nth-child(3) {
-    -webkit-animation: inBtm 0.8s forwards;
-    animation: inBtm 0.8s forwards;
-}
-
-@-webkit-keyframes inM {
-    50% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(45deg);
-    }
-}
-
-@keyframes inM {
-    50% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(45deg);
-    }
-}
-
-@-webkit-keyframes outM {
-    50% {
-        -webkit-transform: rotate(0deg);
-    }
-    100% {
-        -webkit-transform: rotate(45deg);
-    }
-}
-
-@keyframes outM {
-    50% {
-        transform: rotate(0deg);
-    }
-    100% {
-        transform: rotate(45deg);
-    }
-}
-
-@-webkit-keyframes inT {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@keyframes inT {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@-webkit-keyframes outT {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@keyframes outT {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(9px) rotate(135deg);
-    }
-}
-
-@-webkit-keyframes inBtm {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-@keyframes inBtm {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-@-webkit-keyframes outBtm {
-    0% {
-        -webkit-transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        -webkit-transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        -webkit-transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-@keyframes outBtm {
-    0% {
-        transform: translateY(0px) rotate(0deg);
-    }
-    50% {
-        transform: translateY(-9px) rotate(0deg);
-    }
-    100% {
-        transform: translateY(-9px) rotate(135deg);
-    }
-}
-
-.affix {
-    padding: 0;
-    background-color: black;
-    opacity:100%;
-    z-index:8;
-}
-
-.myH2 {
-	text-align:center;
-	font-size: 4rem;
-}
-.myP {
-	text-align: justify;
-	padding-left:15%;
-	padding-right:15%;
-	font-size: 20px;
-}
-@media all and (max-width:700px){
-	.myP {
-		padding:2%;
-	}
-}
-
-
+		/* Media qurey section */
+		@media screen and (min-width: 768px) and (max-width: 1024px) {
+		    .container {
+		        margin: 0;
+		    }
+		}
+		
+		@media screen and (max-width:768px) {
+		    .navTrigger {
+		        display: block;
+		    }
+		    .navHD div.logo {
+		        margin-left: 15px;
+		    }
+		    .navHD div.main_list {
+		        width: 100%;
+		        height: 0;
+		        overflow: hidden;
+		    }
+		    .navHD div.show_list {
+		        height: auto;
+		        display: none;
+		    }
+		    .navHD div.main_list ul {
+		        flex-direction: column;
+		        width: 100%;
+		        height: 100vh;
+		        right: 0;
+		        left: 0;
+		        bottom: 0;
+		        background-color: #111;
+		        /*same background color of navbar*/
+		        background-position: center top;
+		    }
+		    .navHD div.main_list ul li {
+		        width: 100%;
+		        text-align: right;
+		    }
+		    .navHD div.main_list ul li a {
+		        text-align: center;
+		        width: 100%;
+		        font-size: 3rem;
+		        padding: 20px;
+		    }
+		    .navHD div.media_button {
+		        display: block;
+		    }
+		}
+	
+	
+		.navTrigger {
+		    cursor: pointer;
+		    width: 30px;
+		    height: 25px;
+		    margin: auto;
+		    position: absolute;
+		    right: 30px;
+		    top: 0;
+		    bottom: 0;
+		}
+		
+		.navTrigger i {
+		    background-color: #fff;
+		    border-radius: 2px;
+		    content: '';
+		    display: block;
+		    width: 100%;
+		    height: 4px;
+		}
+		
+		.navTrigger i:nth-child(1) {
+		    -webkit-animation: outT 0.8s backwards;
+		    animation: outT 0.8s backwards;
+		    -webkit-animation-direction: reverse;
+		    animation-direction: reverse;
+		}
+		
+		.navTrigger i:nth-child(2) {
+		    margin: 5px 0;
+		    -webkit-animation: outM 0.8s backwards;
+		    animation: outM 0.8s backwards;
+		    -webkit-animation-direction: reverse;
+		    animation-direction: reverse;
+		}
+		
+		.navTrigger i:nth-child(3) {
+		    -webkit-animation: outBtm 0.8s backwards;
+		    animation: outBtm 0.8s backwards;
+		    -webkit-animation-direction: reverse;
+		    animation-direction: reverse;
+		}
+		
+		.navTrigger.active i:nth-child(1) {
+		    -webkit-animation: inT 0.8s forwards;
+		    animation: inT 0.8s forwards;
+		}
+		
+		.navTrigger.active i:nth-child(2) {
+		    -webkit-animation: inM 0.8s forwards;
+		    animation: inM 0.8s forwards;
+		}
+		
+		.navTrigger.active i:nth-child(3) {
+		    -webkit-animation: inBtm 0.8s forwards;
+		    animation: inBtm 0.8s forwards;
+		}
+		
+		@-webkit-keyframes inM {
+		    50% {
+		        -webkit-transform: rotate(0deg);
+		    }
+		    100% {
+		        -webkit-transform: rotate(45deg);
+		    }
+		}
+		
+		@keyframes inM {
+		    50% {
+		        transform: rotate(0deg);
+		    }
+		    100% {
+		        transform: rotate(45deg);
+		    }
+		}
+		
+		@-webkit-keyframes outM {
+		    50% {
+		        -webkit-transform: rotate(0deg);
+		    }
+		    100% {
+		        -webkit-transform: rotate(45deg);
+		    }
+		}
+		
+		@keyframes outM {
+		    50% {
+		        transform: rotate(0deg);
+		    }
+		    100% {
+		        transform: rotate(45deg);
+		    }
+		}
+		
+		@-webkit-keyframes inT {
+		    0% {
+		        -webkit-transform: translateY(0px) rotate(0deg);
+		    }
+		    50% {
+		        -webkit-transform: translateY(9px) rotate(0deg);
+		    }
+		    100% {
+		        -webkit-transform: translateY(9px) rotate(135deg);
+		    }
+		}
+		
+		@keyframes inT {
+		    0% {
+		        transform: translateY(0px) rotate(0deg);
+		    }
+		    50% {
+		        transform: translateY(9px) rotate(0deg);
+		    }
+		    100% {
+		        transform: translateY(9px) rotate(135deg);
+		    }
+		}
+		
+		@-webkit-keyframes outT {
+		    0% {
+		        -webkit-transform: translateY(0px) rotate(0deg);
+		    }
+		    50% {
+		        -webkit-transform: translateY(9px) rotate(0deg);
+		    }
+		    100% {
+		        -webkit-transform: translateY(9px) rotate(135deg);
+		    }
+		}
+		
+		@keyframes outT {
+		    0% {
+		        transform: translateY(0px) rotate(0deg);
+		    }
+		    50% {
+		        transform: translateY(9px) rotate(0deg);
+		    }
+		    100% {
+		        transform: translateY(9px) rotate(135deg);
+		    }
+		}
+		
+		@-webkit-keyframes inBtm {
+		    0% {
+		        -webkit-transform: translateY(0px) rotate(0deg);
+		    }
+		    50% {
+		        -webkit-transform: translateY(-9px) rotate(0deg);
+		    }
+		    100% {
+		        -webkit-transform: translateY(-9px) rotate(135deg);
+		    }
+		}
+		
+		@keyframes inBtm {
+		    0% {
+		        transform: translateY(0px) rotate(0deg);
+		    }
+		    50% {
+		        transform: translateY(-9px) rotate(0deg);
+		    }
+		    100% {
+		        transform: translateY(-9px) rotate(135deg);
+		    }
+		}
+		
+		@-webkit-keyframes outBtm {
+		    0% {
+		        -webkit-transform: translateY(0px) rotate(0deg);
+		    }
+		    50% {
+		        -webkit-transform: translateY(-9px) rotate(0deg);
+		    }
+		    100% {
+		        -webkit-transform: translateY(-9px) rotate(135deg);
+		    }
+		}
+		
+		@keyframes outBtm {
+		    0% {
+		        transform: translateY(0px) rotate(0deg);
+		    }
+		    50% {
+		        transform: translateY(-9px) rotate(0deg);
+		    }
+		    100% {
+		        transform: translateY(-9px) rotate(135deg);
+		    }
+		}
+		
+		.affix {
+		    padding: 0;
+		    background-color: black;
+		    opacity:100%;
+		    z-index:8;
+		}
+		
+		.myH2 {
+			text-align:center;
+			font-size: 4rem;
+		}
+		.myP {
+			text-align: justify;
+			padding-left:15%;
+			padding-right:15%;
+			font-size: 20px;
+		}
+		@media all and (max-width:700px){
+			.myP {
+				padding:2%;
+			}
+		}
         /* NAVBAR STYLE END */
 
 
@@ -627,7 +637,7 @@ $("#mainListDiv").fadeIn();
 
       <!-- 소개글 -->
     <div class="section one ">
-        <div class="row" style="position:absolute; left:10%; right:10%; top:5%; z-index: 9;">
+        <div class="row" style=" left:10%; right:10%; top:5%; z-index: 9;">
             <div class="s1-text-title">
                 /CAMP.do
             </div>
@@ -640,7 +650,7 @@ $("#mainListDiv").fadeIn();
 
       <!-- 두번째 색션 -->
     <div class="section two  w-100 " >
-        <div class="row" style="position:absolute; margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
+        <div class="row" style=" margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
             <div class="s2-text-title">
                 /요즘 핫한 곳으로.go!
             </div>
@@ -661,7 +671,7 @@ $("#mainListDiv").fadeIn();
 
     <!-- 세번째 색션 -->
     <div class="section three">
-        <div class="row" style="position:absolute; left:10%; right:10%; top:5%; z-index: 9;">
+        <div class="row" style=" left:10%; right:10%; top:5%; z-index: 9;">
             <div class="s3-text-title">
                 /CAMPing 의 이유.do 
             </div>
@@ -674,7 +684,7 @@ $("#mainListDiv").fadeIn();
 
     
     <div class="section four">
-        <div class="row" style="position:absolute; margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
+        <div class="row" style=" margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
             <div class="s4-text-title">
                 /캠핑, together.do
             </div>
@@ -685,17 +695,26 @@ $("#mainListDiv").fadeIn();
         </div>
     </div>
   
-        <div class="section five">
-            <div class="row" style="position:absolute; margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
-                <div class="s5-text-title">
-                    /푸터.do 
+       <!--  <div class="section five" style="background-color:gray!important;">
+            <div class="row" style=" margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
+                <div class="col s5-text-title">
+                    /푸터.do  
                 </div>
-                <div class="s5-text-content">
+                <div class=" col s5-text-content">
                     국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
                     국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
                     국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
                 </div>
-              
+        	</div>
+    	</div> -->
+    	<div class="section five">
+        <div class="row" style=" margin-left:15vw; margin-right:15vw; top:2%; z-index: 9;">
+            <div class="s5-text-title">
+                /푸터.do
+            </div>
+            <div class="s5-text-content">
+                국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.
+            </div>
         </div>
     </div>
   </body>
