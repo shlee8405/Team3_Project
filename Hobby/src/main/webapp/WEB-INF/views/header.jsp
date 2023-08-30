@@ -266,7 +266,7 @@ body {
 	}
 
 	function go_mypage() {
-		location.href = "/myPage.do"
+		location.href = "/myPagemain.do"
 	}
 
 	function go_admin() {
@@ -300,7 +300,7 @@ body {
                       <li><a href="/logOut.do" style="text-family:sans-seriff; font-size: 1rem;">로그아웃</a></li>
                     <li><a href="/campMain.do">/캠핑장.do</a></li>
                     <li><a href="/groupList.do">/캠핑모임.do</a></li>
-                    <li><a href="/myPage.do">/마이페이지.do</a></li>
+                    <li><a href="/myPagemain.do">/마이페이지.do</a></li>
                     <li><a href="/cusSer.do">/고객센터.do</a></li>
                     <li><a href="/login.do">/로그인.do</a></li>
                 </ul>

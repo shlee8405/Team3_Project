@@ -243,17 +243,17 @@ public class MyController {
 	}
 
 	// 留덉씠�럹�씠吏� 愿��젴 controls
-	@GetMapping("/myPage.do")
-	public ModelAndView goMyPage() /* 留덉씠�럹�씠吏� 硫붿씤 */ {
-		ModelAndView mv = new ModelAndView("user/myPageMain");
-		return mv;
-	}
-
-	@GetMapping("/myPageOneList.do")
-	public ModelAndView goMyPageOneList() /* �굹�쓽 �젙蹂� 蹂닿린 */ {
-		ModelAndView mv = new ModelAndView("user/myPageOneList");
-		return mv;
-	}
+//	@GetMapping("/myPageMain.do")
+//	public ModelAndView goMyPage() /* 留덉씠�럹�씠吏� 硫붿씤 */ {
+//		ModelAndView mv = new ModelAndView("user/myPageMain");
+//		return mv;
+//	}
+//
+//	@GetMapping("/myPageOneList.do")
+//	public ModelAndView goMyPageOneList() /* �굹�쓽 �젙蹂� 蹂닿린 */ {
+//		ModelAndView mv = new ModelAndView("user/myPageOneList");
+//		return mv;
+//	}
 
 	/*
 	 * @GetMapping("/myPageEdit.do") public ModelAndView goMyPageEdit() �굹�쓽 �젙蹂�

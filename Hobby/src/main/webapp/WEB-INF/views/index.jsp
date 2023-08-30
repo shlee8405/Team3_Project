@@ -61,7 +61,7 @@
 		location.href = "/adminHome.do"
 	}
 	function go_mypage(){
-		location.href = "/mypage.do"
+		location.href = "/myPagemain.do"
 	}
 </script>
 <link rel="stylesheet" href="/resources/css/index.css">
