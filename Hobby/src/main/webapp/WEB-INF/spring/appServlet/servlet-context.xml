@@ -24,6 +24,16 @@
 		<beans:property name="maxUploadSize" value="10485760" />
 		<beans:property name="defaultEncoding" value="UTF-8" />
 	</beans:bean>
+	
+	<beans:bean id="log_inter" class="com.team.commons.LoginInterceptor"/>
+	<interceptors>
+		<interceptor>
+			<mapping path="/cusSer.do"/>
+			
+			<beans:ref bean="log_inter"/>
+		</interceptor>
+	</interceptors>
+	
 	<context:component-scan base-package="com.team.*" />
 	
 </beans:beans>

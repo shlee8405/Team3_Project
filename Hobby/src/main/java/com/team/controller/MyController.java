@@ -162,10 +162,13 @@ public class MyController {
 	}
 
 	@RequestMapping("/go_updateQ.do") /* 문의 수정 페이지로 이동 */
-	public ModelAndView goUpdateQ(@ModelAttribute("q_idx") String q_idx) {
+	public ModelAndView goUpdateQ(@ModelAttribute("q_idx") String q_idx,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("cusser/cusSerAskUpdate");
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
 		QnaVO qvo = qnaService.Detail(q_idx);
 		mv.addObject("qvo", qvo);
+		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
 
@@ -191,31 +194,40 @@ public class MyController {
 		return mv;
 	}
 
-	@RequestMapping("/cusSerReport.do")
-	public ModelAndView goCusSerReport() /* 신고 목록 페이지로 이동 */ {
+	@RequestMapping("/cusSerReport.do") /* 신고 목록 페이지로 이동 */ 
+	public ModelAndView goCusSerReport(HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("cusser/cusSerReport");
-		List<ReportVO> list = reportService.getAllReports();
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
+		List<ReportVO> list = reportService.getReports(u_idx);
 		mv.addObject("list", list);
+		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
 	
 	@GetMapping("/go_ReportDetail.do")/* 신고 상세 페이지 */ 
-	public ModelAndView goReportDetail(@ModelAttribute("r_idx") String r_idx){
+	public ModelAndView goReportDetail(@ModelAttribute("r_idx") String r_idx,HttpServletRequest request){
 		ModelAndView mv = new ModelAndView("cusser/cusSerReportDetail");
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
 		ReportVO rvo = reportService.Detail(r_idx);
+		mv.addObject("user", Ulist.get(0));
 		mv.addObject("rvo", rvo);
 		return mv;
 	}
 	
 	@RequestMapping("/go_updateReport.do") /* 신고 수정 페이지로 이동 */
-	public ModelAndView goUpdateReport(@ModelAttribute("r_idx") String r_idx) {
+	public ModelAndView goUpdateReport(@ModelAttribute("r_idx") String r_idx,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("cusser/cusSerReportUpdate");
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
 		ReportVO rvo = reportService.Detail(r_idx);
+		mv.addObject("user", Ulist.get(0));
 		mv.addObject("rvo", rvo);
 		return mv;
 	}
 	
-	@RequestMapping("/updateReport.do") /* 신고  수정하기 */
+	@RequestMapping("/updateReport.do") /* 신고 수정하기 */
 	public ModelAndView goUpdateReport(ReportVO rvo) {
 		ModelAndView mv = new ModelAndView("redirect:/cusSerReport.do");
 		int res = reportService.UpdateReport(rvo);
@@ -230,15 +242,20 @@ public class MyController {
 	}
 
 	@GetMapping("/report.do")
-	public ModelAndView goReport()/* 신고 작성 페이지로 이동 */ {
+	public ModelAndView goReport(HttpServletRequest request)/* 신고 작성 페이지로 이동 */ {
 		ModelAndView mv = new ModelAndView("cusser/cusSerReportR");
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
+		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
 
 	@PostMapping("/report_insert.do") /* 신고 넣기 */
-	public ModelAndView goReportInsert(ReportVO rvo) {
+	public ModelAndView goReportInsert(ReportVO rvo,HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("redirect:/cusSerReport.do");
-		int res = reportService.getReportInsert(rvo);
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
+		int res = reportService.getReportInsert(rvo,u_idx);
 		return mv;
 	}
 

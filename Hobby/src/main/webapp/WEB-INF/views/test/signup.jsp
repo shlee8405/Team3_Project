@@ -168,6 +168,8 @@
 						    });
 						});
 				    });
+				    var formData = "email=" + encodeURIComponent(emailValue); // emailValue는 이메일 입력 필드 값
+
 			</script>
 		</head>
 		

@@ -161,7 +161,7 @@
         <h3 class="mb-4">문의 수정하기</h3>
         <div class="mb-3">
             <label for="q_name" class="form-label">작성자:</label>
-            <input type="text" id="q_name" name="q_name" class="form-control" value="${qvo.q_name}">
+            <input type="text" id="q_name" name="q_name" class="form-control" value="${user.u_name}" disabled/>
         </div>
         <div class="mb-3">
             <label for="q_content" class="form-label">내용:</label>

@@ -160,11 +160,11 @@
     <form method="post">
         <h3 class="mb-4">신고 수정하기</h3>
         <div class="mb-3">
-            <label for="r_name" class="form-label">작성자:</label>
-            <input type="text" id="r_name" name="r_name" class="form-control" value="${rvo.r_name}">
+            <label for="r_name" class="form-label">작성자</label>
+            <input type="text" id="q_name" name="q_name" class="form-control" value="${user.u_name}" disabled/>
         </div>
         <div class="mb-3">
-            <label for="r_content" class="form-label">내용:</label>
+            <label for="r_content" class="form-label">내용</label>
             <textarea id="r_content" name="r_content" class="form-control" rows="8">${rvo.r_content}</textarea>
         </div>
         <div class="text-center">

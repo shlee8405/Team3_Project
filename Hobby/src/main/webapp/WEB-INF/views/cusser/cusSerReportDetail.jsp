@@ -154,7 +154,7 @@ function go_ReportDelete(r_idx) {
 		                    <thead>
 		                        <tr>
 		                            <th scope="col" class="text-center">작성자</th>
-		                            <td>${rvo.r_name}</td>
+		                            <td>${user.u_name}</td>
 		                        </tr>
 		                        <tr>
 		                            <th scope="col" class="text-center">내용</th>
@@ -180,6 +180,5 @@ function go_ReportDelete(r_idx) {
 		        </div>
 		    </div>
 		</div>
-
 </body>
 </html>
