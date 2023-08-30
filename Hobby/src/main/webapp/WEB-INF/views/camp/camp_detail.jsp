@@ -9,7 +9,7 @@
 <title>캠핑장 상세보기</title>
 <!-- <link> 태그(=스타일시트)는 <head> 내부에 위치한다. -->
    <!-- 부트스트랩 CDN 추가 -->
-   <link rel="stylesheet" href="/resources/css/camp/camp_detail.css">
+   <link rel="stylesheet" href="/resources/css/camp/camp_detail.css?after">
    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
    <link href="/assets/css/star.css" rel="stylesheet" />
@@ -43,8 +43,8 @@
    	 <div class="carousel-item active">
        	 <img src="resources/images/camp_titleBox_img.jpg" class="d-block w-100" alt="...">
        	 <div class="carousel-caption d-none d-md-block">
-            	<h1>${cvo.facltNm}</h1>
-           		<p>${cvo.lineIntro}</p>
+            	<p id="facltNm">${cvo.facltNm}</p>
+           		<p id="lineIntro" style="font-size: 20px;">${cvo.lineIntro == "" ? "자연의 아름다움을 가까이에서 느끼며, 힐링의 시간을 선사하는 캠핑장" : cvo.lineIntro}</p>
      	   </div>
     	</div>
 	</div>
@@ -66,7 +66,8 @@
 
 				<!-- 캠핑장 이미지 -->
 				<div class="col-md-6">
-					<img src='${cvo.firstImageUrl}' width="500px" hight="500px" alt="캠핑장 이미지" class="img-fluid">
+					<img src='${cvo.firstImageUrl == "" ? "resources/images/default_camp_img.jpg" : cvo.firstImageUrl}' 
+						 width="500px" hight="500px" alt="캠핑장 이미지" class="img-fluid">
 				</div>
 
 				<!-- 캠핑장 기본 정보 -->
@@ -75,38 +76,40 @@
 						<table class="table horizontal-only-lines">
 							<tr>
 								<th>주소</th>
-								<td>${cvo.addr1}</td>
+								<td>${cvo.addr1 == "" ? "준비 중 입니다." : cvo.addr1}</td>
 							</tr>
 							<tr>
 								<th>문의처</th>
-								<td>${cvo.tel}</td>
+								<td>${cvo.tel == "" ? "준비 중 입니다." : cvo.tel}</td>
 							</tr>
 							<tr>
 								<th>운영일</th>
-								<td>${cvo.operDeCl}</td>
+								<td>${cvo.operDeCl == "" ? "준비 중 입니다." : cvo.operDeCl}</td>
 							</tr>
 							<tr>
 								<th>캠핑장환경</th>
-								<td>${cvo.lctCl}</td>
+								<td>${cvo.lctCl == "" ? "준비 중 입니다." : cvo.lctCl}</td>
 							</tr>
 							<tr>
 								<th>캠핑장 유형</th>
-								<td>${cvo.induty}</td>
+								<td>${cvo.induty == "" ? "준비 중 입니다." : cvo.induty}</td>
 							</tr>
 							<tr>
 								<th>주변이용가능시설</th>
-								<td>${cvo.posblFcltyCl}</td>
+								<td>${cvo.posblFcltyCl == "" ? "준비 중 입니다." : cvo.posblFcltyCl}</td>
 							</tr>
 						</table>
 		
 				<!-- 좋아요, 찜버튼 -->
 				<div class="d-flex justify-content-end mt-3">
 					<button class="btn btn-danger rounded-circle mr-2" onclick="addLike('user01', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
-			        <i class="fas fa-heart"></i></button>
-			    		 <span id="like-count">${cvo.likesCount}</span> 
+			        	<i class="fas fa-heart"></i>
+			        </button>
+			    		 <span id="like-count" style="margin-right:20px">${cvo.likesCount}</span> 
 			    		 
 					<button class="btn btn-primary rounded-circle" onclick="addToWishlist('user01', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
-			        	<i class="fas fa-thumbs-up"></i></button>
+			        	<i class="fas fa-thumbs-up"></i>
+			        </button>
 			    		<span id="wish-count">${cvo.wishCount}</span> 
 				</div>
 			</div>
@@ -137,7 +140,8 @@
 	        	<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
 	        	<h2 id="review_title" style="font-weight: bolder;">소개글</h2>
 	    	</div>
-            	<p><c:choose>
+            	<p id="campIntroText">
+            	<c:choose>
         			<c:when test="${fn:length(cvo.featureNm) > fn:length(cvo.intro)}">
             			<p>${cvo.featureNm}</p>
        				</c:when>
@@ -147,7 +151,8 @@
         			<c:otherwise>
             			<p>정보를 준비 중 입니다.</p>
         			</c:otherwise>
-    			</c:choose></p>
+    			</c:choose>
+    			</p>
        		</div>
         
         <!-- 위치정보 -->
