@@ -1,6 +1,8 @@
 package com.team.report.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +19,13 @@ public class ReportDAO {
 		return sqlSessionTemplate.selectList("report.allList");
 	}
 	
-	public int getReportInsert(ReportVO rvo) {
-		return sqlSessionTemplate.insert("report.insert",rvo);
+	public int getReportInsert(ReportVO rvo,String u_idx) {
+		
+		Map<String, Object> map = new HashMap<>();
+		map.put("rvo", rvo);
+		map.put("u_idx", u_idx);
+		
+		return sqlSessionTemplate.insert("report.insert",map);
 	}
 	
 	public ReportVO Detail(String r_idx) {
@@ -31,5 +38,9 @@ public class ReportDAO {
 	
 	public int DeleteReport(String r_idx) {
 		return sqlSessionTemplate.update("report.delete",r_idx);
+	}
+	
+	public List<ReportVO> getReports(String u_idx) {
+		return sqlSessionTemplate.selectList("report.List",u_idx);
 	}
 }

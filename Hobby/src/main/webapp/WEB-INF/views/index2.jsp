@@ -15,6 +15,23 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <style>
+	.containerHD {
+	    justify-content: flex-end;
+	    display: flex;
+	    flex-wrap: nowrap;
+	}
+	.logo {
+	    margin-right: auto;
+	    display: flex;
+	    align-items: center;
+	}
+	.navlinks {
+	    flex-wrap: nowrap;
+	}
+	a {
+	    white-space: nowrap;
+	}
+
     @font-face{
         font-family: MBCM;
         src: url(/resources/fonts/MBCM.ttf);

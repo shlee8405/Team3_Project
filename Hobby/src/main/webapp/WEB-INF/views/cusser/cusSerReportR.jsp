@@ -145,12 +145,18 @@
 	    <div class="report-form">
 	    <form method="post">
 	        <h3 class="mb-4">신고하기</h3>
-	        <div class="mb-3">
-	            <label for="r_name" class="form-label">작성자:</label>
-	            <input type="text" id="r_name" name="r_name" class="form-control"/>
+	        <div class="row mb-3">
+	        <div class="col">
+	            <label for="r_name" class="form-label">작성자</label>
+	            <input type="text" id="q_name" name="q_name" class="form-control" value="${user.u_name}" disabled/>
+	        </div>
+	        <!-- <div class="col">
+	            <label for="r_name" class="form-label">신고 대상</label>
+	            <input type="text" id="q_name" name="q_name" class="form-control"/>
+	        </div> -->
 	        </div>
 	        <div class="mb-3">
-	            <label for="r_content" class="form-label">내용:</label>
+	            <label for="r_content" class="form-label">내용</label>
 	            <textarea id="r_content" name="r_content" class="form-control" rows="8"></textarea>
 	        </div>
 	        <div class="text-center">

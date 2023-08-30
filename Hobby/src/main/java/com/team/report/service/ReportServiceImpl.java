@@ -19,8 +19,8 @@ public class ReportServiceImpl implements ReportService{
 	}
 	
 	@Override
-	public int getReportInsert(ReportVO rvo) {
-		return reportDAO.getReportInsert(rvo);
+	public int getReportInsert(ReportVO rvo,String u_idx) {
+		return reportDAO.getReportInsert(rvo,u_idx);
 	}
 	
 	@Override
@@ -36,5 +36,10 @@ public class ReportServiceImpl implements ReportService{
 	@Override
 	public int DeleteReport(String r_idx) {
 		return reportDAO.DeleteReport(r_idx);
+	}
+	
+	@Override
+	public List<ReportVO> getReports(String u_idx) {
+		return reportDAO.getReports(u_idx);
 	}
 }

@@ -161,7 +161,7 @@ $(document).ready(function() {
             <div class="card-body">
                 <!-- Default Table -->
                 <table class="table caption-top" style="background-color: white; border-radius: 10px;">
-                    <caption class="text-center">1:1 문의</caption>
+                    <caption class="text-center">신고 내역</caption>
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">번호</th>
@@ -181,7 +181,7 @@ $(document).ready(function() {
 				            <c:otherwise>
 				                <tr>
 				                    <td>${loop.count}</td>
-				                    <td>${k.r_name}</td>
+						            <td>${user.u_name}</td>
 				                    <td>
 				                        <a href="/go_ReportDetail.do?r_idx=${k.r_idx}">상세보기</a>
 				                    </td>
