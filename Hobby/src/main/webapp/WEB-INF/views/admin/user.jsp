@@ -16,6 +16,19 @@ main {
     flex-direction: row;
 }
 
+.super {
+	margin: 0px;
+	margin-right:0px;
+	padding-right:0px;
+	width: 100%;
+	justify-items:center;
+
+}
+
+
+.btn-tab-clicked {
+	background-color: #0f4200;
+}
 
 .sidebar-link {
 color:#ffffff!important;
@@ -27,6 +40,8 @@ color:#ffffff!important;
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <script type="text/javascript">
 	function go_admin() {
@@ -58,6 +73,11 @@ color:#ffffff!important;
         var y = document.getElementById("test2");
         var z = document.getElementById("test3");
         var test4 = document.getElementById("test4");
+        document.getElementById("btn-tab-1").style.backgroundColor = "#0f4200";
+        document.getElementById("btn-tab-2").style.backgroundColor = '#198754';
+        document.getElementById("btn-tab-3").style.backgroundColor = '#198754';
+        document.getElementById("btn-tab-4").style.backgroundColor = '#198754';
+        $('#btn-tab-1').addClass('btnclicked');
         y.style.display = "none";
         z.style.display = "none";
 		test4.style.display = "none";
@@ -69,6 +89,10 @@ color:#ffffff!important;
         var y = document.getElementById("test2");
         var z = document.getElementById("test3");
         var test4 = document.getElementById("test4");
+        document.getElementById("btn-tab-2").style.backgroundColor = "#0f4200";
+        document.getElementById("btn-tab-1").style.backgroundColor = '#198754';
+        document.getElementById("btn-tab-3").style.backgroundColor = '#198754';
+        document.getElementById("btn-tab-4").style.backgroundColor = '#198754';
         x.style.display = "none";
         z.style.display = "none";
 		test4.style.display = "none";       
@@ -80,6 +104,10 @@ color:#ffffff!important;
         var y = document.getElementById("test2");
         var z = document.getElementById("test3");
         var test4 = document.getElementById("test4");
+        document.getElementById("btn-tab-3").style.backgroundColor = "#0f4200";
+        document.getElementById("btn-tab-1").style.backgroundColor = '#198754';
+        document.getElementById("btn-tab-2").style.backgroundColor = '#198754';
+        document.getElementById("btn-tab-4").style.backgroundColor = '#198754';
         x.style.display = "none";
         y.style.display = "none";
         test4.style.display = "none";
@@ -91,6 +119,10 @@ color:#ffffff!important;
         var y = document.getElementById("test2");
         var z = document.getElementById("test3");
         var test4 = document.getElementById("test4");
+        document.getElementById("btn-tab-4").style.backgroundColor = "#0f4200";
+        document.getElementById("btn-tab-1").style.backgroundColor = '#198754';
+        document.getElementById("btn-tab-2").style.backgroundColor = '#198754';
+        document.getElementById("btn-tab-3").style.backgroundColor = '#198754';
         x.style.display = "none";
         y.style.display = "none";
         z.style.display = "none";
@@ -108,8 +140,22 @@ color:#ffffff!important;
 
 
     <!-- MAIN CONTAINER -->
-   <div class="container"  style="width: 85%;">
+   <div class="super">
+		<div class="row" style="width:100%;">
+			<div class="col" style="border-bottom: 1px solid  #0f4200;">
+				<input type="button" class="btn-check" id="btn-check" autocomplete="off" onclick="hidetest()" checked>
+            	<label class="btn btn-success" for="btn-check" id="btn-tab-1">유저 리스트</label>
 
+            	<input type="button" class="btn-check" id="btn-check2" autocomplete="off" onclick="hidetest2()">
+            	<label class="btn btn-success" for="btn-check2" id="btn-tab-2">유저 생성</label>
+
+            	<input type="button" class="btn-check" id="btn-check3" autocomplete="off" onclick="hidetest3()">
+            	<label class="btn btn-success" for="btn-check3" id="btn-tab-3">관리자 리스트</label>
+   
+            	<input type="button" class="btn-check" id="btn-check4" autocomplete="off" onclick="hidetest4()">
+            	<label class="btn btn-success" for="btn-check4" id="btn-tab-4">관지라 생성</label>
+			</div>
+		</div>
 
         <!-- SEARCH CONTAINER -->
         <div class="container  ps-5 col-5 mt-5 p-1  " style="background-color: rgba(200, 200, 200, 0.3); height:25vh; width: 90%; box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.25);
@@ -140,7 +186,7 @@ color:#ffffff!important;
 
 
         <!-- TOGGLE BUTTON CONTAINER -->
-        <div class="container mt-4 ps-5 p-1 col-6">
+<!--         <div class="container mt-4 ps-5 p-1 col-6">
             <input type="button" class="btn-check" id="btn-check" autocomplete="off" onclick="hidetest()" checked>
             <label class="btn btn-success" for="btn-check">유저 리스트</label>
 
@@ -153,7 +199,7 @@ color:#ffffff!important;
             <input type="button" class="btn-check" id="btn-check4" autocomplete="off" onclick="hidetest4()">
             <label class="btn btn-success" for="btn-check4">관지라 생성</label>
         </div>
-        
+         -->
 
         <!-- FIRST CONTAINER ( USER LIST )-->
         <div id="test" class="container mt-4" style="background-color: rgba(200, 200, 200, 0.3); height:55vh; width: 90%;  box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.25);

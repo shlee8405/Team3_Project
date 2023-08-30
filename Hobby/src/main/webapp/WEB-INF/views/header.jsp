@@ -7,6 +7,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+    
+    @font-face{
+        font-family: MBCM;
+        src: url(/resources/fonts/MBCM.ttf);
+    }
+    @font-face {
+        font-family: TAEBAEK;
+        src: url(/resources/fonts/TAEBAEK.ttf);
+    }
+    
 .containerHD {
     justify-content: flex-end;
     display: flex;
@@ -103,14 +113,15 @@ body {
 }
 
 .navHD div.main_list ul li a {
+ 	font-family: MBCM;
     text-decoration: none;
     color: #fff;
     line-height: 65px;
-    font-size: 2.4rem;
+    font-size: 2.0rem;
 }
 
 .navHD div.main_list ul li a:hover {
-    color: #00E676;
+    color: green;
 }
 
 
@@ -162,7 +173,7 @@ body {
         left: 0;
         bottom: 0;
         background-color: #111;
-        /*same background color of navbar*/
+        /*same background color of navbar
         background-position: center top;
     }
     .navHD div.main_list ul li {
@@ -180,7 +191,6 @@ body {
     }
 }
 } */
->>>>>>> refs/remotes/origin/main
 
 
 
@@ -220,13 +230,60 @@ body {
     </style>
 
     <script>
-        $('.navTrigger').click(function () {
-    $(this).toggleClass('active');
-    console.log("Clicked menu");
-    $("#mainListDiv").toggleClass("show_list");
-    $("#mainListDiv").fadeIn();
+	$('.navTrigger').click(function () {
+    	$(this).toggleClass('active');
+    	console.log("Clicked menu");
+    	$("#mainListDiv").toggleClass("show_list");
+    	$("#mainListDiv").fadeIn();
+	});	
+	
+	function go_camp() {
+		location.href = "/campMain.do"
+	}
 
-});
+	function go_group() {
+		location.href = "/groupList.do"
+	}
+
+	function go_login() {
+		location.href = "/login.do"
+
+	}
+	function go_signup() {
+		location.href = "/signup.do"
+	}
+
+	function go_world() {
+		location.href = "/world.do"
+	}
+
+	function go_map() {
+		location.href = "/map.do"
+	}
+
+	function go_cusser() {
+		location.href = "/cusSer.do"
+	}
+
+	function go_mypage() {
+		location.href = "/myPage.do"
+	}
+
+	function go_admin() {
+		location.href = "/adminHome.do"
+	}
+	
+	function go_shltest() { /* 실험용. 나중에 삭제할 예정*/
+		location.href ="/shltest.do"
+	}
+	
+	function checkU_id(){
+		location.href="/checkSession.do"
+	}
+	
+	function go_logOut() {
+		location.href="/logOut.do"
+	}
 
     </script>
 </head>
@@ -234,21 +291,24 @@ body {
     <nav class="navHD">
         <div class="containerHD">
             <div class="logo">
-                <a href="#"><img src="/resources/images/logo3.png" style="width:200px; position:relative; top:-25px; margin:0;"></a>
+                <a href="/home.do"><img src="/resources/images/logo3.png" style="width:200px; position:relative; top:-25px; margin:0;"></a>
             </div>
             <div id="mainListDiv" class="main_list">
                 <ul class="navlinks">
-                    <li><a href="#">캠핑장</a></li>
-                    <li><a href="#">캠핑모임</a></li>
-                    <li><a href="#">마이페이지</a></li>
-                    <li><a href="#">고객센터</a></li>
-                    <li><a href="#">로그인</a></li>
+                    <li><a href="/adminHome.do" style="text-family:sans-seriff; font-size: 1rem;">관리자</a></li>
+                     <li><a href="/checkSession.do" style="text-family:sans-seriff; font-size: 1rem;">sysout sessionIdx</a></li>
+                      <li><a href="/logOut.do" style="text-family:sans-seriff; font-size: 1rem;">로그아웃</a></li>
+                    <li><a href="/campMain.do">/캠핑장.do</a></li>
+                    <li><a href="/groupList.do">/캠핑모임.do</a></li>
+                    <li><a href="/myPage.do">/마이페이지.do</a></li>
+                    <li><a href="/cusSer.do">/고객센터.do</a></li>
+                    <li><a href="/login.do">/로그인.do</a></li>
                 </ul>
             </div>
           
         </div>
     </nav>
-
+	
 <!-- Jquery needed -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
