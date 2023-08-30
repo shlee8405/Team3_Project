@@ -3,6 +3,7 @@ package com.team.user.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.team.user.dao.UserDAO;
@@ -14,7 +15,8 @@ public class UserServiceImpl implements UserService{
 	@Autowired
 	private UserDAO userDAO;
 	
-	
+	 @Autowired
+	    private BCryptPasswordEncoder passwordEncoder;
 
 	@Override
 	public List<UserVO> getAllUsers() {
@@ -61,8 +63,38 @@ public class UserServiceImpl implements UserService{
         System.out.println("count" + count);
         return count > 0;
 	}
+
+
+
+	@Override
+	public String findIdByEmail(String email) {
+		return userDAO.findIdByEmail(email);
+	}
+
+
+
+	 @Override
+	    public UserVO findUserByEmail(String email) {
+	        return userDAO.findUserByEmail(email);
+	    }
+
+	    @Override
+	    public String generateNewPassword() {
+	        // Implement password generation logic (e.g., using random characters)
+	        return "newGeneratedPassword";
+	    }
+
+	    @Override
+	    public boolean updateUserPassword(String u_id, String newPassword) {
+	        // Encrypt the new password before updating
+	        String encryptedPassword = passwordEncoder.encode(newPassword);
+	        int updatedRows = userDAO.updateUserPassword(u_id, encryptedPassword);
+	        return updatedRows > 0;
+	    }
+
+
+
+
 	
-	
-	
-	
+
 }

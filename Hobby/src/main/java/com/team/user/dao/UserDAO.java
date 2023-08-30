@@ -1,6 +1,8 @@
 package com.team.user.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,4 +57,22 @@ public class UserDAO {
     	System.out.println("daocount" + count);
     	return count;
     }
+    // 이메일로 아이디 찾기
+    public String findIdByEmail(String u_email) {
+        return sqlSessionTemplate.selectOne("user.findIdByEmail", u_email);
+    }
+    
+    public UserVO findUserByEmail(String u_email) {
+        return sqlSessionTemplate.selectOne("user.findUserByEmail", u_email);
+    }
+
+    // Update user's password
+    public int updateUserPassword(String u_id, String encryptedPassword) {
+        Map<String, String> parameterMap = new HashMap<>();
+        parameterMap.put("u_id", u_id);
+        parameterMap.put("encryptedPassword", encryptedPassword);
+        return sqlSessionTemplate.update("user.updateUserPassword", parameterMap);
+    }
+    
+    
 }
