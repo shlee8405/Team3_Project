@@ -38,6 +38,19 @@
 	<select id="idcount" parameterType="String" resultType="java.lang.Integer">
         SELECT COUNT(*) FROM USERS WHERE u_id = #{u_id}
     </select>
+
+    <!-- 아이디 찾기 -->
+    <select id="findIdByEmail" parameterType="String" resultType="java.lang.String">
+        SELECT u_id FROM USERS WHERE u_email = #{u_email}
+    </select>
+   	<select id="findUserByEmail" parameterType="String" resultType="uvo">
+        SELECT * FROM USERS WHERE u_email = #{u_email}
+    </select>
+
+    <update id="updateUserPassword" parameterType="map">
+        UPDATE USERS SET u_pw = #{encryptedPassword} WHERE u_id = #{u_id}
+    </update>
+
     
     
     
@@ -46,6 +59,7 @@
     </select>
     
     
+
 </mapper>
 
 

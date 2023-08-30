@@ -2,18 +2,78 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
 	<title>Login</title>
+	
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link rel="stylesheet" href="/resources/css/login.css">
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    $("#idRecoveryForm").submit(function(event) {
+	        event.preventDefault(); // Prevent the default form submission
+
+	        // Collect form data
+			var formData = "email=" + encodeURIComponent($("#email").val());
+	        // Use AJAX to check email availability first
+	        $.ajax({
+	            url: "/forgotId.do", // Endpoint for 아이디찾기
+	            type: "POST",
+	            data: formData,
+	            dataType: "text", // Response data type
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	            success: function(response) {
+	                console.log("Response:", response); // Add this line for debugging
+	                if (response) {
+	                    // Handle 아이디찾기 success
+	                    var foundId = response;
+	                    alert("아이디를 찾았습니다: " + response);
+	                    $("#idRecoveryModal").modal("hide"); // Close the modal
+	                } else {
+	                    // Handle 아이디찾기 error
+	                    alert("아이디를 찾을 수 없습니다. 다시 시도해주세요.");
+	                }
+	            },
+	            error: function(error) {
+	                console.log("Error:", error);
+	                // Handle 아이디찾기 error if needed
+	            }
+	        });
+	    });
+	});
+	$(document).ready(function() {
+	    $("#pwdRecoveryForm").submit(function(event) {
+	        event.preventDefault(); // Prevent the default form submission
+
+	        // Collect form data
+	        var formData = "email=" + encodeURIComponent($("#email").val());
+
+	        // Use AJAX to initiate password recovery
+	        $.ajax({
+	            url: "/forgotPwd.do", // Endpoint for 비밀번호찾기
+	            type: "POST",
+	            data: formData,
+	            dataType: "text", // Response data type
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	            success: function(response) {
+	                console.log("Response:", response);
+	                $("#pwdRecoveryResult").html(response); // Display the response
+	            },
+	            error: function(error) {
+	                console.log("Error:", error);
+	                // Handle 비밀번호찾기 error if needed
+	            }
+	        });
+	    });
+	});
+	</script>
 </head>
 <body>
     <form action="/login.do" method="post">
@@ -39,17 +99,20 @@
 	                <!--아이디 찾기-->
                     <div class="schid">
                         <c:url var="findId" value="/IdRecovery.do" />
-                        <a href="idfind.html"style="font-family: 'Noto Sans KR', sans-serif;">
-                          아이디찾기
+                        <a href="#" style="font-family: 'Noto Sans KR', sans-serif;" data-bs-toggle="modal" data-bs-target="#idRecoveryModal">
+                        아이디찾기
                         </a>
                     </div>
+                    <div class="modal-body">
+  					<div id="idRecoveryContent"></div>
+					</div>
                     <span style="margin-top: 8px;">|</span>
                 	<!--비밀번호 찾기-->
 	                <div class="schpw">
 	                    <c:url var="findPwd" value="/PwdRecovery.do" />
-	                    <a href="pwfind.html" style="  font-family: 'Noto Sans KR', sans-serif;">
-	                       비밀번호찾기
-	                    </a>
+	                    <a href="#" style="font-family: 'Noto Sans KR', sans-serif;" data-bs-toggle="modal" data-bs-target="#pwdRecoveryModal">
+       					 비밀번호찾기
+    					</a>
 	                </div>
 	                <!--비밀번호 찾기-->
 	                <span style="margin-top: 8px;">|</span>
@@ -64,9 +127,9 @@
                 <br>
                 
                 <!--카카오 로그인 -->
-                <div class="login_api">
+                <div class="login_api" style="text-align: center;">
 				  <a href="javascript:void(0)" id="kakaoLoginBtn"><img src="resources/images/kakao_login_btn.png" style="width:100%; height:50px; "></a>
-				  <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+				  <div id="naver_id_login" style="margin-top: 10px;">
 				</div>	
 			</div>
 		</div>
@@ -75,7 +138,7 @@
 				
 
 
-
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script>
   Kakao.init('c6915a815f664f1b0e24428d4202b72f'); // Initialize Kakao SDK with your API key
 
@@ -164,6 +227,52 @@
     alert(naver_id_login.getProfileData('age'));
   }
 </script>
+<div class="modal fade" id="idRecoveryModal" tabindex="-1" aria-labelledby="idRecoveryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="idRecoveryModalLabel">아이디 찾기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Input fields for 아이디찾기 -->
+        <form id="idRecoveryForm">
+          <div class="mb-3">
+            <label for="email" class="form-label">이메일</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
+          </div>
+          <!-- Add more input fields if needed -->
+          
+          <button type="submit" class="btn btn-primary">아이디 찾기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 비밀번호 찾기 모달 -->
+<div class="modal fade" id="pwdRecoveryModal" tabindex="-1" aria-labelledby="pwdRecoveryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pwdRecoveryModalLabel">비밀번호 찾기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Input fields for 비밀번호찾기 -->
+                <form id="pwdRecoveryForm">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">이메일</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
+                    </div>
+                    <!-- Add more input fields if needed -->
+                    <button type="submit" class="btn btn-primary">비밀번호 찾기</button>
+                </form>
+                <!-- 결과 출력 영역 -->
+                <div id="pwdRecoveryResult"></div>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>
