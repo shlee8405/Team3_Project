@@ -14,6 +14,7 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.team.camp.service.CampService;
 import com.team.camp.vo.CampVO;
+import com.team.camp.vo.ReviewVO;
 
 @RestController
 public class CampController {
@@ -245,14 +247,28 @@ public class CampController {
 		int wishCount = campService.getWish(cvo.getFacltNm());
 		cvo.setWishCount(wishCount);
 		
-		ModelAndView mv = new ModelAndView("camp/camp_detail");
+		// 후기와 별점 가져오기
+	    List<ReviewVO> reviews = campService.getReviews(cvo.getFacltNm());
+	    
+	    //averageRating 값을 반올림하여 정수값으로 변환
+	    double rawAverageRating = campService.getAverageRating(cvo.getFacltNm());
+	    
+	    System.out.println("평균별점:::" + rawAverageRating);
+	    
+	    int averageRating = (int) Math.round(rawAverageRating);
+
+	    System.out.println("reviews" + reviews);
+	    ModelAndView mv = new ModelAndView("camp/camp_detail");
 		mv.addObject("cvo", cvo);
+	    mv.addObject("reviews", reviews);
+	    mv.addObject("averageRating", averageRating);
 		return mv;
 	}
 	
-	@GetMapping("/campReview.do")
-	public ModelAndView goCampReview() {
-		ModelAndView mv = new ModelAndView("camp/camp_review");
-		return mv;
+	@PostMapping("/addReview.do")
+	public String addReview(@RequestParam String facltNm, @RequestParam String u_Id, @RequestParam String comment, @RequestParam int rating) {
+	    campService.addReview(facltNm, u_Id, comment, rating);
+	    String encodedFacltNm = URLEncoder.encode(facltNm, StandardCharsets.UTF_8);
+	    return "redirect:/campDetail.do?keyword=" + encodedFacltNm; // 후기가 추가된 후 다시 해당 캠핑장 상세 페이지로 리다이렉트
 	}
 }

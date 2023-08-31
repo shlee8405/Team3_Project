@@ -22,6 +22,7 @@
 		<typeAlias type="com.team.myqna.vo.MyQnaVO" alias="mqvo" />
 		<typeAlias type="com.team.myreview.vo.MyReviewVO" alias="mrvo" />
 		<typeAlias type="com.team.camp.vo.CampVO" alias="cvo" />
+		<typeAlias type="com.team.camp.vo.ReviewVO" alias="crvo" />
 		<typeAlias type="com.team.group.vo.GroupCmtVO" alias="gcvo" />
 	</typeAliases>
 	

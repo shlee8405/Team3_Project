@@ -1,11 +1,14 @@
 package com.team.camp.dao;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+
+import com.team.camp.vo.ReviewVO;
 
 @Repository
 public class CampDAO {
@@ -80,6 +83,31 @@ public class CampDAO {
 		if (result == null) {
 			return 0;
 		}
+		return result;
+	}
+	
+	// 후기와 별점 추가
+	public void addReview(String facltNm, String u_Id, String comment, int rating) {
+		 Map<String, Object> params = new HashMap<>();
+		 params.put("facltNm", facltNm);
+		 params.put("u_Id", u_Id);
+		 params.put("comment", comment);
+		 params.put("rating", rating);
+		 sqlSessionTemplate.insert("camp.addReview", params);
+	}
+
+	// 해당 캠핑장 리뷰랑 별점 가져오기
+	public List<ReviewVO> getReviews(String facltNm) {
+		System.out.println("getReviews");
+		return sqlSessionTemplate.selectList("camp.getReviews", facltNm);
+	}
+
+	// 해당 캠핑장의 평균 별점 가져오기
+	public Double getAverageRating(String facltNm) {
+	Double result = sqlSessionTemplate.selectOne("camp.getAverageRating", facltNm);
+	if (result == null) { // 해당 캠핑장의 리뷰가 아직 없을 때
+		return 0.0;
+	}
 		return result;
 	}
 }

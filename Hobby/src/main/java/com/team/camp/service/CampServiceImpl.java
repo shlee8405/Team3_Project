@@ -1,9 +1,12 @@
 package com.team.camp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.team.camp.dao.CampDAO;
+import com.team.camp.vo.ReviewVO;
 
 @Service
 public class CampServiceImpl implements CampService {
@@ -61,4 +64,21 @@ public class CampServiceImpl implements CampService {
 		return campDAO.getWishCount(facltNm);
 	}
 
+	// 후기, 별점 추가
+	@Override
+	public void addReview(String facltNm, String u_Id, String comment, int rating) {
+	    campDAO.addReview(facltNm, u_Id, comment, rating);
+	}
+
+	// 해당 캠핑장의 모든 후기와 별점 가져오기
+	@Override
+	public List<ReviewVO> getReviews(String facltNm) {
+		return campDAO.getReviews(facltNm);
+	}
+
+	// 해당 캠핑장 평균 별점 가져오기
+	@Override
+	public double getAverageRating(String facltNm) {
+		return campDAO.getAverageRating(facltNm);
+	}
 }

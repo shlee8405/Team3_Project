@@ -102,7 +102,7 @@
 		var searchMode = false; // 검색모드인지 확인하는 용도. 기본값은 false, 검색 모드일 때 true
 		var searchKeyword = "";
 		var pageNo = 1;
-		var loading = false; 	// 디폴트 false, 스크롤을 내리면 la
+		var loading = false; 	// 디폴트 false
 		
 		/* 스크롤이 80% 이상 움직였을 때 loadMore() 함수 실행*/
 		function loadMore() {
@@ -110,6 +110,7 @@
 			// loading이 true라면 데이터 로드 중일 때 loadMore() 함수가 또 실행되지 않도록 return해버림. ()
 			if(loading) return; 
 			loading = true;		// 데이터 로드 시작
+			
 			
 			// url: 검색모드인지 여부에 따라 다르게 설정하는 삼항연산자
 			var url = searchMode ? "/campSearch.do" : "/campList.do";
@@ -132,7 +133,7 @@
 		            alert(data[0].message);
 		            return;  // 메시지만 있으므로 추가 작업을 하지 않고 반환
 		        }
-				
+								
 		        var list = "";
 				
 				$.each(data, function (index, dataList) {
@@ -193,9 +194,8 @@
 				
 				$("#camp_list").empty(); // 초기화
 					pageNo = 1; // 페이지 번호 초기화
-				
 					loadMore(); // loadMore 함수 호출
-				
+
 				}
 			
 				$(document).ready(function() {
