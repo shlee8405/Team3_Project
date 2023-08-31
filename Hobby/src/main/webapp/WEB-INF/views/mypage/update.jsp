@@ -75,9 +75,10 @@ div {
 </style>
 <script type="text/javascript">
 	function save_go(f) {
-		f.action="/mypage.do";
+		f.action="/myPageEdit2.do";
 		f.submit();
 	}
+	
 </script>
 </head>
 <body>
@@ -96,6 +97,7 @@ div {
     </div>
     <div class="scrollable-content">
     <div style="margin-top: 80px;"></div>
+    <form method="post">
             <table>
 				<tr align="center">
 					<td bgcolor="#637F42" style="color:white">이름</td>
@@ -118,13 +120,14 @@ div {
 					<tr align="center">
 						<td colspan="2">
 							<input type="hidden" name="idx" value="${vo.idx}">
-							<input type="button" value="수정" onclick="save_go(this.form)" />
+							<input type="button" value="완료" onclick="save_go(this.form)" />
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 							<input type="reset" value="취소" />
 						</td>
 					</tr>
 				</tfoot>
 			</table>
+			</form>
 			</div>
     <script type="text/javascript">
 		function goToPage(url){

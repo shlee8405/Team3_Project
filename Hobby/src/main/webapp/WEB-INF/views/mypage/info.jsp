@@ -6,6 +6,7 @@
 <head>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>내 정보</title>
@@ -96,6 +97,9 @@ function sendData(f) {
 	f.action="/myPageEdit.do";
 	f.submit();
 }
+function go_myPageEdit() {
+	location.href = "/myPageEdit2.do"?q_idx=" + q_idx;;
+}
 </script>
 </head>
 <body>
@@ -114,7 +118,7 @@ function sendData(f) {
     </div>
     <div class="scrollable-content">
     <div style="margin-top: 80px;"></div>
-		<form action="myPageEdit.do" method="post">
+		<form method="post">
 		<table>
 				<c:choose>
 	     			<c:when test="${empty list}">
@@ -153,6 +157,7 @@ function sendData(f) {
 		function goToPage(url){
 			location.href = url;
 		}
+		
 	</script>
 </body>
 </html>

@@ -1,30 +1,30 @@
 package com.team.mypagemain.vo;
 
 public class MypageMainVO {
-	private String cw_idx , u_idx, c_name;
+	private String wish_id, u_id, facltNm;
 
-	public String getCw_idx() {
-		return cw_idx;
+	public String getWish_id() {
+		return wish_id;
 	}
 
-	public void setCw_idx(String cw_idx) {
-		this.cw_idx = cw_idx;
+	public void setWish_id(String wish_id) {
+		this.wish_id = wish_id;
 	}
 
-	public String getU_idx() {
-		return u_idx;
+	public String getU_id() {
+		return u_id;
 	}
 
-	public void setU_idx(String u_idx) {
-		this.u_idx = u_idx;
+	public void setU_id(String u_id) {
+		this.u_id = u_id;
 	}
 
-	public String getC_name() {
-		return c_name;
+	public String getFacltNm() {
+		return facltNm;
 	}
 
-	public void setC_name(String c_name) {
-		this.c_name = c_name;
+	public void setFacltNm(String facltNm) {
+		this.facltNm = facltNm;
 	}
-
+	
 }

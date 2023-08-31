@@ -13,9 +13,12 @@ public class MyinfoDAO {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
 	
-	public List<MyinfoVO> getMyinfo() {
+	public List<MyinfoVO> getMyinfo(String l_idx) {
 		// TODO Auto-generated method stub
-		return sessionTemplate.selectList("mypage.myinfo");
+		return sessionTemplate.selectList("mypage.myinfo", l_idx);
+	}
+	public int updateMyinfo(MyinfoVO vo) {
+		return sessionTemplate.update("mypage.myinfoupdate", vo);
 	}
 
 }
