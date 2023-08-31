@@ -17,7 +17,7 @@
 	
 	<insert id="insert" parameterType="gvo">
 		insert into GROUPS(g_title,g_intro, g_fname,g_maxPeople, g_date, g_location, g_desc,g_status, u_idx)
-		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_location},#{g_desc},1,#{u_idx})
+		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_location},#{g_desc},'1',#{u_idx})
 	</insert>
 	
 	<update id="delete" parameterType="gvo">
@@ -43,4 +43,7 @@
 		values(#{gc_content}, sysdate(), #{u_idx}, #{g_idx})
 	</insert>
     
+    <update id="cmtDel" parameterType="gcvo">
+    	update GROUPCOMMENTS set gc_status='0' where gc_idx = #{gc_idx}
+    </update>
 </mapper>

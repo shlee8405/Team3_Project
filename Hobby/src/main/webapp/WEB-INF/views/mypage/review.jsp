@@ -12,91 +12,86 @@
 	crossorigin="anonymous">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>나의 리뷰</title>
+<title>내가 작성한 리뷰</title>
 <style type="text/css">
-th, td {
-	padding: 8px;
-	text-align: center;
-	border-bottom: 1px solid #ddd;
-	vertical-align: center;
+.my-page-title{
+	text-align: center; /* 가운데 정렬 */
+    margin-top: 250px; /* 상단 여백 조절 */
+    padding-bottom: 80px;
 }
-.menu {
-	display: flex;
-	background-color: #f2f2f2;
-	width: 100%;
-	height: 50px;
+.btn-group {
+    display: flex; /* 가로 정렬 */
+    justify-content: space-between; /* 양 옆 여백 */
+    max-width: 1100px; /* 최대 폭 설정 */
+    margin: 0 auto; /* 가운데 정렬 */
+    padding: 0 1px; /* 왼쪽과 오른쪽 여백 설정 */
 }
-
-.menu-item {
-	flex:1;
-	padding: 10px;
-	text-align: center;
-	border: 1px solid; 
-	background-color: white;
-	margin: 0;
-}
-.menu-item-review{
-	background-color: #637F42;
-	color: white;
-}
-a {text-decoration: none;}
-
-table {
-	width: 100%; border-collapse: collapse; text-align: center;
-}
-
-
-tr:nth-child(even) {
-	background-color: #f2f2f2;
-}
-
-th {
-	background-color: #637F42;
-	color: white;
-}
-
-div {margin: auto; text-align: center;}
 .btn-custom{
 	background-color: white;
 	color: black;
     border-color: #637F42;
 }
 .btn-custom:hover{ 
-background-color: #637F42;
-color: white;
+	background-color: #637F42;
+	color: white;
 }
-.btn-custom:active{ 
-background-color: #637F42;
-color: black;
-color: white;
+.btn-comp {
+    flex-grow: 1;
+    transition: background-color 0.3s; /* 애니메이션 효과 추가 */
 }
 
-.btn-active{
-background-color: #637F42;
-color: black;
-color: white;
+.btn-comp.active {
+    background-color: #637F42; /* 클릭 시 배경색 고정 */
+    color: white; /* 텍스트 색상을 밝게 조정 */
 }
-.btn-group {
-    display: flex; /* 요소들을 가로로 정렬 */
+a {
+	text-decoration: none;
+}
+
+table {
+    margin: 0 auto; /* 가운데 정렬 */
+    width: 800px; /* 내용에 맞게 자동 조절 */
+    max-width: 100%; /* 최대 폭 설정 */
+    border-collapse: collapse;
+    text-align: center;
+}
+th, td {
+    padding: 8px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    vertical-align: middle; /* 세로 가운데 정렬 */
+}
+th {
+	background-color: #637F42;
+	color: white;
+}
+
+div {
+	margin: auto;
+	text-align: center;
+}
+.scrollable-content {
+    max-height: 80vh; /* 최대 높이 설정 */
+    overflow-y: auto; /* 세로 스크롤바 활성화 */
 }
 </style>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
-	<div style="position: relative; top: 200px; z-index: 1;">
-
-		<div>
-			<h1 class="mypage-title">마이페이지</h1>
-		</div>
-		<!-- 메뉴바 -->
-		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
-                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
-                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
-                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myqna.do')">1:1문의 내역</button>
-                <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
-            </div>
-		<div style="height: 100px;"></div>
-		<h1>내가 쓴 리뷰</h1>
+	<div style="position: relative; top: 200px; z-index: 1;"></div>
+	<div class="my-page-title">
+		<h1>마이페이지</h1>
+	</div>
+	
+	<!-- 메뉴바 -->
+	<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
+    	<button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
+        <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
+        <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myqna.do')">1:1문의 내역</button>
+        <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
+    </div>
+    <div class="scrollable-content">
+    <div style="margin-top: 80px;"></div>
 		<table>
 			<thead>
 			<tr>

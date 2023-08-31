@@ -87,6 +87,7 @@
     	}
 
     	function comment_del(f) {
+		var chk = confirm("정말 삭제할까요?");
     		f.action = "/groupCmtDel.do";
     		f.submit();
     	}
@@ -217,15 +218,13 @@
 				
 				<!-- 값들을 출력해서 확인 -->
 				<!-- Debugging lines -->
-				<c:out value="${sessionUidx}" />
-				<c:out value="${k.u_idx}" />
+				<%-- <c:out value="${sessionUidx}" />
+				<c:out value="${k.u_idx}" /> --%>
 				
 				<!-- 디버깅 정보 -->
-				<c:out value="If 조건문 전" />
-				<c:if test="${sessionUidx eq k.u_idx}">
-				    <input type="button" value="삭제" onclick="delete_go(this.form)" />
-				</c:if>
-				<c:out value="If 조건문 후" />
+				<%-- <c:if test="${sessionUidx eq k.u_idx}"> --%>
+				    <input type="button" value="삭제" onclick="comment_del(this.form)" />
+				<%-- </c:if> --%>
 		 		<input type="hidden" value="${k.gc_idx}" name="gc_idx">
 		 		<input type="hidden" value="${k.g_idx}" name="g_idx">
 		 		<input type="hidden" name="cPage" value="${cPage}">

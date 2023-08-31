@@ -1,4 +1,18 @@
 @charset "UTF-8";
+@font-face {
+     font-family: CJU-Bold;
+     src: url(/resources/fonts/CJU-Bold.ttf);
+}
+
+#titleBox {
+	font-family: CJU-Bold;
+    font-size:60px;
+  	position: relative;
+  	width: 100%;
+ 	text-align: center;
+  	margin: auto;
+}
+    
 #titleBox img {
 	/* 슬라이드 이미지 사이즈 */
 	width:2000px;
@@ -12,17 +26,15 @@
     height: 100vh;  
     margin: 0;
     position: relative;
-  	z-index: 1;
-	margin-top: 43px; 
+  	z-index: 1; 
 	flex-wrap: wrap;
 	margin-top: -145px;
 }
 
-#titleBox {
-  position: relative;
-  width: 100%;
-  text-align: center;
-  margin: auto;
+#campIntroText{
+	text-align: center;
+	width: 300px;
+	padding: 10px;
 }
 
 .carousel-caption {
@@ -44,7 +56,7 @@
     margin-top: 20px;
 }
 
-/* 수평 라인만 표시하는 테이블 스타일 */
+	/* 수평 라인만 표시하는 테이블 스타일 */
     .horizontal-only-lines tr th, 
     .horizontal-only-lines tr td {
        border: none;
@@ -56,12 +68,12 @@
 	}
 		
 	.nav-tabs .nav-link {
-		border: 1px solid #ccc;
-		border-radius: 5px;
-		text-align: center;
-		transition: background-color 0.3s;  /* 부드러운 효과 */
-		color: #637F42;
-		font-size: 20px; /* 원하는 크기로 조정 */
+	border: 1px solid #ccc;
+	border-radius: 5px;
+	text-align: center;
+	transition: background-color 0.3s;  /* 부드러운 효과 */
+	color: #637F42;
+	font-size: 20px; /* 원하는 크기로 조정 */
 	}
 		
 	.nav-tabs .nav-link:hover {
@@ -83,10 +95,17 @@
     display: flex;
     align-items: center;
     padding: 10px 0;
+    margin-top: 30px;
+    margin-bottom: 30px;
 	}
 	
 	.table th {
     font-weight: bold;
   	}
   	
-  	
+  	#like-count, #wish-count {
+    font-size: 20px;
+    vertical-align: middle;
+    margin-left: 5px;  /* 왼쪽 마진 추가 */
+    margin-top: 10px;
+	}

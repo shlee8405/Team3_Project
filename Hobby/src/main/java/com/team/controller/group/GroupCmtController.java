@@ -34,7 +34,7 @@ public class GroupCmtController {
 	private Paging paging;
 	
 	@PostMapping("/groupCmtList.do")
-	public ModelAndView commentInsert(HttpServletRequest request, GroupCmtVO gcvo, @ModelAttribute("cPage") String cPage,
+	public ModelAndView commentInsert( HttpServletRequest request, GroupCmtVO gcvo, @ModelAttribute("cPage") String cPage,
 	        @ModelAttribute("g_idx") String g_idx, @RequestParam("u_idx") String u_idx) {
 		ModelAndView mv = new ModelAndView("redirect:/group_onelist.do");
 		String gc_content = request.getParameter("gc_content");
@@ -45,10 +45,10 @@ public class GroupCmtController {
 		return mv;
 	}
 	@PostMapping("/groupCmtDel.do")
-	public ModelAndView commentDel(@RequestParam("gc_idx") String gc_idx, @ModelAttribute("cPage") String cPage,
+	public ModelAndView commentDel(GroupCmtVO gcvo, @RequestParam("gc_idx") String gc_idx, @ModelAttribute("cPage") String cPage,
 			@ModelAttribute("g_idx") String g_idx) {
 		ModelAndView mv = new ModelAndView("redirect:/group_onelist.do");
-		//int result = groupService.commentDel(gc_idx);
+		int result = groupService.commentDel(gcvo);
 		return mv;
 	}
 	
