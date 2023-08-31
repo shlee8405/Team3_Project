@@ -16,8 +16,8 @@
 	</select>
 	
 	<insert id="insert" parameterType="gvo">
-		insert into GROUPS(g_title,g_intro, g_fname,g_maxPeople, g_date, g_location, g_desc,g_status, u_idx)
-		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_location},#{g_desc},'1',#{u_idx})
+		insert into GROUPS(g_title,g_intro, g_fname,g_maxPeople, g_date, g_cdo, g_gugun, g_location, g_desc,g_status, u_idx)
+		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_cdo},#{g_gugun},#{g_location},#{g_desc},'1',#{u_idx})
 	</insert>
 	
 	<update id="delete" parameterType="gvo">
@@ -27,7 +27,7 @@
 	
 	<update id="update" parameterType="gvo">
 		update GROUPS set g_title= #{g_title},g_intro= #{g_intro},g_fname= #{g_fname},g_maxPeople= #{g_maxPeople},
-		g_date= #{g_date},g_location= #{g_location},g_desc= #{g_desc}, u_idx= #{u_idx} where g_idx = #{g_idx}
+		g_date= #{g_date},g_cdo= #{g_cdo},g_gugun= #{g_gugun},g_location= #{g_location},g_desc= #{g_desc}, u_idx= #{u_idx} where g_idx = #{g_idx}
 	</update>
 	
 	<select id="cmtList" parameterType="String" resultType="gcvo">

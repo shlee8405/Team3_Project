@@ -19,4 +19,5 @@ public class MyReviewServiceImpl implements MyReviewService{
 		// TODO Auto-generated method stub
 		return myReviewDAO.getMyReivew();
 	}
+	
 }

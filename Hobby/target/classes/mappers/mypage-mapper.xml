@@ -5,25 +5,32 @@
 <mapper namespace="mypage">
 	
 	<select id="myinfo" resultType="mvo">
-		select * from USERS where u_idx = 1
+		select * from USERS where u_idx = #{l_idx}
 	</select>
 	
 	<select id="mypagemain" resultType="mmvo">
-		select * from CWISH
+		select * from camp_wish
 	</select>
 	
-	<update id="myinfoupdate" parameterType="upvo">
+	<!-- <update id="myinfoupdate" parameterType="upvo">
         update USERS set u_name=#{u_name}, u_pw=#{u_pw}, u_phone=#{u_phone},
         u_email=#{u_email} where u_idx = #{u_idx}
-    </update>
+    </update> -->
     
     <select id="myqna" resultType="mqvo">
 		select * from QNA
 	</select>
 	
 	<select id="myreview" resultType="mrvo">
-		select * from CREVIEW
+		select * from camp_review where u_idx = 1
 	</select>
+    
+    <!-- 사용자 정보 업데이트 SQL 추가 -->
+	<update id="myinfoupdate" parameterType="upvo">
+    	UPDATE USERS
+    	SET u_name = #{u_name}, u_id = #{u_id}, u_phone = #{u_phone}, u_email = #{u_email}
+    	WHERE u_idx = #{u_idx}
+	</update>
     
 </mapper>
 

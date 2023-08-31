@@ -49,11 +49,11 @@
       var count_party = 0;
       var maxClicks = ${gvo.g_maxPeople}; // 버튼을 누를 수 있는 최대 횟수
       
-      $(document).ready(function() {
+     /*  $(document).ready(function() {
     	  // 버튼 클릭 이벤트를 설정합니다.
     	  $('#myButton_ok').click(party_click); 
     	  // 이벤트 핸들러를 여기에 더 추가할 수 있습니다.
-    	});
+    	}); */
       
       function party_click() {
      	count_party++;
@@ -88,8 +88,10 @@
 
     	function comment_del(f) {
 		var chk = confirm("정말 삭제할까요?");
-    		f.action = "/groupCmtDel.do";
-    		f.submit();
+			if(chk){
+	    		f.action = "/groupCmtDel.do";
+	    		f.submit();
+			}
     	}
     	
     </script>
@@ -134,7 +136,7 @@
 				</tr>
 				<tr align="center">
 					<th class="allist" bgcolor="#99ccff">캠핑 장소</th>
-					<td class="allist">${gvo.g_location}</td>
+					<td class="allist">${gvo.g_cdo} ${gvo.g_gugun} ${gvo.g_location}</td>
 				</tr>
 				<tr align="center">
 					<th class="allist" bgcolor="#99ccff">모임 정원</th>
@@ -186,7 +188,7 @@
 			 </fieldset>
 		</form>
 	</div>
-	<br><br><br>
+	
 	<!-- 로그인 확인후 입력창 활성화 -->
 	<script>
     $(document).ready(function() {
@@ -232,6 +234,10 @@
 		 </div>
 		</c:forEach>
 		</div>
+		<br>
+		<br>
+		<br>
+		<br>
 		</div>
 		
 </body>

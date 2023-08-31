@@ -1,171 +1,116 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>캠핑장후기</title>
 <style type="text/css">
-#header {
-    display: flex;
-    align-items: center;
-    padding: 10px 0;
+.reviewBox {
+  border: 1px solid #ccc;  				 /* 1px 두께의 회색 테두리 */
+  padding: 20px;           				 /* 내부 패딩 */
+  border-radius: 5px;       			 /* 모서리 둥글게 */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);  /* 그림자 효과 */
 }
 
-#camp_icon {
-    width: 90px;
-    height: 90px;
-    margin-right: 15px;
+.star {
+	font-size: 1.5em;
+	cursor: pointer;
+	color: grey;
 }
 
-#review_write_box {
-    border: 3px solid #D3D3D3;
-    padding: 10px;
-    margin-top: 20px;
+/* 선택된 별 및 이전 별들은 노란색으로 표시 */
+[type="radio"]:checked ~ .star, [type="radio"]:not(:checked) ~ .star {
+	color: gold;
 }
 
-#review_write_box fieldset {
-    display: inline-block;
-    direction: rtl;
-    border: 0;
+.star-rating .star {
+	cursor: pointer; /* 후기 남기기 섹션에서만 별에 커서 스타일 적용 */
 }
 
-#review_write_box input[type=radio] {
-    display: none;
+.checked, .filled {
+	color: gold;
 }
 
-#review_write_box label {
-    font-size: xx-large;
-    color: transparent;
-    text-shadow: 0 0 0 #f0f0f0;
-    cursor: pointer;
+/* 평균 별점 및 후기 목록에서 별은 클릭할 수 없게 만듭니다. */
+.star-display .star, .card-text .star {
+	pointer-events: none;
 }
-
-#review_write_box label:hover {
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-}
-
-#review_write_box label.checked,
-#review_write_box label:hover ~ label.checked {
-    text-shadow: 0 0 0 rgba(250, 208, 0, 0.99);
-    color: gold;
-}
-
-
-.review-box {
-    display: flex;
-    align-items: center; 
-    border: 3px solid #D3D3D3;
-    padding: 10px;
-    margin-top: 10px;
-}
-
-.review-box > div {
-    margin-right: 10px; 
-    flex-shrink: 0; /* 항목들이 줄어들지 않게 설정 */
-}
-
-.review-box .user-id {
-    font-weight: bold;
-}
-
-.review-box .user-rating {
-    font-size: 18px;
-    margin-right: 15px; /* 별점과 리뷰 내용 사이의 간격 */
-}
-
-.review-box .review-content {
-    flex: 1; /* 리뷰 내용이 남은 공간을 모두 차지하도록 설정 */
-    word-wrap: break-word; 
-}
-
-.review-box .review-date {
-    white-space: nowrap;
-    color: gray;
-    font-size: 15px;
-    margin-left: 10px; /* 리뷰 내용과 날짜 사이의 간격 */
-}
-
-
-#reviewContents {
-    width: 100%;
-    height: 90px;
-    padding: 10px;
-    box-sizing: border-box;
-    border: solid 1.5px #D3D3D3;
-    border-radius: 5px;
-    font-size: 16px;
-    resize: none;
-    margin-bottom: 10px;
-}
-
-.text-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.rating-section {
-    display: flex;
-    align-items: center;
-}
-
-#submit_btn {
-    background-color: #548C54;
-    width: 77px;
-    height: 37px;
-    margin-left: auto;  /* 왼쪽으로부터 자동 마진을 적용하여 오른쪽 끝으로 밀어줌 */
-    color: white;
-    font-size: 17px;
-    font-weight: bold;
-    border: none;
-    border-radius: 10px;
-}
-
 </style>
 
-<div id="container">
-    <div id="header">
-        <img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
-        <h2 style="font-weight: bolder;">후기</h2>
-    </div>
-    <form name="review_write_box" id="review_write_box" method="post">
-<div class="text-head">
-    <div class="rating-section">
-        <span class="text-bold" style="display: inline-block;"><h2>별점 선택</h2></span>
-        <fieldset>
-            <input type="radio" name="reviewStar" value="5" id="star1">
-            <label class="star" for="star1">★</label>
-            <input type="radio" name="reviewStar" value="4" id="star2">
-            <label class="star" for="star2">★</label>
-            <input type="radio" name="reviewStar" value="3" id="star3">
-            <label class="star" for="star3">★</label>
-            <input type="radio" name="reviewStar" value="2" id="star4">
-            <label class="star" for="star4">★</label>
-            <input type="radio" name="reviewStar" value="1" id="star5">
-            <label class="star" for="star5">★</label>
-        </fieldset>
-    </div>
-    <button type="submit" id="submit_btn">작 성</button>
-</div>
-        <textarea class="reviewContents" id="reviewContents" placeholder="즐거웠던 여행후기를 남겨주세요."></textarea>
-      </form>
+<!-- 평균 별점 -->
+<div class="container mt-5">
+	<div id="title">
+		<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
+		<h2 id="review_title" style="font-weight: bolder;">후기</h2>
+	</div>
 
-  	<div class="review-box">
-	   	<div class="user-id"><span>exampleUser</span></div>
-	   	<div class="user-rating"><span>★★★★☆</span></div>
-	  		<div class="review-content">튜브타고 물에 둥둥 떠있고 싶다. 룰루랄라 하하하하 호호호호호호호호호호호호호호호호호호호호호호호호</div>
-	  		<div class="review-date">2023-08-18</div>
+	<h2>평균 별점</h2>
+	<div class="star-display">
+		<c:forEach begin="1" end="${averageRating}" varStatus="status">
+			<span class="star checked">★</span>
+		</c:forEach>
+		<c:forEach begin="${averageRating + 1}" end="5" varStatus="status">
+			<span class="star">★</span>
+		</c:forEach>
+	</div>
+</div>
+
+<!-- 별점 평가 폼 -->
+<div class="container mt-5">
+	<div class="reviewBox">
+	<h2>후기 남기기</h2>
+	<form action="/addReview.do" method="post" class="mt-3">
+		<div class="form-group star-rating">
+			<label class="star">★</label> 
+			<label class="star">★</label> 
+			<label class="star">★</label> 
+			<label class="star">★</label> 
+			<label class="star">★</label> 
+			<input type="hidden" name="rating" id="ratingValue">
 		</div>
-  	</div>
- <script type="text/javascript">
-   $(document).ready(function() {
-       $(".star").on('click', function() {
-           var idx = $(this).index();
-           $(".star").removeClass("checked");
-           for (var i = 0; i <= idx; i++) {
-               $(".star").eq(i).addClass("checked");
-           }
-       });
-   });
+		<div class="form-group">
+			<textarea class="form-control" rows="4" id="comment" name="comment"></textarea>
+		</div>
+		<button type="submit" class="btn btn-primary">후기 남기기</button>
+		<input type="hidden" name="facltNm" value="${cvo.facltNm}"> <input
+			type="hidden" name="u_Id" value="user02"> <!-- 로그인한 회원 ID 수정하기 -->
+	</form>
+	</div>
+</div>
+
+<!-- 저장된 후기와 별점 보여주기 -->
+<div class="container mt-5">
+	<h2>후기 목록</h2>
+	<c:forEach items="${reviews}" var="review">
+		<div class="card mt-3">
+			<div class="card-body">
+				<h5 class="card-title">${review.comment}</h5>
+				<p class="card-text">
+					<c:forEach var="i" begin="1" end="${review.rating}">
+						<span class="star filled">★</span>
+					</c:forEach>
+					<c:forEach var="i" begin="${review.rating + 1}" end="5">
+						<span class="star">★</span>
+					</c:forEach>
+				</p>
+			</div>
+		</div>
+	</c:forEach>
+</div>
+
+<script type="text/javascript">
+$(document).ready(function() {
+    $(".star-rating .star").on('click', function() { // 후기 남기기 섹션에서만 별 클릭 이벤트를 적용
+        var idx = $(this).index();
+        $(".star-rating .star").removeClass("checked");
+        for (var i = 0; i <= idx; i++) {
+            $(".star-rating .star").eq(i).addClass("checked");
+        }
+        // 별점 값을 숨겨진 input에 저장
+        $("#ratingValue").val(idx + 1);
+    });
+});
+
 </script>

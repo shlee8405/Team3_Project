@@ -92,10 +92,10 @@ public class GroupController {
 		ModelAndView mv = new ModelAndView("redirect:/groupList.do");
 		try {
 			String path = request.getSession().getServletContext().getRealPath("/resources/images");
-			System.out.println(gvo.getFile());
 			MultipartFile f_param = gvo.getFile();
-			System.out.println(f_param);
-			System.out.println(file.getName());
+			 // g_cdo와 g_gugun 값을 출력해 보거나 사용합니다.
+	        System.out.println("Selected g_cdo: " + gvo.getG_cdo());
+	        System.out.println("Selected g_gugun: " + gvo.getG_gugun());
 			if (f_param.isEmpty()) {
 				gvo.setG_fname("");
 			}else {
