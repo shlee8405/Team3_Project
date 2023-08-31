@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -135,24 +137,28 @@ public class UserController {
 		} 
 
     }
-	 @RequestMapping("/emailCheck.do")
-	    public String checkEmail(@RequestBody String email) {
-		 String decodedEmail2 = "";
-		 try {
-			 decodedEmail2 = URLDecoder.decode(email, "UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-		 String decodedEmail = decodedEmail2.substring(0, decodedEmail2.length() - 1);
-		 System.out.println("controller email : "+decodedEmail);
-	        if (userService.isEmailDuplicate(decodedEmail)) {
-	        	System.out.println("test2");
-	            return "duplicate"; // 이미 사용 중인 이메일인 경우
-	        } else {
-	        	System.out.println("test3");
-	            return "available"; // 사용 가능한 이메일인 경우
-	        }
+	// 이메일 중복확인
+	@RequestMapping("/emailCheck.do")
+	public String checkEmail(@RequestBody String email) {
+	    String decodedEmail2 = "";
+	    try {
+	        decodedEmail2 = URLDecoder.decode(email, "UTF-8");
+	    } catch (UnsupportedEncodingException e) {
+	        e.printStackTrace();
 	    }
+	    String decodedEmail = decodedEmail2.replace("=", ""); // = 문자 제거
+	    System.out.println("controller email : " + decodedEmail);
+
+	    if (userService.isEmailDuplicate(decodedEmail)) {
+	        System.out.println("test2");
+	        return "duplicate"; // 이미 사용 중인 이메일인 경우
+	    } else {
+	        System.out.println("test3");
+	        return "available"; // 사용 가능한 이메일인 경우
+	    }
+	}
+
+	 // 아이디 중복확인
 	 @RequestMapping("/idCheck.do")
 	    public String checkId(@RequestBody String id) {
 	        String decodedId2 = "";
@@ -196,4 +202,65 @@ public class UserController {
 		 // Session에 id 추가
 		 return mv;
 	 }
-}
+	 @RequestMapping("/forgotId.do")
+	 public String forgotId(@RequestBody String encodedEmail) {
+//	     if (encodedEmail.isEmpty()) {
+//	         return ResponseEntity.badRequest().body("이메일 주소가 유효하지 않습니다.");
+//	     }
+//	     System.out.println(encodedEmail);
+//	     String foundId = userService.findIdByEmail(encodedEmail);
+		 
+		 String decodedEmail2 = "";
+		    try {
+		        decodedEmail2 = URLDecoder.decode(encodedEmail, "UTF-8");
+		    } catch (UnsupportedEncodingException e) {
+		        e.printStackTrace();
+		    }
+		    String decodedEmail = decodedEmail2.replace("=", ""); // = 문자 제거
+		    String finalemail = decodedEmail.substring(5);
+		    System.out.println("controller email : " + finalemail);
+		    String foundId = userService.findIdByEmail(finalemail);
+	     if (foundId != null) {
+	         System.out.println("아이디 찾음: " + foundId);
+	         return foundId; // Return the 아이디
+	     } else {
+	         System.out.println("아이디를 찾을 수 없음");
+	         return null;
+	     }
+	 }
+	 @RequestMapping("/forgotPwd.do")
+	    public ResponseEntity<String> forgotPassword(@RequestBody String encodedEmail) {
+	        String decodedEmail = decodeEmail(encodedEmail);
+
+	        if (decodedEmail == null || decodedEmail.isEmpty()) {
+	            return ResponseEntity.badRequest().body("Invalid email address.");
+	        }
+
+	        String newPassword = userService.generateNewPassword();
+	        if (newPassword != null) {
+	            boolean updated = userService.updateUserPassword(decodedEmail, newPassword);
+	            if (updated) {
+	                String responseMessage = "A new password has been sent to " + decodedEmail + ".";
+	                return ResponseEntity.ok(responseMessage);
+	            } else {
+	                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                        .body("Failed to reset password.");
+	            }
+	        } else {
+	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                    .body("Failed to generate a new password.");
+	        }
+	    }
+
+	    // Helper method to decode the email
+	    private String decodeEmail(String encodedEmail) {
+	        try {
+	            return URLDecoder.decode(encodedEmail, "UTF-8").replaceAll("=", "");
+	        } catch (UnsupportedEncodingException e) {
+	            e.printStackTrace();
+	            return null;
+	        }
+	    }
+	 
+	 }
+

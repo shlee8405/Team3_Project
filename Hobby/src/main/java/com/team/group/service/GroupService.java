@@ -28,4 +28,6 @@ public interface GroupService {
 	public UserVO getUserCmtInfo(String u_idx); 
 	// 댓글 삽입
 	public int getCommInsert(GroupCmtVO gcvo);
+	// 댓글 삭제
+	public int commentDel(GroupCmtVO gcvo);
 }

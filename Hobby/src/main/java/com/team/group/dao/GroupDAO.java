@@ -60,4 +60,9 @@ public class GroupDAO {
 	public int getCommInsert(GroupCmtVO gcvo) {
 		return sqlSessionTemplate.insert("group.cmtInsert", gcvo);
 	}
+	
+	public int commentDel(GroupCmtVO gcvo) {
+		return sqlSessionTemplate.update("group.cmtDel", gcvo);
+	}
+	
 }

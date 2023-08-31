@@ -64,6 +64,12 @@ public class GroupServiceImpl implements GroupService {
 	public int getCommInsert(GroupCmtVO gcvo) {
 		return groupDAO.getCommInsert(gcvo);
 	}
+
+	@Override
+	public int commentDel(GroupCmtVO gcvo) {
+		return groupDAO.commentDel(gcvo);
+	}
+	
 	
 	
 }
