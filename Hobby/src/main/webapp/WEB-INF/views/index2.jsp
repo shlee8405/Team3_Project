@@ -84,9 +84,21 @@
           display: inline-block;
           padding: 0px 1vw;
         } 
-        .s1-text-title{
-            font-family: MBCM;
-            font-size:5em;
+        /* .s1-text-title{
+          font-family: MBCM;
+          font-size:5em;
+        } */
+        
+        .s1-text {
+        display: inline-block;
+        margin: 0;
+        padding:0;
+        line-height: 1em;
+        font-family: MBCM;
+        font-size:10em;
+        background: linear-gradient(to bottom, rgba(255,255,255,0.5) 50%, black 50%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
         }
         .s1-text-content{
             font-family: TAEBAEK;
@@ -555,6 +567,11 @@
 		}
         /* NAVBAR STYLE END */
 
+	
+		/* transform */
+		.s1-text{
+			transform: translateX(30px) translateY(0px);
+		}
 
 </style>
 
@@ -562,13 +579,13 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script>
     $('.navTrigger').click(function () {
-$(this).toggleClass('active');
-console.log("Clicked menu");
-$("#mainListDiv").toggleClass("show_list");
-$("#mainListDiv").fadeIn();
-
-});
-
+		$(this).toggleClass('active');
+		console.log("Clicked menu");
+		$("#mainListDiv").toggleClass("show_list");
+		$("#mainListDiv").fadeIn();
+	});
+    
+    
 </script>
   <body>
    
@@ -607,7 +624,16 @@ $("#mainListDiv").fadeIn();
             } else {
                 $('.navHD').removeClass('affix');
             }
+            
+            var w = $(window).scrollTop();
+            var f = "translateX(" + w *0.20 + "px)";
+            console.log(w);
+        	$('.s1-text').css({
+        		transform: f
+        	});
         });
+     
+
     </script>
 
 
@@ -637,8 +663,9 @@ $("#mainListDiv").fadeIn();
       <!-- 소개글 -->
     <div class="section one ">
         <div class="row" style=" left:10%; right:10%; top:5%; z-index: 9;">
-            <div class="s1-text-title">
-                /CAMP.do
+            <div class="s1-text-title" style="translate:0px -50%; ">
+               
+               <p class="s1-text">/CAMP.do</p>
             </div>
             <div class="s1-text-content">
                 국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이 체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을 제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는 형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에 정당한 보상을 청구할 수 있다.

@@ -11,11 +11,32 @@
 
 <style type="text/css">
 
+@font-face{
+    font-family: MBCM;
+    src: url(/resources/fonts/MBCM.ttf);
+}
+@font-face {
+    font-family: TAEBAEK;
+    src: url(/resources/fonts/TAEBAEK.ttf);
+}
+@font-face {
+    font-family: YDBLUE;
+    src: url(/resources/fonts/YDBLUE.ttf);
+}
+
+
+
 main {
     display:flex;
     flex-direction: row;
 }
+*{
+	font-family:YDBLUE;
+}
 
+.navtext{
+	font-family:YDBLUE;
+}
 
 .sidebar-link {
 color:#ffffff!important;
@@ -59,25 +80,24 @@ color:#ffffff!important;
 <body>
     <!-- SIDE BAR ( NAV BAR )-->
     <div class="flex-shrink-0 p-3  " style="height:100vh; width: 15%; background-color: #0f4200; color:white;">
-        <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom border-2 sidebar-link">
-        <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"></use></svg>
-        <span class="fs-5 fw-semibold">/CAMPING.do</span>
+        <a href="/adminHome.do" class="border-bottom border-2 m-0 p-0" >
+        	<img src="/resources/images/logo3.png" alt="hi" style="width:100%; position:relative; top:-25px; margin:0;">
         </a>
         <ul class="list-unstyled ps-0">
         <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+            <button class="btn btn-toggle align-items-center rounded collapsed  navtext sidebar-link" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
             대시보드
             </button>
             <div class="collapse" id="dashboard-collapse" style="">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="/adminHome.do" class="ps-4 link-dark rounded sidebar-link">11</a></li>
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">22</a></li>
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link">33</a></li>
+                <li><a href="/adminHome.do" class="ps-4 link-dark rounded sidebar-link navtext">11</a></li>
+                <li><a href="#" class="ps-4 link-dark rounded sidebar-link navtext">22</a></li>
+                <li><a href="#" class="ps-4 link-dark rounded sidebar-link navtext">33</a></li>
             </ul>
             </div>
         </li>
         <li class="mb-1">
-            <a class="btn btn-toggle align-items-center rounded collapsed sidebar-link" href="/adminUser.do">
+            <a class="btn btn-toggle align-items-center rounded collapsed  navtext sidebar-link" href="/adminUser.do">
             유저관리
             </a>
             <!-- 드롭다운 필요없을거같아서 일단 주석 -->
@@ -89,7 +109,7 @@ color:#ffffff!important;
             </div> -->
         </li>
         <li class="mb-1">
-            <a class="btn btn-toggle align-items-center rounded collapsed sidebar-link"  href="/adminGroup.do">
+            <a class="btn btn-toggle align-items-center rounded collapsed navtext sidebar-link"  href="/adminGroup.do">
             캠핑모임 관리
             </a>
             <!-- 드롭다운 필요없을거같아서 일단 주석 -->
@@ -102,25 +122,25 @@ color:#ffffff!important;
             </div> -->
         </li>
         <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#cusser-collapse" aria-expanded="false">
+            <button class="btn btn-toggle align-items-center rounded collapsed  navtext sidebar-link" data-bs-toggle="collapse" data-bs-target="#cusser-collapse" aria-expanded="false">
             고객지원
             </button>
             <div class="collapse" id="cusser-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="/adminFAQ.do" class="ps-4 link-dark rounded sidebar-link">F A Q</a></li>
-                <li><a href="/adminQNA.do" class="ps-4 ink-dark rounded sidebar-link">1대1 문의</a></li>
-                <li><a href="/adminReport.do" class="ps-4 link-dark rounded sidebar-link">신고</a></li>
+                <li><a href="/adminFAQ.do" class="ps-4 link-dark rounded sidebar-link navtext" >F A Q</a></li>
+                <li><a href="/adminQNA.do" class="ps-4 ink-dark rounded sidebar-link navtext">1대1 문의</a></li>
+                <li><a href="/adminReport.do" class="ps-4 link-dark rounded sidebar-link navtext">신고</a></li>
             </ul>
             </div>
         </li>
         <li class="border-top border-2 my-3"></li>
         <li class="mb-1">
-            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+            <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link navtext" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
             계정
             </button>
             <div class="collapse" id="account-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="/home.do" class="ps-4 link-dark rounded sidebar-link">로그아웃</a></li>
+                <li><a href="/home.do" class="ps-4 link-dark rounded sidebar-link navtext">로그아웃</a></li>
             </ul>
             </div>
         </li>
