@@ -1,63 +1,54 @@
 package com.team.myreview.vo;
 
 public class MyReviewVO {
-	private String cr_idx, u_idx, c_name, cr_content, cr_star, cr_date, cr_status;
+	private String id, facltNm, u_Id, comment, rating, created_date;
 
-	public String getCr_idx() {
-		return cr_idx;
+	public String getId() {
+		return id;
 	}
 
-	public void setCr_idx(String cr_idx) {
-		this.cr_idx = cr_idx;
+	public void setId(String id) {
+		this.id = id;
 	}
 
-	public String getU_idx() {
-		return u_idx;
+	public String getFacltNm() {
+		return facltNm;
 	}
 
-	public void setU_idx(String u_idx) {
-		this.u_idx = u_idx;
+	public void setFacltNm(String facltNm) {
+		this.facltNm = facltNm;
 	}
 
-	public String getC_name() {
-		return c_name;
+	public String getU_Id() {
+		return u_Id;
 	}
 
-	public void setC_name(String c_name) {
-		this.c_name = c_name;
+	public void setU_Id(String u_Id) {
+		this.u_Id = u_Id;
 	}
 
-	public String getCr_content() {
-		return cr_content;
+	public String getComment() {
+		return comment;
 	}
 
-	public void setCr_content(String cr_content) {
-		this.cr_content = cr_content;
+	public void setComment(String comment) {
+		this.comment = comment;
 	}
 
-	public String getCr_star() {
-		return cr_star;
+	public String getRating() {
+		return rating;
 	}
 
-	public void setCr_star(String cr_star) {
-		this.cr_star = cr_star;
+	public void setRating(String rating) {
+		this.rating = rating;
 	}
 
-	public String getCr_date() {
-		return cr_date;
+	public String getCreated_date() {
+		return created_date;
 	}
 
-	public void setCr_date(String cr_date) {
-		this.cr_date = cr_date;
+	public void setCreated_date(String created_date) {
+		this.created_date = created_date;
 	}
-
-	public String getCr_status() {
-		return cr_status;
-	}
-
-	public void setCr_status(String cr_status) {
-		this.cr_status = cr_status;
-	}
-	
 	
 }

@@ -15,4 +15,5 @@ public class MyReviewDAO {
 	public List<MyReviewVO> getMyReivew(){
 		return sessionTemplate.selectList("mypage.myreview");
 	}
+	
 }

@@ -13,12 +13,17 @@ public class MyinfoServiceImp implements MyinfoService{
 	
 	@Autowired
 	private MyinfoDAO myinfoDAO;
-	
 	@Override
-	public List<MyinfoVO> getMyinfo() {
+	public List<MyinfoVO> getMyinfo(String l_idx) {
 		// TODO Auto-generated method stub
-		return myinfoDAO.getMyinfo();
+		return myinfoDAO.getMyinfo(l_idx);
 	}
+	@Override
+	public int updateMyinfo(MyinfoVO vo) {
+		// TODO Auto-generated method stub
+		return myinfoDAO.updateMyinfo(vo);
+	}
+	
 	
 
 }

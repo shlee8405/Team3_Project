@@ -109,7 +109,7 @@ div {
 	     			  <c:forEach var="k" items="${list}" varStatus="vs">
 	     			  	<tr>
 	     			  		<td>${vs.count }</td>
-	     			  		<td>${k.c_name }</td>
+	     			  		<td>${k.facltNm }</td>
 	     			  	</tr>
 	     			  </c:forEach> 
 	     			</c:otherwise>
