@@ -9,6 +9,16 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="resources/css/summernote-lite.css">
 <style type="text/css">
+
+	@font-face{
+        font-family: OpenSans-Bold;
+        src: url(/resources/fonts/IBMPlexSansKR-Light.ttf);
+    }
+    
+    h1{
+    	font-family: OpenSans-Bold;
+    	text-align: center;
+    }
     
 	.container-fluid {
         margin: auto;
@@ -164,7 +174,7 @@ if(document.getElementById('q_title').value.trim() === "" || document.getElement
     <form method="post">
         <h3 class="mb-4">문의 게시판</h3>
         
-        <div class="row g-3" style="padding-bottom: 20px;">
+        <div class="row g-3" style="padding-bottom: 20px;" >
 	        <div class="col-md-9">
 	            <label for="q_title" class="form-label">제목</label>
 	            <input type="text" id="q_title" name="q_title" class="form-control" required/>

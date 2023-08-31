@@ -163,7 +163,7 @@
         <div class="row g-3" style="padding-bottom: 20px;">
 	        <div class="col-md-9">
 	            <label for="r_title" class="form-label">제목</label>
-	            <input type="text" id="r_title" name="r_title" class="form-control"/>
+	            <input type="text" id="r_title" name="r_title" class="form-control"value="${rvo.r_title}"/>
 	        </div>
 	        <div class="col-md-3">
 	            <label for="r_name" class="form-label">작성자</label>

@@ -162,7 +162,7 @@
         <div class="row g-3" style="padding-bottom: 20px;">
 	        <div class="col-md-9">
 	            <label for="q_title" class="form-label">제목</label>
-	            <input type="text" id="q_title" name="q_title" class="form-control"/>
+	            <input type="text" id="q_title" name="q_title" class="form-control" value="${qvo.q_title }"/>
 	        </div>
 	        <div class="col-md-3">
 	            <label for="q_name" class="form-label">작성자</label>
