@@ -22,6 +22,7 @@ main {
 	padding-right:0px;
 	width: 100%;
 	justify-items:center;
+	background-color: rgba(217, 255, 204, 0.05);
 
 }
 
@@ -35,6 +36,18 @@ color:#ffffff!important;
 
 }
 
+.row.topper {
+}
+
+
+.bottomcontainer {
+	background-color: rgba(200, 200, 200, 0.3); 
+	width: 100%; 
+	box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.25);
+    border-radius: 10px; 
+	padding:2.5rem;  
+	display: inline-block;  
+}
 
 </style>
 
@@ -42,6 +55,17 @@ color:#ffffff!important;
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.css?after" />
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.js">
+
+import DataTable from 'datatables.net-dt';
+import 'datatables.net-responsive-dt';
+ 
+
+
+</script>
 
 <script type="text/javascript">
 	function go_admin() {
@@ -129,19 +153,23 @@ color:#ffffff!important;
         test4.style.display = "block";
     }
     
+    $(document).ready( function () {
+        $('#myTable').DataTable();
+    } );
+    
 </script>
 </head>
 <body>
 <main>
-	<!-- SIDEBAR -->
-   	<jsp:include page="sidebar.jsp" />
+		<!-- SIDEBAR -->
+	   	<jsp:include page="sidebar.jsp" />
 
 
 
 
-    <!-- MAIN CONTAINER -->
-   <div class="super">
-		<div class="row" style="width:100%;">
+	    <!-- MAIN CONTAINER -->
+	   <div class="super" >
+		<div class="row topper ms-1" style="width:100%; ">
 			<div class="col" style="border-bottom: 1px solid  #0f4200;">
 				<input type="button" class="btn-check" id="btn-check" autocomplete="off" onclick="hidetest()" checked>
             	<label class="btn btn-success" for="btn-check" id="btn-tab-1">유저 리스트</label>
@@ -158,9 +186,7 @@ color:#ffffff!important;
 		</div>
 
         <!-- SEARCH CONTAINER -->
-        <div class="container  ps-5 col-5 mt-5 p-1  " style="background-color: rgba(200, 200, 200, 0.3); height:25vh; width: 90%; box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.25);
-        border-radius: 10px; flex-direction: column;
-        " >
+        <div class="topcontainer  ps-5 col-5 mt-5 p-1">
             <div class="row justify-content-center align-items-center g-2 m-1 ms-5 me-5" style="height: 4vh;">
                 <div class="col" style="width: 20%;">Search</div>
                 <div class="col-10" > <input type="search" name="" id="" style="width: 80%;"></div>
@@ -185,35 +211,12 @@ color:#ffffff!important;
         </div>
 
 
-        <!-- TOGGLE BUTTON CONTAINER -->
-<!--         <div class="container mt-4 ps-5 p-1 col-6">
-            <input type="button" class="btn-check" id="btn-check" autocomplete="off" onclick="hidetest()" checked>
-            <label class="btn btn-success" for="btn-check">유저 리스트</label>
-
-            <input type="button" class="btn-check" id="btn-check2" autocomplete="off" onclick="hidetest2()">
-            <label class="btn btn-success" for="btn-check2">유저 생성</label>
-
-            <input type="button" class="btn-check" id="btn-check3" autocomplete="off" onclick="hidetest3()">
-            <label class="btn btn-success" for="btn-check3">관리자 리스트</label>
-   
-            <input type="button" class="btn-check" id="btn-check4" autocomplete="off" onclick="hidetest4()">
-            <label class="btn btn-success" for="btn-check4">관지라 생성</label>
-        </div>
-         -->
-
         <!-- FIRST CONTAINER ( USER LIST )-->
-        <div id="test" class="container mt-4" style="background-color: rgba(200, 200, 200, 0.3); height:55vh; width: 90%;  box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.25);
-        border-radius: 10px;
-        " >
-            <div class="table-responsive pt-4 ps-5 pe-5" style="height: 50vh; padding-bottom: 1rem;">
-                <table class="table 
-                table-hover	
-                table-sm
-                table-success   
-                align-middle
-                overflow-auto">
-                    <thead class="table-primary">
-                        <caption>Table Name</caption>
+        <div id="test" class="bottomcontainer ms-2 me-3 mt-4" >
+                <table class="
+                display"
+                id="myTable" >
+                    <thead class="table-success" >
                         <tr>
                             <th> 아이디 </th>
                             <th> 닉네임 </th>
@@ -228,8 +231,8 @@ color:#ffffff!important;
                             <th> 더보기 </th>
                         </tr>
                      </thead>
-                        <tbody class="table-group-divider">
-							<c:choose>
+                     <tbody class="table-group-divider">
+						<c:choose>
 									<c:when test="${empty list}">
 										<tr>
 											<td colspan="4"><h2>원하는 정보가 존재하지 않습니다.</h2></td>
@@ -240,10 +243,10 @@ color:#ffffff!important;
 											<tr>
 												<td>${k.u_id}</td>
 												<td>${k.u_nickname}</td>
-												<td>${k.u_pw}</td>
+												<td>****</td>
 												<td>${k.u_name}</td>
 												<td>${k.u_email}</td>
-												<td>${k.u_birthday}</td>
+												<td>${k.u_birthday.substring(0,10)}</td>
 												<td>${k.u_phone}</td>
 												<td>${k.u_ban}</td>
 												<td>${k.u_terms}</td>
@@ -257,10 +260,6 @@ color:#ffffff!important;
 								</c:choose>
                         </tbody>
                 </table> 
-            </div>
-            
-            
-
         </div>
 
 
