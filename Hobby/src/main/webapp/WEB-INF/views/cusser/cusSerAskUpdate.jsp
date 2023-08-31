@@ -170,7 +170,7 @@
 	        </div>
         </div>
         <div class="mb-3">
-            <label for="q_content" class="form-label">내용:</label>
+            <label for="q_content" class="form-label">내용</label>
             <textarea id="q_content" name="q_content" class="form-control" rows="8">${qvo.q_content}</textarea>
         </div>
         <div class="text-center">
