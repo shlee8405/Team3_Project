@@ -164,6 +164,10 @@ $(window).scroll(function() {
                             <td>${user.u_name}</td>
                         </tr>
                         <tr>
+                            <th scope="col" class="text-center">제목</th>
+                            <td>${qvo.q_title}</td>
+                        </tr>
+                        <tr>
                             <th scope="col" class="text-center">내용</th>
                             <td>${qvo.q_content}</td>
                         </tr>
@@ -172,8 +176,19 @@ $(window).scroll(function() {
                             <td>${qvo.q_response}</td>
                         </tr>
                         <tr>
-                            <th scope="col" class="text-center">상태</th>
-                            <td>대기중</td>
+                        	<th scope="col" class="text-center">상태</th>
+                        	<td>
+					            <c:if test="${qvo.q_response == null}">
+					                대기중
+					            </c:if>
+					            <c:if test="${qvo.q_response != null}">
+					                답변 완료
+					            </c:if>
+				            </td>
+				        </tr>
+                        <tr>
+                            <th scope="col" class="text-center">작성 날짜</th>
+                            <td>${qvo.q_date}</td>
                         </tr>
                     </thead>
                 </table>

@@ -9,8 +9,8 @@
 	</select>
 	
 	<insert id="insert" parameterType="map">
-		insert into REPORT (r_content,u_idx1)
-		values(#{rvo.r_content},#{u_idx})
+		insert into REPORT (r_content,u_idx1,r_date,r_title)
+		values(#{rvo.r_content},#{u_idx},sysdate(),#{rvo.r_title})
 	</insert>
 	
 	<select id="detail" parameterType="String" resultType="rvo">
@@ -18,7 +18,7 @@
 	</select>
 	
 	<update id="update" parameterType="rvo">
-		update REPORT set r_name = #{r_name},  r_content = #{r_content}  where r_idx = #{r_idx}
+		update REPORT set r_name = #{r_name},  r_content = #{r_content}, r_date = sysdate() r_title = #{r_title}  where r_idx = #{r_idx}
 	</update>
 	
 	<update id="delete" parameterType="String">

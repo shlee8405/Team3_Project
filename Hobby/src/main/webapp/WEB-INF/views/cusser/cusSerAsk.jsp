@@ -174,8 +174,10 @@
                         <tr>
                             <th scope="col" class="text-center">번호</th>
                             <th scope="col" class="text-center">작성자</th>
+                            <th scope="col" class="text-center">제목</th>
                             <th scope="col" class="text-center">내용</th>
                             <th scope="col" class="text-center">답변</th>
+                            <th scope="col" class="text-center">작성 날짜</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -183,13 +185,14 @@
 				        <c:choose>
 				            <c:when test="${k.q_status == 0}">
 				                <tr>
-				                    <td colspan="4">삭제된 목록입니다</td>
+				                    <td colspan="5">삭제된 목록입니다</td>
 				                </tr>
 				            </c:when>
 				            <c:otherwise>
 				                <tr>
 				                    <td>${loop.count}</td>
 				                    <td>${user.u_name}</td>
+				                    <td>${k.q_title}</td>
 				                    <td>
 				                        <a href="/go_AskDetail.do?q_idx=${k.q_idx}">상세보기</a>
 				                    </td>
@@ -201,6 +204,7 @@
 				                            답변 완료
 				                        </c:if>
 				                    </td>
+				                    <td>${k.q_date}</td>
 				                </tr>
 				            </c:otherwise>
 				        </c:choose>

@@ -4,9 +4,26 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class QnaVO {
 	
-	private String q_idx, q_content, q_response , u_idx, q_status, q_name, f_name;
+	private String q_idx, q_content, q_response , u_idx, q_status, q_name, f_name, q_date, q_title;
 	private MultipartFile q_file;
 	
+	
+	public String getQ_title() {
+		return q_title;
+	}
+
+	public void setQ_title(String q_title) {
+		this.q_title = q_title;
+	}
+
+	public String getQ_date() {
+		return q_date;
+	}
+
+	public void setQ_date(String q_date) {
+		this.q_date = q_date;
+	}
+
 	public String getF_name() {
 		return f_name;
 	}

@@ -157,6 +157,10 @@ function go_ReportDelete(r_idx) {
 		                            <td>${user.u_name}</td>
 		                        </tr>
 		                        <tr>
+		                            <th scope="col" class="text-center">제목</th>
+		                            <td>${rvo.r_title}</td>
+		                        </tr>
+		                        <tr>
 		                            <th scope="col" class="text-center">내용</th>
 		                            <td>${rvo.r_content}</td>
 		                        </tr>
@@ -166,7 +170,18 @@ function go_ReportDelete(r_idx) {
 		                        </tr>
 		                        <tr>
 		                            <th scope="col" class="text-center">상태</th>
-		                            <td>대기중</td>
+		                            <td>
+							            <c:if test="${rvo.r_response == null}">
+							                대기중
+							            </c:if>
+							            <c:if test="${rvo.r_response != null}">
+							                답변 완료
+							            </c:if>
+						            </td>
+		                        </tr>
+		                        <tr>
+		                            <th scope="col" class="text-center">작성 날짜</th>
+		                            <td>${rvo.r_date}</td>
 		                        </tr>
 		                    </thead>
 		                </table>

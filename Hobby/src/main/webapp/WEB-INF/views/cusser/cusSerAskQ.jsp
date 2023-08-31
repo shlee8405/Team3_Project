@@ -89,6 +89,11 @@
 </style>
 <script type="text/javascript">
     function sendData(f) {
+if(document.getElementById('q_title').value.trim() === "" || document.getElementById('q_content').value.trim() === "") {
+    alert('제목과 내용을 모두 입력해주세요.');
+    return false;
+}
+
         /* // 다른 방법
         if(f.title.value.trim().length <= 0){
             alert("제목을 입력하세요");
@@ -158,13 +163,21 @@
     <div class="ask-form">
     <form method="post">
         <h3 class="mb-4">문의 게시판</h3>
-        <div class="mb-3">
-            <label for="q_name" class="form-label">작성자</label>
-            <input type="text" id="q_name" name="q_name" class="form-control" value="${user.u_name}" disabled/>
+        
+        <div class="row g-3" style="padding-bottom: 20px;">
+	        <div class="col-md-9">
+	            <label for="q_title" class="form-label">제목</label>
+	            <input type="text" id="q_title" name="q_title" class="form-control" required/>
+	        </div>
+	        <div class="col-md-3">
+	            <label for="q_name" class="form-label">작성자</label>
+	            <input type="text" id="q_name" name="q_name" class="form-control" value="${user.u_name}" required disabled/>
+	        </div>
         </div>
+        
         <div class="mb-3">
             <label for="q_content" class="form-label">내용</label>
-            <textarea id="q_content" name="q_content" class="form-control" rows="8"></textarea>
+            <textarea id="q_content" name="q_content" class="form-control" rows="8" required></textarea>
         </div>
         <div class="text-center">
             <input type="button" class="btn btn-primary" value="보내기" onclick="sendData(this.form)"/>

@@ -159,9 +159,15 @@
     <div class="bbs-form">
     <form method="post">
         <h3 class="mb-4">문의 수정하기</h3>
-        <div class="mb-3">
-            <label for="q_name" class="form-label">작성자:</label>
-            <input type="text" id="q_name" name="q_name" class="form-control" value="${user.u_name}" disabled/>
+        <div class="row g-3" style="padding-bottom: 20px;">
+	        <div class="col-md-9">
+	            <label for="q_title" class="form-label">제목</label>
+	            <input type="text" id="q_title" name="q_title" class="form-control"/>
+	        </div>
+	        <div class="col-md-3">
+	            <label for="q_name" class="form-label">작성자</label>
+	            <input type="text" id="q_name" name="q_name" class="form-control" value="${user.u_name}" disabled/>
+	        </div>
         </div>
         <div class="mb-3">
             <label for="q_content" class="form-label">내용:</label>
