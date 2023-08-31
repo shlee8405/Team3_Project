@@ -44,4 +44,20 @@
 	<select id="getWishCount" resultType="int">
 		SELECT COUNT(*) FROM camp_wish WHERE facltNm = #{facltNm}
 	</select>
+	
+	<!-- 후기와 별점 추가 -->
+    <insert id="addReview" parameterType="map">
+        INSERT INTO camp_review(facltNm, u_Id, comment, rating, created_date)
+        VALUES(#{facltNm}, #{u_Id}, #{comment}, #{rating}, NOW())
+    </insert>
+
+    <!-- 해당 캠핑장의 모든 후기와 별점 가져오기 -->
+    <select id="getReviews" parameterType="String" resultType="crvo">
+        SELECT * FROM camp_review WHERE facltNm = #{facltNm} ORDER BY created_date DESC
+    </select>
+
+    <!-- 해당 캠핑장의 평균 별점 가져오기 -->
+    <select id="getAverageRating" parameterType="String" resultType="double">
+        SELECT AVG(rating) FROM camp_review WHERE facltNm = #{facltNm}
+    </select>
 </mapper>
