@@ -602,9 +602,17 @@
                      <li><a href="/checkSession.do" style="text-family:sans-seriff; font-size: 1rem;">sysout sessionIdx</a></li>
                       <li><a href="/logOut.do" style="text-family:sans-seriff; font-size: 1rem;">로그아웃</a></li>
                     <li><a href="/campMain.do">/캠핑장.do</a></li>
+
+					<% 
+					    String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx"); 
+					%>
+					
+					<% if (u_idx != null && !u_idx.isEmpty()) { %>
+					    <li><a href="/myPagemain.do">/마이페이지.do</a></li>
+					    <li><a href="/cusSer.do">/고객센터.do</a></li>
+					<% } %>
+
                     <li><a href="/groupList.do">/캠핑모임.do</a></li>
-                    <li><a href="/myPagemain.do">/마이페이지.do</a></li>
-                    <li><a href="/cusSer.do">/고객센터.do</a></li>
                     <li><a href="/login.do">/로그인.do</a></li>
                 </ul>
             </div>
