@@ -5,5 +5,5 @@ import java.util.List;
 import com.team.mypagemain.vo.MypageMainVO;
 
 public interface MypageMainService {
-	public List<MypageMainVO> getMypageMain();
+	public List<MypageMainVO> getMypageMain(String u_id);
 }

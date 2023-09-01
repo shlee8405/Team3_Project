@@ -14,9 +14,9 @@ public class MypageMainServiceImpl implements MypageMainService{
 	@Autowired
 	private MypageMainDAO mypagemainDAO;
 	@Override
-	public List<MypageMainVO> getMypageMain() {
+	public List<MypageMainVO> getMypageMain(String u_id) {
 		// TODO Auto-generated method stub
-		return mypagemainDAO.getMypageMain();
+		return mypagemainDAO.getMypageMain(u_id);
 	}
 	
 

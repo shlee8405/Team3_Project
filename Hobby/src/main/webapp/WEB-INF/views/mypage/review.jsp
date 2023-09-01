@@ -111,7 +111,7 @@ div {
 	     			  <c:forEach var="k" items="${list}" varStatus="vs">
 	     			  	<tr>
 	     			  		<td>${vs.count }</td>
-	     			  		<td>${k.facltNm }</td>
+	     			  		<td><a href="/campDetail.do?keyword=${k.facltNm}">${k.facltNm}</a></td>
 	     			  		<td>${k.comment }</td>
 	     			  		<td>${k.rating }</td>
 	     			  		<td>${k.created_date }</td>
