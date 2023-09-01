@@ -9,7 +9,7 @@
 	</select>
 	
 	<select id="mypagemain" resultType="mmvo">
-		select * from camp_wish
+		select * from camp_wish where u_id = #{u_id}
 	</select>
 	
 	<!-- <update id="myinfoupdate" parameterType="upvo">
@@ -22,7 +22,7 @@
 	</select>
 	
 	<select id="myreview" resultType="mrvo">
-		select * from camp_review where u_idx = 1
+		select * from camp_review where u_id = #{u_id}
 	</select>
     
     <!-- 사용자 정보 업데이트 SQL 추가 -->

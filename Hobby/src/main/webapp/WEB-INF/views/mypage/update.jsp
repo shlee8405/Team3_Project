@@ -101,28 +101,28 @@ div {
             <table>
 				<tr align="center">
 					<td bgcolor="#637F42" style="color:white">이름</td>
-					<td><input type="text" name="name" value="${vo.u_name }" size ="20"/></td>
+					<td><input type="text" name="u_name" value="${user.u_name }" size ="20"/></td>
 				</tr>
 				<tr align="center">
 					<td bgcolor="#637F42" style="color:white">아이디</td>
-					<td><input type="text" name="id" value="${vo.u_id }" size ="20"/></td>
+					<td><input type="text" name="u_id" value="${user.u_id }" size ="20"/></td>
 				</tr>
 				<tr align="center">
 					<td bgcolor="#637F42" style="color:white">휴대전화</td>
-					<td><input type="text" name="phone" value="${vo.u_phone }" size ="20"/></td>
+					<td><input type="text" name="u_phone" value="${user.u_phone }" size ="20"/></td>
 				</tr>
 				<tr align="center" >
 					<td bgcolor="#637F42" style="color:white">이메일</td>
-					<td><input type="text" name="email" value="${vo.u_email }" size ="20"/></td>
+					<td><input type="text" name="u_email" value="${user.u_email }" size ="20"/></td>
 				</tr>
 				
 				<tfoot>
 					<tr align="center">
 						<td colspan="2">
-							<input type="hidden" name="idx" value="${vo.idx}">
+							<input type="hidden" name="u_idx" value="${user.u_idx}">
 							<input type="button" value="완료" onclick="save_go(this.form)" />
 							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="reset" value="취소" />
+							<input type="button" value="취소" onclick="goBack() "/>
 						</td>
 					</tr>
 				</tfoot>
@@ -133,6 +133,9 @@ div {
 		function goToPage(url){
 			location.href = url;
 		}
+		function goBack() {
+	        window.history.back();
+	    }
 	</script>
 </body>
 </html>

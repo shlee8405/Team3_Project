@@ -12,8 +12,8 @@ import com.team.myreview.vo.MyReviewVO;
 public class MyReviewDAO {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
-	public List<MyReviewVO> getMyReivew(){
-		return sessionTemplate.selectList("mypage.myreview");
+	public List<MyReviewVO> getMyReivew(String u_id){
+		return sessionTemplate.selectList("mypage.myreview", u_id);
 	}
 	
 }

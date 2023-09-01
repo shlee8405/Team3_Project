@@ -15,9 +15,9 @@ public class MyReviewServiceImpl implements MyReviewService{
 	private MyReviewDAO myReviewDAO;
 
 	@Override
-	public List<MyReviewVO> getMyReview() {
+	public List<MyReviewVO> getMyReview(String u_id) {
 		// TODO Auto-generated method stub
-		return myReviewDAO.getMyReivew();
+		return myReviewDAO.getMyReivew(u_id);
 	}
 	
 }
