@@ -23,6 +23,11 @@
     font-family: YDBLUE;
     src: url(/resources/fonts/YDBLUE.ttf);
 }
+@font-face {
+    font-family: MBCM2;
+    src: url(/resources/fonts/MBCM2.ttf);
+}
+
 
 
 
@@ -80,8 +85,8 @@ color:#ffffff!important;
 <body>
     <!-- SIDE BAR ( NAV BAR )-->
     <div class="flex-shrink-0 p-3  " style="height:100vh; width: 15%; background-color: #0f4200; color:white;">
-        <a href="/adminHome.do" class="border-bottom border-2 m-0 p-0" >
-        	<img src="/resources/images/logo3.png" alt="hi" style="width:100%; position:relative; top:-25px; margin:0;">
+        <a href="/adminHome.do" class="border-bottom border-2 m-0 pb-3" style=""  >
+        	<img src="/resources/images/logo3.png" alt="hi" style="width:100%; position:relative; top:-25px; margin:0; max-height:100px; object-fit:cover; translate:0px 5%; ">
         </a>
         <ul class="list-unstyled ps-0">
         <li class="mb-1">
