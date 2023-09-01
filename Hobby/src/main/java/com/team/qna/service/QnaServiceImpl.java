@@ -17,4 +17,29 @@ public class QnaServiceImpl implements QnaService {
 	public List<QnaVO> getAllQna() {
 		return qnaDAO.getAllQna();
 	}
+	
+	@Override
+	public int getInsert(QnaVO qvo,String u_idx) {
+		return qnaDAO.getInsert(qvo,u_idx);
+	}
+	
+	@Override
+	public QnaVO Detail(String q_idx) {
+		return qnaDAO.Detail(q_idx);
+	}
+	
+	@Override
+	public int DeleteQ(String q_idx) {
+		return qnaDAO.DeleteQ(q_idx);
+	}
+	
+	@Override
+	public int UpdateQna(QnaVO qvo) {
+		return qnaDAO.UpdateQna(qvo);
+	}
+	
+	@Override
+	public List<QnaVO> getQnAOne(String q_idx) {
+		return qnaDAO.getQnAOne(q_idx);
+	}
 }

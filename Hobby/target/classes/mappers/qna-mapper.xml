@@ -5,9 +5,29 @@
 <mapper namespace="qna">
 	
 	<select id="allList" resultType="qvo">
-		select * from qna 
+		select * from QNA
 	</select>
 	
+	<insert id="insert" parameterType="map">
+		INSERT INTO QNA(q_content,q_name,f_name,u_idx,q_date,q_title)
+		VALUES(#{qvo.q_content},#{qvo.q_name},#{qvo.f_name},#{u_idx},sysdate(),#{qvo.q_title})
+	</insert>
+	
+	<select id="detail" parameterType="String" resultType="qvo">
+		select * from QNA where q_idx = #{q_idx}
+	</select>
+	
+	<update id="delete" parameterType="String">
+		update QNA set q_status = 0 where q_idx = #{q_idx}
+	</update>
+	
+	<update id="update" parameterType="qvo">
+		update QNA set q_name = #{q_name} , q_content = #{q_content}, q_date = sysdate(), q_title = #{q_title} where q_idx = #{q_idx}
+	</update>
+	
+	<select id="QnAOne" parameterType="String" resultType="qvo">
+		select * from QNA where u_idx = #{u_idx}
+	</select>
 </mapper>
 
 

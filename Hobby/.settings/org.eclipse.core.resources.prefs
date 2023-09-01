@@ -1,2 +1,6 @@
 eclipse.preferences.version=1
+encoding//src/main/java/com/team/controller/MyController.java=UTF-8
+encoding//src/main/webapp/WEB-INF/views/cusser/cusSerFAQ.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/index.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/mypage/info.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/test/login.jsp=UTF-8

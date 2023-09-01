@@ -6,13 +6,19 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 	
 
+	<context:property-placeholder location="classpath:props/jdbc.properties" />
 
-	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-		<!--  MariaDB 연결 -->
-		<property name="driverClassName" value="org.mariadb.jdbc.Driver" />
-		<property name="url" value="jdbc:mariadb://localhost:3306/team" />
-		<property name="username" value="team" />
-		<property name="password" value="1111" /> 
+	<bean id="dataSource"  class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.user}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 최대 동시 접속자 -->
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<!-- 커넥션 풀에 반납할때 최대로 유지 되는 커넥션의 수 -->
+		<property name="maxIdle" value="${jdbc.maxIdle}" />
+		<!-- 커넥션 풀에 반납할때 최소로 유지 되는 커넥션의 수 -->
+		<property name="minIdle" value="${jdbc.minIdle}" />
 	</bean>
 	
 	
@@ -29,10 +35,15 @@
 		<constructor-arg ref="sqlSessionFactory" />
 	</bean>
 	
+	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+	<bean id="restTemplate" class="org.springframework.web.client.RestTemplate"/>
 	
 
-
-		<!-- Root Context: defines shared resources visible to all other web components -->
+	<!-- Root Context: defines shared resources visible to all other web components -->
 	<context:annotation-config />
 	<context:component-scan base-package="com.team.*" />
 	

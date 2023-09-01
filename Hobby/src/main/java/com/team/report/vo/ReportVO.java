@@ -2,7 +2,40 @@ package com.team.report.vo;
 
 public class ReportVO {
 	
-	private String r_idx, u_idx1,u_idx2,r_content,r_status;
+	private String r_idx, u_idx1, u_idx2, r_content,r_status,r_name,r_response,r_date,r_title;
+	
+
+	public String getR_title() {
+		return r_title;
+	}
+
+	public void setR_title(String r_title) {
+		this.r_title = r_title;
+	}
+
+	public String getR_date() {
+		return r_date;
+	}
+
+	public void setR_date(String r_date) {
+		this.r_date = r_date;
+	}
+
+	public String getR_response() {
+		return r_response;
+	}
+
+	public void setR_response(String r_response) {
+		this.r_response = r_response;
+	}
+
+	public String getR_name() {
+		return r_name;
+	}
+
+	public void setR_name(String r_name) {
+		this.r_name = r_name;
+	}
 
 	public String getR_idx() {
 		return r_idx;

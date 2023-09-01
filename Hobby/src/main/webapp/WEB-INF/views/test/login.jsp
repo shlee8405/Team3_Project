@@ -1,358 +1,278 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<title>Login</title>
-<style type="text/css">
-.login-content{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
+	<title>Login</title>
+	
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link rel="stylesheet" href="/resources/css/login.css">
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    $("#idRecoveryForm").submit(function(event) {
+	        event.preventDefault(); // Prevent the default form submission
 
-.img img{
-  width: 500px;
-}
+	        // Collect form data
+			var formData = "email=" + encodeURIComponent($("#email").val());
+	        // Use AJAX to check email availability first
+	        $.ajax({
+	            url: "/forgotId.do", // Endpoint for 아이디찾기
+	            type: "POST",
+	            data: formData,
+	            dataType: "text", // Response data type
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	            success: function(response) {
+	                console.log("Response:", response); // Add this line for debugging
+	                if (response) {
+	                    // Handle 아이디찾기 success
+	                    var foundId = response;
+	                    alert("아이디를 찾았습니다: " + response);
+	                    $("#idRecoveryModal").modal("hide"); // Close the modal
+	                } else {
+	                    // Handle 아이디찾기 error
+	                    alert("아이디를 찾을 수 없습니다. 다시 시도해주세요.");
+	                }
+	            },
+	            error: function(error) {
+	                console.log("Error:", error);
+	                // Handle 아이디찾기 error if needed
+	            }
+	        });
+	    });
+	});
+	$(document).ready(function() {
+	    $("#pwdRecoveryForm").submit(function(event) {
+	        event.preventDefault(); // Prevent the default form submission
 
-form{
-  width: 360px;
-}
+	        // Collect form data
+	        var formData = "email=" + encodeURIComponent($("#email").val());
 
-.login-content img{
-    height: 100px;
-}
-
-.login-content h2{
-  margin: 15px 0;
-  color: #333;
-  text-transform: uppercase;
-  font-size: 2.9rem;
-}
-
-.login-content .input-div{
-  position: relative;
-    display: grid;
-    grid-template-columns: 7% 93%;
-    margin: 25px 0;
-    padding: 5px 0;
-    border-bottom: 2px solid #d9d9d9;
-}
-
-.login-content .input-div.one{
-  margin-top: 0;
-}
-
-.i{
-  color: #d9d9d9;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.i i{
-  transition: .3s;
-}
-
-.input-div > div{
-    position: relative;
-    height: 45px;
-}
-
-.input-div > div > h5{
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #999;
-  font-size: 18px;
-  transition: .3s;
-}
-
-.input-div:before, .input-div:after{
-  content: '';
-  position: absolute;
-  bottom: -2px;
-  width: 0%;
-  height: 2px;
-  background-color: #38d39f;
-  transition: .4s;
-}
-
-.input-div:before{
-  right: 50%;
-}
-
-.input-div:after{
-  left: 50%;
-}
-
-.input-div.focus:before, .input-div.focus:after{
-  width: 50%;
-}
-
-.input-div.focus > div > h5{
-  top: -5px;
-  font-size: 15px;
-}
-
-.input-div.focus > .i > i{
-  color: #38d39f;
-}
-
-.input-div > div > input{
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  border: none;
-  outline: none;
-  background: none;
-  font-size: 1.2rem;
-  color: #555;
-  font-family: 'poppins', sans-serif;
-}
-
-.input-div.pass{
-  margin-bottom: 4px;
-}
-
-a{
-  display: block;
-  text-align: right;
-  text-decoration: none;
-  color: #999;
-  font-size: 0.9rem;
-  transition: .3s;
-}
-
-a:hover{
-  color: #38d39f;
-}
-
-.login_btn{
-  display: block;
-  width: 100%;
-  height: 50px;
-  outline: none;
-  border: none;
-  background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
-  background-size: 200%;
-  font-size: 1.2rem;
-  color: #fff;
-  font-family: 'Poppins', sans-serif;
-  text-transform: uppercase;
-  margin: 1rem 0;
-  cursor: pointer;
-  transition: .5s;
-  border-radius: 2.5rem;
-}
-.login_btn:hover{
-  background-position: right;
-}
-
-@media screen and (max-width: 1050px){
-  .container{
-    grid-gap: 5rem;
-  }
-}
-
-@media screen and (max-width: 1000px){
-  form{
-    width: 290px;
-  }
-
-  .login-content h2{
-        font-size: 2.4rem;
-        margin: 8px 0;
-  }
-
-  .img img{
-    width: 400px;
-  }
-}
-
-@media screen and (max-width: 900px){
-  .container{
-    grid-template-columns: 1fr;
-  }
-
-  .img{
-    display: none;
-  }
-
-  .wave{
-    display: none;
-  }
-
-  .login-content{
-    justify-content: center;
-  }
-}
-</style>
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-
-
+	        // Use AJAX to initiate password recovery
+	        $.ajax({
+	            url: "/forgotPwd.do", // Endpoint for 비밀번호찾기
+	            type: "POST",
+	            data: formData,
+	            dataType: "text", // Response data type
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	            success: function(response) {
+	                console.log("Response:", response);
+	                $("#pwdRecoveryResult").html(response); // Display the response
+	            },
+	            error: function(error) {
+	                console.log("Error:", error);
+	                // Handle 비밀번호찾기 error if needed
+	            }
+	        });
+	    });
+	});
+	</script>
 </head>
 <body>
-
-	<div class="container">
-		<h2>Login Page</h2> 
-	
-		<!-- Button to Open the Modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModal">Login</button>
-
-		<!-- The Modal -->
-		<div class="modal fade" id="loginModal">
-			<div class="modal-dialog centered">
-				<div class="modal-content">
-
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h2 class="modal-title"></h2>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
+    <form action="/login.do" method="post">
+        <div class="wrap">
+            <div class="login">
+                    <h3 style="font	-size:50px;  font-family: 'Noto Sans KR', sans-serif;">/캠핑.DO</h3>
+                <!--이메일 입력-->
+                <div class="u_id">
+                    <h4 style=" font-family: 'Noto Sans KR', sans-serif;">아이디</h4>
+                    <input type="text" name="u_id" class="pos" placeholder="ID(아이디)">
+                </div>
+                <!--비밀번호 입력-->
+                <div class="u_pw"> 
+                    <h4 style=" font-family: 'Noto Sans KR', sans-serif;">비밀번호</h4>
+                    <input type="password" name="u_pw" class="pos" placeholder="비밀번호">
+                </div>
+                <!--로그인 버튼-->
+                <div class="submit">
+                    <input style="font-family: 'Noto Sans KR', sans-serif;" type="submit" value="로그인">
+                </div>
+                <br>
+                <div class="loginmenu">
+	                <!--아이디 찾기-->
+                    <div class="schid">
+                        <c:url var="findId" value="/IdRecovery.do" />
+                        <a href="#" style="font-family: 'Noto Sans KR', sans-serif;" data-bs-toggle="modal" data-bs-target="#idRecoveryModal">
+                        아이디찾기
+                        </a>
+                    </div>
+                    <div class="modal-body">
+  					<div id="idRecoveryContent"></div>
 					</div>
-
-					<!-- Modal body -->
-					<div class="modal-body">
-				        <div class="login-content">
-				            <form>
-				                <img src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg">
-				                <h2 class="title">Welcome</h2>
-				                    <div class="input-div one">
-				                        <div class="i">
-				                            <i class="fas fa-user"></i>
-				                        </div>
-				                        <div class="div">
-				                            <h5>Username</h5>
-				                            <input type="text" class="input">
-				                        </div>
-				                    </div>
-				                    <div class="input-div pass">
-				                        <div class="i"> 
-				                            <i class="fas fa-lock"></i>
-				                        </div>
-				                        <div class="div">
-				                            <h5>Password</h5>
-				                            <input type="password" class="input">
-				                        </div>
-				                    </div>
-				                    <a href="#">Forgot Password?</a>
-				                    <input type="submit" class="login_btn" value="Login">
-				                    
-				                    <div class="login_api">
-                					<a href="#" id="kakaoLoginBtn"><img src="resources/images/kakao_login_btn.png" style="width:100%; height:50px; margin-top: 2rem;"></a>
-                					
-                					<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-
-									<ul>
-										<li onclick="kakaoLogin();">
-									      <a href="javascript:void(0)">
-									          <span>카카오 로그인</span>
-									      </a>
-										</li>
-										<li onclick="kakaoLogout();">
-									      <a href="javascript:void(0)">
-									          <span>카카오 로그아웃</span>
-									      </a>
-										</li>
-									</ul>
-									<!-- 카카오 스크립트 -->
-									<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-									
-									<script>
-									document.addEventListener("DOMContentLoaded", function() {
-									    document.getElementById("kakaoLoginBtn").addEventListener("click", function() {
-									        kakaoLogin();
-									    });
-									});
-									</script>
-									
-									
-									<script>
-									Kakao.init('c6915a815f664f1b0e24428d4202b72f'); //발급받은 키 중 javascript키를 사용해준다.
-									console.log(Kakao.isInitialized()); // sdk초기화여부판단
-									//카카오로그인
-									function kakaoLogin() {
-									    Kakao.Auth.login({
-									      success: function (response) {
-									        Kakao.API.request({
-									          url: '/v2/user/me',
-									          success: function (response) {
-									        	  console.log(response)
-									          },
-									          fail: function (error) {
-									            console.log(error)
-									          },
-									        })
-									      },
-									      fail: function (error) {
-									        console.log(error)
-									      },
-									    })
-									  }
-									
-									//카카오로그아웃  
-									function kakaoLogout() {
-									    if (Kakao.Auth.getAccessToken()) {
-									      Kakao.API.request({
-									        url: '/v1/user/unlink',
-									        success: function (response) {
-									        	console.log(response)
-									        },
-									        fail: function (error) {
-									          console.log(error)
-									        },
-									      })
-									      Kakao.Auth.setAccessToken(undefined)
-									    }
-									  }  
-									</script>
-                					
-           							</div>
-
-            						<div class="login_api">
-                					<a href=""><img src="resources/images/naver_login_btn.png" style="width:100%; height:50px; margin: 10px 0;"></a>
-           							</div>
-				            </form>
-				        </div>
-					</div>				
-				</div>
+                    <span style="margin-top: 8px;">|</span>
+                	<!--비밀번호 찾기-->
+	                <div class="schpw">
+	                    <c:url var="findPwd" value="/PwdRecovery.do" />
+	                    <a href="#" style="font-family: 'Noto Sans KR', sans-serif;" data-bs-toggle="modal" data-bs-target="#pwdRecoveryModal">
+       					 비밀번호찾기
+    					</a>
+	                </div>
+	                <!--비밀번호 찾기-->
+	                <span style="margin-top: 8px;">|</span>
+	                <div class="schpw">
+	                    <c:url var="findPwd" value="/PwdRecovery.do" />
+	                    <a href="pwfind.html" style="  font-family: 'Noto Sans KR', sans-serif;">
+	                        회원가입
+	                    </a>
+	                </div>
+	            </div>
+	            
+                <br>
+                
+                <!--카카오 로그인 -->
+                <div class="login_api" style="text-align: center;">
+				  <a href="javascript:void(0)" id="kakaoLoginBtn"><img src="resources/images/kakao_login_btn.png" style="width:100%; height:50px; "></a>
+				  <div id="naver_id_login" style="margin-top: 10px;">
+				</div>	
 			</div>
 		</div>
-	</div>
-	
-</body>
-<!-- 네이버 로그인 api -->
-<script src="https://static.nid.naver.com/js/naveridlogin_js_sdk_2.0.2.js" charset="utf-8"></script>
-<script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function() {
-  var inputs = document.querySelectorAll(".input");
+	</form>
+				
+				
 
-  function addcl(){
-    let parent = this.parentNode.parentNode;
-    parent.classList.add("focus");
+
+<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
+<script>
+  Kakao.init('c6915a815f664f1b0e24428d4202b72f'); // Initialize Kakao SDK with your API key
+
+  // Attach event listener to Kakao login button
+  document.getElementById('kakaoLoginBtn').addEventListener('click', function() {
+    if (Kakao.Auth.getAccessToken()) {
+      kakaoLogout();
+    } else {
+      kakaoLogin();
+    }
+  });
+
+  // Kakao login function
+  function kakaoLogin() {
+    Kakao.Auth.login({
+      success: function(response) {
+        Kakao.API.request({
+          url: '/v2/user/me',
+          success: function(response) {
+            console.log(response);
+            console.log(response.id);
+            $.ajax({
+				 url: '/kakaoLogin.do', // 중복확인을 처리하는 서버 URL (적절히 변경 필요)
+		            type: 'post', // POST 방식으로 요청
+		            contentType: 'application/json; charset=utf-8',
+		            data: JSON.stringify(response), // 서버로 전달할 데이터
+		            success: function(result) {
+		            	location.href="/home.do";
+		            	//modal화 되면 여기에 모달 숨기기 넣으면 될듯
+		            },
+		            error: function(error) {
+		            	console.log(error);
+		            }
+		        });
+          },
+          fail: function(error) {
+            console.log(error);
+          },
+        });
+      },
+      fail: function(error) {
+        console.log(error);
+      },
+    });
   }
 
-  function remcl(){
-    let parent = this.parentNode.parentNode;
-    if(this.value == ""){
-      parent.classList.remove("focus");
+  // Kakao logout function
+  function kakaoLogout() {
+    if (Kakao.Auth.getAccessToken()) {
+      Kakao.API.request({
+        url: '/v1/user/unlink',
+        success: function(response) {
+          console.log(response);
+        },
+        fail: function(error) {
+          console.log(error);
+        },
+      });
+      Kakao.Auth.setAccessToken(undefined);
     }
   }
-
-  inputs.forEach(input => {
-    input.addEventListener("focus", addcl);
-    input.addEventListener("blur", remcl);
-  });
-});
 </script>
+<script type="text/javascript" src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<!-- 네이버 로그인 버튼 노출 영역 -->
+    <div id="naver_id_login"></div>
+    <!-- //네이버 로그인 버튼 노출 영역 -->
+    <script type="text/javascript">
+    var naver_id_login = new naver_id_login("64LV1RLj1gi5COZg0EVh", "http://localhost:8090/home.do");
+    var state = naver_id_login.getUniqState();
+    naver_id_login.setButton("green", 70, 70);
+    naver_id_login.setDomain("http://localhost:8090");
+    naver_id_login.setState(state);	
+    naver_id_login.setPopup();
+    naver_id_login.init_naver_id_login();   
+</script>
+    <script type="text/javascript">
+  // 접근 토큰 값 출력	
+  alert(naver_id_login.oauthParams.access_token);
+  // 네이버 사용자 프로필 조회
+  naver_id_login.get_naver_userprofile("naverSignInCallback()");
+  // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+  function naverSignInCallback() {
+    alert(naver_id_login.getProfileData('email'));
+    alert(naver_id_login.getProfileData('nickname'));
+    alert(naver_id_login.getProfileData('age'));
+  }
+</script>
+<div class="modal fade" id="idRecoveryModal" tabindex="-1" aria-labelledby="idRecoveryModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="idRecoveryModalLabel">아이디 찾기</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <!-- Input fields for 아이디찾기 -->
+        <form id="idRecoveryForm">
+          <div class="mb-3">
+            <label for="email" class="form-label">이메일</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
+          </div>
+          <!-- Add more input fields if needed -->
+          
+          <button type="submit" class="btn btn-primary">아이디 찾기</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- 비밀번호 찾기 모달 -->
+<div class="modal fade" id="pwdRecoveryModal" tabindex="-1" aria-labelledby="pwdRecoveryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pwdRecoveryModalLabel">비밀번호 찾기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Input fields for 비밀번호찾기 -->
+                <form id="pwdRecoveryForm">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">이메일</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
+                    </div>
+                    <!-- Add more input fields if needed -->
+                    <button type="submit" class="btn btn-primary">비밀번호 찾기</button>
+                </form>
+                <!-- 결과 출력 영역 -->
+                <div id="pwdRecoveryResult"></div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
 </html>

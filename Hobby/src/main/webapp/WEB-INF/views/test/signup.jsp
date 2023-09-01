@@ -1,363 +1,254 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<title>Login</title>
-<style type="text/css">
-.login-content {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	text-align: center;
-}
+		<%@ page language="java" contentType="text/html; charset=UTF-8"
+			pageEncoding="UTF-8"%>
+		<!DOCTYPE html>
+		<html >
+			<head>
+				<title>Sign Up</title>
+				<meta charset="UTF-8">
+				<meta name="viewport" content="width=device-width, initial-scale=1">
+				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+				<!-- <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script> -->
+				<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+				<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+				<link rel="preconnect" href="https://fonts.googleapis.com">
+				<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+				<link rel="stylesheet" href="/resources/css/join.css">
+				
+				<script type="text/javascript">
+				
+				function go_login() {
+					location.href = "/login.do"
+				}
+				// 추가된 함수: 생일 형식 유효성 검사
+				function validateBirthday() {
+					var birthdayInput = document.getElementById("u_birthday");
+				    var birthdayValue = birthdayInput.value;
+				    
+				    // 생일을 Date 객체로 변환하여 현재 날짜와 비교
+				    var selectedDate = new Date(birthdayValue);
+				    var currentDate = new Date();
+				    
+				    if (isNaN(selectedDate.getTime())) {
+				        // 날짜가 유효하지 않은 경우
+				        alert("유효하지 않은 날짜입니다.");
+				        birthdayInput.value = ""; // 입력값 초기화
+				        return;
+				    }
+				    
+				    if (selectedDate > currentDate) {
+				        // 미래의 날짜인 경우
+				        alert("미래의 날짜는 선택할 수 없습니다.");
+				        birthdayInput.value = ""; // 입력값 초기화
+				        return;
+				    }
+				}
+			
+				// 추가된 함수: 핸드폰 번호 형식 유효성 검사
+				function validatePhoneNumber() {
+					 var phoneNumberInput = document.getElementById("u_phone");
+					    var phoneNumberValue = phoneNumberInput.value;
+					    
+					    // 숫자와 하이픈(-)을 제외한 모든 문자 제거
+					    var cleanPhoneNumber = phoneNumberValue.replace(/[^\d-]/g, "");
+					    
+					    // 하이픈(-)을 기준으로 분리
+					    var phoneNumberParts = cleanPhoneNumber.split("-");
+					    
+					    // 형식 체크: 숫자 3-4-4 형태인지 검사
+					    if (phoneNumberParts.length !== 3 ||
+					        phoneNumberParts[0].length !== 3 ||
+					        phoneNumberParts[1].length !== 4 ||
+					        phoneNumberParts[2].length !== 4) {
+					        alert("올바른 핸드폰 번호 형식이 아닙니다.");
+					        phoneNumberInput.value = ""; // 입력값 초기화
+					        return;
+					    }
+					    
+					    // 유효한 핸드폰 번호
+					    // 이곳에서 필요한 추가 동작을 수행할 수 있습니다.
+				}
+				function checkAgreement() {
+				    var agreeCheckbox = document.getElementById("agreeCheckbox");
+				    var submitButton = document.getElementById("submitButton"); // 예시: 버튼 요소의 ID
+			
+				    if (agreeCheckbox.checked) {
+				        // 체크되었을 때 수행할 동작
+				        submitButton.disabled = false; // 버튼을 활성화
+				    } else {
+				        // 해제되었을 때 수행할 동작
+				        submitButton.disabled = true; // 버튼을 비활성화
+				    }
+				}
+				function validateForm() {
+				    var agreeCheckbox = document.getElementById("agreeCheckbox");
+				    
+				    if (!agreeCheckbox.checked) {
+				        alert("이용약관에 동의해야 회원가입이 가능합니다.");
+				        return false; // Prevent form submission
+				    }
+				    
+				    return true; // Allow form submission
+				}
+			
+				function validateForm() {
+				    var agreeCheckbox = document.getElementById("agreeCheckbox");
+				    var emailInput = document.getElementById("u_email");
+				    var idInput = document.getElementById("u_id");
+				    var pwInput = document.getElementById("upwd1");
+				    var confirmPwInput = document.getElementById("upwd2");
+				    var nicknameInput = document.getElementById("u_nickname");
+				    var birthdayInput = document.getElementById("u_birthday");
+				    var phoneInput = document.getElementById("u_phone");
+				    var nameInput = document.getElementById("u_name");
+		
+				    if (
+				        emailInput.value === "" ||
+				        idInput.value === "" ||
+				        pwInput.value === "" ||
+				        confirmPwInput.value === "" ||
+				        nicknameInput.value === "" ||
+				        birthdayInput.value === "" ||
+				        phoneInput.value === "" ||
+				        nameInput.value === ""
+				    ) {
+				        alert("모든 필수 항목을 입력해주세요.");
+				        return false;
+				    }
+		
+		
+				    // You can add additional validation logic here if needed
+		
+				    return true;
+				}
+				
+				/* 이메일 u_email 중복확인 기능 jquery */
+				    $(document).ready(function() {
+						$("#emailBtn").click(function() {
+							var email = $('#u_email').val(); 
+							alert(email);
+							console.log(email)
+							$.ajax({
+								 url: '/emailCheck.do', // 중복확인을 처리하는 서버 URL (적절히 변경 필요)
+						            type: 'post', // POST 방식으로 요청
+						            data: email, // 서버로 전달할 데이터
+						            success: function(result) {
+						                if (result === "available") {
+						                    $('#emailDupCheckMsg').text("사용 가능한 이메일입니다.").css("color", "green");
+						                } else if (result === "duplicate") {
+						                    $('#emailDupCheckMsg').text("이미 사용 중인 이메일입니다.").css("color", "red");
+						                }
+						            },
+						            error: function() {
+						                $('#emailDupCheckMsg').text("에러가 발생했습니다.").css("color", "red");
+						            }
+						        });
+						});
+						
+						/* 아이디 u_id 중복확인 기능 jquery */
+						$(document).ready(function() {
+						 $("#idBtn").click(function() {
+						        var id = $('#u_id').val();
+						        alert(id);
+						        console.log(id)
+						        $.ajax({
+						            url: '/idCheck.do', // 아이디 중복확인을 처리하는 서버 URL (적절히 변경 필요)
+						            type: 'post', // POST 방식으로 요청
+						            data: id, // 서버로 전달할 데이터
+						            success: function(result) {
+						                if (result === "available") {
+						                    $('#chkIdMessage').text("사용 가능한 아이디입니다.").css("color", "green");
+						                } else if (result === "duplicate") {
+						                    $('#chkIdMessage').text("이미 사용 중인 아이디입니다.").css("color", "red");
+						                }
+						            },
+						            error: function() {
+						                $('#chkIdMessage').text("에러가 발생했습니다.").css("color", "red");
+						            }
+						        });
+						    });
+						});
+				    });
+				    var formData = "email=" + encodeURIComponent(emailValue); // emailValue는 이메일 입력 필드 값
 
-.img img {
-	width: 500px;
-}
+			</script>
+		</head>
+		
+		<body>
+			<form action="/signupGo.do" method="post" id="signupForm" onsubmit="validateForm();">
+				<div class="wrap">
+					<div class="login">
+						<h3 style="font-family: 'Noto Sans KR', sans-serif; font-size : 40px">회원 가입</h3><br>
+						<div class="textForm2">
+							<!--이메일 입력-->
+							<input type="email" class="u_email" name="u_email" id="u_email"
+								 placeholder="*이메일을 입력해주세요." required>
+								<div class="emailchk">
+							<!--이메일 중복확인-->
+							<button type="button" id="emailBtn" class="bttn" >중복 확인</button>
+   							 <span id="emailDupCheckMsg"></span> <!-- 중복확인 결과를 나타내는 스팬 -->
+							
 
-form {
-	width: 360px;
-}
-
-.login-content img {
-	height: 100px;
-}
-
-.login-content h2 {
-	margin: 15px 0;
-	color: #333;
-	text-transform: uppercase;
-	font-size: 2.9rem;
-}
-
-.login-content .input-div {
-	position: relative;
-	display: grid;
-	grid-template-columns: 7% 93%;
-	margin: 25px 0;
-	padding: 5px 0;
-	border-bottom: 2px solid #d9d9d9;
-}
-
-.login-content .input-div.one {
-	margin-top: 0;
-}
-
-.i {
-	color: #d9d9d9;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-}
-
-.i i {
-	transition: .3s;
-}
-
-.input-div>div {
-	position: relative;
-	height: 45px;
-}
-
-.input-div>div>h5 {
-	position: absolute;
-	top: 50%;
-	transform: translateY(-50%);
-	color: #999;
-	font-size: 18px;
-	transition: .3s;
-}
-
-.input-div:before, .input-div:after {
-	content: '';
-	position: absolute;
-	bottom: -2px;
-	width: 0%;
-	height: 2px;
-	background-color: #38d39f;
-	transition: .4s;
-}
-
-.input-div:before {
-	right: 50%;
-}
-
-.input-div:after {
-	left: 50%;
-}
-
-.input-div.focus:before, .input-div.focus:after {
-	width: 50%;
-}
-
-.input-div.focus>div>h5 {
-	top: -5px;
-	font-size: 15px;
-}
-
-.input-div.focus>.i>i {
-	color: #38d39f;
-}
-
-.input-div>div>input {
-	position: absolute;
-	left: 0;
-	top: 0;
-	width: 100%;
-	height: 100%;
-	border: none;
-	outline: none;
-	background: none;
-	font-size: 1.2rem;
-	color: #555;
-	font-family: 'poppins', sans-serif;
-}
-
-.input-div.pass {
-	margin-bottom: 4px;
-}
-
-a {
-	display: block;
-	text-align: right;
-	text-decoration: none;
-	color: #999;
-	font-size: 0.9rem;
-	transition: .3s;
-}
-
-a:hover {
-	color: #38d39f;
-}
-
-.login_btn {
-	display: block;
-	width: 100%;
-	height: 50px;
-	outline: none;
-	border: none;
-	background-image: linear-gradient(to right, #32be8f, #38d39f, #32be8f);
-	background-size: 200%;
-	font-size: 1.2rem;
-	color: #fff;
-	font-family: 'Poppins', sans-serif;
-	text-transform: uppercase;
-	margin: 1rem 0;
-	cursor: pointer;
-	transition: .5s;
-	border-radius: 2.5rem;
-}
-
-.login_btn:hover {
-	background-position: right;
-}
-
-@media screen and (max-width: 1050px) {
-	.container {
-		grid-gap: 5rem;
-	}
-}
-
-@media screen and (max-width: 1000px) {
-	form {
-		width: 290px;
-	}
-	.login-content h2 {
-		font-size: 2.4rem;
-		margin: 8px 0;
-	}
-	.img img {
-		width: 400px;
-	}
-}
-
-@media screen and (max-width: 900px) {
-	.container {
-		grid-template-columns: 1fr;
-	}
-	.img {
-		display: none;
-	}
-	.wave {
-		display: none;
-	}
-	.login-content {
-		justify-content: center;
-	}
-}
-</style>
-
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet"
-	href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script
-	src="https://cdn.jsdelivr.net/npm/jquery@3.6.4/dist/jquery.slim.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-<script type="text/javascript">
-	function signupOk(f) {
-		// 이용약관 동의 검사
-		if ($('.checkbox').is(':checked')){
-			if(!$('#inputid').val()) {
-				alert("아이디를 입력하세요");
-				$('#inputid').trigger("focus");
-				return;
-			}
-			if(!$('#inputpw').val()){
-				alert("비밀번호를 입력하세요");
-				$('#inputpw').trigger("focus");
-				return;
-			}
-			if(!$('#inputname').val()){
-				alert("이름을 입력하세요");
-				$('#inputname').trigger("focus");
-				return;
-			}
-			if(!$('#inputbirthday').val()){
-				alert("생년월일을 입력하세요");
-				$('#inputbirthday').trigger("focus");
-				return;
-			}
-			if(!$('#inputemail').val()){
-				alert("이메일을 입력하세요");
-				$('#inputemail').trigger("focus");
-				return;
-			}
-			f.action="/signupOk.do";
-			f.submit();
-		} else {
-			alert("약관에 동의해주세요");
-			$('.checkbox').trigger("focus");
-		}
-	}
-</script>
-</head>
-<body>
-
-	<div class="container">
-		<h2>회원가입페이지</h2>
-
-		<!-- Button to Open the Modal -->
-		<button type="button" class="btn btn-primary" data-toggle="modal"
-			data-target="#signupModal">회원가입</button>
-
-		<!-- The Modal -->
-		<div class="modal fade" id="signupModal">
-			<div class="modal-dialog centered">
-				<div class="modal-content">
-
-					<!-- Modal Header -->
-					<div class="modal-header">
-						<h2 class="modal-title"></h2>
-						<button type="button" class="close" data-dismiss="modal">&times;</button>
-					</div>
-
-					<!-- Modal body -->
-					<div class="modal-body">
-						<div class="login-content">
-							<form method="post">
-								<img
-									src="https://raw.githubusercontent.com/sefyudem/Responsive-Login-Form/master/img/avatar.svg">
-								<h2 class="title">회원가입</h2>
-								<div class="input-div one">
-									<div class="i">
-										<i class="fas fa-user"></i>
-									</div>
-									<div class="div">
-										<h5>아이디</h5>
-										<input type="text" class="input" id="inputid" name="u_id">
-									</div>
 								</div>
-								<div class="input-div pass">
-									<div class="i">
-										<i class="fas fa-lock"></i>
-									</div>
-									<div class="div">
-										<h5>패스워드</h5>
-										<input type="password" class="input" id="inputpw" name="u_pw">
-									</div>
-								</div>
-								<div class="input-div one">
-									<div class="i">
-										<i class="fas fa-user"></i>
-									</div>
-									<div class="div">
-										<h5>이름</h5>
-										<input type="text" class="input" id="inputname" name="u_name">
-									</div>
-								</div>
-								<div class="input-div one">
-									<div class="i">
-										<i class="fas fa-user"></i>
-									</div>
-									<div class="div">
-										<h5>생년월일</h5>
-										<input type="text" class="input" id="inputbirthday" name="u_birthday">
-									</div>
-								</div>
-								<div class="input-div one">
-									<div class="i">
-										<i class="fas fa-user"></i>
-									</div>
-									<div class="div">
-										<h5>이메일</h5>
-										<input type="text" class="input" id="inputemail" name="u_email">
-									</div>
-								</div>
-								<div class="input-div one">
-									<div class="i">
-										<i class="fas fa-user"></i>
-									</div>
-									<div class="div">
-										<h5>동의</h5>
-										<input type="checkbox" id="checkbox" class="checkbox"
-											name="u_terms">
-									</div>
-								</div>
-								<input type="button" class="login_btn" value="회원가입"
-									onclick="signupOk(this.form)">
+						</div>
+						
+						<!--아이디 확인-->
+						<div class="textForm2">
+							<input type="text" class="u_id" name="u_id" id="u_id" 
+								placeholder="*아이디를 입력해주세요." required> 
+							<!-- 아이디 중복확인 -->
+							<button type="button" id="idBtn" class="bttn">중복 확인</button>
+							<span id="chkIdMessage"></span>
+						</div>
+						
+						<!--비밀번호 확인-->	
+						<div class="textForm">
+							<input type="password" class="u_pw" name="u_pw" id="u_password" oninput="chkPwd();"
+								placeholder="*비밀번호를 입력해주세요." required> <br> <span
+								id="chkPwdMessage"></span>
+						</div>
+						
+						<!--비밀번호 재확인-->
+						<div class="textForm">
+							<input type="password" class="u_pw" id="upwd2" name="u_password2" oninput="validPW();"
+								placeholder="*비밀번호 확인"> <br> <span
+								id="pwRuleChk"></span>
+						</div>
+						
+						<!--닉네임 중복확인-->
+						<div class="textForm">
+							<input type="text" name="u_nickname" id="u_nickname"
+								class="u_nickname" placeholder="*닉네임을 입력해주세요."
+								required> <br> <span id="nicknameDupCheckMsg"></span>
+						</div>
+						
+						<!-- 이름 입력 -->
+						<div class="textForm">
+							<input type="text" name="u_name" id="u_name"
+								class="u_nickname" placeholder="*이름을 입력해주세요."
+								required> <br> <span id="nicknameDupCheckMsg"></span>
+						</div>
 
-								<div class="login_api">
-									<a href=""><img src="resources/images/kakao_login_btn.png"
-										style="width: 100%; height: 50px; margin-top: 2rem;"></a>
-								</div>
-
-								<div class="login_api">
-									<a href=""><img src="resources/images/naver_login_btn.png"
-										style="width: 100%; height: 50px; margin: 10px 0;"></a>
-								</div>
-							</form>
+						<!-- 생일 입력 -->
+						<div class="textForm2">
+							<input type="date" class="u_birthday" name="u_birthday"
+								id="u_birthday" onchange="validateBirthday();"
+								placeholder="*생일을 입력해주세요." required>
+						</div>
+						
+						<div class="textForm2">
+							<!-- 핸드폰 번호 입력 -->
+							<input type="tel" class="u_phone" name="u_phone" id="u_phone"
+								onchange="validatePhoneNumber();" placeholder="*핸드폰 번호를 입력해주세요."
+								required>
+						</div>
+	
+						<div>
+							<button class="submit2" onclick="validateForm()">가입하기</button>
+							<a id="main" href="">홈으로</a>
 						</div>
 					</div>
 				</div>
-			</div>
-		</div>
-	</div>
-</body>
-<script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function() {
-  var inputs = document.querySelectorAll(".input");
+			</form>	
 
-  function addcl(){
-    let parent = this.parentNode.parentNode;
-    parent.classList.add("focus");
-  }
-
-  function remcl(){
-    let parent = this.parentNode.parentNode;
-    if(this.value == ""){
-      parent.classList.remove("focus");
-    }
-  }
-
-  inputs.forEach(input => {
-    input.addEventListener("focus", addcl);
-    input.addEventListener("blur", remcl);
-  });
-});
-</script>
+	</body>
 </html>

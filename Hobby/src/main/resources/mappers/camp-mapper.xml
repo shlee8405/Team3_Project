@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="camp">
+
+	<!-- 좋아요 -->
+	<insert id="addLike">
+		INSERT INTO camp_likes (u_id, facltNm) VALUES (#{u_id}, #{facltNm})
+	</insert>
+
+	<!-- 좋아요 중복 체크 -->
+	<select id="checkLike" resultType="int">
+		SELECT COUNT(*) FROM camp_likes WHERE u_id = #{u_id} AND facltNm =
+		#{facltNm}
+	</select>
+
+	<!-- 좋아요 취소 -->
+	<delete id="removeLike">
+		DELETE FROM camp_likes WHERE u_id = #{u_id} AND facltNm = #{facltNm}
+	</delete>
+
+	<!-- 좋아요 수 조회 쿼리 -->
+	<select id="getLikeCount" resultType="int">
+		SELECT COUNT(*) FROM camp_likes WHERE facltNm = #{facltNm}
+	</select>
+
+	<!-- 찜하기 -->
+	<insert id="addWish">
+		INSERT INTO camp_wish (u_id, facltNm) VALUES (#{u_id}, #{facltNm})
+	</insert>
+
+	<!-- 찜하기 중복 체크 -->
+	<select id="checkWish" resultType="int">
+		SELECT COUNT(*) FROM camp_wish WHERE u_id = #{u_id} AND facltNm = #{facltNm}
+	</select>
+
+	<!-- 찜하기 취소 -->
+	<delete id="removeWish">
+		DELETE FROM camp_wish WHERE u_id = #{u_id} AND facltNm = #{facltNm}
+	</delete>
+
+	<!-- 찜하기 수 조회 -->
+	<select id="getWishCount" resultType="int">
+		SELECT COUNT(*) FROM camp_wish WHERE facltNm = #{facltNm}
+	</select>
+	
+	<!-- 후기와 별점 추가 -->
+    <insert id="addReview" parameterType="map">
+        INSERT INTO camp_review(facltNm, u_Id, comment, rating, created_date)
+        VALUES(#{facltNm}, #{u_Id}, #{comment}, #{rating}, NOW())
+    </insert>
+
+    <!-- 해당 캠핑장의 모든 후기와 별점 가져오기 -->
+    <select id="getReviews" parameterType="String" resultType="crvo">
+        SELECT * FROM camp_review WHERE facltNm = #{facltNm} ORDER BY created_date DESC
+    </select>
+
+    <!-- 해당 캠핑장의 평균 별점 가져오기 -->
+    <select id="getAverageRating" parameterType="String" resultType="double">
+        SELECT AVG(rating) FROM camp_review WHERE facltNm = #{facltNm}
+    </select>
+</mapper>
