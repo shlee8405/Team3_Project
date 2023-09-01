@@ -4,12 +4,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>신고 목록</title>
+<title>/고객센터.do</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style type="text/css">
+
+@font-face{
+        font-family: OpenSans-Bold;
+        src: url(/resources/fonts/IBMPlexSansKR-Light.ttf);
+    }
+    
+    h1{
+    	font-family: OpenSans-Bold;
+    	text-align: center;
+    }
     .container-fluid {
+    font-family: OpenSans-Bold;
         margin: auto;
         width: 50%;
         background-color: #d4ead7;
@@ -19,10 +30,12 @@
     }
     
     .table th, .table td {
+    font-family: OpenSans-Bold;
         vertical-align: middle;
     }
     
     .table th:first-child, .table td:first-child {
+    font-family: OpenSans-Bold;
         width: 10%;
         font-size: 14px;
         text-align: center; /* 가운데 정렬 추가 */
@@ -30,35 +43,42 @@
     }
 
     .navbar {
+    font-family: OpenSans-Bold;
         height: auto;
         min-height: 100vh;
         width: 250px;
    }
    
    .navbar-toggler {
+   font-family: OpenSans-Bold;
         margin: auto;
    }
    
    .offcanvas {
+   font-family: OpenSans-Bold;
         width: 320px;
         background-color: #637F42;
    }
    
    .navbar-nav.flex-column {
+   font-family: OpenSans-Bold;
         align-items: center;
    }
    
    .navbar-nav.flex-column .nav-item {
+   font-family: OpenSans-Bold;
         width: 100%;
         text-align: center;
    }
 
    .offcanvas-body {
+   font-family: OpenSans-Bold;
        display: flex;
        flex-direction: column;
        align-items: center;
    }
    .dropdown {
+   font-family: OpenSans-Bold;
        margin-top: 10px;
    }
     
@@ -150,6 +170,7 @@ $(document).ready(function() {
         </div>
 
         <div class="container-fluid align-self-end">
+        <h1>신고 내역</h1>
 		    <!-- 검색창 추가 -->
 		    <form class="d-flex justify-content-end mb-3" role="search" id="search-form" onsubmit="return false;">
 		        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
@@ -158,16 +179,18 @@ $(document).ready(function() {
 		    
 		    <!-- ... rest of your content ... -->
 		
-            <div class="card-body">
+            <div class="card-body" style="max-height: 50vh; overflow-y: auto;">
+            
                 <!-- Default Table -->
                 <table class="table caption-top" style="background-color: white; border-radius: 10px;">
-                    <caption class="text-center">신고 내역</caption>
                     <thead>
                         <tr>
                             <th scope="col" class="text-center">번호</th>
                             <th scope="col" class="text-center">작성자</th>
+                            <th scope="col" class="text-center">제목</th>
                             <th scope="col" class="text-center">내용</th>
                             <th scope="col" class="text-center">답변</th>
+                            <th scope="col" class="text-center">작성 날짜</th>
                         </tr>
                     </thead>
                     <tbody class="text-center">
@@ -175,13 +198,14 @@ $(document).ready(function() {
 				        <c:choose>
 				            <c:when test="${k.r_status == 0}">
 				                <tr>
-				                    <td colspan="4">삭제된 목록입니다</td>
+				                    <td colspan="6">삭제된 목록입니다</td>
 				                </tr>
 				            </c:when>
 				            <c:otherwise>
 				                <tr>
 				                    <td>${loop.count}</td>
 						            <td>${user.u_name}</td>
+						            <td>${k.r_title}</td>
 				                    <td>
 				                        <a href="/go_ReportDetail.do?r_idx=${k.r_idx}">상세보기</a>
 				                    </td>
@@ -193,6 +217,7 @@ $(document).ready(function() {
 				                            답변 완료
 				                        </c:if>
 				                    </td>
+				                    <td>${k.r_date}</td>
 				                </tr>
 				            </c:otherwise>
 				        </c:choose>

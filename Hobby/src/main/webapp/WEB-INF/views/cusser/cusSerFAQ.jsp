@@ -4,16 +4,24 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>자주하는 질문</title>
+<title>/고객센터.do</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
-
+<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style type="text/css">
+
+	@font-face{
+        font-family: OpenSans-Bold;
+        src: url(/resources/fonts/IBMPlexSansKR-Light.ttf);
+    }
+
    h1 {
-        margin-top: 5px;
         text-align: center;
+        font-size: 60px;
+        font-family: OpenSans-Bold;
     }
     
     .container-fluid {
@@ -26,28 +34,34 @@
         width: 50%;
         max-height: 80vh;
         overflow-y: auto;
+        font-family: OpenSans-Bold;
     }
     
     .scroll-content::-webkit-scrollbar {
        width: 0.5em;
+       font-family: OpenSans-Bold;
    }
    
    .scroll-content::-webkit-scrollbar-thumb {
        background-color: #888;
+       font-family: OpenSans-Bold;
    }
    
    .scroll-content::-webkit-scrollbar-track {
        background: transparent;
+       font-family: OpenSans-Bold;
    }
     
     .accordion-container {
         display: flex;
         justify-content: center;
         align-items: center;
+        font-family: OpenSans-Bold;
    }
    
    .accordion {
         margin: 10px auto;
+        font-family: OpenSans-Bold;
    }
    
    /* New styles for the navigation */
@@ -55,33 +69,40 @@
         height: auto;
         min-height: 100vh;
         width: 250px;
+        font-family: OpenSans-Bold;
    }
    
    .navbar-toggler {
         margin: auto;
+        font-family: OpenSans-Bold;
    }
    
    .offcanvas {
         width: 320px;
         background-color: #637F42;
+        font-family: OpenSans-Bold;
    }
    
    .navbar-nav.flex-column {
         align-items: center;
+        font-family: OpenSans-Bold;
    }
    
    .navbar-nav.flex-column .nav-item {
         width: 100%;
         text-align: center;
+        font-family: OpenSans-Bold;
    }
 
    .offcanvas-body {
        display: flex;
        flex-direction: column;
        align-items: center;
+       font-family: OpenSans-Bold;
    }
    .dropdown {
        margin-top: 10px;
+       font-family: OpenSans-Bold;
    }
    
 </style>
@@ -167,7 +188,9 @@ $(document).ready(function() {
             </div>
         </div>
         
-        <div class="container-fluid align-self-center">
+        
+        <div class="container-fluid align-self-center" style="max-height: 70vh; overflow-y: auto;">
+        <h1>FAQ</h1>
 		    <!-- 검색창 추가 -->
 		    <form class="d-flex justify-content-end mb-3" role="search" id="search-form" onsubmit="return false;">
 			    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">

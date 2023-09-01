@@ -272,6 +272,8 @@ ol.paging li a:hover {
         </c:choose>
     </div>
     <button id="write_btn" onclick="group_write_go()">글쓰기</button>
+    <br>
+    <br>
     
     <ol class="paging">
 		<!-- 이전 버튼 -->
@@ -306,7 +308,12 @@ ol.paging li a:hover {
 		</c:choose>
 	</ol>
     </div>
-    
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
     </div>
 </body>
 </html>

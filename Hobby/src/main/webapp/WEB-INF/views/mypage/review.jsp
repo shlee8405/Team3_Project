@@ -111,10 +111,10 @@ div {
 	     			  <c:forEach var="k" items="${list}" varStatus="vs">
 	     			  	<tr>
 	     			  		<td>${vs.count }</td>
-	     			  		<td>${k.c_name }</td>
-	     			  		<td>${k.cr_content }</td>
-	     			  		<td>${k.cr_star }</td>
-	     			  		<td>${k.cr_date }</td>
+	     			  		<td>${k.facltNm }</td>
+	     			  		<td>${k.comment }</td>
+	     			  		<td>${k.rating }</td>
+	     			  		<td>${k.created_date }</td>
 	     			  		<%-- <td>${k.regdate.substring(0,10)}</td> --%>
 	     			  	</tr>
 	     			  </c:forEach> 

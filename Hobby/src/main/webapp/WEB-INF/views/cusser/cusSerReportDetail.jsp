@@ -4,12 +4,23 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>/고객센터.do</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style type="text/css">
+	@font-face{
+        font-family: OpenSans-Bold;
+        src: url(/resources/fonts/IBMPlexSansKR-Light.ttf);
+    }
+    
+    h1{
+    	font-family: OpenSans-Bold;
+    	text-align: center;
+    }
+
     .container-fluid {
+    font-family: OpenSans-Bold;
         margin: auto;
         width: 40%;
         background-color: #d4ead7;
@@ -18,11 +29,19 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
     }
     
+    .container-padding {
+    font-family: OpenSans-Bold;
+        overflow-y: auto; /* 내용이 넘칠 경우 스크롤 생성 */
+        max-height: calc(650px); /* 최대 높이를 뷰포트 높이에서 헤더 높이를 뺀 값으로 제한 */
+    }
+    
     .table th, .table td {
+    font-family: OpenSans-Bold;
         vertical-align: middle;
     }
     
     .table th:first-child, .table td:first-child {
+    font-family: OpenSans-Bold;
         width: 10%;
         font-size: 14px;
         text-align: center; /* 가운데 정렬 추가 */
@@ -30,35 +49,42 @@
     }
 
     .navbar {
+    font-family: OpenSans-Bold;
         height: auto;
         min-height: 100vh;
         width: 250px;
    }
    
    .navbar-toggler {
+   font-family: OpenSans-Bold;
         margin: auto;
    }
    
    .offcanvas {
+   font-family: OpenSans-Bold;
         width: 320px;
         background-color: #637F42;
    }
    
    .navbar-nav.flex-column {
+   font-family: OpenSans-Bold;
         align-items: center;
    }
    
    .navbar-nav.flex-column .nav-item {
+   font-family: OpenSans-Bold;
         width: 100%;
         text-align: center;
    }
 
    .offcanvas-body {
+   font-family: OpenSans-Bold;
        display: flex;
        flex-direction: column;
        align-items: center;
    }
    .dropdown {
+   font-family: OpenSans-Bold;
        margin-top: 10px;
    }
 </style>
@@ -100,6 +126,9 @@ function go_ReportUpdate(r_idx) {
 }
 function go_ReportDelete(r_idx) {
 	location.href = "/go_deleteReport.do?r_idx=" + r_idx;
+}
+function go_List(r_idx) {
+	location.href = "/cusSerReport.do"
 }
 </script>
 </head>
@@ -147,14 +176,18 @@ function go_ReportDelete(r_idx) {
         </div>
 
 		<div class="container-fluid align-self-end">
+		<div class="card-body container-padding">
 		            <div class="card-body">
 		                <!-- Default Table -->
 		                <table class="table caption-top" style="background-color: white; border-radius: 10px;">
-		                    <caption class="text-center">수정하기</caption>
 		                    <thead>
 		                        <tr>
 		                            <th scope="col" class="text-center">작성자</th>
 		                            <td>${user.u_name}</td>
+		                        </tr>
+		                        <tr>
+		                            <th scope="col" class="text-center">제목</th>
+		                            <td>${rvo.r_title}</td>
 		                        </tr>
 		                        <tr>
 		                            <th scope="col" class="text-center">내용</th>
@@ -166,7 +199,18 @@ function go_ReportDelete(r_idx) {
 		                        </tr>
 		                        <tr>
 		                            <th scope="col" class="text-center">상태</th>
-		                            <td>대기중</td>
+		                            <td>
+							            <c:if test="${rvo.r_response == null}">
+							                대기중
+							            </c:if>
+							            <c:if test="${rvo.r_response != null}">
+							                답변 완료
+							            </c:if>
+						            </td>
+		                        </tr>
+		                        <tr>
+		                            <th scope="col" class="text-center">작성 날짜</th>
+		                            <td>${rvo.r_date}</td>
 		                        </tr>
 		                    </thead>
 		                </table>
@@ -176,9 +220,11 @@ function go_ReportDelete(r_idx) {
 		                <!-- 오른쪽 정렬 -->
 		                <button type="button" class="btn btn-primary" onclick="go_ReportUpdate(${rvo.r_idx})">신고 수정</button>
 		                <button type="button" class="btn btn-primary" onclick="go_ReportDelete(${rvo.r_idx})">신고 삭제</button>
+		                <button type="button" class="btn btn-primary" onclick="go_List(${rvo.r_idx})">목록 보기</button>
 		            </div>
 		        </div>
 		    </div>
+		</div>
 		</div>
 </body>
 </html>

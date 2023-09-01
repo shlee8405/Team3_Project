@@ -5,11 +5,27 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class GroupVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private String g_idx, g_title, g_desc, g_date, g_location, g_maxPeople, g_curPeople, g_link, g_status, g_fname, g_oldfname, u_idx, g_intro;
+	private String g_idx, g_title, g_desc, g_date, g_cdo, g_gugun, g_location, g_maxPeople, g_curPeople, g_link, g_status, g_fname, g_oldfname, u_idx, g_intro;
 	
 	// file 파리미터를 저장할 이름
 	private MultipartFile file;
 	
+	public String getG_cdo() {
+		return g_cdo;
+	}
+
+	public void setG_cdo(String g_cdo) {
+		this.g_cdo = g_cdo;
+	}
+
+	public String getG_gugun() {
+		return g_gugun;
+	}
+
+	public void setG_gugun(String g_gugun) {
+		this.g_gugun = g_gugun;
+	}
+
 	public MultipartFile getFile() {
 		return file;
 	}

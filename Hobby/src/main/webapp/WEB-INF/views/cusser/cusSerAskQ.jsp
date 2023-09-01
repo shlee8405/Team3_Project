@@ -3,12 +3,22 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>/고객센터.do</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="resources/css/summernote-lite.css">
 <style type="text/css">
+
+	@font-face{
+        font-family: OpenSans-Bold;
+        src: url(/resources/fonts/IBMPlexSansKR-Light.ttf);
+    }
+    
+    h1{
+    	font-family: OpenSans-Bold;
+    	text-align: center;
+    }
     
 	.container-fluid {
         margin: auto;
@@ -89,6 +99,11 @@
 </style>
 <script type="text/javascript">
     function sendData(f) {
+if(document.getElementById('q_title').value.trim() === "" || document.getElementById('q_content').value.trim() === "") {
+    alert('제목과 내용을 모두 입력해주세요.');
+    return false;
+}
+
         /* // 다른 방법
         if(f.title.value.trim().length <= 0){
             alert("제목을 입력하세요");
@@ -158,13 +173,21 @@
     <div class="ask-form">
     <form method="post">
         <h3 class="mb-4">문의 게시판</h3>
-        <div class="mb-3">
-            <label for="q_name" class="form-label">작성자</label>
-            <input type="text" id="q_name" name="q_name" class="form-control" value="${user.u_name}" disabled/>
+        
+        <div class="row g-3" style="padding-bottom: 20px;" >
+	        <div class="col-md-9">
+	            <label for="q_title" class="form-label">제목</label>
+	            <input type="text" id="q_title" name="q_title" class="form-control" required/>
+	        </div>
+	        <div class="col-md-3">
+	            <label for="q_name" class="form-label">작성자</label>
+	            <input type="text" id="q_name" name="q_name" class="form-control" value="${user.u_name}" required disabled/>
+	        </div>
         </div>
+        
         <div class="mb-3">
             <label for="q_content" class="form-label">내용</label>
-            <textarea id="q_content" name="q_content" class="form-control" rows="8"></textarea>
+            <textarea id="q_content" name="q_content" class="form-control" rows="8" required></textarea>
         </div>
         <div class="text-center">
             <input type="button" class="btn btn-primary" value="보내기" onclick="sendData(this.form)"/>
