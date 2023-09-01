@@ -12,7 +12,7 @@ import com.team.mypagemain.vo.MypageMainVO;
 public class MypageMainDAO {
 	@Autowired
 	private SqlSessionTemplate sessionTemplate;
-	public List<MypageMainVO> getMypageMain(){
-		return sessionTemplate.selectList("mypage.mypagemain");
+	public List<MypageMainVO> getMypageMain(String u_id){
+		return sessionTemplate.selectList("mypage.mypagemain", u_id);
 	}
 }

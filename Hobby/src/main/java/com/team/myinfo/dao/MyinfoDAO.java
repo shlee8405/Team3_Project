@@ -17,8 +17,11 @@ public class MyinfoDAO {
 		// TODO Auto-generated method stub
 		return sessionTemplate.selectList("mypage.myinfo", l_idx);
 	}
+	// 수정
 	public int updateMyinfo(MyinfoVO vo) {
 		return sessionTemplate.update("mypage.myinfoupdate", vo);
 	}
+	
+	
 
 }

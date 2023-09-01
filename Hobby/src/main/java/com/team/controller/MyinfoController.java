@@ -42,10 +42,13 @@ public class MyinfoController {
 	}
 	// 수정하는 페이지로 이동하는 컨트롤러
 	@RequestMapping("/myPageEdit.do")
-    public ModelAndView goToMyPageEdit() {
+    public ModelAndView goMyPageEdit(HttpServletRequest request) {
         ModelAndView mv = new ModelAndView("mypage/update");
+        String l_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(l_idx);
         List<MyinfoUpdateVO> list = myinfoUpdateService.getMyinfoUpdate();
         mv.addObject("list", list);
+        mv.addObject("user", Ulist.get(0));
         return mv;
     }
 	 

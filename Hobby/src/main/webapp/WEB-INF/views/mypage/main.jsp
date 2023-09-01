@@ -98,6 +98,7 @@ div {
 			<tr>
 				<th>번호</th>
 				<th>캠핑장 이름</th>
+				<th>링크 바로가기</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -110,6 +111,12 @@ div {
 	     			  	<tr>
 	     			  		<td>${vs.count }</td>
 	     			  		<td>${k.facltNm }</td>
+	     			  		 <td>
+					            <c:url var="campDetailURL" value="/campDetail.do">
+					                <c:param name="keyword" value="${k.facltNm}" />
+					            </c:url>
+					            <a href="${campDetailURL}">캠핑장 보기</a>
+					        </td>
 	     			  	</tr>
 	     			  </c:forEach> 
 	     			</c:otherwise>

@@ -97,9 +97,9 @@ function sendData(f) {
 	f.action="/myPageEdit.do";
 	f.submit();
 }
-function go_myPageEdit() {
-	location.href = "/myPageEdit2.do"?q_idx=" + q_idx;;
-}
+/* function go_myPageEdit() {
+	location.href = "/myPageEdit2.do"?u_idx=" + u_idx;
+} */
 </script>
 </head>
 <body>
@@ -149,7 +149,8 @@ function go_myPageEdit() {
 		</table>
 			<div style="margin-top: 20px;"></div>
 			<div class="button-wrapper">
-				<input type="submit" onclick="sendData(this.form)" value="수정">
+				<input type="submit" onclick="sendData(this.form)" value="내 정보 수정">
+				<input type="submit" onclick="sendData2(this.form)" value="비밀번호 변경">
 			</div>
 			</form>
 		</div>
