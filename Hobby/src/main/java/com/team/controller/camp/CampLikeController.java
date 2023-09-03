@@ -1,7 +1,10 @@
 package com.team.controller.camp;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.team.camp.service.CampService;
+import com.team.qna.vo.QnaVO;
+import com.team.user.vo.UserVO;
 
 @RestController
 public class CampLikeController {
@@ -22,7 +27,12 @@ public class CampLikeController {
 
 	// 좋아요 기능
 	@PostMapping("/addLike.do")
-	public Map<String, Object> addLike(@RequestParam String u_id, @RequestParam String facltNm) {
+	public Map<String, Object> addLike(@RequestParam String u_id, @RequestParam String facltNm, HttpServletRequest request) {
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		System.out.println("u_idx는 누구????:::" + u_idx);
+		//List<UserVO> Ulist = userService.getUsers(u_idx);
+		//mv.addObject("user", Ulist.get(0));
+		
 		// 좋아요 수 증가 또는 감소
 		int result = campService.addLike(u_id, facltNm);
 
