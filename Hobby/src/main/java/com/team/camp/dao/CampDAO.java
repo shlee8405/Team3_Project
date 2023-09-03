@@ -9,34 +9,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team.camp.vo.ReviewVO;
+import com.team.user.vo.UserVO;
 
 @Repository
 public class CampDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
+	
+	// u_idx로 USERS테이블에서 u_id, u_nickname 가져옴.
+	public UserVO getUserInfoByUidx(String u_idx) {
+		  return sqlSessionTemplate.selectOne("camp.getUserInfoByUidx", u_idx);
+	}
 
 	// 좋아요 추가
-	public int addLike(String u_id, String facltNm) {
-		Map<String, Object> params = new HashMap<>();
-		params.put("u_id", u_id);
-		params.put("facltNm", facltNm);
-		return sqlSessionTemplate.insert("camp.addLike", params);
+	public int addLike(String u_idx, String u_id, String u_nickname, String facltNm) {
+	  Map<String, Object> params = new HashMap<>();
+	  params.put("u_idx", u_idx);
+	  params.put("u_id", u_id);
+	  params.put("u_nickname", u_nickname);
+	  params.put("facltNm", facltNm);
+	  return sqlSessionTemplate.insert("camp.addLike", params);
 	}
 
 	// 좋아요 중복 체크
-	public int checkLike(String u_id, String facltNm) {
+	public int checkLike(String u_idx, String facltNm) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("u_id", u_id);
+		params.put("u_idx", u_idx);
 		params.put("facltNm", facltNm);
 		Integer result = sqlSessionTemplate.selectOne("camp.checkLike", params);
 		return result == null ? 0 : result;
 	}
 
 	// 좋아요 취소
-	public int removeLike(String u_id, String facltNm) {
+	public int removeLike(String u_idx, String facltNm) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("u_id", u_id);
+		params.put("u_idx", u_idx);
 		params.put("facltNm", facltNm);
 		return sqlSessionTemplate.delete("camp.removeLike", params);
 	}
@@ -52,26 +60,28 @@ public class CampDAO {
 	}
 
 	// 찜하기 추가
-	public int addWish(String u_id, String facltNm) {
+	public int addWish(String u_idx, String u_id, String u_nickname, String facltNm) {
 		Map<String, Object> params = new HashMap<>();
+		params.put("u_idx", u_idx);
 		params.put("u_id", u_id);
+		params.put("u_nickname", u_nickname);
 		params.put("facltNm", facltNm);
 		return sqlSessionTemplate.insert("camp.addWish", params);
 	}
 
 	// 찜하기 중복 체크
-	public int checkWish(String u_id, String facltNm) {
+	public int checkWish(String u_idx, String facltNm) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("u_id", u_id);
+		params.put("u_idx", u_idx);
 		params.put("facltNm", facltNm);
 		Integer result = sqlSessionTemplate.selectOne("camp.checkWish", params);
 		return result == null ? 0 : result;
 	}
 
 	// 찜하기 취소
-	public int removeWish(String u_id, String facltNm) {
+	public int removeWish(String u_idx, String facltNm) {
 		Map<String, Object> params = new HashMap<>();
-		params.put("u_id", u_id);
+		params.put("u_idx", u_idx);
 		params.put("facltNm", facltNm);
 		return sqlSessionTemplate.delete("camp.removeWish", params);
 	}

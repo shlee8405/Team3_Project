@@ -7,13 +7,13 @@ import com.team.camp.vo.ReviewVO;
 public interface CampService {
 
 	// 좋아요 수 증가
-	int addLike(String u_id, String facltNm);
+	int addLike(String u_idx, String facltNm);
 
 	// 좋아요 수 가져오기
 	int getLikes(String facltNm);
 
 	// 찜하기
-	int addWish(String u_Id, String facltNm);
+	int addWish(String u_Idx, String facltNm);
 	
 	// 찜하기 수 가져오기
 	int getWish(String facltNm);

@@ -27,14 +27,11 @@ public class CampLikeController {
 
 	// 좋아요 기능
 	@PostMapping("/addLike.do")
-	public Map<String, Object> addLike(@RequestParam String u_id, @RequestParam String facltNm, HttpServletRequest request) {
+	public Map<String, Object> addLike(@RequestParam String facltNm, HttpServletRequest request) {
 		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
-		System.out.println("u_idx는 누구????:::" + u_idx);
-		//List<UserVO> Ulist = userService.getUsers(u_idx);
-		//mv.addObject("user", Ulist.get(0));
 		
 		// 좋아요 수 증가 또는 감소
-		int result = campService.addLike(u_id, facltNm);
+		int result = campService.addLike(u_idx, facltNm);
 
 		Map<String, Object> response = new HashMap<>();
 
@@ -55,9 +52,11 @@ public class CampLikeController {
 
 	// 찜하기 기능
 	@PostMapping("/addWishlist.do")
-	public Map<String, Object> addWish(@RequestParam String u_id, @RequestParam String facltNm) {
+	public Map<String, Object> addWish( @RequestParam String facltNm, HttpServletRequest request) {
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		
 		// 찜하기 삽입
-		int result = campService.addWish(u_id, facltNm);
+		int result = campService.addWish(u_idx, facltNm);
 
 		Map<String, Object> response = new HashMap<>();
 
