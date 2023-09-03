@@ -89,6 +89,21 @@ ol.paging li a:hover {
   display: flex;  /* 추가 */
   align-items: center;  /* 추가 */
 }
+.serch_all {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; /* 이 부분은 중앙 정렬을 위해 추가한 것입니다. */
+      border: 1px solid lightgray;
+      margin: auto;
+      border-radius: 10px;
+      background-color: rgba(128, 128, 0, 0.2);
+    }
+      .search-container {
+      display: flex;
+  justify-content: center;
+  width: 100%;
+    }
 /* .search-box:hover{
   box-shadow: 0px 0px .5px 1px #51e3d4;
   width: 282px;
@@ -107,6 +122,12 @@ ol.paging li a:hover {
 .search-box:hover > .search-btn{
   background-color: #fff;
 }
+ .search-box, .search_boxes{
+      margin: 5px;
+    }
+    .search-box, .search_boxes {
+      flex: 1;
+    }
 .search-txt{
    flex: 1;  /* 추가 */
    padding: 0;
@@ -114,6 +135,11 @@ ol.paging li a:hover {
    background: none;
    width: 200px; /* 원하는 너비로 변경 */
 }
+ .button-container {
+      display: flex;
+      justify-content: flex-end; /* 버튼을 오른쪽으로 정렬 */
+      width: 100%;
+    }
 .ser_btn{
 		background-color: #548C54;
 		width: 120px;
@@ -122,6 +148,7 @@ ol.paging li a:hover {
 		font-weight: bold;
 		border-radius: 10px; 
 		color: #FFFCFC;
+      margin: 5px; /* 상하좌우 마진을 모두 5px로 설정 */
 		cursor: pointer;
 	}
     </style>
@@ -214,12 +241,15 @@ ol.paging li a:hover {
 <body>
 <jsp:include page="../header.jsp"  />
 <div style="position:relative; top:200px; z-index:1;">
+<div class="serch_all"  style="width: 800px">
+<h2 style="margin-top: 20px; text-align: left;">모임 검색</h2> <br>
+ <div class="search-container">
 <div class="search-box">
       <input type="text" class="search-txt" name="" placeholder="제목을 입력하세요">
-    </div>
+    </div>&nbsp;&nbsp;
     <br>
 <div class="search_boxes">
-            <select name="" id="" onchange="categoryChange(this)">
+            <select name="" id="" onchange="categoryChange(this)" style="height: 40px; width: 120px; border-radius: 30px; ">
               <option>시/도 선택</option>
               <option value="general01">강원</option>
               <option value="general02">경기</option>
@@ -237,14 +267,16 @@ ol.paging li a:hover {
               <option value="general14">제주</option>
               <option value="general15">충남</option>
               <option value="general16">충북</option>
-            </select>
+            </select>&nbsp;
           
-            <select name="" id="state">
+            <select name="" id="state" style="height: 40px; width: 120px; border-radius: 30px; ">
               <option>군/구 선택</option>
             </select>
+            </div>
           </div>&nbsp;&nbsp;
-          <div>
-          <button class="ser_btn" id="myButton_ok">참여</button>
+          <div class="button-container">
+          <button class="ser_btn" id="myButton_ok">검색</button>
+          </div>
           </div>
           <br>
 <div id="listgroup" style="width: 1000px ;">

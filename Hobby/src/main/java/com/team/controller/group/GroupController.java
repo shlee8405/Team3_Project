@@ -40,7 +40,6 @@ public class GroupController {
 		// 전체 게시물의 수
 		int count = groupService.getTotalCount();
 		paging.setTotalRecord(count);
-		System.out.println(count);
 		// 전체 페이지의 수
 		if (paging.getTotalRecord() <= paging.getNumPerPage()) {
 			paging.setTotalPage(1);
@@ -62,7 +61,6 @@ public class GroupController {
 
 		// offset = limit * (현재페이지-1);
 		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() - 1));
-		System.out.println(paging);
 		// 시작블록과 끝블록 구하기
 		paging.setBeginBlock(
 				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
@@ -125,8 +123,6 @@ public class GroupController {
 		ModelAndView mv = new ModelAndView("group/groupOnelist");
 		String g_idx = request.getParameter("g_idx");
 		String cPage = request.getParameter("cPage");
-		// 사용자 정보 가져오기
-        //UserVO userInfo = (UserVO) session.getAttribute("userInfo");
 		
 		// 상세보기
 		GroupVO gvo = groupService.getGroupOnelist(g_idx);

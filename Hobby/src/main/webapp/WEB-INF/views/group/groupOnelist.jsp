@@ -10,9 +10,9 @@
 <title>Insert title here</title>
 <style type="text/css">
 	a { text-decoration: none;}
-	#onelist{width: 800px; border-collapse:collapse; text-align: center;}
-	.allist{border: 1px solid black; padding: 3px}
-	.list{width: 800px; margin:auto; text-align: center;}
+	#onelist{width: 1000px; border-collapse:collapse; text-align: center;}
+	.allist{border-bottom: 1px solid lightgray; padding: 3px; height: 40px;}
+	.list{width: 1000px; margin:auto; text-align: center;}
 	.btn{
 		background-color: #548C54;
 		width: 120px;
@@ -29,6 +29,13 @@
 	padding-right: 30px;
 	font-size: 25px;
 	font-weight: bold;
+	}
+	.infoItem {
+		border: 1px solid gray;
+		width: 1000px;
+		min-height: 600px;
+    max-height: 1200px;
+    overflow-y: auto;
 	}
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -104,10 +111,23 @@
 <hr>
 <br>
 <form method="post">
+<div style="display: flex; align-items: flex-start;">
+    <!-- 새로 추가된 썸네일 이미지 부분 -->
+    <div style="width: 300px; height: 300px;">
+        <c:choose>
+            <c:when test="${empty gvo.g_fname}">
+                <!-- 빈 공간 유지 -->
+                <img src="resources/images/캠핑.png" style="width: 300px; height: 300px;">
+            </c:when>
+            <c:otherwise>
+                <img src="resources/images/${gvo.g_fname}" style="width: 300px; height: 300px;">
+            </c:otherwise>
+        </c:choose>
+        </div>&nbsp;&nbsp;&nbsp;&nbsp;
 			<table id="onelist" class="allist">
 				<tr align="center">
 					<th class="allist" bgcolor="#99ccff">제  목</th>
-					<td class="allist">${gvo.g_title}</td>
+					<td class="allist"><b>${gvo.g_title}</b></td>
 				</tr>
 				<tr align="center">
 					<th class="allist" bgcolor="#99ccff">작성자</th>
@@ -117,19 +137,7 @@
 					<th class="allist" bgcolor="#99ccff">모임소개</th>
 					<td class="allist">${gvo.g_intro }</td>
 				</tr>
-				<tr align="center">
-					<th class="allist" bgcolor="#99ccff">썸네일</th>
-					<c:choose>
-						<c:when test="${empty gvo.g_fname }">
-							<td class="allist"><b>첨부 파일 없음</b></td>
-						</c:when>
-						<c:otherwise>
-							<td class="allist">
-								<img src="resources/images/${gvo.g_fname}" style="width: 200px; height: 200px">
-							</td>
-						</c:otherwise>
-					</c:choose>
-				</tr>
+				
 				<tr align="center">
 				    <th class="allist" bgcolor="#99ccff">캠핑 날짜</th>
 				    <td class="allist">${gvo.g_date}</td>
@@ -142,26 +150,25 @@
 					<th class="allist" bgcolor="#99ccff">모임 정원</th>
 					<td class="allist">${gvo.g_maxPeople }</td>
 				</tr>
-				<tr align="center">
-					<td class="allist" colspan="2" style="text-align: left">
-						<pre style="padding-left: 15px">${gvo.g_desc }</pre>
-					</td>
-				</tr>
-				<tfoot>
-					<tr align="center">
-						<td class="allist" colspan="2">
-							<input type="hidden" name="g_idx" value="${gvo.g_idx}">
-							<%-- <input type="hidden" value="${cPage}" name="cPage"> --%>
-							<input type="button" value="목록" onclick="list_go(this.form)" />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="button" value="수정" onclick="edit_go(this.form)" />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="button" value="삭제" onclick="delete_go(this.form)" />
-						</td>
-					</tr>
-				</tfoot>
+				
 			</table>
+			</div>
+		
+			<br>
+			 <div class="infoItem">
+        <span>${gvo.g_desc }</span>
+    </div>
+    <br><br>
+    <div class="infoActions">
+        <input type="hidden" name="g_idx" value="${gvo.g_idx}">
+        <input type="button" value="목록" onclick="list_go(this.form)" />
+        <input type="button" value="수정" onclick="edit_go(this.form)" />
+        <input type="button" value="삭제" onclick="delete_go(this.form)" />
+    </div>
 		</form>
+		<br>
+		<br>
+		<div style="border: 1px solid lightgray; width: 500px; text-align: center; margin-left : auto;">
 		<p id="groupCount"><span id="count_party">0</span>/${gvo.g_maxPeople}&nbsp;&nbsp;</p>
 		<div id="ok">
 			<button class="btn" id="myButton_ok" onclick="party_click()">참여</button>
@@ -170,7 +177,8 @@
 			<button class="btn" id="myButton_cancle" onclick="party_click_no()">참여 취소</button>
 		</div>
 		</div>
-		
+		<br>
+		<br>
 		<%-- 댓글 입력 --%>
 	<div style="padding:50px; width:580px; margin: auto; ">
 		<form method="post">
@@ -188,7 +196,7 @@
 			 </fieldset>
 		</form>
 	</div>
-	
+		
 	<!-- 로그인 확인후 입력창 활성화 -->
 	<script>
     $(document).ready(function() {
@@ -212,21 +220,20 @@
 		 	<form method="post">
 		 		<p>아이디 : ${k.u_idx}</p>
 		 		<p>내용 : ${k.gc_content }</p>
-		 		<p>날짜 : ${k.gc_date.substring(0,10)}</p>
-		 		<%-- 실제로는 로그인 성공해야지만 삭제번트이 보여야 한다. --%>
-		 		<input type="button" value="댓글수정" onclick="comment_update(this.form)"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-		 		<!-- JSTL을 이용한 세션 변수 접근 -->
-				<c:set var="sessionUidx" value="${sessionScope.u_idx}" />
+		 		<p>날짜 : ${k.gc_date}</p>
+		 		<!-- 세션의 u_idx와 댓글의 u_idx를 문자열로 변환 -->
+				<c:set var="commentUidxStr" value="${k.u_idx}" />
 				
-				<!-- 값들을 출력해서 확인 -->
+				<!-- 문자열로 변환된 값들을 출력해서 확인 -->
 				<!-- Debugging lines -->
-				<%-- <c:out value="${sessionUidx}" />
-				<c:out value="${k.u_idx}" /> --%>
+				<%-- <c:out value="Session Uidx as String: ${sessionUidxStr}" />
+				<c:out value="Comment Uidx as String: ${commentUidxStr}" />
+				<c:out value="Session Uidx: ${sessionUidx}" /> --%>
 				
-				<!-- 디버깅 정보 -->
-				<%-- <c:if test="${sessionUidx eq k.u_idx}"> --%>
+				<!-- 문자열로 변환된 값을 비교 -->
+				<c:if test="${sessionUidx eq commentUidxStr}">
 				    <input type="button" value="삭제" onclick="comment_del(this.form)" />
-				<%-- </c:if> --%>
+				</c:if>
 		 		<input type="hidden" value="${k.gc_idx}" name="gc_idx">
 		 		<input type="hidden" value="${k.g_idx}" name="g_idx">
 		 		<input type="hidden" name="cPage" value="${cPage}">
