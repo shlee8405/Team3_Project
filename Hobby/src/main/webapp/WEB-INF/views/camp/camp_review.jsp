@@ -7,11 +7,32 @@
 <meta charset="UTF-8">
 <title>캠핑장후기</title>
 <style type="text/css">
+@font-face {
+     font-family: Jua-Regular;
+     src: url(/resources/fonts/Jua-Regular.ttf);
+}
+
+#title{
+	font-family: Jua-Regular;
+    font-size:50px;
+}
+
+#review_title{
+    margin-top: 10px;
+}
+
 .reviewBox {
+  font-family: Jua-Regular;
+  font-size:30px;
   border: 1px solid #ccc;  				 /* 1px 두께의 회색 테두리 */
   padding: 20px;           				 /* 내부 패딩 */
   border-radius: 5px;       			 /* 모서리 둥글게 */
   box-shadow: 0 0 10px rgba(0,0,0,0.1);  /* 그림자 효과 */
+}
+
+.form-control{
+	font-family: Jua-Regular;
+  	font-size:20px;
 }
 
 .star {
@@ -38,9 +59,46 @@
 	pointer-events: none;
 }
 
+.review_list{
+	text-align: center;
+	font-family: Jua-Regular;
+  	font-size:30px;
+}
+
 .card-body {
     position: relative;
+    font-family: Jua-Regular;
 }
+.card-body .card-text {
+    font-size: 50px;  /* 원하는 크기로 설정 */
+}
+
+.card-body .card-title {  /* 후기 내용 */
+    font-size: 25px;
+}
+
+.card-body .card-subtitle { /* 작성자, 작성일 */
+    font-size: 20px;  
+    margin-top: 15px;
+}
+
+.card-body .card-subtitle { /* 작성자, 작성일 */
+    font-size: 20px;  
+    margin-top: 15px;
+}
+
+.card-body .star {  /* 별 하나 크기 */
+    font-size: 30px; 
+}
+
+.card-body .star.filled { /* 별 묶음 */
+    font-size: 30px;  
+}
+
+.card-body .delete-button { /* 삭제 버튼 */
+    font-size: 20px;  
+}
+
 .card-subtitle {
     display: flex;
     justify-content: space-between;
@@ -51,24 +109,14 @@
 <div class="container mt-5">
 	<div id="title">
 		<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
-		<h2 id="review_title" style="font-weight: bolder;">후기</h2>
-	</div>
-
-	<h2>평균 별점</h2>
-	<div class="star-display">
-		<c:forEach begin="1" end="${averageRating}" varStatus="status">
-			<span class="star checked">★</span>
-		</c:forEach>
-		<c:forEach begin="${averageRating + 1}" end="5" varStatus="status">
-			<span class="star">★</span>
-		</c:forEach>
+		<div id="review_title" style="font-weight: bolder;">후기</div>
 	</div>
 </div>
 
 <!-- 별점 평가 폼 -->
 <div class="container mt-5">
 	<div class="reviewBox">
-	<h2>후기 남기기</h2>
+	<span>후기를 작성해주세요.</span>
 	<form id="reviewForm" action="/addReview.do" method="post" class="mt-3">
 		<div class="form-group star-rating">
 			<label class="star">★</label> 
@@ -89,7 +137,6 @@
 
 <!-- 저장된 후기와 별점 보여주기 -->
 <div class="container mt-5">
-	<h2>후기 목록</h2>
 	<c:forEach items="${reviews}" var="review">
 		<div class="card mt-3">
 			<div class="card-body">

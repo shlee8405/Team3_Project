@@ -1,4 +1,9 @@
 @charset "UTF-8";
+@font-face {
+     font-family: CJU-Bold;
+     src: url(/resources/fonts/CJU-Bold.ttf);
+}
+
 /* 검색창 */
 #carouselExampleFade img {
 	/* 슬라이드 이미지 사이즈 */
@@ -36,6 +41,13 @@
     border: 1px solid #ccc;
     height: calc(3rem + 2px) !important;
     border-radius:0;
+}
+
+.small-title{ /* BEST 캠핑장, 전체 캠핑장 제목 */
+	font-family: CJU-Bold;
+    font-size:40px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .wrn-btn{

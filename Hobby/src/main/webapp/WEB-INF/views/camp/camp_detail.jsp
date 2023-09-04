@@ -50,15 +50,6 @@
 	</div>
 		
 	<div class="container3">
-		<%-- <div class="row">
-			<!-- 캠핑장 제목과 한줄 소개-->
-			<div class="col-md-12" style="margin-bottom: 10px;">
-				<h1 style="font-weight: bolder;">${cvo.facltNm}</h1>
-				<br>
-				<p><font color="gray">${cvo.lineIntro}</font></p>
-			</div>
-		</div> --%>
-
 		<hr style="border-top: 1px solid #dee2e6; margin: 20px 0;">
 			
 		<div class="container">
@@ -98,8 +89,18 @@
 								<th>주변이용가능시설</th>
 								<td>${cvo.posblFcltyCl == "" ? "준비 중 입니다." : cvo.posblFcltyCl}</td>
 							</tr>
+							<tr>
+								<th><div class="star-display">평균 별점</div></th>
+								<td><c:forEach begin="1" end="${averageRating}" varStatus="status">
+										<span class="star checked">★</span>
+									</c:forEach>
+									<c:forEach begin="${averageRating + 1}" end="5" varStatus="status">
+										<span class="star">★</span>
+									</c:forEach></td>
+							</tr>
 						</table>
 		
+			
 				<!-- 좋아요, 찜버튼 -->
 				<div class="d-flex justify-content-end mt-3">
 					<button class="btn btn-danger rounded-circle mr-2" onclick="addLike('${user.u_id}', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
@@ -138,7 +139,7 @@
         <div class="tab-pane container active" id="campIntro">
 	        <div id="title">
 	        	<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
-	        	<h2 id="review_title" style="font-weight: bolder;">소개글</h2>
+	        	<div id="review_title" style="font-weight: bolder;">소개글</div>
 	    	</div>
             	<p id="campIntroText">
             	<c:choose>
@@ -159,7 +160,7 @@
         <div class="tab-pane container fade" id="locationInfo">
         <div id="title">
         	<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
-        	<h2 id="review_title" style="font-weight: bolder;">찾아오시는 길</h2>
+        	<div id="review_title" style="font-weight: bolder;">찾아오시는 길</div>
     	</div>
             <!-- 카카오맵 지도 -->
             <div id="map" style="width: 100%; max-width: 800px; height: 400px; margin: 0 auto;"></div>

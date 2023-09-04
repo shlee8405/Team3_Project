@@ -67,32 +67,26 @@
 		</section>
 		</div>
 		
-			<div id="camp_list">
-				<!-- 이 안에 캠핑장 리스트 보여주기 -->
-				<!-- <div class="product-grid">
-						<div class="product-image">
-						<a href="#">
-						<img class="pic-1" src="/resources/images/camping.jpg"> 
-						<img class="pic-2" src="/resources/images/camping.jpg">
-						</a> 
-						<span class="product-new-label">강원도</span> 
-						<span class="product-discount-label">BEST 1</span>
-						</div>
-					<div class="product-content">
-						<div class="price">
-							<a href="#">장호 비치 캠핑장</a>
-							<h3 class="title">강원도 삼척시 근덕면 장호1길 41</h3>
-						</div>
-						 <ul class="rating">
-		                    <li class="fa fa-star"></li>
-		                    <li class="fa fa-star"></li>
-		                    <li class="fa fa-star"></li>
-		                    <li class="fa fa-star"></li>
-		                    <li class="fa fa-star disable"></li>
-                		</ul>
-						<a class="add-to-cart" href="#">View Details</a>
-						</div>
-					</div> -->
+		<div class="best_wrap">
+			<div class="small-title">
+				<span>BEST 캠핑장</span>
+			</div>
+			<div id="camp_best3_list">
+				<!-- 베스트3 캠핑장 리스트  -->
+			</div>
+		</div>
+		
+		<div class="list_wrap">
+			<div class="small-title">
+				<span>전체 캠핑장 살펴보기</span>
+			</div>
+<!-- 			<div class="sch-title">
+					<h3>검색 결과</h3>
+			</div> -->
+			
+				<div id="camp_list">
+					<!-- 이 안에 캠핑장 리스트 보여주기 -->
+				</div>
 			</div>	
 		</div>		
 </body>
