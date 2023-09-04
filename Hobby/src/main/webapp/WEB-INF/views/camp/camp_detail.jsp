@@ -102,12 +102,12 @@
 		
 				<!-- 좋아요, 찜버튼 -->
 				<div class="d-flex justify-content-end mt-3">
-					<button class="btn btn-danger rounded-circle mr-2" onclick="addLike('user01', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
+					<button class="btn btn-danger rounded-circle mr-2" onclick="addLike('${user.u_id}', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
 			        	<i class="fas fa-heart"></i>
 			        </button>
 			    		 <span id="like-count" style="margin-right:20px">${cvo.likesCount}</span> 
 			    		 
-					<button class="btn btn-primary rounded-circle" onclick="addToWishlist('user01', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
+					<button class="btn btn-primary rounded-circle" onclick="addToWishlist('${user.u_id}', '${cvo.facltNm}')" style="width: 50px; height: 50px;">
 			        	<i class="fas fa-thumbs-up"></i>
 			        </button>
 			    		<span id="wish-count">${cvo.wishCount}</span> 

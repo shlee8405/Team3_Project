@@ -37,6 +37,14 @@
 .star-display .star, .card-text .star {
 	pointer-events: none;
 }
+
+.card-body {
+    position: relative;
+}
+.card-subtitle {
+    display: flex;
+    justify-content: space-between;
+}
 </style>
 
 <!-- 평균 별점 -->
@@ -61,7 +69,7 @@
 <div class="container mt-5">
 	<div class="reviewBox">
 	<h2>후기 남기기</h2>
-	<form action="/addReview.do" method="post" class="mt-3">
+	<form id="reviewForm" action="/addReview.do" method="post" class="mt-3">
 		<div class="form-group star-rating">
 			<label class="star">★</label> 
 			<label class="star">★</label> 
@@ -73,9 +81,8 @@
 		<div class="form-group">
 			<textarea class="form-control" rows="4" id="comment" name="comment"></textarea>
 		</div>
-		<button type="submit" class="btn btn-primary">후기 남기기</button>
-		<input type="hidden" name="facltNm" value="${cvo.facltNm}"> <input
-			type="hidden" name="u_Id" value="user02"> <!-- 로그인한 회원 ID 수정하기 -->
+		<button type="submit" class="btn btn-success">후기 남기기</button>
+		<input type="hidden" name="facltNm" value="${cvo.facltNm}"> 
 	</form>
 	</div>
 </div>
@@ -86,15 +93,34 @@
 	<c:forEach items="${reviews}" var="review">
 		<div class="card mt-3">
 			<div class="card-body">
-				<h5 class="card-title">${review.comment}</h5>
-				<p class="card-text">
-					<c:forEach var="i" begin="1" end="${review.rating}">
-						<span class="star filled">★</span>
-					</c:forEach>
-					<c:forEach var="i" begin="${review.rating + 1}" end="5">
-						<span class="star">★</span>
-					</c:forEach>
-				</p>
+				<!-- 별점 표시와 삭제 버튼 -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="card-text mb-0">
+                        <c:forEach var="i" begin="1" end="${review.rating}">
+                            <span class="star filled">★</span>
+                        </c:forEach>
+                        <c:forEach var="i" begin="${review.rating + 1}" end="5">
+                            <span class="star">★</span>
+                        </c:forEach>
+                    </p>
+                    
+                    <!-- 삭제 버튼 -->
+					<c:if test="${sessionUidx == review.u_idx}">
+					    <form id="deleteForm_${review.id}" action="/deleteReview.do" method="post">
+					        <input type="hidden" name="id" value="${review.id}">
+					        <input type="hidden" name="facltNm" value="${review.facltNm}">
+					        <button type="button" onclick="confirmDelete(${review.id})" class="btn btn-link btn-sm delete-button">X</button>
+					    </form>
+					</c:if>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">${review.comment}</h5>
+                </div>
+                <!-- 닉네임과 날짜 추가 -->
+                <p class="card-subtitle mb-2 text-muted">
+                    <span>${review.u_nickname}님</span>
+                    <span>${review.formatted_date}</span>
+                </p>
 			</div>
 		</div>
 	</c:forEach>
@@ -111,6 +137,23 @@ $(document).ready(function() {
         // 별점 값을 숨겨진 input에 저장
         $("#ratingValue").val(idx + 1);
     });
+    
+ 	// 별점 선택 강요
+    $("#reviewForm").on('submit', function(e) {
+        if ($("#ratingValue").val() == "") {
+            alert("별점을 선택해주세요.");
+            e.preventDefault();
+        }
+    });
 });
+
+// 삭제 확인
+function confirmDelete(reviewId) {
+    var r = confirm("정말 삭제하시겠습니까?");
+    if (r == true) {
+        // 삭제 로직 실행
+        document.getElementById('deleteForm_' + reviewId).submit();
+    }
+}
 
 </script>

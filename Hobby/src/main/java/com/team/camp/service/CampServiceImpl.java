@@ -32,7 +32,7 @@ public class CampServiceImpl implements CampService {
 		} else {
 			// 좋아요 추가
 			System.out.println("좋아요 성공:::" + check);
-			return campDAO.addLike(u_idx, user.getU_id(), user.getU_nickname(), facltNm);// 성공값으로 1 반환
+			return campDAO.addLike(u_idx, user.getU_id(), user.getU_nickname(), facltNm); //성공값으로 1 반환
 		}
 	}
 
@@ -71,8 +71,14 @@ public class CampServiceImpl implements CampService {
 
 	// 후기, 별점 추가
 	@Override
-	public void addReview(String facltNm, String u_Id, String comment, int rating) {
-	    campDAO.addReview(facltNm, u_Id, comment, rating);
+	public void addReview(String facltNm, String u_Idx, String comment, int rating) {
+		UserVO user = campDAO.getUserInfoByUidx(u_Idx);
+	    campDAO.addReview(facltNm, u_Idx, user.getU_id(), user.getU_nickname(), comment, rating);
+	}
+	
+	// 후기 삭제
+	public void deleteReview(int id, String u_idx) {
+		campDAO.deleteReview(id, u_idx);
 	}
 
 	// 해당 캠핑장의 모든 후기와 별점 가져오기

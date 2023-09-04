@@ -16,20 +16,20 @@ public class CampDAO {
 
 	@Autowired
 	private SqlSessionTemplate sqlSessionTemplate;
-	
+
 	// u_idx로 USERS테이블에서 u_id, u_nickname 가져옴.
 	public UserVO getUserInfoByUidx(String u_idx) {
-		  return sqlSessionTemplate.selectOne("camp.getUserInfoByUidx", u_idx);
+		return sqlSessionTemplate.selectOne("camp.getUserInfoByUidx", u_idx);
 	}
 
 	// 좋아요 추가
 	public int addLike(String u_idx, String u_id, String u_nickname, String facltNm) {
-	  Map<String, Object> params = new HashMap<>();
-	  params.put("u_idx", u_idx);
-	  params.put("u_id", u_id);
-	  params.put("u_nickname", u_nickname);
-	  params.put("facltNm", facltNm);
-	  return sqlSessionTemplate.insert("camp.addLike", params);
+		Map<String, Object> params = new HashMap<>();
+		params.put("u_idx", u_idx);
+		params.put("u_id", u_id);
+		params.put("u_nickname", u_nickname);
+		params.put("facltNm", facltNm);
+		return sqlSessionTemplate.insert("camp.addLike", params);
 	}
 
 	// 좋아요 중복 체크
@@ -95,15 +95,17 @@ public class CampDAO {
 		}
 		return result;
 	}
-	
+
 	// 후기와 별점 추가
-	public void addReview(String facltNm, String u_Id, String comment, int rating) {
-		 Map<String, Object> params = new HashMap<>();
-		 params.put("facltNm", facltNm);
-		 params.put("u_Id", u_Id);
-		 params.put("comment", comment);
-		 params.put("rating", rating);
-		 sqlSessionTemplate.insert("camp.addReview", params);
+	public void addReview(String facltNm, String u_idx, String u_id, String u_nickname, String comment, int rating) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("facltNm", facltNm);
+		params.put("u_idx", u_idx);
+		params.put("u_id", u_id);
+		params.put("u_nickname", u_nickname);
+		params.put("comment", comment);
+		params.put("rating", rating);
+		sqlSessionTemplate.insert("camp.addReview", params);
 	}
 
 	// 해당 캠핑장 리뷰랑 별점 가져오기
@@ -114,10 +116,18 @@ public class CampDAO {
 
 	// 해당 캠핑장의 평균 별점 가져오기
 	public Double getAverageRating(String facltNm) {
-	Double result = sqlSessionTemplate.selectOne("camp.getAverageRating", facltNm);
-	if (result == null) { // 해당 캠핑장의 리뷰가 아직 없을 때
-		return 0.0;
-	}
+		Double result = sqlSessionTemplate.selectOne("camp.getAverageRating", facltNm);
+		if (result == null) { // 해당 캠핑장의 리뷰가 아직 없을 때
+			return 0.0;
+		}
 		return result;
+	}
+
+	// 후기삭제
+	public int deleteReview(int id, String u_idx) {
+		Map<String, Object> params = new HashMap<>();
+		params.put("id", id);
+		params.put("u_idx", u_idx);
+		return sqlSessionTemplate.delete("camp.deleteReview", params);
 	}
 }

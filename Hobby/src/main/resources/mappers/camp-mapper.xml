@@ -52,10 +52,15 @@
 	
 	<!-- 후기와 별점 추가 -->
     <insert id="addReview" parameterType="map">
-        INSERT INTO camp_review(facltNm, u_Id, comment, rating, created_date)
-        VALUES(#{facltNm}, #{u_Id}, #{comment}, #{rating}, NOW())
+        INSERT INTO camp_review(facltNm, u_idx, u_id, u_nickname, comment, rating, created_date)
+        VALUES(#{facltNm}, #{u_idx}, #{u_id}, #{u_nickname}, #{comment}, #{rating}, NOW())
     </insert>
 
+    <!-- 후기삭제 -->
+    <delete id="deleteReview" parameterType="map">
+    DELETE FROM camp_review WHERE id = #{id} AND u_idx = #{u_idx}
+	</delete>
+	
     <!-- 해당 캠핑장의 모든 후기와 별점 가져오기 -->
     <select id="getReviews" parameterType="String" resultType="crvo">
         SELECT * FROM camp_review WHERE facltNm = #{facltNm} ORDER BY created_date DESC
@@ -65,4 +70,5 @@
     <select id="getAverageRating" parameterType="String" resultType="double">
         SELECT AVG(rating) FROM camp_review WHERE facltNm = #{facltNm}
     </select>
+    
 </mapper>

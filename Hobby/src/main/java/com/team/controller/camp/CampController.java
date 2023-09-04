@@ -5,9 +5,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -178,7 +181,9 @@ public class CampController {
 	
 	// 캠핑장 상세보기 호출하기
 	@GetMapping("/campDetail.do")
-	public ModelAndView getCampDetail(@RequestParam String keyword) throws URISyntaxException, UnsupportedEncodingException {
+	public ModelAndView getCampDetail(@RequestParam String keyword, HttpServletRequest request) 
+			throws URISyntaxException, UnsupportedEncodingException {
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
 		
 		// 리퀘스트 파라미터
 		int numOfRows = 1; // 보여줄 리스트 개수
@@ -250,6 +255,14 @@ public class CampController {
 		// 후기와 별점 가져오기
 	    List<ReviewVO> reviews = campService.getReviews(cvo.getFacltNm());
 	    
+	    // 날짜 형식 변경
+	    SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd");
+	    for(ReviewVO review : reviews) {
+	    	Date creaDate = review.getCreated_date();
+	    	String formattedDate = sdf.format(creaDate);
+	    	review.setFormatted_date(formattedDate);
+	    }
+	    
 	    //averageRating 값을 반올림하여 정수값으로 변환
 	    double rawAverageRating = campService.getAverageRating(cvo.getFacltNm());
 	    
@@ -262,13 +275,32 @@ public class CampController {
 		mv.addObject("cvo", cvo);
 	    mv.addObject("reviews", reviews);
 	    mv.addObject("averageRating", averageRating);
+	    mv.addObject("sessionUidx", u_idx);
 		return mv;
 	}
 	
+	// 후기 추가
 	@PostMapping("/addReview.do")
-	public String addReview(@RequestParam String facltNm, @RequestParam String u_Id, @RequestParam String comment, @RequestParam int rating) {
-	    campService.addReview(facltNm, u_Id, comment, rating);
+	public ModelAndView addReview(@RequestParam String facltNm, @RequestParam String comment, @RequestParam int rating, 
+			HttpServletRequest request) {
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+
+	    campService.addReview(facltNm, u_idx, comment, rating);
 	    String encodedFacltNm = URLEncoder.encode(facltNm, StandardCharsets.UTF_8);
-	    return "redirect:/campDetail.do?keyword=" + encodedFacltNm; // 후기가 추가된 후 다시 해당 캠핑장 상세 페이지로 리다이렉트
+	    
+	    ModelAndView mv = new ModelAndView("redirect:/campDetail.do?keyword=" + encodedFacltNm);
+
+	    return mv; // 후기가 추가된 후 다시 해당 캠핑장 상세 페이지로 리다이렉트
 	}
+	
+	// 후기 삭제
+	@PostMapping("/deleteReview.do")
+	public ModelAndView deleteReview(@RequestParam String facltNm, @RequestParam int id, HttpServletRequest request) {
+	    String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		campService.deleteReview(id, u_idx);
+		String encodedFacltNm = URLEncoder.encode(facltNm, StandardCharsets.UTF_8);
+		ModelAndView mv = new ModelAndView("redirect:/campDetail.do?keyword=" + encodedFacltNm);
+
+		    return mv;
+		}
 }

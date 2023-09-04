@@ -19,7 +19,10 @@ public interface CampService {
 	int getWish(String facltNm);
 	
 	// 후기
-	public void addReview(String facltNm, String u_Id, String comment, int rating);
+	public void addReview(String facltNm, String u_Idx, String comment, int rating);
 	List<ReviewVO> getReviews(String facltNm);
 	double getAverageRating(String facltNm);
+	
+	// 후기 삭제
+	public void deleteReview(int id, String u_idx);
 }
