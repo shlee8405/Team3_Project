@@ -13,7 +13,8 @@
 	    width:900px;
 	    margin:0 auto;
 	    margin-top:20px;
-	    border:1px solid black;
+	    border:1px solid lightgray;
+	    border-radius: 10px; 
 	    border-collapse:collapse;
 	    font-size:14px;
 	    
@@ -27,13 +28,13 @@
 	
 	#bbs table th {
 	    text-align:center;
-	    border:1px solid black;
+	    border:1px solid lightgray;
 	    padding:4px 10px;
 	}
 	
 	#bbs table td {
 	    text-align:left;
-	    border:1px solid black;
+	     border:1px solid lightgray;
 	    padding:4px 10px;
 	}
 	.no {width:15%}
@@ -155,10 +156,19 @@
 			}
 		}
 </script>
+
+<script type="text/javascript">
+    function limitInputLength(event) {
+        if (event.target.value.length > 18) {
+            event.target.value = event.target.value.slice(0, 18);
+            alert("17자 이하로 작성해주세요");
+        }
+    }
+</script>
 </head>
 <body>
-
-	<h2>그룹글쓰기폼</h2>
+<jsp:include page="../header.jsp"  />
+<div style="position:relative; top:200px; z-index:1;">
 		<div id="bbs">
 	<form method="post" enctype="multipart/form-data">
 		<table summary="게시판 글쓰기">
@@ -182,7 +192,7 @@
 				</tr>
 				<tr>
 					<th>모임 소개</th>  <!-- 첨부파일 유효성검사 해주자 -->
-					<td><input type="text" name="g_intro" size="60"/></td>
+					<td><input type="text" name="g_intro" size="60" oninput="limitInputLength(event)"/></td>
 				</tr>
 				<tr>
 					<th>캠핑 날짜</th>
