@@ -26,6 +26,23 @@ color:#ffffff!important;
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
+
+	/*
+	
+	document on load {
+		
+		var Checker = Checker;
+		if(Checker == "true") {
+			alert("성공적으로 추가되었습니다");
+		}
+		
+	}
+	
+	
+	
+	*/
+
+
 	function go_admin() {
 		location.href = "/adminHome.do"
 	}
