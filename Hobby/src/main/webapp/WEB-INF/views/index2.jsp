@@ -1063,8 +1063,6 @@ rotate(
 			</div>
 			<div id="mainListDiv" class="main_list">
 				<ul class="navlinks">
-					<li><a href="/adminHome.do"
-						style="text-family: sans-seriff; font-size: 1rem;">관리자</a></li>
 					<li><a href="/checkSession.do"
 						style="text-family: sans-seriff; font-size: 1rem;">sysout
 							sessionIdx</a></li>
@@ -1073,9 +1071,12 @@ rotate(
 
 					<%
 					String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+					String adminChecker = (String) request.getSession().getServletContext().getAttribute("adminChecker");
 					%>
+				
+					
 					<%
-					if (u_idx != null && !u_idx.isEmpty()) {
+					if (u_idx != null && !u_idx.isEmpty() && adminChecker==null) {
 					%>
 					<li><a href="/myPagemain.do">/마이페이지.do</a></li>
 					<li><a href="/cusSer.do">/고객센터.do</a></li>
@@ -1083,6 +1084,15 @@ rotate(
 					}
 					%>
 					<li><a href="/groupList.do">/캠핑모임.do</a></li>
+		
+					<%
+					if (adminChecker != null){
+					%>
+					<li><a href="/adminHome.do">/관리자.do</a></li>
+					<%
+					}
+					%>
+					
 					<%
 					if(u_idx != null && !u_idx.isEmpty()) {
 					%>
@@ -1093,6 +1103,7 @@ rotate(
 					<% if(u_idx == null) { %>
 					<li><a href="/login.do" data-bs-toggle="modal" data-bs-target="#exampleModal">/로그인.do</a></li> <!-- 로그인 모달 버튼 -->
 					<% } %>
+					
 				</ul>
 			</div>
 

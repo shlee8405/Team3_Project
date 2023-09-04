@@ -74,26 +74,30 @@ public class UserServiceImpl implements UserService{
 
 
 	 @Override
-	    public UserVO findUserByEmail(String email) {
-	        return userDAO.findUserByEmail(email);
-	    }
+    public UserVO findUserByEmail(String email) {
+        return userDAO.findUserByEmail(email);
+    }
 
-	    @Override
-	    public String generateNewPassword() {
-	        // Implement password generation logic (e.g., using random characters)
-	        return "newGeneratedPassword";
-	    }
+    @Override
+    public String generateNewPassword() {
+        // Implement password generation logic (e.g., using random characters)
+        return "newGeneratedPassword";
+    }
 
-	    @Override
-	    public boolean updateUserPassword(String u_id, String newPassword) {
-	        // Encrypt the new password before updating
-	        String encryptedPassword = passwordEncoder.encode(newPassword);
-	        int updatedRows = userDAO.updateUserPassword(u_id, encryptedPassword);
-	        return updatedRows > 0;
-	    }
+    @Override
+    public boolean updateUserPassword(String u_id, String newPassword) {
+        // Encrypt the new password before updating
+        String encryptedPassword = passwordEncoder.encode(newPassword);
+        int updatedRows = userDAO.updateUserPassword(u_id, encryptedPassword);
+        return updatedRows > 0;
+    }
 
 
-
+    @Override
+    public int getAdminInsert(UserVO uvo) {
+    	int res = userDAO.getAdminInsert(uvo);
+    	return res;
+    }
 
 	
 
