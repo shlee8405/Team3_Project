@@ -200,7 +200,26 @@ import 'datatables.net-responsive-dt';
     $(document).ready( function () {
 	    $('#myTable1').DataTable();
     } );
-    
+    $(document).ready(()=>{
+    	var actionControl = "${adminActionControl}";
+    	if(actionControl == "ban") {
+    		alert("성공적으로 밴하셨습니다.");
+    		actionControl = "";
+    		<% session.removeAttribute("adminActionControl"); %>
+    	} else if (actionControl == "update") {
+    		alert("성공적으로 수정하셨습니다.");
+    		<% session.removeAttribute("adminActionControl"); %>
+    	} else if (actionControl == "delete") {
+    		alert("성공적으로 삭제하셨습니다.");
+    		<% session.removeAttribute("adminActionControl"); %>
+    	} else if (actionControl == "error") {
+    		alert("뭔가 잘 못 되었습니다. 개발자에게 문의하세요.");
+    		<% session.removeAttribute("adminActionControl"); %>
+    	} else if (actionControl == "unban") {
+    		alert("정지를 풀었습니다.");
+    		<% session.removeAttribute("adminActionControl"); %>
+    	}
+    })
 </script>
 </head>
 <body>
@@ -250,17 +269,42 @@ import 'datatables.net-responsive-dt';
 		       		<div class="row row-search" >
 						<div class="col-4"> </div>
 						<div class="col" style="align-items:center;">
-							<select class="form-select row-content" aria-label="Default select example" style="width:100% ; " >
-							  <option selected>닉네임</option>
-							  <option value="1">출생년도</option>
-							  <option value="2">번호 마지막 4</option>
+							<select class="form-select row-content" id="searchTextSelect" aria-label="Default select example" style="width:100% ; " >
+							  <option value="1" selected>닉네임</option>
+							  <option value="2" >출생년도</option>
+							  <option value="3" >번호 마지막 4</option>
 							</select> 
 						</div>
 						<div class="col-2" style="align-items:center;"> 
-							<input class="row-content" type="text" style="width:100%">
+							<input class="row-content" type="text" id="searchTextInput" style="width:100%">
 						</div>
+						<script type="text/javascript">
+						function search() {
+							const text = document.getElementById("searchTextInput").value;		
+							if(text==''|| !text) {
+								alert('검색어를 입력해주세요');
+								document.getElementById("searchTextInput").focus();
+							}
+							else {
+								const subject = document.getElementById("searchTextSelect").value;
+								if (subject == '1') {
+									alert('닉네임 검색 ㄱ' +  text);
+									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
+								} else if (subject == '2') {
+									alert('출생년도 검색 ㄱ' + text);
+									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
+								} else if (subject == '3') {
+									alert('뒷자리수 검색 ㄱ' + text);
+									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
+								}
+								
+								
+							}
+							
+						}
+						</script>
 						<div class="col" style=" align-items:center;"> 
-							<input class="row-content" type="button" style="width:100%" value="검색">
+							<input class="row-content btn btn-success" type="button" onclick='search()' style="width:100%" value="검색">
 						</div>
 						<div class="col-4"> </div>
 		       		</div>
@@ -390,7 +434,7 @@ import 'datatables.net-responsive-dt';
 																	<td>X</td>
 																</c:when>
 																<c:otherwise>
-																	<td>정지 상태</td>
+																	<td style="color:red; font-weight:bolder">O</td>
 																</c:otherwise>
 															</c:choose>					
 															
@@ -400,7 +444,7 @@ import 'datatables.net-responsive-dt';
 																	<td>동의</td>
 																</c:when>
 																<c:otherwise>
-																	<td>비동의</td>
+																	<td style="color:red; font-weight:bolder">비동의</td>
 																</c:otherwise>
 															</c:choose>		
 
@@ -415,15 +459,13 @@ import 'datatables.net-responsive-dt';
 														
 														<div class="modal fade" id="modal${k.u_idx}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														
-															<div class="modal-dialog modal-xl" >
+															<div class="modal-dialog modal-xl" id="oneUserModal" >
 																 <div class="modal-content">
 															      <div class="modal-header titlemodal">
 															        <h5 class="modal-title" id="exampleModalLabel"><b>${k.u_nickname}</b>님의 정보</h5>
 															        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 															      </div>
 													      	 	<form>
-															    
-															    
 															      		<div class="modal-body">	
 														      			 <!-- 유저 상세보기 정보 컨테이너 -->
 															      	 		<div class="container-fluid">
@@ -432,7 +474,7 @@ import 'datatables.net-responsive-dt';
 																	      	 			아이디
 																	      	 		</div>
 																	      	 		<div class="col">
-																	      	 			<input type="text" placeholder="${k.u_id }">
+																	      	 			<input type="text" name="u_id" placeholder="${k.u_id}">
 																	      	 		</div>
 																	      	 	</div>
 																	      	 	<div class="row"> 
@@ -440,7 +482,7 @@ import 'datatables.net-responsive-dt';
 																	      	 			닉네임
 																	      	 		</div>
 																	      	 		<div class="col">
-																	      	 			<input type="text" placeholder="${k.u_nickname }">
+																	      	 			<input type="text" name="u_nickname" placeholder="${k.u_nickname }">
 																	      	 		</div>
 																	      	 	</div>
 																				<div class="row"> 
@@ -448,7 +490,7 @@ import 'datatables.net-responsive-dt';
 																	      	 			이메일
 																	      	 		</div>
 																	      	 		<div class="col">
-																	      	 			<input type="text" placeholder="${k.u_email }">
+																	      	 			<input type="text" name="u_email" placeholder="${k.u_email }">
 																	      	 		</div>
 																	      	 	</div>
 																	      	 	<div class="row"> 
@@ -456,7 +498,7 @@ import 'datatables.net-responsive-dt';
 																	      	 			이름
 																	      	 		</div>
 																	      	 		<div class="col">
-																	      	 			<input type="text" placeholder="${k.u_name }">
+																	      	 			<input type="text" name="u_name" placeholder="${k.u_name }">
 																	      	 		</div>
 																	      	 	</div>
 																	      	 	<div class="row"> 
@@ -464,7 +506,7 @@ import 'datatables.net-responsive-dt';
 																	      	 			생년월일
 																	      	 		</div>
 																	      	 		<div class="col">
-																	      	 			<input type="text" placeholder="${k.u_birthday.substring(0,10)}">
+																	      	 			<input type="text" name="u_birthday" placeholder="${k.u_birthday.substring(0,10)}">
 																	      	 		</div>
 																	      	 	</div>
 																	      	 	<div class="row"> 
@@ -472,9 +514,10 @@ import 'datatables.net-responsive-dt';
 																	      	 			전화번호
 																	      	 		</div>
 																	      	 		<div class="col">
-																	      	 			<input type="text" placeholder="${k.u_phone }">
+																	      	 			<input type="text" name="u_phone" placeholder="${k.u_phone }">
 																	      	 		</div>
 																	      	 	</div>
+																	      	 	<input type="hidden" name="u_idx" value="${k.u_idx}">
 															      			</div>
 																	      
 															      		</div>
@@ -482,24 +525,47 @@ import 'datatables.net-responsive-dt';
 															      		<script type="text/javascript">
 															      			// 상세 유저 CRUD
 															      			const banUser = (idx) => {
-															      				alert("정지 인덱스 : " + idx );
+															      				const response = confirm("정말로 밴하겠습니까?");
+															      				if(response) location.href = "/banUserAdmin?idx="+idx;
+															      				else alert("취소하셨습니다");
 															      			}
+															      			
+															      			const unbanUser = (idx) => {
+															      				const response = confirm("정말로 밴을 풀겠습니까?");
+															      				if(response) location.href = "/unbanUserAdmin?idx="+idx;
+															      				else alert("취소하셨습니다");
+															      			}
+															      			
 															      			
 															      			const deleteUser = (idx) => {
-															      				alert("삭제 인덱스 : " + idx );
+															      				const response = confirm("정말로 삭제 하시겠습니까?");
+															      				if(response) location.href = "/deleteUserAdmin?idx="+idx;
+															      				else alert("취소하셨습니다");
 															      			}
 															      			
-															      			const updateUser = (idx) => {
-															      				alert("수정 인덱스 : " + idx );
+															      			function updateUser(f) {
+															      				const response = confirm("정말로 수정 하시겠습니까?");
+															      				if(response) {
+															      					f.action = "/updateUserAdmin";
+															      					f.submit();
+															      				}
+															      				else alert("취소하셨습니다");
 															      			}							
 															      			
 															      		</script>
-															      		
+															      			
 																      <div class="modal-footer">
-																        <button type="button" onclick="banUser(${k.u_idx})" class="btn btn-danger">정지</button>
+																      <c:choose>
+																      	<c:when test="${k.u_ban == 0}">
+																	        <button type="button" onclick="banUser(${k.u_idx})" class="btn btn-danger">정지</button>
+																		</c:when>
+																		<c:otherwise>
+																	        <button type="button" onclick="unbanUser(${k.u_idx})" class="btn btn-primary">정지풀기</button>
+																		</c:otherwise>
+																      </c:choose>
 																        <button type="button" onclick="deleteUser(${k.u_idx})" class="btn btn-danger">삭제</button>
-																        <button type="button" onclick="updateUser(${k.u_idx})" class="btn btn-primary">수정</button>
-														  	            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+																        <button type="button" onclick="updateUser(this.form)" class="btn btn-primary">수정</button>
+														  	            <input type="reset" class="btn btn-secondary" data-bs-dismiss="modal" value="취소"> 
 																      </div>
 														      	 </form>
 															    </div>

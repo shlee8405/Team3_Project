@@ -99,7 +99,26 @@ public class UserServiceImpl implements UserService{
     	return res;
     }
 
+    
+    @Override
+    public int getBanUser(String idx) {
+    	return userDAO.getBanUser(idx);
+    }
 	
+    @Override
+    public int getUnbanUser(String idx) {
+    	return userDAO.getUnbanUser(idx);
+    }
+    
+    @Override
+    public int getDeleteUser(String idx) {
+    	return userDAO.getDeleteUser(idx);
+    }
+    
+    @Override
+    public int getUpdateUserAdmin(UserVO uvo) {
+    	return userDAO.getUpdateUserAdmin(uvo);
+    }
 
 
 
