@@ -478,9 +478,27 @@ import 'datatables.net-responsive-dt';
 															      			</div>
 																	      
 															      		</div>
+															      		
+															      		<script type="text/javascript">
+															      			// 상세 유저 CRUD
+															      			const banUser = (idx) => {
+															      				alert("정지 인덱스 : " + idx );
+															      			}
+															      			
+															      			const deleteUser = (idx) => {
+															      				alert("삭제 인덱스 : " + idx );
+															      			}
+															      			
+															      			const updateUser = (idx) => {
+															      				alert("수정 인덱스 : " + idx );
+															      			}							
+															      			
+															      		</script>
+															      		
 																      <div class="modal-footer">
-																        <button type="button" class="btn btn-danger">삭제</button>
-																        <button type="button" class="btn btn-primary">수정</button>
+																        <button type="button" onclick="banUser(${k.u_idx})" class="btn btn-danger">정지</button>
+																        <button type="button" onclick="deleteUser(${k.u_idx})" class="btn btn-danger">삭제</button>
+																        <button type="button" onclick="updateUser(${k.u_idx})" class="btn btn-primary">수정</button>
 														  	            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 																      </div>
 														      	 </form>
@@ -658,10 +676,59 @@ import 'datatables.net-responsive-dt';
 															<td>${k.u_id}</td>
 															<td>${k.u_nickname}</td>
 															<td>****</td>
-															<td> 
-																<button> 유저 상세보기 </button>
+														<td> 
+																<a href="#"  class="btn btn-success" style="padding:0;" data-bs-toggle="modal" data-bs-target="#modalA${k.u_idx}">
+																 	관리자 정보 보기
+																</a>
 															</td>
 														</tr>
+														
+														<div class="modal fade" id="modalA${k.u_idx}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														
+															<div class="modal-dialog modal-xl" >
+																 <div class="modal-content">
+															      <div class="modal-header titlemodal">
+															        <h5 class="modal-title" id="exampleModalLabel"><b>${k.u_nickname}</b>님의 정보</h5>
+															        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															      </div>
+													      	 	<form>
+															    
+															    
+															      		<div class="modal-body">	
+														      			 <!-- 유저 상세보기 정보 컨테이너 -->
+															      	 		<div class="container-fluid">
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			아이디
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<b>${k.u_id}</b>
+																	      	 		</div>
+																	      	 	</div>
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			닉네임
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<b>${k.u_nickname }</b>
+																	      	 		</div>
+																	      	 	</div>
+															      			</div>
+																	      
+															      		</div>
+																      <div class="modal-footer">
+																        <button type="button" class="btn btn-danger">삭제</button>
+														  	            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+																      </div>
+														      	 </form>
+															    </div>
+															</div>
+														</div>
+														
+														
+														
+														
+														
 													</c:if>
 												</c:forEach>
 											</c:otherwise>

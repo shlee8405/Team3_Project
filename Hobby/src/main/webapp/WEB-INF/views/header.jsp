@@ -317,6 +317,7 @@ body {
                 <ul class="navlinks">
                      <li><a href="/checkSession.do" style="text-family:sans-seriff; font-size: 1rem;">sysout sessionIdx</a></li>
                     <li><a href="/campMain.do">/캠핑장.do</a></li>
+					<li><a href="/groupList.do">/캠핑모임.do</a></li>
 
 					<%
 					String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
@@ -332,7 +333,6 @@ body {
 					<%
 					}
 					%>
-					<li><a href="/groupList.do">/캠핑모임.do</a></li>
 		
 					<%
 					if (adminChecker != null){

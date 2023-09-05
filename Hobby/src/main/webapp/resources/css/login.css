@@ -114,7 +114,7 @@ login-modal {
    width: 80%;
  }
  
- .u_id input {
+ .u_id>input {
    width: 100%;
    height: 50px;
    border-radius: 30px;
@@ -129,7 +129,7 @@ login-modal {
    width: 80%;
  }
  
- .u_pw input {
+ .u_pw>input {
    width: 100%;
    height: 50px;
    border-radius: 30px;
@@ -145,7 +145,7 @@ login-modal {
    width: 80%;
    color: rgb(255, 255, 255);
  }
- .submit input {
+ .submit>input {
    width: 100%;
    height: 50px;
    border: 0;

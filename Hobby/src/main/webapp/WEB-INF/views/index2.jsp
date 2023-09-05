@@ -52,6 +52,10 @@ a {
 	font-family: MBCM;
 	src: url(/resources/fonts/MBCM.ttf);
 }
+@font-face {
+	font-family: MBCM2;
+	src: url(/resources/fonts/MBCM2.ttf);
+}
 
 @font-face {
 	font-family: TAEBAEK;
@@ -76,7 +80,9 @@ body, html {
 .hero-image {
 	/* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
 	background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
-		url("https://st2.depositphotos.com/8573964/12346/i/950/depositphotos_123466770-stock-photo-beach-in-the-morning-sun.jpg");
+		/* url("https://st2.depositphotos.com/8573964/12346/i/950/depositphotos_123466770-stock-photo-beach-in-the-morning-sun.jpg"); */
+		/* url("https://images.pexels.com/photos/5914157/pexels-photo-5914157.jpeg"); */
+		url("https://images.pexels.com/photos/1371798/pexels-photo-1371798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
 	/* Set a specific height */
 	height: 70%;
 	/* Position and center the image to scale nicely on all screens */
@@ -88,12 +94,22 @@ body, html {
 
 /* Place text in the middle of the image */
 .hero-text {
-	text-align: center;
+	font-family: MBCM2;
+	text-align: right;
 	position: absolute;
-	top: 80%;
-	left: 50%;
+	top: 50%;
+	left: 65%;
 	transform: translate(-50%, -50%);
-	color: white;
+	color: rgba(255,255,255,0.3);
+	font-size:4em;
+	width: 50vw;
+}
+.hero-title {
+	font-size:5rem!important;
+}
+
+.hero-content{
+	font-size:3rem;
 }
 /* 투명 */
 .section.one {
@@ -1068,6 +1084,7 @@ rotate(
 							sessionIdx</a></li>
 
 					<li><a href="/campMain.do">/캠핑장.do</a></li>
+					<li><a href="/groupList.do">/캠핑모임.do</a></li>
 
 					<%
 					String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
@@ -1083,7 +1100,6 @@ rotate(
 					<%
 					}
 					%>
-					<li><a href="/groupList.do">/캠핑모임.do</a></li>
 		
 					<%
 					if (adminChecker != null){
@@ -1140,9 +1156,8 @@ rotate(
 	<!-- 히어로 이미지 -->
 	<div class="hero-image">
 		<div class="hero-text">
-			<h1>I am John Doe</h1>
-			<p>And I'm a Photographer</p>
-			<button>Hire me</button>
+			<p class="hero-title">별드림캠핑장</p>
+			<p class="hero-content">경기도 가평군 가평읍 개곡리 198-1</p>
 		</div>
 	</div>
 

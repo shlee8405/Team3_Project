@@ -28,6 +28,7 @@
 
 .search-sec{
     padding: 2rem;
+    z-index:2;
 }
 
 .search-slt{
