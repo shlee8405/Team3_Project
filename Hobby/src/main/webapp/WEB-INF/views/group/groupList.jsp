@@ -7,6 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style>
+
+.fixed-position {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 9999;
+}
+
+.board-item {
+    position: relative;
+}
+
+.board-item > p:last-child {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+}
+
+
+.fixed-position {
+    position: fixed;
+    top: 250px;
+    right: 10px;
+    z-index: 9999;
+    padding: 5px;  /* Adding some padding for better visibility */
+}
+
         .board-container {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -235,6 +262,32 @@ ol.paging li a:hover {
 			}
 		}
 
+	// 검색액션
+	 $(document).ready(function() {
+            $("#myButton_ok").click(function() {
+                // 입력 값을 가져옵니다.
+                var title = $(".search-txt").val();
+                var city = $("select[name='']").val();
+                var state = $("#state").val();
+
+                // AJAX 요청을 보냅니다.
+                $.ajax({
+                	url: '/group/search', // 요청할 서버의 URL
+                    type: 'GET', // HTTP 메서드 (GET 또는 POST)
+                    data: { // 서버로 보낼 데이터
+                        title: title,
+                        city: city,
+                        state: state
+                    },
+                    success: function(data) { // 요청이 성공했을 때 실행할 함수
+                        $(".board-container").html(data);
+                    },
+                    error: function(error) { // 요청이 실패했을 때 실행할 함수
+                        console.error("Error fetching data:", error);
+                    }
+                });
+            });
+        });
 </script>
 
 </head>
@@ -298,6 +351,7 @@ ol.paging li a:hover {
         <img class="thumbnail" src="${pageContext.request.contextPath}${thumbnailSrc}">
         <h4 style="margin-top: 20px">${k.g_title}</h4>
         <p>${k.g_intro}</p>
+        <p class="fixed-position">${k.g_cdo} ${k.g_gugun}</p>
     </div>
 </c:forEach>
             </c:otherwise>

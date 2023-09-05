@@ -7,11 +7,32 @@
 <meta charset="UTF-8">
 <title>캠핑장후기</title>
 <style type="text/css">
+@font-face {
+     font-family: Jua-Regular;
+     src: url(/resources/fonts/Jua-Regular.ttf);
+}
+
+#title{
+	font-family: Jua-Regular;
+    font-size:50px;
+}
+
+#review_title{
+    margin-top: 10px;
+}
+
 .reviewBox {
+  font-family: Jua-Regular;
+  font-size:30px;
   border: 1px solid #ccc;  				 /* 1px 두께의 회색 테두리 */
   padding: 20px;           				 /* 내부 패딩 */
   border-radius: 5px;       			 /* 모서리 둥글게 */
   box-shadow: 0 0 10px rgba(0,0,0,0.1);  /* 그림자 효과 */
+}
+
+.form-control{
+	font-family: Jua-Regular;
+  	font-size:20px;
 }
 
 .star {
@@ -37,31 +58,66 @@
 .star-display .star, .card-text .star {
 	pointer-events: none;
 }
+
+.review_list{
+	text-align: center;
+	font-family: Jua-Regular;
+  	font-size:30px;
+}
+
+.card-body {
+    position: relative;
+    font-family: Jua-Regular;
+}
+.card-body .card-text {
+    font-size: 50px;  /* 원하는 크기로 설정 */
+}
+
+.card-body .card-title {  /* 후기 내용 */
+    font-size: 25px;
+}
+
+.card-body .card-subtitle { /* 작성자, 작성일 */
+    font-size: 20px;  
+    margin-top: 15px;
+}
+
+.card-body .card-subtitle { /* 작성자, 작성일 */
+    font-size: 20px;  
+    margin-top: 15px;
+}
+
+.card-body .star {  /* 별 하나 크기 */
+    font-size: 30px; 
+}
+
+.card-body .star.filled { /* 별 묶음 */
+    font-size: 30px;  
+}
+
+.card-body .delete-button { /* 삭제 버튼 */
+    font-size: 20px;  
+}
+
+.card-subtitle {
+    display: flex;
+    justify-content: space-between;
+}
 </style>
 
 <!-- 평균 별점 -->
 <div class="container mt-5">
 	<div id="title">
 		<img id="camp_icon" src="resources/images/camp_icon.png" alt="캠핑 아이콘">
-		<h2 id="review_title" style="font-weight: bolder;">후기</h2>
-	</div>
-
-	<h2>평균 별점</h2>
-	<div class="star-display">
-		<c:forEach begin="1" end="${averageRating}" varStatus="status">
-			<span class="star checked">★</span>
-		</c:forEach>
-		<c:forEach begin="${averageRating + 1}" end="5" varStatus="status">
-			<span class="star">★</span>
-		</c:forEach>
+		<div id="review_title" style="font-weight: bolder;">후기</div>
 	</div>
 </div>
 
 <!-- 별점 평가 폼 -->
 <div class="container mt-5">
 	<div class="reviewBox">
-	<h2>후기 남기기</h2>
-	<form action="/addReview.do" method="post" class="mt-3">
+	<span>후기를 작성해주세요.</span>
+	<form id="reviewForm" action="/addReview.do" method="post" class="mt-3">
 		<div class="form-group star-rating">
 			<label class="star">★</label> 
 			<label class="star">★</label> 
@@ -73,28 +129,45 @@
 		<div class="form-group">
 			<textarea class="form-control" rows="4" id="comment" name="comment"></textarea>
 		</div>
-		<button type="submit" class="btn btn-primary">후기 남기기</button>
-		<input type="hidden" name="facltNm" value="${cvo.facltNm}"> <input
-			type="hidden" name="u_Id" value="user02"> <!-- 로그인한 회원 ID 수정하기 -->
+		<button type="submit" class="btn btn-success">후기 남기기</button>
+		<input type="hidden" name="facltNm" value="${cvo.facltNm}"> 
 	</form>
 	</div>
 </div>
 
 <!-- 저장된 후기와 별점 보여주기 -->
 <div class="container mt-5">
-	<h2>후기 목록</h2>
 	<c:forEach items="${reviews}" var="review">
 		<div class="card mt-3">
 			<div class="card-body">
-				<h5 class="card-title">${review.comment}</h5>
-				<p class="card-text">
-					<c:forEach var="i" begin="1" end="${review.rating}">
-						<span class="star filled">★</span>
-					</c:forEach>
-					<c:forEach var="i" begin="${review.rating + 1}" end="5">
-						<span class="star">★</span>
-					</c:forEach>
-				</p>
+				<!-- 별점 표시와 삭제 버튼 -->
+                <div class="d-flex justify-content-between align-items-center">
+                    <p class="card-text mb-0">
+                        <c:forEach var="i" begin="1" end="${review.rating}">
+                            <span class="star filled">★</span>
+                        </c:forEach>
+                        <c:forEach var="i" begin="${review.rating + 1}" end="5">
+                            <span class="star">★</span>
+                        </c:forEach>
+                    </p>
+                    
+                    <!-- 삭제 버튼 -->
+					<c:if test="${sessionUidx == review.u_idx}">
+					    <form id="deleteForm_${review.id}" action="/deleteReview.do" method="post">
+					        <input type="hidden" name="id" value="${review.id}">
+					        <input type="hidden" name="facltNm" value="${review.facltNm}">
+					        <button type="button" onclick="confirmDelete(${review.id})" class="btn btn-link btn-sm delete-button">X</button>
+					    </form>
+					</c:if>
+                </div>
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title mb-0">${review.comment}</h5>
+                </div>
+                <!-- 닉네임과 날짜 추가 -->
+                <p class="card-subtitle mb-2 text-muted">
+                    <span>${review.u_nickname}님</span>
+                    <span>${review.formatted_date}</span>
+                </p>
 			</div>
 		</div>
 	</c:forEach>
@@ -111,6 +184,23 @@ $(document).ready(function() {
         // 별점 값을 숨겨진 input에 저장
         $("#ratingValue").val(idx + 1);
     });
+    
+ 	// 별점 선택 강요
+    $("#reviewForm").on('submit', function(e) {
+        if ($("#ratingValue").val() == "") {
+            alert("별점을 선택해주세요.");
+            e.preventDefault();
+        }
+    });
 });
+
+// 삭제 확인
+function confirmDelete(reviewId) {
+    var r = confirm("정말 삭제하시겠습니까?");
+    if (r == true) {
+        // 삭제 로직 실행
+        document.getElementById('deleteForm_' + reviewId).submit();
+    }
+}
 
 </script>

@@ -82,7 +82,7 @@
 	
 	/* 활성화된 탭 */
 	.nav-tabs .nav-link.active {   
-	background-color: #637F42;
+	background-color: #637F42!importants;
 	color: white;
 	font-weight: bolder;
 	}
@@ -97,6 +97,12 @@
     padding: 10px 0;
     margin-top: 30px;
     margin-bottom: 30px;
+	font-family: Jua-Regular;
+    font-size:50px;
+	}
+	
+	#review_title{
+    margin-top: 10px;
 	}
 	
 	.table th {
@@ -108,4 +114,12 @@
     vertical-align: middle;
     margin-left: 5px;  /* 왼쪽 마진 추가 */
     margin-top: 10px;
+	}
+	
+	.star-display{
+	padding-top: 9px;
+	}
+	
+	.img-fluid{
+	margin-top: 15px;
 	}

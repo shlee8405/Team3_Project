@@ -5,9 +5,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -174,11 +177,60 @@ public class CampController {
 			//mv.addObject("dataList", dataList);
 			return dataList;
 		}
+	
+	
+	// 캠핑장 베스트3
+		@GetMapping("/campBest.do")
+		public List<CampVO> getTop3Camps() throws URISyntaxException, UnsupportedEncodingException {
+		    //Map<String, Object> response = new HashMap<>();
+		    List<String> bestCampNames = campService.getBest3(); // 상위 3개 캠핑장 이름 가져오기
+
+		    List<CampVO> bestDataList = new ArrayList<>();
+
+		    for (String campName : bestCampNames) {
+		        // API 호출 로직
+		        String apiUrl = targetUrl + "/searchList"
+		                + "?numOfRows=" + 1 // 한 건만 가져올 것이므로 numOfRows는 1
+		                + "&pageNo=" + 1
+		                + "&MobileOS=" + mobileOS
+		                + "&MobileApp=" + mobileApp
+		                + "&serviceKey=" + serviceKey
+		                + "&_type=json"
+		                + "&keyword=" + URLEncoder.encode(campName, StandardCharsets.UTF_8.toString());
+
+		        URI uri = new URI(apiUrl);
+		        ResponseEntity<String> apiResponse = restTemplate.getForEntity(uri, String.class);
+
+		        JSONObject jsonResponse = new JSONObject(apiResponse.getBody());
+
+		        JSONArray items = jsonResponse.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item");
+
+		        // 첫번째 아이템 가져오기 (우리는 numOfRows를 1로 설정했으므로 하나만 있다)
+		        JSONObject oneItem = items.getJSONObject(0);
+
+		        // 정보 추출 및 CampVO 객체 생성
+		        CampVO cvo = new CampVO();
+				cvo.setFacltNm(oneItem.getString("facltNm"));
+				cvo.setIntro(oneItem.getString("intro"));
+				cvo.setAddr1(oneItem.getString("addr1"));
+				cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
+				cvo.setDoNm(oneItem.getString("doNm"));
+
+		        // CampVO 객체를 리스트에 추가
+		        bestDataList.add(cvo);
+		    }
+
+		    //response.put("bestCamps", bestDataList);
+		    return bestDataList;
+		}
+		
 
 	
 	// 캠핑장 상세보기 호출하기
 	@GetMapping("/campDetail.do")
-	public ModelAndView getCampDetail(@RequestParam String keyword) throws URISyntaxException, UnsupportedEncodingException {
+	public ModelAndView getCampDetail(@RequestParam String keyword, HttpServletRequest request) 
+			throws URISyntaxException, UnsupportedEncodingException {
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
 		
 		// 리퀘스트 파라미터
 		int numOfRows = 1; // 보여줄 리스트 개수
@@ -250,6 +302,14 @@ public class CampController {
 		// 후기와 별점 가져오기
 	    List<ReviewVO> reviews = campService.getReviews(cvo.getFacltNm());
 	    
+	    // 날짜 형식 변경
+	    SimpleDateFormat sdf = new SimpleDateFormat("yy.MM.dd");
+	    for(ReviewVO review : reviews) {
+	    	Date creaDate = review.getCreated_date();
+	    	String formattedDate = sdf.format(creaDate);
+	    	review.setFormatted_date(formattedDate);
+	    }
+	    
 	    //averageRating 값을 반올림하여 정수값으로 변환
 	    double rawAverageRating = campService.getAverageRating(cvo.getFacltNm());
 	    
@@ -262,13 +322,32 @@ public class CampController {
 		mv.addObject("cvo", cvo);
 	    mv.addObject("reviews", reviews);
 	    mv.addObject("averageRating", averageRating);
+	    mv.addObject("sessionUidx", u_idx);
 		return mv;
 	}
 	
+	// 후기 추가
 	@PostMapping("/addReview.do")
-	public String addReview(@RequestParam String facltNm, @RequestParam String u_Id, @RequestParam String comment, @RequestParam int rating) {
-	    campService.addReview(facltNm, u_Id, comment, rating);
+	public ModelAndView addReview(@RequestParam String facltNm, @RequestParam String comment, @RequestParam int rating, 
+			HttpServletRequest request) {
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+
+	    campService.addReview(facltNm, u_idx, comment, rating);
 	    String encodedFacltNm = URLEncoder.encode(facltNm, StandardCharsets.UTF_8);
-	    return "redirect:/campDetail.do?keyword=" + encodedFacltNm; // 후기가 추가된 후 다시 해당 캠핑장 상세 페이지로 리다이렉트
+	    
+	    ModelAndView mv = new ModelAndView("redirect:/campDetail.do?keyword=" + encodedFacltNm);
+
+	    return mv; // 후기가 추가된 후 다시 해당 캠핑장 상세 페이지로 리다이렉트
 	}
+	
+	// 후기 삭제
+	@PostMapping("/deleteReview.do")
+	public ModelAndView deleteReview(@RequestParam String facltNm, @RequestParam int id, HttpServletRequest request) {
+	    String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		campService.deleteReview(id, u_idx);
+		String encodedFacltNm = URLEncoder.encode(facltNm, StandardCharsets.UTF_8);
+		ModelAndView mv = new ModelAndView("redirect:/campDetail.do?keyword=" + encodedFacltNm);
+
+		    return mv;
+		}
 }

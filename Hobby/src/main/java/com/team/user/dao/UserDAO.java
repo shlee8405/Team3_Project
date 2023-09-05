@@ -75,7 +75,10 @@ public class UserDAO {
         return sqlSessionTemplate.update("user.updateUserPassword", parameterMap);
     }
     
-    
+    // 관리자 계정 추가
+    public int getAdminInsert(UserVO uvo) {
+    	return sqlSessionTemplate.insert("user.insertAdmin",uvo);
+    }
     
 
     

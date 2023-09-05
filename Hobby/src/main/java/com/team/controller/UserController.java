@@ -3,6 +3,7 @@ package com.team.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
+import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -63,6 +64,7 @@ public class UserController {
 			HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("redirect:/home.do");
 		request.getSession().getServletContext().removeAttribute("sessionUidx");
+		request.getSession().getServletContext().removeAttribute("adminChecker");
 		return mv;
 	}
 		
@@ -72,7 +74,7 @@ public class UserController {
 	// 회원가입 DB 저장 실행
 	@PostMapping("/signupGo.do")
 	public ModelAndView getUserInsert(UserVO uvo) {
-		ModelAndView mv = new ModelAndView("test/login");
+		ModelAndView mv = new ModelAndView("index2");
 		//비밀번호 암호화
 		String newPass = passwordEncoder.encode(uvo.getU_pw());
 		//setter in vo
@@ -94,7 +96,6 @@ public class UserController {
         
         // 없으면 종료
         if(res == 0) {
-        	mv.setViewName("test/login");
         	return mv;
         }
                
@@ -109,8 +110,10 @@ public class UserController {
 			} else {
 				UserVO dbuvo = userService.getUserVoWithId(uvo.getU_id());
 				if(dbuvo.getU_status().equals("9")) {
-				//관리자 
-					
+				request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
+				request.getSession().getServletContext().setAttribute("adminChecker", dbuvo.getU_status());
+				mv.setViewName("index2");
+				return mv;
 				} else if (dbuvo.getU_ban().equals("1")) {
 				//밴 
 					

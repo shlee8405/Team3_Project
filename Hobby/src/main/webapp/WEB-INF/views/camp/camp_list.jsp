@@ -67,32 +67,44 @@
 		</section>
 		</div>
 		
-			<div id="camp_list">
-				<!-- 이 안에 캠핑장 리스트 보여주기 -->
-				<!-- <div class="product-grid">
-						<div class="product-image">
-						<a href="#">
-						<img class="pic-1" src="/resources/images/camping.jpg"> 
-						<img class="pic-2" src="/resources/images/camping.jpg">
-						</a> 
-						<span class="product-new-label">강원도</span> 
-						<span class="product-discount-label">BEST 1</span>
-						</div>
-					<div class="product-content">
-						<div class="price">
-							<a href="#">장호 비치 캠핑장</a>
-							<h3 class="title">강원도 삼척시 근덕면 장호1길 41</h3>
-						</div>
-						 <ul class="rating">
-		                    <li class="fa fa-star"></li>
-		                    <li class="fa fa-star"></li>
-		                    <li class="fa fa-star"></li>
-		                    <li class="fa fa-star"></li>
-		                    <li class="fa fa-star disable"></li>
-                		</ul>
-						<a class="add-to-cart" href="#">View Details</a>
+		<div class="best_wrap">
+			<div class="small-title">BEST 캠핑장</div>
+			<div id="camp_best3_list">
+			<!-- 베스트3 캠핑장 리스트  -->
+			</div>
+			<hr>
+		</div>
+
+		<div class="list_wrap">
+			<div class="small-title">모든 캠핑장 살펴보기</div>
+
+				<div id="camp_list">
+					<!-- 이 안에 캠핑장 리스트 보여주기 -->
+					<!-- <div class="product-grid">
+							<div class="product-image">
+							<a href="#">
+							<img class="pic-1" src="/resources/images/camping.jpg"> 
+							<img class="pic-2" src="/resources/images/camping.jpg">
+							</a> 
+							<span class="product-new-label">강원도</span> 
+							<span class="product-discount-label">BEST 1</span>
+							</div>
+						<div class="product-content">
+							<div class="price">
+								<a href="#">장호 비치 캠핑장</a>
+								<h3 class="title">강원도 삼척시 근덕면 장호1길 41</h3>
+							</div>
+							 <ul class="rating">
+			                    <li class="fa fa-star"></li>
+			                    <li class="fa fa-star"></li>
+			                    <li class="fa fa-star"></li>
+			                    <li class="fa fa-star"></li>
+			                    <li class="fa fa-star disable"></li>
+	                		</ul>
+							<a class="add-to-cart" href="#">View Details</a>
 						</div>
 					</div> -->
+				</div>	
 			</div>	
 		</div>		
 </body>
@@ -106,7 +118,7 @@
 		
 		/* 스크롤이 80% 이상 움직였을 때 loadMore() 함수 실행*/
 		function loadMore() {
-			
+			$(".small-title").hide();
 			// loading이 true라면 데이터 로드 중일 때 loadMore() 함수가 또 실행되지 않도록 return해버림. ()
 			if(loading) return; 
 			loading = true;		// 데이터 로드 시작
@@ -172,7 +184,7 @@
 	                
 	                $("#camp_list").append(list); //append
 					pageNo++;
-	                
+					$(".small-title").show();
 	                loading = false; // 데이터 로드 완료
 	                
 	            },
@@ -182,33 +194,92 @@
 	            }
 	        });
 	    }
-		loadMore();
+		getBest3(); //베스트 캠핑장 초기 로딩
+		loadMore(); //캠핑장 리스트 초기 로딩
+			
+		function doSearch() {
+			$("#best_wrap").hide(); // 검색시 베스트 캠핑장 html 영역 숨김
+			searchMode = true; // 검색 모드 활성화
+			searchKeyword = $(".search-slt").val(); // var 키워드 제거
+		 	
+			 // 검색 버튼을 누른 후, 서치 박스의 내용을 초기화
+		    $(".search-slt").val("");
+			
+			$("#camp_list").empty(); // 초기화
+				pageNo = 1; // 페이지 번호 초기화
+				loadMore(); // loadMore 함수 호출
+	
+			}
+			
+		$(document).ready(function() {
+       	 	$("#more-btn").on("click", loadMore);
+        	$('#more-btn').trigger("click");
+   		});
 		
-			
-			function doSearch() {
-				searchMode = true; // 검색 모드 활성화
-				searchKeyword = $(".search-slt").val(); // var 키워드 제거
-			 	
-				 // 검색 버튼을 누른 후, 서치 박스의 내용을 초기화
-			    $(".search-slt").val("");
-				
-				$("#camp_list").empty(); // 초기화
-					pageNo = 1; // 페이지 번호 초기화
-					loadMore(); // loadMore 함수 호출
+		// 무한 스크롤
+		$(window).scroll(function() {
+			// 사용자가 스크롤 바를 80%이상 움직였을 때 loadMore()실행해서 무한스크롤 함.
+			if($(window).scrollTop() + $(window).height() > $(document).height() * 0.8) {
+				loadMore();
+			}
+		});
+		
+		//베스트3
+		function getBest3() {
+			$(".small-title").hide();
+			$.ajax({
+				url : "/campBest.do",
+				method : "get",
+				dataType : "json", 
+				success : function(data) {
+					// 'bestCamps'라는 키로 서버에서 보낸 데이터 리스트를 찾는다.
+					//var dataList = data.bestCamps;
+					var list = "";
 
-				}
-			
-				$(document).ready(function() {
-		       	 	$("#more-btn").on("click", loadMore);
-		        	$('#more-btn').trigger("click");
-		   		});
-				
-				// 무한 스크롤
-				$(window).scroll(function() {
-					// 사용자가 스크롤 바를 80%이상 움직였을 때 loadMore()실행해서 무한스크롤 함.
-					if($(window).scrollTop() + $(window).height() > $(document).height() * 0.8) {
-						loadMore();
-					}
-				});
+					
+					$.each(data, function (index, response) {
+						// 제공 이미지 없을 시
+						var imageUrl = response.firstImageUrl == "" ? "resources/images/default_camp_img.jpg" : response.firstImageUrl;
+						
+						list += "<div class='product-grid'>"
+									+"<div class='product-image'>"
+										+"<a href='#'>"
+										+"<img class='pic-1' src=" + imageUrl + ">" 
+										+"<img class='pic-2' src=" + imageUrl + ">" 
+										+"</a>" 
+										+"<span class='product-new-label'>" + response.doNm + "</span>" 
+									+"</div>" 
+									+"<div class='product-content'>" 
+										+"<div class='price'>" 
+											+"<a class='title' href='/campDetail.do?keyword=" + response.facltNm + "'>" + response.facltNm + "</a>" 
+											+"<span class='addr1'>" + response.addr1 + "</span>" 
+										+"</div>" 
+											+"<ul class='rating'>"
+							                    +"<li class='fa fa-star'>" 
+							                    +"</li>"
+							                    +"<li class='fa fa-star'>" 
+							                    +"</li>"
+							                    +"<li class='fa fa-star'>" 
+							                    +"</li>"
+							                    +"<li class='fa fa-star'>" 
+							                    +"</li>"
+							                    +"<li class='fa fa-star disable'>"
+							                    +"</li>"
+					                		+"</ul>"
+										+"<a class='add-to-cart' href='#'>" + "View Details" + "</a>" 
+									+"</div>"
+								+"</div>"                  
+		                }); //each
+		                
+		                $("#camp_best3_list").append(list); //append
+		                $(".small-title").show();
+		                
+		            },
+		            error: function() {
+		            	alert("에러");
+		            	//loading = false;
+		            }
+		        });
+		}
 	</script>
 </html>

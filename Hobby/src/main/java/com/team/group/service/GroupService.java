@@ -14,6 +14,8 @@ public interface GroupService {
 	public int getTotalCount() ;
 	// 페이징처리를 위한 리스트
 	public List<GroupVO> getAllGroups(int offset, int limit);
+	//검색
+	public List<GroupVO> searchGroups(GroupVO gvo);
 	// 글쓰기
 	public int getGroupWriteOk(GroupVO gvo);
 	// 상세보기
@@ -30,4 +32,5 @@ public interface GroupService {
 	public int getCommInsert(GroupCmtVO gcvo);
 	// 댓글 삭제
 	public int commentDel(GroupCmtVO gcvo);
+	
 }

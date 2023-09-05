@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 유저 관리</title>
 
 <style type="text/css">
 
@@ -78,6 +78,16 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 
 .row-content{
 	margin-top: 25px;
+}
+
+.labelmodal {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.titlemodal {
+	display: flex;
+	justify-content: flex-end;
 }
 </style>
 
@@ -270,7 +280,6 @@ import 'datatables.net-responsive-dt';
 		                            <th> 전화번호 </th>
 		                            <th> 밴유무 </th>
 		                            <th> 약관동의</th>
-		                            <th> status </th>
 		                            <th> 더보기 </th>
 		                        </tr>
 		                     </thead>
@@ -373,17 +382,140 @@ import 'datatables.net-responsive-dt';
 																</c:otherwise>
 															</c:choose>				
 															
-																								    
-															<td>${k.u_ban}</td>
-															<td>${k.u_terms}</td>
-															<td>${k.u_status}</td>
+																	
+																	
+															<!-- 벤 유무 -->
+															<c:choose>
+																<c:when test="${k.u_ban==0}">
+																	<td>X</td>
+																</c:when>
+																<c:otherwise>
+																	<td>정지 상태</td>
+																</c:otherwise>
+															</c:choose>					
+															
+															<!-- 약관 동의 -->
+															<c:choose>
+																<c:when test="${k.u_terms==1}">
+																	<td>동의</td>
+																</c:when>
+																<c:otherwise>
+																	<td>비동의</td>
+																</c:otherwise>
+															</c:choose>		
+
+
+															<!-- 유저 상세보기 -->
 															<td> 
-																<button> 유저 상세보기 </button>
+																<a href="#"  class="btn btn-success" style="padding:0;" data-bs-toggle="modal" data-bs-target="#modal${k.u_idx}">
+																  유저 정보 보기
+																</a>
 															</td>
 														</tr>
+														
+														<div class="modal fade" id="modal${k.u_idx}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														
+															<div class="modal-dialog modal-xl" >
+																 <div class="modal-content">
+															      <div class="modal-header titlemodal">
+															        <h5 class="modal-title" id="exampleModalLabel"><b>${k.u_nickname}</b>님의 정보</h5>
+															        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															      </div>
+													      	 	<form>
+															    
+															    
+															      		<div class="modal-body">	
+														      			 <!-- 유저 상세보기 정보 컨테이너 -->
+															      	 		<div class="container-fluid">
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			아이디
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<input type="text" placeholder="${k.u_id }">
+																	      	 		</div>
+																	      	 	</div>
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			닉네임
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<input type="text" placeholder="${k.u_nickname }">
+																	      	 		</div>
+																	      	 	</div>
+																				<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			이메일
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<input type="text" placeholder="${k.u_email }">
+																	      	 		</div>
+																	      	 	</div>
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			이름
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<input type="text" placeholder="${k.u_name }">
+																	      	 		</div>
+																	      	 	</div>
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			생년월일
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<input type="text" placeholder="${k.u_birthday.substring(0,10)}">
+																	      	 		</div>
+																	      	 	</div>
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			전화번호
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<input type="text" placeholder="${k.u_phone }">
+																	      	 		</div>
+																	      	 	</div>
+															      			</div>
+																	      
+															      		</div>
+															      		
+															      		<script type="text/javascript">
+															      			// 상세 유저 CRUD
+															      			const banUser = (idx) => {
+															      				alert("정지 인덱스 : " + idx );
+															      			}
+															      			
+															      			const deleteUser = (idx) => {
+															      				alert("삭제 인덱스 : " + idx );
+															      			}
+															      			
+															      			const updateUser = (idx) => {
+															      				alert("수정 인덱스 : " + idx );
+															      			}							
+															      			
+															      		</script>
+															      		
+																      <div class="modal-footer">
+																        <button type="button" onclick="banUser(${k.u_idx})" class="btn btn-danger">정지</button>
+																        <button type="button" onclick="deleteUser(${k.u_idx})" class="btn btn-danger">삭제</button>
+																        <button type="button" onclick="updateUser(${k.u_idx})" class="btn btn-primary">수정</button>
+														  	            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+																      </div>
+														      	 </form>
+															    </div>
+															</div>
+														</div>
+														
+														
+														
 													</c:if>
 												</c:forEach>
 											</c:otherwise>
+											
+											
+											
+											
+											
 										</c:choose>
 		                        </tbody>
 		                </table> 
@@ -413,75 +545,89 @@ import 'datatables.net-responsive-dt';
         
 	        <div class="bottomcontainer ms-2 me-3 mt-1"   style="height:70vh;">
     
-		                 <form action="/" method="post">
+		                 <form action="/signupGoAdmin.do" method="post">
 		                    
-		                    <div class="row">
-		                        <h1>일반 유저 생성</h1>
+		                    <div class="row" >
+		                       	<div class="col"  style="display:flex; justify-content: center;">
+		                       		<h1>일반 유저 생성</h1>
+		                       	</div> 
 		                    </div>
 		                    
-		                    <div class="row justify-content-md-center">
-		                       <div class="col col-lg-2" style="align-items: flex-start;">
+		                    <div class="row justify-content-md-center " >
+		                       <div class="col col-lg-2" style="display:flex; justify-content: flex-end;">
 		                            <label for="u_id">아이디</label>
 		                        </div>
 		                        <div class="col col-lg-2">
-		                            <input type="text" name="u_id" id="u_id" required>
+		                            <input type="text" name="u_id" id="u_id" placeholder="아이디 입력하세요" required >
 		                        </div>
 		                    </div>
-		                    <div class="row justify-content-md-center">
+		                     <div class="row justify-content-md-center " >
+		                       <div class="col col-lg-2" style="display:flex; justify-content: flex-end;">
+		                            <label for="u_id">닉네임</label>
+		                        </div>
 		                        <div class="col col-lg-2">
+		                            <input type="text" name="u_nickname" id="u_nickname" placeholder="닉네임 입력하세요" required >
+		                        </div>
+		                    </div>
+		                    <div class="row justify-content-md-center ">
+		                        <div class="col col-lg-2" style="display:flex; justify-content: flex-end;">
 		                            <label for="u_name">이름</label> 
 		                        </div>
 		                        <div class="col col-lg-2">
-		                            <input type="text" name="u_name" id="u_name"required>
+		                            <input type="text" name="u_name" id="u_name" placeholder="이름 입력하세요" required>
 		                        </div>
 		                    </div>
-		                    <div class="row justify-content-md-center">
-		                        <div class="col col-lg-2">
+		                    <div class="row justify-content-md-center ">
+		                        <div class="col col-lg-2"style="display:flex; justify-content: flex-end;">
 		                            <label for="u_pw">비밀번호 :</label>
 		                        </div>
 		                        <div class="col col-lg-2">
-		                            <input type="password" name="u_pw" id="u_pw"required>
+		                            <input type="password" name="u_pw" id="u_pw" placeholder="비밀번호 입력하세요" required>
 		                        </div>
-		                    <div class="row justify-content-md-center"></div>
-		                        <div class="col col-lg-2">
+		                        
+		                    </div>
+		                    <div class="row justify-content-md-center">
+		                        <div class="col col-lg-2"style="display:flex; justify-content: flex-end;">
 		                            <label for="confirm_pw">비밀번호 확인 :</label> 
 		                        </div>
 		                        <div class="col col-lg-2">
-		                            <input type="password" name="confirm_pw" id="confirm_pw"required>
+		                            <input type="password" name="confirm_pw" id="confirm_pw"placeholder="비밀번호 입력하세요" required>
 		                        </div>
 		                    </div>
 		                    
 		                    <div class="row justify-content-md-center">
-		                        <div class="col col-lg-2">
+		                        <div class="col col-lg-2"style="display:flex; justify-content: flex-end;">
 		                            <label for="email">이메일 :</label>
 		                        </div>
 		                        <div class="col col-lg-2">
-		                            <input type="email" name="u_email" id="u_email"required>
+		                            <input type="email" name="u_email" id="u_email" placeholder="이메일 입력하세요" required>
 		                        </div>
 		                    </div>
 		    
 		                    <div class="row justify-content-md-center">
-		                        <div class="col col-lg-2">
-		                            <label for="u_phone">Phone Number: </label>
+		                        <div class="col col-lg-2"style="display:flex; justify-content: flex-end;">
+		                            <label for="u_phone">전화번호 : </label>
 		                        </div>
 		                        <div class="col col-lg-2">
-		                            <input type="tel" name="u_phone" id="u_phone"required>
+		                            <input type="tel" name="u_phone" id="u_phone" placeholder="010-1234-5678" required>
 		                        </div>
 		                    </div>
 		                    
-		                    <div class="row justify-content-md-center"></div>
-		                    <div><label for="license">Read and agree to our license/terms?<input type="checkbox" name="license" id="license" required></label></div>
+		                    <div class="row justify-content-md-center">
+		                    	<div class="col" style="display:flex; justify-content: center;" >
+		                    		<label for="license"> 약관동의 <input type="checkbox" name="license" id="license" required></label>
+		                    	</div>
+		                    </div>
 		                    
 		                    <div class="row justify-content-md-center">
 		                            <div class="col col-lg-1"></div>
 		                            <div class="col col-lg-1"></div>
-		                            <div class="col col-lg-1"></div>
-		                            <div class="col col-lg-1"><input type="submit" value="유저 생성"  style="float:right;"></div>
-		                            <div class="col col-lg-1"><input type="reset" value="취소" style="float:left;"> </div>
+		                            <div class="col col-lg-1"><input type="submit" class="btn btn-primary" value="유저 생성"  style="float:right;"></div>
+		                            <div class="col col-lg-1"><input type="reset" class="btn btn-danger" value="취소" style="float:left;"> </div>
 		                      
 		                    </div>
 		                </form>
-		        </div>
+		        	</div>
 		          </div>
          
          
@@ -513,13 +659,6 @@ import 'datatables.net-responsive-dt';
 		                            <th> 아이디 </th>
 		                            <th> 닉네임 </th>
 		                            <th> 비밀번호</th>
-		                            <th> 이름 </th>
-		                            <th> 이메일</th>
-		                            <th> 생년월일</th>
-		                            <th> 전화번호 </th>
-		                            <th> 밴유무 </th>
-		                            <th> 약관동의</th>
-		                            <th> status </th>
 		                            <th> 더보기 </th>
 		                        </tr>
 		                     </thead>
@@ -537,17 +676,59 @@ import 'datatables.net-responsive-dt';
 															<td>${k.u_id}</td>
 															<td>${k.u_nickname}</td>
 															<td>****</td>
-															<td>****</td>
-															<td>${k.u_email}</td>
-															<td>${k.u_birthday.substring(0,10)}</td>
-															<td>${k.u_phone}</td>
-															<td>${k.u_ban}</td>
-															<td>${k.u_terms}</td>
-															<td>${k.u_status}</td>
-															<td> 
-																<button> 유저 상세보기 </button>
+														<td> 
+																<a href="#"  class="btn btn-success" style="padding:0;" data-bs-toggle="modal" data-bs-target="#modalA${k.u_idx}">
+																 	관리자 정보 보기
+																</a>
 															</td>
 														</tr>
+														
+														<div class="modal fade" id="modalA${k.u_idx}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														
+															<div class="modal-dialog modal-xl" >
+																 <div class="modal-content">
+															      <div class="modal-header titlemodal">
+															        <h5 class="modal-title" id="exampleModalLabel"><b>${k.u_nickname}</b>님의 정보</h5>
+															        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															      </div>
+													      	 	<form>
+															    
+															    
+															      		<div class="modal-body">	
+														      			 <!-- 유저 상세보기 정보 컨테이너 -->
+															      	 		<div class="container-fluid">
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			아이디
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<b>${k.u_id}</b>
+																	      	 		</div>
+																	      	 	</div>
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			닉네임
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<b>${k.u_nickname }</b>
+																	      	 		</div>
+																	      	 	</div>
+															      			</div>
+																	      
+															      		</div>
+																      <div class="modal-footer">
+																        <button type="button" class="btn btn-danger">삭제</button>
+														  	            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+																      </div>
+														      	 </form>
+															    </div>
+															</div>
+														</div>
+														
+														
+														
+														
+														
 													</c:if>
 												</c:forEach>
 											</c:otherwise>
@@ -579,74 +760,59 @@ import 'datatables.net-responsive-dt';
 			</div>
 		
 	        <div class="bottomcontainer ms-2 me-3 mt-1"   style="height:70vh;">
-		                 <form action="/" method="post">
+		                 <form action="/signupGoAdminAdmin.do" method="post">
 		                    
-		                    <div class="row">
-		                        <h1>관리자 계정 생성</h1>
+		                    <div class="row" >
+		                       	<div class="col"  style="display:flex; justify-content: center;">
+		                       		<h1>관리자 생성</h1>
+		                       	</div> 
 		                    </div>
 		                    
-		                    <div class="row justify-content-md-center">
-		                       <div class="col col-lg-2" style="align-items: flex-start;">
+		                    <div class="row justify-content-md-center " >
+		                       <div class="col col-lg-2" style="display:flex; justify-content: flex-end;">
 		                            <label for="u_id">아이디</label>
 		                        </div>
 		                        <div class="col col-lg-2">
-		                            <input type="text" name="u_id" id="u_id" required>
+		                            <input type="text" name="u_id" id="u_id" placeholder="관리자 아이디를 적어주세요"required >
 		                        </div>
 		                    </div>
-		                    <div class="row justify-content-md-center">
-		                        <div class="col col-lg-2">
-		                            <label for="u_name">이름</label> 
+		                    
+                           	<div class="row justify-content-md-center">
+		                        <div class="col col-lg-2"style="display:flex; justify-content: flex-end;">
+		                            <label for="confirm_pw">닉네임 :</label> 
 		                        </div>
 		                        <div class="col col-lg-2">
-		                            <input type="text" name="u_name" id="u_name"required>
+		                            <input type="text" name="u_nickname" id="u_nickname"placeholder="관리자 닉네임을 적어주세요" required>
 		                        </div>
 		                    </div>
-		                    <div class="row justify-content-md-center">
-		                        <div class="col col-lg-2">
+		                    
+		                    <div class="row justify-content-md-center ">
+		                        <div class="col col-lg-2"style="display:flex; justify-content: flex-end;">
 		                            <label for="u_pw">비밀번호 :</label>
 		                        </div>
 		                        <div class="col col-lg-2">
-		                            <input type="password" name="u_pw" id="u_pw"required>
+		                            <input type="password" name="u_pw" id="u_pw" placeholder="비밀번호 입력하세요" required>
 		                        </div>
-		                    <div class="row justify-content-md-center"></div>
-		                        <div class="col col-lg-2">
+		                    </div>
+		                    
+		                    <div class="row justify-content-md-center">
+		                        <div class="col col-lg-2"style="display:flex; justify-content: flex-end;">
 		                            <label for="confirm_pw">비밀번호 확인 :</label> 
 		                        </div>
 		                        <div class="col col-lg-2">
-		                            <input type="password" name="confirm_pw" id="confirm_pw"required></label>
+		                            <input type="password" name="confirm_pw" id="confirm_pw"placeholder="비밀번호 입력하세요" required>
 		                        </div>
 		                    </div>
 		                    
 		                    <div class="row justify-content-md-center">
-		                        <div class="col col-lg-2">
-		                            <label for="email">이메일 :</label>
-		                        </div>
-		                        <div class="col col-lg-2">
-		                            <input type="email" name="u_email" id="u_email"required>
-		                        </div>
-		                    </div>
-		    
-		                    <div class="row justify-content-md-center">
-		                        <div class="col col-lg-2">
-		                            <label for="u_phone">Phone Number: </label>
-		                        </div>
-		                        <div class="col col-lg-2">
-		                            <input type="tel" name="u_phone" id="u_phone"required>
-		                        </div>
-		                    </div>
-		                    
-		                    <div class="row justify-content-md-center"></div>
-		                    <div><label for="license">Read and agree to our license/terms?<input type="checkbox" name="license" id="license" required></label></div>
-		                    
-		                    <div class="row justify-content-md-center">
 		                            <div class="col col-lg-1"></div>
 		                            <div class="col col-lg-1"></div>
-		                            <div class="col col-lg-1"></div>
-		                            <div class="col col-lg-1"><input type="submit" value="유저 생성"  style="float:right;"></div>
-		                            <div class="col col-lg-1"><input type="reset" value="취소" style="float:left;"> </div>
+		                            <div class="col col-lg-1"><input type="submit" class="btn btn-primary" value="관리자 생성"  style="float:right;"></div>
+		                            <div class="col col-lg-1"><input type="reset" class="btn btn-danger" value="취소" style="float:left;"> </div>
 		                      
 		                    </div>
 		                </form>
+
 	   		</div>
 	 
 		</div>

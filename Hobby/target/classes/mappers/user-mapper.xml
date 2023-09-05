@@ -52,6 +52,10 @@
     </update>
 
     
+    <select id="insertAdmin" parameterType="uvo" resultType="int">
+    	INSERT INTO USERS(u_id, u_pw, u_nickname, u_status)
+    	VALUES(#{u_id}, #{u_pw}, #{u_nickname}, 9)
+    </select>
     
     
     <select id="one" parameterType="String" resultType="uvo">

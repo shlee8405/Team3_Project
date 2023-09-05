@@ -5,21 +5,27 @@ import java.util.List;
 import com.team.camp.vo.ReviewVO;
 
 public interface CampService {
+	
+	// 상위 3개 캠핑장 이름을 가져오는 메소드
+	List<String> getBest3();
 
 	// 좋아요 수 증가
-	int addLike(String u_id, String facltNm);
+	int addLike(String u_idx, String facltNm);
 
 	// 좋아요 수 가져오기
 	int getLikes(String facltNm);
 
 	// 찜하기
-	int addWish(String u_Id, String facltNm);
+	int addWish(String u_Idx, String facltNm);
 	
 	// 찜하기 수 가져오기
 	int getWish(String facltNm);
 	
 	// 후기
-	public void addReview(String facltNm, String u_Id, String comment, int rating);
+	public void addReview(String facltNm, String u_Idx, String comment, int rating);
 	List<ReviewVO> getReviews(String facltNm);
 	double getAverageRating(String facltNm);
+	
+	// 후기 삭제
+	public void deleteReview(int id, String u_idx);
 }
