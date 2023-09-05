@@ -11,7 +11,7 @@
 		select * from GROUPS where g_status = '1' order by g_idx desc limit #{limit} offset #{offset}
 	</select>
 	
-	<select id="searchGroups" resultType="gvo">
+	<select id="searchGroups" parameterType="gvo" resultType="gvo">
         SELECT * FROM GROUPS 
         WHERE g_title LIKE CONCAT('%', #{g_title}, '%')
         AND g_cdo = #{g_cdo}

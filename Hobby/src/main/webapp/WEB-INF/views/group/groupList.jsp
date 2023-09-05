@@ -91,7 +91,9 @@ ol.paging li a:hover {
 	color: white;
 	font-weight: bold;
 }
-
+.hide {
+    display: none;
+}
 .disable {
 	padding: 3px 7px;
 	border: 1px solid silver;
@@ -184,9 +186,14 @@ ol.paging li a:hover {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script type="text/javascript">
-	function group_write_go() {
-		alert("로그인이 필요합니다");
-		location.href= "/group_writeForm.do";
+	function group_write_go(f) {
+		var sessionUidx = '<%=request.getSession().getServletContext().getAttribute("sessionUidx")%>';
+		if (!sessionUidx) {
+	        alert('로그인이 필요한 기능입니다.');
+	        return false; // 이 함수가 버튼의 클릭 이벤트 핸들러로 사용되는 경우 이전 페이지로 돌아갑니다.
+	    } else {
+			location.href= "/group_writeForm.do";
+	    }
 	}
 	function go_groupOnelist(f) {
 		var div = document.getElementById("group_item");
@@ -218,37 +225,37 @@ ol.paging li a:hover {
 		  const jeju = ["서귀포시","제주시","남제주군","북제주군"];
 		  const chungbuk = ["제천시","청주시","충주시","괴산군","단양군","보은군","영동군","옥천군","음성군","증평군","진천군","청원군"];
 
-		  if (e.value == "general01") {
+		  if (e.value == "강원") {
 		    add = gangwon;
-		  } else if (e.value == "general02") {
+		  } else if (e.value == "경기") {
 		    add = gyeonggi;
-		  } else if (e.value == "general03") {
+		  } else if (e.value == "경남") {
 		    add = gyeongsangnam;
-		  } else if (e.value == "general04") {
+		  } else if (e.value == "경북") {
 		    add = gyeongsangbuk;
-		  } else if (e.value == "general05") {
+		  } else if (e.value == "광주") {
 		    add = gwangju;
-		  } else if (e.value == "general06") {
+		  } else if (e.value == "대구") {
 		    add = daegu;
-		  } else if (e.value == "general07") {
+		  } else if (e.value == "대전") {
 		    add = daejeon;
-		  } else if (e.value == "general08") {
+		  } else if (e.value == "부산") {
 		    add = busan;
-		  } else if (e.value == "general09") {
+		  } else if (e.value == "서울") {
 		    add = seoul;
-		  } else if (e.value == "general10") {
+		  } else if (e.value == "울산") {
 		    add = ulsan;
-		  } else if (e.value == "general11") {
+		  } else if (e.value == "인천") {
 		    add = incheon;
-		  } else if (e.value == "general12") {
+		  } else if (e.value == "전남") {
 		    add = jeonnam;
-		  } else if (e.value == "general13") {
+		  } else if (e.value == "전북") {
 		    add = jeonbuk;
-		  } else if (e.value == "general14") {
+		  } else if (e.value == "제주") {
 		    add = jeju;
-		  } else if (e.value == "general15") {
+		  } else if (e.value == "충남") {
 		    add = chungnam;
-		  } else if (e.value == "general16") {
+		  } else if (e.value == "충북") {
 		    add = chungbuk;
 		  }
 
@@ -265,26 +272,36 @@ ol.paging li a:hover {
 	// 검색액션
 	 $(document).ready(function() {
             $("#myButton_ok").click(function() {
+		 $(".board-container").empty();
                 // 입력 값을 가져옵니다.
                 var title = $(".search-txt").val();
                 var city = $("select[name='']").val();
                 var state = $("#state").val();
 
+                
                 // AJAX 요청을 보냅니다.
                 $.ajax({
-                	url: '/group/search', // 요청할 서버의 URL
+                	url: '/search', // 요청할 서버의 URL
                     type: 'GET', // HTTP 메서드 (GET 또는 POST)
                     data: { // 서버로 보낼 데이터
                         title: title,
                         city: city,
                         state: state
                     },
-                    success: function(data) { // 요청이 성공했을 때 실행할 함수
+                    
+                    success: function(data) {
+                    	
+                        console.log(title);
+                        console.log(city);
+                        console.log(state);
+                        
+                        console.log("Success! Data received:", data);
                         $(".board-container").html(data);
                     },
-                    error: function(error) { // 요청이 실패했을 때 실행할 함수
+                    error: function(xhr, status, error) {
                         console.error("Error fetching data:", error);
                     }
+
                 });
             });
         });
@@ -304,22 +321,22 @@ ol.paging li a:hover {
 <div class="search_boxes">
             <select name="" id="" onchange="categoryChange(this)" style="height: 40px; width: 120px; border-radius: 30px; ">
               <option>시/도 선택</option>
-              <option value="general01">강원</option>
-              <option value="general02">경기</option>
-              <option value="general03">경남</option>
-              <option value="general04">경북</option>
-              <option value="general05">광주</option>
-              <option value="general06">대구</option>
-              <option value="general07">대전</option>
-              <option value="general08">부산</option>
-              <option value="general09">서울</option>
-              <option value="general10">울산</option>
-              <option value="general11">인천</option>
-              <option value="general12">전남</option>
-              <option value="general13">전북</option>
-              <option value="general14">제주</option>
-              <option value="general15">충남</option>
-              <option value="general16">충북</option>
+              <option value="강원">강원</option>
+              <option value="경기">경기</option>
+              <option value="경남">경남</option>
+              <option value="경북">경북</option>
+              <option value="광주">광주</option>
+              <option value="대구">대구</option>
+              <option value="대전">대전</option>
+              <option value="부산">부산</option>
+              <option value="서울">서울</option>
+              <option value="울산">울산</option>
+              <option value="인천">인천</option>
+              <option value="전남">전남</option>
+              <option value="전북">전북</option>
+              <option value="제주">제주</option>
+              <option value="충남">충남</option>
+              <option value="충북">충북</option>
             </select>&nbsp;
           
             <select name="" id="state" style="height: 40px; width: 120px; border-radius: 30px; ">
@@ -357,20 +374,21 @@ ol.paging li a:hover {
             </c:otherwise>
         </c:choose>
     </div>
-    <button id="write_btn" onclick="group_write_go()">글쓰기</button>
+    <button id="write_btn" onclick="group_write_go(this.form)">글쓰기</button>
     <br>
     <br>
     
     <ol class="paging">
 		<!-- 이전 버튼 -->
 		<c:choose>
-			<c:when test="${paging.beginBlock <= paging.pagePerBlock }">
-				<li class="disable">이전으로</li>
-			</c:when>
-			<c:otherwise>
-				<li><a href="/groupList.do?cPage=${paging.beginBlock-paging.pagePerBlock }">이전으로</a></li>
-			</c:otherwise>
-		</c:choose>
+    <c:when test="${paging.beginBlock <= 1}">
+         <li class="hide">이전으로</li>
+    </c:when>
+    <c:otherwise>
+        <li><a href="/groupList.do?cPage=${paging.beginBlock-paging.pagePerBlock }">이전으로</a></li>
+    </c:otherwise>
+</c:choose>
+
 							
 		<!-- 페이지번호들 -->
 		<c:forEach begin="${paging.beginBlock }" end="${paging.endBlock }" step="1" var="k">
@@ -385,13 +403,13 @@ ol.paging li a:hover {
 					
 		<!-- 이후 버튼 -->
 		<c:choose>
-			<c:when test="${paging.endBlock >= paging.totalPage }">
-				<li class="disable">다음으로</li>
-			</c:when>
-		<c:otherwise>
-			<li><a href="/groupList.do?cPage=${paging.nowPage+paging.pagePerBlock}">다음으로</a></li>
-		</c:otherwise>
-		</c:choose>
+    <c:when test="${paging.endBlock >= paging.totalPage }">
+          <li class="hide">다음으로</li>
+    </c:when>
+    <c:otherwise>
+        <li><a href="/groupList.do?cPage=${paging.nowPage+paging.pagePerBlock}">다음으로</a></li>
+    </c:otherwise>
+</c:choose>
 	</ol>
     </div>
     <br>
