@@ -9,7 +9,7 @@
 <title>캠핑장 리스트</title>
 
 <!-- bootstrap cdn -->
-<link rel="stylesheet" href="/resources/css/camp/camp_list.css">
+<link rel="stylesheet" href="/resources/css/camp/camp_list.css?after">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 <link
@@ -67,17 +67,24 @@
 		</section>
 		</div>
 		
-		<div class="best_wrap">
-			<div class="small-title">BEST 캠핑장</div>
-			<div id="camp_best3_list">
-			<!-- 베스트3 캠핑장 리스트  -->
-			</div>
-			<hr>
-		</div>
 
 		<div class="list_wrap">
-			<div class="small-title">모든 캠핑장 살펴보기</div>
-
+			<div class="best_wrap">
+				<div class="small-title">
+					<img id="best_icon" src="resources/images/best.png" style="width: 100px; height: 100px;" alt="best_icon"> 
+						BEST 캠핑장
+				</div>
+					<div id="camp_best3_list">
+						<!-- 베스트3 캠핑장 리스트  -->
+					</div>
+				<hr>
+			</div>
+			
+			<div class="small-title">
+				<img id="camplist_icon" src="resources/images/tent.png" style="width: 100px; height: 100px;" alt="camplist_icon"> 
+					모든 캠핑장 살펴보기
+			</div>
+			
 				<div id="camp_list">
 					<!-- 이 안에 캠핑장 리스트 보여주기 -->
 					<!-- <div class="product-grid">

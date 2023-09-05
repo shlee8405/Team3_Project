@@ -49,7 +49,6 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px; /* 카드 사이의 간격. 원하는 값으로 조정 가능 */
-    
 }
 
 /* BEST 캠핑장, 전체 캠핑장 제목 */
