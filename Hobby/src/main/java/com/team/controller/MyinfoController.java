@@ -40,6 +40,7 @@ public class MyinfoController {
 		mv.addObject("user", Ulist.get(0));
 		return mv;
 	}
+	
 	// 수정하는 페이지로 이동하는 컨트롤러
 	@RequestMapping("/myPageEdit.do")
     public ModelAndView goMyPageEdit(HttpServletRequest request) {

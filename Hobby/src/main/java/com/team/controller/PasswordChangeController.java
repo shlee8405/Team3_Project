@@ -43,43 +43,44 @@ public class PasswordChangeController {
         mv.setViewName("mypage/changePassword");
         mv.addObject("errorMsg", "현재 비밀번호 입력");
         return mv;
-    }
-    if (!passwordEncoder.matches(now, dbpw)) {
-	        // 현재 비밀번호가 일치하지 않을 때 JavaScript 알림 표시
-        mv.addObject("errorMsg", "비밀번호 틀림");
-	        mv.setViewName("mypage/changePassword");
-	        mv.addObject("error", "fail");
-	        mv.addObject("passwordMismatch", true); // 추가: 비밀번호 불일치 여부를 전달
-	        return mv;
 	    }
-
-	    // 새로운 비밀번호와 확인 비밀번호가 일치하는지 확인
-    if (!newPassword.equals(confirmPassword)) {
-        mv.setViewName("mypage/changePassword");
-        mv.addObject("errorMsg", "새로운 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
-        return mv;
-    }
+	    
+	    if (!passwordEncoder.matches(now, dbpw)) {
+		        // 현재 비밀번호가 일치하지 않을 때 JavaScript 알림 표시
+	        mv.addObject("errorMsg", "비밀번호 틀림");
+		        mv.setViewName("mypage/changePassword");
+		        mv.addObject("error", "fail");
+		        mv.addObject("passwordMismatch", true); // 추가: 비밀번호 불일치 여부를 전달
+		        return mv;
+		    }
+	
+		    // 새로운 비밀번호와 확인 비밀번호가 일치하는지 확인
 	    if (!newPassword.equals(confirmPassword)) {
 	        mv.setViewName("mypage/changePassword");
-	        mv.addObject("passwordMismatch", true); // 추가: 비밀번호 불일치 여부를 전달
+	        mv.addObject("errorMsg", "새로운 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
 	        return mv;
 	    }
-
-	    // 새로운 비밀번호 암호화 및 저장
-	    String encodedNewPassword = passwordEncoder.encode(newPassword);
-	    Ulist.get(0).setU_pw(encodedNewPassword);
-	    int result = userService.pass(u_idx, encodedNewPassword);
-
-	    if (result > 0) {
-	        mv.setViewName("redirect:/home.do");
-	    } else {
-	        // 비밀번호 변경에 실패한 경우에 대한 처리
-	        // 예를 들어, mv.addObject("error", "비밀번호 변경에 실패하였습니다.") 등으로 에러 메시지를 전달할 수 있습니다.
-	        mv.setViewName("mypage/changePassword");
-	    }
-
-	    return mv;
-	}
+		    if (!newPassword.equals(confirmPassword)) {
+		        mv.setViewName("mypage/changePassword");
+		        mv.addObject("passwordMismatch", true); // 추가: 비밀번호 불일치 여부를 전달
+		        return mv;
+		    }
+	
+		    // 새로운 비밀번호 암호화 및 저장
+		    String encodedNewPassword = passwordEncoder.encode(newPassword);
+		    Ulist.get(0).setU_pw(encodedNewPassword);
+		    int result = userService.pass(u_idx, encodedNewPassword);
+	
+		    if (result > 0) {
+		        mv.setViewName("redirect:/home.do");
+		    } else {
+		        // 비밀번호 변경에 실패한 경우에 대한 처리
+		        // 예를 들어, mv.addObject("error", "비밀번호 변경에 실패하였습니다.") 등으로 에러 메시지를 전달할 수 있습니다.
+		        mv.setViewName("mypage/changePassword");
+		    }
+	
+		    return mv;
+		}
 
 
 }

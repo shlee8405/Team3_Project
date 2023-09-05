@@ -104,10 +104,6 @@ div {
 					<td><input type="text" name="u_name" value="${user.u_name }" size ="20"/></td>
 				</tr>
 				<tr align="center">
-					<td bgcolor="#637F42" style="color:white">아이디</td>
-					<td><input type="text" name="u_id" value="${user.u_id }" size ="20"/></td>
-				</tr>
-				<tr align="center">
 					<td bgcolor="#637F42" style="color:white">휴대전화</td>
 					<td><input type="text" name="u_phone" value="${user.u_phone }" size ="20"/></td>
 				</tr>
