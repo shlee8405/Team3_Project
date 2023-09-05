@@ -93,9 +93,13 @@ div {
 }
 </style>
 <script type="text/javascript">
-function sendData(f) {
-	f.action="/myPageEdit.do";
-	f.submit();
+	function sendData(f) {
+		f.action="/myPageEdit.do";
+		f.submit();
+	}
+	function sendData2(f) {
+		f.action="/changePassword.do";
+		f.submit();
 }
 /* function go_myPageEdit() {
 	location.href = "/myPageEdit2.do"?u_idx=" + u_idx;

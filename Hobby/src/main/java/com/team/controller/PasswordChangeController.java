@@ -1,40 +1,85 @@
 package com.team.controller;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.team.user.service.UserService;
+import com.team.user.vo.UserVO;
 
 @Controller
 public class PasswordChangeController {
+	
+	@Autowired
+	private UserService userService;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 
-    @GetMapping("/changePassword")
-    public String showChangePasswordPage() {
-        return "changePassword";
-    }
+	@RequestMapping("/changePassword.do")
+	public ModelAndView changePassword() {
+		ModelAndView mv = new ModelAndView("mypage/changePassword");
+		return mv;
+	}
+	
+	@RequestMapping("/change.do")
+	public ModelAndView change(HttpServletRequest request, @RequestParam("currentPassword") String now, @RequestParam("newPassword") String newPassword, @RequestParam("confirmPassword") String confirmPassword) {
+	    ModelAndView mv = new ModelAndView();
+	    String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+	    List<UserVO> Ulist = userService.getUsers(u_idx);
+	    String dbpw = Ulist.get(0).getU_pw();
 
-    @PostMapping("/changePassword")
-    public String changePassword(String currentPassword, String newPassword, String confirmPassword) {
-        // 여기에서 현재 비밀번호가 맞는지 확인하고 새로운 비밀번호로 변경하는 로직을 추가하세요.
-        // 비밀번호 변경이 성공하면 성공 페이지로, 실패하면 실패 페이지로 리다이렉트하거나 메시지를 표시하세요.
-    	if (isCurrentPasswordValid(currentPassword)) {
-            if (newPassword.equals(confirmPassword)) {
-                // 비밀번호 변경 로직 추가 (새로운 비밀번호로 변경)
-                // 변경 성공 시 리다이렉트하거나 메시지를 표시하세요.
-                return "redirect:/successPage"; // 성공 페이지 URL
-            } else {
-                // 새로운 비밀번호와 확인 비밀번호가 일치하지 않을 때의 처리
-                return "redirect:/passwordMismatchPage"; // 비밀번호 불일치 페이지 URL
-            }
-        } else {
-            // 현재 비밀번호가 맞지 않을 때의 처리
-            return "redirect:/invalidPasswordPage"; // 비밀번호 불일치 페이지 URL
-        }
+	    if (now == null || now.trim().isEmpty()) {
+        // 현재 비밀번호 입력창이 비었을 때 JavaScript 알림 표시
+        mv.setViewName("mypage/changePassword");
+        mv.addObject("errorMsg", "현재 비밀번호 입력");
+        return mv;
     }
+    if (!passwordEncoder.matches(now, dbpw)) {
+	        // 현재 비밀번호가 일치하지 않을 때 JavaScript 알림 표시
+        mv.addObject("errorMsg", "비밀번호 틀림");
+	        mv.setViewName("mypage/changePassword");
+	        mv.addObject("error", "fail");
+	        mv.addObject("passwordMismatch", true); // 추가: 비밀번호 불일치 여부를 전달
+	        return mv;
+	    }
 
-    private boolean isCurrentPasswordValid(String currentPassword) {
-        // 여기에서 현재 비밀번호를 확인하는 로직을 구현하세요.
-        // 실제로는 데이터베이스에서 사용자의 비밀번호와 비교하는 등의 작업이 필요합니다.
-        // 이 예제에서는 간단히 "12345"라는 비밀번호로 가정합니다.
-        return currentPassword.equals("12345");
+	    // 새로운 비밀번호와 확인 비밀번호가 일치하는지 확인
+    if (!newPassword.equals(confirmPassword)) {
+        mv.setViewName("mypage/changePassword");
+        mv.addObject("errorMsg", "새로운 비밀번호와 확인 비밀번호가 일치하지 않습니다.");
+        return mv;
     }
+	    if (!newPassword.equals(confirmPassword)) {
+	        mv.setViewName("mypage/changePassword");
+	        mv.addObject("passwordMismatch", true); // 추가: 비밀번호 불일치 여부를 전달
+	        return mv;
+	    }
+
+	    // 새로운 비밀번호 암호화 및 저장
+	    String encodedNewPassword = passwordEncoder.encode(newPassword);
+	    Ulist.get(0).setU_pw(encodedNewPassword);
+	    int result = userService.pass(u_idx, encodedNewPassword);
+
+	    if (result > 0) {
+	        mv.setViewName("redirect:/home.do");
+	    } else {
+	        // 비밀번호 변경에 실패한 경우에 대한 처리
+	        // 예를 들어, mv.addObject("error", "비밀번호 변경에 실패하였습니다.") 등으로 에러 메시지를 전달할 수 있습니다.
+	        mv.setViewName("mypage/changePassword");
+	    }
+
+	    return mv;
+	}
+
+
 }

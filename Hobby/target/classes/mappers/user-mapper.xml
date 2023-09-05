@@ -58,7 +58,13 @@
     	select * from USERS where u_idx = #{u_idx}
     </select>
     
-    
+    <!-- userMapper.xml -->
+	<update id="pass" parameterType="map">
+	    UPDATE USERS
+	    SET u_pw = #{u_pw}
+	    WHERE u_idx = #{u_idx}
+	</update>
+
 
 </mapper>
 
