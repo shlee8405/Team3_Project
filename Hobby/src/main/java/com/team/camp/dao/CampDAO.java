@@ -22,6 +22,11 @@ public class CampDAO {
 		return sqlSessionTemplate.selectOne("camp.getUserInfoByUidx", u_idx);
 	}
 
+	// 상위 3개 캠핑장 이름을 가져오는 쿼리 추가
+	public List<String> getBest3() {
+		return sqlSessionTemplate.selectList("camp.getBest3");
+	}
+
 	// 좋아요 추가
 	public int addLike(String u_idx, String u_id, String u_nickname, String facltNm) {
 		Map<String, Object> params = new HashMap<>();

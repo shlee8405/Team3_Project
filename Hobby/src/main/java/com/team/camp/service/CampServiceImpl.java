@@ -15,10 +15,16 @@ public class CampServiceImpl implements CampService {
 	@Autowired
 	private CampDAO campDAO;
 
+	// 상위 3개 캠핑장 이름을 가져오는 메소드
+	@Override
+	public List<String> getBest3() {
+		return campDAO.getBest3();
+	}
+
 	// 좋아요 수 증가
 	@Override
 	public int addLike(String u_idx, String facltNm) {
-		 UserVO user = campDAO.getUserInfoByUidx(u_idx);
+		UserVO user = campDAO.getUserInfoByUidx(u_idx);
 
 		// 중복 체크
 		int check = campDAO.checkLike(u_idx, facltNm);
@@ -32,7 +38,7 @@ public class CampServiceImpl implements CampService {
 		} else {
 			// 좋아요 추가
 			System.out.println("좋아요 성공:::" + check);
-			return campDAO.addLike(u_idx, user.getU_id(), user.getU_nickname(), facltNm); //성공값으로 1 반환
+			return campDAO.addLike(u_idx, user.getU_id(), user.getU_nickname(), facltNm); // 성공값으로 1 반환
 		}
 	}
 
@@ -73,9 +79,9 @@ public class CampServiceImpl implements CampService {
 	@Override
 	public void addReview(String facltNm, String u_Idx, String comment, int rating) {
 		UserVO user = campDAO.getUserInfoByUidx(u_Idx);
-	    campDAO.addReview(facltNm, u_Idx, user.getU_id(), user.getU_nickname(), comment, rating);
+		campDAO.addReview(facltNm, u_Idx, user.getU_id(), user.getU_nickname(), comment, rating);
 	}
-	
+
 	// 후기 삭제
 	public void deleteReview(int id, String u_idx) {
 		campDAO.deleteReview(id, u_idx);

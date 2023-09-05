@@ -82,7 +82,7 @@
 	
 	/* 활성화된 탭 */
 	.nav-tabs .nav-link.active {   
-	background-color: #637F42;
+	background-color: #637F42!importants;
 	color: white;
 	font-weight: bolder;
 	}

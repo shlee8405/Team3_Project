@@ -44,9 +44,18 @@
     border-radius:0;
 }
 
-.small-title{ /* BEST 캠핑장, 전체 캠핑장 제목 */
+/* 캠핑장 베스트3 리스트 */
+#camp_best3_list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px; /* 카드 사이의 간격. 원하는 값으로 조정 가능 */
+    
+}
+
+/* BEST 캠핑장, 전체 캠핑장 제목 */
+.small-title{ 
 	font-family: CJU-Bold;
-    font-size:40px;
+    font-size:50px;
     text-align: center;
     margin-bottom: 30px;
 }

@@ -177,6 +177,53 @@ public class CampController {
 			//mv.addObject("dataList", dataList);
 			return dataList;
 		}
+	
+	
+	// 캠핑장 베스트3
+		@GetMapping("/campBest.do")
+		public List<CampVO> getTop3Camps() throws URISyntaxException, UnsupportedEncodingException {
+		    //Map<String, Object> response = new HashMap<>();
+		    List<String> bestCampNames = campService.getBest3(); // 상위 3개 캠핑장 이름 가져오기
+
+		    List<CampVO> bestDataList = new ArrayList<>();
+
+		    for (String campName : bestCampNames) {
+		        // API 호출 로직
+		        String apiUrl = targetUrl + "/searchList"
+		                + "?numOfRows=" + 1 // 한 건만 가져올 것이므로 numOfRows는 1
+		                + "&pageNo=" + 1
+		                + "&MobileOS=" + mobileOS
+		                + "&MobileApp=" + mobileApp
+		                + "&serviceKey=" + serviceKey
+		                + "&_type=json"
+		                + "&keyword=" + URLEncoder.encode(campName, StandardCharsets.UTF_8.toString());
+
+		        URI uri = new URI(apiUrl);
+		        ResponseEntity<String> apiResponse = restTemplate.getForEntity(uri, String.class);
+
+		        JSONObject jsonResponse = new JSONObject(apiResponse.getBody());
+
+		        JSONArray items = jsonResponse.getJSONObject("response").getJSONObject("body").getJSONObject("items").getJSONArray("item");
+
+		        // 첫번째 아이템 가져오기 (우리는 numOfRows를 1로 설정했으므로 하나만 있다)
+		        JSONObject oneItem = items.getJSONObject(0);
+
+		        // 정보 추출 및 CampVO 객체 생성
+		        CampVO cvo = new CampVO();
+				cvo.setFacltNm(oneItem.getString("facltNm"));
+				cvo.setIntro(oneItem.getString("intro"));
+				cvo.setAddr1(oneItem.getString("addr1"));
+				cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
+				cvo.setDoNm(oneItem.getString("doNm"));
+
+		        // CampVO 객체를 리스트에 추가
+		        bestDataList.add(cvo);
+		    }
+
+		    //response.put("bestCamps", bestDataList);
+		    return bestDataList;
+		}
+		
 
 	
 	// 캠핑장 상세보기 호출하기

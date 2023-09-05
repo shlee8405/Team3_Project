@@ -5,6 +5,9 @@ import java.util.List;
 import com.team.camp.vo.ReviewVO;
 
 public interface CampService {
+	
+	// 상위 3개 캠핑장 이름을 가져오는 메소드
+	List<String> getBest3();
 
 	// 좋아요 수 증가
 	int addLike(String u_idx, String facltNm);
