@@ -52,9 +52,7 @@ public class UserDAO {
     }
     // 아이디 중복 확인
     public int idCheck2(String u_id) {
-    	System.out.println("dao string" + u_id);
     	int count = sqlSessionTemplate.selectOne("user.idcount", u_id);
-    	System.out.println("daocount" + count);
     	return count;
     }
 

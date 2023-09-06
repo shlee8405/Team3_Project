@@ -51,7 +51,6 @@ public class UserServiceImpl implements UserService{
 	@Override
     public boolean isEmailDuplicate(String email) {
         int count = userDAO.idCheck(email);
-        System.out.println("count" + count);
         return count > 0;
     }
 
@@ -60,7 +59,6 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public boolean isIdDuplicate(String id) {
 		int count = userDAO.idCheck2(id);
-        System.out.println("count" + count);
         return count > 0;
 	}
 
