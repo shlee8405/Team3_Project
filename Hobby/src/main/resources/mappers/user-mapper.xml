@@ -69,7 +69,30 @@
 	    WHERE u_idx = #{u_idx}
 	</update>
 
+    <update id="banUser" parameterType="String">
+    	update USERS SET u_ban = 1 where u_idx = #{u_idx}
+    </update>
+    
+    <update id="unbanUser" parameterType="String">
+    	update USERS SET u_ban = 0 where u_idx = #{u_idx}
+    </update>
+    
 
+	<update id="updateUserStatusToZero" parameterType="String">
+		update USERS set u_status = 0 where u_idx = #{u_idx}
+	</update>
+	
+	<update id="updateUserInfoAdmin" parameterType="uvo">
+	  UPDATE USERS
+	  SET
+	    u_id = CASE WHEN #{u_id} IS NOT NULL AND #{u_id} != '' THEN #{u_id} ELSE u_id END,
+	    u_nickname = CASE WHEN #{u_nickname} IS NOT NULL AND #{u_nickname} != '' THEN #{u_nickname} ELSE u_nickname END,
+	    u_name = CASE WHEN #{u_name} IS NOT NULL AND #{u_name} != '' THEN #{u_name} ELSE u_name END,
+	    u_email = CASE WHEN #{u_email} IS NOT NULL AND #{u_email} != '' THEN #{u_email} ELSE u_email END,
+	    u_birthday = CASE WHEN #{u_birthday} IS NOT NULL AND #{u_birthday} != '' THEN #{u_birthday} ELSE u_birthday END,
+	    u_phone = CASE WHEN #{u_phone} IS NOT NULL AND #{u_phone} != '' THEN #{u_phone} ELSE u_phone END
+	  WHERE u_idx = #{u_idx}
+	</update>
 </mapper>
 
 
