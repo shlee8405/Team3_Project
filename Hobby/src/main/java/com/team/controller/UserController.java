@@ -240,7 +240,7 @@ public class UserController {
 			 UserVO uvo = new UserVO();
 			 uvo.setU_id(kakaoId);
 			 uvo.setU_nickname(kakaoName);
-			 uvo.setU_name(kakaoId);
+			 uvo.setU_name(kakaoName);
 			 int insertResult = userService.getUserInsert(uvo);
 			 UserVO dbuvo = userService.getUserVoWithId(kakaoId);
 			 System.out.println("kakaoLogin.do insert id successfull  id: " + kakaoId);
