@@ -20,11 +20,6 @@
         text-align: center; /* 제목을 가운데 정렬 */
     }
     
-    .row{
-    	width: 50%;
-    	margin: auto;
-    }
-    
 </style>
 
 <script type="text/javascript">
@@ -37,7 +32,7 @@
 <div style="position:relative; top:200px; z-index:1;">
 
 
-<div class="row">
+<div class="row" style="width: 50%; margin: 0 auto;">
 	<div class="col-4">
 	<div class="card" style="width: 25rem;">
 	  <img src="/resources/images/FAQ.PNG" class="card-img-top" alt="...">

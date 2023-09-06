@@ -6,8 +6,6 @@
 <meta charset="UTF-8">
 <title>/고객센터.do</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style type="text/css">
 
 	@font-face{
@@ -148,7 +146,7 @@
             </button>
         </nav>
         <!-- Offcanvas Navbar Content -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style="background-color: #637F42">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: white;">고객센터</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -179,7 +177,7 @@
             </div>
         </div>
 
-        <div class="container-fluid align-self-end">
+        <div class="container-fluid align-self-end" style="width: 50%">
         
         <h1>1:1 문의</h1>
         
@@ -207,7 +205,7 @@
 				        <c:choose>
 				            <c:when test="${k.q_status == 0}">
 				                <tr>
-				                    <td colspan="5">삭제된 목록입니다</td>
+				                    <td colspan="6">삭제된 목록입니다</td>
 				                </tr>
 				            </c:when>
 				            <c:otherwise>
@@ -236,7 +234,7 @@
                 </table>
                 <!-- End Default Table Example -->
             </div>
-            <div class="text-end">
+            <div class="text-end"  style="padding-top: 10px;">
                 <!-- 오른쪽 정렬 -->
                 <button type="button" class="btn btn-success" onclick="go_inquiry()">문의하기</button>
             </div>

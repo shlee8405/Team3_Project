@@ -9,8 +9,6 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <style type="text/css">
 
 	@font-face{
@@ -109,46 +107,45 @@
 
 <script type="text/javascript">
 
-$(window).scroll(function() {
-    var scroll = $(window).scrollTop();
-    if (scroll > 50) { // 50px 이상 스크롤하면 배경색을 변경
-        $(".navbar").css("background-color", "#0F4200"); // Change this color if needed
-    } else {
-        $(".navbar").css("background-color", "#637F42"); // Original color
-    }
-});
-
-$(document).ready(function() {
-    $("#search-button").click(function() {
-        performSearch();
-    });
-
-    $("#search-input").keyup(function(event) {
-        if (event.keyCode === 13) {
-            performSearch();
-        }
-    });
-
-    // 검색 버튼 클릭 이벤트
-    function performSearch() {
+$(document).ready(function(){
+    // Function to execute search
+    function executeSearch() {
         var searchTerm = $("#search-input").val().toLowerCase();
-        $(".accordion").each(function() {
-            var content = $(this).find(".accordion-button").text().toLowerCase();
-            if (content.includes(searchTerm)) {
-                $(this).show();
-            } else {
-                $(this).hide();
+
+        // Initially hide all accordion items
+        $(".accordion-item").hide();
+
+        // Iterate over accordion headers
+        $(".accordion-header").each(function(){
+            if ($(this).text().toLowerCase().indexOf(searchTerm) !== -1) {
+                // If the header contains the search term, show the header and its corresponding body
+                $(this).parent().show();
             }
         });
     }
+
+    // Search on button click
+    $("#search-button").on('click', function(e){
+        e.preventDefault();  // Prevent default form submission
+        executeSearch();
+    });
+
+    // Search on pressing Enter key in search input field
+    $("#search-input").on('keypress', function(e){
+        if (e.which == 13) {  // 13 is the code for Enter key
+            e.preventDefault();  // Prevent default form submission
+            executeSearch();
+        }
+    });
 });
 
 
 </script>
 </head>
 <body>
-
-<jsp:include page="../header.jsp"/>
+<div>
+	<jsp:include page="../header.jsp"/>
+</div>
 
 <div class="d-flex">
     <nav class="navbar navbar-dark" style="background-color: #637F42; width: 80px;">
@@ -157,7 +154,7 @@ $(document).ready(function() {
             </button>
         </nav>
         <!-- Offcanvas Navbar Content -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style="background-color: #637F42;">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: white;">고객센터</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -189,7 +186,7 @@ $(document).ready(function() {
         </div>
         
         
-        <div class="container-fluid align-self-center" style="max-height: 70vh; overflow-y: auto;">
+        <div class="container-fluid align-self-center" style="max-height: 70vh; overflow-y: auto; width: 50%">
         <h1>FAQ</h1>
 		    <!-- 검색창 추가 -->
 		    <form class="d-flex justify-content-end mb-3" role="search" id="search-form" onsubmit="return false;">
@@ -197,24 +194,24 @@ $(document).ready(function() {
 			    <button class="btn btn-success" type="button" id="search-button">Search</button>
 			</form>
 		    
-		    <div class="scroll-content">
-		        <c:forEach var="k" items="${list}" varStatus="status">
-		            <div class="accordion" id="accordionExample${status.index}">
-		                <div class="accordion-item">
-		                    <h2 class="accordion-header">
-		                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.index}" aria-expanded="true" aria-controls="collapse${status.index}">
-		                            ${k.f_content}
-		                        </button>
-		                    </h2>
-		                    <div id="collapse${status.index}" class="accordion-collapse collapse ${status.index == 0 ? 'show' : ''}" data-bs-parent="#accordionExample${status.index}">
-		                        <div class="accordion-body">
-		                            ${k.f_response}
-		                        </div>
-		                    </div>
-		                </div>
-		            </div>
-		        </c:forEach>
-		    </div>
+		    <div class="accordion" id="accordionExample">
+			  <c:forEach var="k" items="${list}" varStatus="status">
+			    <div class="accordion-item">
+			      <h2 class="accordion-header">
+			        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.index + 1}" aria-expanded="true" aria-controls="collapse${status.index + 1}">
+			          ${k.f_content}
+			        </button>
+			      </h2>
+			      <div id="collapse${status.index + 1}" class="accordion-collapse collapse ${status.index == 0 ? 'show' : ''}" data-bs-parent="#accordionExample">
+			        <div class="accordion-body">
+			          <strong>${k.f_response}</strong> 
+			        </div>
+			      </div>
+			    </div>
+			  </c:forEach>
+			</div>
+
+		</div>
 		</div>
             
         </div>
