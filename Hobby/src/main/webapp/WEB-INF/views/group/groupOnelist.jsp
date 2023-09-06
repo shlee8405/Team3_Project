@@ -12,7 +12,7 @@
 	#onelist{width: 1000px; border-collapse:collapse; text-align: center;}
 	.allist{border-bottom: 1px solid lightgray; padding: 3px; height: 40px;}
 	.list{width: 1000px; margin:auto; text-align: center;}
-	.btn{
+	.btn5{
 		background-color: #548C54;
 		width: 120px;
 		height: 50px;
@@ -170,10 +170,10 @@
 		<div style="border: 1px solid lightgray; width: 500px; text-align: center; margin-left : auto;">
 		<p id="groupCount"><span id="count_party">0</span>/${gvo.g_maxPeople}&nbsp;&nbsp;</p>
 		<div id="ok">
-			<button class="btn" id="myButton_ok" onclick="party_click()">참여</button>
+			<button class="btn5" id="myButton_ok" onclick="party_click()">참여</button>
 		</div>&nbsp;&nbsp;
 		<div id="no" style="display:none;">
-			<button class="btn" id="myButton_cancle" onclick="party_click_no()">참여 취소</button>
+			<button class="btn5" id="myButton_cancle" onclick="party_click_no()">참여 취소</button>
 		</div>
 		</div>
 		<br>

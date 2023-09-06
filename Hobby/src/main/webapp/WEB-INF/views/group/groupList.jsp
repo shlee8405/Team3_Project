@@ -320,7 +320,7 @@ ol.paging li a:hover {
     <br>
 <div class="search_boxes">
             <select name="" id="" onchange="categoryChange(this)" style="height: 40px; width: 120px; border-radius: 30px; ">
-              <option>시/도 선택</option>
+              <option value="">시/도 선택</option>
               <option value="강원">강원</option>
               <option value="경기">경기</option>
               <option value="경남">경남</option>
@@ -340,7 +340,7 @@ ol.paging li a:hover {
             </select>&nbsp;
           
             <select name="" id="state" style="height: 40px; width: 120px; border-radius: 30px; ">
-              <option>군/구 선택</option>
+              <option value="">군/구 선택</option>
             </select>
             </div>
           </div>&nbsp;&nbsp;
