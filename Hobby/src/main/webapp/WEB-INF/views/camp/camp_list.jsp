@@ -190,24 +190,32 @@
 										+"<a class='title' href='/campDetail.do?keyword=" + dataList.facltNm + "'>" + dataList.facltNm + "</a>" 
 										+"<span class='addr1'>" + dataList.addr1 + "</span>" 
 									+"</div>" 
-										+"<ul class='rating'>"
-						                    +"<li class='fa fa-star'>" 
-						                    +"</li>"
-						                    +"<li class='fa fa-star'>" 
-						                    +"</li>"
-						                    +"<li class='fa fa-star'>" 
-						                    +"</li>"
-						                    +"<li class='fa fa-star'>" 
-						                    +"</li>"
-						                    +"<li class='fa fa-star disable'>"
-						                    +"</li>"
-				                		+"</ul>"
+										+"<ul class='rating' data-rating='" + dataList.averageRating + "'>"  // data-rating 추가
+		                                    +"<li class='fa fa-star'></li>"
+		                                    +"<li class='fa fa-star'></li>"
+		                                    +"<li class='fa fa-star'></li>"
+		                                    +"<li class='fa fa-star'></li>"
+		                                    +"<li class='fa fa-star'></li>"
+                                		+"</ul>"
 									+"<a class='add-to-cart' href='#'>" + "View Details" + "</a>" 
 								+"</div>"
 							+"</div>"                  
 	                }); //each
 	                
 	                $("#camp_list").append(list); //append
+	                
+	             	// 별 색칠 로직
+	                $('.rating').each(function() {
+	                    var rating = $(this).data('rating');
+	                    $(this).find('.fa').each(function(index) {
+	                        if (index < rating) {
+	                        	$(this).removeClass('disable');  // 색칠된 별은 .disable 클래스 제거
+	                        } else {
+	                            $(this).addClass('disable');  // 색칠되지 않은 별은 .disable 클래스 추가
+	                        }
+	                    });
+	                });
+	                
 					pageNo++;
 	                loading = false; // 데이터 로드 완료
 	                
@@ -264,7 +272,7 @@
 				dataType : "json", 
 				success : function(data) {
 					// 'bestCamps'라는 키로 서버에서 보낸 데이터 리스트를 찾는다.
-					//var dataList = data.bestCamps;
+					// var dataList = data.bestCamps;
 					var list = "";
 
 					
@@ -286,24 +294,31 @@
 											+"<a class='title' href='/campDetail.do?keyword=" + response.facltNm + "'>" + response.facltNm + "</a>" 
 											+"<span class='addr1'>" + response.addr1 + "</span>" 
 										+"</div>" 
-											+"<ul class='rating'>"
-							                    +"<li class='fa fa-star'>" 
-							                    +"</li>"
-							                    +"<li class='fa fa-star'>" 
-							                    +"</li>"
-							                    +"<li class='fa fa-star'>" 
-							                    +"</li>"
-							                    +"<li class='fa fa-star'>" 
-							                    +"</li>"
-							                    +"<li class='fa fa-star disable'>"
-							                    +"</li>"
-					                		+"</ul>"
+										+"<ul class='rating' data-rating='" + response.averageRating + "'>"  // data-rating 추가
+		                                    +"<li class='fa fa-star'></li>"
+		                                    +"<li class='fa fa-star'></li>"
+		                                    +"<li class='fa fa-star'></li>"
+		                                    +"<li class='fa fa-star'></li>"
+		                                    +"<li class='fa fa-star'></li>"
+                            		+"</ul>"
 										+"<a class='add-to-cart' href='#'>" + "View Details" + "</a>" 
 									+"</div>"
 								+"</div>"                  
 		                }); //each
 		                
 		                $("#camp_best3_list").append(list); //append
+		                
+		             	// 별 색칠 로직
+		                $('.rating').each(function() {
+		                    var rating = $(this).data('rating');
+		                    $(this).find('.fa').each(function(index) {
+		                        if (index < rating) {
+		                        	$(this).removeClass('disable');  // 색칠된 별은 .disable 클래스 제거
+		                        } else {
+		                            $(this).addClass('disable');  // 색칠되지 않은 별은 .disable 클래스 추가
+		                        }
+		                    });
+		                });
 		                $(".small-title").show();
 		                
 		            },
@@ -312,6 +327,6 @@
 		            	//loading = false;
 		            }
 		        });
-		}
+			}
 	</script>
 </html>

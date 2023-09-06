@@ -128,8 +128,17 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 .product-grid .social li a:after,.product-grid .social li a:before{content:attr(data-tip);color:#fff;background-color:#000;font-size:12px;letter-spacing:1px;line-height:20px;padding:1px 5px;white-space:nowrap;opacity:0;transform:translateX(-50%);position:absolute;left:50%;top:-30px}
 .product-grid .social li a:after{content:'';height:15px;width:15px;border-radius:0;transform:translateX(-50%) rotate(45deg);top:-20px;z-index:-1}
 .product-grid .social li a:hover:after,.product-grid .social li a:hover:before{opacity:1}
-.product-grid .product-discount-label,.product-grid .product-new-label{color:#fff;background-color:#4ce262;font-size:15px;text-transform:uppercase;padding:2px 7px;display:block;position:absolute;top:10px;left:0}
-.product-grid .product-discount-label{background-color:#FCC424;left:auto;right:0}
+.product-grid .product-discount-label,.product-grid .product-new-label{
+	color:#fff;
+	background-color:#4ce262; 
+	font-weight:bold;
+	font-size:15px; 
+	text-transform:uppercase;
+	padding:2px 7px;
+	display:block;
+	position:absolute;top:10px;
+	left:0}
+.product-grid .product-discount-label{color:red; background-color:#FCC424; font-weight:bold; left:auto; right:0}
 .product-grid .rating{
 	color:#FFD200;
 	font-size:12px;

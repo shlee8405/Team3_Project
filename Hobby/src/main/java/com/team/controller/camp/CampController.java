@@ -91,17 +91,21 @@ public class CampController {
 			 intro : 소개글
 			 */
 			
+			
 			CampVO cvo = new CampVO();
 			cvo.setFacltNm(oneItem.getString("facltNm"));
+			
+			//averageRating 값을 반올림하여 정수값으로 변환
+			double rawAverageRating = campService.getAverageRating(cvo.getFacltNm());			
+			int averageRating = (int) Math.round(rawAverageRating);
+			
 			cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
 			cvo.setAddr1(oneItem.getString("addr1"));
 			cvo.setDoNm(oneItem.getString("doNm"));
-			// 나중에 필요한거 더 추가........
+			cvo.setAverageRating(averageRating);
 			dataList.add(cvo);
+			
 		}
-		
-//		ModelAndView mv = new ModelAndView("camp/camp_list");
-//		mv.addObject("dataList", dataList);
 		return dataList;
 	}
 	
@@ -211,10 +215,16 @@ public class CampController {
 		        // 정보 추출 및 CampVO 객체 생성
 		        CampVO cvo = new CampVO();
 				cvo.setFacltNm(oneItem.getString("facltNm"));
+				
+				//averageRating 값을 반올림하여 정수값으로 변환
+				double rawAverageRating = campService.getAverageRating(cvo.getFacltNm());			
+				int averageRating = (int) Math.round(rawAverageRating);
+				
 				cvo.setIntro(oneItem.getString("intro"));
 				cvo.setAddr1(oneItem.getString("addr1"));
 				cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
 				cvo.setDoNm(oneItem.getString("doNm"));
+				cvo.setAverageRating(averageRating);
 
 		        // CampVO 객체를 리스트에 추가
 		        bestDataList.add(cvo);
