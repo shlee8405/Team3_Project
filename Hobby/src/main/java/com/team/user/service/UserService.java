@@ -43,10 +43,17 @@ public interface UserService {
     // 관리자 계정 추가
     int getAdminInsert(UserVO uvo); 
 
+	// 유저 밴
+    int getBanUser(String idx);
+    
+    // 유저 언밴
+    int getUnbanUser(String idx);
 	
+	// 유저 삭제
+    int getDeleteUser(String idx);
 	
-	
-	
+    // 유저 수정
+    int getUpdateUserAdmin(UserVO uvo);
 	// 유져 1명의 정보 가져오기
 	List<UserVO> getUsers(String u_idx);
 	

@@ -78,11 +78,27 @@ public class GroupController {
 		mv.addObject("paging", paging);
         return mv;
     }
-	@RequestMapping("/group/search")
-	@ResponseBody
-	public List<GroupVO> searchGroups(GroupVO groupVO) {
-	    return groupService.searchGroups(groupVO);
+	@RequestMapping("/search")
+	public ModelAndView searchGroups(
+	        @RequestParam("title") String title, 
+	        @RequestParam("city") String city,
+	        @RequestParam("state") String state) {
+	    
+	    GroupVO gvo = new GroupVO();
+	    gvo.setG_title(title);
+	    gvo.setG_cdo(city);
+	    gvo.setG_gugun(state);
+	    
+	    List<GroupVO> resultGroups = groupService.searchGroups(gvo);
+
+	    ModelAndView modelAndView = new ModelAndView("group/groupSearchResult"); // Change to the new JSP page
+	    modelAndView.addObject("glist", resultGroups);
+
+	    return modelAndView;
 	}
+
+
+	
 	@GetMapping("/group_writeForm.do")
 	public ModelAndView getGroupWriteForm() {
 		ModelAndView mv = new ModelAndView("group/groupWrite");
