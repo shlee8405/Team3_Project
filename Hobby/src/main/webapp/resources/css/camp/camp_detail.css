@@ -27,8 +27,21 @@
     margin: 0;
     position: relative;
   	z-index: 1; 
-	flex-wrap: wrap;
 	margin-top: -145px;
+	flex-wrap: wrap;
+}
+
+.mycontainer{
+	display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 50%;
+    margin: 0;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+    margin-top: 50px;
 }
 
 #campIntroText{
@@ -82,8 +95,8 @@
 	
 	/* 활성화된 탭 */
 	.nav-tabs .nav-link.active {   
-	background-color: #637F42;
-	color: white;
+	background-color: #637F42 !important;
+	color: white !important;
 	font-weight: bolder;
 	}
 	
@@ -97,6 +110,12 @@
     padding: 10px 0;
     margin-top: 30px;
     margin-bottom: 30px;
+	font-family: Jua-Regular;
+    font-size:50px;
+	}
+	
+	#review_title{
+    margin-top: 10px;
 	}
 	
 	.table th {
@@ -108,4 +127,13 @@
     vertical-align: middle;
     margin-left: 5px;  /* 왼쪽 마진 추가 */
     margin-top: 10px;
+	}
+	
+	.star-display{
+	padding-top: 9px;
+	}
+	
+	.camp_img{
+	width: 90%;
+    height: 350px;
 	}

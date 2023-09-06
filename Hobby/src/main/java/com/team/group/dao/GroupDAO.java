@@ -64,5 +64,7 @@ public class GroupDAO {
 	public int commentDel(GroupCmtVO gcvo) {
 		return sqlSessionTemplate.update("group.cmtDel", gcvo);
 	}
-	
+	public List<GroupVO> searchGroups(GroupVO gvo) {
+        return sqlSessionTemplate.selectList("group.searchGroups", gvo);
+	}
 }

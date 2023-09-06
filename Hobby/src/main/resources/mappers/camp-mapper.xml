@@ -4,20 +4,30 @@
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="camp">
 
+	<!-- 좋아요 수가 높은 상위 3개 캠핑장 이름 가져오기 -->
+	<select id="getBest3" resultType="string">
+	    SELECT facltNm FROM camp_likes GROUP BY facltNm ORDER BY COUNT(*) DESC LIMIT 3
+	</select>
+
+	<!-- 사용자 정보 가져오기 -->
+	<select id="getUserInfoByUidx" resultType="uvo">
+	  SELECT u_id, u_nickname FROM USERS WHERE u_idx = #{u_idx}
+	</select>
+
 	<!-- 좋아요 -->
 	<insert id="addLike">
-		INSERT INTO camp_likes (u_id, facltNm) VALUES (#{u_id}, #{facltNm})
+	  INSERT INTO camp_likes (u_idx, u_id, u_nickname, facltNm) VALUES (#{u_idx}, #{u_id}, #{u_nickname}, #{facltNm})
 	</insert>
 
 	<!-- 좋아요 중복 체크 -->
 	<select id="checkLike" resultType="int">
-		SELECT COUNT(*) FROM camp_likes WHERE u_id = #{u_id} AND facltNm =
+		SELECT COUNT(*) FROM camp_likes WHERE u_idx = #{u_idx} AND facltNm =
 		#{facltNm}
 	</select>
 
 	<!-- 좋아요 취소 -->
 	<delete id="removeLike">
-		DELETE FROM camp_likes WHERE u_id = #{u_id} AND facltNm = #{facltNm}
+		DELETE FROM camp_likes WHERE u_idx = #{u_idx} AND facltNm = #{facltNm}
 	</delete>
 
 	<!-- 좋아요 수 조회 쿼리 -->
@@ -27,17 +37,17 @@
 
 	<!-- 찜하기 -->
 	<insert id="addWish">
-		INSERT INTO camp_wish (u_id, facltNm) VALUES (#{u_id}, #{facltNm})
+		INSERT INTO camp_wish (u_idx, u_id, u_nickname, facltNm) VALUES (#{u_idx}, #{u_id}, #{u_nickname}, #{facltNm})
 	</insert>
 
 	<!-- 찜하기 중복 체크 -->
 	<select id="checkWish" resultType="int">
-		SELECT COUNT(*) FROM camp_wish WHERE u_id = #{u_id} AND facltNm = #{facltNm}
+		SELECT COUNT(*) FROM camp_wish WHERE u_idx = #{u_idx} AND facltNm = #{facltNm}
 	</select>
 
 	<!-- 찜하기 취소 -->
 	<delete id="removeWish">
-		DELETE FROM camp_wish WHERE u_id = #{u_id} AND facltNm = #{facltNm}
+		DELETE FROM camp_wish WHERE u_idx = #{u_idx} AND facltNm = #{facltNm}
 	</delete>
 
 	<!-- 찜하기 수 조회 -->
@@ -47,10 +57,15 @@
 	
 	<!-- 후기와 별점 추가 -->
     <insert id="addReview" parameterType="map">
-        INSERT INTO camp_review(facltNm, u_Id, comment, rating, created_date)
-        VALUES(#{facltNm}, #{u_Id}, #{comment}, #{rating}, NOW())
+        INSERT INTO camp_review(facltNm, u_idx, u_id, u_nickname, comment, rating, created_date)
+        VALUES(#{facltNm}, #{u_idx}, #{u_id}, #{u_nickname}, #{comment}, #{rating}, NOW())
     </insert>
 
+    <!-- 후기삭제 -->
+    <delete id="deleteReview" parameterType="map">
+    DELETE FROM camp_review WHERE id = #{id} AND u_idx = #{u_idx}
+	</delete>
+	
     <!-- 해당 캠핑장의 모든 후기와 별점 가져오기 -->
     <select id="getReviews" parameterType="String" resultType="crvo">
         SELECT * FROM camp_review WHERE facltNm = #{facltNm} ORDER BY created_date DESC
@@ -60,4 +75,5 @@
     <select id="getAverageRating" parameterType="String" resultType="double">
         SELECT AVG(rating) FROM camp_review WHERE facltNm = #{facltNm}
     </select>
+    
 </mapper>

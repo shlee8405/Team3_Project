@@ -39,7 +39,7 @@ public class GroupServiceImpl implements GroupService {
 	public GroupVO getGroupOnelist(String g_idx) {
 		return groupDAO.getGroupOnelist(g_idx);
 	}
-
+	
 	@Override
 	public int getGroupDelete(GroupVO gvo) {
 		return groupDAO.getGroupDelete(gvo);
@@ -68,6 +68,11 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public int commentDel(GroupCmtVO gcvo) {
 		return groupDAO.commentDel(gcvo);
+	}
+
+	@Override
+	public List<GroupVO> searchGroups(GroupVO gvo) {
+		return groupDAO.searchGroups(gvo);
 	}
 	
 	

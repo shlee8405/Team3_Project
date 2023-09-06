@@ -1,4 +1,9 @@
 @charset "UTF-8";
+@font-face {
+     font-family: CJU-Bold;
+     src: url(/resources/fonts/CJU-Bold.ttf);
+}
+
 /* 검색창 */
 #carouselExampleFade img {
 	/* 슬라이드 이미지 사이즈 */
@@ -23,6 +28,7 @@
 
 .search-sec{
     padding: 2rem;
+    z-index:2;
 }
 
 .search-slt{
@@ -36,6 +42,21 @@
     border: 1px solid #ccc;
     height: calc(3rem + 2px) !important;
     border-radius:0;
+}
+
+/* 캠핑장 베스트3 리스트 */
+#camp_best3_list {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px; /* 카드 사이의 간격. 원하는 값으로 조정 가능 */
+}
+
+/* BEST 캠핑장, 전체 캠핑장 제목 */
+.small-title{ 
+	font-family: CJU-Bold;
+    font-size:50px;
+    text-align: center;
+    margin-bottom: 30px;
 }
 
 .wrn-btn{
@@ -108,7 +129,7 @@ h3.h3{text-align:center;margin:1em;text-transform:capitalize;font-size:1.7em;}
 .product-grid .social li a:after{content:'';height:15px;width:15px;border-radius:0;transform:translateX(-50%) rotate(45deg);top:-20px;z-index:-1}
 .product-grid .social li a:hover:after,.product-grid .social li a:hover:before{opacity:1}
 .product-grid .product-discount-label,.product-grid .product-new-label{color:#fff;background-color:#4ce262;font-size:15px;text-transform:uppercase;padding:2px 7px;display:block;position:absolute;top:10px;left:0}
-.product-grid .product-discount-label{background-color:#333;left:auto;right:0}
+.product-grid .product-discount-label{background-color:#FCC424;left:auto;right:0}
 .product-grid .rating{
 	color:#FFD200;
 	font-size:12px;

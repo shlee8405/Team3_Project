@@ -75,9 +75,32 @@ public class UserDAO {
         return sqlSessionTemplate.update("user.updateUserPassword", parameterMap);
     }
     
+    // 관리자 계정 추가
+    public int getAdminInsert(UserVO uvo) {
+    	return sqlSessionTemplate.insert("user.insertAdmin",uvo);
+    }
     
+    // 유저 밴
+    public int getBanUser(String idx) {
+    	return sqlSessionTemplate.update("user.banUser",idx);
+    }
     
-
+    // 유저 언밴
+    public int getUnbanUser(String idx) {
+    	return sqlSessionTemplate.update("user.unbanUser",idx);
+    }
+    
+    // 유저 삭제
+    public int getDeleteUser(String idx) {
+    	return sqlSessionTemplate.update("user.updateUserStatusToZero", idx);
+    }
+    
+    // 유저 수정
+    public int getUpdateUserAdmin(UserVO uvo) {
+    	return sqlSessionTemplate.update("user.updateUserInfoAdmin", uvo);
+    }
+    
+    // 
     
     
     

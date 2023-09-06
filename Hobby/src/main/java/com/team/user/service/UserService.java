@@ -30,21 +30,30 @@ public interface UserService {
 
 	 // 이메일로 아이디 찾기
 	 String findIdByEmail(String email);
-	 	// 비밀번호 리셋을 위한 이메일로 유저 찾기
-	    UserVO findUserByEmail(String email);
-
-	    // 비밀번호 리셋을 위한 새로운 비밀번호 생성
-	    String generateNewPassword();
-
-	    // 유저 비밀번호 업데이트
-	    boolean updateUserPassword(String u_id, String newPassword);
-
 	 
+ 	// 비밀번호 리셋을 위한 이메일로 유저 찾기
+    UserVO findUserByEmail(String email);
 
+    // 비밀번호 리셋을 위한 새로운 비밀번호 생성
+    String generateNewPassword();
+
+    // 유저 비밀번호 업데이트
+    boolean updateUserPassword(String u_id, String newPassword);
+
+    // 관리자 계정 추가
+    int getAdminInsert(UserVO uvo); 
+
+	// 유저 밴
+    int getBanUser(String idx);
+    
+    // 유저 언밴
+    int getUnbanUser(String idx);
 	
+	// 유저 삭제
+    int getDeleteUser(String idx);
 	
-	
-	
+    // 유저 수정
+    int getUpdateUserAdmin(UserVO uvo);
 	// 유져 1명의 정보 가져오기
 	List<UserVO> getUsers(String u_idx);
 	

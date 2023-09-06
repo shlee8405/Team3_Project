@@ -145,7 +145,8 @@ color:#ffffff!important;
             </button>
             <div class="collapse" id="account-collapse">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="/home.do" class="ps-4 link-dark rounded sidebar-link navtext">로그아웃</a></li>
+                <li><a href="/logOut.do" class="ps-4 link-dark rounded sidebar-link navtext">로그아웃</a></li>
+                <li><a href="/home.do" class="ps-4 link-dark rounded sidebar-link navtext">홈으로</a></li>
             </ul>
             </div>
         </li>
