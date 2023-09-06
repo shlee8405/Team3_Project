@@ -1286,7 +1286,8 @@ rotate(
 										style="font-size: 50px; font-family: 'Noto Sans KR', sans-serif;">/캠핑.DO</h3>
 								</div>
 								<!--이메일 입력-->
-								<div class="u_id ">
+								<div class="u_id  hiddenholder">
+								
 									<h4 style="font-family: 'Noto Sans KR', sans-serif;">아이디</h4>
 									<input type="text" name="u_id" class="pos"
 										placeholder="ID(아이디)">
@@ -1359,6 +1360,7 @@ rotate(
 		if (url=='/') {
 			url = '/home.do'
 		}
+		$( ".hiddenholder" ).append( "<input type='hidden' value='" +url + "' name='url'/>" ); 
 		// Attach event listener to Kakao login button
 		document.getElementById('kakaoLoginBtn').addEventListener('click',
 				function() {
