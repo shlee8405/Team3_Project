@@ -176,12 +176,16 @@
             <c:otherwise>
                 <c:forEach var="k" items="${list}" varStatus="vs">
                     <tr>
-                        <td style="border: 1px solid black; padding: 8px;">이름</td>
-                        <td style="border: 1px solid black; padding: 8px;">${k.u_name}</td>
-                    </tr>
-                    <tr>
                         <td style="border: 1px solid black; padding: 8px;">아이디</td>
                         <td style="border: 1px solid black; padding: 8px;">${k.u_id}</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 8px;">닉네임</td>
+                        <td style="border: 1px solid black; padding: 8px;">${k.u_nickname}</td>
+                    </tr>
+                    <tr>
+                        <td style="border: 1px solid black; padding: 8px;">이름</td>
+                        <td style="border: 1px solid black; padding: 8px;">${k.u_name}</td>
                     </tr>
                     <tr>
                         <td style="border: 1px solid black; padding: 8px;">휴대전화</td>
