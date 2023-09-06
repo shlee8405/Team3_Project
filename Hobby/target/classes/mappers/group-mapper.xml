@@ -6,51 +6,88 @@
 	<select id="count" resultType="int">
 		select count(*) from GROUPS
 	</select>
-	
+
 	<select id="allList" parameterType="Map" resultType="gvo">
-		select * from GROUPS where g_status = '1' order by g_idx desc limit #{limit} offset #{offset}
+		select *
+		from GROUPS where g_status = '1' order by g_idx desc limit #{limit}
+		offset #{offset}
 	</select>
-	
+
 	<select id="searchGroups" parameterType="gvo" resultType="gvo">
-        SELECT * FROM GROUPS 
-        WHERE g_title LIKE CONCAT('%', #{g_title}, '%')
-        AND g_cdo = #{g_cdo}
-        AND g_gugun = #{g_gugun}
-    </select>
-	
-	<select id="onelist" parameterType="String" resultType="gvo">
-		select * from GROUPS where g_idx = #{g_idx}
+		SELECT * FROM GROUPS
+		WHERE g_status = '1'
+		<if test="g_title != null and g_title != ''">
+			AND g_title LIKE CONCAT('%', #{g_title}, '%')
+		</if>
+		<if test="g_cdo != null and g_cdo != ''">
+			AND g_cdo = #{g_cdo}
+		</if>
+		<if test="g_gugun != null and g_gugun != ''">
+			AND g_gugun = #{g_gugun}
+		</if>
+		ORDER BY g_idx DESC
+		<!-- LIMIT #{limit} OFFSET #{offset} -->
 	</select>
-	
+	<!-- 검색결과 페이지수 -->
+	<select id="searchGroupsCount" parameterType="gvo" resultType="int">
+	SELECT COUNT(*) FROM GROUPS
+	WHERE g_status = '1'
+	<if test="g_title != null and g_title != ''">
+		AND g_title LIKE CONCAT('%', #{g_title}, '%')
+	</if>
+	<if test="g_cdo != null and g_cdo != ''">
+		AND g_cdo = #{g_cdo}
+	</if>
+	<if test="g_gugun != null and g_gugun != ''">
+		AND g_gugun = #{g_gugun}
+	</if>
+</select>
+
+	<select id="onelist" parameterType="String" resultType="gvo">
+		select *
+		from GROUPS where g_idx = #{g_idx}
+	</select>
+
 	<insert id="insert" parameterType="gvo">
-		insert into GROUPS(g_title,g_intro, g_fname,g_maxPeople, g_date, g_cdo, g_gugun, g_location, g_desc,g_status, u_idx)
+		insert into
+		GROUPS(g_title,g_intro, g_fname,g_maxPeople, g_date, g_cdo, g_gugun,
+		g_location, g_desc,g_status, u_idx)
 		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_cdo},#{g_gugun},#{g_location},#{g_desc},'1',#{u_idx})
 	</insert>
-	
+
 	<update id="delete" parameterType="gvo">
 		update GROUPS
-		set g_status= '0' where g_idx = #{g_idx}
+		set g_status= '0'
+		where g_idx = #{g_idx}
 	</update>
-	
+
 	<update id="update" parameterType="gvo">
-		update GROUPS set g_title= #{g_title},g_intro= #{g_intro},g_fname= #{g_fname},g_maxPeople= #{g_maxPeople},
-		g_date= #{g_date},g_cdo= #{g_cdo},g_gugun= #{g_gugun},g_location= #{g_location},g_desc= #{g_desc}, u_idx= #{u_idx} where g_idx = #{g_idx}
+		update GROUPS set g_title=
+		#{g_title},g_intro= #{g_intro},g_fname= #{g_fname},g_maxPeople=
+		#{g_maxPeople},
+		g_date= #{g_date},g_cdo= #{g_cdo},g_gugun=
+		#{g_gugun},g_location= #{g_location},g_desc= #{g_desc}, u_idx=
+		#{u_idx} where g_idx = #{g_idx}
 	</update>
-	
+
 	<select id="cmtList" parameterType="String" resultType="gcvo">
-		select * from GROUPCOMMENTS where g_idx = #{g_idx} and gc_status = '1'
+		select *
+		from GROUPCOMMENTS where g_idx = #{g_idx} and gc_status = '1'
 	</select>
-	
-	<select id="getUserCmtInfo" parameterType="String" resultType="uvo">
-        SELECT * FROM USERS WHERE u_idx = #{u_idx}
-    </select>
-    
-    <insert id="cmtInsert" parameterType="gcvo">
-		insert into GROUPCOMMENTS(gc_content, gc_date, u_idx, g_idx)
-		values(#{gc_content}, sysdate(), #{u_idx}, #{g_idx})
+
+	<select id="getUserCmtInfo" parameterType="String"
+		resultType="uvo">
+		SELECT * FROM USERS WHERE u_idx = #{u_idx}
+	</select>
+
+	<insert id="cmtInsert" parameterType="gcvo">
+		insert into
+		GROUPCOMMENTS(gc_content, gc_date, u_idx, g_idx)
+		values(#{gc_content},
+		sysdate(), #{u_idx}, #{g_idx})
 	</insert>
-    
-    <update id="cmtDel" parameterType="gcvo">
-    	update GROUPCOMMENTS set gc_status='0' where gc_idx = #{gc_idx}
-    </update>
+
+	<update id="cmtDel" parameterType="gcvo">
+		update GROUPCOMMENTS set gc_status='0' where gc_idx = #{gc_idx}
+	</update>
 </mapper>

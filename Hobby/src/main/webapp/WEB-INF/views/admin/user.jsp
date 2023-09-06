@@ -338,7 +338,179 @@ import 'datatables.net-responsive-dt';
 												<c:forEach var="k" items="${list}" varStatus="vs">
 												
 												
-													<!-- 아이디 숨기기 -->
+													<c:if test="${k.u_status==0}">
+														<tr>
+															<!-- 아이디 숨기기 -->
+															<c:choose>
+																<c:when test="${not empty k.u_id}">
+																	<c:set var="inputString" value="${k.u_id}" /> <!-- Replace with your input string -->
+																    <c:set var="firstLetter" value="${inputString.substring(0, 1)}" />
+																    <c:set var="lastLetter" value="${inputString.substring(fn:length(inputString) - 1)}" />
+																    <c:set var="middleAsterisks" value="" />
+																    <c:forEach var="i" begin="1" end="${fn:length(inputString) - 2}">
+															        <c:set var="middleAsterisks" value="${middleAsterisks}*"/>
+																    </c:forEach>
+																	<td>${firstLetter}${middleAsterisks}${lastLetter}</td>
+																</c:when>
+																
+																<c:otherwise>
+																	<td>-</td>
+																</c:otherwise>
+															</c:choose>
+															
+															<td>${k.u_nickname}</td>
+															
+															<!-- 이름 숨기기 -->
+													    	<td>탈퇴회원</td>
+															
+															<!-- 이메일 숨기기 -->
+													 	   	<td>-</td>
+															 	
+															
+															<!-- 생년월일 숨기기 -->		
+															<td>-</td>
+															
+															<!-- 핸드폰 번호 숨기기 -->
+															<td>-</td>
+															
+																	
+																	
+															<!-- 벤 유무 -->
+															<td>-</td>
+															
+															<!-- 약관 동의 -->
+															<td>-</td>
+
+
+															<!-- 유저 상세보기 -->
+															<td> 
+																<a href="#"  class="btn btn-success" style="padding:0;" data-bs-toggle="modal" data-bs-target="#modal${k.u_idx}">
+																  유저 정보 보기
+																</a>
+															</td>
+														</tr>
+														
+														<div class="modal fade" id="modal${k.u_idx}"  tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+														
+															<div class="modal-dialog modal-xl" id="oneUserModal" >
+																 <div class="modal-content">
+															      <div class="modal-header titlemodal">
+															        <h5 class="modal-title" id="exampleModalLabel"><b>${k.u_nickname}</b>님의 정보</h5>
+															        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															      </div>
+													      	 	<form>
+															      		<div class="modal-body">	
+														      			 <!-- 유저 상세보기 정보 컨테이너 -->
+															      	 		<div class="container-fluid">
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			아이디
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<input type="text" name="u_id" placeholder="${k.u_id}">
+																	      	 		</div>
+																	      	 	</div>
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			닉네임
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<input type="text" name="u_nickname" placeholder="${k.u_nickname }">
+																	      	 		</div>
+																	      	 	</div>
+																				<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			이메일
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<input type="text" name="u_email" placeholder="-" readonly>
+																	      	 		</div>
+																	      	 	</div>
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			이름
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<input type="text" name="u_name" placeholder="-" readonly>
+																	      	 		</div>
+																	      	 	</div>
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			생년월일
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<input type="text" name="u_birthday" placeholder="-"readonly>
+																	      	 		</div>
+																	      	 	</div>
+																	      	 	<div class="row"> 
+																	      	 		<div class="col labelmodal">
+																	      	 			전화번호
+																	      	 		</div>
+																	      	 		<div class="col">
+																	      	 			<input type="text" name="u_phone" placeholder="-" readonly>
+																	      	 		</div>
+																	      	 	</div>
+																	      	 	<input type="hidden" name="u_idx" value="${k.u_idx}">
+															      			</div>
+																	      
+															      		</div>
+															      		
+															      		<script type="text/javascript">
+															      			// 상세 유저 CRUD
+															      			const banUser = (idx) => {
+															      				const response = confirm("정말로 밴하겠습니까?");
+															      				if(response) location.href = "/banUserAdmin?idx="+idx;
+															      				else alert("취소하셨습니다");
+															      			}
+															      			
+															      			const unbanUser = (idx) => {
+															      				const response = confirm("정말로 밴을 풀겠습니까?");
+															      				if(response) location.href = "/unbanUserAdmin?idx="+idx;
+															      				else alert("취소하셨습니다");
+															      			}
+															      			
+															      			
+															      			const deleteUser = (idx) => {
+															      				const response = confirm("정말로 삭제 하시겠습니까?");
+															      				if(response) location.href = "/deleteUserAdmin?idx="+idx;
+															      				else alert("취소하셨습니다");
+															      			}
+															      			
+															      			function updateUser(f) {
+															      				const response = confirm("정말로 수정 하시겠습니까?");
+															      				if(response) {
+															      					f.action = "/updateUserAdmin";
+															      					f.submit();
+															      				}
+															      				else alert("취소하셨습니다");
+															      			}							
+															      			
+															      		</script>
+															      			
+																      <div class="modal-footer">
+																      <c:choose>
+																      	<c:when test="${k.u_ban == 0}">
+																	        <button type="button" onclick="banUser(${k.u_idx})" class="btn btn-danger">정지</button>
+																		</c:when>
+																		<c:otherwise>
+																	        <button type="button" onclick="unbanUser(${k.u_idx})" class="btn btn-primary">정지풀기</button>
+																		</c:otherwise>
+																      </c:choose>
+																        <button type="button" onclick="deleteUser(${k.u_idx})" class="btn btn-danger">삭제</button>
+																        <button type="button" onclick="updateUser(this.form)" class="btn btn-primary">수정</button>
+														  	            <input type="reset" class="btn btn-secondary" data-bs-dismiss="modal" value="취소"> 
+																      </div>
+														      	 </form>
+															    </div>
+															</div>
+														</div>
+														
+														
+														
+													</c:if>
+													
+													
+													
 													<c:if test="${k.u_status==1}">
 														<tr>
 															<c:choose>

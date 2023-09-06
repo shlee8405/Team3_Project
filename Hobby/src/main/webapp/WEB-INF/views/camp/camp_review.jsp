@@ -115,25 +115,27 @@
 
 <!-- 별점 평가 폼 -->
 <div class="container mt-5">
-	<div class="reviewBox">
-	<span>후기를 작성해주세요.</span>
-	<form id="reviewForm" action="/addReview.do" method="post" class="mt-3">
-		<div class="form-group star-rating">
-			<label class="star">★</label> 
-			<label class="star">★</label> 
-			<label class="star">★</label> 
-			<label class="star">★</label> 
-			<label class="star">★</label> 
-			<input type="hidden" name="rating" id="ratingValue">
+	<c:if test="${not empty sessionUidx}">
+		<div class="reviewBox">
+		<span>후기를 작성해주세요.</span>
+		<form id="reviewForm" action="/addReview.do" method="post" class="mt-3">
+			<div class="form-group star-rating">
+				<label class="star">★</label> 
+				<label class="star">★</label> 
+				<label class="star">★</label> 
+				<label class="star">★</label> 
+				<label class="star">★</label> 
+				<input type="hidden" name="rating" id="ratingValue">
+			</div>
+			<div class="form-group">
+				<textarea class="form-control" rows="4" id="comment" name="comment"></textarea>
+			</div>
+			<button type="submit" class="btn btn-success">후기 남기기</button>
+			<input type="hidden" name="facltNm" value="${cvo.facltNm}"> 
+		</form>
 		</div>
-		<div class="form-group">
-			<textarea class="form-control" rows="4" id="comment" name="comment"></textarea>
-		</div>
-		<button type="submit" class="btn btn-success">후기 남기기</button>
-		<input type="hidden" name="facltNm" value="${cvo.facltNm}"> 
-	</form>
 	</div>
-</div>
+</c:if>
 
 <!-- 저장된 후기와 별점 보여주기 -->
 <div class="container mt-5">

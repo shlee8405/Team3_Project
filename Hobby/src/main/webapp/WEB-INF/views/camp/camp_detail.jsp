@@ -15,7 +15,7 @@
    <link href="/assets/css/star.css" rel="stylesheet" />
  
 <style type="text/css">
-	.nav-tabs .nav-link {
+	.nav-tabs .nav-link !important{
 		border: 1px solid #ccc;
 		border-radius: 5px;
 		text-align: center;
@@ -49,8 +49,7 @@
     	</div>
 	</div>
 		
-	<div class="container3">
-		<hr style="border-top: 1px solid #dee2e6; margin: 20px 0;">
+	<div class="mycontainer">
 			
 		<div class="container">
 			<div class="row">
@@ -58,7 +57,7 @@
 				<!-- 캠핑장 이미지 -->
 				<div class="col-md-6">
 					<img src='${cvo.firstImageUrl == "" ? "resources/images/default_camp_img.jpg" : cvo.firstImageUrl}' 
-						 width="500px" hight="500px" alt="캠핑장 이미지" class="img-fluid">
+						 alt="캠핑장 이미지" class="camp_img">
 				</div>
 
 				<!-- 캠핑장 기본 정보 -->
@@ -117,7 +116,6 @@
  		</div>
 	</div>
 	
-	<hr style="border-top: 1px solid #dee2e6; margin: 10px;">
 
 	<!-- 탭 버튼 -->
 	<div class="container mt-3">

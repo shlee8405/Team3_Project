@@ -173,6 +173,7 @@
 		        var list = "";
 				
 				$.each(data, function (index, dataList) {
+					
 					// 제공 이미지 없을 시
 					var imageUrl = dataList.firstImageUrl == "" ? "resources/images/default_camp_img.jpg" : dataList.firstImageUrl;
 					
@@ -278,6 +279,7 @@
 										+"<img class='pic-2' src=" + imageUrl + ">" 
 										+"</a>" 
 										+"<span class='product-new-label'>" + response.doNm + "</span>" 
+										+"<span class='product-discount-label'>" + "BEST" + "</span>"
 									+"</div>" 
 									+"<div class='product-content'>" 
 										+"<div class='price'>" 

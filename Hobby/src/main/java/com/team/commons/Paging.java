@@ -24,6 +24,9 @@ public class Paging {
 	private int offset = 0;
 	
 	
+	public void setTotalPage() {
+	    this.totalPage = (int)Math.ceil((double)totalRecord / numPerPage);
+	}
 	public int getOffset() {
 		return offset;
 	}
