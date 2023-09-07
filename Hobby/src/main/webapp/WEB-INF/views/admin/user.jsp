@@ -511,7 +511,7 @@ import 'datatables.net-responsive-dt';
 													
 													
 													
-													<c:if test="${k.u_status==1}">
+													<c:if test="${k.u_status==1||k.u_status==2}">
 														<tr>
 															<c:choose>
 																<c:when test="${not empty k.u_id}">
@@ -530,7 +530,14 @@ import 'datatables.net-responsive-dt';
 																</c:otherwise>
 															</c:choose>
 															
-															<td>${k.u_nickname}</td>
+															<c:choose>
+																<c:when test="${k.u_status==2}">
+																	<td><b style="color:gold;">카카오계졍</b>:${k.u_nickname}</td>
+																</c:when>
+																<c:otherwise>
+																	<td>${k.u_nickname}</td>
+																</c:otherwise>
+															</c:choose>
 															
 															<!-- 이름 숨기기 -->
 															<c:choose>

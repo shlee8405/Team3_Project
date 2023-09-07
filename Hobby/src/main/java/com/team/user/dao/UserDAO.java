@@ -27,6 +27,11 @@ public class UserDAO {
 	public int getUserInsert(UserVO uvo) {
 		return sqlSessionTemplate.insert("user.addUser", uvo);
 	}
+	// 사용자 추가
+	public int getUserInsertKakao(UserVO uvo) {
+		return sqlSessionTemplate.insert("user.addUserKakao", uvo);
+	}
+	
 	 // 아이디로 인코딩 된 사용자 비밀번호 가져오기
 	public String getUserPass(UserVO uvo) {
 		return sqlSessionTemplate.selectOne("user.getPassWithId", uvo);

@@ -14,6 +14,10 @@ public interface UserService {
 	// 삽입
 	int getUserInsert(UserVO uvo);
 	
+	// 카카오삽입
+	int getUserInsertKakao(UserVO uvo);
+	
+	
 	// 유저 비밀번호 추출
 	String getUserPass(UserVO uvo);
 	

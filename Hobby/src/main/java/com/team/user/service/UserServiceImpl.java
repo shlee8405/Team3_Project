@@ -30,7 +30,10 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getUserInsert(uvo);
 	}
 
-
+	@Override
+	public int getUserInsertKakao(UserVO uvo) {
+		return userDAO.getUserInsertKakao(uvo);
+	}
 
 	@Override
 	public String getUserPass(UserVO uvo) {

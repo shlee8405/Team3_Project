@@ -295,7 +295,7 @@ public class MyController {
 	@GetMapping("/adminGroup.do")
 	public ModelAndView goAdminGroup() /* 愿�由ъ옄 洹몃９ */ {
 		ModelAndView mv = new ModelAndView("admin/group");
-		List<GroupVO> list = groupService.getAllGroups();
+		List<GroupVO> list = groupService.getAllGroupsNoPaging();
 		mv.addObject("list", list);
 		return mv;
 	}
