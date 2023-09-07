@@ -12,6 +12,11 @@
 		from GROUPS where g_status = '1' order by g_idx desc limit #{limit}
 		offset #{offset}
 	</select>
+	
+	<select id="allListNoPaging" resultType="gvo">
+		select *
+		from GROUPS where g_status = '1' order by g_idx desc 
+	</select>
 
 	<select id="searchGroups" parameterType="gvo" resultType="gvo">
 		SELECT * FROM GROUPS

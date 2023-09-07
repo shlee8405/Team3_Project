@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html >
 <head>
@@ -249,7 +250,9 @@ body {
 
     </style>
 
+    
     <script>
+    
 	$('.navTrigger').click(function () {
     	$(this).toggleClass('active');
     	console.log("Clicked menu");
@@ -309,6 +312,7 @@ body {
     </script>
 </head>
 <body>
+
     <nav class="navHD">
         <div class="containerHD">
             <div class="logo">
@@ -411,7 +415,7 @@ body {
 
 						<form action="/login.do" method="post">
 							<div class="login-modal login container ms-0 me-0">
-							<
+							
 								<div class="row">
 									<h3
 										style="font-size: 50px; font-family: 'Noto Sans KR', sans-serif;">/캠핑.DO</h3>
@@ -647,7 +651,18 @@ body {
 	</div>
 
 	
-
+<c:if test='${loginChk=="wrong"}'>
+    <script>
+        alert("wrong pass");
+    </script>
+    <c:remove var="loginChk" scope="session" />
+</c:if>
+<c:if test='${loginChk=="invalid"}'>
+    <script>
+        alert("wrong id");
+    </script>
+    <c:remove var="loginChk" scope="session" />
+</c:if>
 
     
     
@@ -655,7 +670,8 @@ body {
     
     
     <footer class="footerHD" >
-    	<div> hi</div>
+    	<div> hi${loginChk}</div>
+    	<h1></h1>
     </footer>
 </body>
 </html>

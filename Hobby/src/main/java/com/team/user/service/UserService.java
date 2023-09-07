@@ -14,6 +14,10 @@ public interface UserService {
 	// 삽입
 	int getUserInsert(UserVO uvo);
 	
+	// 카카오삽입
+	int getUserInsertKakao(UserVO uvo);
+	
+	
 	// 유저 비밀번호 추출
 	String getUserPass(UserVO uvo);
 	
@@ -58,6 +62,14 @@ public interface UserService {
 	List<UserVO> getUsers(String u_idx);
 	
 	int pass(String u_idx, String encodedNewPassword);
+	
+	
+	// 유저 상세 검색 (닉네임)
+	List<UserVO> getUsersWithNickname(String u_nickname);
+	
+	List<UserVO> getUsersWithBirthday(String u_birthday);
+	
+	List<UserVO> getUsersWithPhone(String u_phone); 
 	
 
 }

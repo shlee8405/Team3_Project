@@ -24,6 +24,11 @@ public class GroupServiceImpl implements GroupService {
 	public List<GroupVO> getAllGroups() {
 		return groupDAO.getAllGroups();
 	}
+
+	@Override
+	public List<GroupVO> getAllGroupsNoPaging() {
+		return groupDAO.getAllGroupsAdmin();
+	}
 	
 	@Override
 	public List<GroupVO> getAllGroups(int offset, int limit) {

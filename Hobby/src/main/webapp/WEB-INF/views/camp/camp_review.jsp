@@ -130,7 +130,7 @@
 			<div class="form-group">
 				<textarea class="form-control" rows="4" id="comment" name="comment"></textarea>
 			</div>
-			<button type="submit" class="btn btn-success">후기 남기기</button>
+			<button type="submit" class="btn btn-outline-success">후기 남기기</button>
 			<input type="hidden" name="facltNm" value="${cvo.facltNm}"> 
 		</form>
 		</div>
@@ -153,12 +153,12 @@
                         </c:forEach>
                     </p>
                     
-                    <!-- 삭제 버튼 -->
+                    <!-- 수정, 삭제 버튼 -->
 					<c:if test="${sessionUidx == review.u_idx}">
 					    <form id="deleteForm_${review.id}" action="/deleteReview.do" method="post">
 					        <input type="hidden" name="id" value="${review.id}">
 					        <input type="hidden" name="facltNm" value="${review.facltNm}">
-					        <button type="button" onclick="confirmDelete(${review.id})" class="btn btn-link btn-sm delete-button">X</button>
+					        <button type="button" onclick="confirmDelete(${review.id})" class="btn btn-outline-danger">X</button>
 					    </form>
 					</c:if>
                 </div>

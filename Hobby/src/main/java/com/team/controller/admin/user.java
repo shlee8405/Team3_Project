@@ -1,7 +1,6 @@
 package com.team.controller.admin;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -102,9 +101,27 @@ public class user {
 	
 	@GetMapping("/adminUserPageDetailSearch")
 	public ModelAndView dEtAiLsEaRcHaDmInPaGe(@RequestParam("text") String text, @RequestParam("query") String subject, HttpSession session) {
-		ModelAndView mv = new ModelAndView("redirect:/adminUser.do");
+		ModelAndView mv = new ModelAndView("admin/user");
 		System.out.println("text is "+text);
 		System.out.println("subject is "+subject);
+		
+		if (subject.equals("1")) {
+			String newText = "%"+text+"%";
+			System.out.println("newText is "+ newText);
+			List<UserVO> list = userService.getUsersWithNickname(newText);
+			mv.addObject("list", list);
+			return mv;
+		} else if (subject.equals("2")) {
+			String newText = text+"%";
+			System.out.println("newText is "+ newText);
+			List<UserVO> list = userService.getUsersWithBirthday(newText);
+			mv.addObject("list",list);
+		} else if (subject.equals("3")) {
+			String newText = "%"+text;
+			System.out.println("newText is "+ newText);
+			List<UserVO> list = userService.getUsersWithPhone(newText);
+			mv.addObject("list",list);
+		}
 		return mv;
 	}
 }

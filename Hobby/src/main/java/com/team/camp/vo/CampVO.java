@@ -25,6 +25,16 @@ public class CampVO {
 
 	private int likesCount, wishCount;
 	
+	private double averageRating;
+	
+	public double getAverageRating() {
+		return averageRating;
+	}
+
+	public void setAverageRating(double averageRating) {
+		this.averageRating = averageRating;
+	}
+
 	public int getWishCount() {
 		return wishCount;
 	}

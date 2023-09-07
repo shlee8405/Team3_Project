@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 유저 관리</title>
+<title>유저 관리</title>
 
 <style type="text/css">
 
@@ -195,10 +195,18 @@ import 'datatables.net-responsive-dt';
     }
     
     $(document).ready( function () {
-        $('#myTable2').DataTable();
+    	try{
+	        $('#myTable2').DataTable();
+    	}catch {
+    	}
     } );
     $(document).ready( function () {
-	    $('#myTable1').DataTable();
+	    try{
+	    	$('#myTable1').DataTable();
+	    }catch{
+	    	
+	    }
+	    	
     } );
     $(document).ready(()=>{
     	var actionControl = "${adminActionControl}";
@@ -288,7 +296,6 @@ import 'datatables.net-responsive-dt';
 							else {
 								const subject = document.getElementById("searchTextSelect").value;
 								if (subject == '1') {
-									alert('닉네임 검색 ㄱ' +  text);
 									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
 								} else if (subject == '2') {
 									alert('출생년도 검색 ㄱ' + text);
@@ -302,11 +309,17 @@ import 'datatables.net-responsive-dt';
 							}
 							
 						}
+						function refresh() {
+							location.href="/adminUser.do";
+						}
 						</script>
 						<div class="col" style=" align-items:center;"> 
 							<input class="row-content btn btn-success" type="button" onclick='search()' style="width:100%" value="검색">
 						</div>
-						<div class="col-4"> </div>
+						<div class="col" style="align-items:center;">
+							<input class="row-content btn btn-success" type="button" onclick='refresh()' style="width:100%" value="전체보기">
+						</div>
+						<div class="col-3"> </div>
 		       		</div>
 		       		
 		        </div>
@@ -315,23 +328,34 @@ import 'datatables.net-responsive-dt';
 		        <div class="bottomcontainer ms-2 me-3 mt-1"   style="height:70vh;">
 		                <table class="display" id="myTable1">	
 		                    <thead class="table-success" >
-		                        <tr>
-		                            <th> 아이디 </th>
-		                            <th> 닉네임 </th>
-		                            <th> 이름 </th>
-		                            <th> 이메일</th>
-		                            <th> 생년월일</th>
-		                            <th> 전화번호 </th>
-		                            <th> 밴유무 </th>
-		                            <th> 약관동의</th>
-		                            <th> 더보기 </th>
-		                        </tr>
+			                   	<c:choose>
+			                   		<c:when test="${empty list}">
+										<tr>
+											<th></th>
+										</tr>
+			                   		</c:when>
+			                   		<c:otherwise>
+				                           <tr>
+					                            <th> 아이디 </th>
+					                            <th> 닉네임 </th>
+					                            <th> 이름 </th>
+					                            <th> 이메일</th>
+					                            <th> 생년월일</th>
+					                            <th> 전화번호 </th>
+					                            <th> 밴유무 </th>
+					                            <th> 약관동의</th>
+					                            <th> 더보기 </th>
+					                        </tr>
+			                   		</c:otherwise>
+			                   	</c:choose>
+		                        
+		            
 		                     </thead>
 		                     <tbody class="table-group-divider">
 								<c:choose>
 											<c:when test="${empty list}">
 												<tr>
-													<td colspan="4"><h2>원하는 정보가 존재하지 않습니다.</h2></td>
+													<td ><h2>원하는 정보가 존재하지 않습니다.</h2></td>
 												</tr>
 											</c:when>
 											<c:otherwise>
@@ -511,7 +535,7 @@ import 'datatables.net-responsive-dt';
 													
 													
 													
-													<c:if test="${k.u_status==1}">
+													<c:if test="${k.u_status==1||k.u_status==2}">
 														<tr>
 															<c:choose>
 																<c:when test="${not empty k.u_id}">
@@ -530,7 +554,14 @@ import 'datatables.net-responsive-dt';
 																</c:otherwise>
 															</c:choose>
 															
-															<td>${k.u_nickname}</td>
+															<c:choose>
+																<c:when test="${k.u_status==2}">
+																	<td><b style="color:gold;">카카오계졍</b>:${k.u_nickname}</td>
+																</c:when>
+																<c:otherwise>
+																	<td>${k.u_nickname}</td>
+																</c:otherwise>
+															</c:choose>
 															
 															<!-- 이름 숨기기 -->
 															<c:choose>
@@ -893,18 +924,27 @@ import 'datatables.net-responsive-dt';
 		        <div class="bottomcontainer ms-2 me-3 mt-1"   style="height:70vh;">
 		                <table class="display" id="myTable2" >	
 		                    <thead class="table-success" >
-		                        <tr>
-		                            <th> 아이디 </th>
-		                            <th> 닉네임 </th>
-		                            <th> 비밀번호</th>
-		                            <th> 더보기 </th>
-		                        </tr>
+			                   	<c:choose>
+			                   		<c:when test="${empty list}">
+										<tr>
+											<th></th>
+										</tr>
+			                   		</c:when>
+			                   		<c:otherwise>
+				                        <tr>
+				                            <th> 아이디 </th>
+				                            <th> 닉네임 </th>
+				                            <th> 비밀번호</th>
+				                            <th> 더보기 </th>
+				                        </tr>
+			                   		</c:otherwise>
+			                   	</c:choose>
 		                     </thead>
 		                     <tbody class="table-group-divider">
 								<c:choose>
 											<c:when test="${empty list}">
 												<tr>
-													<td colspan="4"><h2>원하는 정보가 존재하지 않습니다.</h2></td>
+													<td><h2>원하는 정보가 존재하지 않습니다.</h2></td>
 												</tr>
 											</c:when>
 											<c:otherwise>

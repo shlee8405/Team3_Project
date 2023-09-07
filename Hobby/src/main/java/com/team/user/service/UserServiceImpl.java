@@ -30,7 +30,10 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getUserInsert(uvo);
 	}
 
-
+	@Override
+	public int getUserInsertKakao(UserVO uvo) {
+		return userDAO.getUserInsertKakao(uvo);
+	}
 
 	@Override
 	public String getUserPass(UserVO uvo) {
@@ -118,12 +121,6 @@ public class UserServiceImpl implements UserService{
     	return userDAO.getUpdateUserAdmin(uvo);
     }
 
-
-
-	
-	
-	
-	
 	@Override
 	public List<UserVO> getUsers(String u_idx) {
 		return userDAO.getUsers(u_idx);
@@ -134,6 +131,19 @@ public class UserServiceImpl implements UserService{
 		return userDAO.pass(u_idx,encodedNewPassword);
 	}
 	
+	@Override
+	public List<UserVO> getUsersWithNickname(String u_nickname) {
+		return userDAO.getUsersWithNickname(u_nickname);
+	}
 	
+	@Override
+	public List<UserVO> getUsersWithBirthday(String u_birthday) {
+		return userDAO.getUsersWithBirthday(u_birthday);
+	}
+	
+	@Override
+	public List<UserVO> getUsersWithPhone(String u_phone) {
+		return userDAO.getUsersWithPhone(u_phone);
+	}
 
 }

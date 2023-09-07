@@ -27,6 +27,11 @@ public class UserDAO {
 	public int getUserInsert(UserVO uvo) {
 		return sqlSessionTemplate.insert("user.addUser", uvo);
 	}
+	// 사용자 추가
+	public int getUserInsertKakao(UserVO uvo) {
+		return sqlSessionTemplate.insert("user.addUserKakao", uvo);
+	}
+	
 	 // 아이디로 인코딩 된 사용자 비밀번호 가져오기
 	public String getUserPass(UserVO uvo) {
 		return sqlSessionTemplate.selectOne("user.getPassWithId", uvo);
@@ -101,9 +106,6 @@ public class UserDAO {
     // 
     
     
-    
-    
-    
     public List<UserVO> getUsers(String u_idx) {
     	return sqlSessionTemplate.selectList("user.one",u_idx);
     }
@@ -113,6 +115,22 @@ public class UserDAO {
     	 map.put("u_idx", u_idx);
     	 map.put("u_pw", encodedNewPassword);
          return sqlSessionTemplate.update("user.pass", map);
+    }
+    
+    //닉네임으로 유저들 검색
+    public List<UserVO> getUsersWithNickname(String u_nickname){
+    	List<UserVO> list = sqlSessionTemplate.selectList("user.allListByNickname", u_nickname);
+    	return list;
+    }
+    //생년으로 유저들 검색    
+    public List<UserVO> getUsersWithBirthday(String u_birthday){
+    	List<UserVO> list = sqlSessionTemplate.selectList("user.allListByBirthday", u_birthday);
+    	return list;
+    }
+    //전화번호 4자리로 유저들 검색
+    public List<UserVO> getUsersWithPhone(String u_phone){
+    	List<UserVO> list = sqlSessionTemplate.selectList("user.allListByPhone", u_phone);
+    	return list;
     }
     
 

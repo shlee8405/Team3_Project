@@ -86,7 +86,7 @@ public class CampServiceImpl implements CampService {
 	public void deleteReview(int id, String u_idx) {
 		campDAO.deleteReview(id, u_idx);
 	}
-
+	
 	// 해당 캠핑장의 모든 후기와 별점 가져오기
 	@Override
 	public List<ReviewVO> getReviews(String facltNm) {

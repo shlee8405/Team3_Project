@@ -26,6 +26,11 @@ public class GroupDAO {
 		return sqlSessionTemplate.selectList("group.allList");
 	}
 	
+	// group select * no paging
+	public List<GroupVO> getAllGroupsAdmin() {
+		return sqlSessionTemplate.selectList("group.allListNoPaging");
+	}
+	
 	public List<GroupVO> getAllGroups(int offset, int limit) {
 		Map<String, Integer> map = new HashMap<String, Integer>();
 		map.put("limit", limit);

@@ -128,7 +128,7 @@ public class CampDAO {
 		return result;
 	}
 
-	// 후기삭제
+	// 후기 삭제
 	public int deleteReview(int id, String u_idx) {
 		Map<String, Object> params = new HashMap<>();
 		params.put("id", id);

@@ -108,6 +108,8 @@ public class UserController {
         System.out.println(url);
         // 없으면 종료
         if(res == 0) {
+        	request.getSession().getServletContext().setAttribute("loginChk", "invalid");
+        	mv.setViewName("redirect:"+url);
         	return mv;
         }
                
@@ -117,7 +119,8 @@ public class UserController {
         // 비밀번호 디코딩
         try {
 			if (!passwordEncoder.matches(uvo.getU_pw(), dbpw)) {
-				request.getSession().getServletContext().setAttribute("LoginChk", "fail");
+				request.getSession().getServletContext().setAttribute("loginChk", "wrong");
+				mv.setViewName("redirect:"+url);
 				return mv;
 			} else {
 				UserVO dbuvo = userService.getUserVoWithId(uvo.getU_id());
@@ -205,24 +208,6 @@ public class UserController {
 		 LinkedTreeMap<String, String> kakaomap = (LinkedTreeMap<String, String>) kakaovo.getProperties();
 		 //kakaovo.getId() = 카카오 고유 아이디
 		 //kakaomap.get("nickname") = 카카오 계정 이름
-		 
-		 /* 
-		 pseudocode
-		 
-		 result = service.dao.getId(kakaoId)
-		 
-		 if(result exists) {
-		 
-		 	add idx to session
-		 	continue
-		 } else {
-		 	insert id to DB
-		 	fetch idx 
-		 	insert idx to session
-		 	continue
-		 }
-		  */
-
 		 String kakaoId = kakaovo.getId();
 		 String kakaoName = kakaomap.get("nickname");
 		 System.out.println("kakao Object url is "+kakaovo.getUrl());
@@ -230,6 +215,7 @@ public class UserController {
 		 boolean result = userService.isIdDuplicate(kakaoId);
 		 if(result) {
 			 UserVO dbuvo = userService.getUserVoWithId(kakaoId);
+			 System.out.println("kakaoLogin.do u_ban==1 is :" + dbuvo.getU_ban().equals("1"));
 			 System.out.println("kakaoLogin.do retrieve id successfull id: " + kakaoId );
 			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
 			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
@@ -241,7 +227,7 @@ public class UserController {
 			 uvo.setU_id(kakaoId);
 			 uvo.setU_nickname(kakaoName);
 			 uvo.setU_name(kakaoName);
-			 int insertResult = userService.getUserInsert(uvo);
+			 int insertResult = userService.getUserInsertKakao(uvo);
 			 UserVO dbuvo = userService.getUserVoWithId(kakaoId);
 			 System.out.println("kakaoLogin.do insert id successfull  id: " + kakaoId);
 			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
@@ -252,15 +238,8 @@ public class UserController {
 		 }
 	 }
 	 
-	 
 	 @RequestMapping("/forgotId.do")
 	 public String forgotId(@RequestBody String encodedEmail) {
-//	     if (encodedEmail.isEmpty()) {
-//	         return ResponseEntity.badRequest().body("이메일 주소가 유효하지 않습니다.");
-//	     }
-//	     System.out.println(encodedEmail);
-//	     String foundId = userService.findIdByEmail(encodedEmail);
-		 
 		 String decodedEmail2 = "";
 		    try {
 		        decodedEmail2 = URLDecoder.decode(encodedEmail, "UTF-8");

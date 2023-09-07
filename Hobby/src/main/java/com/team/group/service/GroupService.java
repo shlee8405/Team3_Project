@@ -10,6 +10,9 @@ public interface GroupService {
 
 	public List<GroupVO> getAllGroups();
 	
+	// group select * no paging
+	public List<GroupVO> getAllGroupsNoPaging();
+	
 	// 전체 게시물의 수
 	public int getTotalCount() ;
 	// 페이징처리를 위한 리스트
