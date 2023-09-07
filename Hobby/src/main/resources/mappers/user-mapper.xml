@@ -8,6 +8,19 @@
 		select * from USERS 
 	</select>
 	
+	<select id="allListByNickname" parameterType="String" resultType="uvo">
+		select * from USERS where u_nickname like #{u_nickname}
+	</select>
+	
+	<select id="allListByBirthday" parameterType="String" resultType="uvo">
+		select * from USERS where u_birthday like #{u_birthday}
+	</select>
+	
+	<select id="allListByPhone" parameterType="String" resultType="uvo">
+		select * from USERS where u_phone like #{u_phone}
+	</select>
+	
+	
 	<insert id="addUser" parameterType="uvo" >
 		insert INTO USERS(u_id, u_pw, u_name ,u_nickname, u_birthday, u_email, u_phone)
 		VALUES(#{u_id}, #{u_pw},#{u_name} ,#{u_nickname}, #{u_birthday}, #{u_email}, #{u_phone})

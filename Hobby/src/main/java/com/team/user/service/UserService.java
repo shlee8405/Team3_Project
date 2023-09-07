@@ -63,5 +63,13 @@ public interface UserService {
 	
 	int pass(String u_idx, String encodedNewPassword);
 	
+	
+	// 유저 상세 검색 (닉네임)
+	List<UserVO> getUsersWithNickname(String u_nickname);
+	
+	List<UserVO> getUsersWithBirthday(String u_birthday);
+	
+	List<UserVO> getUsersWithPhone(String u_phone); 
+	
 
 }

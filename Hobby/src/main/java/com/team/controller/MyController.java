@@ -277,44 +277,6 @@ public class MyController {
 	 * �닔�젙 { ModelAndView mv = new ModelAndView("user/myPageEdit"); return mv; }
 	 */
 
-	// 愿�由ъ옄 愿��젴 controls
-	@GetMapping("/adminHome.do")
-	public ModelAndView goAdminHome() /* 愿�由ъ옄 �솃 */ {
-		return new ModelAndView("admin/home");
-	}
-
-
-	@GetMapping("/adminUser.do")
-	public ModelAndView goAdminUser() /* 愿�由ъ옄 �쑀�� */ {
-		ModelAndView mv = new ModelAndView("admin/user");
-		List<UserVO> list = userService.getAllUsers();
-		mv.addObject("list", list);
-		return mv;
-	}
-
-	@GetMapping("/adminGroup.do")
-	public ModelAndView goAdminGroup() /* 愿�由ъ옄 洹몃９ */ {
-		ModelAndView mv = new ModelAndView("admin/group");
-		List<GroupVO> list = groupService.getAllGroupsNoPaging();
-		mv.addObject("list", list);
-		return mv;
-	}
-
-	@GetMapping("/adminQNA.do")
-	public ModelAndView goAdminQNA() /* 愿�由ъ옄 1��1 */ {
-		ModelAndView mv = new ModelAndView("admin/qna");
-		List<QnaVO> list = qnaService.getAllQna();
-		mv.addObject("list", list);
-		return mv;
-	}
-
-	@GetMapping("/adminReport.do")
-	public ModelAndView goAdminReport() /* 愿�由ъ옄 �떊怨� */ {
-		ModelAndView mv = new ModelAndView("admin/report");
-		List<ReportVO> list = reportService.getAllReports();
-		mv.addObject("list", list);
-		return mv;
-	}
 
 	// �쉶�썝媛��엯, 濡쒓렇�씤 controls
 	@GetMapping("/login.do")
