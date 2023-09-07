@@ -2,8 +2,9 @@ package com.team.controller.group;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -142,26 +143,61 @@ public class GroupController {
 	}
 	@GetMapping("/group_onelist.do")
 	public ModelAndView getGroupOnelist(HttpServletRequest request, HttpSession session) {
-		ModelAndView mv = new ModelAndView("group/groupOnelist");
-		String g_idx = request.getParameter("g_idx");
-		String cPage = request.getParameter("cPage");
-		
-		// 상세보기
-		GroupVO gvo = groupService.getGroupOnelist(g_idx);
-		// 댓글 가져오기
-		List<GroupCmtVO> gc_list = groupService.getCommList(g_idx);
-		
-		mv.addObject("uvo", new UserVO().getU_id());
-		mv.addObject("gvo", gvo);
-		mv.addObject("gc_list",gc_list);
-		mv.addObject("cPage", cPage);
-		//mv.addObject("uvo", userInfo);
-		
-		// 사용자의 u_idx를 이용하여 사용자 정보 가져오기
-        /*UserVO user = groupService.getUserCmtInfo(userInfo.getU_idx());
-        mv.addObject("user", user);*/
-		return mv;
+	    ModelAndView mv = new ModelAndView("group/groupOnelist");
+	    String g_idx = request.getParameter("g_idx");
+	    String cPage = request.getParameter("cPage");
+	    
+	    // 여기에 코드를 삽입합니다.
+	    String userIdx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+	    int participationCount = groupService.checkUserParticipation(g_idx, userIdx);
+	    boolean isParticipated = participationCount > 0;
+
+	    mv.addObject("isParticipated", isParticipated);
+
+	    // 상세보기
+	    GroupVO gvo = groupService.getGroupOnelist(g_idx);
+	    // 댓글 가져오기
+	    List<GroupCmtVO> gc_list = groupService.getCommList(g_idx);
+	    
+	    mv.addObject("uvo", new UserVO().getU_id());
+	    mv.addObject("gvo", gvo);
+	    mv.addObject("gc_list",gc_list);
+	    mv.addObject("cPage", cPage);
+	    //mv.addObject("uvo", userInfo);
+	    
+	    // 사용자의 u_idx를 이용하여 사용자 정보 가져오기
+	    /*UserVO user = groupService.getUserCmtInfo(userInfo.getU_idx());
+	    mv.addObject("user", user);*/
+	    return mv;
 	}
+	
+	@PostMapping("/joinGroup.do")
+	@ResponseBody
+	public Map<String, Boolean> joinGroup(String g_idx, String u_idx) {
+	    Map<String, Boolean> result = new HashMap<>();
+	    try {
+	        groupService.joinGroup(g_idx, u_idx);
+	        result.put("success", true);
+	    } catch (Exception e) {
+	        result.put("success", false);
+	    }
+	    return result;
+	}
+
+	@PostMapping("/cancelParticipation.do")
+	@ResponseBody
+	public Map<String, Boolean> cancelParticipation(String g_idx, String u_idx) {
+	    Map<String, Boolean> result = new HashMap<>();
+	    try {
+	        groupService.cancelParticipation(g_idx, u_idx);
+	        result.put("success", true);
+	    } catch (Exception e) {
+	        result.put("success", false);
+	    }
+	    return result;
+	}
+
+
 	@PostMapping("/groupDelete.do")
 	public ModelAndView getGroupDelete(GroupVO gvo) {
 		ModelAndView mv = new ModelAndView("redirect:/groupList.do");

@@ -20,6 +20,10 @@ public interface GroupService {
 	public int getGroupWriteOk(GroupVO gvo);
 	// 상세보기
 	public GroupVO getGroupOnelist(String g_idx);
+	// 참여하기
+	public int checkUserParticipation(String g_idx, String u_idx);
+	public void joinGroup(String g_idx, String u_idx);
+	public void cancelParticipation(String g_idx, String u_idx);
 	// 삭제하기
 	public int getGroupDelete(GroupVO g_idx);
 	// 수정하기
