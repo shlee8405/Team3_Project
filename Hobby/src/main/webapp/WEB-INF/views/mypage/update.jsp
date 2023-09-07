@@ -3,13 +3,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>내 정보 수정</title>
 <style type="text/css">
 .my-page-title{
@@ -29,10 +25,7 @@
 	color: black;
     border-color: #637F42;
 }
-.btn-custom:hover{ 
-	background-color: #637F42;
-	color: white;
-}
+
 .btn-comp {
     flex-grow: 1;
     transition: background-color 0.3s; /* 애니메이션 효과 추가 */
@@ -96,42 +89,82 @@ div {
 
     }
 	
+	var buttonStyles = {};
+
+	function applyHover(buttonId) {
+	    var button = document.getElementById(buttonId);
+	    buttonStyles[buttonId] = {
+	        backgroundColor: button.style.backgroundColor,
+	        color: button.style.color
+	    };
+
+	    button.style.backgroundColor = '#4f6d3a';
+	    button.style.color = 'white';
+
+	    // 다른 버튼들의 스타일을 초기 스타일로 설정
+	    for (var id in buttonStyles) {
+	        if (id !== buttonId) {
+	            var otherButton = document.getElementById(id);
+	            var style = buttonStyles[id];
+	            otherButton.style.backgroundColor = style.backgroundColor;
+	            otherButton.style.color = style.color;
+	        }
+	    }
+	}
+
+	function removeHover(buttonId) {
+	    // 호버 이벤트가 제거될 때 해당 버튼의 스타일을 초기 스타일로 복원
+	    var button = document.getElementById(buttonId);
+	    var style = buttonStyles[buttonId];
+	    if (style) {
+	        button.style.backgroundColor = style.backgroundColor;
+	        button.style.color = style.color;
+	    }
+	}
+	
 </script>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
 	<div style="position: relative; top: 200px; z-index: 1;"></div>
 	<div class="my-page-title">
-		<h1>마이페이지</h1>
+		<h1>내 정보 수정</h1>
 	</div>
 	
 	<!-- 메뉴바 -->
-	<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
-    	<button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
-        <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
-        <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myqna.do')">1:1문의 내역</button>
-        <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
-    </div>
+	<div  style="margin: auto;">
+		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
+		    <button id="button1" type="button" onmouseover="applyHover('button1');" onmouseout="removeHover('button1');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
+		    <button id="button2" type="button" onmouseover="applyHover('button2');" onmouseout="removeHover('button2');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
+		    <button id="button4" type="button" onmouseover="applyHover('button4');" onmouseout="removeHover('button4');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
+		</div>
+	</div>
     <div class="scrollable-content">
-    <div style="margin-top: 80px;"></div>
+    <div style="margin-top: 40px;"></div>
     <form method="post" onsubmit="return validateEmail(this);">
             <table>
+            <thead>
+		    	<tr>
+		            <th style="border: 1px solid black; padding: 8px;">항목</th>
+		            <th style="border: 1px solid black; padding: 8px;">내용</th>
+		        </tr>
+		    </thead>
 				<tr align="center">
-					<td bgcolor="#637F42" style="color:white">닉네임</td>
-					<td><input type="text" name="u_nickname" value="${user.u_nickname }" size ="20"/></td>
+					<td style="border: 1px solid black; padding: 8px;">닉네임</td>
+					<td style="border: 1px solid black; padding: 8px;"><input type="text" name="u_nickname" value="${user.u_nickname }" size ="20"/></td>
 				</tr>
 				<tr align="center">
-					<td bgcolor="#637F42" style="color:white">휴대전화</td>
-					<td><input type="text" name="u_phone" value="${user.u_phone }" size ="20"/></td>
+					<td style="border: 1px solid black; padding: 8px;">휴대전화</td>
+					<td style="border: 1px solid black; padding: 8px;"><input type="text" name="u_phone" value="${user.u_phone }" size ="20"/></td>
 				</tr>
 				<tr align="center" >
-					<td bgcolor="#637F42" style="color:white">이메일</td>
-					<td><input type="text" name="u_email" value="${user.u_email}" size ="20"/></td>
+					<td style="border: 1px solid black; padding: 8px;">이메일</td>
+					<td style="border: 1px solid black; padding: 8px;"><input type="text" name="u_email" value="${user.u_email}" size ="20"/></td>
 				</tr>
 				
 				<tfoot>
 					<tr align="center">
-			            <td colspan="2">
+			            <td colspan="2" style="border: 1px solid black; padding: 8px;">
 			                <input type="hidden" name="u_idx" value="${user.u_idx}">
 			                <input type="button" value="완료" onclick="validateEmail(this.form);" />
 			                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;

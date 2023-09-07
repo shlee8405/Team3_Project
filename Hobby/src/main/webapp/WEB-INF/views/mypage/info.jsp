@@ -142,7 +142,7 @@
 	<jsp:include page="../header.jsp" />
 	<div style="position: relative; top: 200px; z-index: 1;"></div>
 	<div class="my-page-title">
-		<h1>마이페이지</h1>
+		<h1>내 정보</h1>
 	</div>
 	
 	<div>
@@ -150,7 +150,6 @@
 		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
 		    <button id="button1" type="button" onmouseover="applyHover('button1');" onmouseout="removeHover('button1');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
 		    <button id="button2" type="button" onmouseover="applyHover('button2');" onmouseout="removeHover('button2');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
-		    <button id="button3" type="button" onmouseover="applyHover('button3');" onmouseout="removeHover('button3');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myqna.do')">1:1문의 내역</button>
 		    <button id="button4" type="button" onmouseover="applyHover('button4');" onmouseout="removeHover('button4');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
 		</div>
 
@@ -207,7 +206,7 @@
 				<input type="submit" onclick="sendData2(this.form)" value="비밀번호 변경">
 			</div>
 			</form>
-		</div>
+		</div>	
     </div>
 	<script type="text/javascript">
 		function goToPage(url){

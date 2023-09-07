@@ -3,14 +3,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>내 정보 수정</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>내 정보 수정</title>
 <style type="text/css">
 .my-page-title{
 	text-align: center; /* 가운데 정렬 */
@@ -21,7 +17,6 @@
     display: flex; /* 가로 정렬 */
     justify-content: space-between; /* 양 옆 여백 */
     max-width: 1100px; /* 최대 폭 설정 */
-    margin: 0 auto; /* 가운데 정렬 */
     padding: 0 1px; /* 왼쪽과 오른쪽 여백 설정 */
 }
 .btn-custom{
@@ -29,10 +24,7 @@
 	color: black;
     border-color: #637F42;
 }
-.btn-custom:hover{ 
-	background-color: #637F42;
-	color: white;
-}
+
 .btn-comp {
     flex-grow: 1;
     transition: background-color 0.3s; /* 애니메이션 효과 추가 */
@@ -79,7 +71,9 @@ function save_go(f) {
 	f.submit();
 }
 
-
+function goBack() {
+    window.history.back();
+}
 
 function goToPage(url){
 	location.href = url;
@@ -93,50 +87,92 @@ window.onload = function() {
 }
 
 
+
+var buttonStyles = {};
+
+function applyHover(buttonId) {
+    var button = document.getElementById(buttonId);
+    buttonStyles[buttonId] = {
+        backgroundColor: button.style.backgroundColor,
+        color: button.style.color
+    };
+
+    button.style.backgroundColor = '#4f6d3a';
+    button.style.color = 'white';
+
+    // 다른 버튼들의 스타일을 초기 스타일로 설정
+    for (var id in buttonStyles) {
+        if (id !== buttonId) {
+            var otherButton = document.getElementById(id);
+            var style = buttonStyles[id];
+            otherButton.style.backgroundColor = style.backgroundColor;
+            otherButton.style.color = style.color;
+        }
+    }
+}
+
+function removeHover(buttonId) {
+    // 호버 이벤트가 제거될 때 해당 버튼의 스타일을 초기 스타일로 복원
+    var button = document.getElementById(buttonId);
+    var style = buttonStyles[buttonId];
+    if (style) {
+        button.style.backgroundColor = style.backgroundColor;
+        button.style.color = style.color;
+    }
+}
+
+
 </script>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
 	<div style="position: relative; top: 200px; z-index: 1;"></div>
 	<div class="my-page-title">
-		<h1>마이페이지</h1>
+		<h1>비밀번호 변경</h1>
 	</div>
 	
 	<!-- 메뉴바 -->
-	<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
-    	<button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
-        <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
-        <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myqna.do')">1:1문의 내역</button>
-        <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
-    </div>
-    <div class="scrollable-content">
-    <div style="margin-top: 80px;"></div>
+	<div  style="margin: auto;">
+		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
+		    <button id="button1" type="button" onmouseover="applyHover('button1');" onmouseout="removeHover('button1');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
+		    <button id="button2" type="button" onmouseover="applyHover('button2');" onmouseout="removeHover('button2');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
+		    <button id="button4" type="button" onmouseover="applyHover('button4');" onmouseout="removeHover('button4');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
+		</div>
+	</div>
+    <div class="scrollable-content" style="width: 30%">
+    <div style="margin-top: 40px;"></div>
     <form method="post">
-            <table>
-				<tr align="center">
-					<td bgcolor="#637F42" style="color:white">현재 비밀번호</td>
-					<td><input type="password" id="currentPassword" name="currentPassword" required></td>
-				</tr>
-				<tr align="center">
-					<td bgcolor="#637F42" style="color:white">새로운 비밀번호</td>
-					<td><input type="password"  id="newPassword" name="newPassword" required></td>
-				</tr>
-				<tr align="center">
-					<td bgcolor="#637F42" style="color:white">새로운 비밀번호 확인</td>
-					<td><input type="password" id="confirmPassword" name="confirmPassword" required></td>
-				</tr>
-				<tfoot>
-					<tr align="center">
-						<td colspan="2">
-							<input type="button" value="변경하기" onclick="save_go(this.form)" />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="button" value="취소" onclick="goBack() "/>
-						</td>
-					</tr>
-				</tfoot>
-			</table>
-			</form>
-			</div>
+    <table style="border-collapse: collapse; width: 100%; border: 2px solid black;">
+    <thead>
+    	<tr>
+            <th>항목</th>
+            <th style="border: 1px solid black; padding: 8px;">내용</th>
+        </tr>
+    </thead>
+		<tr align="center">
+			<td style="border: 1px solid black; padding: 8px;">현재 비밀번호</td>
+			<td style="border: 1px solid black; padding: 8px;"><input type="password" id="currentPassword" name="currentPassword" required></td>
+		</tr>
+		<tr align="center">
+			<td style="border: 1px solid black; padding: 8px;">새로운 비밀번호</td>
+			<td style="border: 1px solid black; padding: 8px;"><input type="password"  id="newPassword" name="newPassword" required></td>
+		</tr>
+		<tr align="center">
+			<td style="border: 1px solid black; padding: 8px;">새로운 비밀번호 확인</td>
+			<td style="border: 1px solid black; padding: 8px;"><input type="password" id="confirmPassword" name="confirmPassword" required></td>
+		</tr>
+		<tfoot>
+			<tr align="center">
+				<td colspan="2" style="border: 1px solid black; padding: 8px;">
+					<input type="button" value="변경하기" onclick="save_go(this.form)" />
+					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<input type="button" value="취소" onclick="goBack()"/>
+				</td>
+			</tr>
+		</tfoot>
+	</table>
+	</form>
+	</div>
     
 </body>
 </html>

@@ -5,11 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>내가 작성한 리뷰</title>
@@ -30,10 +26,6 @@
 	background-color: white;
 	color: black;
     border-color: #637F42;
-}
-.btn-custom:hover{ 
-	background-color: #637F42;
-	color: white;
 }
 .btn-comp {
     flex-grow: 1;
@@ -75,46 +67,81 @@ div {
     overflow-y: auto; /* 세로 스크롤바 활성화 */
 }
 </style>
+<script type="text/javascript">
+var buttonStyles = {};
+
+function applyHover(buttonId) {
+    var button = document.getElementById(buttonId);
+    buttonStyles[buttonId] = {
+        backgroundColor: button.style.backgroundColor,
+        color: button.style.color
+    };
+
+    button.style.backgroundColor = '#4f6d3a';
+    button.style.color = 'white';
+
+    // 다른 버튼들의 스타일을 초기 스타일로 설정
+    for (var id in buttonStyles) {
+        if (id !== buttonId) {
+            var otherButton = document.getElementById(id);
+            var style = buttonStyles[id];
+            otherButton.style.backgroundColor = style.backgroundColor;
+            otherButton.style.color = style.color;
+        }
+    }
+}
+
+function removeHover(buttonId) {
+    // 호버 이벤트가 제거될 때 해당 버튼의 스타일을 초기 스타일로 복원
+    var button = document.getElementById(buttonId);
+    var style = buttonStyles[buttonId];
+    if (style) {
+        button.style.backgroundColor = style.backgroundColor;
+        button.style.color = style.color;
+    }
+}
+</script>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
 	<div style="position: relative; top: 200px; z-index: 1;"></div>
 	<div class="my-page-title">
-		<h1>마이페이지</h1>
+		<h1>리뷰 목록</h1>
 	</div>
 	
 	<!-- 메뉴바 -->
-	<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
-    	<button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
-        <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
-        <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myqna.do')">1:1문의 내역</button>
-        <button type="button" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
-    </div>
-    <div class="scrollable-content">
-    <div style="margin-top: 80px;"></div>
-		<table>
+	<div  style="margin: auto;">
+		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
+		    <button id="button1" type="button" onmouseover="applyHover('button1');" onmouseout="removeHover('button1');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
+		    <button id="button2" type="button" onmouseover="applyHover('button2');" onmouseout="removeHover('button2');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
+		    <button id="button4" type="button" onmouseover="applyHover('button4');" onmouseout="removeHover('button4');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
+		</div>
+	</div>
+    <div class="scrollable-content" style="width: 30%">
+    <div style="margin-top: 40px;"></div>
+		<table style="border-collapse: collapse; width: 100%; border: 2px solid black;">
 			<thead>
 			<tr>
-				<th>번호</th>
-				<th>제목</th>
-				<th>내용</th>
-				<th>별점</th>
-				<th>날짜</th>
+				<th style="border: 1px solid black; padding: 8px; white-space: nowrap;">번호</th>
+				<th style="border: 1px solid black; padding: 8px; white-space: nowrap;">캠핑장</th>
+				<th style="border: 1px solid black; padding: 8px; white-space: nowrap;">내용</th>
+				<th style="border: 1px solid black; padding: 8px; white-space: nowrap;">별점</th>
+				<th style="border: 1px solid black; padding: 8px; white-space: nowrap;">작성날짜</th>
 			</tr>
 			</thead>
 			<tbody>
 				<c:choose>
 	     			<c:when test="${empty list}">
-	     				<tr><td colspan="4"><h3>내가 작성한 리뷰가 없습니다.</h3> </td></tr>
+	     				<tr><td colspan="4" style="border: 1px solid black; padding: 8px;"><h3>내가 작성한 리뷰가 없습니다.</h3> </td></tr>
 	     			</c:when>
 	     			<c:otherwise>
 	     			  <c:forEach var="k" items="${list}" varStatus="vs">
 	     			  	<tr>
-	     			  		<td>${vs.count }</td>
-	     			  		<td><a href="/campDetail.do?keyword=${k.facltNm}">${k.facltNm}</a></td>
-	     			  		<td>${k.comment }</td>
-	     			  		<td>${k.rating }</td>
-	     			  		<td>${k.created_date }</td>
+	     			  		<td style="border: 1px solid black; padding: 8px;">${vs.count }</td>
+	     			  		<td style="border: 1px solid black; padding: 8px;"><a href="/campDetail.do?keyword=${k.facltNm}">${k.facltNm}</a></td>
+	     			  		<td style="border: 1px solid black; padding: 8px;">${k.comment }</td>
+	     			  		<td style="border: 1px solid black; padding: 8px;">${k.rating }</td>
+	     			  		<td style="border: 1px solid black; padding: 8px;">${k.created_date }</td>
 	     			  		<%-- <td>${k.regdate.substring(0,10)}</td> --%>
 	     			  	</tr>
 	     			  </c:forEach> 
