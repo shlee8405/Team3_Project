@@ -298,10 +298,8 @@ import 'datatables.net-responsive-dt';
 								if (subject == '1') {
 									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
 								} else if (subject == '2') {
-									alert('출생년도 검색 ㄱ' + text);
 									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
 								} else if (subject == '3') {
-									alert('뒷자리수 검색 ㄱ' + text);
 									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
 								}
 								
@@ -538,30 +536,44 @@ import 'datatables.net-responsive-dt';
 													<c:if test="${k.u_status==1||k.u_status==2}">
 														<tr>
 															<c:choose>
-																<c:when test="${not empty k.u_id}">
-																	<c:set var="inputString" value="${k.u_id}" /> <!-- Replace with your input string -->
-																    <c:set var="firstLetter" value="${inputString.substring(0, 1)}" />
-																    <c:set var="lastLetter" value="${inputString.substring(fn:length(inputString) - 1)}" />
-																    <c:set var="middleAsterisks" value="" />
-																    <c:forEach var="i" begin="1" end="${fn:length(inputString) - 2}">
-															        <c:set var="middleAsterisks" value="${middleAsterisks}*"/>
-																    </c:forEach>
-																	<td>${firstLetter}${middleAsterisks}${lastLetter}</td>
+																<c:when test="${k.u_status==2}">
+																	<c:choose>
+																		<c:when test="${not empty k.u_id}">
+																			<c:set var="inputString" value="${k.u_id}" /> <!-- Replace with your input string -->
+																		    <c:set var="firstLetter" value="${inputString.substring(0, 1)}" />
+																		    <c:set var="lastLetter" value="${inputString.substring(fn:length(inputString) - 1)}" />
+																		    <c:set var="middleAsterisks" value="" />
+																		    <c:forEach var="i" begin="1" end="${fn:length(inputString) - 2}">
+																	        <c:set var="middleAsterisks" value="${middleAsterisks}*"/>
+																		    </c:forEach>
+																			<td>${firstLetter}${middleAsterisks}${lastLetter} <b style="color:gold;">: 카카오계졍</b></td>
+																		</c:when>
+																		<c:otherwise>
+																			<td>-</td>
+																		</c:otherwise>
+																	</c:choose>
 																</c:when>
-																
 																<c:otherwise>
-																	<td>-</td>
+																	<c:choose>
+																		<c:when test="${not empty k.u_id}">
+																			<c:set var="inputString" value="${k.u_id}" /> <!-- Replace with your input string -->
+																		    <c:set var="firstLetter" value="${inputString.substring(0, 1)}" />
+																		    <c:set var="lastLetter" value="${inputString.substring(fn:length(inputString) - 1)}" />
+																		    <c:set var="middleAsterisks" value="" />
+																		    <c:forEach var="i" begin="1" end="${fn:length(inputString) - 2}">
+																	        <c:set var="middleAsterisks" value="${middleAsterisks}*"/>
+																		    </c:forEach>
+																			<td>${firstLetter}${middleAsterisks}${lastLetter}</td>
+																		</c:when>
+																		<c:otherwise>
+																			<td>-</td>
+																		</c:otherwise>
+																	</c:choose>
 																</c:otherwise>
 															</c:choose>
 															
-															<c:choose>
-																<c:when test="${k.u_status==2}">
-																	<td><b style="color:gold;">카카오계졍</b>:${k.u_nickname}</td>
-																</c:when>
-																<c:otherwise>
-																	<td>${k.u_nickname}</td>
-																</c:otherwise>
-															</c:choose>
+															
+															<td>${k.u_nickname}</td>
 															
 															<!-- 이름 숨기기 -->
 															<c:choose>

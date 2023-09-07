@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.faq.service.FaqService;
+import com.team.faq.vo.FaqVO;
 import com.team.group.service.GroupService;
 import com.team.group.vo.GroupVO;
 import com.team.qna.service.QnaService;
@@ -88,6 +89,15 @@ public class AdminController {
 		List<ReportVO> list = reportService.getAllReports();
 		mv.addObject("list", list);
 		return mv;
+	}
+	
+	@GetMapping("/adminFAQ.do")
+	public ModelAndView goAdminFaq() /*관리자 FAQ 페이지 */ {
+		ModelAndView mv = new ModelAndView("admin/faq");
+		List<FaqVO> list = faqService.getList();
+		mv.addObject("list", list);
+		return mv;
+		
 	}
 
 }

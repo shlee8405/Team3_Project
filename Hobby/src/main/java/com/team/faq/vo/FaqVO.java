@@ -2,7 +2,7 @@ package com.team.faq.vo;
 
 public class FaqVO {
 	
-	private String u_idx, f_content, f_response , idx;
+	private String u_idx, f_content, f_response , f_idx;
 
 	public String getU_idx() {
 		return u_idx;
@@ -28,12 +28,12 @@ public class FaqVO {
 		this.f_response = f_response;
 	}
 
-	public String getIdx() {
-		return idx;
+	public String getF_idx() {
+		return f_idx;
 	}
 
-	public void setIdx(String idx) {
-		this.idx = idx;
+	public void setIdx(String f_idx) {
+		this.f_idx = f_idx;
 	}
 
 	

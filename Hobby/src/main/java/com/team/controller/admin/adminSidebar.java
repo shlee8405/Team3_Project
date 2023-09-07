@@ -16,12 +16,7 @@ public class adminSidebar {
 	@Autowired private UserService userService;
 	
 	
-	@GetMapping("/adminFAQ.do")
-	public ModelAndView goAdminFaq() /*관리자 FAQ 페이지 */ {
-		ModelAndView mv = new ModelAndView("admin/faq");
-		return mv;
-		
-	}
+
 	
 //	@GetMapping("/adminUser.do")
 //	public ModelAndView goAdminUser() /*관리자 유저*/ {
