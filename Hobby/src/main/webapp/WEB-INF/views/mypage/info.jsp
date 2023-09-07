@@ -78,10 +78,6 @@
 		color: white;
 	}
 	
-	div {
-		margin: auto;
-		text-align: center;
-	}
 	.scrollable-content {
 	    max-height: 80vh; /* 최대 높이 설정 */
 	    overflow-y: auto; /* 세로 스크롤바 활성화 */
@@ -145,15 +141,15 @@
 		<h1>내 정보</h1>
 	</div>
 	
-	<div>
+	<div style="text-align: center;">
 	<!-- 메뉴바 -->
 		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
 		    <button id="button1" type="button" onmouseover="applyHover('button1');" onmouseout="removeHover('button1');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
 		    <button id="button2" type="button" onmouseover="applyHover('button2');" onmouseout="removeHover('button2');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
 		    <button id="button4" type="button" onmouseover="applyHover('button4');" onmouseout="removeHover('button4');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
 		</div>
-
-    <div class="scrollable-content" style="width: 30%">
+	</div>
+    <div class="scrollable-content" style="width: 30%; margin: auto;">
     <div style="margin-top: 40px;"></div>
 		<form method="post">
 		<table style="border-collapse: collapse; width: 100%; border: 2px solid black;">
@@ -198,16 +194,17 @@
             </c:otherwise>
         </c:choose>
     </tbody>
-</table>
-
-			<div style="margin-top: 20px;"></div>
-			<div class="button-wrapper">
-				<input type="submit" onclick="sendData(this.form)" value="내 정보 수정">
+    <tfoot>
+    	<tr align="center">
+        	<td colspan="2">
+        		<input type="submit" onclick="sendData(this.form)" value="내 정보 수정">
 				<input type="submit" onclick="sendData2(this.form)" value="비밀번호 변경">
-			</div>
+			</td>
+        </tr>	
+    </tfoot>
+</table>
 			</form>
-		</div>	
-    </div>
+			</div>
 	<script type="text/javascript">
 		function goToPage(url){
 			location.href = url;

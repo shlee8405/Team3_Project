@@ -58,10 +58,7 @@ th {
 	color: white;
 }
 
-div {
-	margin: auto;
-	text-align: center;
-}
+
 .scrollable-content {
     max-height: 80vh; /* 최대 높이 설정 */
     overflow-y: auto; /* 세로 스크롤바 활성화 */
@@ -110,16 +107,17 @@ function removeHover(buttonId) {
 	</div>
 	
 	<!-- 메뉴바 -->
-	<div  style="margin: auto;">
+	<div  style="text-align: center;">
 		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
 		    <button id="button1" type="button" onmouseover="applyHover('button1');" onmouseout="removeHover('button1');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
 		    <button id="button2" type="button" onmouseover="applyHover('button2');" onmouseout="removeHover('button2');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
 		    <button id="button4" type="button" onmouseover="applyHover('button4');" onmouseout="removeHover('button4');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
 		</div>
 	</div>
-    <div class="scrollable-content" style="width: 30%">
-    <div style="margin-top: 40px;"></div>
-		<table style="border-collapse: collapse; width: 100%; border: 2px solid black;">
+	<div class="container-fluid" style="border: 1px solid black; padding: 8px; width: 40%; margin-top: 40px;">
+    <div class="scrollable-content">
+    <div></div>
+		<table style="border-collapse: collapse;  border: 2px solid black;">
 			<thead>
 			<tr>
 				<th style="border: 1px solid black; padding: 8px; white-space: nowrap;">번호</th>
@@ -149,6 +147,7 @@ function removeHover(buttonId) {
 	     		</c:choose>
 			</tbody>
 		</table>
+		</div>
 		</div>
 		<script type="text/javascript">
 		function goToPage(url){
