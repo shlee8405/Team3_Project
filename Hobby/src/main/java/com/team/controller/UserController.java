@@ -14,9 +14,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.google.gson.Gson;
+import com.google.gson.internal.LinkedTreeMap;
 import com.team.group.service.GroupService;
 import com.team.qna.service.QnaService;
 import com.team.report.service.ReportService;
@@ -40,6 +43,11 @@ public class UserController {
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	
+	@RequestMapping("/") 
+	public ModelAndView goHOME() {
+		return new ModelAndView("redirect:/home.do");
+	}
 	
 	// 회원가입 이동
 	@RequestMapping("/signup.do")
@@ -65,6 +73,9 @@ public class UserController {
 		ModelAndView mv = new ModelAndView("redirect:/home.do");
 		request.getSession().getServletContext().removeAttribute("sessionUidx");
 		request.getSession().getServletContext().removeAttribute("adminChecker");
+		if(request.getSession().getServletContext().getAttribute("kakaoSession")!=null) {
+			request.getSession().getServletContext().removeAttribute("kakaoSession");
+		}
 		return mv;
 	}
 		
@@ -89,11 +100,12 @@ public class UserController {
 	@PostMapping("/login.do")
     public ModelAndView loginUser(UserVO uvo, 
     		HttpServletRequest request,
-    		HttpServletResponse response) {
-        ModelAndView mv = new ModelAndView();
+    		HttpServletResponse response,
+    		@RequestParam("url") String url) {
+        ModelAndView mv = new ModelAndView(url);
         // 아이디 DB에 존재하는지 확인 
         int res = userService.getUserCount(uvo.getU_id());
-        
+        System.out.println(url);
         // 없으면 종료
         if(res == 0) {
         	return mv;
@@ -112,7 +124,7 @@ public class UserController {
 				if(dbuvo.getU_status().equals("9")) {
 				request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
 				request.getSession().getServletContext().setAttribute("adminChecker", dbuvo.getU_status());
-				mv.setViewName("index2");
+				mv.setViewName("redirect:"+url);
 				return mv;
 				} else if (dbuvo.getU_ban().equals("1")) {
 				//밴 
@@ -122,7 +134,7 @@ public class UserController {
 					
 				} else {
 				//일반회원
-					mv.setViewName("index2");
+					mv.setViewName("redirect:"+url);
 					request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
 					return mv;
 				}
@@ -183,28 +195,64 @@ public class UserController {
 	 
 	 
 	 // 카카오 로그인. KakaoVO를 통해 id 받음
-	 @RequestMapping("/kakaoLogin.do")
+	 @PostMapping("/kakaoLogin.do")
 	 public ModelAndView kakaologin(@RequestBody KakaoVO kakaovo, 
 			 HttpServletResponse response, 
 			 HttpServletRequest request) {
+		 System.out.println("url is " + request.getRequestURI());
+		 ModelAndView mv = new ModelAndView();
+		 @SuppressWarnings("unchecked")
+		 LinkedTreeMap<String, String> kakaomap = (LinkedTreeMap<String, String>) kakaovo.getProperties();
+		 //kakaovo.getId() = 카카오 고유 아이디
+		 //kakaomap.get("nickname") = 카카오 계정 이름
+		 
+		 /* 
+		 pseudocode
+		 
+		 result = service.dao.getId(kakaoId)
+		 
+		 if(result exists) {
+		 
+		 	add idx to session
+		 	continue
+		 } else {
+		 	insert id to DB
+		 	fetch idx 
+		 	insert idx to session
+		 	continue
+		 }
+		  */
 
-		 ModelAndView mv = new ModelAndView("index2");
-		 System.out.println("id is : " + kakaovo.getId() + " on /kakaoLogin.do");
-		 // 아이디 정상적으로 옴
-		 
-		 
-		 //db에 넣는코드
-		 
-		 // if(db에 KakaoVO.getId() 가 존재하지 않으면){
-			 // int res = userDAO.getInsert()
-		 //	 } 
-		 // else if (db에 kakaoVO.getID()가 존재하면) {
-		 	// proceed...
-		 //	 }
-		 
-		 // Session에 id 추가
-		 return mv;
+		 String kakaoId = kakaovo.getId();
+		 String kakaoName = kakaomap.get("nickname");
+		 System.out.println("kakao Object url is "+kakaovo.getUrl());
+		 // check if id exists
+		 boolean result = userService.isIdDuplicate(kakaoId);
+		 if(result) {
+			 UserVO dbuvo = userService.getUserVoWithId(kakaoId);
+			 System.out.println("kakaoLogin.do retrieve id successfull id: " + kakaoId );
+			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
+			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
+			 System.out.println("kakaoLogin.do insert session Idx success");
+			 System.out.println("redirect:"+kakaovo.getUrl());
+			 return new ModelAndView("redirect:"+kakaovo.getUrl());
+		 } else {
+			 UserVO uvo = new UserVO();
+			 uvo.setU_id(kakaoId);
+			 uvo.setU_nickname(kakaoName);
+			 uvo.setU_name(kakaoName);
+			 int insertResult = userService.getUserInsert(uvo);
+			 UserVO dbuvo = userService.getUserVoWithId(kakaoId);
+			 System.out.println("kakaoLogin.do insert id successfull  id: " + kakaoId);
+			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
+			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
+			 System.out.println("kakaoLogin.do insert session Idx success");
+			 System.out.println("redirect:"+kakaovo.getUrl());
+			 return new ModelAndView("redirect:"+kakaovo.getUrl());
+		 }
 	 }
+	 
+	 
 	 @RequestMapping("/forgotId.do")
 	 public String forgotId(@RequestBody String encodedEmail) {
 //	     if (encodedEmail.isEmpty()) {

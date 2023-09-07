@@ -1112,12 +1112,13 @@ rotate(
 					<%
 					if(u_idx != null && !u_idx.isEmpty()) {
 					%>
-					<li><a href="/logOut.do">/로그아웃.do</a></li>
+					<li><a onclick="logout()">/로그아웃.do</a></li>
 					<%
 					}
 					%>
 					<% if(u_idx == null) { %>
-					<li><a href="/login.do" data-bs-toggle="modal" data-bs-target="#exampleModal">/로그인.do</a></li> <!-- 로그인 모달 버튼 -->
+				
+					<li><a  data-bs-toggle="modal" data-bs-target="#exampleModal">/로그인.do</a></li> <!-- 로그인 모달 버튼 -->
 					<% } %>
 					
 				</ul>
@@ -1125,7 +1126,21 @@ rotate(
 
 		</div>
 	</nav>
+	<script>
+		<%
+		String kakaoSession = (String) request.getSession().getServletContext().getAttribute("kakaoSession");
+		%>
 
+		function logout() {
+			<% if(kakaoSession!=null){ %>
+				kakaoLogout();
+				location.href="/logOut.do";
+			<% }else{%>
+				alert("hihi2");
+				location.href="/logOut.do";
+			<%}%>
+		}					
+	</script>
 	<!-- Jquery needed -->
 	<script
 		src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
@@ -1271,7 +1286,8 @@ rotate(
 										style="font-size: 50px; font-family: 'Noto Sans KR', sans-serif;">/캠핑.DO</h3>
 								</div>
 								<!--이메일 입력-->
-								<div class="u_id ">
+								<div class="u_id  hiddenholder">
+								
 									<h4 style="font-family: 'Noto Sans KR', sans-serif;">아이디</h4>
 									<input type="text" name="u_id" class="pos"
 										placeholder="ID(아이디)">
@@ -1338,15 +1354,17 @@ rotate(
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script>
 		Kakao.init('c6915a815f664f1b0e24428d4202b72f'); // Initialize Kakao SDK with your API key
-
+		
+		//root url 일때에도 /home.do 보내기
+		var url = window.location.pathname;
+		if (url=='/') {
+			url = '/home.do'
+		}
+		$( ".hiddenholder" ).append( "<input type='hidden' value='" +url + "' name='url'/>" ); 
 		// Attach event listener to Kakao login button
 		document.getElementById('kakaoLoginBtn').addEventListener('click',
 				function() {
-					if (Kakao.Auth.getAccessToken()) {
-						kakaoLogout();
-					} else {
 						kakaoLogin();
-					}
 				});
 
 		// Kakao login function
@@ -1358,27 +1376,27 @@ rotate(
 									.request({
 										url : '/v2/user/me',
 										success : function(response) {
-											console.log(response);
-											console.log(response.id);
+											console.log("kakao response is " + response);
+											console.log("kakao response id is " + response.id);
+											response.url = url;
+											console.log(response)
 											$
 													.ajax({
 														url : '/kakaoLogin.do', // 중복확인을 처리하는 서버 URL (적절히 변경 필요)
 														type : 'post', // POST 방식으로 요청
 														contentType : 'application/json; charset=utf-8',
-														data : JSON
-																.stringify(response), // 서버로 전달할 데이터
-														success : function(
-																result) {
-															location.href = "/home.do";
-															//modal화 되면 여기에 모달 숨기기 넣으면 될듯
+														data : JSON.stringify(response), // 서버로 전달할 데이터
+														success : function() {
+															window.location.reload();
 														},
 														error : function(error) {
 															console.log(error);
+															window.location.reload();
 														}
 													});
 										},
 										fail : function(error) {
-											console.log(error);
+											console.log("kakao login error is "+ error);
 										},
 									});
 						},
@@ -1394,16 +1412,18 @@ rotate(
 				Kakao.API.request({
 					url : '/v1/user/unlink',
 					success : function(response) {
-						console.log(response);
+						console.log("kakao logout response is " +response);
 					},
 					fail : function(error) {
-						console.log(error);
+						console.log("kakao logout error is " + error);
 					},
 				});
 				Kakao.Auth.setAccessToken(undefined);
 			}
 		}
-	</script>
+		
+	
+		</script>
 	<script type="text/javascript"
 		src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
 		charset="utf-8"></script>
