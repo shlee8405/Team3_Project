@@ -28,7 +28,7 @@
     <!-- 사용자 정보 업데이트 SQL 추가 -->
 	<update id="myinfoupdate" parameterType="upvo">
     	UPDATE USERS
-    	SET u_name = #{u_name}, u_id = #{u_id}, u_phone = #{u_phone}, u_email = #{u_email}
+    	SET u_phone = #{u_phone}, u_email = #{u_email}, u_nickname = #{u_nickname}
     	WHERE u_idx = #{u_idx}
 	</update>
     

@@ -67,6 +67,13 @@
     	select * from USERS where u_idx = #{u_idx}
     </select>
     
+    <!-- userMapper.xml -->
+	<update id="pass" parameterType="map">
+	    UPDATE USERS
+	    SET u_pw = #{u_pw}
+	    WHERE u_idx = #{u_idx}
+	</update>
+
     <update id="banUser" parameterType="String">
     	update USERS SET u_ban = 1 where u_idx = #{u_idx}
     </update>

@@ -79,6 +79,23 @@ div {
 		f.submit();
 	}
 	
+	function validateEmail(form) {
+        // Email validation pattern
+        var emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+        // Get the email input field value
+        var email = form.u_email.value;
+        // Check if the email matches the pattern
+        if (!emailPattern.test(email)) {
+		    alert("이메일 형식이 올바르지 않습니다.");
+		    return false; // Prevent form submission
+		}
+        
+		save_go(form); // Call save_go function if email is valid
+		return false;
+
+    }
+	
 </script>
 </head>
 <body>
@@ -97,15 +114,11 @@ div {
     </div>
     <div class="scrollable-content">
     <div style="margin-top: 80px;"></div>
-    <form method="post">
+    <form method="post" onsubmit="return validateEmail(this);">
             <table>
 				<tr align="center">
-					<td bgcolor="#637F42" style="color:white">이름</td>
-					<td><input type="text" name="u_name" value="${user.u_name }" size ="20"/></td>
-				</tr>
-				<tr align="center">
-					<td bgcolor="#637F42" style="color:white">아이디</td>
-					<td><input type="text" name="u_id" value="${user.u_id }" size ="20"/></td>
+					<td bgcolor="#637F42" style="color:white">닉네임</td>
+					<td><input type="text" name="u_nickname" value="${user.u_nickname }" size ="20"/></td>
 				</tr>
 				<tr align="center">
 					<td bgcolor="#637F42" style="color:white">휴대전화</td>
@@ -113,18 +126,18 @@ div {
 				</tr>
 				<tr align="center" >
 					<td bgcolor="#637F42" style="color:white">이메일</td>
-					<td><input type="text" name="u_email" value="${user.u_email }" size ="20"/></td>
+					<td><input type="text" name="u_email" value="${user.u_email}" size ="20"/></td>
 				</tr>
 				
 				<tfoot>
 					<tr align="center">
-						<td colspan="2">
-							<input type="hidden" name="u_idx" value="${user.u_idx}">
-							<input type="button" value="완료" onclick="save_go(this.form)" />
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="button" value="취소" onclick="goBack() "/>
-						</td>
-					</tr>
+			            <td colspan="2">
+			                <input type="hidden" name="u_idx" value="${user.u_idx}">
+			                <input type="button" value="완료" onclick="validateEmail(this.form);" />
+			                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+			                <input type="button" value="취소" onclick="goBack()"/>
+			            </td>
+			        </tr>
 				</tfoot>
 			</table>
 			</form>

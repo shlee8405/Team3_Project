@@ -132,6 +132,11 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getUsers(u_idx);
 	}
 	
+	@Override
+	public int pass(String u_idx, String encodedNewPassword) {
+		return userDAO.pass(u_idx,encodedNewPassword);
+	}
+	
 	
 
 }

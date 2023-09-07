@@ -113,5 +113,12 @@ public class UserDAO {
     	return sqlSessionTemplate.selectList("user.one",u_idx);
     }
     
+    public int pass(String u_idx,String encodedNewPassword) {
+    	 Map<String, String> map = new HashMap<>();
+    	 map.put("u_idx", u_idx);
+    	 map.put("u_pw", encodedNewPassword);
+         return sqlSessionTemplate.update("user.pass", map);
+    }
+    
 
 }
