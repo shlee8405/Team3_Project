@@ -149,7 +149,7 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public boolean findPwByEmail(String email2) {
+	public String findPwByEmail(String email2) {
 		return userDAO.findPwByEmail(email2);
 	}
 

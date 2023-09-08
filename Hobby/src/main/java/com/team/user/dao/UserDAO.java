@@ -133,7 +133,7 @@ public class UserDAO {
     	return list;
     }
  // 이메일로 비번 찾기
-    public boolean findPwByEmail(String u_email2) {
+    public String findPwByEmail(String u_email2) {
         return sqlSessionTemplate.selectOne("user.findPwByEmail", u_email2);
     }
 

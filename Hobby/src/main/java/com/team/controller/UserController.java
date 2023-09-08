@@ -269,7 +269,7 @@ public class UserController {
 		    String decodedEmail = decodedEmail2.replace("=", ""); // = 문자 제거
 		    String finalemail = decodedEmail.substring(6);
 		    System.out.println("controller email : " + finalemail);
-		    String foundPw = userService.findIdByEmail(finalemail);
+		    String foundPw = userService.findPwByEmail(finalemail);
 	     if (foundPw != null) {
 	         System.out.println("비번 찾음: " + foundPw);
 	         return foundPw; // Return the 아이디
