@@ -118,7 +118,7 @@ color:#ffffff!important;
 
 
 
-    <div class="container"  style="width: 85%; background-color: white">
+   <div class="container"  style="width: 85%; margin-left:15vw;">
         <div class="row mt-3" style=" box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.25);
         border-radius: 10px;background-color: rgba(0, 0, 0, 0.11);  margin-left:10%; width:80%; height:30%;">
             <div class="col " style="height: 100%;">

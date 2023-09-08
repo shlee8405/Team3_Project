@@ -20,7 +20,8 @@ main {
 	margin: 0px;
 	margin-right:0px;
 	padding-right:0px;
-	width: 100%;
+	width: 85%;
+	margin-left:15vw;
 	justify-items:center;
 	background-color: rgba(217, 255, 204, 0.05);
 
