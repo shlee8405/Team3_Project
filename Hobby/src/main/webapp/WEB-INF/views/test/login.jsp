@@ -73,47 +73,32 @@
 													});
 										});
 					});
-	$(document)
-			.ready(
-					function() {
-						$("#pwdRecoveryForm")
-								.submit(
-										function(event) {
-											event.preventDefault(); // Prevent the default form submission
+	$(document).ready(function() {
+	    $("#pwdRecoveryForm").submit(function(event) {
+	        event.preventDefault(); // Prevent the default form submission
 
-											// Collect form data
-											var formData = "email="
-													+ encodeURIComponent($(
-															"#email").val());
+	        // Collect form data
+	        var formData = "email=" + encodeURIComponent($("#email").val());
 
-											// Use AJAX to initiate password recovery
-											$
-													.ajax({
-														url : "/forgotPwd.do", // Endpoint for 비밀번호찾기
-														type : "POST",
-														data : formData,
-														dataType : "text", // Response data type
-														contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-														success : function(
-																response) {
-															console
-																	.log(
-																			"Response:",
-																			response);
-															$(
-																	"#pwdRecoveryResult")
-																	.html(
-																			response); // Display the response
-														},
-														error : function(error) {
-															console.log(
-																	"Error:",
-																	error);
-															// Handle 비밀번호찾기 error if needed
-														}
-													});
-										});
-					});
+	        // Use AJAX to initiate password recovery
+	        $.ajax({
+	            url: "/forgotPwd.do", // Endpoint for 비밀번호찾기
+	            type: "POST",
+	            data: formData,
+	            dataType: "text", // Response data type
+	            contentType: "application/x-www-form-urlencoded; charset=UTF-8",
+	            success: function(response) {
+	                console.log("Response:", response);
+	                $("#pwdRecoveryResultMessage").text(response); // Display the response in the modal
+	                $("#pwdRecoveryResultModal").modal("show"); // Show the result modal
+	            },
+	            error: function(error) {
+	                console.log("Error:", error);
+	                // Handle 비밀번호찾기 error if needed
+	            }
+	        });
+	    });
+	});
 </script>
 </head>
 <body>
@@ -161,9 +146,7 @@
 											data-bs-toggle="modal" data-bs-target="#idRecoveryModal">
 											아이디찾기 </a>
 									</div>
-									<div class="modal-body">
-										<div id="idRecoveryContent"></div>
-									</div>
+									
 									<span style="margin-top: 8px;">|</span>
 									<!--비밀번호 찾기-->
 									<div class="schpw">
@@ -327,32 +310,48 @@
 		</div>
 	</div>
 	<!-- 비밀번호 찾기 모달 -->
-	<div class="modal fade" id="pwdRecoveryModal" tabindex="-1"
-		aria-labelledby="pwdRecoveryModalLabel" aria-hidden="true">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title" id="pwdRecoveryModalLabel">비밀번호 찾기</h5>
-					<button type="button" class="btn-close" data-bs-dismiss="modal"
-						aria-label="Close"></button>
-				</div>
-				<div class="modal-body">
-					<!-- Input fields for 비밀번호찾기 -->
-					<form id="pwdRecoveryForm">
-						<div class="mb-3">
-							<label for="email" class="form-label">이메일</label> <input
-								type="email" class="form-control" id="email" name="email"
-								placeholder="이메일을 입력하세요">
-						</div>
-						<!-- Add more input fields if needed -->
-						<button type="submit" class="btn btn-primary">비밀번호 찾기</button>
-					</form>
-					<!-- 결과 출력 영역 -->
-					<div id="pwdRecoveryResult"></div>
-				</div>
-			</div>
-		</div>
-	</div>
+<div class="modal fade" id="pwdRecoveryModal" tabindex="-1" aria-labelledby="pwdRecoveryModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pwdRecoveryModalLabel">비밀번호 찾기</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- Input fields for 비밀번호 찾기 -->
+                <form id="pwdRecoveryForm">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">이메일</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="이메일을 입력하세요">
+                    </div>
+                    <!-- Add more input fields if needed -->
+                    <button type="submit" class="btn btn-primary">비밀번호 찾기</button>
+                </form>
+                <!-- 결과 출력 영역 -->
+                <div id="pwdRecoveryResult"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 비밀번호 찾기 결과 모달 -->
+<div class="modal fade" id="pwdRecoveryResultModal" tabindex="-1" aria-labelledby="pwdRecoveryResultModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="pwdRecoveryResultModalLabel">비밀번호 찾기 결과</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <!-- 비밀번호 찾기 결과 메시지를 여기에 표시합니다. -->
+                <div id="pwdRecoveryResultMessage"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">닫기</button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 
 </html>

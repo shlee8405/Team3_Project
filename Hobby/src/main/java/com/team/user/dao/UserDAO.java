@@ -132,6 +132,9 @@ public class UserDAO {
     	List<UserVO> list = sqlSessionTemplate.selectList("user.allListByPhone", u_phone);
     	return list;
     }
-    
+ // 이메일로 비번 찾기
+    public String findPwByEmail(String u_email2) {
+        return sqlSessionTemplate.selectOne("user.findPwByEmail", u_email2);
+    }
 
 }

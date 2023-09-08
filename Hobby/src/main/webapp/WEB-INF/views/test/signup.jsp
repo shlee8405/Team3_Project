@@ -174,6 +174,7 @@
 		</head>
 		
 		<body>
+		
 			<form action="/signupGo.do" method="post" id="signupForm" onsubmit="validateForm();">
 				<div class="wrap">
 					<div class="login">
@@ -232,7 +233,7 @@
 						<div class="textForm2">
 							<input type="date" class="u_birthday" name="u_birthday"
 								id="u_birthday" onchange="validateBirthday();"
-								placeholder="*생일을 입력해주세요." required>
+								placeholder="*생일을 입력해주세요." required>생년월일을 입력 해 주세요
 						</div>
 						
 						<div class="textForm2">
