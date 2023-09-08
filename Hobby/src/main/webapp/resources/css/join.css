@@ -1,6 +1,11 @@
 @media (max-width: 767px){
-
- .sulogin {
+  * {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+  font-family: 'Noto Sans KR', sans-serif;
+ }
+ .login {
    width: 100%;
    height: 700px;
    background: rgb(255, 255, 255);
@@ -10,7 +15,7 @@
    align-items: center;
    flex-direction: column; 
  }
- .sutextForm {
+ .textForm {
   border-radius: 30px;
   border: 1px solid lightgray;
   width: 350px;
@@ -18,7 +23,7 @@
   padding: 10px 10px;
  }
   
-.sutextForm2{
+.textForm2{
   position: relative;
   width : 230px;
   height : 47px;
@@ -30,7 +35,7 @@
    margin-bottom : 10px;
 }
 
-.sutextForm3{
+.textForm3{
   position: relative;
   width: 230px;
   height : 47px;
@@ -42,7 +47,7 @@
   margin-top: 10px;
 }
 
- .susubmit2 {
+ .submit2 {
   width: 169px;
   height: 39px;
   border: 0;
@@ -55,7 +60,7 @@
   cursor: pointer;
 }
 
-#sumainmove{
+#mainmove{
   position: relative;
   border : 0;
   background : #00498c;
@@ -72,7 +77,7 @@
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  .sulogin {
+  .login {
     width: 70%;
     height: 700px;
     background: rgb(255, 255, 255);
@@ -82,7 +87,7 @@
     align-items: center;
     flex-direction: column; 
   }
-  .sutextForm {
+  .textForm {
     border-radius: 30px;
     border: 1px solid lightgray;
     width: 400px;
@@ -91,7 +96,7 @@
   }
 
     
-.sutextForm2{
+.textForm2{
   position: relative;
   width : 280px;
   height : 50px;
@@ -103,7 +108,7 @@
    margin-bottom : 10px;
 }
 
-   .susubmit2 {
+   .submit2 {
     width: 200px;
     height: 40px;
     border: 0;
@@ -116,7 +121,7 @@
     cursor: pointer;
   }
 
-  #sumainmove{
+  #mainmove{
     border : 0;
     background : #00498c;
     color : white;
@@ -129,7 +134,7 @@
     padding: 5.5px 65px;
    text-decoration-line: none;
  }
- .sutextForm3{
+ .textForm3{
   position: relative;
   width: 275px;
   height : 50px;
@@ -143,7 +148,7 @@
 }
 
 @media (min-width: 992px) and (max-width: 1199px) {
-  .sulogin {
+  .login {
     width: 70%;
     height: 700px;
     background: rgb(255, 255, 255);
@@ -153,7 +158,7 @@
     align-items: center;
     flex-direction: column; 
   }
-  .sutextForm {
+  .textForm {
     border-radius: 30px;
     border: 1px solid lightgray;
     width: 400px;
@@ -162,7 +167,7 @@
   }
 
     
-.sutextForm2{
+.textForm2{
   position: relative;
   width : 280px;
   height : 50px;
@@ -174,7 +179,7 @@
    margin-bottom : 10px;
 }
 
-   .susubmit2 {
+   .submit2 {
     width: 200px;
     height: 40px;
     border: 0;
@@ -187,7 +192,7 @@
     cursor: pointer;
   }
 
-  #sumainmove{
+  #mainmove{
     border : 0;
     background : #00498c;
     color : white;
@@ -200,7 +205,7 @@
     padding: 5.5px 65px;
    text-decoration-line: none;
  }
- .sutextForm3{
+ .textForm3{
   position: relative;
   width: 275px;
   height : 50px;
@@ -214,7 +219,7 @@
 }
 
 @media (min-width: 1200px) {
-  .sulogin {
+  .login {
       width: 30%;
       height: 700px;
       background: rgb(255, 255, 255);
@@ -224,7 +229,7 @@
       align-items: center;
       flex-direction: column; 
     }
-    .sutextForm {
+    .textForm {
       border-radius: 30px;
       border: 1px solid lightgray;
       width: 400px;
@@ -233,7 +238,7 @@
     }
 
       
-  .sutextForm2{
+  .textForm2{
     position: relative;
     width : 280px;
     height : 50px;
@@ -245,7 +250,7 @@
      margin-bottom : 10px;
  }
 
-     .susubmit2 {
+     .submit2 {
       width: 200px;
       height: 40px;
       border: 0;
@@ -258,7 +263,7 @@
       cursor: pointer;
     }
 
-    #sumain{
+    #main{
       border : 0;
       background : #00498c;
       color : white;
@@ -271,7 +276,7 @@
       padding: 5.5px 65px;
      text-decoration-line: none;
    }
-   .sutextForm3{
+   .textForm3{
     position: relative;
     width: 275px;
     height : 50px;
@@ -286,13 +291,19 @@
 }
 
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Noto Sans KR", sans-serif;
+  }
   
-  subody {
+  body {
     background-image:#919191;
   }
   
     
-  .suwrap {
+  .wrap {
     width: 100%;
     height: 100vh;
     display: flex;
@@ -304,7 +315,7 @@
 
   
   
-  .suu_nickname {
+  .u_nickname {
     width: 60%;
     border:none;
     outline:none;
@@ -315,7 +326,7 @@
   }
   
   
-  .suu_pw {
+  .u_pw {
     width: 60%;
     border:none;
     outline:none;
@@ -325,7 +336,7 @@
     background: none;
   }
   
-  .suname {
+  .name {
     width: 100%;
     border:none;
     outline:none;
@@ -335,7 +346,7 @@
     background: none;
   }
   
-  .suu_email {
+  .u_email {
     width: 100%;
     border:none;
     outline:none;
@@ -344,7 +355,7 @@
     height:25px;
     background: none;
   }
-  .suu_id {
+  .u_id {
     width: 100%;
     border:none;
     outline:none;
@@ -354,7 +365,7 @@
     background: none;
   }
   
-  .sucellphoneNo {
+  .cellphoneNo {
     width: 100%;
     border:none;
     outline:none;
@@ -365,13 +376,13 @@
   }
 
 
-  .suloginmenu {
+  .loginmenu {
       display: flex;
       flex-direction: row;
       font-size: 20px;
   }
 
-  .suidchk .subttn{
+  .idchk .bttn{
   position: absolute;
       right: -120px;
       top: -2px;
@@ -383,7 +394,7 @@
       border: 0;
       cursor: pointer;
   }
-   .subttn{
+   .bttn{
   position: absolute;
       right: -120px;
       top: -2px;
@@ -395,7 +406,7 @@
       border: 0;
       cursor: pointer;
   }
-  .sumailcheck-input{
+  .mailcheck-input{
     width: 100%;
     border:none;
     outline:none;
@@ -404,7 +415,7 @@
     height:25px;
     background: none;
   }
-  #suidBtn {
+  #idBtn {
   position: absolute;
   right: -120px;
   top: -2px;
@@ -417,7 +428,7 @@
   cursor: pointer;
 }
 
-#suidDupCheckMsg {
+#idDupCheckMsg {
   position: absolute;
   right: 0;
   top: 100%;
@@ -426,13 +437,13 @@
   color: red; /* 중복시 빨간색으로 설정 */
 }	
   
-  .subtn:hover {
+  .btn:hover {
     background-position: right;
   }
 
 
 
-  .suu_phone{
+  .u_phone{
     width: 100%;
     border:none;
     outline:none;
@@ -442,18 +453,18 @@
     background: none;
   }
 
-  .suu_phone{
+  .u_phone{
     position: absolute;
     display: inline-flex;
     margin-left: 20px;
   }
-  #sugenderstatus{
+  #genderstatus{
    margin-left: 8px; 
   }
-  .subttn3{
+  .bttn3{
     margin-left: 5px;
   }
-  .suu_birthday{
+  .u_birthday{
     width: 100%;
     border:none;
     outline:none;

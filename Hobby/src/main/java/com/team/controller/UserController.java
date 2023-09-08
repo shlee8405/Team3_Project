@@ -259,38 +259,25 @@ public class UserController {
 	     }
 	 }
 	 @RequestMapping("/forgotPwd.do")
-	    public ResponseEntity<String> forgotPassword(@RequestBody String encodedEmail) {
-	        String decodedEmail = decodeEmail(encodedEmail);
-
-	        if (decodedEmail == null || decodedEmail.isEmpty()) {
-	            return ResponseEntity.badRequest().body("Invalid email address.");
-	        }
-
-	        String newPassword = userService.generateNewPassword();
-	        if (newPassword != null) {
-	            boolean updated = userService.updateUserPassword(decodedEmail, newPassword);
-	            if (updated) {
-	                String responseMessage = "A new password has been sent to " + decodedEmail + ".";
-	                return ResponseEntity.ok(responseMessage);
-	            } else {
-	                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                        .body("Failed to reset password.");
-	            }
-	        } else {
-	            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                    .body("Failed to generate a new password.");
-	        }
-	    }
-
-	    // Helper method to decode the email
-	    private String decodeEmail(String encodedEmail) {
-	        try {
-	            return URLDecoder.decode(encodedEmail, "UTF-8").replaceAll("=", "");
-	        } catch (UnsupportedEncodingException e) {
-	            e.printStackTrace();
-	            return null;
-	        }
-	    }
+	 public String forgotPw(@RequestBody String encodedEmail) {
+		 String decodedEmail2 = "";
+		    try {
+		        decodedEmail2 = URLDecoder.decode(encodedEmail, "UTF-8");
+		    } catch (UnsupportedEncodingException e) {
+		        e.printStackTrace();
+		    }
+		    String decodedEmail = decodedEmail2.replace("=", ""); // = 문자 제거
+		    String finalemail = decodedEmail.substring(6);
+		    System.out.println("controller email : " + finalemail);
+		    String foundPw = userService.findIdByEmail(finalemail);
+	     if (foundPw != null) {
+	         System.out.println("비번 찾음: " + foundPw);
+	         return foundPw; // Return the 아이디
+	     } else {
+	         System.out.println("비번을 찾을 수 없음");
+	         return null;
+	     }
+	 }
 	 
 	 }
 
