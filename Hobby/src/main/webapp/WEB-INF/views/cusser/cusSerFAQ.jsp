@@ -193,7 +193,7 @@ $(document).ready(function(){
         <br>
         
         <div class="container-fluid align-self-center" style="max-height: 70vh; overflow-y: auto; width: 50%">
-		<ul class="nav nav-tabs nav-justified" style="font-size: 30px;">
+		<ul class="nav nav-tabs nav-justified border-0" style="font-size: 30px;">
 		  <li class="nav-item border border-4 rounded border-success">
 		    <a class="nav-link active" aria-current="page">FAQ</a>
 		  </li>
@@ -212,21 +212,24 @@ $(document).ready(function(){
 			</form>
 		    
 		    <div class="accordion" id="accordionExample">
-			  <c:forEach var="k" items="${list}" varStatus="status">
-			    <div class="accordion-item">
-			      <h2 class="accordion-header">
-			        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.index + 1}" aria-expanded="true" aria-controls="collapse${status.index + 1}">
-			          ${k.f_content}
-			        </button>
-			      </h2>
-			      <div id="collapse${status.index + 1}" class="accordion-collapse collapse ${status.index == 0 ? 'show' : ''}" data-bs-parent="#accordionExample">
-			        <div class="accordion-body">
-			          <strong>${k.f_response}</strong> 
-			        </div>
-			      </div>
-			    </div>
-			  </c:forEach>
+			    <c:forEach var="k" items="${list}" varStatus="status">
+			        <c:if test="${k.f_status != 0}">
+			            <div class="accordion-item">
+			                <h2 class="accordion-header">
+			                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${status.index + 1}" aria-expanded="true" aria-controls="collapse${status.index + 1}">
+			                        ${k.f_content}
+			                    </button>
+			                </h2>
+			                <div id="collapse${status.index + 1}" class="accordion-collapse collapse ${status.index == 0 ? 'show' : ''}" data-bs-parent="#accordionExample">
+			                    <div class="accordion-body">
+			                        <strong>${k.f_response}</strong> 
+			                    </div>
+			                </div>
+			            </div>
+			        </c:if>
+			    </c:forEach>
 			</div>
+
 
 		</div>
             

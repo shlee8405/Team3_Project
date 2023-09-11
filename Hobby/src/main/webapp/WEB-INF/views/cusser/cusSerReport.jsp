@@ -129,23 +129,22 @@ $(document).ready(function() {
 <body>
     <jsp:include page="../header.jsp" />
 
-    <div class="d-flex">
-    <nav class="navbar navbar-dark" style="background-color: #637F42; width: 80px;">
+    <!-- <nav class="navbar navbar-dark" style="background-color: #637F42; width: 80px;">
             <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon" style="color: black;"></span>
             </button>
         </nav>
-        <!-- Offcanvas Navbar Content -->
+        Offcanvas Navbar Content
         <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style="background-color: #637F42;">
             <div class="offcanvas-header">
                 <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: white;">고객센터</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
             <div class="offcanvas-body" >
-            	<div> <!-- 오른쪽 정렬 -->
+            	<div> 오른쪽 정렬
                 	<a class="btn btn-light" href="/cusSerFAQ.do" role="button">FAQ</a>
             	</div>
-                <!-- Offcanvas Navigation Links -->
+                Offcanvas Navigation Links
                 <div class="dropdown">
                     <button class="btn btn-light dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
                       QnA
@@ -165,12 +164,29 @@ $(document).ready(function() {
                     </ul>
                   </div>
             </div>
-        </div>
+        </div> -->
+        
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>	
+        <br>
 
-        <div class="container-fluid align-self-end" style="width: 50%">
-        <h1>신고 내역</h1>
+        <div class="container-fluid align-self-center" style="max-height: 70vh;  width: 50%">
+		<ul class="nav nav-tabs nav-justified border-0" style="font-size: 30px; width: 98%; margin: AUTO;">
+		  <li class="nav-item border border-4 rounded border-success">
+		    <a class="nav-link active" aria-current="page">REPORT</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="/cusSerFAQ.do" style="color: black;">FAQ</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link" href="/cusSerAsk.do" style="color: black;">QNA</a>
+		  </li>
+		</ul>
 		    <!-- 검색창 추가 -->
-		    <form class="d-flex justify-content-end mb-3" role="search" id="search-form" onsubmit="return false;">
+		    <form class="d-flex justify-content-end mb-3" role="search" id="search-form" onsubmit="return false;" style="padding-top: 15px; margin: AUTO; width: 98%">
 		        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
 		        <button class="btn btn-success" type="button" id="search-button">Search</button>
 		    </form>
@@ -223,15 +239,14 @@ $(document).ready(function() {
 				</tbody>
 
                 </table>
+                <div class="text-end">
+	                <!-- 오른쪽 정렬 -->
+	                <button type="button" class="btn btn-success" onclick="go_report()">신고하기</button>
+	            </div>
                 <!-- End Default Table Example -->
             </div>
-            <div class="text-end" style="padding-top: 10px;">
-                <!-- 오른쪽 정렬 -->
-                <button type="button" class="btn btn-success" onclick="go_report()">신고하기</button>
-            </div>
+            
         </div>
-    </div>
-</div>
     
 </body>
 </html>

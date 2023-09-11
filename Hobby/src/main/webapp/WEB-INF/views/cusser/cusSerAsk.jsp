@@ -187,7 +187,7 @@
 
         
         <div class="container-fluid align-self-center" style="max-height: 70vh;  width: 50%">
-		<ul class="nav nav-tabs nav-justified" style="font-size: 30px; width: 98	%; margin: AUTO;">
+		<ul class="nav nav-tabs nav-justified border-0" style="font-size: 30px; width: 98%; margin: AUTO;">
 		  <li class="nav-item border border-4 rounded border-success">
 		    <a class="nav-link active" aria-current="page">QNA</a>
 		  </li>
