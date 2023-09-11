@@ -209,6 +209,18 @@
 	</script>
 	
 	<script type="text/javascript">
+	$(document).ready(function() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const showReviews = urlParams.get('showReviews');
+
+    if (showReviews === 'true') {
+        // Bootstrap의 탭을 예로 들면 다음과 같이 할 수 있습니다.
+        $('a[href="#reviews"]').tab('show');  // 후기 탭을 활성화
+   		}
+	});
+	</script>
+	
+	<script type="text/javascript">
 	/* 찜하기 버튼 */
 	function addToWishlist(u_id, campName) {
     	$.ajax({
