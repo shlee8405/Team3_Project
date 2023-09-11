@@ -46,6 +46,22 @@ public class GroupServiceImpl implements GroupService {
 	}
 	
 	@Override
+	public int checkUserParticipation(String g_idx, String u_idx) {
+	    return groupDAO.checkUserParticipation(g_idx, u_idx);
+	}
+	
+	@Override
+	public void joinGroup(String g_idx, String u_idx) {
+	    groupDAO.joinGroup(g_idx, u_idx);
+	}
+
+	@Override
+	public void cancelParticipation(String g_idx, String u_idx) {
+	    groupDAO.cancelParticipation(g_idx, u_idx);
+	}
+
+	
+	@Override
 	public int getGroupDelete(GroupVO gvo) {
 		return groupDAO.getGroupDelete(gvo);
 	}
@@ -81,5 +97,12 @@ public class GroupServiceImpl implements GroupService {
 	}
 	
 	
+	
+	
+	
+	@Override
+	public int insertMember(String g_idx, String u_idx) {
+		return groupDAO.insertMember(g_idx,u_idx);
+	}
 	
 }
