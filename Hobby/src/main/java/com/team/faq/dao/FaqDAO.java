@@ -18,4 +18,13 @@ public class FaqDAO {
 	public List<FaqVO> getAllfaq() {
 		return sqlSessionTemplate.selectList("faq.allList");
 	}
+	// FAQ 질문으로 검색	
+	public List<FaqVO> getListByContent(String f_content) {
+		return sqlSessionTemplate.selectList("faq.allListByContent", f_content);
+	}
+	
+	// FAQ 답변으로 검색
+	public List<FaqVO> getListByResponse(String f_response) {
+		return sqlSessionTemplate.selectList("faq.allListByResponse", f_response);
+	}
 }

@@ -20,5 +20,14 @@ public class FaqServiceImpl implements FaqService {
 		return faqDAO.getAllfaq();
 	}
 	
+	@Override
+	public List<FaqVO> getListByContent(String f_content) {
+		return faqDAO.getListByContent(f_content);
+	}
+	
+	@Override
+	public List<FaqVO> getListByResponse(String f_response) {
+		return faqDAO.getListByResponse(f_response);
+	}
 	
 }
