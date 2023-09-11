@@ -32,8 +32,8 @@
 <div style="position:relative; top:200px; z-index:1;">
 
 
-<div class="row" style="width: 50%; margin: 0 auto;">
-	<div class="col-4">
+<div class="row justify-content-md-center" style=" margin: 0 auto; width: 60%">
+	<div class="col">
 	<div class="card" style="width: 25rem;">
 	  <img src="/resources/images/FAQ.PNG" class="card-img-top" alt="...">
 	  <div class="card-body">
@@ -46,7 +46,7 @@
 	</div>
 	</div>
 	
-	<div class="col-4">
+	<div class="col">
 	<div class="card" style="width: 25rem;">
 	  <img src="/resources/images/FAQ.PNG" class="card-img-top" alt="...">
 	  <div class="card-body">
@@ -59,7 +59,7 @@
 	</div>
 	</div>
 	
-	<div class="col-4">
+	<div class="col">
 	<div class="card" style="width: 25rem;">
 	  <img src="/resources/images/FAQ.PNG" class="card-img-top" alt="...">
 	  <div class="card-body d-flex flex-column">

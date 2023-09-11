@@ -86,17 +86,15 @@
 </style>
 <script type="text/javascript">
 
-function sendData(f) {
-	if(document.getElementById('r_title').value.trim() === "" || document.getElementById('r_content').value.trim() === "") {
-	    alert('제목과 내용을 모두 입력해주세요.');
-	    return false;
+	function sendData(f) {
+		if(document.getElementById('r_title').value.trim() === "" || document.getElementById('r_content').value.trim() === "") {
+		    alert('제목과 내용을 모두 입력해주세요.');
+		    return false;
+		}else
+		f.action="/report_insert.do";
+        f.submit();
 	}
 	
-    function sendData(f) {
-        f.action="/report_insert.do";
-        f.submit();
-    }
-    
     function list_go(f) {
         f.action="/cusSerReport.do";
         f.submit();
@@ -170,7 +168,6 @@ function sendData(f) {
 	        </div>
 	        <div class="text-center">
 	            <input type="button" class="btn btn-primary" value="보내기" onclick="sendData(this.form)"/>
-	            <input type="reset" class="btn btn-secondary" value="다시"/>
 	            <input type="button" class="btn btn-secondary" value="목록" onclick="list_go(this.form)"/>
 	        </div>
 	    </form>
