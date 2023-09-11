@@ -58,7 +58,7 @@
 		<section class="search-sec">
    			<div class="schbox-wrap">
        	    	<div>
-                	<input type="text" class="search-slt" placeholder="캠핑장 이름을 입력하세요.">
+                	<input type="text" class="search-slt" placeholder="캠핑장 이름을 입력하세요." onkeyup="handleEnter(event)">
                 </div>
 				<div>
                     <button type="button" class="btn btn-info wrn-btn" onclick="doSearch()">Search</button>
@@ -178,8 +178,8 @@
 					var imageUrl = dataList.firstImageUrl == "" ? "resources/images/default_camp_img.jpg" : dataList.firstImageUrl;
 					
 					list += "<div class='product-grid'>"
-								+"<div class='product-image'>"
-									+"<a href='#'>"
+									+"<div class='product-image'>"
+									+"<a href='/campDetail.do?keyword=" + dataList.facltNm + "'>"
 									+"<img class='pic-1' src=" + imageUrl + ">" 
 									+"<img class='pic-2' src=" + imageUrl + ">" 
 									+"</a>" 
@@ -251,6 +251,14 @@
 			pageNo = 1; // 페이지 번호 초기화
 			loadMore(); // loadMore 함수 호출
 	
+		}
+		
+		// 엔터 검색
+		function handleEnter(event) {
+		    console.log("handleEnter called");  // 이 부분을 추가
+		    if (event.keyCode === 13) {
+		        doSearch();
+		    }
 		}
 
 		// 무한 스크롤
