@@ -373,7 +373,6 @@ body {
 				kakaoLogout();
 				location.href="/logOut.do";
 			<% }else{%>
-				alert("hihi2");
 				location.href="/logOut.do";
 			<%}%>
 		}					

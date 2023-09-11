@@ -8,6 +8,13 @@
 		select * from FAQ
 	</select>
 	
+	<select id="allListByContent" parameterType="String" resultType="fvo">
+		select * from FAQ where f_content like #{f_content}
+	</select>
+	
+	<select id="allListByResponse" parameterType="String" resultType="fvo">
+		select * from FAQ where f_response like #{f_reponse}
+	</select>
 </mapper>
 
 

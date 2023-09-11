@@ -2,7 +2,21 @@ package com.team.faq.vo;
 
 public class FaqVO {
 	
-	private String u_idx, f_content, f_response , f_idx;
+	private String u_idx, f_content, f_response , f_idx, f_status;
+
+	
+	
+	public String getF_status() {
+		return f_status;
+	}
+
+	public void setF_status(String f_status) {
+		this.f_status = f_status;
+	}
+
+	public void setF_idx(String f_idx) {
+		this.f_idx = f_idx;
+	}
 
 	public String getU_idx() {
 		return u_idx;

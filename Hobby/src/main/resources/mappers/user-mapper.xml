@@ -111,6 +111,10 @@
 	    u_phone = CASE WHEN #{u_phone} IS NOT NULL AND #{u_phone} != '' THEN #{u_phone} ELSE u_phone END
 	  WHERE u_idx = #{u_idx}
 	</update>
+	
+	<select id="findPwByEmail" parameterType="String" resultType="java.lang.String">
+        SELECT u_pw FROM USERS WHERE u_email = #{u_email}
+    </select>
 </mapper>
 
 

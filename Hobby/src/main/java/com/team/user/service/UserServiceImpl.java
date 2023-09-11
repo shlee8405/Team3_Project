@@ -146,4 +146,11 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getUsersWithPhone(u_phone);
 	}
 
+
+
+	@Override
+	public String findPwByEmail(String email2) {
+		return userDAO.findPwByEmail(email2);
+	}
+
 }

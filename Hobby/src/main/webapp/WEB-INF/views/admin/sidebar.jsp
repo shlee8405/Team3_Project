@@ -84,7 +84,7 @@ color:#ffffff!important;
 </head>
 <body>
     <!-- SIDE BAR ( NAV BAR )-->
-    <div class="flex-shrink-0 p-3  " style="height:100vh; width: 15%; background-color: #0f4200; color:white;">
+    <div class="flex-shrink-0 p-3  " style="height:100vh; width: 15%; background-color: #0f4200; color:white; position: fixed;">
         <a href="/adminHome.do" class="border-bottom border-2 m-0 pb-3" style=""  >
         	<img src="/resources/images/logo3.png" alt="hi" style="width:100%; position:relative; top:-25px; margin:0; max-height:100px; object-fit:cover; translate:0px 5%; ">
         </a>

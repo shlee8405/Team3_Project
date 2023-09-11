@@ -796,6 +796,7 @@ rotate(
 						$("#idRecoveryForm")
 								.submit(
 										function(event) {
+											console.log("dsadsdsa")
 											event.preventDefault(); // Prevent the default form submission
 
 											// Collect form data
@@ -840,46 +841,55 @@ rotate(
 										});
 					});
 	$(document)
-			.ready(
-					function() {
-						$("#pwdRecoveryForm")
-								.submit(
-										function(event) {
-											event.preventDefault(); // Prevent the default form submission
+	.ready(
+			function() {
+				$("#pwdRecoveryForm")
+						.submit(
+								function(event) {
+									console.log("321313121")
+									event.preventDefault(); // Prevent the default form submission
 
-											// Collect form data
-											var formData = "email="
-													+ encodeURIComponent($(
-															"#email").val());
-
-											// Use AJAX to initiate password recovery
-											$
-													.ajax({
-														url : "/forgotPwd.do", // Endpoint for 비밀번호찾기
-														type : "POST",
-														data : formData,
-														dataType : "text", // Response data type
-														contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-														success : function(
-																response) {
-															console
-																	.log(
-																			"Response:",
-																			response);
-															$(
-																	"#pwdRecoveryResult")
-																	.html(
-																			response); // Display the response
-														},
-														error : function(error) {
-															console.log(
-																	"Error:",
-																	error);
-															// Handle 비밀번호찾기 error if needed
-														}
-													});
-										});
-					});
+									// Collect form data
+									var formData = "email2="
+											+ encodeURIComponent($(
+													"#email2").val());
+									// Use AJAX to check email availability first
+									$
+											.ajax({
+												url : "/forgotPwd.do", // Endpoint for 아이디찾기
+												type : "POST",
+												data : formData,
+												dataType : "text", // Response data type
+												contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+												success : function(
+														response) {
+													console
+															.log(
+																	"Response:",
+																	response); // Add this line for debugging
+													if (response) {
+														// Handle 아이디찾기 success
+														var foundPw = response;
+														alert("비번을 찾았습니다: "
+																+ response);
+														$(
+																"#pwdRecoveryModal")
+																.modal(
+																		"hide"); // Close the modal
+													} else {
+														// Handle 아이디찾기 error
+														alert("비번을 찾을 수 없습니다. 다시 시도해주세요.");
+													}
+												},
+												error : function(error) {
+													console.log(
+															"Error:",
+															error);
+													// Handle 아이디찾기 error if needed
+												}
+											});
+								});
+			});
 </script>
 
 <script type="text/javascript">
@@ -1136,7 +1146,6 @@ rotate(
 				kakaoLogout();
 				location.href="/logOut.do";
 			<% }else{%>
-				alert("hihi2");
 				location.href="/logOut.do";
 			<%}%>
 		}					
@@ -1192,7 +1201,7 @@ rotate(
 				행정각부의 장은 소관사무에 관하여 법률이나 대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다.</div>
 		</div>
 	</div>
-
+<h2>dd</h2>
 	<!-- 두번째 색션 -->
 	<div class="section two  w-100 ">
 		<div class="row"
@@ -1312,9 +1321,7 @@ rotate(
 											data-bs-toggle="modal" data-bs-target="#idRecoveryModal">
 											아이디찾기 </a>
 									</div>
-									<div class="modal-body">
-										<div id="idRecoveryContent"></div>
-									</div>
+									
 									<span style="margin-top: 8px;">|</span>
 									<!--비밀번호 찾기-->
 									<div class="schpw">
@@ -1498,8 +1505,8 @@ rotate(
 					<!-- Input fields for 비밀번호찾기 -->
 					<form id="pwdRecoveryForm">
 						<div class="mb-3">
-							<label for="email" class="form-label">이메일</label> <input
-								type="email" class="form-control" id="email" name="email"
+							<label for="email2" class="form-label">이메일</label> <input
+								type="email" class="form-control" id="email2" name="email2"
 								placeholder="이메일을 입력하세요">
 						</div>
 						<!-- Add more input fields if needed -->

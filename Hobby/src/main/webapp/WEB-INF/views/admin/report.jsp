@@ -59,7 +59,7 @@ color:#ffffff!important;
    
 
   <!-- MAIN CONTAINER -->
-   <div class="container"  style="width: 85%;">
+   <div class="container"  style="width: 85%; margin-left:15vw;">
 
 
 

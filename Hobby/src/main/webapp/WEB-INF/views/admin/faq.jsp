@@ -20,7 +20,8 @@ main {
 	margin: 0px;
 	margin-right:0px;
 	padding-right:0px;
-	width: 100%;
+	width: 85%;
+	margin-left:15vw;
 	justify-items:center;
 	background-color: rgba(217, 255, 204, 0.05);
 
@@ -194,9 +195,8 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 						<div class="col-4"> </div>
 						<div class="col" style="align-items:center;">
 							<select class="form-select row-content" id="searchTextSelect" aria-label="Default select example" style="width:100% ; " >
-							  <option value="1" selected>닉네임</option>
-							  <option value="2" >출생년도</option>
-							  <option value="3" >번호 마지막 4</option>
+							  <option value="1" selected>질문</option>
+							  <option value="2" >답변</option>
 							</select> 
 						</div>
 						<div class="col-2" style="align-items:center;"> 
@@ -213,17 +213,16 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 							else {
 								const subject = document.getElementById("searchTextSelect").value;
 								if (subject == '1') {
-									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
+									//TODO search
+									location.href = "/adminFaqDetailSearch?text="+text+"&query="+subject;
 								} else if (subject == '2') {
-									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
-								} else if (subject == '3') {
-									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
-								}
+									location.href = "/adminFaqDetailSearch?text="+text+"&query="+subject;
+								} 
 							}
 						}
 						// 전체보기 function
 						function refresh() {
-							location.href="/adminUser.do";
+							location.href="/adminFAQ.do";
 						}
 					</script>
 						<div class="col" style=" align-items:center;"> 
@@ -251,6 +250,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 				                           <tr>
 					                            <th> 질문 </th> 
 					                            <th> 답변 </th>
+					                            <th> 보이기 상태 </th>
 					                            <th> 더 보기 </th>
 					                        </tr>
 			                   		</c:otherwise>
@@ -272,6 +272,15 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 														<td>${k.f_content}</td>
 														<!-- f_response -->
 														<td>${k.f_response}</td>
+														<!-- f_status //보이기 상태 -->
+														<c:choose>
+															<c:when test="${k.f_status==1}">
+																<td style="color:black; font-weight:bolder;"> 보임 </td>
+															</c:when>
+															<c:otherwise>
+																<td style="color:red; font-weight:bolder;"> 숨김 </td>
+															</c:otherwise>
+														</c:choose>
 														<!-- 더보기 -->
 														<td> 
 															<a href="#"  class="btn btn-success" style="padding:0;" 
@@ -283,6 +292,39 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 													
 													<!-- modal create start -->
 													
+													<!-- modal script -->
+													<script>
+													
+														function deleteFaq(idx){
+															const response = confirm("정말로 삭제하시겠습니까?");
+															if(response) {
+																alert(idx);
+															}
+														}
+														function hideFaq(idx){
+															const response = confirm("정말로 숨기겠습니까?");
+															if(response) {
+																alert(idx);
+															}
+														}
+														function unhideFaq(idx){
+															const response = confirm("정말로 표시하겠습니까?");
+															if(response) {
+																alert(idx);
+															}	
+														}
+														function updateFaq(f) {
+															const response = confirm("정말로 수정 하시겠습니까?");
+										      				if(response) {
+										      					f.action = "/updateFaqAdmin";
+										      					f.submit();
+										      				}
+										      				else alert("취소하셨습니다");
+														}														
+														
+													
+													</script>
+													
 													<!-- faqModal -->
 													<div class="modal fade" id="faqModal${k.f_idx}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 														<div class="modal-dialog modal-xl" id="oneGroupModal">
@@ -291,22 +333,29 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																	<h5 class="modal-title" id="exampleModalLabel"><b>FAQ 수정</b></h5>
 																	<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 																</div>
-																<form>
+																<form >
 																	<div class="modal-body">
 																		<div class="container-fluid">
+																			<input type="hidden" name="f_idx" value="${k.f_idx}">
 																			<div>
-																				<div  style="width:60%; margin-left:20%; margin-right:20%;margin-bottom:2%; margin-top:2%;">
-																					<h2 class="modalTitle">${k.f_content}</h2>
-																				</div>
-																				<textarea style="width:60%; margin-left:20%; margin-right:20%; height: 10em;">${k.f_response}</textarea>
+																				<textarea name="f_content" style="width:60%; margin-left:20%; margin-right:20%; height: 2em;">${k.f_content}</textarea>
+																				<textarea name="f_response" style="width:60%; margin-left:20%; margin-right:20%; height: 10em;">${k.f_response}</textarea>
 																			</div>
 																			<div class="row">
 																				<div class="col"></div>
 																				<div class="col"></div>
 																				<div class="col"></div>
 																				<div class="col" style="display: flex; flex-direction: row-reverse;">
-																					<a class="btn btn-success" style="margin:1%;">수정</a>
-																					<a class="btn btn-danger" style="margin:1%;">삭제</a>
+																					<button class="btn btn-success"  onclick="updateFaq(this.form)" style="margin:1%;">수정</button>
+																					<c:choose>
+																						<c:when test="${k.f_status==1}">
+																							<a class="btn btn-warning" onclick="hideFaq(${f_idx})" style="margin:1%;">숨김</a>
+																						</c:when>
+																						<c:otherwise>
+																							<a class="btn btn-primary" onclick="unhideFaq(${f_idx})" style="margin:1%;">보이기</a>
+																						</c:otherwise>
+																					</c:choose>
+																					<a class="btn btn-danger" onclick="deleteFaq(${k.f_idx})" style="margin:1%;">삭제</a>
 																				</div>
 																				<div class="col"></div>
 																			</div>
