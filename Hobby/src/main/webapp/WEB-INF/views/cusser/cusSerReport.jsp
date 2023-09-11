@@ -174,15 +174,15 @@ $(document).ready(function() {
         <br>
 
         <div class="container-fluid align-self-center" style="max-height: 70vh;  width: 50%">
-		<ul class="nav nav-tabs nav-justified border-0" style="font-size: 30px; width: 98%; margin: AUTO;">
-		  <li class="nav-item border border-4 rounded border-success">
-		    <a class="nav-link active" aria-current="page">REPORT</a>
+		<ul class="nav nav-tabs nav-justified border-0" style="font-size: 30px;">
+		  <li class="nav-item">
+		    <a class="nav-link " aria-current="page" style="color: black;" href = "/cusSerFAQ.do">FAQ</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="/cusSerFAQ.do" style="color: black;">FAQ</a>
+		    <a class="nav-link " href="/cusSerAsk.do" style="color: black;">QNA</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="/cusSerAsk.do" style="color: black;">QNA</a>
+		    <a class="nav-link active border border-4 rounded border-success" href="/cusSerReport.do" style="color: black;">REPORT</a>
 		  </li>
 		</ul>
 		    <!-- 검색창 추가 -->
