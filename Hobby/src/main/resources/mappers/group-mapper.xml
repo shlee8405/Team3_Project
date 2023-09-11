@@ -108,4 +108,13 @@
 		update GROUPCOMMENTS set
 		gc_status='0' where gc_idx = #{gc_idx}
 	</update>
+	
+	
+	
+	
+	
+	
+	<insert id="insertMember" parameterType="map">
+		INSERT INTO GROUPUSERS (g_idx, u_idx) VALUES (#{g_idx}, #{u_idx})
+	</insert>
 </mapper>

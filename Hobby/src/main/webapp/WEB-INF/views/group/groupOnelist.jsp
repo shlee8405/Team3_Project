@@ -53,19 +53,10 @@
 		f.submit();
 	}
      
-	function joinGroup() {
-	    var g_idx = '<%= request.getParameter("g_idx") %>'; // 해당 그룹의 ID 가져오기
-	    var userIdx = '<%= request.getSession().getServletContext().getAttribute("sessionUidx") %>'; // 현재 사용자의 ID 가져오기
-	    $.post("/joinGroup.do", { g_idx: g_idx, u_idx: userIdx }, function(data) {
-	        if (data.success) {
-	            location.reload(); // 페이지 새로고침
-	            console.log(g_idx);
-	            console.log(userIdx);
-	        } else {
-	            alert("참여 중 오류가 발생했습니다.");
-	        }
-	    });
+	function joinGroup(g_idx) {
+	    window.location.href = "/joinGroup.do?g_idx=" + g_idx;
 	}
+
 
 	function cancelParticipation() {
 	    var g_idx = '<%= request.getParameter("g_idx") %>'; // 해당 그룹의 ID 가져오기
@@ -116,7 +107,7 @@
     <div style="width: 300px; height: 300px;">
         <c:choose>
             <c:when test="${empty gvo.g_fname}">
-                <!-- 빈 공간 유지 -->
+                <!-- 빈 공간 유지 --> 
                 <img src="resources/images/캠핑.png" style="width: 300px; height: 300px;">
             </c:when>
             <c:otherwise>
@@ -150,7 +141,11 @@
 					<th class="allist" bgcolor="#99ccff">모임 정원</th>
 					<td class="allist">${gvo.g_maxPeople }</td>
 				</tr>
-				
+				<tr>
+				<td>
+	   			 <button id="participate" onclick="joinGroup(${gvo.g_idx})">참여</button>
+	   			 </td>
+	   			</tr>
 			</table>
 			</div>
 		
@@ -162,18 +157,20 @@
     <div class="infoActions">
         <input type="hidden" name="g_idx" value="${gvo.g_idx}">
         <input type="button" value="목록" onclick="list_go(this.form)" />
+    <c:set var="gUidxStr" value="${k.u_idx}" />
+    <c:if test="${sessionUidx eq gUidxStr}">
         <input type="button" value="수정" onclick="edit_go(this.form)" />
         <input type="button" value="삭제" onclick="delete_go(this.form)" />
+    </c:if>
     </div>
 		</form>
 		<br>
 		<br>
+		
 		<div style="border: 1px solid lightgray; width: 500px; text-align: center; margin-left : auto;">
-		<% if((Boolean) request.getAttribute("isParticipated")) { %>
-  			<button id="cancelParticipation" onclick="cancelParticipation()">참여 취소</button>
-		<% } else { %>
-   			 <button id="participate" onclick="joinGroup()">참여</button>
-		<% } %>
+		<form action="post">
+			
+		</form>
 		</div>
 		<br>
 		<br>

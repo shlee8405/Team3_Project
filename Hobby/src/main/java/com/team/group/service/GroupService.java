@@ -37,4 +37,10 @@ public interface GroupService {
 	// 댓글 삭제
 	public int commentDel(GroupCmtVO gcvo);
 	
+	
+	
+	
+	
+	int insertMember(String g_idx,String u_idx);
+	
 }

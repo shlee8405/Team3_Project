@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -26,6 +27,7 @@ import com.team.commons.Paging;
 import com.team.group.service.GroupService;
 import com.team.group.vo.GroupCmtVO;
 import com.team.group.vo.GroupVO;
+import com.team.user.service.UserService;
 import com.team.user.vo.UserVO;
 
 @Controller
@@ -34,6 +36,8 @@ public class GroupController {
 	private GroupService groupService;
 	@Autowired
 	private Paging paging;
+	@Autowired
+	private UserService userService;
 	
 	@RequestMapping("/groupList.do")
 	 public ModelAndView getAllGroups(HttpServletRequest request) {
@@ -141,7 +145,7 @@ public class GroupController {
 			return null;
 		}
 	}
-	@GetMapping("/group_onelist.do")
+	@RequestMapping("/group_onelist.do")
 	public ModelAndView getGroupOnelist(HttpServletRequest request, HttpSession session) {
 	    ModelAndView mv = new ModelAndView("group/groupOnelist");
 	    String g_idx = request.getParameter("g_idx");
@@ -171,18 +175,28 @@ public class GroupController {
 	    return mv;
 	}
 	
-	@PostMapping("/joinGroup.do")
-	@ResponseBody
-	public Map<String, Boolean> joinGroup(String g_idx, String u_idx) {
-	    Map<String, Boolean> result = new HashMap<>();
-	    try {
-	        groupService.joinGroup(g_idx, u_idx);
-	        result.put("success", true);
-	    } catch (Exception e) {
-	        result.put("success", false);
-	    }
-	    return result;
+	@RequestMapping("/joinGroup.do")
+	public ModelAndView joinGroup(@RequestParam("g_idx") String g_idx, HttpServletRequest request) {
+	    ModelAndView mav = new ModelAndView("redirect:/group_onelist.do");
+	    String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+	    int result = groupService.insertMember(g_idx,u_idx);
+	    System.out.println("dsdadsa    "+g_idx);
+	    return mav;
 	}
+
+	
+//	@PostMapping("/joinGroup.do")
+//	@ResponseBody
+//	public Map<String, Boolean> joinGroup(String g_idx, String u_idx) {
+//		Map<String, Boolean> result = new HashMap<>();
+//		try {
+//			groupService.joinGroup(g_idx, u_idx);
+//			result.put("success", true);
+//		} catch (Exception e) {
+//			result.put("false", false);
+//		}
+//		return result;
+//	}
 
 	@PostMapping("/cancelParticipation.do")
 	@ResponseBody

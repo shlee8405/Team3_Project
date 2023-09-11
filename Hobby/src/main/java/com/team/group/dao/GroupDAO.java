@@ -89,4 +89,15 @@ public class GroupDAO {
 	public List<GroupVO> searchGroups(GroupVO gvo) {
         return sqlSessionTemplate.selectList("group.searchGroups", gvo);
 	}
+	
+	
+	
+	
+	public int insertMember(String g_idx, String u_idx) {
+	    Map<String, String> map = new HashMap<>();
+	    map.put("g_idx", g_idx);
+	    map.put("u_idx", u_idx);
+	    return sqlSessionTemplate.insert("group.insertMember", map);
+	}
+
 }

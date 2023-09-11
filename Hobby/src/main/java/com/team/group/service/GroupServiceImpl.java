@@ -93,4 +93,11 @@ public class GroupServiceImpl implements GroupService {
 	
 	
 	
+	
+	
+	@Override
+	public int insertMember(String g_idx, String u_idx) {
+		return groupDAO.insertMember(g_idx,u_idx);
+	}
+	
 }
