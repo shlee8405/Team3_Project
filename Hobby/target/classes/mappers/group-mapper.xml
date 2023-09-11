@@ -34,24 +34,41 @@
 		<!-- LIMIT #{limit} OFFSET #{offset} -->
 	</select>
 	<!-- 검색결과 페이지수 -->
-	<select id="searchGroupsCount" parameterType="gvo" resultType="int">
-	SELECT COUNT(*) FROM GROUPS
-	WHERE g_status = '1'
-	<if test="g_title != null and g_title != ''">
-		AND g_title LIKE CONCAT('%', #{g_title}, '%')
-	</if>
-	<if test="g_cdo != null and g_cdo != ''">
-		AND g_cdo = #{g_cdo}
-	</if>
-	<if test="g_gugun != null and g_gugun != ''">
-		AND g_gugun = #{g_gugun}
-	</if>
-</select>
+	<select id="searchGroupsCount" parameterType="gvo"
+		resultType="int">
+		SELECT COUNT(*) FROM GROUPS
+		WHERE g_status = '1'
+		<if test="g_title != null and g_title != ''">
+			AND g_title LIKE CONCAT('%', #{g_title}, '%')
+		</if>
+		<if test="g_cdo != null and g_cdo != ''">
+			AND g_cdo = #{g_cdo}
+		</if>
+		<if test="g_gugun != null and g_gugun != ''">
+			AND g_gugun = #{g_gugun}
+		</if>
+	</select>
 
 	<select id="onelist" parameterType="String" resultType="gvo">
 		select *
 		from GROUPS where g_idx = #{g_idx}
 	</select>
+
+	<select id="checkUserParticipation" resultType="int">
+		select count(*)
+		from GROUPUSERS
+		where g_idx = #{g_idx} and u_idx = #{u_idx}
+	</select>
+
+	<insert id="joinGroup">
+		INSERT INTO GROUPUSERS (g_idx, u_idx) VALUES (#{g_idx}, #{u_idx});
+		UPDATE GROUPS SET g_curPeople = g_curPeople + 1 WHERE g_idx = #{g_idx};
+	</insert>
+
+	<delete id="cancelParticipation">
+		DELETE FROM GROUPUSERS WHERE g_idx = #{g_idx} AND u_idx = #{u_idx};
+		UPDATE GROUPS SET g_curPeople = g_curPeople - 1 WHERE g_idx = #{g_idx};
+	</delete>
 
 	<insert id="insert" parameterType="gvo">
 		insert into
@@ -93,6 +110,16 @@
 	</insert>
 
 	<update id="cmtDel" parameterType="gcvo">
-		update GROUPCOMMENTS set gc_status='0' where gc_idx = #{gc_idx}
+		update GROUPCOMMENTS set
+		gc_status='0' where gc_idx = #{gc_idx}
 	</update>
+	
+	
+	
+	
+	
+	
+	<insert id="insertMember" parameterType="map">
+		INSERT INTO GROUPUSERS (g_idx, u_idx) VALUES (#{g_idx}, #{u_idx})
+	</insert>
 </mapper>

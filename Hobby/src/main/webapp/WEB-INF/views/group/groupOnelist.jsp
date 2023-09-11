@@ -52,34 +52,26 @@
 		f.action="/groupDelete.do";
 		f.submit();
 	}
-      var count_party = 0;
-      var maxClicks = ${gvo.g_maxPeople}; // 버튼을 누를 수 있는 최대 횟수
-      
-     /*  $(document).ready(function() {
-    	  // 버튼 클릭 이벤트를 설정합니다.
-    	  $('#myButton_ok').click(party_click); 
-    	  // 이벤트 핸들러를 여기에 더 추가할 수 있습니다.
-    	}); */
-      
-      function party_click() {
-     	count_party++;
-      document.getElementById("count_party").innerHTML = count_party;
-          if (count_party >= maxClicks) {
-              $("#ok").css("display","none");
-              $("#no").css("display","block");
-              $("")
-          }
-      }
-      function party_click_no() {
-      document.getElementById("count_party").innerHTML = count_party;
-          if (count_party < 1) {
-              //document.getElementById("myButton_cancle").style.display = true;
-              $("#ok").css("display","block");
-              $("#no").css("display","none");
-          }else{
-      		count_party--;
-          }
-	} 
+     
+	function joinGroup(g_idx) {
+	    window.location.href = "/joinGroup.do?g_idx=" + g_idx;
+	}
+
+
+	function cancelParticipation() {
+	    var g_idx = '<%= request.getParameter("g_idx") %>'; // 해당 그룹의 ID 가져오기
+	    var userIdx = '<%= request.getSession().getServletContext().getAttribute("sessionUidx") %>'; // 현재 사용자의 ID 가져오기
+	    $.post("/cancelParticipation.do", { g_idx: g_idx, u_idx: userIdx }, function(data) {
+	        if (data.success) {
+	            console.log(g_idx);
+	            console.log(userIdx);
+	            location.reload(); // 페이지 새로고침
+	        } else {
+	            alert("참여 취소 중 오류가 발생했습니다.");
+	        }
+	    });
+	}
+	
       function comment_go(f) {
     		 // 유효성 검사
     		if(f.gc_content.value.trim().length <=0){
@@ -115,7 +107,7 @@
     <div style="width: 300px; height: 300px;">
         <c:choose>
             <c:when test="${empty gvo.g_fname}">
-                <!-- 빈 공간 유지 -->
+                <!-- 빈 공간 유지 --> 
                 <img src="resources/images/캠핑.png" style="width: 300px; height: 300px;">
             </c:when>
             <c:otherwise>
@@ -149,7 +141,11 @@
 					<th class="allist" bgcolor="#99ccff">모임 정원</th>
 					<td class="allist">${gvo.g_maxPeople }</td>
 				</tr>
-				
+				<tr>
+				<td>
+	   			 <button id="participate" onclick="joinGroup(${gvo.g_idx})">참여</button>
+	   			 </td>
+	   			</tr>
 			</table>
 			</div>
 		
@@ -161,20 +157,20 @@
     <div class="infoActions">
         <input type="hidden" name="g_idx" value="${gvo.g_idx}">
         <input type="button" value="목록" onclick="list_go(this.form)" />
+    <c:set var="gUidxStr" value="${k.u_idx}" />
+    <c:if test="${sessionUidx eq gUidxStr}">
         <input type="button" value="수정" onclick="edit_go(this.form)" />
         <input type="button" value="삭제" onclick="delete_go(this.form)" />
+    </c:if>
     </div>
 		</form>
 		<br>
 		<br>
+		
 		<div style="border: 1px solid lightgray; width: 500px; text-align: center; margin-left : auto;">
-		<p id="groupCount"><span id="count_party">0</span>/${gvo.g_maxPeople}&nbsp;&nbsp;</p>
-		<div id="ok">
-			<button class="btn5" id="myButton_ok" onclick="party_click()">참여</button>
-		</div>&nbsp;&nbsp;
-		<div id="no" style="display:none;">
-			<button class="btn5" id="myButton_cancle" onclick="party_click_no()">참여 취소</button>
-		</div>
+		<form action="post">
+			
+		</form>
 		</div>
 		<br>
 		<br>

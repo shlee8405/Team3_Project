@@ -46,6 +46,28 @@ public class GroupDAO {
 		return sqlSessionTemplate.selectOne("group.onelist", g_idx);
 	}
 	
+	public int checkUserParticipation(String g_idx, String u_idx) {
+	    Map<String, Object> map = new HashMap<>();
+	    map.put("g_idx", g_idx);
+	    map.put("u_idx", u_idx);
+	    return sqlSessionTemplate.selectOne("group.checkUserParticipation", map);
+	}
+
+	public void joinGroup(String g_idx, String u_idx) {
+	    Map<String, String> map = new HashMap<>();
+	    map.put("g_idx", g_idx);
+	    map.put("u_idx", u_idx);
+	    sqlSessionTemplate.insert("group.joinGroup", map);
+	}
+
+	public void cancelParticipation(String g_idx, String u_idx) {
+	    Map<String, String> map = new HashMap<>();
+	    map.put("g_idx", g_idx);
+	    map.put("u_idx", u_idx);
+	    sqlSessionTemplate.delete("group.cancelParticipation", map);
+	}
+
+	
 	public int getGroupDelete(GroupVO gvo) {
 		return sqlSessionTemplate.update("group.delete", gvo);
 	}
@@ -72,4 +94,15 @@ public class GroupDAO {
 	public List<GroupVO> searchGroups(GroupVO gvo) {
         return sqlSessionTemplate.selectList("group.searchGroups", gvo);
 	}
+	
+	
+	
+	
+	public int insertMember(String g_idx, String u_idx) {
+	    Map<String, String> map = new HashMap<>();
+	    map.put("g_idx", g_idx);
+	    map.put("u_idx", u_idx);
+	    return sqlSessionTemplate.insert("group.insertMember", map);
+	}
+
 }
