@@ -19,6 +19,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.ModelAndView;
@@ -48,7 +49,6 @@ public class CampController {
 		
 		// 리퀘스트 파라미터
 		int numOfRows = 6; 	// 보여줄 리스트 개수
-		//int pageNo = 1; 	// 페이지 번호
 		
 		String apiUrl = targetUrl + "/basedList"
 				+ "?numOfRows=" + numOfRows
@@ -73,24 +73,6 @@ public class CampController {
 		
 		for (int i = 0; i < item.length(); i++) {
 			JSONObject oneItem = item.getJSONObject(i);
-			
-			/*
-			 facltNm : 야영장명
-			 lineIntro : 한줄소개
-			 firstImageUrl : 이미지
-			 addr1 : 전체 주소
-			 doNm : 주소(시,도)
-			 tel : 전화번호 
-			 operDeCl : 운영일
-			 lctCl : 캠핑장 환경 (ex: 산, 숲)
-			 induty : 캠핑장 유형 (ex: 자동차 야영장)
-			 posblFcltyCl : 주변이용가능시설
-			 mapX : 경도(X)
-			 mapY : 위도(Y)
-			 featureNm : 소개글
-			 intro : 소개글
-			 */
-			
 			
 			CampVO cvo = new CampVO();
 			cvo.setFacltNm(oneItem.getString("facltNm"));
@@ -345,8 +327,8 @@ public class CampController {
 	    campService.addReview(facltNm, u_idx, comment, rating);
 	    String encodedFacltNm = URLEncoder.encode(facltNm, StandardCharsets.UTF_8);
 	    
-	    ModelAndView mv = new ModelAndView("redirect:/campDetail.do?keyword=" + encodedFacltNm);
-
+	    ModelAndView mv = new ModelAndView("redirect:/campDetail.do?keyword=" + encodedFacltNm + "&showReviews=true");
+	    mv.addObject("scrollToReviews", true);  // 후기 섹션으로 스크롤하는 플래그를 설정
 	    return mv; // 후기가 추가된 후 다시 해당 캠핑장 상세 페이지로 리다이렉트
 	}
 	
