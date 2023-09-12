@@ -2,6 +2,8 @@ package com.team.controller.admin;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,29 +51,49 @@ public class faq {
 		System.out.println("fvo content is " + fvo.getF_content());
 		System.out.println("fvo response is " + fvo.getF_response());
 		
-//		int res = faqService.getUpdateFaqAdmin(fvo);
-		
-		
-		return mv;
-		
-		/*
-		 
-		  //		System.out.println("update : " + idx);
-		ModelAndView mv = new ModelAndView("redirect:/adminUser.do");
-//		Map<String, String> queryMap = new HashMap<String, String>();
-//		queryMap.put("u_idx", uvo.getU_idx);
-		System.out.println("id is "+uvo.getU_id());
-		System.out.println("idx is "+uvo.getU_idx());
-		System.out.println("name is "+uvo.getU_name());
-		
-		int res = userService.getUpdateUserAdmin(uvo);
-		if(res>0)session.setAttribute("adminActionControl", "update");
+		int res = faqService.getUpdateFaqAdmin(fvo);
+		if (res > 0) session.setAttribute("adminActionControl", "update");
 		else session.setAttribute("adminActionControl", "error");
 		return mv;
-		  
-		  
-		  
-		
-		 */
 	}
+	@GetMapping("/hideFaqAdmin")
+	public ModelAndView hideFaq(@RequestParam("idx") String idx, HttpSession session) {
+		ModelAndView mv = new ModelAndView("redirect:/adminFAQ.do");
+		int res = faqService.getHideFaq(idx);
+		if(res>0)session.setAttribute("adminActionControl", "hide");
+		else session.setAttribute("adminActionControl", "error");
+		return mv;
+	}
+	@GetMapping("/unhideFaqAdmin")
+	public ModelAndView unhideFaq(@RequestParam("idx") String idx, HttpSession session) {
+		ModelAndView mv = new ModelAndView("redirect:/adminFAQ.do");
+		int res = faqService.getUnhideFaq(idx);
+		if(res>0)session.setAttribute("adminActionControl", "unhide");
+		else session.setAttribute("adminActionControl", "error");
+		return mv;
+	}
+	
+	@GetMapping("/deleteFaqAdmin")
+	public ModelAndView deleteFaq(@RequestParam("idx") String idx, HttpSession session) {
+		ModelAndView mv = new ModelAndView("redirect:/adminFAQ.do");
+		int res = faqService.getDeleteFaq(idx);
+		if(res>0) session.setAttribute("adminActionControl", "delete");
+		else session.setAttribute("adminActionControl", "error");
+		return mv;
+	}
+	
+	@RequestMapping("/addFaqAdmin")
+	public ModelAndView addFaq(FaqVO fvo, 
+			HttpServletResponse response,
+			HttpServletRequest request) {
+		ModelAndView mv = new ModelAndView("redirect:/adminFAQ.do");
+		String sessionidx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		fvo.setU_idx(sessionidx);
+		System.out.println("/addFaqAdmin u_idx is " + fvo.getU_idx());
+		int res = faqService.getInsertFaq(fvo);
+		if(res>0) request.getSession().getServletContext().setAttribute("adminActionControl", "insert");
+		else request.getSession().getServletContext().setAttribute("adminActionControl", "error");
+		return mv;
+	}
+	
 }

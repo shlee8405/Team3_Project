@@ -131,6 +131,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 		location.href = "/home.do"
 	}
 
+	/* 
     function hidetest() {
         var x = document.getElementById("test");
         var y = document.getElementById("test2");
@@ -148,7 +149,10 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
         document.getElementById("btn-tab-1").style.backgroundColor = '#198754';
         x.style.display = "none";
         y.style.display = "block";
-    }
+    } 
+    */
+    
+    
     // 데이터테이블로 테이블 생성
     $(document).ready( function () {
 	    try{
@@ -156,6 +160,27 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 	    }catch{
 	    }
     } );
+    
+    $(document).ready(()=>{
+    	var actionControl = "${adminActionControl}";
+    	if(actionControl == "hide") {
+    		alert("성공적으로 숨기셨습니다.");
+    		actionControl = "";
+    		<% session.removeAttribute("adminActionControl"); %>
+    	} else if (actionControl == "update") {
+    		alert("성공적으로 수정하셨습니다.");
+    		<% session.removeAttribute("adminActionControl"); %>
+    	} else if (actionControl == "delete") {
+    		alert("성공적으로 삭제하셨습니다.");
+    		<% session.removeAttribute("adminActionControl"); %>
+    	} else if (actionControl == "error") {
+    		alert("뭔가 잘 못 되었습니다. 개발자에게 문의하세요.");
+    		<% session.removeAttribute("adminActionControl"); %>
+    	} else if (actionControl == "unhide") {
+    		alert("보이기로 바꾸셨습니다.");
+    		<% session.removeAttribute("adminActionControl"); %>
+    	}
+    })
 </script>
 </head>
 <body>
@@ -167,16 +192,74 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 	   <div class="super" >
 			<div class="row topper ms-1" style="width:100%; ">
 				<div class="col" style="border-bottom: 1px solid  #0f4200;">
-					<input type="button" class="btn-check" id="btn-check" autocomplete="off" onclick="hidetest()" checked>
+					<input type="button" class="btn-check" id="btn-check" autocomplete="off" onclick="refresh()" checked>
 	            	<label class="btn btn-success" for="btn-check" id="btn-tab-1">등록된 FAQ</label>
 	
-	            	<input type="button" class="btn-check" id="btn-check2" autocomplete="off" onclick="hidetest2()">
-	            	<label class="btn btn-success" for="btn-check2" id="btn-tab-2">FAQ 추가</label>
+	            	<!-- <input type="button" class="btn-check" id="btn-check2" autocomplete="off" onclick="hidetest2()"> -->
+	            	<!-- <label class="btn btn-success" for="btn-check2" id="btn-tab-2">FAQ 추가</label> -->
+	            	<a href="#"  class="btn btn-success" id="btn-tab-1" style="" 
+						data-bs-toggle="modal" data-bs-target="#addFaqModal">
+				  		FAQ 추가
+					</a>
+					<!-- FAQ 추가 modal JS -->
+					<script>
+						function addFaq(f) {
+							const response = confirm("정말로 추가 하시겠습니까?");
+		      				if(response) {
+		      					f.action = "/addFaqAdmin";
+		      					f.submit();
+		      				}
+		      				else {
+		      					alert("취소하셨습니다");
+		      					refresh();
+		      				}
+						}												
+					</script>
+					
+					<!-- FAQ 추가 modal -->
+				<div class="modal fade" id="addFaqModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog modal-xl" id="oneGroupModal">
+						<div class="modal-content">
+							<div class="modal-header titlemodal">
+								<h5 class="modal-title" id="exampleModalLabel" style="margin-left:50%; transform: translate(-50%, 0%); font-size:3rem;"><b>/FAQ 추가.do</b></h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+							</div>
+							<form >
+								<div class="modal-body">
+									<div class="container-fluid"> 
+										<div class="row" style="width:60%; margin-left:20%; margin-right:20%;">
+											<div class="col">
+												<textarea name="f_content" style="width:100%; height: 3rem;'" placeholder="FAQ 제목을 입력해주세요..."></textarea>
+											</div>
+										</div> 
+										<div class="row" style="width:60%; margin-left:20%; margin-right:20%;">
+											<div class="col">
+												<textarea name="f_response" style="width:100%; height: 10rem;" placeholder="FAQ 내용을 입력해주세요..."></textarea>
+											</div>
+										</div>
+										<div class="row">
+											<div class="col">
+											</div>
+											<div class="col">
+											</div>
+											<div class="col">
+												<button class="btn btn-primary" onclick="addFaq(this.form)" >추가하기</button>
+												<button type="button" class="btn btn-danger" data-bs-dismiss="modal" aria-label="Close" >취소</button>
+											</div>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>															
+					</div>
+				</div>
+				
+	            	
 				</div>
 			</div>
-	        <!-- SEARCH CONTAINER -->
 	        <div id="test"> 
-	        	<!-- FIRST CONTAINER (GROUP LIST SEARCH) -->
+	        
+	        <!-- SEARCH CONTAINER -->
 		        <div class="topcontainer  ps-5  mt-0 p-1">
 		       		<div class="row row-search">
 		       			<div class="col ">
@@ -220,6 +303,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 								} 
 							}
 						}
+
 						// 전체보기 function
 						function refresh() {
 							location.href="/adminFAQ.do";
@@ -236,8 +320,11 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 		       		
 		        </div>
 		
+	
+		
+		
 		        <!-- FIRST CONTAINER ( USER LIST )-->
-		        <div class="bottomcontainer ms-2 me-3 mt-1"   style="height:70vh;">
+		        <div class="bottomcontainer ms-2 me-3 mt-1"   style="height:auto;">
 		                <table class="display" id="myTable1">	
 		                    <thead class="table-success" >
 			                   	<c:choose>
@@ -298,19 +385,19 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 														function deleteFaq(idx){
 															const response = confirm("정말로 삭제하시겠습니까?");
 															if(response) {
-																alert(idx);
+																location.href="/deleteFaqAdmin?idx="+idx;
 															}
 														}
 														function hideFaq(idx){
 															const response = confirm("정말로 숨기겠습니까?");
 															if(response) {
-																alert(idx);
+																location.href="/hideFaqAdmin?idx="+idx;
 															}
 														}
 														function unhideFaq(idx){
 															const response = confirm("정말로 표시하겠습니까?");
 															if(response) {
-																alert(idx);
+																location.href="/unhideFaqAdmin?idx="+idx;
 															}	
 														}
 														function updateFaq(f) {
@@ -319,8 +406,12 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 										      					f.action = "/updateFaqAdmin";
 										      					f.submit();
 										      				}
-										      				else alert("취소하셨습니다");
-														}														
+										      				else {
+										      					alert("취소하셨습니다");
+										      					refresh();
+										      				
+										      				}
+														}												
 														
 													
 													</script>
@@ -349,10 +440,10 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																					<button class="btn btn-success"  onclick="updateFaq(this.form)" style="margin:1%;">수정</button>
 																					<c:choose>
 																						<c:when test="${k.f_status==1}">
-																							<a class="btn btn-warning" onclick="hideFaq(${f_idx})" style="margin:1%;">숨김</a>
+																							<a class="btn btn-warning" onclick="hideFaq(${k.f_idx})" style="margin:1%;">숨김</a>
 																						</c:when>
 																						<c:otherwise>
-																							<a class="btn btn-primary" onclick="unhideFaq(${f_idx})" style="margin:1%;">보이기</a>
+																							<a class="btn btn-primary" onclick="unhideFaq(${k.f_idx})" style="margin:1%;">보이기</a>
 																						</c:otherwise>
 																					</c:choose>
 																					<a class="btn btn-danger" onclick="deleteFaq(${k.f_idx})" style="margin:1%;">삭제</a>

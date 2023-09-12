@@ -288,6 +288,15 @@ import 'datatables.net-responsive-dt';
 							<input class="row-content" type="text" id="searchTextInput" style="width:100%">
 						</div>
 						<script type="text/javascript">
+						var input = document.getElementById("searchTextInput");
+
+						input.addEventListener("keypress", function(event) {
+						  if (event.key === "Enter") {
+						    event.preventDefault();
+						    document.getElementById("searchSubmitBtn").click();
+						  }
+						});
+						
 						function search() {
 							const text = document.getElementById("searchTextInput").value;		
 							if(text==''|| !text) {
@@ -303,17 +312,14 @@ import 'datatables.net-responsive-dt';
 								} else if (subject == '3') {
 									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
 								}
-								
-								
 							}
-							
 						}
 						function refresh() {
 							location.href="/adminUser.do";
 						}
 						</script>
 						<div class="col" style=" align-items:center;"> 
-							<input class="row-content btn btn-success" type="button" onclick='search()' style="width:100%" value="검색">
+							<input class="row-content btn btn-success" type="button" onclick='search()' style="width:100%" value="검색" id="searchSubmitBtn">
 						</div>
 						<div class="col" style="align-items:center;">
 							<input class="row-content btn btn-success" type="button" onclick='refresh()' style="width:100%" value="전체보기">
@@ -324,7 +330,7 @@ import 'datatables.net-responsive-dt';
 		        </div>
 		
 		        <!-- FIRST CONTAINER ( USER LIST )-->
-		        <div class="bottomcontainer ms-2 me-3 mt-1"   style="height:70vh;">
+		        <div class="bottomcontainer ms-2 me-3 mt-1"   style="height:auto;">
 		                <table class="display" id="myTable1">	
 		                    <thead class="table-success" >
 			                   	<c:choose>
@@ -813,7 +819,7 @@ import 'datatables.net-responsive-dt';
 			       			<div class="col ">
 			       			</div>
 			       			<div class="col col-title-text" >
-			       				<h1 class="col-title-h1">/관리자 계정 추가.do</h1>
+			       				<h1 class="col-title-h1">/유저 계정 추가.do</h1>
 			       			</div>
 			       			<div class="col">
 			       			</div>
@@ -933,8 +939,8 @@ import 'datatables.net-responsive-dt';
 			       		</div>
 			</div>
 	        
-	       <!-- FIRST CONTAINER ( USER LIST )-->
-		        <div class="bottomcontainer ms-2 me-3 mt-1"   style="height:70vh;">
+	       <!-- THIRD CONTAINER ( ADMIN LIST )-->
+		        <div class="bottomcontainer ms-2 me-3 mt-1"   style="height:auto; min-height: 70vh;">
 		                <table class="display" id="myTable2" >	
 		                    <thead class="table-success" >
 			                   	<c:choose>
