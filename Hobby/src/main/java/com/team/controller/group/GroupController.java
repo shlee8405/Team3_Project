@@ -184,7 +184,7 @@ public class GroupController {
 	    return mav;
 	}
 
-	
+//jh	
 //	@PostMapping("/joinGroup.do")
 //	@ResponseBody
 //	public Map<String, Boolean> joinGroup(String g_idx, String u_idx) {
