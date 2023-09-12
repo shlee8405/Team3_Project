@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>유저 관리</title>
+<title>FAQ 관리</title>
 
 <style type="text/css">
 

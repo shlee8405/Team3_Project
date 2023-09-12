@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>유저 관리</title>
+<title>캠핑 모임 관리</title>
 
 <style type="text/css">
 

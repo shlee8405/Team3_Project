@@ -8,6 +8,11 @@
 		select * from QNA
 	</select>
 	
+	<select id="allListOrderByResponse" resultType="qvo">
+		SELECT * FROM QNA
+		ORDER BY CASE WHEN q_response IS NOT NULL THEN 1 ELSE 0 END, q_idx;
+	</select>
+	
 	<insert id="insert" parameterType="map">
 		INSERT INTO QNA(q_content,q_name,f_name,u_idx,q_date,q_title)
 		VALUES(#{qvo.q_content},#{qvo.q_name},#{qvo.f_name},#{u_idx},sysdate(),#{qvo.q_title})
