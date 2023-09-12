@@ -143,6 +143,7 @@
 				</tr>
 				<tr>
 				<td>
+				${user.u_id}&nbsp;&nbsp;&nbsp;&nbsp;
 	   			 <button id="participate" onclick="joinGroup(${gvo.g_idx})">참여</button>
 	   			 </td>
 	   			</tr>

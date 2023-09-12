@@ -177,11 +177,13 @@ public class GroupController {
 	
 	@RequestMapping("/joinGroup.do")
 	public ModelAndView joinGroup(@RequestParam("g_idx") String g_idx, HttpServletRequest request) {
-	    ModelAndView mav = new ModelAndView("redirect:/group_onelist.do");
+	    ModelAndView mv = new ModelAndView("redirect:/group_onelist.do");
 	    String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
 	    int result = groupService.insertMember(g_idx,u_idx);
+	    List<UserVO> Ulist = userService.getUsers(u_idx);
 	    System.out.println("dsdadsa    "+g_idx);
-	    return mav;
+	    mv.addObject("user", Ulist.get(0));
+	    return mv;
 	}
 
 //jh	
