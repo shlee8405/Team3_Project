@@ -188,14 +188,24 @@ public class GroupController {
 	
 	@RequestMapping("/joinGroup.do")
 	public ModelAndView joinGroup(@RequestParam("g_idx") String g_idx, HttpServletRequest request) {
-	    ModelAndView mv = new ModelAndView("redirect:/group_onelist.do");
+	    ModelAndView mv;
+
 	    String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
-	    int result = groupService.insertMember(g_idx,u_idx);
+
+	    if (u_idx == null || u_idx.trim().isEmpty()) {
+	        mv = new ModelAndView("groupOnelist");
+	        mv.addObject("loginRequired", true);  // 로그인이 필요한 경우
+	        return mv;
+	    }
+
+	    int result = groupService.insertMember(g_idx, u_idx);
 	    List<UserVO> Ulist = userService.getUsers(u_idx);
 	    System.out.println("dsdadsa    "+g_idx);
+	    mv = new ModelAndView("redirect:/group_onelist.do");
 	    mv.addObject("user", Ulist.get(0));
 	    return mv;
 	}
+
 
 //jh	
 //	@PostMapping("/joinGroup.do")

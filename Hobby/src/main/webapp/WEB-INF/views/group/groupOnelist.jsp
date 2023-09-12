@@ -53,10 +53,20 @@
 		f.submit();
 	}
      
-	function joinGroup(g_idx) {
-	    window.location.href = "/joinGroup.do?g_idx=" + g_idx;
-	}
+    // 세션에서 u_idx 값을 가져와 JavaScript 변수로 저장
+    var u_idx = "<%= request.getSession().getServletContext().getAttribute("sessionUidx") %>";
+    console.log("u_idx value:", u_idx);  // u_idx의 값을 콘솔에 출력
+    
+    function joinGroup(g_idx) {
+    	console.log("joinGroup function called");  // 함수 호출 확인
+        // u_idx가 null 또는 빈 문자열인 경우 로그인되어 있지 않다고 판단
+         if (!u_idx || u_idx === "null") {
+            alert("로그인이 필요한 기능입니다.");
+            return; // 함수를 여기서 종료
+        }
 
+        window.location.href = "/joinGroup.do?g_idx=" + g_idx;
+    }
 
 	function cancelParticipation() {
 	    var g_idx = '<%= request.getParameter("g_idx") %>'; // 해당 그룹의 ID 가져오기
@@ -159,10 +169,8 @@
         <input type="hidden" name="g_idx" value="${gvo.g_idx}">
         <input type="button" value="목록" onclick="list_go(this.form)" />
     <c:set var="gUidxStr" value="${k.u_idx}" />
-    <c:if test="${sessionUidx eq gUidxStr}">
         <input type="button" value="수정" onclick="edit_go(this.form)" />
         <input type="button" value="삭제" onclick="delete_go(this.form)" />
-    </c:if>
     </div>
 		</form>
 		<br>
