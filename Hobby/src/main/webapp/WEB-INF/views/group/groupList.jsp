@@ -186,15 +186,25 @@ ol.paging li a:hover {
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script type="text/javascript">
-	function group_write_go(fe5) {
-		var sessionUidx = '<%=request.getSession().getServletContext().getAttribute("sessionUidx")%>';
-		if (!sessionUidx) {
-	        alert('로그인이 필요한 기능입니다.');
-	        return false; // 이 함수가 버튼의 클릭 이벤트 핸들러로 사용되는 경우 이전 페이지로 돌아갑니다.
-	    } else {
-			location.href= "/group_writeForm.do";
-	    }
-	}
+function group_write_go(f) {
+	var sessionUidx = "${user.u_idx}";
+	
+	console.log('group_write_go function called');
+    console.log('sessionUidx value:', sessionUidx);
+
+    // sessionUidx 변수를 사용하여 ${user.u_idx} 값을 가져옵니다.
+    var Uidx = sessionUidx;
+
+    if (Uidx === null || Uidx === '') {
+        alert('로그인이 필요한 기능입니다.');
+        return false;
+    } else {
+        // Uidx 값을 사용하여 원하는 동작을 수행합니다.
+        location.href = "/group_writeForm.do?u_idx=" + Uidx;
+    }
+}
+
+
 	function go_groupOnelist(f) {
 		var div = document.getElementById("group_item");
 		div.classList.add("hovered");
@@ -374,7 +384,7 @@ ol.paging li a:hover {
             </c:otherwise>
         </c:choose>
     </div>
-    <button id="write_btn" onclick="group_write_go(this.form)">글쓰기</button>
+    <button id="write_btn" onclick="group_write_go(this.form, '${user.u_idx}')">글쓰기</button>
     <br>
     <br>
     

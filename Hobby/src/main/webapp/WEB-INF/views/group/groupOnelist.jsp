@@ -167,13 +167,6 @@
 		</form>
 		<br>
 		<br>
-		
-		<div style="border: 1px solid lightgray; width: 500px; text-align: center; margin-left : auto;">
-		<form action="post">
-			
-		</form>
-		</div>
-		<br>
 		<br>
 		<%-- 댓글 입력 --%>
 	<div style="padding:50px; width:580px; margin: auto; ">
@@ -182,7 +175,7 @@
 				<c:if test="${sessionUidx != null}">
 				    <p id="commId">아이디 : ${sessionUidx}</p>
 				</c:if>
-				<p >내용 : <br>
+				<p >내용 : 
 					<textarea id="commentArea" rows="4" cols="40" name="gc_content"></textarea>
 				 </p>
 				 <input id="commIn" type="button" value="댓글저장" onclick="comment_go(this.form)">
