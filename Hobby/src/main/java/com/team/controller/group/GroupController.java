@@ -77,8 +77,17 @@ public class GroupController {
 		if (paging.getEndBlock() > paging.getTotalPage()) {
 			paging.setEndBlock(paging.getTotalPage());
 		}
-		
 		List<GroupVO> glist = groupService.getAllGroups(paging.getOffset(), paging.getNumPerPage());
+		
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		if (u_idx != null) {
+		    List<UserVO> Ulist = userService.getUsers(u_idx);
+		    if (!Ulist.isEmpty()) {
+		        mv.addObject("user", Ulist.get(0));
+		    }
+		}
+
+		
 		mv.addObject("glist", glist);
 		mv.addObject("paging", paging);
         return mv;
@@ -105,9 +114,13 @@ public class GroupController {
 
 	
 	@GetMapping("/group_writeForm.do")
-	public ModelAndView getGroupWriteForm() {
+	public ModelAndView getGroupWriteForm(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("group/groupWrite");
-		mv.addObject("uvo", new UserVO().getU_nickname());
+		
+		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+		List<UserVO> Ulist = userService.getUsers(u_idx);
+		mv.addObject("user", Ulist.get(0));
+		
 		return mv;
 	}
     
@@ -151,37 +164,37 @@ public class GroupController {
 	    String g_idx = request.getParameter("g_idx");
 	    String cPage = request.getParameter("cPage");
 	    
-	    // 여기에 코드를 삽입합니다.
 	    String userIdx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
-	    int participationCount = groupService.checkUserParticipation(g_idx, userIdx);
-	    boolean isParticipated = participationCount > 0;
-
-	    mv.addObject("isParticipated", isParticipated);
+	    //int participationCount = groupService.checkUserParticipation(g_idx, userIdx);
+	    //boolean isParticipated = participationCount > 0;
+	    
 
 	    // 상세보기
 	    GroupVO gvo = groupService.getGroupOnelist(g_idx);
 	    // 댓글 가져오기
 	    List<GroupCmtVO> gc_list = groupService.getCommList(g_idx);
+	    // id가져오기
+	    //List<UserVO> Ulist = userService.getUsers(u_idx);
 	    
-	    mv.addObject("uvo", new UserVO().getU_id());
+	    //mv.addObject("user", Ulist.get(0));
+	    //mv.addObject("isParticipated", isParticipated);
+	    
 	    mv.addObject("gvo", gvo);
 	    mv.addObject("gc_list",gc_list);
 	    mv.addObject("cPage", cPage);
-	    //mv.addObject("uvo", userInfo);
 	    
-	    // 사용자의 u_idx를 이용하여 사용자 정보 가져오기
-	    /*UserVO user = groupService.getUserCmtInfo(userInfo.getU_idx());
-	    mv.addObject("user", user);*/
 	    return mv;
 	}
 	
 	@RequestMapping("/joinGroup.do")
 	public ModelAndView joinGroup(@RequestParam("g_idx") String g_idx, HttpServletRequest request) {
-	    ModelAndView mav = new ModelAndView("redirect:/group_onelist.do");
+	    ModelAndView mv = new ModelAndView("redirect:/group_onelist.do");
 	    String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
 	    int result = groupService.insertMember(g_idx,u_idx);
+	    List<UserVO> Ulist = userService.getUsers(u_idx);
 	    System.out.println("dsdadsa    "+g_idx);
-	    return mav;
+	    mv.addObject("user", Ulist.get(0));
+	    return mv;
 	}
 
 //jh	

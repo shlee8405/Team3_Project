@@ -78,7 +78,9 @@ public class AdminController {
 	@GetMapping("/adminQNA.do")
 	public ModelAndView goAdminQNA() /* 愿�由ъ옄 1��1 */ {
 		ModelAndView mv = new ModelAndView("admin/qna");
-		List<QnaVO> list = qnaService.getAllQna();
+		List<QnaVO> list = qnaService.getAllQnaOrderByResponse();
+		List<UserVO> userlist = userService.getAllUsers();
+		mv.addObject("userlist" , userlist);
 		mv.addObject("list", list);
 		return mv;
 	}

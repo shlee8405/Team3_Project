@@ -15,6 +15,27 @@
 	<select id="allListByResponse" parameterType="String" resultType="fvo">
 		select * from FAQ where f_response like #{f_reponse}
 	</select>
+	
+	<update id="updateFaq" parameterType="fvo">
+		update FAQ set f_content = #{f_content}, f_response = #{f_response} where f_idx = #{f_idx}
+	</update>
+	
+	<update id="hideFaq" parameterType="String"> 
+		update FAQ set f_status = 0 where f_idx = #{f_idx}
+	</update>
+	
+	<update id="unhideFaq" parameterType="String"> 
+		update FAQ set f_status = 1 where f_idx = #{f_idx}
+	</update>
+	
+	<delete id="deleteFaq" parameterType="String">
+		delete from FAQ where f_idx = #{f_idx}
+	</delete>
+	
+	<insert id="insertFaq" parameterType="fvo">
+		insert into FAQ(f_content, f_response, u_idx)
+		values(#{f_content} , #{f_response} , #{u_idx})
+	</insert>
 </mapper>
 
 

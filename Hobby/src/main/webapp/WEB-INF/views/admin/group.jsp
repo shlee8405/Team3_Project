@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>유저 관리</title>
+<title>캠핑 모임 관리</title>
 
 <style type="text/css">
 
@@ -240,7 +240,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 		        </div>
 		
 		        <!-- FIRST CONTAINER ( USER LIST )-->
-		        <div class="bottomcontainer ms-2 me-3 mt-1"   style="height:70vh;">
+		        <div class="bottomcontainer ms-2 me-3 mt-1"   style="height:auto;">
 		                <table class="display" id="myTable1">	
 		                    <thead class="table-success" >
 			                   	<c:choose>

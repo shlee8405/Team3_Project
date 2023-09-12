@@ -9,6 +9,9 @@ public interface QnaService {
 	// 문의 전체보기
 	public List<QnaVO> getAllQna();
 	
+	// 문의 전체보기. 답변 없는것들 먼저 보임
+	List<QnaVO> getAllQnaOrderByResponse();
+	
 	// 1대1 문의 넣기
 	int getInsert(QnaVO qvo,String u_idx);
 	

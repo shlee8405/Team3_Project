@@ -20,6 +20,10 @@ public class QnaDAO {
 		return sqlSessionTemplate.selectList("qna.allList");
 	}
 	
+	public List<QnaVO> getAllQnaOrderByResponse() {
+		return sqlSessionTemplate.selectList("qna.allListOrderByResponse");
+	}
+	
 	public int getInsert(QnaVO qvo, String u_idx) {
 		
 		Map<String, Object> map = new HashMap<>();

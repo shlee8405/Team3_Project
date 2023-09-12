@@ -30,4 +30,29 @@ public class FaqServiceImpl implements FaqService {
 		return faqDAO.getListByResponse(f_response);
 	}
 	
+	@Override
+	public int getUpdateFaqAdmin(FaqVO fvo) {
+		return faqDAO.getUpdateFaqAdmin(fvo);
+	}
+	
+	@Override
+	public int getHideFaq(String f_idx) {
+		return faqDAO.getHideFaq(f_idx);
+	}
+	
+	@Override
+	public int getUnhideFaq(String f_idx) {
+		return faqDAO.getUnhideFaq(f_idx);
+	}
+	
+	@Override
+	public int getDeleteFaq(String f_idx) {
+		return faqDAO.getDeleteFaq(f_idx);
+	}
+	
+	@Override
+	public int getInsertFaq(FaqVO fvo) {
+		return faqDAO.getInsertFaq(fvo);
+	}
 }
+

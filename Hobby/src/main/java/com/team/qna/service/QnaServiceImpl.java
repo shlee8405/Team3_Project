@@ -19,6 +19,11 @@ public class QnaServiceImpl implements QnaService {
 	}
 	
 	@Override
+	public List<QnaVO> getAllQnaOrderByResponse() {
+		return qnaDAO.getAllQnaOrderByResponse();
+	}
+	
+	@Override
 	public int getInsert(QnaVO qvo,String u_idx) {
 		return qnaDAO.getInsert(qvo,u_idx);
 	}
