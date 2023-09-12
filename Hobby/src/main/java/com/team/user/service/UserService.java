@@ -2,6 +2,7 @@ package com.team.user.service;
 
 import java.util.List;
 
+import com.team.user.vo.NaverVO;
 import com.team.user.vo.UserVO;
 
 public interface UserService {
@@ -73,4 +74,9 @@ public interface UserService {
 	
 	// 이메일로 비밀번호 찾기
 	String findPwByEmail(String email);
+	
+	
+	int naver(NaverVO naverVO);
+	
+	String getNaverUserByEmail(String id);
 }

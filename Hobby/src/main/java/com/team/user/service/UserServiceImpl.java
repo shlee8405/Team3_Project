@@ -7,6 +7,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.team.user.dao.UserDAO;
+import com.team.user.vo.NaverVO;
 import com.team.user.vo.UserVO;
 
 @Service
@@ -151,6 +152,18 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public String findPwByEmail(String email2) {
 		return userDAO.findPwByEmail(email2);
+	}
+	
+	
+	
+	@Override
+	public int naver(NaverVO naverVO) {
+		return userDAO.naver(naverVO);
+	}
+	
+	@Override
+	public String getNaverUserByEmail(String id) {
+		return userDAO.getNaverUserByEmail(id);
 	}
 
 }

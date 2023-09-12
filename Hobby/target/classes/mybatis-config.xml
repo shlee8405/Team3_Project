@@ -24,6 +24,7 @@
 		<typeAlias type="com.team.camp.vo.CampVO" alias="cvo" />
 		<typeAlias type="com.team.camp.vo.ReviewVO" alias="crvo" />
 		<typeAlias type="com.team.group.vo.GroupCmtVO" alias="gcvo" />
+		<typeAlias type="com.team.user.vo.NaverVO" alias="naverVO" />
 	</typeAliases>
 	
 	<mappers>
