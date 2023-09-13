@@ -1431,11 +1431,8 @@ rotate(
 		
 	
 		</script>
-	<script type="text/javascript"
-		src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-		charset="utf-8"></script>
-	<script type="text/javascript"
-		src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript"src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"charset="utf-8"></script>
+	<script type="text/javascript"src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		
 	<!-- 네이버 로그인 버튼 노출 영역 -->
 	<div id="naver_id_login"></div>
@@ -1457,10 +1454,6 @@ rotate(
 			// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
 			function naverSignInCallback() {
 				console.log(naver_id_login)
-				/* alert(naver_id_login.getProfileData('email'));
-				alert(naver_id_login.getProfileData('nickname'));
-				alert(naver_id_login.getProfileData('id'));
-				alert(naver_id_login.getProfileData('name')); */
 				var email = naver_id_login.getProfileData('email');
 				var nickname = naver_id_login.getProfileData('nickname');
 				var id = naver_id_login.getProfileData('id');
