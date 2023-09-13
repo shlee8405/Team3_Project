@@ -245,12 +245,13 @@ public class UserController {
 	     @RequestParam("email") String email,
 	     @RequestParam("nickname") String nickname,
 	     @RequestParam("id") String id,
-	     @RequestParam("name") String name) {
+	     @RequestParam("name") String name,
+	     HttpServletResponse response, 
+		 HttpServletRequest request
+	     ) {
 
 	     // 1. 데이터베이스에서 이메일을 사용하여 기존 정보를 조회
-		 System.out.println(id);
 	     String existingNaverUser = userService.getNaverUserByEmail(id);
-	     System.out.println(existingNaverUser);
 	     
 	     // 2. 조회된 정보가 없을 경우에만 새로운 데이터를 삽입
 	     if (existingNaverUser == null) {
@@ -262,8 +263,31 @@ public class UserController {
 
 	         int res = userService.naver(naverVO);
 	     }
+	     
+	     boolean result = userService.isIdDuplicate(id);
+	     
+		 if(result) {
+			 UserVO dbuvo = userService.getUserVoWithId(id);
+			 System.out.println("kakaoLogin.do u_ban==1 is :" + dbuvo.getU_ban().equals("1"));
+			 System.out.println("kakaoLogin.do retrieve id successfull id: " + id );
+			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
+			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
+			 System.out.println("kakaoLogin.do insert session Idx success");
+			 return new ModelAndView("redirect:/home.do");
+		 } else {
+			 UserVO uvo = new UserVO();
+			 uvo.setU_id(id);
+			 uvo.setU_nickname(name);
+			 uvo.setU_name(name);
+			 int insertResult = userService.getUserInsertKakao(uvo);
+			 UserVO dbuvo = userService.getUserVoWithId(id);
+			 System.out.println("kakaoLogin.do insert id successfull  id: " + id);
+			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
+			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
+			 System.out.println("kakaoLogin.do insert session Idx success");
+			 return new ModelAndView("redirect:/home.do");
+		 }
 
-	     return new ModelAndView("redirect:/home.do");
 	 }
 
 
