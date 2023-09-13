@@ -118,7 +118,7 @@
     
     
     
-    <!--  -->
+    <!-- 네이버 로그인 -->
     <insert id="naver" parameterType="naverVO">
     	insert into USERS(u_name, u_id, u_nickname) value(#{name},#{id},#{nickname})
     </insert>
