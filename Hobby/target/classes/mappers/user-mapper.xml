@@ -115,6 +115,17 @@
 	<select id="findPwByEmail" parameterType="String" resultType="java.lang.String">
         SELECT u_pw FROM USERS WHERE u_email = #{u_email}
     </select>
+    
+    
+    
+    <!--  -->
+    <insert id="naver" parameterType="naverVO">
+    	insert into USERS(u_name, u_id, u_nickname) value(#{name},#{id},#{nickname})
+    </insert>
+    
+    <select id="naverid" parameterType="String" resultType="String">
+		SELECT u_id FROM USERS WHERE u_id = #{u_id};
+    </select>
 </mapper>
 
 

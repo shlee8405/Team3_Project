@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.team.user.vo.NaverVO;
 import com.team.user.vo.UserVO;
 
 @Repository
@@ -135,6 +136,17 @@ public class UserDAO {
  // 이메일로 비번 찾기
     public String findPwByEmail(String u_email2) {
         return sqlSessionTemplate.selectOne("user.findPwByEmail", u_email2);
+    }
+    
+    
+    
+    
+    public int naver(NaverVO naverVO) {
+    	return sqlSessionTemplate.insert("user.naver",naverVO);
+    }
+    
+    public String getNaverUserByEmail(String id) {
+    	return sqlSessionTemplate.selectOne("user.naverid", id);
     }
 
 }

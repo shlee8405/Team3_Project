@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
@@ -25,6 +26,7 @@ import com.team.qna.service.QnaService;
 import com.team.report.service.ReportService;
 import com.team.user.service.UserService;
 import com.team.user.vo.KakaoVO;
+import com.team.user.vo.NaverVO;
 import com.team.user.vo.UserVO;
 
 @RestController
@@ -237,6 +239,58 @@ public class UserController {
 			 return new ModelAndView("redirect:"+kakaovo.getUrl());
 		 }
 	 }
+	 
+	 @RequestMapping(value = "/naver.do")
+	 public ModelAndView handleNaverLogin(
+	     @RequestParam("email") String email,
+	     @RequestParam("nickname") String nickname,
+	     @RequestParam("id") String id,
+	     @RequestParam("name") String name,
+	     HttpServletResponse response, 
+		 HttpServletRequest request
+	     ) {
+
+	     // 1. 데이터베이스에서 이메일을 사용하여 기존 정보를 조회
+	     String existingNaverUser = userService.getNaverUserByEmail(id);
+	     
+	     // 2. 조회된 정보가 없을 경우에만 새로운 데이터를 삽입
+	     if (existingNaverUser == null) {
+	         NaverVO naverVO = new NaverVO();
+	         naverVO.setId(id);
+	         naverVO.setName(name);
+	         naverVO.setEmail(email);
+	         naverVO.setNickname(nickname);
+
+	         int res = userService.naver(naverVO);
+	     }
+	     
+	     boolean result = userService.isIdDuplicate(id);
+	     
+		 if(result) {
+			 UserVO dbuvo = userService.getUserVoWithId(id);
+			 System.out.println("kakaoLogin.do u_ban==1 is :" + dbuvo.getU_ban().equals("1"));
+			 System.out.println("kakaoLogin.do retrieve id successfull id: " + id );
+			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
+			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
+			 System.out.println("kakaoLogin.do insert session Idx success");
+			 return new ModelAndView("redirect:/home.do");
+		 } else {
+			 UserVO uvo = new UserVO();
+			 uvo.setU_id(id);
+			 uvo.setU_nickname(name);
+			 uvo.setU_name(name);
+			 int insertResult = userService.getUserInsertKakao(uvo);
+			 UserVO dbuvo = userService.getUserVoWithId(id);
+			 System.out.println("kakaoLogin.do insert id successfull  id: " + id);
+			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
+			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
+			 System.out.println("kakaoLogin.do insert session Idx success");
+			 return new ModelAndView("redirect:/home.do");
+		 }
+
+	 }
+
+
 	 
 	 @RequestMapping("/forgotId.do")
 	 public String forgotId(@RequestBody String encodedEmail) {
