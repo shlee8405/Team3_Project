@@ -130,28 +130,6 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 	function go_home() {
 		location.href = "/home.do"
 	}
-
-	/* 
-    function hidetest() {
-        var x = document.getElementById("test");
-        var y = document.getElementById("test2");
-        document.getElementById("btn-tab-1").style.backgroundColor = "#0f4200";
-        document.getElementById("btn-tab-2").style.backgroundColor = '#198754';
-        $('#btn-tab-1').addClass('btnclicked');
-        y.style.display = "none";
-        x.style.display = "block";
-    }
-
-    function hidetest2() {
-        var x = document.getElementById("test");
-        var y = document.getElementById("test2");
-        document.getElementById("btn-tab-2").style.backgroundColor = "#0f4200";
-        document.getElementById("btn-tab-1").style.backgroundColor = '#198754';
-        x.style.display = "none";
-        y.style.display = "block";
-    } 
-    */
-    
     
     // 데이터테이블로 테이블 생성
     $(document).ready( function () {
@@ -211,8 +189,8 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 						<div class="col-4"> </div>
 						<div class="col" style="align-items:center;">
 							<select class="form-select row-content" id="searchTextSelect" aria-label="Default select example" style="width:100% ; " >
-							  <option value="1" selected>제목</option>
-							  <option value="2" >닉네임</option>
+							  <option value="1" selected>문의 제목</option>
+							  <option value="2" >문의자</option>
 							</select> 
 						</div>
 						<div class="col-2" style="align-items:center;"> 
@@ -220,6 +198,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 						</div>
 					<script type="text/javascript">
 						// 검색 버튼 자바스크립트 function
+						//TODO 검색
 						function search() {
 							const text = document.getElementById("searchTextInput").value;		
 							if(text==''|| !text) {
@@ -230,16 +209,16 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 								const subject = document.getElementById("searchTextSelect").value;
 								if (subject == '1') {
 									//TODO search
-									location.href = "/adminFaqDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminQnaDetailSearch?text="+text+"&query="+subject;
 								} else if (subject == '2') {
-									location.href = "/adminFaqDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminQnaDetailSearch?text="+text+"&query="+subject;
 								} 
 							}
 						}
 
 						// 전체보기 function
 						function refresh() {
-							location.href="/adminFAQ.do";
+							location.href="/adminQNA.do";
 						}
 					</script>
 						<div class="col" style=" align-items:center;"> 
@@ -322,7 +301,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 														function sendQna(f) {
 															const response = confirm("정말로 수정 하시겠습니까?");
 										      				if(response) {
-										      					f.action = "/updateFaqAdmin";
+										      					f.action = "/updateQnaAdmin";
 										      					f.submit();
 										      				}
 										      				else {
@@ -331,9 +310,9 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 										      				}
 														}
 														function deleteQna(f) {
-															const response = confirm("정말로 수정 하시겠습니까?");
+															const response = confirm("정말로 삭제 하시겠습니까?");
 										      				if(response) {
-										      					f.action = "/updateFaqAdmin";
+										      					f.action = "/deleteQnaAdmin";
 										      					f.submit();
 										      				}
 										      				else {
@@ -358,7 +337,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																		<div class="container-fluid">
 																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%; margin-bottom: 1rem; border-bottom: 1px solid black;">
 																				<div class="col-2">
-																					문의자:  
+																					<b>문의자:</b>  
 																				</div>
 																				<div class="col-10">
 																					<div>
@@ -372,7 +351,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																			</div> 
 																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%; margin-bottom: 1rem; border-bottom: 1px solid black;">
 																				<div class="col-2">
-																					제목:  
+																					<b>제목:</b>  
 																				</div>
 																				<div class="col-10">
 																					<div>
@@ -380,9 +359,9 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																					</div>
 																				</div>
 																			</div> 
-																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%;">
+																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%; margin-bottom: 1rem; border-bottom: 1px solid black;">
 																				<div class="col-2">
-																					내용 :  
+																					<b>내용 :</b>  
 																				</div>
 																				<div class="col-10">
 																					<div>
@@ -391,17 +370,26 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																				</div>
 																			</div> 
 																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%;">
+																				<div class="col-2">
+																					<b>작성 날짜 :</b>  
+																				</div>
+																				<div class="col-10">
+																					<div>
+																					${k.q_date.substring(2,10)}
+																					</div>
+																				</div>
+																			</div> 
+																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%; margin-top:1rem;">
 																				<div class="col">
 																					
 																					<c:choose>
 																						<c:when test="${k.q_response!=null}">
-																							<textarea name="f_response" style="width:100%; height: 10rem;"> ${k.q_response} </textarea>
+																							<textarea name="q_response" style="width:100%; height: 10rem;"> ${k.q_response} </textarea>
 																						</c:when>
 																						<c:otherwise>
-																							<textarea name="f_response" style="width:100%; height: 10rem;" placeholder="1대1 답변을 작성해주세요..."></textarea>
+																							<textarea name="q_response" style="width:100%; height: 10rem;" placeholder="1대1 답변을 작성해주세요..."></textarea>
 																						</c:otherwise>
 																					</c:choose>
-																				
 																				
 																					
 																				</div>
@@ -412,6 +400,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																				<div class="col">
 																				</div>
 																				<div class="col">
+																					<input type="hidden" name="q_idx" value="${k.q_idx}">
 																					<button class="btn btn-primary" onclick="sendQna(this.form)" >저장</button>
 																					<button class="btn btn-danger" onclick="deleteQna(this.form)" >삭제</button>
 																					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" >취소</button>
