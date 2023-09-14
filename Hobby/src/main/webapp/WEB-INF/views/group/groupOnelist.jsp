@@ -168,9 +168,11 @@
     <div class="infoActions">
         <input type="hidden" name="g_idx" value="${gvo.g_idx}">
         <input type="button" value="목록" onclick="list_go(this.form)" />
-    <c:set var="gUidxStr" value="${k.u_idx}" />
-        <input type="button" value="수정" onclick="edit_go(this.form)" />
-        <input type="button" value="삭제" onclick="delete_go(this.form)" />
+    <c:set var="groupUidxStr" value="${gvo.u_idx}" /> <!-- gvo는 그룹의 정보를 담고 있는 객체로 추정됩니다. -->
+		<c:if test="${sessionUidx eq groupUidxStr}">
+		    <input type="button" value="수정" onclick="edit_go(this.form)" />
+		    <input type="button" value="삭제" onclick="delete_go(this.form)" />
+	</c:if>
     </div>
 		</form>
 		<br>
