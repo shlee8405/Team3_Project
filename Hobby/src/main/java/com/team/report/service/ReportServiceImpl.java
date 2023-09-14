@@ -1,5 +1,6 @@
 package com.team.report.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.team.report.dao.ReportDAO;
 import com.team.report.vo.ReportVO;
+import com.team.user.vo.UserVO;
 
 @Service
 public class ReportServiceImpl implements ReportService{
@@ -42,4 +44,41 @@ public class ReportServiceImpl implements ReportService{
 	public List<ReportVO> getReports(String u_idx) {
 		return reportDAO.getReports(u_idx);
 	}
+	
+	@Override
+	public int getDeleteReportByRVO(ReportVO rvo) {
+		return reportDAO.getDeleteReportByRVO(rvo);
+	}
+	
+	@Override
+	public int getUpdateReportByRVO(ReportVO rvo) {
+		return reportDAO.getUpdateReportByRVO(rvo);
+	}
+	
+	@Override
+	public int getReviveReportByRVO(ReportVO rvo) {
+		return reportDAO.getReviveReportByRVO(rvo);
+	}
+	
+	@Override
+	public int getBanUserReportAdmin(ReportVO rvo) {
+		return reportDAO.getBanUserReportAdmin(rvo);
+	}
+	
+	@Override
+	public List<ReportVO> getListByTitle(String title) {
+		return reportDAO.getListByTitle(title);
+	}
+	
+	@Override
+	public List<ReportVO> getListByNickname(String nickname) {
+		List<UserVO> userlist = reportDAO.getUsersWithNickname(nickname);
+		List<ReportVO> list = new ArrayList<ReportVO>();
+		for (UserVO uvo : userlist) {
+			list.addAll(reportDAO.getListByUidx1(uvo.getU_idx()));
+		}
+		return list;
+	}
+	
 }
+

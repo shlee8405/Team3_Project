@@ -12,6 +12,14 @@
 		SELECT * FROM QNA
 		ORDER BY CASE WHEN q_response IS NOT NULL THEN 1 ELSE 0 END, q_idx;
 	</select>
+		
+	<select id="getListWithTitle" parameterType="String" resultType="qvo">
+		select * from QNA where q_title like #{q_title}
+	</select>
+	
+	<select id="getListWithUidx" parameterType="String" resultType="qvo">
+		select * from QNA where u_idx = #{u_idx}	
+	</select>
 	
 	<insert id="insert" parameterType="map">
 		INSERT INTO QNA(q_content,q_name,f_name,u_idx,q_date,q_title)
@@ -32,6 +40,20 @@
 	
 	<select id="QnAOne" parameterType="String" resultType="qvo">
 		select * from QNA where u_idx = #{u_idx}
+	</select>
+	
+	<delete id="deleteWithQVO" parameterType="qvo">
+		delete from QNA where q_idx = #{q_idx}
+	</delete>
+	
+	<update id="updateWithQVO" parameterType="qvo">
+		update QNA set q_response = #{q_response} where q_idx = #{q_idx}
+	</update>
+	
+	
+	<!-- 유저 테이블 -->
+	<select id="getUsersWithNickname" parameterType="String" resultType="uvo">
+		select * from USERS where u_nickname like #{u_nickname}
 	</select>
 </mapper>
 

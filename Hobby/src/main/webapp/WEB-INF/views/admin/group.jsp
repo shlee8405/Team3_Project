@@ -196,9 +196,10 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 						<div class="col-4"> </div>
 						<div class="col" style="align-items:center;">
 							<select class="form-select row-content" id="searchTextSelect" aria-label="Default select example" style="width:100% ; " >
-							  <option value="1" selected>닉네임</option>
-							  <option value="2" >출생년도</option>
-							  <option value="3" >번호 마지막 4</option>
+							  <option value="1" selected>모임 생성자</option>
+							  <option value="2" >모임 제목</option>
+							  <option value="3" >모임 날짜</option>
+							  <option value="3" >모임 위치</option>
 							</select> 
 						</div>
 						<div class="col-2" style="align-items:center;"> 
@@ -225,7 +226,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 						}
 						// 전체보기 function
 						function refresh() {
-							location.href="/adminUser.do";
+							location.href="/adminGroup.do";
 						}
 					</script>
 						<div class="col" style=" align-items:center;"> 
@@ -251,12 +252,11 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 			                   		</c:when>
 			                   		<c:otherwise>
 				                           <tr>
+					                            <th> 모임 생성자 </th>
 					                            <th> 모임 제목</th> 
 					                            <th> 모임 정보 </th>
-					                            <th> 모임 설명 </th>
 					                            <th> 모임 날짜 </th>
 					                            <th> 모임 위치 </th> <!-- g_cdo+ g_gugun + g_location  -->
-					                            <th> 모임 생성자 </th>
 					                            <th> 모임 참가자 </th>  <!-- GROUPUSERS 참고 -->
 					                            <th> 더보기 </th> <!-- 모달로 삭제 prompt -->
 					                        </tr>
@@ -275,18 +275,21 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 											<c:otherwise>
 												<c:forEach var="k" items="${list}" varStatus="vs">
 													<tr>
+														<!-- group creator -->
+														<c:forEach var="j" items="${userlist}">
+															<c:if test="${k.u_idx==j.u_idx}">
+																<td>${j.u_nickname}</td>
+															</c:if>
+														</c:forEach>
+													
 														<!-- g_title -->
 														<td>${k.g_title}</td>
 														<!-- g_intro -->
 														<td>${k.g_intro}</td>
-														<!-- g_desc -->
-														<td>${k.g_desc}</td>
 														<!-- g_date -->
-														<td>${k.g_date}</td>
+														<td>${k.g_date.substring(0,13)}:00</td>
 														<!-- location (g_cdo + g_gugun + g_location) -->
 														<td>${k.g_cdo} ${k.g_gugun} ${k.g_location}</td>
-														<!-- group creator -->
-														<td>${k.u_idx}</td>
 														<!-- group registered users -->
 														<td> 
 															<a href="#"  class="btn btn-success" style="padding:0;" 
@@ -317,7 +320,26 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																	<div class="modal-body">
 																		<div class="container-fluid">
 																			<div class="row">
-																				
+																				<div class="row" style="width:60%; margin-left:20%; margin-right:20%; margin-bottom: 1rem; border-bottom: 1px solid black;">
+																					<div class="col-3">
+																						<b>참가자:</b>  
+																					</div>
+																					<div class="col-9">
+																						<c:forEach var="gu" items="${groupuserlist}">
+																							<c:if test="${k.g_idx==gu.g_idx}">
+																								<ul>
+																									<li>
+																										<c:forEach var="j" items="${userlist}">
+																											<c:if test="${gu.u_idx==j.u_idx}">
+																												${j.u_nickname}
+																											</c:if>
+																										</c:forEach>
+																									</li>
+																								</ul>
+																							</c:if>
+																						</c:forEach>
+																					</div>
+																				</div> 
 																			</div>																		
 																		</div>
 																	</div>
@@ -336,7 +358,106 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																</div>
 																<form>
 																	<div class="modal-body">
-																	<!-- TODO -->
+																		<div class="container-fluid">
+																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%; margin-bottom: 1rem; border-bottom: 1px solid black;">
+																				<div class="col-3">
+																					<b>생성자:</b>  
+																				</div>
+																				<div class="col-9">
+																					<div>
+																						<c:forEach var="j" items="${userlist}">
+																							<c:if test="${k.u_idx==j.u_idx}">
+																								${j.u_nickname}
+																							</c:if>
+																						</c:forEach>
+																					</div>
+																				</div>
+																			</div> 
+																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%; margin-bottom: 1rem; border-bottom: 1px solid black;">
+																				<div class="col-3">
+																					<b>모임 제목:</b>  
+																				</div>
+																				<div class="col-9">
+																					<div>
+																					${k.g_title}
+																					</div>
+																				</div>
+																			</div> 
+																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%; margin-bottom: 1rem; border-bottom: 1px solid black;">
+																				<div class="col-3">
+																					<b>모임 정보 :</b>  
+																				</div>
+																				<div class="col-9">
+																					<div>
+																					${k.g_intro}
+																					</div>
+																				</div>
+																			</div> 
+																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%;margin-bottom: 1rem; border-bottom: 1px solid black;">
+																				<div class="col-3">
+																					<b>모임 날짜 :</b>  
+																				</div>
+																				<div class="col-9">
+																					<div>
+																					${k.g_date.substring(0,13)}:00
+																					</div>
+																				</div>
+																			</div> 
+																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%;margin-bottom: 1rem; border-bottom: 1px solid black;">
+																				<div class="col-3">
+																					<b>모임 상세 정보 :</b>  
+																				</div>
+																				<div class="col-9">
+																					<div>
+																					${k.g_desc}
+																					</div>
+																				</div>
+																			</div> 
+																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%;margin-bottom: 1rem; border-bottom: 1px solid black;">
+																				<div class="col-3">
+																					<b>모임 주소 :</b>  
+																				</div>
+																				<div class="col-9">
+																					<div>
+																					${k.g_cdo} ${k.g_gugun} ${k.g_location}
+																					</div>
+																				</div>
+																			</div> 
+																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%;margin-bottom: 1rem; border-bottom: 1px solid black;">
+																				<div class="col-3">
+																					<b>총 모임 정원 :</b>  
+																				</div>
+																				<div class="col-9">
+																					<div>
+																					${k.g_maxPeople} 명
+																					</div>
+																				</div>
+																			</div> 
+																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%;margin-bottom: 1rem; border-bottom: 1px solid black;">
+																				<div class="col-3">
+																					<b>모임 바로가기 :</b>  
+																				</div>
+																				<div class="col-9">
+																					<a href="/group_onelist.do?g_idx=${k.g_idx}">
+																					[바로가기 링크]
+																					</a>
+																				</div>
+																			</div> 
+																			
+																			
+																			<div class="row">
+																				<div class="col">
+																				</div>
+																				<div class="col">
+																				</div>
+																				<div class="col">
+																					<input type="hidden" name="g_idx" value="${k.g_idx}">
+																					<button class="btn btn-primary" onclick="sendQna(this.form)" >저장</button>
+																					<button class="btn btn-danger" onclick="deleteQna(this.form)" >삭제</button>
+																					<button type="button" class="btn" data-bs-dismiss="modal" aria-label="Close" >취소</button>
+																				</div>
+																			</div>
+																		</div>
 																	</div>
 																</form>
 															</div>															

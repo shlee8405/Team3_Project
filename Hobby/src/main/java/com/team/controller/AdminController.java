@@ -11,6 +11,8 @@ import com.team.faq.service.FaqService;
 import com.team.faq.vo.FaqVO;
 import com.team.group.service.GroupService;
 import com.team.group.vo.GroupVO;
+import com.team.groupuser.service.GroupuserService;
+import com.team.groupuser.vo.GroupuserVO;
 import com.team.qna.service.QnaService;
 import com.team.qna.vo.QnaVO;
 import com.team.report.service.ReportService;
@@ -33,10 +35,11 @@ public class AdminController {
 	@Autowired
 	private ReportService reportService;
 
-
 	@Autowired
 	private FaqService faqService;
 
+	@Autowired
+	private GroupuserService groupuserService;
 
 //	@GetMapping("/adminUser.do")
 //	public ModelAndView goAdminUser() /* 관리자 유저 */ {
@@ -71,6 +74,10 @@ public class AdminController {
 	public ModelAndView goAdminGroup() /* 愿�由ъ옄 洹몃９ */ {
 		ModelAndView mv = new ModelAndView("admin/group");
 		List<GroupVO> list = groupService.getAllGroupsNoPaging();
+		List<UserVO> userlist = userService.getAllUsers();
+		List<GroupuserVO> groupuserlist = groupuserService.getAllList();
+		mv.addObject("groupuserlist", groupuserlist);
+		mv.addObject("userlist" , userlist);
 		mv.addObject("list", list);
 		return mv;
 	}
@@ -89,7 +96,9 @@ public class AdminController {
 	public ModelAndView goAdminReport() /* 愿�由ъ옄 �떊怨� */ {
 		ModelAndView mv = new ModelAndView("admin/report");
 		List<ReportVO> list = reportService.getAllReports();
+		List<UserVO> userlist = userService.getAllUsers();
 		mv.addObject("list", list);
+		mv.addObject("userlist" , userlist);
 		return mv;
 	}
 	

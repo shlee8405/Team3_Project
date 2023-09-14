@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team.qna.vo.QnaVO;
+import com.team.report.vo.ReportVO;
+import com.team.user.vo.UserVO;
 
 @Repository
 public class QnaDAO {
@@ -47,5 +49,25 @@ public class QnaDAO {
 	
 	public List<QnaVO> getQnAOne(String q_idx) {
 		return sqlSessionTemplate.selectList("qna.QnAOne",q_idx);
+	}
+	
+	public int getDeleteQnaWithQVO(QnaVO qvo) {
+		return sqlSessionTemplate.delete("qna.deleteWithQVO", qvo);
+	}
+	
+	public int getUpdateQnaWithQVO(QnaVO qvo) {
+		return sqlSessionTemplate.update("qna.updateWithQVO", qvo);
+	}
+	
+	public List<QnaVO> getListByTitle(String q_title) {
+		return sqlSessionTemplate.selectList("qna.getListWithTitle", q_title);
+	}
+	
+	public List<QnaVO> getListByUidx(String u_idx) {
+		return sqlSessionTemplate.selectList("qna.getListWithUidx", u_idx);
+	}
+	
+	public List<UserVO> getUsersWithNickname(String nickname) {
+		return sqlSessionTemplate.selectList("qna.getUsersWithNickname", nickname);
 	}
 }

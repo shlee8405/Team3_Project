@@ -199,6 +199,7 @@
         	<td colspan="2">
         		<input type="submit" onclick="sendData(this.form)" value="내 정보 수정">
 				<input type="submit" onclick="sendData2(this.form)" value="비밀번호 변경">
+				<input type="submit" onclick="sendData3(this.form)" value="회원탈퇴">
 			</td>
         </tr>	
     </tfoot>

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.team.report.vo.ReportVO;
+import com.team.user.vo.UserVO;
 
 @Repository
 public class ReportDAO {
@@ -42,5 +43,33 @@ public class ReportDAO {
 	
 	public List<ReportVO> getReports(String u_idx) {
 		return sqlSessionTemplate.selectList("report.List",u_idx);
+	}
+	
+	public int getDeleteReportByRVO(ReportVO rvo) {
+		return sqlSessionTemplate.update("report.deleteWithRVO", rvo);
+	}
+	
+	public int getUpdateReportByRVO(ReportVO rvo) {
+		return sqlSessionTemplate.update("report.updateWithRVO", rvo);
+	}
+	
+	public int getReviveReportByRVO(ReportVO rvo) {
+		return sqlSessionTemplate.update("report.reviveWithRVO", rvo);
+	}
+	
+	public int getBanUserReportAdmin(ReportVO rvo) {
+		return sqlSessionTemplate.update("report.banUserWithRVO", rvo);
+	}
+	
+	public List<ReportVO> getListByTitle(String r_title) {
+		return sqlSessionTemplate.selectList("report.getListWithTitle", r_title);
+	}
+	
+	public List<ReportVO> getListByUidx1(String u_idx1) {
+		return sqlSessionTemplate.selectList("report.getListWithUidx1", u_idx1);
+	}
+	
+	public List<UserVO> getUsersWithNickname(String nickname) {
+		return sqlSessionTemplate.selectList("report.getUsersWithNickname", nickname);
 	}
 }
