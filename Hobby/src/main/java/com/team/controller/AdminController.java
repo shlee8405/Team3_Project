@@ -89,7 +89,9 @@ public class AdminController {
 	public ModelAndView goAdminReport() /* 愿�由ъ옄 �떊怨� */ {
 		ModelAndView mv = new ModelAndView("admin/report");
 		List<ReportVO> list = reportService.getAllReports();
+		List<UserVO> userlist = userService.getAllUsers();
 		mv.addObject("list", list);
+		mv.addObject("userlist" , userlist);
 		return mv;
 	}
 	

@@ -23,7 +23,7 @@ public class faq {
 	@Autowired
 	public FaqService faqService;
 	
-
+	// 상세 검색 list	
 	@GetMapping("/adminFaqDetailSearch")
 	public ModelAndView dEtAiLsEaRcHaDmInPaGeFaQ(@RequestParam("text") String text, @RequestParam("query") String subject, HttpSession session) {
 		ModelAndView mv = new ModelAndView("admin/faq");
