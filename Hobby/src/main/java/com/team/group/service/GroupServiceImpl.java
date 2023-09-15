@@ -110,16 +110,7 @@ public class GroupServiceImpl implements GroupService {
 		return groupDAO.searchGroups(gvo);
 	}
 	
-	
-	
-	
-	
-	@Override
-	public int insertMember(String g_idx, String u_idx) {
-		return groupDAO.insertMember(g_idx,u_idx);
-	}
-	
-	
+	/*	*/	
 	@Override
 	public List<GroupVO> getListByTitle(String title) {
 		return groupDAO.getListByTitle(title);

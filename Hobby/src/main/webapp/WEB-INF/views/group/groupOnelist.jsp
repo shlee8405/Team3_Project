@@ -94,17 +94,27 @@
 
     function joinGroup(g_idx, u_idx) {
         $.ajax({
-            url: "/joinGroup.do",
-            type: "POST",
-            data: { g_idx: g_idx, u_idx: u_idx },
-            success: function(response) {
-                location.reload();
+            url: '/joinGroup.do',
+            type: 'POST',
+            data: {
+                g_idx: g_idx
             },
-            error: function(error) {
-                alert("참여에 실패했습니다.");
+            success: function(response) {
+                if (response.message === "참여 성공") {
+                    // 참여한 상태로 버튼 변경
+                    alert("참여했습니다!");
+                    // 버튼의 텍스트와 이벤트 핸들러를 변경합니다.
+                    $("button").text("참여 취소").attr("onclick", "cancelParticipation('" + g_idx + "')");
+                } else {
+                    // 참여 취소 상태로 버튼 변경
+                    alert("참여를 취소했습니다!");
+                    // 버튼의 텍스트와 이벤트 핸들러를 변경합니다.
+                    $("button").text("참여").attr("onclick", "joinGroup('" + g_idx + "')");
+                }
             }
         });
     }
+
 	
       function comment_go(f) {
     		 // 유효성 검사

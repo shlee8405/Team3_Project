@@ -185,33 +185,26 @@ public class GroupController {
 
 	// 그룹 참여 또는 참여 취소 처리
 	@RequestMapping("/joinGroup.do")
-	public ModelAndView joinGroup(@RequestParam("g_idx") String g_idx, HttpServletRequest request) {
-	    ModelAndView mv;
+	@ResponseBody
+	public Map<String, String> joinGroup(@RequestParam("g_idx") String g_idx, HttpServletRequest request) {
+	    Map<String, String> result = new HashMap<>();
 	    String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
-
-	    // 로그인 체크
+	    
 	    if (u_idx == null || u_idx.trim().isEmpty()) {
-	        mv = new ModelAndView("groupOnelist");
-	        mv.addObject("loginRequired", true);  
-	        return mv;
+	        result.put("message", "로그인 필요");
+	        return result;
 	    }
 
-	    // 참여 중복 체크
 	    int check = groupService.checkUserParticipation(g_idx, u_idx);
 
-	    // 이미 참여한 경우 참여 취소
 	    if (check > 0) {
 	        groupService.removeParticipation(g_idx, u_idx);
-	        mv = new ModelAndView("redirect:/group_onelist.do");
-	        mv.addObject("message", "참여 취소");
-	    } 
-	    // 참여하지 않았다면 참여
-	    else {
+	        result.put("message", "참여 취소");
+	    } else {
 	        groupService.addParticipation(g_idx, u_idx);
-	        mv = new ModelAndView("redirect:/group_onelist.do");
-	        mv.addObject("message", "참여 성공");
+	        result.put("message", "참여 성공");
 	    }
-	    return mv;
+	    return result;
 	}
 		
 	@PostMapping("/groupDelete.do")
