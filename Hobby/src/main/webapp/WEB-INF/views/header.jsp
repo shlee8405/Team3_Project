@@ -494,8 +494,12 @@ body {
 		if (url=='/') {
 			url = '/home.do'
 		}
-
-		$( ".hiddenholder" ).append( "<input type='hidden' value='" +url + "' name='url'/>" ); 
+		var urlParam = window.location.search;
+		if(urlParam.length==0){
+			$( ".hiddenholder" ).append( "<input type='hidden' value='" +url + "' name='url'/>" ); 
+		} else {
+			$( ".hiddenholder" ).append( "<input type='hidden' value='" +url+urlParam+ "' name='url'/>" ); 
+		}
 		/* $( ".hiddenholder" ).append( "<input type='hidden' value='${pageContext.request.servletPath}' name='url'/>" ); */ 
 		// Attach event listener to Kakao login button
 		document.getElementById('kakaoLoginBtn').addEventListener('click',
