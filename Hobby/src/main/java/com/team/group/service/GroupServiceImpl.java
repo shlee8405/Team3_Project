@@ -1,5 +1,6 @@
 package com.team.group.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.team.group.dao.GroupDAO;
 import com.team.group.vo.GroupCmtVO;
 import com.team.group.vo.GroupVO;
+import com.team.report.vo.ReportVO;
 import com.team.user.vo.UserVO;
 
 @Service
@@ -113,6 +115,37 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public int insertMember(String g_idx, String u_idx) {
 		return groupDAO.insertMember(g_idx,u_idx);
+	}
+	
+	
+	@Override
+	public List<GroupVO> getListByTitle(String title) {
+		return groupDAO.getListByTitle(title);
+	}
+	
+	@Override
+	public List<GroupVO> getListByNickname(String nickname) {
+		List<UserVO> userlist = groupDAO.getUsersWithNickname(nickname);
+		List<GroupVO> list = new ArrayList<GroupVO>();
+		for (UserVO uvo : userlist) {
+			list.addAll(groupDAO.getListByUidx(uvo.getU_idx()));
+		}
+		return list;
+	}
+	
+	@Override
+	public List<GroupVO> getListByDate(String date) {
+		return groupDAO.getListByDate(date);
+	}
+	
+	@Override
+	public List<GroupVO> getListByLocation(String location) {
+		return groupDAO.getListByLocation(location);
+	}
+	
+	@Override
+	public int filterOldGroups() {
+		return groupDAO.filterOldGroups();
 	}
 	
 }

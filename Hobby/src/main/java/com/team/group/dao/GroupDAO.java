@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.team.group.vo.GroupCmtVO;
 import com.team.group.vo.GroupVO;
+import com.team.report.vo.ReportVO;
 import com.team.user.vo.UserVO;
 
 @Repository
@@ -112,5 +113,29 @@ public class GroupDAO {
 	    map.put("u_idx", u_idx);
 	    return sqlSessionTemplate.insert("group.insertMember", map);
 	}
+	
+	
+	public List<GroupVO> getListByTitle(String r_title) {
+		return sqlSessionTemplate.selectList("group.getListWithTitle", r_title);
+	}
+	
+	public List<GroupVO> getListByUidx(String u_idx) {
+		return sqlSessionTemplate.selectList("group.getListWithUidx", u_idx);
+	}
+	
+	public List<UserVO> getUsersWithNickname(String nickname) {
+		return sqlSessionTemplate.selectList("group.getUsersWithNickname", nickname);
+	}
 
+	public List<GroupVO> getListByDate(String date) {
+		return sqlSessionTemplate.selectList("group.getListWithDate",date);
+	}
+	
+	public List<GroupVO> getListByLocation(String location) {
+		return sqlSessionTemplate.selectList("group.getListWithLocation", location);
+	}
+	
+	public int filterOldGroups() {
+		return sqlSessionTemplate.update("group.filterOld");
+	}
 }

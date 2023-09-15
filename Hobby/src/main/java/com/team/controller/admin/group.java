@@ -1,6 +1,7 @@
 package com.team.controller.admin;
 
 import java.io.File;
+import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,15 +10,21 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.team.group.service.GroupService;
 import com.team.group.vo.GroupVO;
 import com.team.groupuser.service.GroupuserService;
+import com.team.groupuser.vo.GroupuserVO;
+import com.team.qna.vo.QnaVO;
+import com.team.user.service.UserService;
+import com.team.user.vo.UserVO;
 
 @Controller
 public class group {
@@ -27,12 +34,57 @@ public class group {
 	@Autowired
 	private GroupService groupService;
 	
-	@RequestMapping("/adminGroupDetailSearch")
-	public ModelAndView adminGroupDetailSearch() {
+	@Autowired
+	private UserService userService;
+	
+	@GetMapping("/adminGroupPageDetailSearch")
+	public ModelAndView adminGroupPageDetailSearch(@RequestParam("text") String text, @RequestParam("query") String subject, HttpSession session) {
 		ModelAndView mv = new ModelAndView("admin/group");
+		System.out.println("text is "+text);
+		System.out.println("subject is "+subject);
+		List<UserVO> userlist = userService.getAllUsers();
+		List<GroupuserVO> groupuserlist = groupuserService.getAllList();
+		mv.addObject("userlist" , userlist);
+		
+		if (subject.equals("1")) {
+			// 생성자
+			String newText = "%"+text+"%";
+			System.out.println("newText is "+ newText);
+			List<GroupVO> list = groupService.getListByNickname(newText);
+			mv.addObject("list", list);
+			mv.addObject("userlist", userlist);
+			mv.addObject("groupuserlist", groupuserlist);
+			return mv;
+		} else if (subject.equals("2")) {
+			// 제목
+			String newText = "%"+text+"%";
+			System.out.println("newText is "+ newText);
+			List<GroupVO> list = groupService.getListByTitle(newText);
+			mv.addObject("list", list);
+			mv.addObject("userlist", userlist);
+			mv.addObject("groupuserlist", groupuserlist);
+		} else if (subject.equals("3")) {
+			// 날짜
+			String newText = "%"+text+"%";
+			System.out.println("newText is "+ newText);
+			System.out.println();
+			List<GroupVO> list = groupService.getListByDate(newText);
+			mv.addObject("list", list);
+			mv.addObject("userlist", userlist);
+			mv.addObject("groupuserlist", groupuserlist);
+		} else if (subject.equals("4")) {
+			// 위치
+			String newText = "%"+text+"%";
+			System.out.println("newText is "+ newText);
+			List<GroupVO> list = groupService.getListByLocation(newText);
+			mv.addObject("list", list);
+			mv.addObject("userlist", userlist);
+			mv.addObject("groupuserlist", groupuserlist);
+		}  
 		
 		return mv;
 	}
+	
 	
 	@RequestMapping("/deleteGroupAdmin") 
 	public ModelAndView deleteGroupAdmin(GroupVO gvo, HttpSession session) {

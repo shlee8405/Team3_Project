@@ -222,17 +222,24 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 		       		<div class="row row-search" >
 						<div class="col-4"> </div>
 						<div class="col" style="align-items:center;">
-							<select class="form-select row-content" id="searchTextSelect" aria-label="Default select example" style="width:100% ; " >
+							<select class="form-select row-content" id="searchTextSelect" aria-label="Default select example" style="width:100%;" onchange="dateToggle(this)">
 							  <option value="1" selected>모임 생성자</option>
 							  <option value="2" >모임 제목</option>
 							  <option value="3" >모임 날짜</option>
-							  <option value="3" >모임 위치</option>
+							  <option value="4" >모임 위치</option>
 							</select> 
 						</div>
 						<div class="col-2" style="align-items:center;"> 
 							<input class="row-content" type="text" id="searchTextInput" style="width:100%">
 						</div>
 					<script type="text/javascript">
+						function dateToggle(e) {
+							if(e.value=="3") {
+								document.getElementById('searchTextInput').type = "date";
+							} else {
+								document.getElementById('searchTextInput').type = "text";
+							}
+						}
 						// 검색 버튼 자바스크립트 function
 						function search() {
 							const text = document.getElementById("searchTextInput").value;		
@@ -243,11 +250,13 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 							else {
 								const subject = document.getElementById("searchTextSelect").value;
 								if (subject == '1') {
-									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminGroupPageDetailSearch?text="+text+"&query="+subject;
 								} else if (subject == '2') {
-									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminGroupPageDetailSearch?text="+text+"&query="+subject;
 								} else if (subject == '3') {
-									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminGroupPageDetailSearch?text="+text+"&query="+subject;
+								} else if (subject == '4') {
+									location.href = "/adminGroupPageDetailSearch?text="+text+"&query="+subject;
 								}
 							}
 						}
@@ -777,7 +786,6 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 										</tr>
 									</tbody>
 								</table>
-								<%=(String)session.getAttribute("sessionUidx")%>
 							</form>
 						</div>
 				    	<script src="resources/js/summernote-lite.js"></script>
