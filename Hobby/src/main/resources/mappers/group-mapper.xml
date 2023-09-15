@@ -15,7 +15,7 @@
 	
 	<select id="allListNoPaging" resultType="gvo">
 		select *
-		from GROUPS where g_status = '1' order by g_idx desc 
+		from GROUPS order by g_idx desc 
 	</select>
 
 	<select id="searchGroups" parameterType="gvo" resultType="gvo">

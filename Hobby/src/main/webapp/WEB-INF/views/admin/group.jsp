@@ -283,7 +283,14 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 														</c:forEach>
 													
 														<!-- g_title -->
-														<td>${k.g_title}</td>
+														<c:choose>
+															<c:when test="${k.g_status==1}">
+																<td>${k.g_title}</td>
+															</c:when>
+															<c:otherwise>
+																<td> ${k.g_title}  <b style="color:gray;"><i>삭제된 모임 입니다</i></b></td>
+															</c:otherwise>
+														</c:choose>
 														<!-- g_intro -->
 														<td>${k.g_intro}</td>
 														<!-- g_date -->
@@ -430,6 +437,22 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																				<div class="col-9">
 																					<div>
 																					${k.g_maxPeople} 명
+																					</div>
+																				</div>
+																			</div> 
+																			<div class="row" style="width:60%; margin-left:20%; margin-right:20%;margin-bottom: 1rem; border-bottom: 1px solid black;">
+																				<div class="col-3">
+																					<b>총 참가 신청 :</b>  
+																				</div>
+																				<div class="col-9">
+																					<% int count = 0; %>
+																					<c:forEach var="gu" items="${groupuserlist}">
+																						<c:if test="${k.g_idx==gu.g_idx}">
+																							<% count++; %>
+																						</c:if>
+																					</c:forEach>
+																					<div>
+																					<%=count%> 명
 																					</div>
 																				</div>
 																			</div> 
