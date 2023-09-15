@@ -51,22 +51,24 @@ public class GroupServiceImpl implements GroupService {
 	public GroupVO getGroupOnelist(String g_idx) {
 		return groupDAO.getGroupOnelist(g_idx);
 	}
-	
+
+	// 참여 중복 체크
 	@Override
 	public int checkUserParticipation(String g_idx, String u_idx) {
 	    return groupDAO.checkUserParticipation(g_idx, u_idx);
 	}
-	
+
+	// 그룹 참여 추가
 	@Override
-	public void joinGroup(String g_idx, String u_idx) {
-	    groupDAO.joinGroup(g_idx, u_idx);
+	public int addParticipation(String g_idx, String u_idx) {
+	    return groupDAO.addParticipation(g_idx, u_idx);
 	}
 
+	// 그룹 참여 취소
 	@Override
-	public void cancelParticipation(String g_idx, String u_idx) {
-	    groupDAO.cancelParticipation(g_idx, u_idx);
+	public int removeParticipation(String g_idx, String u_idx) {
+	    return groupDAO.removeParticipation(g_idx, u_idx);
 	}
-
 	
 	@Override
 	public int getGroupDelete(GroupVO gvo) {
@@ -108,16 +110,7 @@ public class GroupServiceImpl implements GroupService {
 		return groupDAO.searchGroups(gvo);
 	}
 	
-	
-	
-	
-	
-	@Override
-	public int insertMember(String g_idx, String u_idx) {
-		return groupDAO.insertMember(g_idx,u_idx);
-	}
-	
-	
+	/*	*/	
 	@Override
 	public List<GroupVO> getListByTitle(String title) {
 		return groupDAO.getListByTitle(title);

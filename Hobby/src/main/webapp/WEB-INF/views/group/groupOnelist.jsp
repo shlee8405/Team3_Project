@@ -52,12 +52,11 @@
 		f.action="/groupDelete.do";
 		f.submit();
 	}
-     
     // 세션에서 u_idx 값을 가져와 JavaScript 변수로 저장
-    var u_idx = "<%= request.getSession().getServletContext().getAttribute("sessionUidx") %>";
-    console.log("u_idx value:", u_idx);  // u_idx의 값을 콘솔에 출력
+    var u_idx = <%= (String) request.getSession().getServletContext().getAttribute("sessionUidx") %>;
+   /*  console.log("u_idx value:", u_idx);  // u_idx의 값을 콘솔에 출력
     
-    function joinGroup(g_idx) {
+    function insertMember(g_idx) {
     	console.log("joinGroup function called");  // 함수 호출 확인
         // u_idx가 null 또는 빈 문자열인 경우 로그인되어 있지 않다고 판단
          if (!u_idx || u_idx === "null") {
@@ -65,22 +64,57 @@
             return; // 함수를 여기서 종료
         }
 
-        window.location.href = "/joinGroup.do?g_idx=" + g_idx;
+        window.location.href = "/insertMember.do?g_idx=" + g_idx;
+    } */
+
+    function participateGroup(g_idx) {
+        // sessionUidx 체크
+        if (!u_idx || u_idx === "null") {
+            alert("로그인 후 이용해주세요.");
+            return;
+        }
+        
+        // 로그인 상태면 서버로 요청 보내기
+        joinGroup(g_idx);
+    }
+    
+    function cancelParticipation(g_idx, u_idx) {
+        $.ajax({
+            url: "/cancelParticipation.do",
+            type: "POST",
+            data: { g_idx: g_idx, u_idx: u_idx },
+            success: function(response) {
+                location.reload();
+            },
+            error: function(error) {
+                alert("참여 취소에 실패했습니다.");
+            }
+        });
     }
 
-	function cancelParticipation() {
-	    var g_idx = '<%= request.getParameter("g_idx") %>'; // 해당 그룹의 ID 가져오기
-	    var userIdx = '<%= request.getSession().getServletContext().getAttribute("sessionUidx") %>'; // 현재 사용자의 ID 가져오기
-	    $.post("/cancelParticipation.do", { g_idx: g_idx, u_idx: userIdx }, function(data) {
-	        if (data.success) {
-	            console.log(g_idx);
-	            console.log(userIdx);
-	            location.reload(); // 페이지 새로고침
-	        } else {
-	            alert("참여 취소 중 오류가 발생했습니다.");
-	        }
-	    });
-	}
+    function joinGroup(g_idx, u_idx) {
+        $.ajax({
+            url: '/joinGroup.do',
+            type: 'POST',
+            data: {
+                g_idx: g_idx
+            },
+            success: function(response) {
+                if (response.message === "참여 성공") {
+                    // 참여한 상태로 버튼 변경
+                    alert("참여했습니다!");
+                    // 버튼의 텍스트와 이벤트 핸들러를 변경합니다.
+                    $("button").text("참여 취소").attr("onclick", "cancelParticipation('" + g_idx + "')");
+                } else {
+                    // 참여 취소 상태로 버튼 변경
+                    alert("참여를 취소했습니다!");
+                    // 버튼의 텍스트와 이벤트 핸들러를 변경합니다.
+                    $("button").text("참여").attr("onclick", "joinGroup('" + g_idx + "')");
+                }
+            }
+        });
+    }
+
 	
       function comment_go(f) {
     		 // 유효성 검사
@@ -107,6 +141,7 @@
 <body>
 <jsp:include page="../header.jsp"  />
 <div style="position:relative; top:200px; z-index:1;">
+<%-- <c:set var="sessionUidx" value="${sessionScope.sessionUidx}" /> --%>
 <div class="list">
 <h2>모임 상세보기</h2>
 <hr>
@@ -154,7 +189,15 @@
 				<tr>
 				<td>
 				${user.u_id}&nbsp;&nbsp;&nbsp;&nbsp;
-	   			 <button id="participate" onclick="joinGroup(${gvo.g_idx})">참여</button>
+	   			 <c:choose>
+				    <c:when test="${isParticipated}">
+				        <button onclick="participateGroup(${gvo.g_idx})">참여 취소</button>
+				    </c:when>
+				    <c:otherwise>
+				        <button onclick="participateGroup(${gvo.g_idx})">참여</button>
+				    </c:otherwise>
+				</c:choose>
+
 	   			 </td>
 	   			</tr>
 			</table>
@@ -199,7 +242,7 @@
 	<!-- 로그인 확인후 입력창 활성화 -->
 	<script>
     $(document).ready(function() {
-        var sessionUidx = '<%=request.getSession().getServletContext().getAttribute("sessionUidx")%>';
+        var sessionUidx = '<%=(String) request.getSession().getServletContext().getAttribute("sessionUidx")%>';
         if (sessionUidx === '' || sessionUidx === 'null') {  // 세션 값이 없을 경우
             $("#commentArea").prop("disabled", true);
             $("#commentArea").val("로그인 후 입력해주세요.");

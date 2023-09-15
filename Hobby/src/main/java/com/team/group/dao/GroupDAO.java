@@ -50,29 +50,32 @@ public class GroupDAO {
 	public GroupVO getGroupOnelist(String g_idx) {
 		return sqlSessionTemplate.selectOne("group.onelist", g_idx);
 	}
-	
+
+	// 참여 중복 체크
 	public int checkUserParticipation(String g_idx, String u_idx) {
-	    Map<String, Object> map = new HashMap<>();
-	    map.put("g_idx", g_idx);
-	    map.put("u_idx", u_idx);
-	    return sqlSessionTemplate.selectOne("group.checkUserParticipation", map);
-	}
-
-	public void joinGroup(String g_idx, String u_idx) {
 	    Map<String, String> map = new HashMap<>();
 	    map.put("g_idx", g_idx);
 	    map.put("u_idx", u_idx);
-	    sqlSessionTemplate.insert("group.joinGroup", map);
+	    Integer result = sqlSessionTemplate.selectOne("group.checkUserParticipation", map);
+	    return result == null ? 0 : result;
 	}
 
-	public void cancelParticipation(String g_idx, String u_idx) {
+	// 그룹 참여 추가
+	public int addParticipation(String g_idx, String u_idx) {
 	    Map<String, String> map = new HashMap<>();
 	    map.put("g_idx", g_idx);
 	    map.put("u_idx", u_idx);
-	    sqlSessionTemplate.delete("group.cancelParticipation", map);
+	    return sqlSessionTemplate.insert("group.addParticipation", map);
 	}
 
-	
+	// 그룹 참여 취소
+	public int removeParticipation(String g_idx, String u_idx) {
+	    Map<String, String> map = new HashMap<>();
+	    map.put("g_idx", g_idx);
+	    map.put("u_idx", u_idx);
+	    return sqlSessionTemplate.delete("group.removeParticipation", map);
+	}
+
 	public int getGroupDelete(GroupVO gvo) {
 		return sqlSessionTemplate.update("group.delete", gvo);
 	}

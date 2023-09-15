@@ -398,7 +398,6 @@ function group_write_go(f) {
         <li><a href="/groupList.do?cPage=${paging.beginBlock-paging.pagePerBlock }">이전으로</a></li>
     </c:otherwise>
 </c:choose>
-
 							
 		<!-- 페이지번호들 -->
 		<c:forEach begin="${paging.beginBlock }" end="${paging.endBlock }" step="1" var="k">
