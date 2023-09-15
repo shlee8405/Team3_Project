@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="report">
+	
+	<select id="allList" resultType="rvo">
+		select * from REPORT
+	</select>
+	
+	<select id="getListWithTitle" parameterType="String" resultType="rvo">
+		select * from REPORT where r_title like #{r_title}
+	</select>
+	
+	<select id="getListWithUidx1" parameterType="String" resultType="rvo">
+		select * from REPORT where u_idx1 = #{u_idx1}	
+	</select>
+	
+	<insert id="insert" parameterType="map">
+		insert into REPORT (r_content,u_idx1,r_date,r_title)
+		values(#{rvo.r_content},#{u_idx},sysdate(),#{rvo.r_title})
+	</insert>
+	
+	<select id="detail" parameterType="String" resultType="rvo">
+		select * from REPORT where r_idx = #{r_idx}
+	</select>
+	
+	<update id="update" parameterType="rvo">
+		update REPORT set r_name = #{r_name},  r_content = #{r_content}, r_date = sysdate(), r_title = #{r_title}  where r_idx = #{r_idx}
+	</update>
+	
+	<update id="delete" parameterType="String">
+		update REPORT set r_status = 0 where r_idx = #{r_idx}
+	</update>
+	
+	<select id="List" parameterType="String" resultType="rvo">
+		select * from REPORT where u_idx1 = #{u_idx}
+	</select>
+	
+	<update id="deleteWithRVO" parameterType="rvo">
+		update REPORT set r_status = 0 where r_idx = #{r_idx}
+	</update>
+	
+	<update id="updateWithRVO" parameterType="rvo">
+		update REPORT set r_response = #{r_response} where r_idx = #{r_idx}
+	</update>
+	
+	<update id="reviveWithRVO" parameterType="rvo">
+		update REPORT set r_status = 1 where r_idx = #{r_idx}
+	</update>
+	
+	
+	<!-- 유저 테이블 -->
+	<update id="banUserWithRVO" parameterType="rvo">
+		update USERS SET u_ban = 1 where u_idx = #{u_idx2}
+	</update>
+	
+	<select id="getUsersWithNickname" parameterType="String" resultType="uvo">
+		select * from USERS where u_nickname like #{u_nickname}
+	</select>
+</mapper>
+
+
+
+
+
+
+
+
