@@ -165,19 +165,16 @@ public class GroupController {
 	    String cPage = request.getParameter("cPage");
 	    
 	    String userIdx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
-	    //int participationCount = groupService.checkUserParticipation(g_idx, userIdx);
-	    //boolean isParticipated = participationCount > 0;
 	    
-
+	    // 여기에 참여 여부를 확인하는 코드를 추가합니다.
+	    int participationCount = groupService.checkUserParticipation(g_idx, userIdx);
+	    boolean isParticipated = participationCount > 0;
+	    mv.addObject("isParticipated", isParticipated);
+	    
 	    // 상세보기
 	    GroupVO gvo = groupService.getGroupOnelist(g_idx);
 	    // 댓글 가져오기
 	    List<GroupCmtVO> gc_list = groupService.getCommList(g_idx);
-	    // id가져오기
-	    //List<UserVO> Ulist = userService.getUsers(u_idx);
-	    
-	    //mv.addObject("user", Ulist.get(0));
-	    //mv.addObject("isParticipated", isParticipated);
 	    
 	    mv.addObject("gvo", gvo);
 	    mv.addObject("gc_list",gc_list);
@@ -185,56 +182,38 @@ public class GroupController {
 	    
 	    return mv;
 	}
-	
+
+	// 그룹 참여 또는 참여 취소 처리
 	@RequestMapping("/joinGroup.do")
 	public ModelAndView joinGroup(@RequestParam("g_idx") String g_idx, HttpServletRequest request) {
 	    ModelAndView mv;
-
 	    String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
 
+	    // 로그인 체크
 	    if (u_idx == null || u_idx.trim().isEmpty()) {
 	        mv = new ModelAndView("groupOnelist");
-	        mv.addObject("loginRequired", true);  // 로그인이 필요한 경우
+	        mv.addObject("loginRequired", true);  
 	        return mv;
 	    }
 
-	    int result = groupService.insertMember(g_idx, u_idx);
-	    List<UserVO> Ulist = userService.getUsers(u_idx);
-	    System.out.println("dsdadsa    "+g_idx);
-	    mv = new ModelAndView("redirect:/group_onelist.do");
-	    mv.addObject("user", Ulist.get(0));
+	    // 참여 중복 체크
+	    int check = groupService.checkUserParticipation(g_idx, u_idx);
+
+	    // 이미 참여한 경우 참여 취소
+	    if (check > 0) {
+	        groupService.removeParticipation(g_idx, u_idx);
+	        mv = new ModelAndView("redirect:/group_onelist.do");
+	        mv.addObject("message", "참여 취소");
+	    } 
+	    // 참여하지 않았다면 참여
+	    else {
+	        groupService.addParticipation(g_idx, u_idx);
+	        mv = new ModelAndView("redirect:/group_onelist.do");
+	        mv.addObject("message", "참여 성공");
+	    }
 	    return mv;
 	}
-
-
-//jh	
-//	@PostMapping("/joinGroup.do")
-//	@ResponseBody
-//	public Map<String, Boolean> joinGroup(String g_idx, String u_idx) {
-//		Map<String, Boolean> result = new HashMap<>();
-//		try {
-//			groupService.joinGroup(g_idx, u_idx);
-//			result.put("success", true);
-//		} catch (Exception e) {
-//			result.put("false", false);
-//		}
-//		return result;
-//	}
-
-	@PostMapping("/cancelParticipation.do")
-	@ResponseBody
-	public Map<String, Boolean> cancelParticipation(String g_idx, String u_idx) {
-	    Map<String, Boolean> result = new HashMap<>();
-	    try {
-	        groupService.cancelParticipation(g_idx, u_idx);
-	        result.put("success", true);
-	    } catch (Exception e) {
-	        result.put("success", false);
-	    }
-	    return result;
-	}
-
-
+		
 	@PostMapping("/groupDelete.do")
 	public ModelAndView getGroupDelete(GroupVO gvo) {
 		ModelAndView mv = new ModelAndView("redirect:/groupList.do");
