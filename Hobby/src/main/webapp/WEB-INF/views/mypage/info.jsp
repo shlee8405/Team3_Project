@@ -92,6 +92,10 @@
 		f.action="/changePassword.do";
 		f.submit();
 }
+	function sendData3(f){
+		f.action="/withdrawal.do";
+		f.submit();
+	}
 	
 
 

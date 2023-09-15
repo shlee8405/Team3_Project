@@ -55,7 +55,7 @@ public interface UserService {
     int getUnbanUser(String idx);
 	
 	// 유저 삭제
-    int getDeleteUser(String idx);
+    int getDeleteUser(String u_idx);
 	
     // 유저 수정
     int getUpdateUserAdmin(UserVO uvo);
