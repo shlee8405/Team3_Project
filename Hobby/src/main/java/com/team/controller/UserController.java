@@ -126,10 +126,11 @@ public class UserController {
 			} else {
 				UserVO dbuvo = userService.getUserVoWithId(uvo.getU_id());
 				if(dbuvo.getU_status().equals("9")) {
-				request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
-				request.getSession().getServletContext().setAttribute("adminChecker", dbuvo.getU_status());
-				mv.setViewName("redirect:"+url);
-				return mv;
+					int resAdmin = groupService.filterOldGroups();
+					request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
+					request.getSession().getServletContext().setAttribute("adminChecker", dbuvo.getU_status());
+					mv.setViewName("redirect:"+url);
+					return mv;
 				} else if (dbuvo.getU_ban().equals("1")) {
 				//밴 
 					

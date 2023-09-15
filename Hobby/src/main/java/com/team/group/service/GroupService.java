@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.team.group.vo.GroupCmtVO;
 import com.team.group.vo.GroupVO;
+import com.team.report.vo.ReportVO;
 import com.team.user.vo.UserVO;
 
 public interface GroupService {
@@ -43,6 +44,16 @@ public interface GroupService {
 	public int getCommInsert(GroupCmtVO gcvo);
 	// 댓글 삭제
 	public int commentDel(GroupCmtVO gcvo);
+	// 제목으로 상세 검색
+	public List<GroupVO> getListByTitle(String title);
+	// 닉네임으로 상세 검색
+	public List<GroupVO> getListByNickname(String nickname); 
+	// 날짜로 모임 찾기
+	public List<GroupVO> getListByDate(String date);
+	// 위치로 모임 찾기
+	public List<GroupVO> getListByLocation(String location);
+	// 오래된 모임 g_status=3 처리
+	public int filterOldGroups();
 	
 	
 	
