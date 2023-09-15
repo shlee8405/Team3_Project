@@ -113,8 +113,8 @@ public class UserServiceImpl implements UserService{
     }
     
     @Override
-    public int getDeleteUser(String idx) {
-    	return userDAO.getDeleteUser(idx);
+    public int getDeleteUser(String u_idx) {
+    	return userDAO.getDeleteUser(u_idx);
     }
     
     @Override
