@@ -15,7 +15,7 @@
 	
 	<select id="allListNoPaging" resultType="gvo">
 		select *
-		from GROUPS order by g_idx desc 
+		from GROUPS order by g_status desc 
 	</select>
 
 	<select id="searchGroups" parameterType="gvo" resultType="gvo">
@@ -76,10 +76,23 @@
 		g_location, g_desc,g_status, u_idx)
 		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_cdo},#{g_gugun},#{g_location},#{g_desc},'1',#{u_idx})
 	</insert>
+	
+	<insert id="insertAsAdmin" parameterType="gvo">
+		insert into
+		GROUPS(g_title,g_intro, g_fname,g_maxPeople, g_date, g_cdo, g_gugun,
+		g_location, g_desc,g_status, u_idx)
+		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_cdo},#{g_gugun},#{g_location},#{g_desc},'1',#{u_idx})
+	</insert>
 
 	<update id="delete" parameterType="gvo">
 		update GROUPS
 		set g_status= '0'
+		where g_idx = #{g_idx}
+	</update>
+	
+	<update id="revive" parameterType="gvo">
+		update GROUPS
+		set g_status= '1'
 		where g_idx = #{g_idx}
 	</update>
 

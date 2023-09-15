@@ -39,6 +39,11 @@ public class GroupServiceImpl implements GroupService {
 	public int getGroupWriteOk(GroupVO gvo) {
 		return groupDAO.getGroupWriteOk(gvo);
 	}
+	
+	@Override
+	public int getGroupAdminWrite(GroupVO gvo) {
+		return groupDAO.getGroupAdminWrite(gvo);
+	}
 
 	@Override
 	public GroupVO getGroupOnelist(String g_idx) {
@@ -64,6 +69,11 @@ public class GroupServiceImpl implements GroupService {
 	@Override
 	public int getGroupDelete(GroupVO gvo) {
 		return groupDAO.getGroupDelete(gvo);
+	}
+	
+	@Override
+	public int getGroupRevive(GroupVO gvo) {
+		return groupDAO.getGroupRevive(gvo);
 	}
 
 	@Override

@@ -21,6 +21,8 @@ public interface GroupService {
 	public List<GroupVO> searchGroups(GroupVO gvo);
 	// 글쓰기
 	public int getGroupWriteOk(GroupVO gvo);
+	// 관리자로 모임 생성
+	public int getGroupAdminWrite(GroupVO gvo);
 	// 상세보기
 	public GroupVO getGroupOnelist(String g_idx);
 	// 참여하기
@@ -29,6 +31,8 @@ public interface GroupService {
 	public void cancelParticipation(String g_idx, String u_idx);
 	// 삭제하기
 	public int getGroupDelete(GroupVO g_idx);
+	// 삭제 복구하기
+	public int getGroupRevive(GroupVO gvo);
 	// 수정하기
 	public int getGroupUpdate(GroupVO gvo);
 	// 댓글 가져오기

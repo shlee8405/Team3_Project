@@ -42,6 +42,10 @@ public class GroupDAO {
 		return sqlSessionTemplate.insert("group.insert", gvo);
 	}
 	
+	public int getGroupAdminWrite(GroupVO gvo) {
+		return sqlSessionTemplate.insert("group.insertAsAdmin", gvo);
+	}
+	
 	public GroupVO getGroupOnelist(String g_idx) {
 		return sqlSessionTemplate.selectOne("group.onelist", g_idx);
 	}
@@ -70,6 +74,10 @@ public class GroupDAO {
 	
 	public int getGroupDelete(GroupVO gvo) {
 		return sqlSessionTemplate.update("group.delete", gvo);
+	}
+	
+	public int getGroupRevive(GroupVO gvo) {
+		return sqlSessionTemplate.update("group.revive", gvo);
 	}
 	
 	public int getGroupUpdate(GroupVO gvo) {
