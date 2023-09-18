@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mainpageimage">
+
+
+    <!-- 메인페이지 이미지의 정보 뽑기 -->
+    <select id="getImage">
+		SELECT * FROM MAINPAGEIMAGE ORDER BY mp_idx
+    </select>
+    
+    <!-- 이미지 업로드 -->
+    <insert id="uploadImage" parameterType="mpivo">
+    	INSERT INTO MAINPAGEIMAGE (mp_title, mp_desc)
+    	VALUES (#{mp_title}, #{mp_desc})
+    </insert>
+    
+    <delete id="deleteImage" parameterType="mpivo">
+    	DELETE FROM MAINPAGEIMAGE WHERE mp_idx = #{mp_idx}
+    </delete>
+    
+    <update id="updateImage" parameterType="mpivo">
+    	UPDATE MAINPAGEIMAGES 
+		SET 
+    	mp_title = CASE WHEN #{mp_title} IS NOT NULL AND #{mp_title} != '' THEN #{mp_title} ELSE mp_title END,
+	    mp_desc = CASE WHEN #{mp_desc} IS NOT NULL AND #{mp_desc} != '' THEN #{mp_desc} ELSE mp_desc END
+		WHERE mp_idx = #{mp_idx}
+    </update>
+    
+</mapper>
