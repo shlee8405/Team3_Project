@@ -29,6 +29,43 @@
 <link rel="stylesheet" href="/resources/css/login.css">
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+
+.waviy {
+  position: relative;
+  -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0,0,0,.2));
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  animation: waviy 3s infinite;
+  animation-delay: calc(.1s * var(--i));
+  
+}
+@keyframes waviy {
+  0%,40%,100% {
+    transform: translateY(0)
+  }
+  20% {
+    transform: translateY(-20px)
+  }
+}
+
+#waviytitle {
+	color:black;
+    text-align: center;
+    font-family: MBCM;
+    font-size: 1em;
+}
+
+
+
+
+
+
 .containerHD {
 	justify-content: flex-end;
 	display: flex;
@@ -76,22 +113,28 @@ body, html {
 	z-index: 2;
 	margin-bottom: 2rem;
 }
-
-/* The hero image */
-.hero-image {
-	/* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-	background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
-		/* url("https://st2.depositphotos.com/8573964/12346/i/950/depositphotos_123466770-stock-photo-beach-in-the-morning-sun.jpg"); */
-		/* url("https://images.pexels.com/photos/5914157/pexels-photo-5914157.jpeg"); */
-		url("https://images.pexels.com/photos/1371798/pexels-photo-1371798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-	/* Set a specific height */
+	<% int x = 0;%>
+	<% String background = "background"; %>
+	<% if(x>0) { %>
+	.hero-image {
+	background-image : linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('resources/background/<%=background%>.jpg');
 	height: 70%;
-	/* Position and center the image to scale nicely on all screens */
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
 	position: relative;
 }
+	<% } else if (x<=0) { %>
+	.hero-image{
+	background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url("https://images.pexels.com/photos/1371798/pexels-photo-1371798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+			height: 70%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
+	<% }%>
+
 
 /* Place text in the middle of the image */
 .hero-text {
@@ -148,6 +191,15 @@ body, html {
 	text-align: center;
 	font-family: MBCM;
 	font-size: 4em;
+	cursor:pointer;
+  	transition: font-size ease-in-out .1s;
+}
+
+.s2-text-title:hover {
+	font-size: 4.5em;
+}
+.s2-text-title:hover #waviytitle {
+	color:gray;
 }
 
 .s2-text-content {
@@ -189,6 +241,11 @@ body, html {
 	text-align: center;
 	font-family: MBCM;
 	font-size: 4em;
+	cursor:pointer;
+  	transition: font-size ease-in-out .1s;
+}
+.s4-text-title:hover {
+	font-size: 4.5em;
 }
 
 .s4-text-content {
@@ -229,16 +286,15 @@ body, html {
 }
 
 .imgdiv {
-	width:550px;
+	width:33.2%;
 	position:relative;
+	cursor: pointer;
 }
+
 
 .imgdiv:hover .placetitle{
 	opacity:1;
-	color:white;
-	text-align: center;
-	font-family: MBCM;
-	font-size: 4em;
+	
 }
 
 .imgdiv:hover .img{
@@ -247,6 +303,10 @@ body, html {
 }
 
 .imgdiv .placetitle {
+	color:white;
+	text-align: center;
+	font-family: MBCM;
+	font-size: 4em;
 	position: absolute;		
     top: 50%;
 	left: 50%;
@@ -938,9 +998,9 @@ rotate(
 				// 제공 이미지 없을 시
 				var imageUrl = response.firstImageUrl == "" ? "resources/images/beach01.jpg" : response.firstImageUrl;
 				
-				list += "<div class='imgdiv'>" 
-					+"<img class='img' src='"+imageUrl+"'alt='img1' width='500px' height='500px'" 
-						+ "style='width: 500px; object-fit: cover; position: relative; margin-left: 3vw; margin-top: 16vh'>"
+				list += "<div class='imgdiv' onclick=\"window.location.href='/campDetail.do?keyword="+response.facltNm+"'\">" 
+					+"<img class='img' src='"+imageUrl+"'alt='img1' width='100%' height='100%'" 
+						+ "style='width: 100%; object-fit: cover; position: relative; border-radius:1rem;'>"
 						+"<span class='placetitle'><h1>"+response.facltNm+"</h1></span>"
 						+"</div>"
 						
@@ -1285,13 +1345,28 @@ rotate(
 	<div class="section two  w-100 ">
 		<div class="row"
 			style="margin-left: 15vw; margin-right: 15vw; top: 2%; z-index: 9;">
-			<div class="s2-text-title">/요즘 핫한 곳으로.go!</div>
-			<div class="s1-text-content">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
+			<!-- <div class="s2-text-title">/요즘 핫한 곳으로.go!</div> -->
+			<div class="s2-text-title waviy mt-3 mb-5" onclick="window.location.href='/campMain.do'">
+				<span id="waviytitle" style="--i:1">/</span>
+				<span id="waviytitle" style="--i:2">요</span>
+				<span id="waviytitle" style="--i:3">즘</span>
+				<span id="waviytitle" style="--i:4">핫</span>
+				<span id="waviytitle" style="--i:4">🔥</span>
+				<span id="waviytitle" style="--i:5">한</span>
+				<span id="waviytitle" style="--i:6">곳</span>
+				<span id="waviytitle" style="--i:7">으</span>
+				<span id="waviytitle" style="--i:8">로</span>
+				<span id="waviytitle" style="--i:9">.</span>
+				<span id="waviytitle" style="--i:10">g</span>
+				<span id="waviytitle" style="--i:11">o</span>
+				<span id="waviytitle" style="--i:12">!</span>
+			</div>
+			<div class="s1-text-content mt-3 mb-5">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
 				체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을
 				제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는
 				형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에
 				정당한 보상을 청구할 수 있다.</div>
-			<div id="image_best3_list" class="row">
+			<div id="image_best3_list" class="row mb-5">
 				
 			</div>
 			
@@ -1337,8 +1412,8 @@ rotate(
 	<div class="section four">
 		<div class="row"
 			style="margin-left: 15vw; margin-right: 15vw; top: 2%; z-index: 9;">
-			<div class="s4-text-title">/캠핑, together.do</div>
-			<div class="s4-text-content">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
+			<div class="s4-text-title mt-4 mb-5" onclick="window.location.href='/groupList.do'">/캠핑, together.d🌏!</div>
+			<div class="s4-text-content mb-5">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
 				체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을
 				제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는
 				형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에

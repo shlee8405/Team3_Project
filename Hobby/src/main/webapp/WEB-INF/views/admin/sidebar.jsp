@@ -79,7 +79,9 @@ color:#ffffff!important;
 		location.href = "/home.do"
 	}
 
-  
+  	function go_adminMainPageModifier() {
+  		location.href = "/adminMainPageModifier.do"
+  	}
 </script>
 </head>
 <body>
@@ -95,8 +97,8 @@ color:#ffffff!important;
             </button>
             <div class="collapse" id="dashboard-collapse" style="">
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="/adminHome.do" class="ps-4 link-dark rounded sidebar-link navtext">11</a></li>
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link navtext">22</a></li>
+                <li><a href="/adminHome.do" class="ps-4 link-dark rounded sidebar-link navtext">대시보드 홈</a></li>
+                <li><a href="/adminMainPageModifier.do" class="ps-4 link-dark rounded sidebar-link navtext">메인페이지 이미지 설정</a></li>
                 <li><a href="#" class="ps-4 link-dark rounded sidebar-link navtext">33</a></li>
             </ul>
             </div>

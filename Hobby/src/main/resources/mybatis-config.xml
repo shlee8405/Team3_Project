@@ -26,6 +26,7 @@
 		<typeAlias type="com.team.group.vo.GroupCmtVO" alias="gcvo" />
 		<typeAlias type="com.team.user.vo.NaverVO" alias="naverVO" />
 		<typeAlias type="com.team.groupuser.vo.GroupuserVO" alias="guvo" />
+		<typeAlias type="com.team.mpimg.vo.MPIVO" alias="mpivo" />
 	</typeAliases>
 	
 	<mappers>
@@ -37,5 +38,6 @@
 		<mapper resource="mappers/mypage-mapper.xml" />
 		<mapper resource="mappers/camp-mapper.xml" />
 		<mapper resource="mappers/groupuser-mapper.xml" />
+		<mapper resource="mappers/mpimg-mapper.xml" />
 	</mappers>
 </configuration>
