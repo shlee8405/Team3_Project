@@ -5,27 +5,17 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="/resources/css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/resources/css/login.css">
 
 <style>
 .containerHD {
@@ -1298,6 +1288,7 @@ rotate(
 	
 	<script type="text/javascript">
     $(document).ready(function() {
+        // 팝업 데이터를 가져옵니다.
         $.ajax({
             url: "/Popup2.do",
             type: "GET",
@@ -1305,7 +1296,7 @@ rotate(
             success: function(data) {
                 for (let i = 0; i < data.length; i++) {
                     // 모달 HTML을 생성합니다.
-                    let modalHtml = '<div class="modal fade" id="exampleModalToggle' + i + '" aria-hidden="true" aria-labelledby="exampleModalToggleLabel' + i + '" tabindex="-1" style="top: -100px; left: ' + (200 * i) + 'px;">' +
+                    let modalHtml = '<div class="modal fade" data-bs-backdrop="static" id="exampleModalToggle' + i + '" aria-hidden="true" aria-labelledby="exampleModalToggleLabel' + i + '" tabindex="-1" style="top: -100px; left: ' + (200 * i) + 'px;">' +
                         '<div class="modal-dialog modal-dialog-centered">' +
                         '<div class="modal-content">' +
                         '<div class="modal-header">' +
@@ -1315,7 +1306,11 @@ rotate(
                         '<div class="modal-body">' +
                         data[i].pop_content +
                         '</div>' +
-                        '<div class="modal-footer">';
+                        '<div class="modal-footer">' +
+                        '<div class="form-check">' +
+                            '<input class="form-check-input" type="checkbox" id="dontShowAgain' + i + '" value="">' +
+                            '<label class="form-check-label" for="dontShowAgain' + i + '">1시간 동안 다시 보지 않기</label>' +
+                        '</div>';
 
                     if (i < data.length - 1) {
                         modalHtml += '<button class="btn btn-primary" data-bs-target="#exampleModalToggle' + (i + 1) + '" data-bs-toggle="modal">Next modal</button>';
@@ -1334,6 +1329,34 @@ rotate(
                 console.error("Failed to fetch data from /Popup2.do");
             }
         });
+        
+        $(document).on('click', 'input[type="checkbox"]', function() {
+            console.log("Checkbox clicked:", $(this).attr('id'), "Checked:", $(this).prop('checked'));
+        });
+        
+        $(document).on('hidden.bs.modal', '.modal', function (e) {
+            console.log("Modal hidden event triggered."); // 이벤트가 트리거되었는지 확인
+
+            const checkboxId = 'dontShowAgain' + e.target.id.replace('exampleModalToggle', '');
+            const isChecked = $('#' + checkboxId).prop('checked');
+
+            console.log("Checkbox ID:", checkboxId); // 체크박스의 ID 값 확인
+            console.log("Is checkbox checked?", isChecked); // 체크박스의 선택 상태 확인
+
+            if (isChecked) {
+                const currentTime = new Date().getTime();
+                localStorage.setItem('popupClosedTime', currentTime);
+                console.log("Stored time in localStorage:", currentTime); // localStorage에 저장된 값 확인
+            }
+        });
+
+        
+        const popupClosedTime = localStorage.getItem('popupClosedTime');
+        console.log("   "+localStorage);
+        console.log("   "+popupClosedTime );
+        if (popupClosedTime && new Date().getTime() - popupClosedTime < 3600000) {
+            return; // 1시간 미만이므로 팝업을 다시 보여주지 않습니다.
+        }
 
         // Drag functionality
         let isDragging = false;
@@ -1362,7 +1385,6 @@ rotate(
         });
     });
 </script>
-
 	
 	<!-- 두번째 색션 -->
 	<div class="section two  w-100 ">

@@ -34,10 +34,6 @@ public class PopupController {
 	@ResponseBody
 	public ResponseEntity<List<PopupVO>> getPopupData() {
 	    List<PopupVO> list = popupService.SelectPopup();
-	    
-	    for (PopupVO popupVO : list) {
-	    	System.out.println(popupVO.getPop_content());
-		}
 	    return ResponseEntity.ok(list);
 	}
 	
