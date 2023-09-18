@@ -199,9 +199,11 @@ public class GroupController {
 
 	    if (check > 0) {
 	        groupService.removeParticipation(g_idx, u_idx);
+	        groupService.decreaseGroupCount(g_idx);  // 참여 취소 시 g_curPeople 감소
 	        result.put("message", "참여 취소");
 	    } else {
 	        groupService.addParticipation(g_idx, u_idx);
+	        groupService.increaseGroupCount(g_idx);  // 참여 시 g_curPeople 증가
 	        result.put("message", "참여 성공");
 	    }
 	    return result;

@@ -70,6 +70,18 @@ public class GroupServiceImpl implements GroupService {
 	    return groupDAO.removeParticipation(g_idx, u_idx);
 	}
 	
+	// g_curPeople 증가
+	@Override
+	public int increaseGroupCount(String g_idx) {
+	    return groupDAO.increaseGroupCount(g_idx);
+	}
+
+	// g_curPeople 감소
+	@Override
+	public int decreaseGroupCount(String g_idx) {
+	    return groupDAO.decreaseGroupCount(g_idx);
+	}
+	
 	@Override
 	public int getGroupDelete(GroupVO gvo) {
 		return groupDAO.getGroupDelete(gvo);

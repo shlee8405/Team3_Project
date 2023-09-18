@@ -30,6 +30,9 @@ public interface GroupService {
 	public int checkUserParticipation(String g_idx, String u_idx);
 	public int addParticipation(String g_idx, String u_idx);
 	public int removeParticipation(String g_idx, String u_idx);
+	//참여자 증감
+	public int increaseGroupCount(String g_idx);
+	public int decreaseGroupCount(String g_idx);
 	// 삭제하기
 	public int getGroupDelete(GroupVO g_idx);
 	// 삭제 복구하기

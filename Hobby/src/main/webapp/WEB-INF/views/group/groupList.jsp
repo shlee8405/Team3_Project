@@ -10,7 +10,7 @@
 
 .fixed-position {
     position: fixed;
-    top: 10px;
+    top: 60px;
     right: 10px;
     z-index: 9999;
 }
@@ -28,7 +28,7 @@
 
 .fixed-position {
     position: fixed;
-    top: 250px;
+    top: 260px;
     right: 10px;
     z-index: 9999;
     padding: 5px;  /* Adding some padding for better visibility */
@@ -42,6 +42,8 @@
         }
 
         .board-item {
+            width: 300px;
+            height: 310px; 
             border: 1px solid #ddd;
             padding: 10px;
             text-align: center;
@@ -203,7 +205,9 @@ function group_write_go(f) {
         location.href = "/group_writeForm.do?u_idx=" + Uidx;
     }
 }
-
+function allSearch() {
+	location.href="/groupList.do";
+}
 
 	function go_groupOnelist(f) {
 		var div = document.getElementById("group_item");
@@ -386,6 +390,8 @@ function group_write_go(f) {
     </div>
     <button id="write_btn" onclick="group_write_go(this.form, '${user.u_idx}')">글쓰기</button>
     <br>
+    <button id="allSearch" onclick="allSearch()">전체보기</button>
+    
     <br>
     
     <ol class="paging">
