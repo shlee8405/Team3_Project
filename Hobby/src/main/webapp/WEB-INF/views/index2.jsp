@@ -1073,7 +1073,6 @@ rotate(
 															});
 										});
 					});
-	var formData = "email=" + encodeURIComponent(emailValue); // emailValue는 이메일 입력 필드 값
 </script>
 
 
@@ -1184,6 +1183,8 @@ rotate(
 			<p class="hero-content">경기도 가평군 가평읍 개곡리 198-1</p>
 		</div>
 	</div>
+	
+	
 
 	<!-- 소개글 -->
 	<div class="section one ">
@@ -1191,6 +1192,7 @@ rotate(
 			<div class="s1-text-title" style="translate: 0px -50%;">
 
 				<p class="s1-text">/CAMP.do</p>
+				
 			</div>
 			<div class="s1-text-content">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
 				체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을
@@ -1200,8 +1202,56 @@ rotate(
 				있다. 여자의 근로는 특별한 보호를 받으며, 고용·임금 및 근로조건에 있어서 부당한 차별을 받지 아니한다. 국무총리 또는
 				행정각부의 장은 소관사무에 관하여 법률이나 대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다.</div>
 		</div>
+		
 	</div>
-<h2>dd</h2>
+	
+	<script type="text/javascript">
+	$(document).ready(function() {
+	    $.ajax({
+	        url: "/Popup2.do",
+	        type: "GET",
+	        dataType: "json",
+	        success: function(data) {
+	            // 'data'는 "/Popup2.do"로부터의 응답입니다.
+
+	            // 모달의 title 부분에 응답 데이터를 넣습니다.
+	            var titleContent = '';
+	            var bodyContent = '';
+	            for (var i = 0; i < data.length; i++) {
+	                titleContent += data[i].pop_title + '<br>';  // 각 pop_title 값에 줄바꿈을 추가합니다.
+	                bodyContent += data[i].pop_content + '<br>';    // 각 pop_content 값에 줄바꿈을 추가합니다.
+	            }
+	            
+	            $("#exampleModalToggle .modal-title").html(titleContent);
+	            $("#exampleModalToggle .modal-body").html(bodyContent);
+	            
+	            // 모달 표시
+	            $('#exampleModalToggle').modal('show');
+	        },
+	        error: function() {
+	            console.error("Failed to fetch data from /Popup2.do");
+	        }
+	    });
+	});
+	</script>
+	
+	
+	<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" style="top: -100px; left: 400px;">
+	  <div class="modal-dialog modal-dialog-centered">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
+	        </h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+	      </div>
+	      <div class="modal-footer">	
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
 	<!-- 두번째 색션 -->
 	<div class="section two  w-100 ">
 		<div class="row"

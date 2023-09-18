@@ -114,7 +114,7 @@ function removeHover(buttonId) {
 		    <button id="button4" type="button" onmouseover="applyHover('button4');" onmouseout="removeHover('button4');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
 		</div>
 	</div>
-	<div class="container-fluid" style="border: 1px solid black; padding: 8px; width: 40%; margin-top: 40px;">
+	<div class="container-fluid" style="padding: 8px; width: 40%; margin-top: 40px;">
     <div class="scrollable-content">
     <div></div>
 		<table style="border-collapse: collapse;  border: 2px solid black;">

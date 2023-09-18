@@ -138,6 +138,11 @@ color:#ffffff!important;
             </ul>
             </div>
         </li>
+        <li class="mb-1">
+            <a class="btn btn-toggle align-items-center rounded collapsed navtext sidebar-link"  href="/Popup.do">
+            	팝업 관리
+            </a>
+        </li>
         <li class="border-top border-2 my-3"></li>
         <li class="mb-1">
             <button class="btn btn-toggle align-items-center rounded collapsed sidebar-link navtext" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
