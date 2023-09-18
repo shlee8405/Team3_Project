@@ -151,10 +151,16 @@ public class CampController {
 
 				CampVO cvo = new CampVO();
 				cvo.setFacltNm(oneItem.getString("facltNm"));
+				
+				//averageRating 값을 반올림하여 정수값으로 변환
+				double rawAverageRating = campService.getAverageRating(cvo.getFacltNm());			
+				int averageRating = (int) Math.round(rawAverageRating);
+				
 				cvo.setIntro(oneItem.getString("intro"));
 				cvo.setAddr1(oneItem.getString("addr1"));
 				cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
 				cvo.setDoNm(oneItem.getString("doNm"));
+				cvo.setAverageRating(averageRating);
 				dataList.add(cvo);
 			}
 			

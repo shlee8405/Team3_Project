@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- MyBatis에서 쿼리에 매핑되는 파라미터에 NULL값이 있는 경우 에러 발생 => 해결 -->
+	<!-- MyBatis cache 사용 여부 (지금은 false) -->
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="cacheEnabled" value="false"/>
+	</settings>
+	
+	<typeAliases>
+		<typeAlias type="com.team.user.vo.UserVO" alias="uvo" />
+		<typeAlias type="com.team.group.vo.GroupVO" alias="gvo" />
+		<typeAlias type="com.team.report.vo.ReportVO" alias="rvo" />
+		<typeAlias type="com.team.qna.vo.QnaVO" alias="qvo" />
+		<typeAlias type="com.team.faq.vo.FaqVO" alias="fvo" />
+		<typeAlias type="com.team.myinfo.vo.MyinfoVO" alias="mvo" />
+		<typeAlias type="com.team.mypagemain.vo.MypageMainVO" alias="mmvo" />
+		<typeAlias type="com.team.myinfoupdate.vo.MyinfoUpdateVO" alias="upvo" />
+		<typeAlias type="com.team.myqna.vo.MyQnaVO" alias="mqvo" />
+		<typeAlias type="com.team.myreview.vo.MyReviewVO" alias="mrvo" />
+		<typeAlias type="com.team.camp.vo.CampVO" alias="cvo" />
+		<typeAlias type="com.team.camp.vo.ReviewVO" alias="crvo" />
+		<typeAlias type="com.team.group.vo.GroupCmtVO" alias="gcvo" />
+		<typeAlias type="com.team.user.vo.NaverVO" alias="naverVO" />
+<<<<<<< HEAD
+		<typeAlias type="com.team.popup.vo.PopupVO" alias="PopupVO" />
+=======
+		<typeAlias type="com.team.groupuser.vo.GroupuserVO" alias="guvo" />
+>>>>>>> refs/heads/main
+	</typeAliases>
+	
+	<mappers>
+		<mapper resource="mappers/user-mapper.xml" />
+		<mapper resource="mappers/group-mapper.xml" />
+		<mapper resource="mappers/report-mapper.xml" />
+		<mapper resource="mappers/qna-mapper.xml" />
+		<mapper resource="mappers/faq-mapper.xml" />
+		<mapper resource="mappers/mypage-mapper.xml" />
+		<mapper resource="mappers/camp-mapper.xml" />
+<<<<<<< HEAD
+		<mapper resource="mappers/popup-mapper.xml" />
+=======
+		<mapper resource="mappers/groupuser-mapper.xml" />
+>>>>>>> refs/heads/main
+	</mappers>
+</configuration>

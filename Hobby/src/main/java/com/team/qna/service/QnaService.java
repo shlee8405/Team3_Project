@@ -26,4 +26,16 @@ public interface QnaService {
 	
 	// 로그인 문의 가져오기
 	List<QnaVO> getQnAOne(String q_idx);
+	
+	// 문의 삭제 with qvo
+	int getDeleteQnaWithQVO(QnaVO qvo);
+	
+	// 문의 수정 with qvo
+	int getUpdateQnaWithQVO(QnaVO qvo);
+	
+	// 문의 list with 제목
+	List<QnaVO> getListByTitle(String q_title);
+	
+	// 문의 list with 문의자
+	List<QnaVO> getListByNickname(String u_idx);
 }

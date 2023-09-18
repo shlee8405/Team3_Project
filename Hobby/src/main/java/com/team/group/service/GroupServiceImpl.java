@@ -1,5 +1,6 @@
 package com.team.group.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.team.group.dao.GroupDAO;
 import com.team.group.vo.GroupCmtVO;
 import com.team.group.vo.GroupVO;
+import com.team.report.vo.ReportVO;
 import com.team.user.vo.UserVO;
 
 @Service
@@ -39,31 +41,55 @@ public class GroupServiceImpl implements GroupService {
 	public int getGroupWriteOk(GroupVO gvo) {
 		return groupDAO.getGroupWriteOk(gvo);
 	}
+	
+	@Override
+	public int getGroupAdminWrite(GroupVO gvo) {
+		return groupDAO.getGroupAdminWrite(gvo);
+	}
 
 	@Override
 	public GroupVO getGroupOnelist(String g_idx) {
 		return groupDAO.getGroupOnelist(g_idx);
 	}
-	
+
+	// 참여 중복 체크
 	@Override
 	public int checkUserParticipation(String g_idx, String u_idx) {
 	    return groupDAO.checkUserParticipation(g_idx, u_idx);
 	}
+
+	// 그룹 참여 추가
+	@Override
+	public int addParticipation(String g_idx, String u_idx) {
+	    return groupDAO.addParticipation(g_idx, u_idx);
+	}
+
+	// 그룹 참여 취소
+	@Override
+	public int removeParticipation(String g_idx, String u_idx) {
+	    return groupDAO.removeParticipation(g_idx, u_idx);
+	}
 	
+	// g_curPeople 증가
 	@Override
-	public void joinGroup(String g_idx, String u_idx) {
-	    groupDAO.joinGroup(g_idx, u_idx);
+	public int increaseGroupCount(String g_idx) {
+	    return groupDAO.increaseGroupCount(g_idx);
 	}
 
+	// g_curPeople 감소
 	@Override
-	public void cancelParticipation(String g_idx, String u_idx) {
-	    groupDAO.cancelParticipation(g_idx, u_idx);
+	public int decreaseGroupCount(String g_idx) {
+	    return groupDAO.decreaseGroupCount(g_idx);
 	}
-
 	
 	@Override
 	public int getGroupDelete(GroupVO gvo) {
 		return groupDAO.getGroupDelete(gvo);
+	}
+	
+	@Override
+	public int getGroupRevive(GroupVO gvo) {
+		return groupDAO.getGroupRevive(gvo);
 	}
 
 	@Override
@@ -96,13 +122,35 @@ public class GroupServiceImpl implements GroupService {
 		return groupDAO.searchGroups(gvo);
 	}
 	
-	
-	
-	
+	/*	*/	
+	@Override
+	public List<GroupVO> getListByTitle(String title) {
+		return groupDAO.getListByTitle(title);
+	}
 	
 	@Override
-	public int insertMember(String g_idx, String u_idx) {
-		return groupDAO.insertMember(g_idx,u_idx);
+	public List<GroupVO> getListByNickname(String nickname) {
+		List<UserVO> userlist = groupDAO.getUsersWithNickname(nickname);
+		List<GroupVO> list = new ArrayList<GroupVO>();
+		for (UserVO uvo : userlist) {
+			list.addAll(groupDAO.getListByUidx(uvo.getU_idx()));
+		}
+		return list;
+	}
+	
+	@Override
+	public List<GroupVO> getListByDate(String date) {
+		return groupDAO.getListByDate(date);
+	}
+	
+	@Override
+	public List<GroupVO> getListByLocation(String location) {
+		return groupDAO.getListByLocation(location);
+	}
+	
+	@Override
+	public int filterOldGroups() {
+		return groupDAO.filterOldGroups();
 	}
 	
 }

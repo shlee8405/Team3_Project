@@ -3,7 +3,6 @@ package com.team.controller;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 
-import javax.security.auth.message.callback.PrivateKeyCallback.Request;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -127,10 +126,11 @@ public class UserController {
 			} else {
 				UserVO dbuvo = userService.getUserVoWithId(uvo.getU_id());
 				if(dbuvo.getU_status().equals("9")) {
-				request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
-				request.getSession().getServletContext().setAttribute("adminChecker", dbuvo.getU_status());
-				mv.setViewName("redirect:"+url);
-				return mv;
+					int resAdmin = groupService.filterOldGroups();
+					request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
+					request.getSession().getServletContext().setAttribute("adminChecker", dbuvo.getU_status());
+					mv.setViewName("redirect:"+url);
+					return mv;
 				} else if (dbuvo.getU_ban().equals("1")) {
 				//밴 
 					

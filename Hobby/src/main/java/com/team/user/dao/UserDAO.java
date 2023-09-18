@@ -95,8 +95,8 @@ public class UserDAO {
     }
     
     // 유저 삭제
-    public int getDeleteUser(String idx) {
-    	return sqlSessionTemplate.update("user.updateUserStatusToZero", idx);
+    public int getDeleteUser(String u_idx) {
+    	return sqlSessionTemplate.update("user.updateUserStatusToZero", u_idx);
     }
     
     // 유저 수정

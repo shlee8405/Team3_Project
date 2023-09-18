@@ -1,5 +1,6 @@
 package com.team.qna.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,8 @@ import org.springframework.stereotype.Service;
 
 import com.team.qna.dao.QnaDAO;
 import com.team.qna.vo.QnaVO;
+import com.team.report.vo.ReportVO;
+import com.team.user.vo.UserVO;
 
 @Service
 public class QnaServiceImpl implements QnaService {
@@ -46,5 +49,30 @@ public class QnaServiceImpl implements QnaService {
 	@Override
 	public List<QnaVO> getQnAOne(String q_idx) {
 		return qnaDAO.getQnAOne(q_idx);
+	}
+	
+	@Override
+	public int getDeleteQnaWithQVO(QnaVO qvo) {
+		return qnaDAO.getDeleteQnaWithQVO(qvo);
+	}
+	
+	@Override
+	public int getUpdateQnaWithQVO(QnaVO qvo) {
+		return qnaDAO.getUpdateQnaWithQVO(qvo);
+	}
+	
+	@Override
+	public List<QnaVO> getListByTitle(String q_title) {
+		return qnaDAO.getListByTitle(q_title);
+	}
+
+	@Override
+	public List<QnaVO> getListByNickname(String str) {
+		List<UserVO> userlist = qnaDAO.getUsersWithNickname(str);
+		List<QnaVO> list = new ArrayList<QnaVO>();
+		for (UserVO uvo : userlist) {
+			list.addAll(qnaDAO.getListByUidx(uvo.getU_idx()));
+		}
+		return list;
 	}
 }

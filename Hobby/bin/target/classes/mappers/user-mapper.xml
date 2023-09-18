@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+	
+	<select id="allList" resultType="uvo">
+		select * from USERS 
+	</select>
+	
+	<select id="allListByNickname" parameterType="String" resultType="uvo">
+		select * from USERS where u_nickname like #{u_nickname}
+	</select>
+	
+	<select id="allListByBirthday" parameterType="String" resultType="uvo">
+		select * from USERS where u_birthday like #{u_birthday}
+	</select>
+	
+	<select id="allListByPhone" parameterType="String" resultType="uvo">
+		select * from USERS where u_phone like #{u_phone}
+	</select>
+	
+	
+	<insert id="addUser" parameterType="uvo" >
+		insert INTO USERS(u_id, u_pw, u_name ,u_nickname, u_birthday, u_email, u_phone)
+		VALUES(#{u_id}, #{u_pw},#{u_name} ,#{u_nickname}, #{u_birthday}, #{u_email}, #{u_phone})
+	</insert>
+	
+	<insert id="addUserKakao" parameterType="uvo">
+		insert INTO USERS(u_id, u_pw, u_name ,u_nickname, u_birthday, u_email, u_phone, u_status)
+		VALUES(#{u_id}, #{u_pw},#{u_name} ,#{u_nickname}, #{u_birthday}, #{u_email}, #{u_phone}, 2)
+	</insert>
+	
+	<!-- 인코딩 된 비밀번호 추출 -->
+	<select id="getPassWithId" parameterType="uvo" resultType="String" >
+		SELECT u_pw FROM USERS WHERE u_id = #{u_id} 
+	</select>
+	<!-- 아이디가 DB 에 존재하는지 확인 -->
+	<select id="getCountWithUid" parameterType="String" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM USERS WHERE u_id = #{u_id}
+	</select>
+	
+	<!-- 유저 아이디로 uvo 가져오기 -->
+	<select id="getUserVoWithId" parameterType="String" resultType="uvo">
+		select * from USERS where u_id = #{u_id} 
+	</select>
+	
+	<select id="selectId" parameterType="String" resultType="uvo">
+		select * from USERS where u_id = #{u_id}
+	</select>
+	<!-- 이메일 중복 체크 -->
+	<select id="emailcount" parameterType="String" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM USERS WHERE u_email = #{u_email}
+    </select>
+	<!-- 아이디 중복 체크 -->
+	<select id="idcount" parameterType="String" resultType="java.lang.Integer">
+        SELECT COUNT(*) FROM USERS WHERE u_id = #{u_id}
+    </select>
+
+    <!-- 아이디 찾기 -->
+    <select id="findIdByEmail" parameterType="String" resultType="java.lang.String">
+        SELECT u_id FROM USERS WHERE u_email = #{u_email}
+    </select>
+   	<select id="findUserByEmail" parameterType="String" resultType="uvo">
+        SELECT * FROM USERS WHERE u_email = #{u_email}
+    </select>
+
+    <update id="updateUserPassword" parameterType="map">
+        UPDATE USERS SET u_pw = #{encryptedPassword} WHERE u_id = #{u_id}
+    </update>
+
+    
+    <select id="insertAdmin" parameterType="uvo" resultType="int">
+    	INSERT INTO USERS(u_id, u_pw, u_nickname, u_status)
+    	VALUES(#{u_id}, #{u_pw}, #{u_nickname}, 9)
+    </select>
+    
+    
+    <select id="one" parameterType="String" resultType="uvo">
+    	select * from USERS where u_idx = #{u_idx}
+    </select>
+    
+    <!-- userMapper.xml -->
+	<update id="pass" parameterType="map">
+	    UPDATE USERS
+	    SET u_pw = #{u_pw}
+	    WHERE u_idx = #{u_idx}
+	</update>
+
+    <update id="banUser" parameterType="String">
+    	update USERS SET u_ban = 1 where u_idx = #{u_idx}
+    </update>
+    
+    <update id="unbanUser" parameterType="String">
+    	update USERS SET u_ban = 0 where u_idx = #{u_idx}
+    </update>
+    
+
+	<update id="updateUserStatusToZero" parameterType="String">
+		update USERS set u_status = 0 where u_idx = #{u_idx}
+	</update>
+	
+	<update id="updateUserInfoAdmin" parameterType="uvo">
+	  UPDATE USERS
+	  SET
+	    u_id = CASE WHEN #{u_id} IS NOT NULL AND #{u_id} != '' THEN #{u_id} ELSE u_id END,
+	    u_nickname = CASE WHEN #{u_nickname} IS NOT NULL AND #{u_nickname} != '' THEN #{u_nickname} ELSE u_nickname END,
+	    u_name = CASE WHEN #{u_name} IS NOT NULL AND #{u_name} != '' THEN #{u_name} ELSE u_name END,
+	    u_email = CASE WHEN #{u_email} IS NOT NULL AND #{u_email} != '' THEN #{u_email} ELSE u_email END,
+	    u_birthday = CASE WHEN #{u_birthday} IS NOT NULL AND #{u_birthday} != '' THEN #{u_birthday} ELSE u_birthday END,
+	    u_phone = CASE WHEN #{u_phone} IS NOT NULL AND #{u_phone} != '' THEN #{u_phone} ELSE u_phone END
+	  WHERE u_idx = #{u_idx}
+	</update>
+	
+	<select id="findPwByEmail" parameterType="String" resultType="java.lang.String">
+        SELECT u_pw FROM USERS WHERE u_email = #{u_email}
+    </select>
+    
+    
+    
+    <!-- 네이버 로그인 -->
+    <insert id="naver" parameterType="naverVO">
+    	insert into USERS(u_name, u_id, u_nickname, u_email) value(#{name},#{id},#{nickname},#{email})
+    </insert>
+    
+    <select id="naverid" parameterType="String" resultType="String">
+		SELECT u_id FROM USERS WHERE u_id = #{u_id};
+    </select>
+</mapper>
+
+
+
+
+
+
+
+
