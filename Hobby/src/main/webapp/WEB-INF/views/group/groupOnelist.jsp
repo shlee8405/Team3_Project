@@ -75,21 +75,7 @@
         }
         
         // 로그인 상태면 서버로 요청 보내기
-        joinGroup(g_idx);
-    }
-    
-    function cancelParticipation(g_idx, u_idx) {
-        $.ajax({
-            url: "/cancelParticipation.do",
-            type: "POST",
-            data: { g_idx: g_idx, u_idx: u_idx },
-            success: function(response) {
-                location.reload();
-            },
-            error: function(error) {
-                alert("참여 취소에 실패했습니다.");
-            }
-        });
+        joinGroup(g_idx, u_idx);
     }
 
     function joinGroup(g_idx, u_idx) {
@@ -104,18 +90,20 @@
                     // 참여한 상태로 버튼 변경
                     alert("참여했습니다!");
                     // 버튼의 텍스트와 이벤트 핸들러를 변경합니다.
-                    $("button").text("참여 취소").attr("onclick", "cancelParticipation('" + g_idx + "')");
+                    $("button").text("참여 취소").off('click').on('click', function() { joinGroup(g_idx, u_idx); });
                 } else {
                     // 참여 취소 상태로 버튼 변경
                     alert("참여를 취소했습니다!");
                     // 버튼의 텍스트와 이벤트 핸들러를 변경합니다.
-                    $("button").text("참여").attr("onclick", "joinGroup('" + g_idx + "')");
+                    $("button").text("참여").off('click').on('click', function() { joinGroup(g_idx, u_idx); });
                 }
+            },
+            error: function(error) {
+                alert("처리 중 오류가 발생했습니다. 다시 시도해주세요.");
             }
         });
     }
-
-	
+    
       function comment_go(f) {
     		 // 유효성 검사
     		if(f.gc_content.value.trim().length <=0){
@@ -187,18 +175,18 @@
 					<td class="allist">${gvo.g_maxPeople }</td>
 				</tr>
 				<tr>
-				<td>
-				${user.u_id}&nbsp;&nbsp;&nbsp;&nbsp;
-	   			 <c:choose>
-				    <c:when test="${isParticipated}">
-				        <button onclick="participateGroup(${gvo.g_idx})">참여 취소</button>
-				    </c:when>
-				    <c:otherwise>
-				        <button onclick="participateGroup(${gvo.g_idx})">참여</button>
-				    </c:otherwise>
-				</c:choose>
-
-	   			 </td>
+					<td>
+					
+		   			 <c:choose>
+					    <c:when test="${isParticipated}">
+					        <button onclick="participateGroup(${gvo.g_idx})">참여 취소</button>
+					    </c:when>
+					    <c:otherwise>
+					        <button onclick="participateGroup(${gvo.g_idx})">참여</button>
+					    </c:otherwise>
+					</c:choose>
+	
+		   			 </td>
 	   			</tr>
 			</table>
 			</div>

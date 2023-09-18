@@ -76,6 +76,16 @@ public class GroupDAO {
 	    return sqlSessionTemplate.delete("group.removeParticipation", map);
 	}
 
+	// g_curPeople 증가
+	public int increaseGroupCount(String g_idx) {
+	    return sqlSessionTemplate.update("group.increaseGroupCount", g_idx);
+	}
+
+	// g_curPeople 감소
+	public int decreaseGroupCount(String g_idx) {
+	    return sqlSessionTemplate.update("group.decreaseGroupCount", g_idx);
+	}
+	
 	public int getGroupDelete(GroupVO gvo) {
 		return sqlSessionTemplate.update("group.delete", gvo);
 	}
