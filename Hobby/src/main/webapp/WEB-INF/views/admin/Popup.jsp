@@ -12,6 +12,8 @@
 main {
     display:flex;
     flex-direction: row;
+    max-width: 100%;
+    height: auto;
 }
 
 
@@ -19,6 +21,8 @@ main {
 color:#ffffff!important;
 
 }
+
+
 
 </style>
 
@@ -58,45 +62,32 @@ color:#ffffff!important;
    	<jsp:include page="sidebar.jsp" />
 
   <!-- MAIN CONTAINER -->
-   <div class="container"  style="width: 85%; margin-left:15vw;">
+   <div class="container" style="padding-bottom: 20px;">
 
         <!-- FIRST CONTAINER ( USER LIST )-->
-        <div id="test" class="container mt-4" style="background-color: rgba(200, 200, 200, 0.3); height:75vh; width: 90%;  box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.25);
-        border-radius: 10px;
-        " >
-        
-        	<div class="row " style="justify-content:center;">
-				<h1>팝업 관리</h1>
-			</div>
-            <div class="table-responsive pt-4 ps-5 pe-5" style="height: 50vh; padding-bottom: 1rem;">
-                <table class="table 
-                table-hover	
-                table-sm
-                table-success   
-                align-middle
-                overflow-auto">
-                    <thead class="table-primary">
-                        <caption>Table Name</caption>
-                        <thead>
-	                        <tr>
-	                            <th> 제목 </th>
-	                            <th> 내용 </th>
-	                        </tr>
-                        </thead>
-                        <tbody>
-                        	<tr>
-                        		<c:forEach var="vo" items="${list}">
-                        			<td>${vo.pop_title}</td>
-                        			<td>${vo.pop_content}</td>
-                        		</c:forEach>
-                        	</tr>
-                        </tbody>
-                 </table> 
-              <div>
-               	<a class="btn btn-primary" href="/PopupWrite.do" role="button">작성</a>
-              </div>
-            </div>
-        </div>
+        <div id="test" class="container mt-4" style="background-color: rgba(200, 200, 200, 0.3); box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.25);border-radius: 10px;">
+		    <div class="row justify-content-center">
+		        <h1>팝업 관리</h1>
+		    </div>
+		    <div class="row">
+		        <c:forEach var="vo" items="${list}">
+		            <div class="col-md-6 mb-3">
+		                <div class="card">
+		                    <div class="card-header">
+		                        ${vo.pop_title}
+		                    </div>
+		                    <div class="card-body">
+		                        <p class="card-text">${vo.pop_content}</p>
+		                    </div>
+		                </div>
+		            </div>
+		        </c:forEach>
+		    </div>
+		    <div class="row justify-content-end">
+		       <a class="btn btn-primary btn-block" href="/PopupWrite.do" role="button">작성하기</a>
+		    </div>
+		</div>
+
    </div>
 </main>
 

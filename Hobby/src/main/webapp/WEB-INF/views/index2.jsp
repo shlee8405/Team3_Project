@@ -773,6 +773,19 @@ rotate(
 .s1-text {
 	transform: translateX(30px) translateY(0px);
 }
+
+
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+
+.modal-body img {
+    max-width: 100%;
+    height: auto;
+}
+
+
 </style>
 
 </head>
@@ -1206,51 +1219,72 @@ rotate(
 	</div>
 	
 	<script type="text/javascript">
-	$(document).ready(function() {
-	    $.ajax({
-	        url: "/Popup2.do",
-	        type: "GET",
-	        dataType: "json",
-	        success: function(data) {
-	            // 'data'는 "/Popup2.do"로부터의 응답입니다.
+    $(document).ready(function() {
+        $.ajax({
+            url: "/Popup2.do",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                for (let i = 0; i < data.length; i++) {
+                    // 모달 HTML을 생성합니다.
+                    let modalHtml = '<div class="modal fade" id="exampleModalToggle' + i + '" aria-hidden="true" aria-labelledby="exampleModalToggleLabel' + i + '" tabindex="-1" style="top: -100px; left: ' + (200 * i) + 'px;">' +
+                        '<div class="modal-dialog modal-dialog-centered">' +
+                        '<div class="modal-content">' +
+                        '<div class="modal-header">' +
+                        '<h1 class="modal-title fs-5" id="exampleModalToggleLabel' + i + '">' + data[i].pop_title + '</h1>' +
+                        '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
+                        '</div>' +
+                        '<div class="modal-body">' +
+                        data[i].pop_content +
+                        '</div>' +
+                        '<div class="modal-footer">';
 
-	            // 모달의 title 부분에 응답 데이터를 넣습니다.
-	            var titleContent = '';
-	            var bodyContent = '';
-	            for (var i = 0; i < data.length; i++) {
-	                titleContent += data[i].pop_title + '<br>';  // 각 pop_title 값에 줄바꿈을 추가합니다.
-	                bodyContent += data[i].pop_content + '<br>';    // 각 pop_content 값에 줄바꿈을 추가합니다.
-	            }
-	            
-	            $("#exampleModalToggle .modal-title").html(titleContent);
-	            $("#exampleModalToggle .modal-body").html(bodyContent);
-	            
-	            // 모달 표시
-	            $('#exampleModalToggle').modal('show');
-	        },
-	        error: function() {
-	            console.error("Failed to fetch data from /Popup2.do");
-	        }
-	    });
-	});
-	</script>
-	
-	
-	<div class="modal fade" id="exampleModalToggle" aria-hidden="true" aria-labelledby="exampleModalToggleLabel" tabindex="-1" style="top: -100px; left: 400px;">
-	  <div class="modal-dialog modal-dialog-centered">
-	    <div class="modal-content">
-	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="exampleModalToggleLabel">
-	        </h1>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-	      </div>
-	      <div class="modal-body">
-	      </div>
-	      <div class="modal-footer">	
-	      </div>
-	    </div>
-	  </div>
-	</div>
+                    if (i < data.length - 1) {
+                        modalHtml += '<button class="btn btn-primary" data-bs-target="#exampleModalToggle' + (i + 1) + '" data-bs-toggle="modal">Next modal</button>';
+                    }
+
+                    modalHtml += '</div></div></div></div>';
+
+                    // 생성된 모달 HTML을 body에 추가합니다.
+                    $('body').append(modalHtml);
+                }
+
+                // 첫 번째 모달을 표시합니다.
+                $('#exampleModalToggle0').modal('show');
+            },
+            error: function() {
+                console.error("Failed to fetch data from /Popup2.do");
+            }
+        });
+
+        // Drag functionality
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+
+        $(document).on('mousedown', '.modal-content', function(e) {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            initialLeft = parseInt($(this).closest('.modal').css('left'));
+            initialTop = parseInt($(this).closest('.modal').css('top'));
+        });
+
+        $(document).on('mousemove', function(e) {
+            if (!isDragging) return;
+            let dx = e.clientX - startX;
+            let dy = e.clientY - startY;
+            $('.modal.show').css({
+                left: initialLeft + dx + 'px',
+                top: initialTop + dy + 'px'
+            });
+        });
+
+        $(document).on('mouseup', function() {
+            isDragging = false;
+        });
+    });
+</script>
+
 	
 	<!-- 두번째 색션 -->
 	<div class="section two  w-100 ">
