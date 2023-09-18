@@ -9,7 +9,7 @@
 
 	<select id="allList" parameterType="Map" resultType="gvo">
 		select *
-		from GROUPS where g_status = '1' order by g_idx desc limit #{limit}
+		from GROUPS where g_status != 0  order by g_idx desc limit #{limit}
 		offset #{offset}
 	</select>
 
