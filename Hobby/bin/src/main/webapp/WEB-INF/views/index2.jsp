@@ -21,6 +21,7 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -225,6 +226,34 @@ body, html {
 .img:hover {
 	filter: none;
 	-webkit-filter: grayscale(0);
+}
+
+.imgdiv {
+	width:550px;
+	position:relative;
+}
+
+.imgdiv:hover .placetitle{
+	opacity:1;
+	color:white;
+	text-align: center;
+	font-family: MBCM;
+	font-size: 4em;
+}
+
+.imgdiv:hover .img{
+	filter: none;
+	-webkit-filter: grayscale(0);
+}
+
+.imgdiv .placetitle {
+	position: absolute;		
+    top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+    opacity: 0;
+    transition: all 0.8s ease;			
 }
 
 /* NAVBAR STYLE */
@@ -890,6 +919,56 @@ rotate(
 											});
 								});
 			});
+	$(document)
+	.ready(
+	function() {
+		console.log('베스트캠핑장가져오기 시작');
+	$.ajax({
+		url : "/campBest.do",
+		method : "get",
+		dataType : "json", 
+		success : function(data) {
+			// 'bestCamps'라는 키로 서버에서 보낸 데이터 리스트를 찾는다.
+			// var dataList = data.bestCamps;
+			console.log('베스트캠핑장가져오기 inside function(data){}');
+			var list = "";
+
+			
+			$.each(data, function (index, response) {
+				// 제공 이미지 없을 시
+				var imageUrl = response.firstImageUrl == "" ? "resources/images/beach01.jpg" : response.firstImageUrl;
+				
+				list += "<div class='imgdiv'>" 
+					+"<img class='img' src='"+imageUrl+"'alt='img1' width='500px' height='500px'" 
+						+ "style='width: 500px; object-fit: cover; position: relative; margin-left: 3vw; margin-top: 16vh'>"
+						+"<span class='placetitle'><h1>"+response.facltNm+"</h1></span>"
+						+"</div>"
+						
+                }); //each
+                
+                $("#image_best3_list").append(list); //append
+                
+             	// 별 색칠 로직
+                $('.rating').each(function() {
+                    var rating = $(this).data('rating');
+                    $(this).find('.fa').each(function(index) {
+                        if (index < rating) {
+                        	$(this).removeClass('disable');  // 색칠된 별은 .disable 클래스 제거
+                        } else {
+                            $(this).addClass('disable');  // 색칠되지 않은 별은 .disable 클래스 추가
+                        }
+                    });
+                });
+                $(".small-title").show();
+                
+            },
+            error: function() {
+            	alert("에러");
+            	//loading = false;
+            }
+        });
+	}
+	);
 </script>
 
 <script type="text/javascript">
@@ -1212,6 +1291,11 @@ rotate(
 				제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는
 				형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에
 				정당한 보상을 청구할 수 있다.</div>
+			<div id="image_best3_list" class="row">
+				
+			</div>
+			
+<!-- 		
 			<div class="row">
 				<img class="img" src="/resources/images/beach01.jpg" alt="img1"
 					width="500px" height="500px"
@@ -1228,9 +1312,12 @@ rotate(
 					width="500px" height="500px"
 					style="width: 500px; object-fit: cover; position: relative; margin-left: 3vw; margin-top: 16vh">
 			</div>
-
+ -->
 		</div>
 	</div>
+	<script>
+	
+	</script>
 
 	<!-- 세번째 색션 -->
 	<div class="section three">
