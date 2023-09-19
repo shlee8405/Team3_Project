@@ -2,7 +2,15 @@ package com.team.popup.vo;
 
 public class PopupVO {
 	
-	private String pop_title, pop_content;
+	private String pop_title, pop_content, pop_idx;
+
+	public String getPop_idx() {
+		return pop_idx;
+	}
+
+	public void setPop_idx(String pop_idx) {
+		this.pop_idx = pop_idx;
+	}
 
 	public String getPop_title() {
 		return pop_title;

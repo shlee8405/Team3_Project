@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,7 +24,7 @@ public class PopupController {
 	@Autowired
 	private PopupService popupService;
 
-	@RequestMapping("/Popup.do")
+	@RequestMapping("/Popup.do")/*팝업관리 이동*/
 	public ModelAndView Popup() {
 		ModelAndView mv = new ModelAndView("admin/Popup");
 		List<PopupVO> list = popupService.SelectPopup();
@@ -30,26 +32,47 @@ public class PopupController {
 		return mv;
 	}
 	
-	@RequestMapping("/Popup2.do")
+	@RequestMapping("/Popup2.do")/*팝업창에 넣기*/
 	@ResponseBody
 	public ResponseEntity<List<PopupVO>> getPopupData() {
 	    List<PopupVO> list = popupService.SelectPopup();
 	    return ResponseEntity.ok(list);
 	}
 	
-	@RequestMapping("/PopupWrite.do")
+	@RequestMapping("/PopupWrite.do")/*팝업 작성 이동*/
 	public ModelAndView PopupWrite() {
 		ModelAndView mv = new ModelAndView("admin/PopupWrite");
 		return mv;
 	}
 	
 	
-	@RequestMapping("/insert_Popup.do")
+	@RequestMapping("/insert_Popup.do")/*팝업 작성하기*/
 	public ModelAndView Insert_Popup(PopupVO vo) {
 		ModelAndView mv = new ModelAndView("redirect:/Popup.do");
 		int res = popupService.Insert_Popup(vo);
 		return mv;
 	}
 	
+	@RequestMapping("/delete_Popup.do")/*팝업 삭제하기*/
+	public ModelAndView Delete_Popup(@RequestParam("pop_idx")String idx) {
+		ModelAndView mv = new ModelAndView("redirect:/Popup.do");
+		int res = popupService.Delete_Popup(idx);
+		return mv;
+	}
+	
+	@RequestMapping("/update_Popup.do")/*수정 페이지로 이동*/
+	public ModelAndView Update_Popup(@ModelAttribute("PopupVo")PopupVO popupVO) {
+		ModelAndView mv = new ModelAndView("admin/PopupUpdate");
+		popupVO = popupService.selectOne(popupVO);
+		mv.addObject("popvo",popupVO);
+		return mv;
+	}
+	
+	@RequestMapping("/update.do")/*수정하기*/
+	public ModelAndView Update(PopupVO popvo) {
+		ModelAndView mv = new ModelAndView("redirect:/Popup.do");
+		int res = popupService.Update(popvo);
+		return mv;
+	}
 
 }

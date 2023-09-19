@@ -863,6 +863,12 @@ rotate(
     height: auto;
 }
 
+.modal-content iframe {
+    width: 100%;
+    height: 30vw%; 
+    max-height: 100%; 
+}
+
 
 </style>
 
@@ -1373,13 +1379,17 @@ rotate(
                         '</div>';
 
                     if (i < data.length - 1) {
-                        modalHtml += '<button class="btn btn-primary" data-bs-target="#exampleModalToggle' + (i + 1) + '" data-bs-toggle="modal">Next modal</button>';
+                        modalHtml += '<button class="btn btn-primary" data-bs-target="#exampleModalToggle' + (i + 1) + '" data-bs-toggle="modal">다음</button>';
                     }
 
                     modalHtml += '</div></div></div></div>';
 
                     // 생성된 모달 HTML을 body에 추가합니다.
                     $('body').append(modalHtml);
+                    
+                    if (popupClosedTime && new Date().getTime() - popupClosedTime < 60000) {
+                        return; // 1시간 미만이므로 팝업을 다시 보여주지 않습니다.
+                    }
                 }
 
                 // 첫 번째 모달을 표시합니다.
@@ -1414,27 +1424,27 @@ rotate(
         const popupClosedTime = localStorage.getItem('popupClosedTime');
         console.log("   "+localStorage);
         console.log("   "+popupClosedTime );
-        if (popupClosedTime && new Date().getTime() - popupClosedTime < 3600000) {
-            return; // 1시간 미만이므로 팝업을 다시 보여주지 않습니다.
-        }
-
-        // Drag functionality
+        
+      
+     // Drag functionality
         let isDragging = false;
         let startX, startY, initialLeft, initialTop;
+        let draggedModal = null;  // 드래그 중인 팝업을 참조하는 변수
 
         $(document).on('mousedown', '.modal-content', function(e) {
             isDragging = true;
             startX = e.clientX;
             startY = e.clientY;
-            initialLeft = parseInt($(this).closest('.modal').css('left'));
-            initialTop = parseInt($(this).closest('.modal').css('top'));
+            draggedModal = $(this).closest('.modal');  // 현재 클릭된 팝업을 참조합니다.
+            initialLeft = parseInt(draggedModal.css('left'));
+            initialTop = parseInt(draggedModal.css('top'));
         });
 
         $(document).on('mousemove', function(e) {
-            if (!isDragging) return;
+            if (!isDragging || !draggedModal) return;
             let dx = e.clientX - startX;
             let dy = e.clientY - startY;
-            $('.modal.show').css({
+            draggedModal.css({  // 드래그 중인 팝업만 움직입니다.
                 left: initialLeft + dx + 'px',
                 top: initialTop + dy + 'px'
             });
@@ -1442,7 +1452,9 @@ rotate(
 
         $(document).on('mouseup', function() {
             isDragging = false;
+            draggedModal = null;  // 드래그 종료 후 참조를 초기화합니다.
         });
+
     });
 </script>
 	

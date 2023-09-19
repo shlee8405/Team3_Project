@@ -24,4 +24,19 @@ public class PopupServiceImpl implements PopupService {
 	public List<PopupVO> SelectPopup() {
 		return popupDAO.SelectPopup();
 	}
+	
+	@Override
+	public int Delete_Popup(String idx) {
+		return popupDAO.Delete_Popup(idx);
+	}
+	
+	@Override
+	public PopupVO selectOne(PopupVO popupVO) {
+		return popupDAO.selectOne(popupVO);
+	}
+	
+	@Override
+	public int Update(PopupVO popvo) {
+		return popupDAO.Update(popvo);
+	}
 }
