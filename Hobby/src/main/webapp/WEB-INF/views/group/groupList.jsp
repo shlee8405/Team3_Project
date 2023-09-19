@@ -363,28 +363,28 @@ function allSearch() {
           </div>
           </div>
           <br>
-<div id="listgroup" style="width: 1000px ;">
-    <h3>모임</h3>
-    <div class="board-container">
-        <c:choose>
-            <c:when test="${empty glist}">
-                <div class="board-item">
-                    <h3>작성된 글이 없습니다.</h3>
-                </div>
-            </c:when>
-            <c:otherwise>
-                <c:forEach var="k" items="${glist}">
-    <div id="group_item" class="board-item" onclick="go_groupOnelist(${k.g_idx})">
-        <c:set var="thumbnailSrc" value="/resources/images/캠핑.png" />
-        <c:if test="${not empty k.g_fname}">
-            <c:set var="thumbnailSrc" value='/resources/images/${k.g_fname}' />
-        </c:if>
-        <img class="thumbnail" src="${pageContext.request.contextPath}${thumbnailSrc}">
-        <h4 style="margin-top: 20px">${k.g_title}</h4>
-        <p>${k.g_intro}</p>
-        <p class="fixed-position">${k.g_cdo} ${k.g_gugun}</p>
-    </div>
-</c:forEach>
+	<div id="listgroup" style="width: 1000px ;">
+	    <h3>모임</h3>
+	    <div class="board-container">
+	        <c:choose>
+	            <c:when test="${empty glist}">
+	                <div class="board-item">
+	                    <h3>작성된 글이 없습니다.</h3>
+	                </div>
+	            </c:when>
+	            <c:otherwise>
+	                <c:forEach var="k" items="${glist}">
+					    <div id="group_item" class="board-item" onclick="go_groupOnelist(${k.g_idx})">
+					        <c:set var="thumbnailSrc" value="/resources/images/캠핑.png" />
+					        <c:if test="${not empty k.g_fname}">
+					            <c:set var="thumbnailSrc" value='/resources/images/${k.g_fname}' />
+					        </c:if>
+					        <img class="thumbnail" src="${pageContext.request.contextPath}${thumbnailSrc}">
+					        <h4 style="margin-top: 20px">${k.g_title}</h4>
+					        <p>${k.g_intro}</p>
+					        <p class="fixed-position">${k.g_cdo} ${k.g_gugun}</p>
+					    </div>
+					</c:forEach>
             </c:otherwise>
         </c:choose>
     </div>
