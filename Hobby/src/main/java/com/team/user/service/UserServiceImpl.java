@@ -155,7 +155,7 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	
-	
+	// 네이버 로그인
 	@Override
 	public int naver(NaverVO naverVO) {
 		return userDAO.naver(naverVO);

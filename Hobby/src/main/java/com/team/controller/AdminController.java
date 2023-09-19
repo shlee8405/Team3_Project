@@ -108,7 +108,12 @@ public class AdminController {
 		List<FaqVO> list = faqService.getList();
 		mv.addObject("list", list);
 		return mv;
-		
+	}
+	
+	@GetMapping("/adminMainPageModifier.do")
+	public ModelAndView goAdminMainPageModifier() {
+		ModelAndView mv = new ModelAndView("admin/mainpagemodifier");
+		return mv;
 	}
 
 }

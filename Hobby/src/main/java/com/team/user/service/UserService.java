@@ -76,6 +76,7 @@ public interface UserService {
 	String findPwByEmail(String email);
 	
 	
+	// 네이버 로그인
 	int naver(NaverVO naverVO);
 	
 	String getNaverUserByEmail(String id);

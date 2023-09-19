@@ -118,9 +118,9 @@
     
     
     
-    <!--  -->
+    <!-- 네이버 로그인 -->
     <insert id="naver" parameterType="naverVO">
-    	insert into USERS(u_name, u_id, u_nickname) value(#{name},#{id},#{nickname})
+    	insert into USERS(u_name, u_id, u_nickname, u_email) value(#{name},#{id},#{nickname},#{email})
     </insert>
     
     <select id="naverid" parameterType="String" resultType="String">

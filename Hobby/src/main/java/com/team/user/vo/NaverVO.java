@@ -1,8 +1,15 @@
 package com.team.user.vo;
 
 public class NaverVO {
-	private String id,name, nickname,email;
-	
+	private String id,name, nickname,email,url;
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
 
 	public String getEmail() {
 		return email;

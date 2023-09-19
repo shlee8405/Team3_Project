@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -21,6 +20,7 @@
 
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script
 	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -225,6 +225,34 @@ body, html {
 .img:hover {
 	filter: none;
 	-webkit-filter: grayscale(0);
+}
+
+.imgdiv {
+	width:550px;
+	position:relative;
+}
+
+.imgdiv:hover .placetitle{
+	opacity:1;
+	color:white;
+	text-align: center;
+	font-family: MBCM;
+	font-size: 4em;
+}
+
+.imgdiv:hover .img{
+	filter: none;
+	-webkit-filter: grayscale(0);
+}
+
+.imgdiv .placetitle {
+	position: absolute;		
+    top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 10;
+    opacity: 0;
+    transition: all 0.8s ease;			
 }
 
 /* NAVBAR STYLE */
@@ -773,6 +801,19 @@ rotate(
 .s1-text {
 	transform: translateX(30px) translateY(0px);
 }
+
+
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+
+.modal-body img {
+    max-width: 100%;
+    height: auto;
+}
+
+
 </style>
 
 </head>
@@ -890,6 +931,56 @@ rotate(
 											});
 								});
 			});
+	$(document)
+	.ready(
+	function() {
+		console.log('베스트캠핑장가져오기 시작');
+	$.ajax({
+		url : "/campBest.do",
+		method : "get",
+		dataType : "json", 
+		success : function(data) {
+			// 'bestCamps'라는 키로 서버에서 보낸 데이터 리스트를 찾는다.
+			// var dataList = data.bestCamps;
+			console.log('베스트캠핑장가져오기 inside function(data){}');
+			var list = "";
+
+			
+			$.each(data, function (index, response) {
+				// 제공 이미지 없을 시
+				var imageUrl = response.firstImageUrl == "" ? "resources/images/beach01.jpg" : response.firstImageUrl;
+				
+				list += "<div class='imgdiv'>" 
+					+"<img class='img' src='"+imageUrl+"'alt='img1' width='500px' height='500px'" 
+						+ "style='width: 500px; object-fit: cover; position: relative; margin-left: 3vw; margin-top: 16vh'>"
+						+"<span class='placetitle'><h1>"+response.facltNm+"</h1></span>"
+						+"</div>"
+						
+                }); //each
+                
+                $("#image_best3_list").append(list); //append
+                
+             	// 별 색칠 로직
+                $('.rating').each(function() {
+                    var rating = $(this).data('rating');
+                    $(this).find('.fa').each(function(index) {
+                        if (index < rating) {
+                        	$(this).removeClass('disable');  // 색칠된 별은 .disable 클래스 제거
+                        } else {
+                            $(this).addClass('disable');  // 색칠되지 않은 별은 .disable 클래스 추가
+                        }
+                    });
+                });
+                $(".small-title").show();
+                
+            },
+            error: function() {
+            	alert("에러");
+            	//loading = false;
+            }
+        });
+	}
+	);
 </script>
 
 <script type="text/javascript">
@@ -1073,7 +1164,6 @@ rotate(
 															});
 										});
 					});
-	var formData = "email=" + encodeURIComponent(emailValue); // emailValue는 이메일 입력 필드 값
 </script>
 
 
@@ -1184,6 +1274,8 @@ rotate(
 			<p class="hero-content">경기도 가평군 가평읍 개곡리 198-1</p>
 		</div>
 	</div>
+	
+	
 
 	<!-- 소개글 -->
 	<div class="section one ">
@@ -1191,6 +1283,7 @@ rotate(
 			<div class="s1-text-title" style="translate: 0px -50%;">
 
 				<p class="s1-text">/CAMP.do</p>
+				
 			</div>
 			<div class="s1-text-content">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
 				체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을
@@ -1200,8 +1293,77 @@ rotate(
 				있다. 여자의 근로는 특별한 보호를 받으며, 고용·임금 및 근로조건에 있어서 부당한 차별을 받지 아니한다. 국무총리 또는
 				행정각부의 장은 소관사무에 관하여 법률이나 대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다.</div>
 		</div>
+		
 	</div>
-<h2>dd</h2>
+	
+	<script type="text/javascript">
+    $(document).ready(function() {
+        $.ajax({
+            url: "/Popup2.do",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                for (let i = 0; i < data.length; i++) {
+                    // 모달 HTML을 생성합니다.
+                    let modalHtml = '<div class="modal fade" id="exampleModalToggle' + i + '" aria-hidden="true" aria-labelledby="exampleModalToggleLabel' + i + '" tabindex="-1" style="top: -100px; left: ' + (200 * i) + 'px;">' +
+                        '<div class="modal-dialog modal-dialog-centered">' +
+                        '<div class="modal-content">' +
+                        '<div class="modal-header">' +
+                        '<h1 class="modal-title fs-5" id="exampleModalToggleLabel' + i + '">' + data[i].pop_title + '</h1>' +
+                        '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
+                        '</div>' +
+                        '<div class="modal-body">' +
+                        data[i].pop_content +
+                        '</div>' +
+                        '<div class="modal-footer">';
+
+                    if (i < data.length - 1) {
+                        modalHtml += '<button class="btn btn-primary" data-bs-target="#exampleModalToggle' + (i + 1) + '" data-bs-toggle="modal">Next modal</button>';
+                    }
+
+                    modalHtml += '</div></div></div></div>';
+
+                    // 생성된 모달 HTML을 body에 추가합니다.
+                    $('body').append(modalHtml);
+                }
+
+                // 첫 번째 모달을 표시합니다.
+                $('#exampleModalToggle0').modal('show');
+            },
+            error: function() {
+                console.error("Failed to fetch data from /Popup2.do");
+            }
+        });
+
+        // Drag functionality
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+
+        $(document).on('mousedown', '.modal-content', function(e) {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            initialLeft = parseInt($(this).closest('.modal').css('left'));
+            initialTop = parseInt($(this).closest('.modal').css('top'));
+        });
+
+        $(document).on('mousemove', function(e) {
+            if (!isDragging) return;
+            let dx = e.clientX - startX;
+            let dy = e.clientY - startY;
+            $('.modal.show').css({
+                left: initialLeft + dx + 'px',
+                top: initialTop + dy + 'px'
+            });
+        });
+
+        $(document).on('mouseup', function() {
+            isDragging = false;
+        });
+    });
+</script>
+
+	
 	<!-- 두번째 색션 -->
 	<div class="section two  w-100 ">
 		<div class="row"
@@ -1212,6 +1374,11 @@ rotate(
 				제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는
 				형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에
 				정당한 보상을 청구할 수 있다.</div>
+			<div id="image_best3_list" class="row">
+				
+			</div>
+			
+<!-- 		
 			<div class="row">
 				<img class="img" src="/resources/images/beach01.jpg" alt="img1"
 					width="500px" height="500px"
@@ -1228,9 +1395,12 @@ rotate(
 					width="500px" height="500px"
 					style="width: 500px; object-fit: cover; position: relative; margin-left: 3vw; margin-top: 16vh">
 			</div>
-
+ -->
 		</div>
 	</div>
+	<script>
+	
+	</script>
 
 	<!-- 세번째 색션 -->
 	<div class="section three">
@@ -1431,11 +1601,8 @@ rotate(
 		
 	
 		</script>
-	<script type="text/javascript"
-		src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-		charset="utf-8"></script>
-	<script type="text/javascript"
-		src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript"src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"charset="utf-8"></script>
+	<script type="text/javascript"src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		
 	<!-- 네이버 로그인 버튼 노출 영역 -->
 	<div id="naver_id_login"></div>
@@ -1457,10 +1624,6 @@ rotate(
 			// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
 			function naverSignInCallback() {
 				console.log(naver_id_login)
-				/* alert(naver_id_login.getProfileData('email'));
-				alert(naver_id_login.getProfileData('nickname'));
-				alert(naver_id_login.getProfileData('id'));
-				alert(naver_id_login.getProfileData('name')); */
 				var email = naver_id_login.getProfileData('email');
 				var nickname = naver_id_login.getProfileData('nickname');
 				var id = naver_id_login.getProfileData('id');

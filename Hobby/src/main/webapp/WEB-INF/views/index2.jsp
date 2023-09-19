@@ -1,34 +1,60 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
-<script
-	src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="/resources/css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="/resources/css/login.css">
 
 <style>
+
+@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
+
+
+.waviy {
+  position: relative;
+  -webkit-box-reflect: below -20px linear-gradient(transparent, rgba(0,0,0,.2));
+}
+.waviy span {
+  position: relative;
+  display: inline-block;
+  color: #fff;
+  animation: waviy 3s infinite;
+  animation-delay: calc(.1s * var(--i));
+  
+}
+@keyframes waviy {
+  0%,40%,100% {
+    transform: translateY(0)
+  }
+  20% {
+    transform: translateY(-20px)
+  }
+}
+
+#waviytitle {
+	color:black;
+    text-align: center;
+    font-family: MBCM;
+    font-size: 1em;
+}
+
+
+
+
+
+
 .containerHD {
 	justify-content: flex-end;
 	display: flex;
@@ -76,22 +102,28 @@ body, html {
 	z-index: 2;
 	margin-bottom: 2rem;
 }
-
-/* The hero image */
-.hero-image {
-	/* Use "linear-gradient" to add a darken background effect to the image (photographer.jpg). This will make the text easier to read */
-	background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)),
-		/* url("https://st2.depositphotos.com/8573964/12346/i/950/depositphotos_123466770-stock-photo-beach-in-the-morning-sun.jpg"); */
-		/* url("https://images.pexels.com/photos/5914157/pexels-photo-5914157.jpeg"); */
-		url("https://images.pexels.com/photos/1371798/pexels-photo-1371798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-	/* Set a specific height */
+	<% int x = 0;%>
+	<% String background = "background"; %>
+	<% if(x>0) { %>
+	.hero-image {
+	background-image : linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('resources/background/<%=background%>.jpg');
 	height: 70%;
-	/* Position and center the image to scale nicely on all screens */
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
 	position: relative;
 }
+	<% } else if (x<=0) { %>
+	.hero-image{
+	background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url("https://images.pexels.com/photos/1371798/pexels-photo-1371798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
+			height: 70%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
+	<% }%>
+
 
 /* Place text in the middle of the image */
 .hero-text {
@@ -148,6 +180,15 @@ body, html {
 	text-align: center;
 	font-family: MBCM;
 	font-size: 4em;
+	cursor:pointer;
+  	transition: font-size ease-in-out .1s;
+}
+
+.s2-text-title:hover {
+	font-size: 4.5em;
+}
+.s2-text-title:hover #waviytitle {
+	color:gray;
 }
 
 .s2-text-content {
@@ -189,6 +230,11 @@ body, html {
 	text-align: center;
 	font-family: MBCM;
 	font-size: 4em;
+	cursor:pointer;
+  	transition: font-size ease-in-out .1s;
+}
+.s4-text-title:hover {
+	font-size: 4.5em;
 }
 
 .s4-text-content {
@@ -229,16 +275,15 @@ body, html {
 }
 
 .imgdiv {
-	width:550px;
+	width:33.2%;
 	position:relative;
+	cursor: pointer;
 }
+
 
 .imgdiv:hover .placetitle{
 	opacity:1;
-	color:white;
-	text-align: center;
-	font-family: MBCM;
-	font-size: 4em;
+	
 }
 
 .imgdiv:hover .img{
@@ -247,6 +292,10 @@ body, html {
 }
 
 .imgdiv .placetitle {
+	color:white;
+	text-align: center;
+	font-family: MBCM;
+	font-size: 4em;
 	position: absolute;		
     top: 50%;
 	left: 50%;
@@ -802,6 +851,19 @@ rotate(
 .s1-text {
 	transform: translateX(30px) translateY(0px);
 }
+
+
+.modal-body {
+    max-height: calc(100vh - 210px);
+    overflow-y: auto;
+}
+
+.modal-body img {
+    max-width: 100%;
+    height: auto;
+}
+
+
 </style>
 
 </head>
@@ -938,9 +1000,9 @@ rotate(
 				// 제공 이미지 없을 시
 				var imageUrl = response.firstImageUrl == "" ? "resources/images/beach01.jpg" : response.firstImageUrl;
 				
-				list += "<div class='imgdiv'>" 
-					+"<img class='img' src='"+imageUrl+"'alt='img1' width='500px' height='500px'" 
-						+ "style='width: 500px; object-fit: cover; position: relative; margin-left: 3vw; margin-top: 16vh'>"
+				list += "<div class='imgdiv' onclick=\"window.location.href='/campDetail.do?keyword="+response.facltNm+"'\">" 
+					+"<img class='img' src='"+imageUrl+"'alt='img1' width='100%' height='100%'" 
+						+ "style='width: 100%; object-fit: cover; position: relative; border-radius:1rem;'>"
 						+"<span class='placetitle'><h1>"+response.facltNm+"</h1></span>"
 						+"</div>"
 						
@@ -1152,7 +1214,6 @@ rotate(
 															});
 										});
 					});
-	var formData = "email=" + encodeURIComponent(emailValue); // emailValue는 이메일 입력 필드 값
 </script>
 
 
@@ -1263,6 +1324,8 @@ rotate(
 			<p class="hero-content">경기도 가평군 가평읍 개곡리 198-1</p>
 		</div>
 	</div>
+	
+	
 
 	<!-- 소개글 -->
 	<div class="section one ">
@@ -1270,6 +1333,7 @@ rotate(
 			<div class="s1-text-title" style="translate: 0px -50%;">
 
 				<p class="s1-text">/CAMP.do</p>
+				
 			</div>
 			<div class="s1-text-content">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
 				체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을
@@ -1279,19 +1343,135 @@ rotate(
 				있다. 여자의 근로는 특별한 보호를 받으며, 고용·임금 및 근로조건에 있어서 부당한 차별을 받지 아니한다. 국무총리 또는
 				행정각부의 장은 소관사무에 관하여 법률이나 대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다.</div>
 		</div>
+		
 	</div>
-<h2>dd</h2>
+	
+	<script type="text/javascript">
+    $(document).ready(function() {
+        // 팝업 데이터를 가져옵니다.
+        $.ajax({
+            url: "/Popup2.do",
+            type: "GET",
+            dataType: "json",
+            success: function(data) {
+                for (let i = 0; i < data.length; i++) {
+                    // 모달 HTML을 생성합니다.
+                    let modalHtml = '<div class="modal fade" data-bs-backdrop="static" id="exampleModalToggle' + i + '" aria-hidden="true" aria-labelledby="exampleModalToggleLabel' + i + '" tabindex="-1" style="top: -100px; left: ' + (200 * i) + 'px;">' +
+                        '<div class="modal-dialog modal-dialog-centered">' +
+                        '<div class="modal-content">' +
+                        '<div class="modal-header">' +
+                        '<h1 class="modal-title fs-5" id="exampleModalToggleLabel' + i + '">' + data[i].pop_title + '</h1>' +
+                        '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
+                        '</div>' +
+                        '<div class="modal-body">' +
+                        data[i].pop_content +
+                        '</div>' +
+                        '<div class="modal-footer">' +
+                        '<div class="form-check">' +
+                            '<input class="form-check-input" type="checkbox" id="dontShowAgain' + i + '" value="">' +
+                            '<label class="form-check-label" for="dontShowAgain' + i + '">1시간 동안 다시 보지 않기</label>' +
+                        '</div>';
+
+                    if (i < data.length - 1) {
+                        modalHtml += '<button class="btn btn-primary" data-bs-target="#exampleModalToggle' + (i + 1) + '" data-bs-toggle="modal">Next modal</button>';
+                    }
+
+                    modalHtml += '</div></div></div></div>';
+
+                    // 생성된 모달 HTML을 body에 추가합니다.
+                    $('body').append(modalHtml);
+                }
+
+                // 첫 번째 모달을 표시합니다.
+                $('#exampleModalToggle0').modal('show');
+            },
+            error: function() {
+                console.error("Failed to fetch data from /Popup2.do");
+            }
+        });
+        
+        $(document).on('click', 'input[type="checkbox"]', function() {
+            console.log("Checkbox clicked:", $(this).attr('id'), "Checked:", $(this).prop('checked'));
+        });
+        
+        $(document).on('hidden.bs.modal', '.modal', function (e) {
+            console.log("Modal hidden event triggered."); // 이벤트가 트리거되었는지 확인
+
+            const checkboxId = 'dontShowAgain' + e.target.id.replace('exampleModalToggle', '');
+            const isChecked = $('#' + checkboxId).prop('checked');
+
+            console.log("Checkbox ID:", checkboxId); // 체크박스의 ID 값 확인
+            console.log("Is checkbox checked?", isChecked); // 체크박스의 선택 상태 확인
+
+            if (isChecked) {
+                const currentTime = new Date().getTime();
+                localStorage.setItem('popupClosedTime', currentTime);
+                console.log("Stored time in localStorage:", currentTime); // localStorage에 저장된 값 확인
+            }
+        });
+
+        
+        const popupClosedTime = localStorage.getItem('popupClosedTime');
+        console.log("   "+localStorage);
+        console.log("   "+popupClosedTime );
+        if (popupClosedTime && new Date().getTime() - popupClosedTime < 3600000) {
+            return; // 1시간 미만이므로 팝업을 다시 보여주지 않습니다.
+        }
+
+        // Drag functionality
+        let isDragging = false;
+        let startX, startY, initialLeft, initialTop;
+
+        $(document).on('mousedown', '.modal-content', function(e) {
+            isDragging = true;
+            startX = e.clientX;
+            startY = e.clientY;
+            initialLeft = parseInt($(this).closest('.modal').css('left'));
+            initialTop = parseInt($(this).closest('.modal').css('top'));
+        });
+
+        $(document).on('mousemove', function(e) {
+            if (!isDragging) return;
+            let dx = e.clientX - startX;
+            let dy = e.clientY - startY;
+            $('.modal.show').css({
+                left: initialLeft + dx + 'px',
+                top: initialTop + dy + 'px'
+            });
+        });
+
+        $(document).on('mouseup', function() {
+            isDragging = false;
+        });
+    });
+</script>
+	
 	<!-- 두번째 색션 -->
 	<div class="section two  w-100 ">
 		<div class="row"
 			style="margin-left: 15vw; margin-right: 15vw; top: 2%; z-index: 9;">
-			<div class="s2-text-title">/요즘 핫한 곳으로.go!</div>
-			<div class="s1-text-content">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
+			<!-- <div class="s2-text-title">/요즘 핫한 곳으로.go!</div> -->
+			<div class="s2-text-title waviy mt-3 mb-5" onclick="window.location.href='/campMain.do'">
+				<span id="waviytitle" style="--i:1">/</span>
+				<span id="waviytitle" style="--i:2">요</span>
+				<span id="waviytitle" style="--i:3">즘</span>
+				<span id="waviytitle" style="--i:4">핫</span>
+				<span id="waviytitle" style="--i:4">🔥</span>
+				<span id="waviytitle" style="--i:5">한</span>
+				<span id="waviytitle" style="--i:6">곳</span>
+				<span id="waviytitle" style="--i:7">으</span>
+				<span id="waviytitle" style="--i:8">로</span>
+				<span id="waviytitle" style="--i:9">.</span>
+				<span id="waviytitle" style="--i:10">g</span>
+				<span id="waviytitle" style="--i:11">o</span>
+				<span id="waviytitle" style="--i:12">!</span>
+			</div>
+			<div class="s1-text-content mt-3 mb-5">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
 				체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을
 				제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는
 				형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에
 				정당한 보상을 청구할 수 있다.</div>
-			<div id="image_best3_list" class="row">
+			<div id="image_best3_list" class="row mb-5">
 				
 			</div>
 			
@@ -1337,8 +1517,8 @@ rotate(
 	<div class="section four">
 		<div class="row"
 			style="margin-left: 15vw; margin-right: 15vw; top: 2%; z-index: 9;">
-			<div class="s4-text-title">/캠핑, together.do</div>
-			<div class="s4-text-content">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
+			<div class="s4-text-title mt-4 mb-5" onclick="window.location.href='/groupList.do'">/캠핑, together.d🌏!</div>
+			<div class="s4-text-content mb-5">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
 				체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을
 				제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는
 				형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에
@@ -1518,11 +1698,8 @@ rotate(
 		
 	
 		</script>
-	<script type="text/javascript"
-		src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-		charset="utf-8"></script>
-	<script type="text/javascript"
-		src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript"src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"charset="utf-8"></script>
+	<script type="text/javascript"src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		
 	<!-- 네이버 로그인 버튼 노출 영역 -->
 	<div id="naver_id_login"></div>
@@ -1544,10 +1721,6 @@ rotate(
 			// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
 			function naverSignInCallback() {
 				console.log(naver_id_login)
-				/* alert(naver_id_login.getProfileData('email'));
-				alert(naver_id_login.getProfileData('nickname'));
-				alert(naver_id_login.getProfileData('id'));
-				alert(naver_id_login.getProfileData('name')); */
 				var email = naver_id_login.getProfileData('email');
 				var nickname = naver_id_login.getProfileData('nickname');
 				var id = naver_id_login.getProfileData('id');

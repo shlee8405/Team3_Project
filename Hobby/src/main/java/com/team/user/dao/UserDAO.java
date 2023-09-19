@@ -140,7 +140,7 @@ public class UserDAO {
     
     
     
-    
+    // 네이버 로그인
     public int naver(NaverVO naverVO) {
     	return sqlSessionTemplate.insert("user.naver",naverVO);
     }

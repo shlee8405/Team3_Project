@@ -268,11 +268,8 @@ public class UserController {
 	     
 		 if(result) {
 			 UserVO dbuvo = userService.getUserVoWithId(id);
-			 System.out.println("kakaoLogin.do u_ban==1 is :" + dbuvo.getU_ban().equals("1"));
-			 System.out.println("kakaoLogin.do retrieve id successfull id: " + id );
 			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
 			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
-			 System.out.println("kakaoLogin.do insert session Idx success");
 			 return new ModelAndView("redirect:/home.do");
 		 } else {
 			 UserVO uvo = new UserVO();
@@ -281,10 +278,8 @@ public class UserController {
 			 uvo.setU_name(name);
 			 int insertResult = userService.getUserInsertKakao(uvo);
 			 UserVO dbuvo = userService.getUserVoWithId(id);
-			 System.out.println("kakaoLogin.do insert id successfull  id: " + id);
 			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
 			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
-			 System.out.println("kakaoLogin.do insert session Idx success");
 			 return new ModelAndView("redirect:/home.do");
 		 }
 
