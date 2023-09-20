@@ -6,7 +6,24 @@ import org.springframework.web.multipart.MultipartFile;
 public class GroupVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private String g_idx, g_title, g_desc, g_date, g_cdo, g_gugun, g_location, g_maxPeople, g_curPeople, g_link, g_status, g_fname, g_oldfname, u_idx, g_intro;
+	private int limit, offset;
 	
+	public int getLimit() {
+		return limit;
+	}
+
+	public void setLimit(int limit) {
+		this.limit = limit;
+	}
+
+	public int getOffset() {
+		return offset;
+	}
+
+	public void setOffset(int offset) {
+		this.offset = offset;
+	}
+
 	// file 파리미터를 저장할 이름
 	private MultipartFile file;
 	
