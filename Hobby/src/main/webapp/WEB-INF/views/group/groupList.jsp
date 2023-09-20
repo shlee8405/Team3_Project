@@ -134,6 +134,14 @@ ol.paging li a:hover {
 	border-radius: 10px;
 	background-color: rgba(128, 128, 0, 0.2);
 }
+.serch_all2 {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center; /* 이 부분은 중앙 정렬을 위해 추가한 것입니다. */
+	margin: auto;
+	border-radius: 10px;
+}
 
 .search-container {
 	display: flex;
@@ -225,18 +233,19 @@ function group_write_go(f) {
         location.href = "/group_writeForm.do?u_idx=" + Uidx;
     }
 }
-function allSearch() {
-	location.href="/groupList.do";
-}
+	function allSearch() {
+		location.href="/groupList.do";
+	}
 
 	function go_groupOnelist(f) {
+		var cPage = ${paging.nowPage}
 		var div = document.getElementById("group_item");
 		div.classList.add("hovered");
 	      div.addEventListener("mouseleave", function() {
 	        div.classList.remove("hovered");
 	      });
 		
-		location.href= "/group_onelist.do?g_idx="+ f;
+		location.href= "/group_onelist.do?g_idx="+ f+"&cPage="+cPage;
 		console.log("g_idx");
 	}
 
@@ -304,6 +313,7 @@ function allSearch() {
 		}
 
 	// 검색액션
+	/*
 	 $(document).ready(function() {
             $("#myButton_ok").click(function() {
 		 $(".board-container").empty();
@@ -338,53 +348,58 @@ function allSearch() {
 
                 });
             });
-        });
+        });*/
 </script>
 
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
 	<div style="position: relative; top: 200px; z-index: 1;">
-		<div class="serch_all" style="width: 800px">
-			<h2 style="margin-top: 20px; text-align: left;">모임 검색</h2>
-			<br>
-			<div class="search-container">
-				<div class="search-box">
-					<input type="text" class="search-txt" name=""
-						placeholder="제목을 입력하세요">
+		<form action="/search.do" method="get">
+			<div class="serch_all" style="width: 800px">
+				<h2 style="margin-top: 20px; text-align: left;">모임 검색</h2>
+				<br>
+				<div class="search-container">
+					<div class="search-box">
+						<input type="text" class="search-txt" name="title"
+							placeholder="제목을 입력하세요">
+					</div>
+					&nbsp;&nbsp; <br>
+					<div class="search_boxes">
+						<select name="city" id="" onchange="categoryChange(this)"
+							style="height: 40px; width: 120px; border-radius: 30px;">
+							<option value="">시/도 선택</option>
+							<option value="강원">강원</option>
+							<option value="경기">경기</option>
+							<option value="경남">경남</option>
+							<option value="경북">경북</option>
+							<option value="광주">광주</option>
+							<option value="대구">대구</option>
+							<option value="대전">대전</option>
+							<option value="부산">부산</option>
+							<option value="서울">서울</option>
+							<option value="울산">울산</option>
+							<option value="인천">인천</option>
+							<option value="전남">전남</option>
+							<option value="전북">전북</option>
+							<option value="제주">제주</option>
+							<option value="충남">충남</option>
+							<option value="충북">충북</option>
+						</select>&nbsp; <select name="state" id="state"
+							style="height: 40px; width: 120px; border-radius: 30px;">
+							<option value="">군/구 선택</option>
+						</select>
+					</div>
 				</div>
-				&nbsp;&nbsp; <br>
-				<div class="search_boxes">
-					<select name="" id="" onchange="categoryChange(this)"
-						style="height: 40px; width: 120px; border-radius: 30px;">
-						<option value="">시/도 선택</option>
-						<option value="강원">강원</option>
-						<option value="경기">경기</option>
-						<option value="경남">경남</option>
-						<option value="경북">경북</option>
-						<option value="광주">광주</option>
-						<option value="대구">대구</option>
-						<option value="대전">대전</option>
-						<option value="부산">부산</option>
-						<option value="서울">서울</option>
-						<option value="울산">울산</option>
-						<option value="인천">인천</option>
-						<option value="전남">전남</option>
-						<option value="전북">전북</option>
-						<option value="제주">제주</option>
-						<option value="충남">충남</option>
-						<option value="충북">충북</option>
-					</select>&nbsp; <select name="" id="state"
-						style="height: 40px; width: 120px; border-radius: 30px;">
-						<option value="">군/구 선택</option>
-					</select>
-				</div>
-			</div>
-			&nbsp;&nbsp;
-			<div class="button-container">
+				&nbsp;&nbsp;
+				<!-- <div class="button-container">
 				<button class="ser_btn" id="myButton_ok">검색</button>
+			</div> -->
+				<div class="button-container">
+					<input class="ser_btn" type="submit" value="검색">
+				</div>
 			</div>
-		</div>
+		</form>
 		<br>
 		<div id="listgroup" style="width: 1000px;">
 			<h3>모임</h3>
@@ -413,7 +428,15 @@ function allSearch() {
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
-
+			</div>
+			<div class="button-container"
+				style="width: 100%; margin-right: 600px;">
+				<button id="write_btn" class="ser_btn"
+					onclick="group_write_go(this.form, '${user.u_idx}')">글쓰기</button>
+				<br>
+				<button id="allSearch" class="ser_btn" onclick="allSearch()">전체보기</button>
+			</div>
+			<div class="serch_all2" >
 				<ol class="paging">
 					<!-- 이전 버튼 -->
 					<c:choose>
@@ -451,12 +474,6 @@ function allSearch() {
 				</ol>
 			</div>
 		</div>
-		<button id="write_btn"
-					onclick="group_write_go(this.form, '${user.u_idx}')">글쓰기</button>
-				<br>
-				<button id="allSearch" onclick="allSearch()">전체보기</button>
-				<br>
-		<br> <br> <br> <br> <br> <br>
 	</div>
 </body>
 </html>

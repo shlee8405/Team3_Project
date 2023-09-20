@@ -176,7 +176,20 @@
 				</tr>
 				<tr>
 					<td>
+						    <div class="col-3">
+						        <b>참가자:</b>  
+						    </div>
+						<c:if test="${isParticipated}">
+						    <p>당신은 이 그룹에 이미 참여하였습니다.</p>
+						</c:if>
 					
+						    <div class="col-9">
+						        <c:forEach var="user" items="${groupUsers}">
+						            <ul>
+						                <li>${user.u_nickname}</li>
+						            </ul>
+						        </c:forEach>
+						    </div>
 		   			 <c:choose>
 					    <c:when test="${isParticipated}">
 					        <button onclick="participateGroup(${gvo.g_idx})">참여 취소</button>
@@ -199,6 +212,7 @@
     <div class="infoActions">
         <input type="hidden" name="g_idx" value="${gvo.g_idx}">
         <input type="button" value="목록" onclick="list_go(this.form)" />
+        <input type="hidden" name="cPage" value="${cPage }">
     <c:set var="groupUidxStr" value="${gvo.u_idx}" /> <!-- gvo는 그룹의 정보를 담고 있는 객체로 추정됩니다. -->
 		<c:if test="${sessionUidx eq groupUidxStr}">
 		    <input type="button" value="수정" onclick="edit_go(this.form)" />
