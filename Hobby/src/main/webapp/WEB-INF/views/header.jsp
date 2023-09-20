@@ -59,7 +59,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-	z-index: 1 !important;
+	z-index: 2 !important;
 }
 
 /* Navbar section */
@@ -72,7 +72,7 @@ body {
     text-align: center;
     background-color:#637F42;
     top: 0;
-    z-index: 1;
+    z-index: 2;
   
 }
 
@@ -84,7 +84,7 @@ body {
 	text-align:center;
     background-color:#0F4200;
     bottom: 0;
-    z-index: 1;
+    z-index: 2;
     padding:0;
 	visibility: hidden;
 	opacity: 0;
@@ -220,7 +220,7 @@ body {
     padding: 0;
     background-color: #0F4200;
     opacity:100%;
-    z-index:1;
+    z-index: 2;
 }
 
 .affix2 {
