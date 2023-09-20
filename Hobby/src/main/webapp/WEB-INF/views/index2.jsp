@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/resources/css/login.css">
+    <link rel="stylesheet" href="/resources/css/bonfire.css">
 
 <style>
 
@@ -254,9 +255,11 @@ animation: blinker 1.5s linear infinite;
 }
 
 .section.three {
+	height: 600px;
+	padding: 0px 1vw;
+	background: none;
+	margin-left: 0;
 	display: inline-block;
-	height: auto;
-	background-color: white;
 	padding: 0px 1vw;
 }
 
@@ -1614,22 +1617,91 @@ rotate(
 	<script>
 	
 	</script>
-
+	
 	<!-- 세번째 색션 -->
 	<div class="section three">
 		<div class="row" style="left: 10%; right: 10%; top: 5%; z-index: 9;">
-			<div class="s3-text-title">/CAMPing 의 <span class="eublink">이유</span>.do</div>
-			<div class="s3-text-content pe-5">
+			<div class="col">
+				<div class="fire-on">
+				    <div class="switch-wrap">
+						<div id="switch">
+							<div id="circle"></div>
+						</div>
+				    </div>
+					
+					
+					<div class="section-center">
+						<div class="moon">
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
+						<div class="shooting-star"></div>
+						<div class="shooting-star-2"></div>
+						<div class="star"></div>
+						<div class="star snd"></div>
+						<div class="star trd"></div>
+						<div class="star fth"></div>
+						<div class="star fith"></div>
+						<div class="circle"></div>
+						<div class="wood-circle"></div>
+						<div class="wood"></div>
+						<div class="tree-1"></div>
+						<div class="tree-2"></div>
+						<div class="fire">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+						<div class="smoke">
+							<span class="s-0"></span>
+							<span class="s-1"></span>
+							<span class="s-2"></span>
+							<span class="s-3"></span>
+							<span class="s-4"></span>
+							<span class="s-5"></span>
+							<span class="s-6"></span>
+							<span class="s-7"></span>
+							<span class="s-8"></span>
+							<span class="s-9"></span>
+						</div>
+					</div>
+			</div>
 			
-			캠핑은 도시의 소음에서 벗어나 자연 속에서 신선한 공기를 마시며 <b><i>몸과 마음을 힐링</i></b>할 수 있는 최고의 방법입니다!<br> 
-			텐트 속에서 자연의 소리를 들으며, 별빛 아래에서의 잠은 일상의 <b><i>스트레스를 풀어줍니다</i></b>. <br>
-			또한 가족과 친구들과 함께하는 캠프 파이어는 <b><i>소중한 추억</i></b>을 만들어줍니다. <br>
-			캠핑은 자연과 가까워지는 경험이자, <b><i>새로운 모험</i></b>을 시작하는 기회입니다.
+			</div>
+			<div class="col">
+				<div class="s3-text-title">/CAMPing 의 <span class="eublink">이유</span>.do</div>
+				<div class="s3-text-content pe-5">
+				
+				캠핑은 도시의 소음에서 벗어나 자연 속에서 신선한 공기를 마시며 <b><i>몸과 마음을 힐링</i></b>할 수 있는 최고의 방법입니다!<br> 
+				텐트 속에서 자연의 소리를 들으며, 별빛 아래에서의 잠은 일상의 <b><i>스트레스를 풀어줍니다</i></b>. <br>
+				또한 가족과 친구들과 함께하는 캠프 파이어는 <b><i>소중한 추억</i></b>을 만들어줍니다. <br>
+				캠핑은 자연과 가까워지는 경험이자, <b><i>새로운 모험</i></b>을 시작하는 기회입니다.
+				
+				</div>
 			
 			</div>
 		</div>
 		<div class="row" style="height:10vh;"></div>
 	</div>
+	<script>
+	$(document).ready(function() {
+		$("body").addClass("fire-off");
+		$("#switch").addClass("switched");
+	});
+	$("#switch").on('click', function () {
+		if ($("body").hasClass("fire-off")) {
+			$("body").removeClass("fire-off");
+			$("#switch").removeClass("switched");
+			$("body").addClass("dampen");
+		}
+		else {
+			$("body").addClass("fire-off");
+			$("#switch").addClass("switched");
+			$("body").removeClass("dampen");
+		}
+	});
+	</script>
 
 	<!-- 네번째 색션 -->
 	<div class="section four">
