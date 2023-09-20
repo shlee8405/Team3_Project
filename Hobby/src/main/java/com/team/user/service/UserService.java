@@ -73,7 +73,9 @@ public interface UserService {
 	List<UserVO> getUsersWithPhone(String u_phone); 
 	
 	// 이메일로 비밀번호 찾기
-	String findPwByEmail(String email);
+	String findPwByEmail(String finalemail);
+	
+	int PassToID(String finalemail, String encodedNewPassword);
 	
 	
 	// 네이버 로그인
