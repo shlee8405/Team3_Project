@@ -94,11 +94,12 @@ public class GroupController {
         return mv;
     }
 	
-	@RequestMapping("/search")
+	@RequestMapping("/search.do")
 	public ModelAndView searchGroups(
 	        @RequestParam("title") String title, 
 	        @RequestParam("city") String city,
 	        @RequestParam("state") String state) {
+		System.out.println("search");
 	    
 	    GroupVO gvo = new GroupVO();
 	    gvo.setG_title(title);
@@ -136,8 +137,8 @@ public class GroupController {
 	 			paging.setEndBlock(paging.getTotalPage());
 	 		}
 	    
-	    ModelAndView modelAndView = new ModelAndView("group/groupSearchResult"); // Change to the new JSP page
-	    
+	    //ModelAndView modelAndView = new ModelAndView("group/groupSearchResult"); // Change to the new JSP page
+	    ModelAndView modelAndView = new ModelAndView("group/groupList");
 	    
 	    modelAndView.addObject("glist", resultGroups);
 	    modelAndView.addObject("paging", paging);
@@ -196,25 +197,31 @@ public class GroupController {
 	    ModelAndView mv = new ModelAndView("group/groupOnelist");
 	    String g_idx = request.getParameter("g_idx");
 	    String cPage = request.getParameter("cPage");
-	    
+	    System.out.println(cPage);
 	    String userIdx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
 	    
-	    // 여기에 참여 여부를 확인하는 코드를 추가합니다.
+	    // 참여 여부를 확인합니다.
 	    int participationCount = groupService.checkUserParticipation(g_idx, userIdx);
 	    boolean isParticipated = participationCount > 0;
 	    mv.addObject("isParticipated", isParticipated);
 	    
 	    // 상세보기
 	    GroupVO gvo = groupService.getGroupOnelist(g_idx);
+	    mv.addObject("gvo", gvo);
+	    
+	    // 해당 그룹의 모든 참가자 목록을 가져옵니다.
+//	    List<UserVO> groupUsers = groupService.getGroupUsersByGroupId(g_idx);
+//	    mv.addObject("groupUsers", groupUsers);
+	    
 	    // 댓글 가져오기
 	    List<GroupCmtVO> gc_list = groupService.getCommList(g_idx);
+	    mv.addObject("gc_list", gc_list);
 	    
-	    mv.addObject("gvo", gvo);
-	    mv.addObject("gc_list",gc_list);
 	    mv.addObject("cPage", cPage);
 	    
 	    return mv;
 	}
+
 
 	// 그룹 참여 또는 참여 취소 처리
 	@RequestMapping("/joinGroup.do")

@@ -52,6 +52,11 @@ public class GroupServiceImpl implements GroupService {
 		return groupDAO.getGroupOnelist(g_idx);
 	}
 
+	//@Override
+//	public List<UserVO> getGroupUsersByGroupId(String g_idx) {
+//	    return groupDAO.getGroupUsersByGroupId(g_idx);
+//	}
+	
 	// 참여 중복 체크
 	@Override
 	public int checkUserParticipation(String g_idx, String u_idx) {
