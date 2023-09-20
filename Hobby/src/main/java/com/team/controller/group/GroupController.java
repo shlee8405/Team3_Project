@@ -2,6 +2,8 @@ package com.team.controller.group;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -203,7 +205,11 @@ public class GroupController {
 	    String cPage = request.getParameter("cPage");
 	    System.out.println(cPage);
 	    String userIdx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
-	    
+	    Date now = new Date();
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String formattedNow = sdf.format(now);
+	    mv.addObject("now", formattedNow);
+	  	    
 	    // 참여 여부를 확인합니다.
 	    int participationCount = groupService.checkUserParticipation(g_idx, userIdx);
 	    boolean isParticipated = participationCount > 0;
@@ -211,19 +217,23 @@ public class GroupController {
 	    
 	    // 상세보기
 	    GroupVO gvo = groupService.getGroupOnelist(g_idx);
-	    mv.addObject("gvo", gvo);
 	    
+	    // 참여자 카운트
+	    int maxPeople = Integer.parseInt(gvo.getG_maxPeople());
+	    int curPeople = Integer.parseInt(gvo.getG_curPeople());
+	    mv.addObject("maxPeople", maxPeople);
+	    mv.addObject("curPeople", curPeople);
 	    // 해당 그룹의 모든 참가자 목록을 가져옵니다.
 	    List<GroupuserVO> groupuserlist = groupuserService.getAllList();
 	    List<UserVO> userlist = userService.getAllUsers();
 	    mv.addObject("groupUsers", groupuserlist);
 	    mv.addObject("userlist",userlist);
 	    mv.addObject("g_idx",g_idx);
+	    mv.addObject("gvo", gvo);
 	    
 	    // 댓글 가져오기
 	    List<GroupCmtVO> gc_list = groupService.getCommList(g_idx);
 	    mv.addObject("gc_list", gc_list);
-	    
 	    mv.addObject("cPage", cPage);
 	    
 	    return mv;
