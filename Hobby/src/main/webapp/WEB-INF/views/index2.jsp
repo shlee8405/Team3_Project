@@ -882,6 +882,13 @@ rotate(
     max-height: 100%; 
 }
 
+.modal-backdrop {
+    display: none;
+}
+
+#naver_id_login {
+    height: 20px; /* 원하는 높이 값으로 설정 */
+}
 
 </style>
 
@@ -950,57 +957,39 @@ rotate(
 													});
 										});
 					});
-	$(document)
-	.ready(
-			function() {
-				$("#pwdRecoveryForm")
-						.submit(
-								function(event) {
-									console.log("321313121")
+	
+	$(document).ready(function() {
+				$("#pwdRecoveryForm").submit(function(event) {
 									event.preventDefault(); // Prevent the default form submission
-
 									// Collect form data
-									var formData = "email2="
-											+ encodeURIComponent($(
-													"#email2").val());
+									var formData = "email2=" + encodeURIComponent($("#email2").val());
 									// Use AJAX to check email availability first
-									$
-											.ajax({
+										$.ajax({
 												url : "/forgotPwd.do", // Endpoint for 아이디찾기
 												type : "POST",
 												data : formData,
 												dataType : "text", // Response data type
 												contentType : "application/x-www-form-urlencoded; charset=UTF-8",
-												success : function(
-														response) {
-													console
-															.log(
-																	"Response:",
-																	response); // Add this line for debugging
+												success : function(response) {
+													console.log("Response:",response); // Add this line for debugging
 													if (response) {
 														// Handle 아이디찾기 success
 														var foundPw = response;
-														alert("비번을 찾았습니다: "
-																+ response);
-														$(
-																"#pwdRecoveryModal")
-																.modal(
-																		"hide"); // Close the modal
+														alert("임시 비밀번호 발급: "+ response);
+														$("#pwdRecoveryModal").modal("hide"); // Close the modal
 													} else {
 														// Handle 아이디찾기 error
 														alert("비번을 찾을 수 없습니다. 다시 시도해주세요.");
 													}
 												},
 												error : function(error) {
-													console.log(
-															"Error:",
-															error);
+													console.log("Error:",error);
 													// Handle 아이디찾기 error if needed
 												}
 											});
 								});
 			});
-
+	
 	$(document)
 	.ready(
 	function() {
@@ -1480,38 +1469,25 @@ rotate(
         });
 
         
-        $(document).on('click', 'input[type="checkbox"]', function() {
-            console.log("Checkbox clicked:", $(this).attr('id'), "Checked:", $(this).prop('checked'));
-        });
-        
         $(document).on('hidden.bs.modal', '.modal', function (e) {
-            console.log("Modal hidden event triggered."); // 이벤트가 트리거되었는지 확인
 
             const checkboxId = 'dontShowAgain' + e.target.id.replace('exampleModalToggle', '');
             const isChecked = $('#' + checkboxId).prop('checked');
 
-            console.log("Checkbox ID:", checkboxId); // 체크박스의 ID 값 확인
-            console.log("Is checkbox checked?", isChecked); // 체크박스의 선택 상태 확인
-
             if (isChecked) {
                 const currentTime = new Date().getTime();
                 localStorage.setItem('popupClosedTime', currentTime);
-                console.log("Stored time in localStorage:", currentTime); // localStorage에 저장된 값 확인
             }
         });
-
         
         const popupClosedTime = localStorage.getItem('popupClosedTime');
-        console.log("   "+localStorage);
-        console.log("   "+popupClosedTime );
-        
       
      // Drag functionality
         let isDragging = false;
         let startX, startY, initialLeft, initialTop;
         let draggedModal = null;  // 드래그 중인 팝업을 참조하는 변수
 
-        $(document).on('mousedown', '.modal-content', function(e) {
+        $(document).on('mousedown', '.modal-header', function(e) {
             isDragging = true;
             startX = e.clientX;
             startY = e.clientY;
@@ -1705,8 +1681,8 @@ rotate(
 								<div class="login_api" style="text-align: center;">
 									<a href="javascript:void(0)" id="kakaoLoginBtn"><img
 										src="resources/images/kakao_login_btn.png"
-										style="width: 100%; height: 50px;"></a>
-									<div id="naver_id_login" style="margin-top: 10px;"></div>
+										style="width: 70%; height: 50px;"></a>
+									<div id="naver_id_login" style="margin-top: 10px; height: 10px;"></div>
 								</div>
 							</div>
 						</form>
@@ -1794,12 +1770,11 @@ rotate(
 	<script type="text/javascript"src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		
 	<!-- 네이버 로그인 버튼 노출 영역 -->
-	<div id="naver_id_login"></div>
 	<!-- //네이버 로그인 버튼 노출 영역 -->
 	<script type="text/javascript">
 		var naver_id_login = new naver_id_login("G9mEXjeV6N3JKbzZvasQ", "http://localhost:8090");
 		var state = naver_id_login.getUniqState();
-		naver_id_login.setButton("white", 2,40);
+		naver_id_login.setButton("green",3,50);
 		naver_id_login.setDomain(".service.com");
 		naver_id_login.setState(state);
 		naver_id_login.init_naver_id_login();
@@ -1862,9 +1837,8 @@ rotate(
 					<!-- Input fields for 비밀번호찾기 -->
 					<form id="pwdRecoveryForm">
 						<div class="mb-3">
-							<label for="email2" class="form-label">이메일</label> <input
-								type="email" class="form-control" id="email2" name="email2"
-								placeholder="이메일을 입력하세요">
+							<label for="email2" class="form-label">아이디</label>
+							<input type="text" class="form-control" id="email2" name="email2" placeholder="아이디를 입력하세요.">
 						</div>
 						<!-- Add more input fields if needed -->
 						<button type="submit" class="btn btn-primary">비밀번호 찾기</button>
