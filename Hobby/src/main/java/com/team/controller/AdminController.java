@@ -13,6 +13,8 @@ import com.team.group.service.GroupService;
 import com.team.group.vo.GroupVO;
 import com.team.groupuser.service.GroupuserService;
 import com.team.groupuser.vo.GroupuserVO;
+import com.team.mpimg.service.MpimgService;
+import com.team.mpimg.vo.MPIVO;
 import com.team.qna.service.QnaService;
 import com.team.qna.vo.QnaVO;
 import com.team.report.service.ReportService;
@@ -41,6 +43,8 @@ public class AdminController {
 	@Autowired
 	private GroupuserService groupuserService;
 
+	@Autowired
+	private MpimgService mpimgService;
 //	@GetMapping("/adminUser.do")
 //	public ModelAndView goAdminUser() /* 관리자 유저 */ {
 //		ModelAndView mv = new ModelAndView("admin/user");
@@ -113,6 +117,8 @@ public class AdminController {
 	@GetMapping("/adminMainPageModifier.do")
 	public ModelAndView goAdminMainPageModifier() {
 		ModelAndView mv = new ModelAndView("admin/mainpagemodifier");
+		List<MPIVO> list = mpimgService.getImages();
+		mv.addObject("list", list);
 		return mv;
 	}
 

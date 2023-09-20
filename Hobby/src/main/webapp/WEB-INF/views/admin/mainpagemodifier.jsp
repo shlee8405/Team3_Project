@@ -140,6 +140,12 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 
 	   <div class="super" >
 	        <!-- SEARCH CONTAINER -->
+	        <script>
+		        function sendImage(f) {
+		        	f.action = "/uploadMPImage.do";
+		        	f.submit();
+		        }
+	        </script>
 	        <div id="test"> 
 	        	<!-- FIRST CONTAINER (GROUP LIST SEARCH) -->
 		        <div class="topcontainer  ps-5  mt-0 p-1">
@@ -148,14 +154,14 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 				   				<h1 class="col-title-h1" style="border-bottom: 1px solid  #0f4200;" >/메인 페이지 이미지 업로드.do</h1>
 				   			</div>
 				   		</div>
-						<form>
+						<form method="post" enctype="multipart/form-data">
 							<div class="row  ms-5 mt-5" >
 					   			<div class="col w-25"></div>
 					   			<div class="col d-flex justify-content-end border w-25">
 					   				<label> 이미지 제목 </label>
 					   			</div>
 					   			<div class="col d-flex justify-content-start border w-25">
-					   				<input type="text" name="mp_title" placeholder="이미지 설명"> </input> 
+					   				<input type="text" name="mp_title" placeholder="이미지 설명" /> 
 					   			</div>
 					   			<div class="col w-25"></div>
 					   		</div>
@@ -200,7 +206,6 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 					   			<div class="col w-25"></div>
 					   		</div>
 				   		</form>
-				   		
 		        </div>
 		
 		        <!-- BOTTOM CONTAINER ( LIST )-->
@@ -225,8 +230,27 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 										<h1 class="h1title-sub"> /메인 페이지 이미지 리스트.do</h1>
 									</div>
 								</div>	
-								<c:forEach items="${list}" var="k">
-									
+								<c:forEach var="k" items="${list}" >
+									<div class="row ms-5 mt-1 mb-1">
+										<div class="col d-flex justify-content-center">
+											<h1 class="h1title-sub">${k.mp_idx}</h1>
+										</div>
+									</div>	
+									<div class="row ms-5 mt-1 mb-1">
+										<div class="col d-flex justify-content-center">
+											<h1 class="h1title-sub">${k.mp_title}</h1>
+										</div>
+									</div>
+									<div class="row ms-5 mt-1 mb-1">
+										<div class="col d-flex justify-content-center">
+											<h1 class="h1title-sub">${k.mp_desc}</h1>
+										</div>
+									</div>		
+									<div class="row ms-5 mt-1 mb-1">
+										<div class="col d-flex justify-content-center">
+											<img src='resources/background/${k.mp_imgname}' alt="img1" width="100%" height="100%" style="width:100px; object-fit:cover;">
+										</div>
+									</div>	
 								</c:forEach>
 							
 							</c:otherwise>

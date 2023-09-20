@@ -6,7 +6,7 @@
 
 
     <!-- 메인페이지 이미지의 정보 뽑기 -->
-    <select id="getImage">
+    <select id="getImage" resultType="mpivo">
 		SELECT * FROM MAINPAGEIMAGE ORDER BY mp_idx
     </select>
     
@@ -21,11 +21,20 @@
     </delete>
     
     <update id="updateImage" parameterType="mpivo">
-    	UPDATE MAINPAGEIMAGES 
+    	UPDATE MAINPAGEIMAGES
 		SET 
     	mp_title = CASE WHEN #{mp_title} IS NOT NULL AND #{mp_title} != '' THEN #{mp_title} ELSE mp_title END,
 	    mp_desc = CASE WHEN #{mp_desc} IS NOT NULL AND #{mp_desc} != '' THEN #{mp_desc} ELSE mp_desc END
 		WHERE mp_idx = #{mp_idx}
+    </update>
+    
+    <select id="getMaxIdx" resultType="String">
+    	SELECT MAX(mp_idx) FROM MAINPAGEIMAGE
+    </select>
+    
+    <update id="insertImgname" parameterType="mpivo">
+    	update MAINPAGEIMAGE
+    	SET mp_imgname = #{mp_imgname} where mp_idx = #{mp_idx}
     </update>
     
 </mapper>
