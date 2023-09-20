@@ -27,6 +27,8 @@ import com.team.commons.Paging;
 import com.team.group.service.GroupService;
 import com.team.group.vo.GroupCmtVO;
 import com.team.group.vo.GroupVO;
+import com.team.groupuser.service.GroupuserService;
+import com.team.groupuser.vo.GroupuserVO;
 import com.team.user.service.UserService;
 import com.team.user.vo.UserVO;
 
@@ -38,6 +40,8 @@ public class GroupController {
 	private Paging paging;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private GroupuserService groupuserService;
 	
 	@RequestMapping("/groupList.do")
 	 public ModelAndView getAllGroups(HttpServletRequest request) {
@@ -210,8 +214,11 @@ public class GroupController {
 	    mv.addObject("gvo", gvo);
 	    
 	    // 해당 그룹의 모든 참가자 목록을 가져옵니다.
-//	    List<UserVO> groupUsers = groupService.getGroupUsersByGroupId(g_idx);
-//	    mv.addObject("groupUsers", groupUsers);
+	    List<GroupuserVO> groupuserlist = groupuserService.getAllList();
+	    List<UserVO> userlist = userService.getAllUsers();
+	    mv.addObject("groupUsers", groupuserlist);
+	    mv.addObject("userlist",userlist);
+	    mv.addObject("g_idx",g_idx);
 	    
 	    // 댓글 가져오기
 	    List<GroupCmtVO> gc_list = groupService.getCommList(g_idx);

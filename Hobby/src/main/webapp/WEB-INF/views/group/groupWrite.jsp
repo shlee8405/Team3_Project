@@ -44,6 +44,11 @@
 	.hit {width:15%}
 	.title{background:lightsteelblue}
 	.odd {background:silver}
+	
+	.note-modal-backdrop {
+    display: none !important;
+	}
+	
 </style>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script type="text/javascript">
@@ -175,7 +180,7 @@
 			<caption>모임 개설하기</caption>
 			<tbody>
 				<tr>
-					<th>제목</th>
+					<th>제목</th>	
 					<td><input type="text" name="g_title" size="45"/></td>
 				</tr>
 				<tr>
@@ -249,16 +254,16 @@
     	<script type="text/javascript">
     	$(function(){
     		$('#g_desc').summernote({
-    			lang : 'ko-KR',
-    			height : 300,
-    			focus : true,
-    			callbacks : {
-    				onImageUpload :  function(files, editor){
-    					for (var i = 0; i < files.length; i++) {
-							sendImage(files[i], editor);
-						}
-    				}
-    			}
+    	        lang : 'ko-KR',
+    	        height : 300,
+    	        focus : true,
+    	        callbacks : {
+    	            onImageUpload :  function(files, editor){
+    	                for (var i = 0; i < files.length; i++) {
+    	                    sendImage(files[i], editor);
+    	                }
+    	            }
+    	        }
 			});
     	});
     	function sendImage(file, editor) {
@@ -274,6 +279,7 @@
 			}).done(function(data) {
 				var path = data.path;
 				var fname = data.fname;
+				alert("path : "+path+"\nfname : "+fname);
 				$("#g_desc").summernote("editor.insertImage",path+"/"+fname);
 			});
 		}

@@ -1019,7 +1019,7 @@ rotate(
 													if (response) {
 														// Handle 아이디찾기 success
 														var foundPw = response;
-														alert("임시 비밀번호 발급: "+ response);
+														alert("임시 비밀번호가 발급되었습니다.: "+ response);
 														$("#pwdRecoveryModal").modal("hide"); // Close the modal
 													} else {
 														// Handle 아이디찾기 error
@@ -1435,7 +1435,6 @@ rotate(
                         '<div class="modal-content">' +
                         '<div class="modal-header">' +
                         '<h1 class="modal-title fs-5" id="exampleModalToggleLabel' + i + '">' + data[i].pop_title + '</h1>' +
-                        '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
                         '</div>' +
                         '<div class="modal-body">' +
                         data[i].pop_content +
@@ -1444,11 +1443,8 @@ rotate(
                         '<div class="form-check">' +
                             '<input class="form-check-input" type="checkbox" id="dontShowAgain' + i + '" value="">' +
                             '<label class="form-check-label" for="dontShowAgain' + i + '">1시간 동안 다시 보지 않기</label>' +
+                            '<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>' +
                         '</div>';
-
-                    if (i < data.length - 1) {
-                        modalHtml += '<button class="btn btn-primary" data-bs-target="#exampleModalToggle' + (i + 1) + '" data-bs-toggle="modal">다음</button>';
-                    }
 
                     modalHtml += '</div></div></div></div>';
 
@@ -1458,6 +1454,11 @@ rotate(
                     if (popupClosedTime && new Date().getTime() - popupClosedTime < 60000) {
                         return; // 1시간 미만이므로 팝업을 다시 보여주지 않습니다.
                     }
+
+                	// 첫 번째 모달을 표시합니다.
+                    $('#exampleModalToggle'+i).modal('show');
+                    
+                    
                 }
             	if(imgdata.length>0) {
 	            	for (let i=0; i<imgdata.length; i++) {
@@ -1488,6 +1489,7 @@ rotate(
 	            		$('.carousel-indicators').append(indexhtml);
 	            	}
             	}
+            	
             	if(imgdata.length==0) {
             		let i = 0;
         			let imghtml	 = '<div class="carousel-item active">' 
@@ -1500,10 +1502,7 @@ rotate(
             		$('.carousel-inner').append(imghtml);
             		$('.carousel-indicators').append(indexhtml);
             	}
-
-                // 첫 번째 모달을 표시합니다.
-                $('#exampleModalToggle0').modal('show');
-                  
+  
                   
                 
             },
