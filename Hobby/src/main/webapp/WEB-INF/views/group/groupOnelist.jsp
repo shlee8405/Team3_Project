@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -184,11 +186,22 @@
 						</c:if>
 					
 						    <div class="col-9">
-						        <c:forEach var="user" items="${groupUsers}">
-						            <ul>
-						                <li>${user.u_nickname}</li>
-						            </ul>
-						        </c:forEach>
+						        <c:set var="selectedUserIdxList" value="" />
+
+								<c:forEach var="user" items="${groupUsers}">
+								    <c:if test="${user.g_idx eq g_idx}">
+								        <c:set var="selectedUserIdxList" value="${selectedUserIdxList},${user.u_idx}" />
+								    </c:if>
+								</c:forEach>
+								
+								<c:forEach var="user" items="${userlist}">
+								    <c:if test="${fn:contains(selectedUserIdxList, user.u_idx)}">
+								        <ul>
+								            <li>${user.u_nickname}</li>
+								        </ul>
+								    </c:if>
+								</c:forEach>
+
 						    </div>
 		   			 <c:choose>
 					    <c:when test="${isParticipated}">

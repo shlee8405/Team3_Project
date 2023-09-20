@@ -1410,6 +1410,9 @@ rotate(
                     if (popupClosedTime && new Date().getTime() - popupClosedTime < 60000) {
                         return; // 1시간 미만이므로 팝업을 다시 보여주지 않습니다.
                     }
+
+                	// 첫 번째 모달을 표시합니다.
+                    $('#exampleModalToggle'+i).modal('show');
                     
                     
                 }
@@ -1455,10 +1458,7 @@ rotate(
             		$('.carousel-inner').append(imghtml);
             		$('.carousel-indicators').append(indexhtml);
             	}
-
-            	// 첫 번째 모달을 표시합니다.
-                $('#exampleModalToggle0').modal('show');
-                  
+  
                   
                 
             },
