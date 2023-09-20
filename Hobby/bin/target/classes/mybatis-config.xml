@@ -25,11 +25,8 @@
 		<typeAlias type="com.team.camp.vo.ReviewVO" alias="crvo" />
 		<typeAlias type="com.team.group.vo.GroupCmtVO" alias="gcvo" />
 		<typeAlias type="com.team.user.vo.NaverVO" alias="naverVO" />
-<<<<<<< HEAD
 		<typeAlias type="com.team.popup.vo.PopupVO" alias="PopupVO" />
-=======
 		<typeAlias type="com.team.groupuser.vo.GroupuserVO" alias="guvo" />
->>>>>>> refs/heads/main
 	</typeAliases>
 	
 	<mappers>
@@ -40,10 +37,7 @@
 		<mapper resource="mappers/faq-mapper.xml" />
 		<mapper resource="mappers/mypage-mapper.xml" />
 		<mapper resource="mappers/camp-mapper.xml" />
-<<<<<<< HEAD
 		<mapper resource="mappers/popup-mapper.xml" />
-=======
 		<mapper resource="mappers/groupuser-mapper.xml" />
->>>>>>> refs/heads/main
 	</mappers>
 </configuration>

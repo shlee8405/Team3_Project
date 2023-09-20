@@ -46,6 +46,7 @@ public class GroupController {
 		// 전체 게시물의 수
 		int count = groupService.getTotalCount();
 		paging.setTotalRecord(count);
+		
 		// 전체 페이지의 수
 		if (paging.getTotalRecord() <= paging.getNumPerPage()) {
 			paging.setTotalPage(1);
@@ -72,11 +73,12 @@ public class GroupController {
 				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
 
 		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
-
+		
 		// 주의사항
 		if (paging.getEndBlock() > paging.getTotalPage()) {
 			paging.setEndBlock(paging.getTotalPage());
 		}
+		
 		List<GroupVO> glist = groupService.getAllGroups(paging.getOffset(), paging.getNumPerPage());
 		
 		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
@@ -86,12 +88,12 @@ public class GroupController {
 		        mv.addObject("user", Ulist.get(0));
 		    }
 		}
-
 		
 		mv.addObject("glist", glist);
 		mv.addObject("paging", paging);
         return mv;
     }
+	
 	@RequestMapping("/search")
 	public ModelAndView searchGroups(
 	        @RequestParam("title") String title, 
@@ -102,12 +104,43 @@ public class GroupController {
 	    gvo.setG_title(title);
 	    gvo.setG_cdo(city);
 	    gvo.setG_gugun(state);
+	    gvo.setLimit(paging.getNumPerPage());
+	 	gvo.setOffset(paging.getOffset());
 	    
 	    List<GroupVO> resultGroups = groupService.searchGroups(gvo);
+	    
+	        // 전체 게시물의 수
+	 		paging.setTotalRecord(resultGroups.size());
+	 		
+	 		// 전체 페이지의 수
+	 		if (paging.getTotalRecord() <= paging.getNumPerPage()) {
+	 			paging.setTotalPage(1);
+	 		} else {
+	 			paging.setTotalPage(paging.getTotalRecord() / paging.getNumPerPage());
+	 			if (paging.getTotalRecord() % paging.getNumPerPage() != 0) {
+	 				paging.setTotalPage(paging.getTotalPage() + 1);
+	 			}
+	 		}
+	 		
 
+	 		// offset = limit * (현재페이지-1);
+	 		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() - 1));
+	 		// 시작블록과 끝블록 구하기
+	 		paging.setBeginBlock(
+	 				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
+
+	 		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
+	 		
+	 		// 주의사항
+	 		if (paging.getEndBlock() > paging.getTotalPage()) {
+	 			paging.setEndBlock(paging.getTotalPage());
+	 		}
+	    
 	    ModelAndView modelAndView = new ModelAndView("group/groupSearchResult"); // Change to the new JSP page
+	    
+	    
 	    modelAndView.addObject("glist", resultGroups);
-
+	    modelAndView.addObject("paging", paging);
 	    return modelAndView;
 	}
 
