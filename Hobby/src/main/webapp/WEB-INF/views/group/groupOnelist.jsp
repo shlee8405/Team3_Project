@@ -177,12 +177,17 @@
 					<td class="allist">${gvo.g_maxPeople }</td>
 				</tr>
 				<tr>
-					<td>
+					<td  colspan="2">
+					<c:if test="${gvo.g_date <= now}">
+					<br>
+					    <p><b>이미 지난 모임입니다.</b></p>
+					</c:if>
+					
 						    <div class="col-3">
 						        <b>참가자:</b>  
 						    </div>
 						<c:if test="${isParticipated}">
-						    <p>당신은 이 그룹에 이미 참여하였습니다.</p>
+						    <p><b>당신은 이 그룹에 이미 참여하였습니다.</b></p>
 						</c:if>
 					
 						    <div class="col-9">
@@ -203,15 +208,30 @@
 								</c:forEach>
 
 						    </div>
-		   			 <c:choose>
-					    <c:when test="${isParticipated}">
-					        <button onclick="participateGroup(${gvo.g_idx})">참여 취소</button>
-					    </c:when>
-					    <c:otherwise>
-					        <button onclick="participateGroup(${gvo.g_idx})">참여</button>
-					    </c:otherwise>
-					</c:choose>
-	
+		   			<!-- 변수의 값 확인 -->
+					<p>gvo.g_date: ${gvo.g_date}</p>
+					<p>now: ${now}</p>
+					<p>gvo.g_maxPeople: ${gvo.g_maxPeople}</p>
+					<p>gvo.g_curPeople: ${gvo.g_curPeople}</p>
+
+						
+						<!-- 조건 비교를 위해 사용하기 -->
+						<c:choose>
+						    <c:when test="${isParticipated}">
+						        <!-- 사용자가 이미 참여한 상태 -->
+						        <c:if test="${gvo.g_date > now}">
+						            <button onclick="participateGroup(${gvo.g_idx})">참여 취소</button>
+						        </c:if>
+						    </c:when>
+						    <c:otherwise>
+						        <!-- 사용자가 참여하지 않은 상태 -->
+						        <c:if test="${gvo.g_date > now && gvo.g_maxPeople > gvo.g_curPeople}">
+						            <button onclick="participateGroup(${gvo.g_idx})">참여</button>
+						        </c:if>
+						    </c:otherwise>
+						</c:choose>
+
+
 		   			 </td>
 	   			</tr>
 			</table>
