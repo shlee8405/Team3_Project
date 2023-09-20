@@ -1,5 +1,6 @@
 package com.team.controller.admin;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team.mpimg.service.MpimgService;
+import com.team.mpimg.vo.MPIVO;
 import com.team.popup.service.PopupService;
 import com.team.popup.vo.PopupVO;
 import com.team.user.service.UserService;
@@ -23,6 +26,9 @@ public class PopupController {
 	
 	@Autowired
 	private PopupService popupService;
+	
+	@Autowired
+	private MpimgService mpimgService;
 
 	@RequestMapping("/Popup.do")/*팝업관리 이동*/
 	public ModelAndView Popup() {
@@ -34,9 +40,13 @@ public class PopupController {
 	
 	@RequestMapping("/Popup2.do")/*팝업창에 넣기*/
 	@ResponseBody
-	public ResponseEntity<List<PopupVO>> getPopupData() {
+	public ResponseEntity<List<Object>> getPopupData() {
 	    List<PopupVO> list = popupService.SelectPopup();
-	    return ResponseEntity.ok(list);
+	    List<MPIVO> imglist = mpimgService.getImages();
+	    List<Object> list2 = new ArrayList<Object>();
+	    list2.add(list);
+	    list2.add(imglist);
+	    return ResponseEntity.ok(list2);
 	}
 	
 	@RequestMapping("/PopupWrite.do")/*팝업 작성 이동*/

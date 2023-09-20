@@ -102,11 +102,11 @@ body, html {
 	z-index: 2;
 	margin-bottom: 2rem;
 }
-	<% int x = 0;%>
-	<% String background = "background"; %>
+<%-- 	<% int x = 1;%>
+	<% String background = "background4"; %>
 	<% if(x>0) { %>
 	.hero-image {
-	background-image : linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('resources/background/<%=background%>.jpg');
+	background-image : linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('resources/background/<%=background%>.jpeg');
 	height: 70%;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -123,7 +123,20 @@ body, html {
 	position: relative;
 }
 	<% }%>
-
+ --%>
+ 
+ .d-block{
+     position: relative;
+    	transform: translatey(-25%);
+    }
+ 
+#carouselExampleIndicators {
+	height: 70%;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	position: relative;
+}
 
 /* Place text in the middle of the image */
 .hero-text {
@@ -987,6 +1000,7 @@ rotate(
 											});
 								});
 			});
+
 	$(document)
 	.ready(
 	function() {
@@ -1324,12 +1338,29 @@ rotate(
 
 
 	<!-- 히어로 이미지 -->
-	<div class="hero-image">
+<!-- 	<div class="hero-image">
 		<div class="hero-text">
 			<p class="hero-title">별드림캠핑장</p>
 			<p class="hero-content">경기도 가평군 가평읍 개곡리 198-1</p>
 		</div>
-	</div>
+	</div> -->
+	<div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+	  <div class="carousel-indicators">
+		<!-- ajax으로 불러옴 -->
+	  </div>
+	  <div class="carousel-inner h-100">
+	  	<!-- ajax으로 불러옴 -->
+	  </div>
+	  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+	    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+	    <span class="visually-hidden">Previous</span>
+	  </button>
+	  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+	    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+	    <span class="visually-hidden">Next</span>
+	  </button>
+	</div>	
+	
 	
 	
 
@@ -1353,13 +1384,17 @@ rotate(
 	</div>
 	
 	<script type="text/javascript">
+
     $(document).ready(function() {
         // 팝업 데이터를 가져옵니다.
         $.ajax({
             url: "/Popup2.do",
             type: "GET",
             dataType: "json",
-            success: function(data) {
+            success: function(datas) {
+            	let data = datas[0];
+            	let imgdata = datas[1];
+            	console.log(datas)
                 for (let i = 0; i < data.length; i++) {
                     // 모달 HTML을 생성합니다.
                     let modalHtml = '<div class="modal fade" data-bs-backdrop="static" id="exampleModalToggle' + i + '" aria-hidden="true" aria-labelledby="exampleModalToggleLabel' + i + '" tabindex="-1" style="top: -100px; left: ' + (200 * i) + 'px;">' +
@@ -1391,14 +1426,59 @@ rotate(
                         return; // 1시간 미만이므로 팝업을 다시 보여주지 않습니다.
                     }
                 }
+            	if(imgdata.length>0) {
+	            	for (let i=0; i<imgdata.length; i++) {
+	            		let imghtml = '';
+	            		let indexhtml = '';
+	            		if(i==0) {
+	            			imghtml	 = '<div class="carousel-item active">' 
+	            		      			+ '<img src="resources/background/'+imgdata[i].mp_imgname+'" class="d-block w-100" alt="...">'
+	            		    			+'</div>';
+	            		    indexhtml = ' <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="'
+	            		    			+ i
+	            		    			+'" class="active" aria-current="true" aria-label="Slide '
+	            		    			+ (i+1) +'"></button>'
+	            		    console.log(imghtml);
+	            		} else {
+	            			imghtml = '<div class="carousel-item">'
+	            						+ '<img src="resources/background/'+imgdata[i].mp_imgname+'" class="d-block w-100" alt="...">'
+	            						+ '</div>';
+       						indexhtml = ' <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="'
+	        		    			+ i
+	        		    			+'"  aria-label="Slide '
+	        		    			+ (i+1) +'"></button>'
+	            						
+	            			console.log(imghtml);
+	            		}
+	            		
+	            		$('.carousel-inner').append(imghtml);
+	            		$('.carousel-indicators').append(indexhtml);
+	            	}
+            	}
+            	if(imgdata.length==0) {
+            		let i = 0;
+        			let imghtml	 = '<div class="carousel-item active">' 
+		      			+ '<img src="resources/background/background.jpeg" class="d-block w-100" alt="...">'
+		    			+'</div>';
+		    		let indexhtml = ' <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="'
+		    			+ i
+		    			+'" class="active" aria-current="true" aria-label="Slide '
+		    			+ (i+1) +'"></button>'
+            		$('.carousel-inner').append(imghtml);
+            		$('.carousel-indicators').append(indexhtml);
+            	}
 
                 // 첫 번째 모달을 표시합니다.
                 $('#exampleModalToggle0').modal('show');
+                  
+                  
+                
             },
             error: function() {
                 console.error("Failed to fetch data from /Popup2.do");
             }
         });
+
         
         $(document).on('click', 'input[type="checkbox"]', function() {
             console.log("Checkbox clicked:", $(this).attr('id'), "Checked:", $(this).prop('checked'));
