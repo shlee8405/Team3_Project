@@ -1432,6 +1432,19 @@ rotate(
             	let imgdata = datas[1];
             	console.log(datas)
                 for (let i = 0; i < data.length; i++) {
+					    // 유튜브 iframe이 pop_content에 포함되어 있는지 확인합니다.
+					    let content = data[i].pop_content;
+					    if (content.includes("www.youtube.com/embed")) {
+					        // iframe의 src 값을 가져와서 autoplay=1을 추가합니다.
+					        const parser = new DOMParser();
+					        const doc = parser.parseFromString(content, "text/html");
+					        const iframe = doc.querySelector("iframe");
+					        if (iframe) {
+					            const src = iframe.getAttribute("src");
+					            iframe.setAttribute("src", src + (src.includes("?") ? "&" : "?") + "autoplay=1&mute=1");
+					            content = doc.body.innerHTML;
+					        }
+					    }
                     // 모달 HTML을 생성합니다.
                     let modalHtml = '<div class="modal fade" data-bs-backdrop="static" id="exampleModalToggle' + i + '" aria-hidden="true" aria-labelledby="exampleModalToggleLabel' + i + '" tabindex="-1" style="top: -100px; left: ' + (200 * i) + 'px;">' +
                         '<div class="modal-dialog modal-dialog-centered">' +
@@ -1440,7 +1453,7 @@ rotate(
                         '<h1 class="modal-title fs-5" id="exampleModalToggleLabel' + i + '">' + data[i].pop_title + '</h1>' +
                         '</div>' +
                         '<div class="modal-body">' +
-                        data[i].pop_content +
+                        content +
                         '</div>' +
                         '<div class="modal-footer">' +
                         '<div class="form-check">' +
@@ -1460,6 +1473,7 @@ rotate(
 
                 	// 첫 번째 모달을 표시합니다.
                     $('#exampleModalToggle'+i).modal('show');
+                	console.log(content);
                     
                     
                 }
