@@ -331,7 +331,7 @@ body {
 				
 					
 					<%
-					if (u_idx != null && !u_idx.isEmpty() && adminChecker==null) {
+					if (u_idx != null && !u_idx.isEmpty() ) {
 					%>
 					<li><a href="/myPagemain.do">/마이페이지.do</a></li>
 					<li><a href="/cusSer.do">/고객센터.do</a></li>

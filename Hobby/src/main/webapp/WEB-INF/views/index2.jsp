@@ -12,15 +12,41 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/resources/css/login.css">
+    <link rel="stylesheet" href="/resources/css/bonfire.css">
 
 <style>
 
-@import url('https://fonts.googleapis.com/css2?family=Alfa+Slab+One&display=swap');
 
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 60px;
+  height:60px;
+  text-align: center;
+  text-decoration: none;
+  margin: 10px 10px;
+}
+.fa:hover {
+    opacity: 0.7;
+}
+.fa-facebook {
+  background: #3B5998;
+  color: white;
+}
+
+.fa-twitter {
+  background: #55ACEE;
+  color: white;
+}
+
+.fa-google {
+  background: #dd4b39;
+  color: white;
+}
 
 .waviy {
   position: relative;
@@ -94,7 +120,15 @@ body, html {
 	margin: 0;
 	height: 100%;
 }
-
+.eublink {
+animation: blinker 1.5s linear infinite;
+}
+@keyframes blinker {
+50%{
+	color:rgba(255, 106, 98, 0.98);
+	font-size:100%;
+}
+}
 .section {
 	width: 100%;
 	position: relative;
@@ -124,11 +158,12 @@ body, html {
 }
 	<% }%>
  --%>
- 
- .d-block{
-     position: relative;
-    	transform: translatey(-25%);
-    }
+ .d-block {
+   object-fit:cover;
+	width:100%;
+	transform: translatey(-40%)
+  }
+
  
 #carouselExampleIndicators {
 	height: 70%;
@@ -206,7 +241,12 @@ body, html {
 
 .s2-text-content {
 	font-family: TAEBAEK;
-	font-size: 1.0em;
+	font-size: 1.5em;
+	/* white-space: collapse balance; */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	width:auto;
+	margin:auto;
 }
 
 .section.two {
@@ -215,9 +255,11 @@ body, html {
 }
 
 .section.three {
+	height: 600px;
+	padding: 0px 1vw;
+	background: none;
+	margin-left: 0;
 	display: inline-block;
-	height: auto;
-	background-color: white;
 	padding: 0px 1vw;
 }
 
@@ -232,11 +274,13 @@ body, html {
 	font-size: 1.5em;
 	overflow: hidden;
 	text-overflow: ellipsis;
+	text-align: end;
 }
 
 .section.four {
 	display: inline-block;
 	background-color: rgba(204, 211, 207, 0.062);
+	height:auto;
 }
 
 .s4-text-title {
@@ -251,10 +295,13 @@ body, html {
 }
 
 .s4-text-content {
-	font-family: TAEBAEK;
+		font-family: TAEBAEK;
 	font-size: 1.5em;
+	/* white-space: collapse balance; */
 	overflow: hidden;
 	text-overflow: ellipsis;
+	width:auto;
+	margin:auto;
 }
 
 .section.five {
@@ -1252,7 +1299,7 @@ rotate(
 				
 					
 					<%
-					if (u_idx != null && !u_idx.isEmpty() && adminChecker==null) {
+					if (u_idx != null && !u_idx.isEmpty()) {
 					%>
 					<li><a href="/myPagemain.do">/마이페이지.do</a></li>
 					<li><a href="/cusSer.do">/고객센터.do</a></li>
@@ -1361,15 +1408,15 @@ rotate(
 				<p class="s1-text">/CAMP.do</p>
 				
 			</div>
-			<div class="s1-text-content">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
-				체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을
-				제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는
-				형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에
-				정당한 보상을 청구할 수 있다. 대법원에 대법관을 둔다. 다만, 법률이 정하는 바에 의하여 대법관이 아닌 법관을 둘 수
-				있다. 여자의 근로는 특별한 보호를 받으며, 고용·임금 및 근로조건에 있어서 부당한 차별을 받지 아니한다. 국무총리 또는
-				행정각부의 장은 소관사무에 관하여 법률이나 대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다.</div>
+			<div class="s1-text-content ps-5"><span style="font-size: 2rem;"><b>안녕하세요!</b></span><br>
+				<span style="font-family:MBCM;">/CAMP.do</span>는 한국 전역의 환상적인 캠핑 지역과 열정적인 캠핑 애호가들의 다채로운 커뮤니티를 제공하는 독특한 플랫폼입니다.<br>
+				<br><span style="font-weight:bold;">우리가 제공하는 것:</span><br>
+				<i>탐험, 발견, 연결</i><br><br>
+				🌲 <span style="font-weight:bold;">최고의 캠핑 지역:</span> 고요한 호수변 휴식처부터 웅장한 산악 은신처까지, 우리가 엄선한 캠핑 명소들은 자연의 최고봉에서의 잊지 못할 경험을 약속합니다.<br>
+				🏕️ <span style="font-weight:bold;">온라인 모임:</span> 우리 사용자 친화적인 온라인 모임 플랫폼을 통해 캠핑 애호가들과 연결하고 여행을 계획하며 경험을 공유하세요. 숙련된 전문가든, 처음 캠핑을 시도하는 분이든, 캠핑을 사랑하는 커뮤니티를 찾을 수 있습니다.<br>
+				📅 <span style="font-weight:bold;">주최된 캠핑 만남:</span> 커뮤니티 회원들이 주최하는 정기적인 캠핑 만남에 참여하거나, 직접 이벤트를 만들어보세요. 캠프 파이어 주변에서 새로운 우정을 형성하고 평생 간직할 추억을 만드세요.</div>
 		</div>
-		
+		<div class="row" style="height:10vh;"></div>
 	</div>
 	
 	<script type="text/javascript">
@@ -1422,7 +1469,7 @@ rotate(
 	            		let indexhtml = '';
 	            		if(i==0) {
 	            			imghtml	 = '<div class="carousel-item active">' 
-	            		      			+ '<img src="resources/background/'+imgdata[i].mp_imgname+'" class="d-block w-100" alt="...">'
+	            		      			+ '<img src="resources/background/'+imgdata[i].mp_imgname+'" class="d-block" alt="...">'
 	            		    			+'</div>';
 	            		    indexhtml = ' <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="'
 	            		    			+ i
@@ -1431,7 +1478,7 @@ rotate(
 	            		    console.log(imghtml);
 	            		} else {
 	            			imghtml = '<div class="carousel-item">'
-	            						+ '<img src="resources/background/'+imgdata[i].mp_imgname+'" class="d-block w-100" alt="...">'
+	            						+ '<img src="resources/background/'+imgdata[i].mp_imgname+'" class="d-block" alt="...">'
 	            						+ '</div>';
        						indexhtml = ' <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="'
 	        		    			+ i
@@ -1517,6 +1564,7 @@ rotate(
 	<div class="section two  w-100 ">
 		<div class="row"
 			style="margin-left: 15vw; margin-right: 15vw; top: 2%; z-index: 9;">
+			<div class="row" style="height:10vh;"></div>
 			<!-- <div class="s2-text-title">/요즘 핫한 곳으로.go!</div> -->
 			<div class="s2-text-title waviy mt-3 mb-5" onclick="window.location.href='/campMain.do'">
 				<span id="waviytitle" style="--i:1">/</span>
@@ -1533,11 +1581,13 @@ rotate(
 				<span id="waviytitle" style="--i:11">o</span>
 				<span id="waviytitle" style="--i:12">!</span>
 			</div>
-			<div class="s1-text-content mt-3 mb-5">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
-				체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을
-				제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는
-				형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에
-				정당한 보상을 청구할 수 있다.</div>
+			<div class="s2-text-content mt-3 mb-5">
+			
+				 국내 전역에서 많은 캠핑 애호가들에게 <b><i>사랑받는</i></b> 명소들을 소개합니다!📊 <br>
+				 이곳에서는 <b><i>자연의 아름다움과 평온함</i></b>이 어우러진 탁월한 캠핑 지역들을 만나보세요.<br>
+				 모든 캠퍼들이 특별한 순간을 만들 수 있도록 <b><i>정성을 다한 추천</i></b> 명소들을 선별했습니다.<br>
+				 이곳에서 더 많은 <b><i>자연을 느껴보세요!</i></b> 🎆🎊✨
+			</div>
 			<div id="image_best3_list" class="row mb-5">
 				
 			</div>
@@ -1560,39 +1610,121 @@ rotate(
 					style="width: 500px; object-fit: cover; position: relative; margin-left: 3vw; margin-top: 16vh">
 			</div>
  -->
+ 
+ 				<div class="row" style="height:10vh;"></div>
 		</div>
 	</div>
 	<script>
 	
 	</script>
-
+	
 	<!-- 세번째 색션 -->
 	<div class="section three">
 		<div class="row" style="left: 10%; right: 10%; top: 5%; z-index: 9;">
-			<div class="s3-text-title">/CAMPing 의 이유.do</div>
-			<div class="s3-text-content">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
-				체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을
-				제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는
-				형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에
-				정당한 보상을 청구할 수 있다. 대법원에 대법관을 둔다. 다만, 법률이 정하는 바에 의하여 대법관이 아닌 법관을 둘 수
-				있다. 여자의 근로는 특별한 보호를 받으며, 고용·임금 및 근로조건에 있어서 부당한 차별을 받지 아니한다. 국무총리 또는
-				행정각부의 장은 소관사무에 관하여 법률이나 대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다.</div>
+			<div class="col">
+				<div class="fire-on">
+				    <div class="switch-wrap">
+						<div id="switch">
+							<div id="circle"></div>
+						</div>
+				    </div>
+					
+					
+					<div class="section-center">
+						<div class="moon">
+							<div></div>
+							<div></div>
+							<div></div>
+						</div>
+						<div class="shooting-star"></div>
+						<div class="shooting-star-2"></div>
+						<div class="star"></div>
+						<div class="star snd"></div>
+						<div class="star trd"></div>
+						<div class="star fth"></div>
+						<div class="star fith"></div>
+						<div class="circle"></div>
+						<div class="wood-circle"></div>
+						<div class="wood"></div>
+						<div class="tree-1"></div>
+						<div class="tree-2"></div>
+						<div class="fire">
+							<span></span>
+							<span></span>
+							<span></span>
+						</div>
+						<div class="smoke">
+							<span class="s-0"></span>
+							<span class="s-1"></span>
+							<span class="s-2"></span>
+							<span class="s-3"></span>
+							<span class="s-4"></span>
+							<span class="s-5"></span>
+							<span class="s-6"></span>
+							<span class="s-7"></span>
+							<span class="s-8"></span>
+							<span class="s-9"></span>
+						</div>
+					</div>
+			</div>
+			
+			</div>
+			<div class="col">
+				<div class="s3-text-title">/CAMPing 의 <span class="eublink">이유</span>.do</div>
+				<div class="s3-text-content pe-5">
+				
+				캠핑은 도시의 소음에서 벗어나 자연 속에서 신선한 공기를 마시며 <b><i>몸과 마음을 힐링</i></b>할 수 있는 최고의 방법입니다!<br> 
+				텐트 속에서 자연의 소리를 들으며, 별빛 아래에서의 잠은 일상의 <b><i>스트레스를 풀어줍니다</i></b>. <br>
+				또한 가족과 친구들과 함께하는 캠프 파이어는 <b><i>소중한 추억</i></b>을 만들어줍니다. <br>
+				캠핑은 자연과 가까워지는 경험이자, <b><i>새로운 모험</i></b>을 시작하는 기회입니다.
+				
+				</div>
+			
+			</div>
 		</div>
+		<div class="row" style="height:10vh;"></div>
 	</div>
+	<script>
+	$(document).ready(function() {
+		$("body").addClass("fire-off");
+		$("#switch").addClass("switched");
+	});
+	$("#switch").on('click', function () {
+		if ($("body").hasClass("fire-off")) {
+			$("body").removeClass("fire-off");
+			$("#switch").removeClass("switched");
+			$("body").addClass("dampen");
+		}
+		else {
+			$("body").addClass("fire-off");
+			$("#switch").addClass("switched");
+			$("body").removeClass("dampen");
+		}
+	});
+	</script>
 
 	<!-- 네번째 색션 -->
 	<div class="section four">
+		<div class="row" style="height:5vh;"></div>
 		<div class="row"
 			style="margin-left: 15vw; margin-right: 15vw; top: 2%; z-index: 9;">
 			<div class="s4-text-title mt-4 mb-5" onclick="window.location.href='/groupList.do'">/캠핑, together.d🌏!</div>
-			<div class="s4-text-content mb-5">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
-				체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을
-				제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는
-				형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에
-				정당한 보상을 청구할 수 있다. 대법원에 대법관을 둔다. 다만, 법률이 정하는 바에 의하여 대법관이 아닌 법관을 둘 수
-				있다. 여자의 근로는 특별한 보호를 받으며, 고용·임금 및 근로조건에 있어서 부당한 차별을 받지 아니한다. 국무총리 또는
-				행정각부의 장은 소관사무에 관하여 법률이나 대통령령의 위임 또는 직권으로 총리령 또는 부령을 발할 수 있다.</div>
+			<div class="s4-text-content mb-5">
+
+			🤠🤓🤭 함께 캠핑을 즐기고 싶은 이들을 위한 만남의 장을 마련했습니다.
+			<b><i>자연을 함께 누리며</i></b> 새로운 우정을 만들어보세요. <br>
+			😋🤩😂 캠핑 파트너를 찾는 첫걸음을 내딛어보세요! 
+			캠핑을 좋아하는 사람들과 함께하는 <b><i>특별한 순간</i></b>들이 기다립니다. <br>
+
+			</div>
+			
+						
 		</div>
+		<div class="row" style="height:50vh; width:60vw; margin:auto;">
+		<iframe class="mb-5" style="height:100%; width:100%;" width="300" height="315" 
+		src="https://www.youtube.com/embed/rOga7uYptGA?&autoplay=1&mute=1" title="YouTube video player" frameborder="0" allow='autoplay' allowfullscreen></iframe>
+		</div>
+		<div class="row" style="height:10vh;"></div>
 	</div>
 
 	<!-- 푸터 색션 -->
@@ -1600,11 +1732,28 @@ rotate(
 		<div class="row"
 			style="margin-left: 15vw; margin-right: 15vw; top: 2%; z-index: 9;">
 			<div class="s5-text-title">/푸터.do</div>
-			<div class="s5-text-content">국회의원은 현행범인인 경우를 제외하고는 회기중 국회의 동의없이
-				체포 또는 구금되지 아니한다. 중앙선거관리위원회는 법령의 범위안에서 선거관리·국민투표관리 또는 정당사무에 관한 규칙을
-				제정할 수 있으며, 법률에 저촉되지 아니하는 범위안에서 내부규율에 관한 규칙을 제정할 수 있다. 형사피의자 또는
-				형사피고인으로서 구금되었던 자가 법률이 정하는 불기소처분을 받거나 무죄판결을 받은 때에는 법률이 정하는 바에 의하여 국가에
-				정당한 보상을 청구할 수 있다.</div>
+			<div class="s5-text-content">
+				<div class="row">
+					<div class="col">
+						© 2023 캠핑 모임 & 명소 (Camping Meetups & Spots) /camp.do. 판권 소유. <br><br> 
+		
+						개인 정보 보호 정책 (Privacy Policy) | 이용 약관 (Terms of Service) <br><br>
+						
+						문의하기 (Contact Us) | 자주 묻는 질문 (FAQ) <br><br>
+						
+						주소: [주소 입력]<br>
+						전화번호: [전화번호 입력]<br>
+						이메일: [이메일 주소 입력]<br>
+					</div>
+					<div class="col"></div>
+					
+					<div class="col d-flex justify-content-end">
+								<a href="#" class="fa fa-facebook"></a>
+								<a href="#" class="fa fa-twitter"></a>
+								<a href="#" class="fa fa-google"></a>
+					</div>
+				</div>	
+			</div>
 		</div>
 	</div>
 
