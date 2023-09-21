@@ -2,6 +2,8 @@ package com.team.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -115,7 +117,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/adminMainPageModifier.do")
-	public ModelAndView goAdminMainPageModifier() {
+	public ModelAndView goAdminMainPageModifier(HttpSession session) {
 		ModelAndView mv = new ModelAndView("admin/mainpagemodifier");
 		List<MPIVO> list = mpimgService.getImages();
 		mv.addObject("list", list);

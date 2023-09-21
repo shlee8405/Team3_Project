@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 이미지 설정</title>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <style type="text/css">
 
 main {
@@ -130,6 +130,28 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 	function go_adminMainPageModifier() {
 		location.href = "/adminMainPageModifier.do";
 	}
+	
+    $(document).ready(()=>{
+    	var actionControl = "${adminActionControl}";
+    	if(actionControl == "hide") {
+    		alert("성공적으로 숨기셨습니다.");
+    		actionControl = "";
+    		<% session.removeAttribute("adminActionControl"); %>
+    	} else if (actionControl == "update") {
+    		alert("성공적으로 수정하셨습니다.");
+    		<% session.removeAttribute("adminActionControl"); %>
+    	} else if (actionControl == "delete") {
+    		alert("성공적으로 삭제하셨습니다.");
+    		<% session.removeAttribute("adminActionControl"); %>
+    	} else if (actionControl == "error") {
+    		alert("뭔가 잘 못 되었습니다. 개발자에게 문의하세요.");
+    		<% session.removeAttribute("adminActionControl"); %>
+    	} else if (actionControl == "unhide") {
+    		alert("보이기로 바꾸셨습니다.");
+    		<% session.removeAttribute("adminActionControl"); %>
+    	}
+    })
+	
 </script>
 </head>
 
@@ -185,16 +207,6 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 					   			</div>
 					   			<div class="col w-25"></div>
 					   		</div>
-					   		<div class="row  ms-5 mt-1" >
-					   			<div class="col w-25"></div>
-					   			<div class="col d-flex justify-content-end border w-25">
-					   				<label> 기존 이미지 </label>
-					   			</div>
-					   			<div class="col d-flex justify-content-start border w-25">
-					   				<img class='img' src='resources/images/background.jpg'alt='이미지가 없습니다' width='100%' height='100%' style='width: 50%; object-fit: cover; position: relative; border-radius:0.5rem;'>
-					   			</div>
-					   			<div class="col w-25"></div>
-					   		</div>
 					   		<div class="row  ms-5 mt-1 mb-5" >
 					   			<div class="col w-25"></div>
 					   			<div class="col d-flex justify-content-end border w-25">
@@ -232,30 +244,39 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 								</div>	
 								<c:forEach var="k" items="${list}" >
 									<div class="row ms-5 mt-1 mb-1">
-										<div class="col d-flex justify-content-center">
-											<h1 class="h1title-sub">${k.mp_idx}</h1>
+										<div class="card mb-3">
+										  <img src="resources/background/${k.mp_imgname}" class="card-img-top" alt="..." style="width:100%; height:30vh; object-fit:cover;">
+										  <div class="card-body">
+										    <h5 class="card-title">${k.mp_title}</h5>
+										    <p class="card-text">${k.mp_desc}</p>
+										    <div class="row justify-content-end">
+										    	<div class="col" >
+										    		<p class="card-text"><small class="text-muted">업로드 날짜: ${k.mp_date}</small></p>
+										    	</div>
+										    	<div class="col d-flex justify-content-end">
+										    		<button class="btn btn-danger" onclick="deleteImage(${k.mp_idx},'${k.mp_imgname}')">삭제</button>
+										    	</div>
+										    </div>
+										  </div>
 										</div>
-									</div>	
-									<div class="row ms-5 mt-1 mb-1">
-										<div class="col d-flex justify-content-center">
-											<h1 class="h1title-sub">${k.mp_title}</h1>
-										</div>
-									</div>
-									<div class="row ms-5 mt-1 mb-1">
-										<div class="col d-flex justify-content-center">
-											<h1 class="h1title-sub">${k.mp_desc}</h1>
-										</div>
-									</div>		
-									<div class="row ms-5 mt-1 mb-1">
-										<div class="col d-flex justify-content-center">
-											<img src='resources/background/${k.mp_imgname}' alt="img1" width="100%" height="100%" style="width:100px; object-fit:cover;">
-										</div>
+
 									</div>	
 								</c:forEach>
 							
 							</c:otherwise>
 						</c:choose>
-		        
+		        	<script>
+		        		function deleteImage(idx, imgname) {
+		        			const response = confirm("정말로 삭제 하시겠습니까?");
+		        			if(response){
+			        			location.href="/deleteMPImage.do?idx="+idx+"&imgname="+imgname;
+		        			}
+		        			else {
+		        				alert("취소하셨습니다.");
+		        				refresh();
+		        			}
+		        		}
+		        	</script>
 		        </div>
 			</div>
 			
