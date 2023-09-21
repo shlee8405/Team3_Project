@@ -163,7 +163,6 @@
 					<th class="allist" bgcolor="#99ccff">모임소개</th>
 					<td class="allist">${gvo.g_intro }</td>
 				</tr>
-				
 				<tr align="center">
 				    <th class="allist" bgcolor="#99ccff">캠핑 날짜</th>
 				    <td class="allist">${gvo.g_date}</td>
