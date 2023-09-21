@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.internal.LinkedTreeMap;
+import com.team.counter.service.LogincounterService;
 import com.team.group.service.GroupService;
 import com.team.qna.service.QnaService;
 import com.team.report.service.ReportService;
@@ -41,6 +42,9 @@ public class UserController {
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
+	private LogincounterService logincounterService;
 	
 	@RequestMapping("/") 
 	public ModelAndView goHOME() {
@@ -103,7 +107,6 @@ public class UserController {
         ModelAndView mv = new ModelAndView(url);
         // 아이디 DB에 존재하는지 확인 
         int res = userService.getUserCount(uvo.getU_id());
-        System.out.println(url);
         // 없으면 종료
         if(res == 0) {
         	request.getSession().getServletContext().setAttribute("loginChk", "invalid");
@@ -127,6 +130,12 @@ public class UserController {
 					request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
 					request.getSession().getServletContext().setAttribute("adminChecker", dbuvo.getU_status());
 					mv.setViewName("redirect:"+url);
+					//하나의 세션에 로그인 되있는지 확인. 안했으면, 첫 로그인시 카운트++;
+					 Object logincounter = request.getSession().getServletContext().getAttribute("loginCounter");
+					 if(logincounter==null) {
+						 int reslogin = logincounterService.loginCount();
+						 if(reslogin>0) request.getSession().getServletContext().setAttribute("loginCounter", "true");
+					 }
 					return mv;
 				} else if (dbuvo.getU_ban().equals("1")) {
 				//밴 
@@ -138,6 +147,12 @@ public class UserController {
 				//일반회원
 					mv.setViewName("redirect:"+url);
 					request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
+					//하나의 세션에 로그인 되있는지 확인. 안했으면, 첫 로그인시 카운트++;
+					 Object logincounter = request.getSession().getServletContext().getAttribute("loginCounter");
+					 if(logincounter==null) {
+						 int reslogin = logincounterService.loginCount();
+						 if(reslogin>0) request.getSession().getServletContext().setAttribute("loginCounter", "true");
+					 }
 					return mv;
 				}
 			 
@@ -220,6 +235,12 @@ public class UserController {
 			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
 			 System.out.println("kakaoLogin.do insert session Idx success");
 			 System.out.println("redirect:"+kakaovo.getUrl());
+			//하나의 세션에 로그인 되있는지 확인. 안했으면, 첫 로그인시 카운트++;
+			 Object logincounter = request.getSession().getServletContext().getAttribute("loginCounter");
+			 if(logincounter==null) {
+				 int res = logincounterService.loginCount();
+				 if(res>0) request.getSession().getServletContext().setAttribute("loginCounter", "true");
+			 }
 			 return new ModelAndView("redirect:"+kakaovo.getUrl());
 		 } else {
 			 UserVO uvo = new UserVO();
@@ -233,6 +254,12 @@ public class UserController {
 			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
 			 System.out.println("kakaoLogin.do insert session Idx success");
 			 System.out.println("redirect:"+kakaovo.getUrl());
+			//하나의 세션에 로그인 되있는지 확인. 안했으면, 첫 로그인시 카운트++;
+			 Object logincounter = request.getSession().getServletContext().getAttribute("loginCounter");
+			 if(logincounter==null) {
+				 int res = logincounterService.loginCount();
+				 if(res>0) request.getSession().getServletContext().setAttribute("loginCounter", "true");
+			 }
 			 return new ModelAndView("redirect:"+kakaovo.getUrl());
 		 }
 	 }
@@ -275,8 +302,15 @@ public class UserController {
 			 uvo.setU_name(name);
 			 int insertResult = userService.getUserInsertKakao(uvo);
 			 UserVO dbuvo = userService.getUserVoWithId(id);
+			 //하나의 세션에 로그인 되있는지 확인. 안했으면, 첫 로그인시 카운트++;
+			 Object logincounter = request.getSession().getServletContext().getAttribute("loginCounter");
+			 if(logincounter==null) {
+				 int res = logincounterService.loginCount();
+				 if(res>0) request.getSession().getServletContext().setAttribute("loginCounter", "true");
+			 }
 			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
 			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
+			 
 			 return new ModelAndView("redirect:/home.do");
 		 }
 

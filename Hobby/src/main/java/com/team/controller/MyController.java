@@ -1,26 +1,23 @@
 package com.team.controller;
 
-import java.io.File;
 import java.util.List;
-import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team.counter.service.LogincounterService;
+import com.team.counter.service.ViewcounterService;
 import com.team.faq.service.FaqService;
 import com.team.faq.vo.FaqVO;
 import com.team.group.service.GroupService;
-import com.team.group.vo.GroupVO;
 import com.team.qna.service.QnaService;
 import com.team.qna.vo.QnaVO;
 import com.team.report.service.ReportService;
@@ -47,11 +44,29 @@ public class MyController {
 	@Autowired
 	private FaqService faqService;
 
+	@Autowired 
+	private LogincounterService logincounterService;
+	
+	@Autowired
+	private ViewcounterService viewcounterService;
 	// 홈 control
 
-	@GetMapping("/home.do")
-	public ModelAndView goHome() /* �솃�쑝濡� 媛�湲�. �쁽�옱 index 2濡� �릺�뼱�엳�쓬 */ {
+	@GetMapping("/")
+	public ModelAndView rootRedirect() {
+		ModelAndView mv = new ModelAndView("redirect:/home.do");
+		return mv;
+	}
+	
+	@RequestMapping("/home.do")
+	public ModelAndView goHome(HttpSession session) /* �솃�쑝濡� 媛�湲�. �쁽�옱 index 2濡� �릺�뼱�엳�쓬 */ {
 		ModelAndView mv = new ModelAndView("index2");
+		System.out.println("current viewCounter is : " + session.getServletContext().getAttribute("viewCounter"));
+		Object viewcounter = session.getServletContext().getAttribute("viewCounter");
+		// viewcounter가 생성/존재하지 않으면 viewcount 추가
+		if(viewcounter==null) {
+			int res = viewcounterService.viewCount();
+			if(res>0) session.getServletContext().setAttribute("viewCounter", "true");
+		}
 		return mv;
 	}
 

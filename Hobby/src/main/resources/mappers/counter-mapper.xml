@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="counter">
+	
+	<select id="getViewCount" resultType="vcvo">
+		SELECT * FROM VIEWCOUNT WHERE vc_idx = 1
+	</select>
+	
+	<insert id="viewCount">
+		INSERT INTO VIEWCOUNT (vc_date, vc_count)
+		VALUES (CURDATE(), 1)
+		ON DUPLICATE KEY UPDATE vc_count = vc_count + 1
+	</insert>
+	
+	
+	<select id="getLoginCount" resultType="lcvo">
+		SELECT * FROM LOGINCOUNT WHERE lc_idx = 1
+	</select>
+	
+	<insert id="loginCount">
+		INSERT INTO LOGINCOUNT (lc_date, lc_count)
+		VALUES (CURDATE(), 1)
+		ON DUPLICATE KEY UPDATE lc_count = lc_count + 1
+	</insert>
+	
+</mapper>
+
+
+
+
+
+
+
+

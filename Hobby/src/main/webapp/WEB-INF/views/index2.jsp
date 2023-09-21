@@ -125,7 +125,7 @@ animation: blinker 1.5s linear infinite;
 }
 @keyframes blinker {
 50%{
-	color:rgba(255, 106, 98, 0.98);
+	color:rgba(255, 106, 98, 0.28);
 	font-size:100%;
 }
 }
@@ -136,28 +136,6 @@ animation: blinker 1.5s linear infinite;
 	z-index: 2;
 	margin-bottom: 2rem;
 }
-<%-- 	<% int x = 1;%>
-	<% String background = "background4"; %>
-	<% if(x>0) { %>
-	.hero-image {
-	background-image : linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.2)), url('resources/background/<%=background%>.jpeg');
-	height: 70%;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	position: relative;
-}
-	<% } else if (x<=0) { %>
-	.hero-image{
-	background-image: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.2)), url("https://images.pexels.com/photos/1371798/pexels-photo-1371798.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1");
-			height: 70%;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	position: relative;
-}
-	<% }%>
- --%>
  .d-block {
    object-fit:cover;
 	width:100%;
@@ -1361,7 +1339,7 @@ rotate(
 			}
 
 			var w = $(window).scrollTop();
-			var f = "translateX(" + w * 0.20 + "px)";
+			var f = "translateX(" + w * 0.60 + "px)";
 			console.log(w);
 			$('.s1-text').css({
 				transform : f
@@ -1684,7 +1662,8 @@ rotate(
 			
 			</div>
 			<div class="col">
-				<div class="s3-text-title">/CAMPing 의 <span class="eublink">이유</span>.do</div>
+				<div class="s3-text-title"><span style="color:white!important;"> ﾟ☁︎｡ ⋆｡ ﾟ⋆ ☾⋆⁺₊ ⋆</span><br>/CAMPing 의 <span class="eublink">이유</span>.do<br>
+				<span style="color:white!important;">🏕🏔🏞🏖🏕🏔🏖</span></div>
 				<div class="s3-text-content pe-5">
 				
 				캠핑은 도시의 소음에서 벗어나 자연 속에서 신선한 공기를 마시며 <b><i>몸과 마음을 힐링</i></b>할 수 있는 최고의 방법입니다!<br> 

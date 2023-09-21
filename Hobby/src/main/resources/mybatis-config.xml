@@ -28,6 +28,8 @@
 		<typeAlias type="com.team.popup.vo.PopupVO" alias="PopupVO" />
 		<typeAlias type="com.team.groupuser.vo.GroupuserVO" alias="guvo" />
 		<typeAlias type="com.team.mpimg.vo.MPIVO" alias="mpivo" />
+		<typeAlias type="com.team.counter.vo.VCVO" alias="vcvo" />
+		<typeAlias type="com.team.counter.vo.LCVO" alias="lcvo" />
 	</typeAliases>
 	
 	<mappers>
@@ -41,5 +43,6 @@
 		<mapper resource="mappers/popup-mapper.xml" />
 		<mapper resource="mappers/groupuser-mapper.xml" />
 		<mapper resource="mappers/mpimg-mapper.xml" />
+		<mapper resource="mappers/counter-mapper.xml" />
 	</mappers>
 </configuration>
