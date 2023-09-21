@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 대시보드</title>
-
+<script src="https://kit.fontawesome.com/55da9ebea0.js" crossorigin="anonymous"></script>
 <style type="text/css">
 
 main {
@@ -75,6 +75,12 @@ color:#ffffff!important;
 }
 .myBox2 {
 	background-color: rgba(180, 188, 136, 0.24); 
+	box-shadow: 0px 5px 2px rgba(0,0,0,0.25);
+	border-radius:10px;
+	padding:1rem;
+}
+.myBox3 {
+	background-color: rgba(200, 180, 146, 0.24); 
 	box-shadow: 0px 5px 2px rgba(0,0,0,0.25);
 	border-radius:10px;
 	padding:1rem;
@@ -196,13 +202,97 @@ canvas#myChart {
 						 	<div class="boxtitle">페이지 트래픽</div>
 						 	<canvas id="viewcountchart"></canvas>
 						 </div>
-		       			 <div class="col myBox2 ms-4">
+		       			 <div class="col myBox2 ms-4 me-4">
 		       			 	<div class="boxtitle">로그인 트래픽</div>
 		       			 	<canvas id="logincountchart"></canvas>
 		       			 </div>
-		       			 <div class="col"></div>
-		       			 <div class="col"></div>
-
+		       			 <div class="col myBox3 ms-4">
+		       			 
+		       			 	<div class="row p-4 d-flex flex-row pb-0 pt-2">
+								<div class="col m-0 p-0">
+									<i class="fa-regular fa-circle-user fa-lg"></i>
+								</div>
+								<!-- check if exists today user sign up -->
+								<c:choose>
+									<c:when test="${userCount!=0}">
+										<div class="col-10">
+											오늘 총 <b>${userCount}</b>유저가 회원 가입 했습니다!! 😋
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="col-10">
+											오늘은 회원 가입을 한 유저가 없습니다 😪
+										</div>
+									</c:otherwise>
+								</c:choose>
+								<div class="col">
+								</div>
+		       			 	</div><hr>
+		       			 	
+		       			 	<div class="row p-4 d-flex flex-row pb-0 pt-2">
+		       			 		<div class="col m-0 p-0">
+									<i class="fa-solid fa-people-group"></i>
+								</div>
+								<!-- check if exists today user sign up -->
+								<c:choose>
+									<c:when test="${groupCount!=0}">
+										<div class="col-10">
+											오늘 총 <b>${groupCount}</b>모임이 생성 되었습니다! 😆		
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="col-10">
+											오늘은 생성된 모임은 없습니다 😪
+										</div>
+									</c:otherwise>
+								</c:choose>
+								<div class="col">
+								</div>
+		       			 	</div><hr>
+		       			 	
+		       			 	<div class="row p-4 d-flex flex-row pb-0 pt-2">
+		       			 		<div class="col m-0 p-0">
+									<i class="fa-solid fa-eye"></i>
+								</div>
+								<!-- check if exists today user sign up -->
+								<c:choose>
+									<c:when test="${viewCount!=0}">
+										<div class="col-10">
+											오늘의 누적 조희수는 <b>${viewCount}</b>이고! 😋
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="col-10">
+											오늘은 조회수가 없고... 😲								
+										</div>
+									</c:otherwise>
+								</c:choose>
+								<div class="col">
+								</div>
+		       			 	</div><hr>
+		       			 	
+		       			 	<div class="row p-4 d-flex flex-row pb-0 pt-2">
+		       			 		<div class="col m-0 p-0">
+									<i class="fa-solid fa-arrow-right-to-bracket"></i>
+								</div>
+								<!-- check if exists today user sign up -->
+								<c:choose>
+									<c:when test="${loginCount!=0}">
+										<div class="col-10">
+											총 <b>${loginCount}</b>유저가 로그인 했습니다!! 😁
+										</div>
+									</c:when>
+									<c:otherwise>
+										<div class="col-10">
+											로그인이 없습니다... 🙄
+										</div>
+									</c:otherwise>
+								</c:choose>
+								<div class="col">
+								</div>
+		       			 	</div>
+		       			 	
+		       			 </div>
 		       		</div>
 		        </div>
 		

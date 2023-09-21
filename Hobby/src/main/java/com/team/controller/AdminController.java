@@ -9,6 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.team.counter.service.LogincounterService;
+import com.team.counter.service.ViewcounterService;
 import com.team.faq.service.FaqService;
 import com.team.faq.vo.FaqVO;
 import com.team.group.service.GroupService;
@@ -46,6 +48,12 @@ public class AdminController {
 	private GroupuserService groupuserService;
 
 	@Autowired
+	private LogincounterService logincounterService;
+	
+	@Autowired
+	private ViewcounterService viewcounterService;
+	
+	@Autowired
 	private MpimgService mpimgService;
 //	@GetMapping("/adminUser.do")
 //	public ModelAndView goAdminUser() /* 관리자 유저 */ {
@@ -64,7 +72,16 @@ public class AdminController {
 	
 	@GetMapping("/adminHome.do")
 	public ModelAndView goAdminHome() /* 愿�由ъ옄 �솃 */ {
-		return new ModelAndView("admin/home");
+		ModelAndView mv = new ModelAndView("admin/home");
+		int userCountToday = userService.getUsersToday();
+		int groupsCountToday = groupService.getGroupsToday();
+		int todayView = viewcounterService.todayView();
+		int todayLogin = logincounterService.todayLogin();
+		mv.addObject("viewCount", todayView);
+		mv.addObject("loginCount", todayLogin);
+		mv.addObject("groupCount", groupsCountToday);
+		mv.addObject("userCount", userCountToday);
+		return mv;
 	}
 
 

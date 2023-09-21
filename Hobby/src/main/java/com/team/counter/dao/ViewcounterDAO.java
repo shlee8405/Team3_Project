@@ -21,4 +21,8 @@ public class ViewcounterDAO {
 	public List<VCVO> getViewCount() {
 		return sqlSessionTemplate.selectList("counter.getViewCount");
 	}
+	
+	public int todayView() {
+		return sqlSessionTemplate.selectOne("counter.todayView");
+	}
 }

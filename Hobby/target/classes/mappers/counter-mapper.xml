@@ -14,6 +14,9 @@
 		ON DUPLICATE KEY UPDATE vc_count = vc_count + 1
 	</insert>
 	
+	<select id="todayView" resultType="int">
+		SELECT vc_count FROM VIEWCOUNT where vc_date = CURDATE()
+	</select>
 	
 	<select id="getLoginCount" resultType="lcvo">
 		SELECT * FROM LOGINCOUNT ORDER BY lc_idx ASC LIMIT 7;
@@ -24,6 +27,10 @@
 		VALUES (CURDATE(), 1)
 		ON DUPLICATE KEY UPDATE lc_count = lc_count + 1
 	</insert>
+	
+	<select id="todayLogin" resultType="int">
+		SELECT lc_count FROM LOGINCOUNT where lc_date = CURDATE()
+	</select>
 	
 </mapper>
 

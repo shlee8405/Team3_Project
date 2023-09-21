@@ -21,4 +21,8 @@ public class LogincounterDAO {
 	public List<LCVO> getLoginCount() {
 		return sqlSessionTemplate.selectList("counter.getLoginCount");
 	}
+	
+	public int todayLogin() {
+		return sqlSessionTemplate.selectOne("counter.todayLogin");
+	}
 }

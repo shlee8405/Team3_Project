@@ -1335,7 +1335,7 @@ rotate(
 			}
 
 			var w = $(window).scrollTop();
-			var f = "translateX(" + w * 0.60 + "px)";
+			var f = "translateX(" + w * (-0.60) + "px)";
 			console.log(w);
 			$('.s1-text').css({
 				transform : f
@@ -1376,7 +1376,7 @@ rotate(
 		<div class="row" style="left: 10%; right: 10%; top: 5%; z-index: 9;">
 			<div class="s1-text-title" style="translate: 0px -50%;">
 
-				<p class="s1-text">/CAMP.do</p>
+				<p class="s1-text">/CAMPING.do</p>
 				
 			</div>
 			<div class="s1-text-content ps-5"><span style="font-size: 2rem;"><b>안녕하세요!</b></span><br>

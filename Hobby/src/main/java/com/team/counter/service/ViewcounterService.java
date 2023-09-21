@@ -20,4 +20,8 @@ public class ViewcounterService {
 	public List<VCVO> getViewCount() {
 		return viewcounterDAO.getViewCount();
 	}
+	
+	public int todayView() {
+		return viewcounterDAO.todayView();
+	}
 }

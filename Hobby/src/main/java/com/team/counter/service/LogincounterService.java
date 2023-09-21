@@ -21,4 +21,8 @@ public class LogincounterService {
 		return logincounterDAO.getLoginCount();
 	}
 	
+	public int todayLogin() {
+		return logincounterDAO.todayLogin();
+	}
+	
 }
