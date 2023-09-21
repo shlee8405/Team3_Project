@@ -320,7 +320,6 @@ body {
             </div>
             <div id="mainListDiv" class="main_list">
                 <ul class="navlinks">
-                     <li><a href="/checkSession.do" style="text-family:sans-seriff; font-size: 1rem;">sysout sessionIdx</a></li>
                     <li><a href="/campMain.do">/캠핑장.do</a></li>
 					<li><a href="/groupList.do">/캠핑모임.do</a></li>
 

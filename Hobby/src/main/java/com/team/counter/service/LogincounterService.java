@@ -1,5 +1,7 @@
 package com.team.counter.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,7 @@ public class LogincounterService {
 		return logincounterDAO.loginCount();
 	}
 	
-	public LCVO getLoginCount() {
+	public List<LCVO> getLoginCount() {
 		return logincounterDAO.getLoginCount();
 	}
 	

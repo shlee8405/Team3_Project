@@ -1263,10 +1263,6 @@ rotate(
 			</div>
 			<div id="mainListDiv" class="main_list">
 				<ul class="navlinks">
-					<li><a href="/checkSession.do"
-						style="text-family: sans-seriff; font-size: 1rem;">sysout
-							sessionIdx</a></li>
-
 					<li><a href="/campMain.do">/캠핑장.do</a></li>
 					<li><a href="/groupList.do">/캠핑모임.do</a></li>
 
@@ -1722,15 +1718,14 @@ rotate(
 			<div class="s5-text-content">
 				<div class="row">
 					<div class="col">
-						© 2023 캠핑 모임 & 명소 (Camping Meetups & Spots) /camp.do. 판권 소유. <br><br> 
-		
-						개인 정보 보호 정책 (Privacy Policy) | 이용 약관 (Terms of Service) <br><br>
-						
-						문의하기 (Contact Us) | 자주 묻는 질문 (FAQ) <br><br>
+
 						
 						주소: [주소 입력]<br>
 						전화번호: [전화번호 입력]<br>
-						이메일: [이메일 주소 입력]<br>
+						이메일: [이메일 주소 입력]<br><br><br>
+						문의하기 (Contact Us) | 자주 묻는 질문 (FAQ) <br>
+						개인 정보 보호 정책 (Privacy Policy) | 이용 약관 (Terms of Service) <br>
+						© 2023 캠핑 모임 & 명소 (Camping Meetups & Spots) /camp.do. 판권 소유. <br><br> 
 					</div>
 					<div class="col"></div>
 					

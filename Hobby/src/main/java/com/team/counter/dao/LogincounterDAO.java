@@ -1,5 +1,7 @@
 package com.team.counter.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,7 +18,7 @@ public class LogincounterDAO {
 		return res;
 	}
 	
-	public LCVO getLoginCount() {
-		return sqlSessionTemplate.selectOne("counter.getLoginCount");
+	public List<LCVO> getLoginCount() {
+		return sqlSessionTemplate.selectList("counter.getLoginCount");
 	}
 }
