@@ -438,14 +438,16 @@ function group_write_go(f) {
 			</div>
 			<div class="serch_all2" >
 				<ol class="paging">
+				 <!-- 첫 페이지 버튼 -->
+    				<li><a href="/groupList.do?cPage=1"><<</a></li>
 					<!-- 이전 버튼 -->
 					<c:choose>
 						<c:when test="${paging.beginBlock <= 1}">
-							<li class="hide">이전으로</li>
+							<li class="hide"><</li>
 						</c:when>
 						<c:otherwise>
 							<li><a
-								href="/groupList.do?cPage=${paging.beginBlock-paging.pagePerBlock }">이전으로</a></li>
+								href="/groupList.do?cPage=${paging.beginBlock-paging.pagePerBlock }"><</a></li>
 						</c:otherwise>
 					</c:choose>
 
@@ -464,13 +466,15 @@ function group_write_go(f) {
 					<!-- 이후 버튼 -->
 					<c:choose>
 						<c:when test="${paging.endBlock >= paging.totalPage }">
-							<li class="hide">다음으로</li>
+							<li class="hide">></li>
 						</c:when>
 						<c:otherwise>
 							<li><a
-								href="/groupList.do?cPage=${paging.nowPage+paging.pagePerBlock}">다음으로</a></li>
+								href="/groupList.do?cPage=${paging.nowPage+paging.pagePerBlock}">></a></li>
 						</c:otherwise>
 					</c:choose>
+					<!-- 마지막 페이지 버튼 -->
+    				<li><a href="/groupList.do?cPage=${paging.totalPage}">>></a></li>
 				</ol>
 			</div>
 		</div>
