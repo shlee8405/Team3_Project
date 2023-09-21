@@ -1396,9 +1396,6 @@ rotate(
 	    <span class="visually-hidden">Next</span>
 	  </button>
 	</div>	
-	
-	
-	
 
 	<!-- 소개글 -->
 	<div class="section one ">
@@ -1465,17 +1462,14 @@ rotate(
                     modalHtml += '</div></div></div></div>';
 
                     // 생성된 모달 HTML을 body에 추가합니다.
-                    $('body').append(modalHtml);
-                    
-                    if (popupClosedTime && new Date().getTime() - popupClosedTime < 60000) {
-                        return; // 1시간 미만이므로 팝업을 다시 보여주지 않습니다.
+                    if (popupClosedTime && new Date().getTime() - popupClosedTime < 30000) {
+                        // Do nothing for this specific popup, but continue to process the other logic.
+                    } else {
+                        // Only add the modal HTML and show the modal if the time condition is not met.
+                        $('body').append(modalHtml);
+                        $('#exampleModalToggle'+i).modal('show');
                     }
 
-                	// 첫 번째 모달을 표시합니다.
-                    $('#exampleModalToggle'+i).modal('show');
-                	console.log(content);
-                    
-                    
                 }
             	if(imgdata.length>0) {
 	            	for (let i=0; i<imgdata.length; i++) {
