@@ -112,11 +112,13 @@
 	  WHERE u_idx = #{u_idx}
 	</update>
 	
-	<select id="findPwByEmail" parameterType="String" resultType="java.lang.String">
-        SELECT u_pw FROM USERS WHERE u_email = #{u_email}
+	<select id="findPwByEmail" parameterType="String" resultType="String">
+        SELECT u_pw FROM USERS WHERE u_id = #{finalemail}
     </select>
     
-    
+    <update id="PassToID" parameterType="map">
+    	update USERS set u_pw = #{u_pw} where u_id = #{u_id}
+    </update>
     
     <!-- 네이버 로그인 -->
     <insert id="naver" parameterType="naverVO">
