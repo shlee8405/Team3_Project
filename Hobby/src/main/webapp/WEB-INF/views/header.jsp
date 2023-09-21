@@ -59,7 +59,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-	z-index: 5 !important;
+	z-index: 1 !important;
 }
 
 /* Navbar section */
@@ -72,7 +72,7 @@ body {
     text-align: center;
     background-color:#637F42;
     top: 0;
-    z-index: 10;
+    z-index: 1;
   
 }
 
@@ -84,7 +84,7 @@ body {
 	text-align:center;
     background-color:#0F4200;
     bottom: 0;
-    z-index: 10;
+    z-index: 1;
     padding:0;
 	visibility: hidden;
 	opacity: 0;
@@ -220,7 +220,7 @@ body {
     padding: 0;
     background-color: #0F4200;
     opacity:100%;
-    z-index:8;
+    z-index:1;
 }
 
 .affix2 {
@@ -331,7 +331,7 @@ body {
 				
 					
 					<%
-					if (u_idx != null && !u_idx.isEmpty() && adminChecker==null) {
+					if (u_idx != null && !u_idx.isEmpty() ) {
 					%>
 					<li><a href="/myPagemain.do">/마이페이지.do</a></li>
 					<li><a href="/cusSer.do">/고객센터.do</a></li>
@@ -566,22 +566,18 @@ body {
 			}
 		}
 	</script>
-	<script type="text/javascript"
-		src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"
-		charset="utf-8"></script>
-	<script type="text/javascript"
-		src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript"src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"charset="utf-8"></script>
+	<script type="text/javascript"src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		
 	<!-- 네이버 로그인 버튼 노출 영역 -->
 	<div id="naver_id_login"></div>
 	<!-- //네이버 로그인 버튼 노출 영역 -->
 	<script type="text/javascript">
-		var naver_id_login = new naver_id_login("64LV1RLj1gi5COZg0EVh",
-				"http://localhost:8090/home.do");
+		var naver_id_login = new naver_id_login("G9mEXjeV6N3JKbzZvasQ", "http://localhost:8090");
 		var state = naver_id_login.getUniqState();
-		naver_id_login.setButton("green", 70, 70);
-		naver_id_login.setDomain("http://localhost:8090");
+		naver_id_login.setButton("white", 2,40);
+		naver_id_login.setDomain(".service.com");
 		naver_id_login.setState(state);
-		naver_id_login.setPopup();
 		naver_id_login.init_naver_id_login();
 	</script>
 	<script type="text/javascript">
@@ -592,9 +588,12 @@ body {
 			naver_id_login.get_naver_userprofile("naverSignInCallback()");
 			// 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
 			function naverSignInCallback() {
-				alert(naver_id_login.getProfileData('email'));
-				alert(naver_id_login.getProfileData('nickname'));
-				alert(naver_id_login.getProfileData('age'));
+				console.log(naver_id_login)
+				var email = naver_id_login.getProfileData('email');
+				var nickname = naver_id_login.getProfileData('nickname');
+				var id = naver_id_login.getProfileData('id');
+				var name = naver_id_login.getProfileData('name');
+				location.href="/naver.do?email="+email+"&nickname="+nickname+"&id="+id+"&name="+name;
 			}
 		}
 	</script>
@@ -656,13 +655,11 @@ body {
 	
 <c:if test='${loginChk=="wrong"}'>
     <script>
-        alert("wrong pass");
     </script>
     <c:remove var="loginChk" scope="session" />
 </c:if>
 <c:if test='${loginChk=="invalid"}'>
     <script>
-        alert("wrong id");
     </script>
     <c:remove var="loginChk" scope="session" />
 </c:if>

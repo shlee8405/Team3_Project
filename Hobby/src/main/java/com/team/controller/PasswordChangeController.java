@@ -72,7 +72,7 @@ public class PasswordChangeController {
 		    int result = userService.pass(u_idx, encodedNewPassword);
 	
 		    if (result > 0) {
-		        mv.setViewName("redirect:/home.do");
+		        mv.setViewName("redirect:/logOut.do");
 		    } else {
 		        // 비밀번호 변경에 실패한 경우에 대한 처리
 		        // 예를 들어, mv.addObject("error", "비밀번호 변경에 실패하였습니다.") 등으로 에러 메시지를 전달할 수 있습니다.

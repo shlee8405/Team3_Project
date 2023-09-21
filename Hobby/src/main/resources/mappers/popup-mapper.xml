@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="popup">
+	
+	<insert id="insert" parameterType="PopupVO">
+		insert into POPUP(pop_title, pop_content) value(#{pop_title},#{pop_content})
+	</insert>
+	
+	<select id="selectlist" resultType="PopupVO">
+		select * from POPUP
+	</select>
+	
+	<delete id="delete" parameterType="String">
+		DELETE FROM POPUP WHERE pop_idx = #{idx};
+	</delete>
+	
+	<select id="one" parameterType="PopupVO" resultType="PopupVO">
+		select * from POPUP WHERE pop_idx = #{popupVO.getPop_idx()}
+	</select>
+	
+	<update id="update">
+		update POPUP set pop_title = #{pop_title}, pop_content = #{pop_content}  where pop_idx = #{pop_idx}
+	</update>
+	
+</mapper>
+
+
+
+
+
+
+
+

@@ -150,12 +150,17 @@ public class UserServiceImpl implements UserService{
 
 
 	@Override
-	public String findPwByEmail(String email2) {
-		return userDAO.findPwByEmail(email2);
+	public String findPwByEmail(String finalemail) {
+		return userDAO.findPwByEmail(finalemail);
+	}
+	
+	@Override
+	public int PassToID(String finalemail, String encodedNewPassword) {
+		return userDAO.PassToID(finalemail,encodedNewPassword);
 	}
 	
 	
-	
+	// 네이버 로그인
 	@Override
 	public int naver(NaverVO naverVO) {
 		return userDAO.naver(naverVO);

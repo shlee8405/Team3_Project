@@ -97,24 +97,11 @@
 </style>
 <script type="text/javascript">
     function sendData(f) {
-if(document.getElementById('q_title').value.trim() === "" || document.getElementById('q_content').value.trim() === "") {
-    alert('제목과 내용을 모두 입력해주세요.');
+    	
+	if(document.getElementById('q_title').value.trim() === "" || document.getElementById('q_content').value.trim() === "") {
+    	alert('제목과 내용을 모두 입력해주세요.');
     return false;
-}
-
-        /* // 다른 방법
-        if(f.title.value.trim().length <= 0){
-            alert("제목을 입력하세요");
-            f.title.focus();
-            return;
-        }
-        
-        if(f.content.value.trim().length <= 0){
-            alert("내용을 입력하세요");
-            f.content.focus();
-            return;
-        } */
-        
+	}
         f.action="/insert_QNA.do"; // 수정: 여기서 작은 따옴표를 삭제하고 세미콜론 추가
         f.submit();
     }

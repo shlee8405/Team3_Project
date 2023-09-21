@@ -4,23 +4,24 @@
  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="group">
 	<select id="count" resultType="int">
-		select count(*) from GROUPS
+		select count(*) from GROUPS where g_status != 0 
 	</select>
 
 	<select id="allList" parameterType="Map" resultType="gvo">
 		select *
-		from GROUPS where g_status = '1' order by g_idx desc limit #{limit}
+		from GROUPS where g_status != 0  order by g_idx desc limit #{limit}
 		offset #{offset}
 	</select>
-	
+
 	<select id="allListNoPaging" resultType="gvo">
 		select *
-		from GROUPS order by g_status desc 
+		from GROUPS
+		order by g_status desc
 	</select>
 
 	<select id="searchGroups" parameterType="gvo" resultType="gvo">
 		SELECT * FROM GROUPS
-		WHERE g_status = '1'
+		WHERE g_status != 0
 		<if test="g_title != null and g_title != ''">
 			AND g_title LIKE CONCAT('%', #{g_title}, '%')
 		</if>
@@ -30,8 +31,8 @@
 		<if test="g_gugun != null and g_gugun != ''">
 			AND g_gugun = #{g_gugun}
 		</if>
-		ORDER BY g_idx DESC
-		<!-- LIMIT #{limit} OFFSET #{offset} -->
+		order by g_idx desc limit #{limit}
+		offset #{offset}
 	</select>
 	<!-- 검색결과 페이지수 -->
 	<select id="searchGroupsCount" parameterType="gvo"
@@ -54,21 +55,31 @@
 		from GROUPS where g_idx = #{g_idx}
 	</select>
 
-	<select id="checkUserParticipation" resultType="int">
-		select count(*)
-		from GROUPUSERS
-		where g_idx = #{g_idx} and u_idx = #{u_idx}
+	<!-- 참여 중복 체크 -->
+	<select id="checkUserParticipation" parameterType="map"
+		resultType="int">
+		SELECT COUNT(*) FROM GROUPUSERS WHERE g_idx = #{g_idx} AND u_idx = #{u_idx}
 	</select>
 
-	<insert id="joinGroup">
-		INSERT INTO GROUPUSERS (g_idx, u_idx) VALUES (#{g_idx}, #{u_idx});
-		UPDATE GROUPS SET g_curPeople = g_curPeople + 1 WHERE g_idx = #{g_idx};
+	<!-- 그룹 참여 추가 -->
+	<insert id="addParticipation" parameterType="map">
+		INSERT INTO GROUPUSERS (g_idx, u_idx) VALUES (#{g_idx}, #{u_idx})
 	</insert>
 
-	<delete id="cancelParticipation">
-		DELETE FROM GROUPUSERS WHERE g_idx = #{g_idx} AND u_idx = #{u_idx};
-		UPDATE GROUPS SET g_curPeople = g_curPeople - 1 WHERE g_idx = #{g_idx};
+	<!-- 그룹 참여 취소 -->
+	<delete id="removeParticipation" parameterType="map">
+		DELETE FROM GROUPUSERS WHERE g_idx = #{g_idx} AND u_idx = #{u_idx}
 	</delete>
+
+	<!-- g_curPeople 증가 -->
+	<update id="increaseGroupCount" parameterType="string">
+		UPDATE GROUPS SET g_curPeople = g_curPeople + 1 WHERE g_idx = #{g_idx}
+	</update>
+
+	<!-- g_curPeople 감소 -->
+	<update id="decreaseGroupCount" parameterType="string">
+		UPDATE GROUPS SET g_curPeople = g_curPeople - 1 WHERE g_idx = #{g_idx}
+	</update>
 
 	<insert id="insert" parameterType="gvo">
 		insert into
@@ -76,7 +87,7 @@
 		g_location, g_desc,g_status, u_idx)
 		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_cdo},#{g_gugun},#{g_location},#{g_desc},'1',#{u_idx})
 	</insert>
-	
+
 	<insert id="insertAsAdmin" parameterType="gvo">
 		insert into
 		GROUPS(g_title,g_intro, g_fname,g_maxPeople, g_date, g_cdo, g_gugun,
@@ -89,7 +100,7 @@
 		set g_status= '0'
 		where g_idx = #{g_idx}
 	</update>
-	
+
 	<update id="revive" parameterType="gvo">
 		update GROUPS
 		set g_status= '1'
@@ -126,52 +137,58 @@
 		update GROUPCOMMENTS set
 		gc_status='0' where gc_idx = #{gc_idx}
 	</update>
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 	<insert id="insertMember" parameterType="map">
-		INSERT INTO GROUPUSERS (g_idx, u_idx) VALUES (#{g_idx}, #{u_idx})
+		INSERT INTO GROUPUSERS
+		(g_idx, u_idx) VALUES (#{g_idx}, #{u_idx})
 	</insert>
-	
-	<!-- 관리자 페이지에서 검색할때 쓰는 매퍼들  -->
-	<select id="getListWithTitle" parameterType="String" resultType="gvo">
+
+	<!-- 관리자 페이지에서 검색할때 쓰는 매퍼들 -->
+	<select id="getListWithTitle" parameterType="String"
+		resultType="gvo">
 		select * from GROUPS where g_title like #{g_title}
 	</select>
-	
-	<select id="getListWithUidx" parameterType="String" resultType="gvo">
-		select * from GROUPS where u_idx = #{u_idx}	
-	</select>
-	
-	<select id="getListWithDate" parameterType="String" resultType="gvo">
-		select * from GROUPS where g_date like #{g_date}	
+
+	<select id="getListWithUidx" parameterType="String"
+		resultType="gvo">
+		select * from GROUPS where u_idx = #{u_idx}
 	</select>
 
-	<select id="getListWithLocation" parameterType="String" resultType="gvo">
+	<select id="getListWithDate" parameterType="String"
+		resultType="gvo">
+		select * from GROUPS where g_date like #{g_date}
+	</select>
+
+	<select id="getListWithLocation" parameterType="String"
+		resultType="gvo">
 		SELECT *
 		FROM GROUPS
 		WHERE g_cdo LIKE #{input}
-		   OR g_gugun LIKE #{input}
-		   OR g_location LIKE #{input}
+		OR g_gugun LIKE #{input}
+		OR g_location LIKE #{input}
 	</select>
-	
+
 	<!-- 날짜 지난 모임들 g_status=3 처리 -->
 	<update id="filterOld">
 		<![CDATA[
         	UPDATE GROUPS SET g_status = 3 WHERE g_date < CURDATE()
     	]]>
 	</update>
-	
+
 	<!-- 유저 테이블 -->
-	<select id="getUsersWithNickname" parameterType="String" resultType="uvo">
+	<select id="getUsersWithNickname" parameterType="String"
+		resultType="uvo">
 		select * from USERS where u_nickname like #{u_nickname}
 	</select>
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
 </mapper>

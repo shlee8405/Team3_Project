@@ -2,6 +2,8 @@ package com.team.controller.group;
 
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,6 +29,8 @@ import com.team.commons.Paging;
 import com.team.group.service.GroupService;
 import com.team.group.vo.GroupCmtVO;
 import com.team.group.vo.GroupVO;
+import com.team.groupuser.service.GroupuserService;
+import com.team.groupuser.vo.GroupuserVO;
 import com.team.user.service.UserService;
 import com.team.user.vo.UserVO;
 
@@ -38,6 +42,8 @@ public class GroupController {
 	private Paging paging;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private GroupuserService groupuserService;
 	
 	@RequestMapping("/groupList.do")
 	 public ModelAndView getAllGroups(HttpServletRequest request) {
@@ -46,6 +52,7 @@ public class GroupController {
 		// 전체 게시물의 수
 		int count = groupService.getTotalCount();
 		paging.setTotalRecord(count);
+		
 		// 전체 페이지의 수
 		if (paging.getTotalRecord() <= paging.getNumPerPage()) {
 			paging.setTotalPage(1);
@@ -72,11 +79,12 @@ public class GroupController {
 				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
 
 		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
-
+		
 		// 주의사항
 		if (paging.getEndBlock() > paging.getTotalPage()) {
 			paging.setEndBlock(paging.getTotalPage());
 		}
+		
 		List<GroupVO> glist = groupService.getAllGroups(paging.getOffset(), paging.getNumPerPage());
 		
 		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
@@ -86,28 +94,60 @@ public class GroupController {
 		        mv.addObject("user", Ulist.get(0));
 		    }
 		}
-
 		
 		mv.addObject("glist", glist);
 		mv.addObject("paging", paging);
         return mv;
     }
-	@RequestMapping("/search")
+	
+	@RequestMapping("/search.do")
 	public ModelAndView searchGroups(
 	        @RequestParam("title") String title, 
 	        @RequestParam("city") String city,
 	        @RequestParam("state") String state) {
+		System.out.println("search");
 	    
 	    GroupVO gvo = new GroupVO();
 	    gvo.setG_title(title);
 	    gvo.setG_cdo(city);
 	    gvo.setG_gugun(state);
+	    gvo.setLimit(paging.getNumPerPage());
+	 	gvo.setOffset(paging.getOffset());
 	    
 	    List<GroupVO> resultGroups = groupService.searchGroups(gvo);
+	    
+	        // 전체 게시물의 수
+	 		paging.setTotalRecord(resultGroups.size());
+	 		
+	 		// 전체 페이지의 수
+	 		if (paging.getTotalRecord() <= paging.getNumPerPage()) {
+	 			paging.setTotalPage(1);
+	 		} else {
+	 			paging.setTotalPage(paging.getTotalRecord() / paging.getNumPerPage());
+	 			if (paging.getTotalRecord() % paging.getNumPerPage() != 0) {
+	 				paging.setTotalPage(paging.getTotalPage() + 1);
+	 			}
+	 		}
+	 		
 
-	    ModelAndView modelAndView = new ModelAndView("group/groupSearchResult"); // Change to the new JSP page
+	 		// offset = limit * (현재페이지-1);
+	 		paging.setOffset(paging.getNumPerPage() * (paging.getNowPage() - 1));
+	 		// 시작블록과 끝블록 구하기
+	 		paging.setBeginBlock(
+	 				(int) ((paging.getNowPage() - 1) / paging.getPagePerBlock()) * paging.getPagePerBlock() + 1);
+
+	 		paging.setEndBlock(paging.getBeginBlock() + paging.getPagePerBlock() - 1);
+	 		
+	 		// 주의사항
+	 		if (paging.getEndBlock() > paging.getTotalPage()) {
+	 			paging.setEndBlock(paging.getTotalPage());
+	 		}
+	    
+	    //ModelAndView modelAndView = new ModelAndView("group/groupSearchResult"); // Change to the new JSP page
+	    ModelAndView modelAndView = new ModelAndView("group/groupList");
+	    
 	    modelAndView.addObject("glist", resultGroups);
-
+	    modelAndView.addObject("paging", paging);
 	    return modelAndView;
 	}
 
@@ -163,78 +203,69 @@ public class GroupController {
 	    ModelAndView mv = new ModelAndView("group/groupOnelist");
 	    String g_idx = request.getParameter("g_idx");
 	    String cPage = request.getParameter("cPage");
-	    
+	    System.out.println(cPage);
 	    String userIdx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
-	    //int participationCount = groupService.checkUserParticipation(g_idx, userIdx);
-	    //boolean isParticipated = participationCount > 0;
+	    Date now = new Date();
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	    String formattedNow = sdf.format(now);
+	    mv.addObject("now", formattedNow);
+	  	    
+	    // 참여 여부를 확인합니다.
+	    int participationCount = groupService.checkUserParticipation(g_idx, userIdx);
+	    boolean isParticipated = participationCount > 0;
+	    mv.addObject("isParticipated", isParticipated);
 	    
-
 	    // 상세보기
 	    GroupVO gvo = groupService.getGroupOnelist(g_idx);
+	    
+	    // 참여자 카운트
+	    int maxPeople = Integer.parseInt(gvo.getG_maxPeople());
+	    int curPeople = Integer.parseInt(gvo.getG_curPeople());
+	    mv.addObject("maxPeople", maxPeople);
+	    mv.addObject("curPeople", curPeople);
+	    // 해당 그룹의 모든 참가자 목록을 가져옵니다.
+	    List<GroupuserVO> groupuserlist = groupuserService.getAllList();
+	    List<UserVO> userlist = userService.getAllUsers();
+	    mv.addObject("groupUsers", groupuserlist);
+	    mv.addObject("userlist",userlist);
+	    mv.addObject("g_idx",g_idx);
+	    mv.addObject("gvo", gvo);
+	    
 	    // 댓글 가져오기
 	    List<GroupCmtVO> gc_list = groupService.getCommList(g_idx);
-	    // id가져오기
-	    //List<UserVO> Ulist = userService.getUsers(u_idx);
-	    
-	    //mv.addObject("user", Ulist.get(0));
-	    //mv.addObject("isParticipated", isParticipated);
-	    
-	    mv.addObject("gvo", gvo);
-	    mv.addObject("gc_list",gc_list);
+	    mv.addObject("gc_list", gc_list);
 	    mv.addObject("cPage", cPage);
 	    
 	    return mv;
 	}
-	
+
+
+	// 그룹 참여 또는 참여 취소 처리
 	@RequestMapping("/joinGroup.do")
-	public ModelAndView joinGroup(@RequestParam("g_idx") String g_idx, HttpServletRequest request) {
-	    ModelAndView mv;
-
+	@ResponseBody
+	public Map<String, String> joinGroup(@RequestParam("g_idx") String g_idx, HttpServletRequest request) {
+	    Map<String, String> result = new HashMap<>();
 	    String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
-
+	    
 	    if (u_idx == null || u_idx.trim().isEmpty()) {
-	        mv = new ModelAndView("groupOnelist");
-	        mv.addObject("loginRequired", true);  // 로그인이 필요한 경우
-	        return mv;
+	        result.put("message", "로그인 필요");
+	        return result;
 	    }
 
-	    int result = groupService.insertMember(g_idx, u_idx);
-	    List<UserVO> Ulist = userService.getUsers(u_idx);
-	    System.out.println("dsdadsa    "+g_idx);
-	    mv = new ModelAndView("redirect:/group_onelist.do");
-	    mv.addObject("user", Ulist.get(0));
-	    return mv;
-	}
+	    int check = groupService.checkUserParticipation(g_idx, u_idx);
 
-
-//jh	
-//	@PostMapping("/joinGroup.do")
-//	@ResponseBody
-//	public Map<String, Boolean> joinGroup(String g_idx, String u_idx) {
-//		Map<String, Boolean> result = new HashMap<>();
-//		try {
-//			groupService.joinGroup(g_idx, u_idx);
-//			result.put("success", true);
-//		} catch (Exception e) {
-//			result.put("false", false);
-//		}
-//		return result;
-//	}
-
-	@PostMapping("/cancelParticipation.do")
-	@ResponseBody
-	public Map<String, Boolean> cancelParticipation(String g_idx, String u_idx) {
-	    Map<String, Boolean> result = new HashMap<>();
-	    try {
-	        groupService.cancelParticipation(g_idx, u_idx);
-	        result.put("success", true);
-	    } catch (Exception e) {
-	        result.put("success", false);
+	    if (check > 0) {
+	        groupService.removeParticipation(g_idx, u_idx);
+	        groupService.decreaseGroupCount(g_idx);  // 참여 취소 시 g_curPeople 감소
+	        result.put("message", "참여 취소");
+	    } else {
+	        groupService.addParticipation(g_idx, u_idx);
+	        groupService.increaseGroupCount(g_idx);  // 참여 시 g_curPeople 증가
+	        result.put("message", "참여 성공");
 	    }
 	    return result;
 	}
-
-
+		
 	@PostMapping("/groupDelete.do")
 	public ModelAndView getGroupDelete(GroupVO gvo) {
 		ModelAndView mv = new ModelAndView("redirect:/groupList.do");

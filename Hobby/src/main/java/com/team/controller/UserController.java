@@ -2,23 +2,20 @@ package com.team.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
 import com.team.group.service.GroupService;
 import com.team.qna.service.QnaService;
@@ -268,11 +265,8 @@ public class UserController {
 	     
 		 if(result) {
 			 UserVO dbuvo = userService.getUserVoWithId(id);
-			 System.out.println("kakaoLogin.do u_ban==1 is :" + dbuvo.getU_ban().equals("1"));
-			 System.out.println("kakaoLogin.do retrieve id successfull id: " + id );
 			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
 			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
-			 System.out.println("kakaoLogin.do insert session Idx success");
 			 return new ModelAndView("redirect:/home.do");
 		 } else {
 			 UserVO uvo = new UserVO();
@@ -281,10 +275,8 @@ public class UserController {
 			 uvo.setU_name(name);
 			 int insertResult = userService.getUserInsertKakao(uvo);
 			 UserVO dbuvo = userService.getUserVoWithId(id);
-			 System.out.println("kakaoLogin.do insert id successfull  id: " + id);
 			 request.getSession().getServletContext().setAttribute("sessionUidx", dbuvo.getU_idx());
 			 request.getSession().getServletContext().setAttribute("kakaoSession", "true");
-			 System.out.println("kakaoLogin.do insert session Idx success");
 			 return new ModelAndView("redirect:/home.do");
 		 }
 
@@ -312,6 +304,7 @@ public class UserController {
 	         return null;
 	     }
 	 }
+	 
 	 @RequestMapping("/forgotPwd.do")
 	 public String forgotPw(@RequestBody String encodedEmail) {
 		 String decodedEmail2 = "";
@@ -324,14 +317,27 @@ public class UserController {
 		    String finalemail = decodedEmail.substring(6);
 		    System.out.println("controller email : " + finalemail);
 		    String foundPw = userService.findPwByEmail(finalemail);
-	     if (foundPw != null) {
-	         System.out.println("비번 찾음: " + foundPw);
-	         return foundPw; // Return the 아이디
-	     } else {
-	         System.out.println("비번을 찾을 수 없음");
-	         return null;
-	     }
+		    
+		    if (foundPw != null) {
+		        System.out.println("비번 찾음: " + foundPw);
+		        
+		        // 랜덤 8자리 숫자 생성
+		        Random rand = new Random();
+		        String randomNum = String.format("%08d", rand.nextInt(100000000)); 
+
+		        // 랜덤 숫자 암호화
+		        String encodedNewPassword = passwordEncoder.encode(randomNum);
+
+		        // 암호화된 숫자를 데이터베이스에 저장
+		        // 찾은 아이디로 DB에 저장
+		        int result = userService.PassToID(finalemail, encodedNewPassword);
+		        
+		        return randomNum;
+		    }else {
+		         System.out.println("비번을 찾을 수 없음");
+		         return null;
+		     }
 	 }
-	 
+
 	 }
 

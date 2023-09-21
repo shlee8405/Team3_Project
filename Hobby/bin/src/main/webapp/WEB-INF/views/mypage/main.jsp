@@ -13,31 +13,61 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>내가 찜한 캠핑장</title>
 <style type="text/css">
-.my-page-title{
-	text-align: center; /* 가운데 정렬 */
-    margin-top: 250px; /* 상단 여백 조절 */
+.my-page-title {
+    text-align: center;
+    margin-top: 250px;
     padding-bottom: 80px;
 }
-.btn-group {
-    display: flex; /* 가로 정렬 */
-    justify-content: space-between; /* 양 옆 여백 */
-    max-width: 1100px; /* 최대 폭 설정 */
-    margin: 0 auto; /* 가운데 정렬 */
-    padding: 0 1px; /* 왼쪽과 오른쪽 여백 설정 */
-}
-.btn-custom{
-	background-color: white;
-	color: black;
-    border-color: #637F42;
-}
-.btn-comp {
-    flex-grow: 1;
-    transition: background-color 0.3s; /* 애니메이션 효과 추가 */
+
+/* 메뉴바 스타일 */
+.sidebar {
+    background: none; /* 검은색 네모 박스를 없애기 위해 배경을 없음으로 설정합니다. */
+    border: none; /* 테두리 제거 */
+    position: fixed;
+    top: 130px; /* 헤더의 높이만큼 여백 추가 */
+    bottom: 0;
+    height: 50%;
+    width: 250px; /* 사이드바의 넓이를 조정합니다. */
+    overflow: hidden;
+    -webkit-transition: width 0.05s linear;
+    transition: width 0.05s linear;
+    -webkit-transform: translateZ(0) scale(1, 1);
+    z-index: 1000;
+    left: 0;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr); /* 세로로 세 칸으로 나눕니다. */
+    gap: 1px; /* 각 칸 사이의 간격 설정 */
 }
 
-.btn-comp.active {
-    background-color: #637F42; /* 클릭 시 배경색 고정 */
-    color: white; /* 텍스트 색상을 밝게 조정 */
+
+/* 메뉴 아이템 스타일 */
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar li {
+    text-align: center;
+    padding: 10px 0; /* 각 아이템의 여백 조정 */
+}
+
+/* 각 메뉴 아이템의 스타일 */
+.sidebar a {
+    text-decoration: none;
+    color: #637F42; /* 글자 색상 설정 */
+    display: block;
+    transition: color 0.2s ease; /* 글자 색상 변화에 트랜지션 추가 */
+    font-size: 50px; 
+}
+
+/* 마우스 호버 시 글자 색상 변경 */
+.sidebar a:hover {
+    color: #4f6d3a; /* 호버 시 글자 색상 변경 */
+}
+
+/* 페이지 내용에 왼쪽 여백 추가 */
+.content {
+    margin-left: 60px; /* 왼쪽 여백 크기를 사이드바 폭과 일치하도록 설정 */
 }
 a {
 	text-decoration: none;
@@ -110,13 +140,34 @@ function removeHover(buttonId) {
 	</div>
 	
 	<!-- 메뉴바 -->
-	<div  style="text-align: center;">
-		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
-		    <button id="button1" type="button" onmouseover="applyHover('button1');" onmouseout="removeHover('button1');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
-		    <button id="button2" type="button" onmouseover="applyHover('button2');" onmouseout="removeHover('button2');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
-		    <button id="button4" type="button" onmouseover="applyHover('button4');" onmouseout="removeHover('button4');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
-		</div>
-	</div>
+<div class="sidebar">
+    <ul>
+        <li>
+            <button id="button1" type="button" onmouseover="applyHover('button1');" onmouseout="removeHover('button1');" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">
+                <i class="fa fa-home fa-2x"></i>
+                <span class="nav-text">
+                   내가 찜한 캠핑장
+                </span>
+          </button>
+        </li>
+        <li>
+            <button id="button2" type="button" onmouseover="applyHover('button2');" onmouseout="removeHover('button2');" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">
+                <i class="fa fa-globe fa-2x"></i>
+                <span class="nav-text">
+                    내가 작성한 리뷰
+                </span>
+            </button>
+        </li>
+        <li>
+            <button id="button4" type="button" onmouseover="applyHover('button4');" onmouseout="removeHover('button4');"  class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">
+               <i class="fa fa-comments fa-2x"></i>
+                <span class="nav-text">
+                    내 정보
+                </span>
+            </button>
+        </li>
+    </ul>
+</div>
     <div class="scrollable-content" style="width: 30%; margin: auto;">
     <div style="margin-top: 40px;"></div>
 		<table style="border-collapse: collapse; width: 100%; border: 2px solid black;">
