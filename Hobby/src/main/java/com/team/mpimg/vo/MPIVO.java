@@ -3,13 +3,21 @@ package com.team.mpimg.vo;
 import org.springframework.web.multipart.MultipartFile;
 
 public class MPIVO {
-	private String mp_idx, mp_title, mp_desc, mp_imgname;
+	private String mp_idx, mp_title, mp_desc, mp_imgname, mp_date;
 	private MultipartFile file;
 
 
 	
 	
 	
+	public String getMp_date() {
+		return mp_date;
+	}
+
+	public void setMp_date(String mp_date) {
+		this.mp_date = mp_date;
+	}
+
 	public String getMp_imgname() {
 		return mp_imgname;
 	}

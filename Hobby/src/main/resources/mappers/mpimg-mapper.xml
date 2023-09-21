@@ -12,8 +12,8 @@
     
     <!-- 이미지 업로드 -->
     <insert id="uploadImage" parameterType="mpivo">
-    	INSERT INTO MAINPAGEIMAGE (mp_title, mp_desc)
-    	VALUES (#{mp_title}, #{mp_desc})
+    	INSERT INTO MAINPAGEIMAGE (mp_title, mp_desc, mp_date)
+    	VALUES (#{mp_title}, #{mp_desc}, sysdate())
     </insert>
     
     <delete id="deleteImage" parameterType="mpivo">

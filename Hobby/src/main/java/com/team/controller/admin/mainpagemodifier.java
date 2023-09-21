@@ -1,18 +1,16 @@
 package com.team.controller.admin;
 
 import java.io.File;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,13 +23,6 @@ public class mainpagemodifier {
 	
 	@Autowired
 	private MpimgService mpimgService;
-	
-	@RequestMapping("/fetchmainpageimg.do")
-	@ResponseBody
-	public ResponseEntity<List<MPIVO>> fetchmainpageimages() {
-		List<MPIVO> list = mpimgService.getImages();
-		return ResponseEntity.ok(list);
-	}
 	
 	@PostMapping("/uploadMPImage.do")
 	public ModelAndView uploadMPImage(MPIVO mpivo , HttpSession session) {
@@ -67,77 +58,34 @@ public class mainpagemodifier {
 					}
 				} else { // insert fail
 					System.out.println("insert failed in /uploadMPImage.do");
-					
 				}
-				
 			}
-			
 		} catch (Exception e) {
 			System.out.println("try failed in /uploadMPImage.do");
 		}
-		/*
-		if (empty file) { // if file is empty RETURN ERROR
-			return ERRORORORORROROROR
-			return mv;
-		}	
-		
-		try {
-			String filename = getfile    // get file as multipart from front-end
-			
-			
-			
-			int res = file copy (path, filname) // CAN UPLOAD FILE?
-			
-			if (res > 0 ) {    // IF YES, 	 
-				int res2 = DAO.insert(mpivo) // ADD INTO DB ASWELL 
-				if (res > 0 ) {  // IF SUCCESS 
-					session.setAttribute(success , success)   //SUCCESSS
-					return mv;	
-				} else  {
-					session.setattribute(error with DB)   //DB INSERT FAIL
-					return mv;
-				}
-			} else {
-				session.setAttribute(ERROR WITH FILEUPLOAD)  // fileupload FAIL
-				return mv;
-			} 
-		}
-		   
-		   
-		   
-		    
-		    
-		    
-		    
-		   */
-		
 		return mv;
 	}
 	
 	
-	@PostMapping("/deleteMPImage.do")
-	public ModelAndView deleteMPImage(MPIVO mpivo, HttpSession session) {
+	@GetMapping("/deleteMPImage.do")
+	public ModelAndView deleteMPImage(@RequestParam("idx") String idx,
+			@RequestParam("imgname") String imgname ,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminMainPageModifier.do");
-		
-		/*
-		 
-		 try {
-		 	file.delete(); //TRY DELETING FIRST, IF SUCCESS WILL CONTINUE
-		 
-			int res = DAO.deleteMPImg(mpivo); // TRY DELETING WITH mpivo. IDX
-			 
-			if(res>0) {	// SUCCESS DELETING
-			 	session.setAttribute(SUCCESS DELETING MPIDB)
-			} else {
-				session.setATtribute(ERROR DELETING MPIDB)
+		MPIVO mpivo = new MPIVO();
+		mpivo.setMp_idx(idx);
+		int res = mpimgService.deleteImage(mpivo);
+		if(res>0) {
+			session.setAttribute("adminActionControl", "delete");
+			try {
+				String path = session.getServletContext().getRealPath("/resources/background");
+				File out = new File(path, imgname);
+				out.delete();
+			} catch (Exception e) {
+				System.out.println("delete failed in try/catch : "+e);
 			}
-		 } catch {
-		 	"ERROR DELETING FILE"
-		 }
-		 
-		 
-		 */
-		
+		} 
+		else session.setAttribute("adminActionControl", "error");
 		return mv;
 	}
 	
