@@ -12,6 +12,18 @@
 		select * from POPUP
 	</select>
 	
+	<delete id="delete" parameterType="String">
+		DELETE FROM POPUP WHERE pop_idx = #{idx};
+	</delete>
+	
+	<select id="one" parameterType="PopupVO" resultType="PopupVO">
+		select * from POPUP WHERE pop_idx = #{popupVO.getPop_idx()}
+	</select>
+	
+	<update id="update">
+		update POPUP set pop_title = #{pop_title}, pop_content = #{pop_content}  where pop_idx = #{pop_idx}
+	</update>
+	
 </mapper>
 
 

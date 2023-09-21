@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -175,17 +177,61 @@
 					<td class="allist">${gvo.g_maxPeople }</td>
 				</tr>
 				<tr>
-					<td>
+					<td  colspan="2">
+					<c:if test="${gvo.g_date <= now}">
+					<br>
+					    <p><b>이미 지난 모임입니다.</b></p>
+					</c:if>
 					
-		   			 <c:choose>
-					    <c:when test="${isParticipated}">
-					        <button onclick="participateGroup(${gvo.g_idx})">참여 취소</button>
-					    </c:when>
-					    <c:otherwise>
-					        <button onclick="participateGroup(${gvo.g_idx})">참여</button>
-					    </c:otherwise>
-					</c:choose>
-	
+						    <div class="col-3">
+						        <b>참가자:</b>  
+						    </div>
+						<c:if test="${isParticipated}">
+						    <p><b>당신은 이 그룹에 이미 참여하였습니다.</b></p>
+						</c:if>
+					
+						    <div class="col-9">
+						        <c:set var="selectedUserIdxList" value="" />
+
+								<c:forEach var="user" items="${groupUsers}">
+								    <c:if test="${user.g_idx eq g_idx}">
+								        <c:set var="selectedUserIdxList" value="${selectedUserIdxList},${user.u_idx}" />
+								    </c:if>
+								</c:forEach>
+								
+								<c:forEach var="user" items="${userlist}">
+								    <c:if test="${fn:contains(selectedUserIdxList, user.u_idx)}">
+								        <ul>
+								            <li>${user.u_nickname}</li>
+								        </ul>
+								    </c:if>
+								</c:forEach>
+
+						    </div>
+		   			<!-- 변수의 값 확인 -->
+					<p>gvo.g_date: ${gvo.g_date}</p>
+					<p>now: ${now}</p>
+					<p>gvo.g_maxPeople: ${gvo.g_maxPeople}</p>
+					<p>gvo.g_curPeople: ${gvo.g_curPeople}</p>
+
+						
+						<!-- 조건 비교를 위해 사용하기 -->
+						<c:choose>
+						    <c:when test="${isParticipated}">
+						        <!-- 사용자가 이미 참여한 상태 -->
+						        <c:if test="${gvo.g_date > now}">
+						            <button onclick="participateGroup(${gvo.g_idx})">참여 취소</button>
+						        </c:if>
+						    </c:when>
+						    <c:otherwise>
+						        <!-- 사용자가 참여하지 않은 상태 -->
+						        <c:if test="${gvo.g_date > now && gvo.g_maxPeople > gvo.g_curPeople}">
+						            <button onclick="participateGroup(${gvo.g_idx})">참여</button>
+						        </c:if>
+						    </c:otherwise>
+						</c:choose>
+
+
 		   			 </td>
 	   			</tr>
 			</table>
@@ -199,6 +245,7 @@
     <div class="infoActions">
         <input type="hidden" name="g_idx" value="${gvo.g_idx}">
         <input type="button" value="목록" onclick="list_go(this.form)" />
+        <input type="hidden" name="cPage" value="${cPage }">
     <c:set var="groupUidxStr" value="${gvo.u_idx}" /> <!-- gvo는 그룹의 정보를 담고 있는 객체로 추정됩니다. -->
 		<c:if test="${sessionUidx eq groupUidxStr}">
 		    <input type="button" value="수정" onclick="edit_go(this.form)" />

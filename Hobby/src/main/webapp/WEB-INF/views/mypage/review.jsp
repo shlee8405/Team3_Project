@@ -1,4 +1,7 @@
-<%@page import="java.sql.ResultSet"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
+<%@page import="java.util.Map"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -8,13 +11,14 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>내가 작성한 리뷰</title>
+<title>내가 찜한 캠핑장</title>
 <style type="text/css">
-.my-page-title{
-	text-align: center; /* 가운데 정렬 */
-    margin-top: 250px; /* 상단 여백 조절 */
+.my-page-title {
+    text-align: center;
+    margin-top: 250px;
     padding-bottom: 80px;
 }
+
 /* 메뉴바 스타일 */
 .sidebar {
     background: none; /* 검은색 네모 박스를 없애기 위해 배경을 없음으로 설정합니다. */
@@ -87,11 +91,11 @@ th {
 	color: white;
 }
 
-
 .scrollable-content {
     max-height: 80vh; /* 최대 높이 설정 */
-    overflow-y: auto; /* 세로 스크롤바 활성화 */
+    overflow-y: hidden; /* 세로 스크롤바 활성화 */
 }
+
 </style>
 <script type="text/javascript">
 var buttonStyles = {};
@@ -132,7 +136,7 @@ function removeHover(buttonId) {
 	<jsp:include page="../header.jsp" />
 	<div style="position: relative; top: 200px; z-index: 1;"></div>
 	<div class="my-page-title">
-		<h1>리뷰 목록</h1>
+		<h1>내가 작성한 리뷰</h1>
 	</div>
 	
 	<!-- 메뉴바 -->
@@ -164,23 +168,22 @@ function removeHover(buttonId) {
         </li>
     </ul>
 </div>
-	<div class="container-fluid" style="border: 1px solid black; padding: 8px; width: 40%; margin-top: 40px;">
-    <div class="scrollable-content">
-    <div></div>
-		<table style="border-collapse: collapse;  border: 2px solid black;">
+    <div class="scrollable-content" style="width: 30%; margin: auto;">
+    <div style="margin-top: 40px;"></div>
+		<table style="border-collapse: collapse; width: 100%; border: 2px solid black;">
 			<thead>
 			<tr>
-				<th style="border: 1px solid black; padding: 8px; white-space: nowrap;">번호</th>
-				<th style="border: 1px solid black; padding: 8px; white-space: nowrap;">캠핑장</th>
-				<th style="border: 1px solid black; padding: 8px; white-space: nowrap;">내용</th>
-				<th style="border: 1px solid black; padding: 8px; white-space: nowrap;">별점</th>
-				<th style="border: 1px solid black; padding: 8px; white-space: nowrap;">작성날짜</th>
+				<th style="border: 1px solid black; padding: 8px;">번호</th>
+				<th style="border: 1px solid black; padding: 8px;">캠핑장</th>
+				<th style="border: 1px solid black; padding: 8px;">내용</th>
+				<th style="border: 1px solid black; padding: 8px;">별점</th>
+				<th style="border: 1px solid black; padding: 8px;">작성날짜</th>
 			</tr>
 			</thead>
 			<tbody>
 				<c:choose>
 	     			<c:when test="${empty list}">
-	     				<tr><td colspan="4" style="border: 1px solid black; padding: 8px;"><h3>내가 작성한 리뷰가 없습니다.</h3> </td></tr>
+	     				<tr><td colspan="4" style="border: 1px solid black; padding: 8px;"><h3>내가 찜한 캠핑장이 없습니다.</h3></td></tr>
 	     			</c:when>
 	     			<c:otherwise>
 	     			  <c:forEach var="k" items="${list}" varStatus="vs">
@@ -190,16 +193,14 @@ function removeHover(buttonId) {
 	     			  		<td style="border: 1px solid black; padding: 8px;">${k.comment }</td>
 	     			  		<td style="border: 1px solid black; padding: 8px;">${k.rating }</td>
 	     			  		<td style="border: 1px solid black; padding: 8px;">${k.created_date }</td>
-	     			  		<%-- <td>${k.regdate.substring(0,10)}</td> --%>
 	     			  	</tr>
 	     			  </c:forEach> 
 	     			</c:otherwise>
 	     		</c:choose>
 			</tbody>
 		</table>
-		</div>
-		</div>
-		<script type="text/javascript">
+	</div>
+    <script type="text/javascript">
 		function goToPage(url){
 			location.href = url;
 		}

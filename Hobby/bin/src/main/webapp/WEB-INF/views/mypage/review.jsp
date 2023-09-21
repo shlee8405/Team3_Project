@@ -136,16 +136,6 @@ function removeHover(buttonId) {
 	</div>
 	
 	<!-- 메뉴바 -->
-<<<<<<< HEAD
-	<div  style="text-align: center;">
-		<div class="btn-group btn-custom " role="group" aria-label="Basic radio toggle button group">
-		    <button id="button1" type="button" onmouseover="applyHover('button1');" onmouseout="removeHover('button1');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">내가 찜한 캠핑장</button>
-		    <button id="button2" type="button" onmouseover="applyHover('button2');" onmouseout="removeHover('button2');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">내가 작성한 리뷰</button>
-		    <button id="button4" type="button" onmouseover="applyHover('button4');" onmouseout="removeHover('button4');" style="border: 2px solid black;" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">내 정보</button>
-		</div>
-	</div>
-	<div class="container-fluid" style="padding: 8px; width: 40%; margin-top: 40px;">
-=======
 <div class="sidebar">
     <ul>
         <li>
@@ -175,7 +165,6 @@ function removeHover(buttonId) {
     </ul>
 </div>
 	<div class="container-fluid" style="border: 1px solid black; padding: 8px; width: 40%; margin-top: 40px;">
->>>>>>> refs/heads/main
     <div class="scrollable-content">
     <div></div>
 		<table style="border-collapse: collapse;  border: 2px solid black;">

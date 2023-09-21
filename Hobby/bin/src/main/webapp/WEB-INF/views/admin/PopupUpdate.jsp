@@ -51,12 +51,11 @@ color:#ffffff!important;
 	}
 	
 	function sendData(f) {
-    	
 		if(document.getElementById('pop_title').value.trim() === "" || document.getElementById('pop_content').value.trim() === "") {
 	    	alert('제목과 내용을 모두 입력해주세요.');
 	    return false;
 		}
-	        f.action="/insert_Popup.do"; // 수정: 여기서 작은 따옴표를 삭제하고 세미콜론 추가
+	        f.action="/update.do"; // 수정: 여기서 작은 따옴표를 삭제하고 세미콜론 추가
 	        f.submit();
 	    }
 	
@@ -81,22 +80,19 @@ color:#ffffff!important;
             <div class="container-fluid align-self-end" style="width: 50%">
     <div class="ask-form">
     <form method="post">
-        
         <div class="row g-3" style="padding-bottom: 20px;" >
 	        <div class="col-md-9">
 	            <label for="pop_title" class="form-label">제목</label>
-	            <input type="text" id="pop_title" name="pop_title" class="form-control" required/>
+	            <input type="text" id="pop_title" name="pop_title" class="form-control" value="${popvo.pop_title}" required/>
 	        </div>
         </div>
-        
         <div class="mb-3">
             <label for="pop_content" class="form-label">내용</label>
-            <textarea id="pop_content" name="pop_content" class="form-control" rows="8" required></textarea>
+            <textarea id="pop_content" name="pop_content" class="form-control" rows="8" required>${popvo.pop_content}</textarea>
         </div>
         <div class="text-center">
-        	<input type="hidden" name="pop_idx" value="${vo.pop_idx}">
+        	<input type="hidden" name = "pop_idx" value="${popvo.pop_idx}"/>
             <input type="button" class="btn btn-primary" value="보내기" onclick="sendData(this.form)"/>
-            <input type="reset" class="btn btn-secondary" value="다시"/>
             <input type="button" class="btn btn-secondary" value="목록" onclick="list_go(this.form)"/>
         </div>
     </form>

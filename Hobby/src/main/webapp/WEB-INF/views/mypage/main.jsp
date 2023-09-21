@@ -136,7 +136,7 @@ function removeHover(buttonId) {
 	<jsp:include page="../header.jsp" />
 	<div style="position: relative; top: 200px; z-index: 1;"></div>
 	<div class="my-page-title">
-		<h1>찜 목록</h1>
+		<h1>내가 찜한 캠핑장</h1>
 	</div>
 	
 	<!-- 메뉴바 -->

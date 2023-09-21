@@ -79,12 +79,22 @@ color:#ffffff!important;
 		                    <div class="card-body">
 		                        <p class="card-text">${vo.pop_content}</p>
 		                    </div>
+		                    <div class="card-footer d-md-flex justify-content-md-end">
+							    <form action="/delete_Popup.do" method="post">
+							        <input type="hidden" name="pop_idx" value="${vo.pop_idx}">
+							        <button type="submit" class="btn btn-primary" style="padding: 5px;">삭제</button>
+							    </form>
+							    <form action="/update_Popup.do" method="post">
+							        <input type="hidden" name="pop_idx" value="${vo.pop_idx}">
+							        <button type="submit" class="btn btn-primary" style="padding: 5px;">수정</button>
+							    </form>
+							</div>
 		                </div>
 		            </div>
 		        </c:forEach>
 		    </div>
 		    <div class="row justify-content-end">
-		       <a class="btn btn-primary btn-block" href="/PopupWrite.do" role="button">작성하기</a>
+		    	<a class="btn btn-primary btn-block" href="/PopupWrite.do" role="button">작성하기</a>
 		    </div>
 		</div>
 

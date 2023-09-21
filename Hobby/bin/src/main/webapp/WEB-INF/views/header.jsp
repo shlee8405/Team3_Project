@@ -59,7 +59,7 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-	z-index: 5 !important;
+	z-index: 1 !important;
 }
 
 /* Navbar section */
@@ -72,7 +72,7 @@ body {
     text-align: center;
     background-color:#637F42;
     top: 0;
-    z-index: 10;
+    z-index: 1;
   
 }
 
@@ -84,7 +84,7 @@ body {
 	text-align:center;
     background-color:#0F4200;
     bottom: 0;
-    z-index: 10;
+    z-index: 1;
     padding:0;
 	visibility: hidden;
 	opacity: 0;
@@ -220,7 +220,7 @@ body {
     padding: 0;
     background-color: #0F4200;
     opacity:100%;
-    z-index:8;
+    z-index:1;
 }
 
 .affix2 {
@@ -331,7 +331,7 @@ body {
 				
 					
 					<%
-					if (u_idx != null && !u_idx.isEmpty() && adminChecker==null) {
+					if (u_idx != null && !u_idx.isEmpty() ) {
 					%>
 					<li><a href="/myPagemain.do">/마이페이지.do</a></li>
 					<li><a href="/cusSer.do">/고객센터.do</a></li>
@@ -655,13 +655,11 @@ body {
 	
 <c:if test='${loginChk=="wrong"}'>
     <script>
-        alert("wrong pass");
     </script>
     <c:remove var="loginChk" scope="session" />
 </c:if>
 <c:if test='${loginChk=="invalid"}'>
     <script>
-        alert("wrong id");
     </script>
     <c:remove var="loginChk" scope="session" />
 </c:if>
