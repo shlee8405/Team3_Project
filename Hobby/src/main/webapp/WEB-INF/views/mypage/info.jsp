@@ -167,15 +167,39 @@
 </script>
 </head>
 <body>
+
 	<jsp:include page="../header.jsp" />
+	
 	<div style="position: relative; top: 200px; z-index: 1;"></div>
-	<div class="my-page-title">
-		<h1>내 정보</h1>
-	</div>
-	<div style="text-align: center;">
-	</div>
+		<br>
+        <br>
+        <br>
+        <br>
+        <br>	
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+	
+	<div class="container-fluid align-self-center" style="max-height: 73vh; background-color: #d4ead7; padding: 20px; border-radius: 10px; width: 50%">
+	<div style="background-color: white; padding: 20px; border-radius: 10px;">
+		<ul class="nav nav-tabs nav-justified border-0" style="font-size: 30px; margin: auto;">
+		  <li class="nav-item">
+		    <a class="nav-link " aria-current="page" style="color: black;" href = "/myPagemain.do">내가 찜한 캠핑장</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link " aria-current="page" style="color: black;" href = "/myreview.do">내가 작성한 리뷰</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link active border border-4 rounded border-success" href="/mypage.do" style="color: black;">내 정보</a>
+		  </li>
+		</ul>
+        <br>
+        <br>
+	
 	<!-- 메뉴바 -->
-<div class="sidebar">
+<!-- <div class="sidebar">
     <ul>
         <li>
             <button id="button1" type="button" onmouseover="applyHover('button1');" onmouseout="removeHover('button1');" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">
@@ -203,7 +227,8 @@
         </li>
     </ul>
 </div>
-    <div class="scrollable-content" style="width: 30%; margin: auto;">
+ -->
+    <div class="scrollable-content" style="width: 75%; margin: auto;">
     <div style="margin-top: 40px;"></div>
 		<form method="post">
 		<table style="border-collapse: collapse; width: 100%; border: 2px solid black;">
@@ -259,6 +284,8 @@
     </tfoot>
 </table>
 			</form>
+			</div>
+			</div>
 			</div>
 	<script type="text/javascript">
 		function goToPage(url){

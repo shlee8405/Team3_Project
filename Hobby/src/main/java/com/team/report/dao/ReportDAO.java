@@ -20,6 +20,14 @@ public class ReportDAO {
 		return sqlSessionTemplate.selectList("report.allList");
 	}
 	
+	public List<ReportVO> getUncheckedReport() {
+		return sqlSessionTemplate.selectList("report.uncheckedReport");
+	}
+	
+	public int checkReport() {
+		return sqlSessionTemplate.update("report.checkReport");
+	}
+	
 	public int getReportInsert(ReportVO rvo,String u_idx) {
 		
 		Map<String, Object> map = new HashMap<>();

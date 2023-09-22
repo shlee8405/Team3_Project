@@ -5,7 +5,7 @@
 <mapper namespace="counter">
 	
 	<select id="getViewCount" resultType="vcvo">
-		SELECT * FROM VIEWCOUNT WHERE vc_idx = 1
+		SELECT * FROM VIEWCOUNT ORDER BY vc_idx ASC LIMIT 7;
 	</select>
 	
 	<insert id="viewCount">
@@ -14,9 +14,12 @@
 		ON DUPLICATE KEY UPDATE vc_count = vc_count + 1
 	</insert>
 	
+	<select id="todayView" resultType="int">
+		SELECT vc_count FROM VIEWCOUNT where vc_date = CURDATE()
+	</select>
 	
 	<select id="getLoginCount" resultType="lcvo">
-		SELECT * FROM LOGINCOUNT WHERE lc_idx = 1
+		SELECT * FROM LOGINCOUNT ORDER BY lc_idx ASC LIMIT 7;
 	</select>
 	
 	<insert id="loginCount">
@@ -24,6 +27,10 @@
 		VALUES (CURDATE(), 1)
 		ON DUPLICATE KEY UPDATE lc_count = lc_count + 1
 	</insert>
+	
+	<select id="todayLogin" resultType="int">
+		SELECT lc_count FROM LOGINCOUNT where lc_date = CURDATE()
+	</select>
 	
 </mapper>
 

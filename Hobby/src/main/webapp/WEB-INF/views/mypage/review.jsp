@@ -135,9 +135,31 @@ function removeHover(buttonId) {
 <body>
 	<jsp:include page="../header.jsp" />
 	<div style="position: relative; top: 200px; z-index: 1;"></div>
-	<div class="my-page-title">
-		<h1>내가 작성한 리뷰</h1>
-	</div>
+	<br>
+        <br>
+        <br>
+        <br>
+        <br>	
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+	
+	<div class="container-fluid align-self-center" style="max-height: 73vh;">
+		<ul class="nav nav-tabs nav-justified border-0" style="font-size: 30px; width: 50%; margin: auto;">
+		  <li class="nav-item">
+		    <a class="nav-link " aria-current="page" style="color: black;" href = "/myPagemain.do">내가 찜한 캠핑장</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link " aria-current="page" style="color: black;" href = "/myreview.do">내가 작성한 리뷰</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link active border border-4 rounded border-success" href="/mypage.do" style="color: black;">내 정보</a>
+		  </li>
+		</ul>
+        <br>
+        <br>	
 	
 	<!-- 메뉴바 -->
 <div class="sidebar">
@@ -199,6 +221,7 @@ function removeHover(buttonId) {
 	     		</c:choose>
 			</tbody>
 		</table>
+		</div>
 	</div>
     <script type="text/javascript">
 		function goToPage(url){

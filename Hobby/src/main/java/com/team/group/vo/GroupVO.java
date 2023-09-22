@@ -5,9 +5,23 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class GroupVO {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private String g_idx, g_title, g_desc, g_date, g_cdo, g_gugun, g_location, g_maxPeople, g_curPeople, g_link, g_status, g_fname, g_oldfname, u_idx, g_intro;
+	private String g_idx, g_title, g_desc, g_date, g_cdo, g_gugun, g_location, g_maxPeople, g_curPeople, g_link, g_status, g_fname, g_oldfname, u_idx, g_intro, g_createdate;
+	
+	
 	private int limit, offset;
 	
+	
+	
+	
+	
+	public String getG_createdate() {
+		return g_createdate;
+	}
+
+	public void setG_createdate(String g_createdate) {
+		this.g_createdate = g_createdate;
+	}
+
 	public int getLimit() {
 		return limit;
 	}

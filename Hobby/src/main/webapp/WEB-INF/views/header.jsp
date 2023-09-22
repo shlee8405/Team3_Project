@@ -88,7 +88,7 @@ body {
     padding:0;
 	visibility: hidden;
 	opacity: 0;
-	transition: visibility 0s, opacity 0.3s linear;
+	transition: visibility 0s, opacity 0.5s linear;
 }
 .navHD, ::after, ::before {
     box-sizing: content-box;
@@ -310,17 +310,338 @@ body {
 	}
 
     </script>
+    
+    <script type="text/javascript">
+	/* 로그인 모달 스크립트 */
+	$(document)
+			.ready(
+					function() {
+						$("#idRecoveryForm")
+								.submit(
+										function(event) {
+											console.log("dsadsdsa")
+											event.preventDefault(); // Prevent the default form submission
+
+											// Collect form data
+											var formData = "email="
+													+ encodeURIComponent($(
+															"#email").val());
+											// Use AJAX to check email availability first
+											$
+													.ajax({
+														url : "/forgotId.do", // Endpoint for 아이디찾기
+														type : "POST",
+														data : formData,
+														dataType : "text", // Response data type
+														contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+														success : function(
+																response) {
+															console
+																	.log(
+																			"Response:",
+																			response); // Add this line for debugging
+															if (response) {
+																// Handle 아이디찾기 success
+																var foundId = response;
+																alert("아이디를 찾았습니다: "
+																		+ response);
+																$(
+																		"#idRecoveryModal")
+																		.modal(
+																				"hide"); // Close the modal
+															} else {
+																// Handle 아이디찾기 error
+																alert("아이디를 찾을 수 없습니다. 다시 시도해주세요.");
+															}
+														},
+														error : function(error) {
+															console.log(
+																	"Error:",
+																	error);
+															// Handle 아이디찾기 error if needed
+														}
+													});
+										});
+					});
+	
+	$(document).ready(function() {
+				$("#pwdRecoveryForm").submit(function(event) {
+									event.preventDefault(); // Prevent the default form submission
+									// Collect form data
+									var formData = "email2=" + encodeURIComponent($("#email2").val());
+									// Use AJAX to check email availability first
+										$.ajax({
+												url : "/forgotPwd.do", // Endpoint for 아이디찾기
+												type : "POST",
+												data : formData,
+												dataType : "text", // Response data type
+												contentType : "application/x-www-form-urlencoded; charset=UTF-8",
+												success : function(response) {
+													console.log("Response:",response); // Add this line for debugging
+													if (response) {
+														// Handle 아이디찾기 success
+														var foundPw = response;
+														alert("임시 비밀번호가 발급되었습니다.: "+ response);
+														$("#pwdRecoveryModal").modal("hide"); // Close the modal
+													} else {
+														// Handle 아이디찾기 error
+														alert("비번을 찾을 수 없습니다. 다시 시도해주세요.");
+													}
+												},
+												error : function(error) {
+													console.log("Error:",error);
+													// Handle 아이디찾기 error if needed
+												}
+											});
+								});
+			});
+	
+	$(document)
+	.ready(
+	function() {
+		console.log('베스트캠핑장가져오기 시작');
+	$.ajax({
+		url : "/campBest.do",
+		method : "get",
+		dataType : "json", 
+		success : function(data) {
+			// 'bestCamps'라는 키로 서버에서 보낸 데이터 리스트를 찾는다.
+			// var dataList = data.bestCamps;
+			console.log('베스트캠핑장가져오기 inside function(data){}');
+			var list = "";
+
+			
+			$.each(data, function (index, response) {
+				// 제공 이미지 없을 시
+				var imageUrl = response.firstImageUrl == "" ? "resources/images/beach01.jpg" : response.firstImageUrl;
+				
+				list += "<div class='imgdiv' onclick=\"window.location.href='/campDetail.do?keyword="+response.facltNm+"'\">" 
+					+"<img class='img' src='"+imageUrl+"'alt='img1' width='100%' height='100%'" 
+						+ "style='width: 100%; object-fit: cover; position: relative; border-radius:1rem;'>"
+						+"<span class='placetitle'><h1>"+response.facltNm+"</h1></span>"
+						+"</div>"
+						
+                }); //each
+                
+                $("#image_best3_list").append(list); //append
+                
+             	// 별 색칠 로직
+                $('.rating').each(function() {
+                    var rating = $(this).data('rating');
+                    $(this).find('.fa').each(function(index) {
+                        if (index < rating) {
+                        	$(this).removeClass('disable');  // 색칠된 별은 .disable 클래스 제거
+                        } else {
+                            $(this).addClass('disable');  // 색칠되지 않은 별은 .disable 클래스 추가
+                        }
+                    });
+                });
+                $(".small-title").show();
+                
+            },
+            error: function() {
+            	alert("에러");
+            	//loading = false;
+            }
+        });
+	}
+	);
+</script>
+
+<script type="text/javascript">
+	/*회원가입 모달 스크립트*/
+	function go_login() {
+		location.href = "/login.do"
+	}
+	// 추가된 함수: 생일 형식 유효성 검사
+	function validateBirthday() {
+		var birthdayInput = document.getElementById("u_birthday");
+		var birthdayValue = birthdayInput.value;
+
+		// 생일을 Date 객체로 변환하여 현재 날짜와 비교
+		var selectedDate = new Date(birthdayValue);
+		var currentDate = new Date();
+
+		if (isNaN(selectedDate.getTime())) {
+			// 날짜가 유효하지 않은 경우
+			alert("유효하지 않은 날짜입니다.");
+			birthdayInput.value = ""; // 입력값 초기화
+			return;
+		}
+
+		if (selectedDate > currentDate) {
+			// 미래의 날짜인 경우
+			alert("미래의 날짜는 선택할 수 없습니다.");
+			birthdayInput.value = ""; // 입력값 초기화
+			return;
+		}
+	}
+
+	// 추가된 함수: 핸드폰 번호 형식 유효성 검사
+	function validatePhoneNumber() {
+		var phoneNumberInput = document.getElementById("u_phone");
+		var phoneNumberValue = phoneNumberInput.value;
+
+		// 숫자와 하이픈(-)을 제외한 모든 문자 제거
+		var cleanPhoneNumber = phoneNumberValue.replace(/[^\d-]/g, "");
+
+		// 하이픈(-)을 기준으로 분리
+		var phoneNumberParts = cleanPhoneNumber.split("-");
+
+		// 형식 체크: 숫자 3-4-4 형태인지 검사
+		if (phoneNumberParts.length !== 3 || phoneNumberParts[0].length !== 3
+				|| phoneNumberParts[1].length !== 4
+				|| phoneNumberParts[2].length !== 4) {
+			alert("올바른 핸드폰 번호 형식이 아닙니다.");
+			phoneNumberInput.value = ""; // 입력값 초기화
+			return;
+		}
+
+		// 유효한 핸드폰 번호
+		// 이곳에서 필요한 추가 동작을 수행할 수 있습니다.
+	}
+	function checkAgreement() {
+		var agreeCheckbox = document.getElementById("agreeCheckbox");
+		var submitButton = document.getElementById("submitButton"); // 예시: 버튼 요소의 ID
+
+		if (agreeCheckbox.checked) {
+			// 체크되었을 때 수행할 동작
+			submitButton.disabled = false; // 버튼을 활성화
+		} else {
+			// 해제되었을 때 수행할 동작
+			submitButton.disabled = true; // 버튼을 비활성화
+		}
+	}
+	function validateForm() {
+		var agreeCheckbox = document.getElementById("agreeCheckbox");
+
+		if (!agreeCheckbox.checked) {
+			alert("이용약관에 동의해야 회원가입이 가능합니다.");
+			return false; // Prevent form submission
+		}
+
+		return true; // Allow form submission
+	}
+
+	function validateForm() {
+		var agreeCheckbox = document.getElementById("agreeCheckbox");
+		var emailInput = document.getElementById("u_email");
+		var idInput = document.getElementById("u_id");
+		var pwInput = document.getElementById("upwd1");
+		var confirmPwInput = document.getElementById("upwd2");
+		var nicknameInput = document.getElementById("u_nickname");
+		var birthdayInput = document.getElementById("u_birthday");
+		var phoneInput = document.getElementById("u_phone");
+		var nameInput = document.getElementById("u_name");
+
+		if (emailInput.value === "" || idInput.value === ""
+				|| pwInput.value === "" || confirmPwInput.value === ""
+				|| nicknameInput.value === "" || birthdayInput.value === ""
+				|| phoneInput.value === "" || nameInput.value === "") {
+			alert("모든 필수 항목을 입력해주세요.");
+			return false;
+		}
+
+		// You can add additional validation logic here if needed
+
+		return true;
+	}
+
+	/* 이메일 u_email 중복확인 기능 jquery */
+	$(document)
+			.ready(
+					function() {
+						$("#emailBtn").click(
+								function() {
+									var email = $('#u_email').val();
+									alert(email);
+									console.log(email)
+									$.ajax({
+										url : '/emailCheck.do', // 중복확인을 처리하는 서버 URL (적절히 변경 필요)
+										type : 'post', // POST 방식으로 요청
+										data : email, // 서버로 전달할 데이터
+										success : function(result) {
+											if (result === "available") {
+												$('#emailDupCheckMsg').text(
+														"사용 가능한 이메일입니다.").css(
+														"color", "green");
+											} else if (result === "duplicate") {
+												$('#emailDupCheckMsg').text(
+														"이미 사용 중인 이메일입니다.")
+														.css("color", "red");
+											}
+										},
+										error : function() {
+											$('#emailDupCheckMsg').text(
+													"에러가 발생했습니다.").css("color",
+													"red");
+										}
+									});
+								});
+
+						/* 아이디 u_id 중복확인 기능 jquery */
+						$(document)
+								.ready(
+										function() {
+											$("#idBtn")
+													.click(
+															function() {
+																var id = $(
+																		'#u_id')
+																		.val();
+																alert(id);
+																console.log(id)
+																$
+																		.ajax({
+																			url : '/idCheck.do', // 아이디 중복확인을 처리하는 서버 URL (적절히 변경 필요)
+																			type : 'post', // POST 방식으로 요청
+																			data : id, // 서버로 전달할 데이터
+																			success : function(
+																					result) {
+																				if (result === "available") {
+																					$(
+																							'#chkIdMessage')
+																							.text(
+																									"사용 가능한 아이디입니다.")
+																							.css(
+																									"color",
+																									"green");
+																				} else if (result === "duplicate") {
+																					$(
+																							'#chkIdMessage')
+																							.text(
+																									"이미 사용 중인 아이디입니다.")
+																							.css(
+																									"color",
+																									"red");
+																				}
+																			},
+																			error : function() {
+																				$(
+																						'#chkIdMessage')
+																						.text(
+																								"에러가 발생했습니다.")
+																						.css(
+																								"color",
+																								"red");
+																			}
+																		});
+															});
+										});
+					});
+</script>
+    
+    
 </head>
 <body>
 
     <nav class="navHD">
         <div class="containerHD">
             <div class="logo">
-                <a href="/home.do"><img src="/resources/images/logo3.png" style="width:200px; position:relative; top:-25px; margin:0;"></a>
+                <a href="/home.do" style="height: 10px;"><img src="/resources/images/logo3.png" style="width:200px; height:105px; position:relative; top:-50px; margin:0;"></a>
             </div>
             <div id="mainListDiv" class="main_list">
                 <ul class="navlinks">
-                     <li><a href="/checkSession.do" style="text-family:sans-seriff; font-size: 1rem;">sysout sessionIdx</a></li>
                     <li><a href="/campMain.do">/캠핑장.do</a></li>
 					<li><a href="/groupList.do">/캠핑모임.do</a></li>
 
@@ -472,8 +793,8 @@ body {
 								<div class="login_api" style="text-align: center;">
 									<a href="javascript:void(0)" id="kakaoLoginBtn"><img
 										src="resources/images/kakao_login_btn.png"
-										style="width: 100%; height: 50px;"></a>
-									<div id="naver_id_login" style="margin-top: 10px;"></div>
+										style="width: 70%; height: 50px;"></a>
+									<div id="naver_id_login" style="margin-top: 10px; height: 10px;"></div>
 								</div>
 							</div>
 						</form>
@@ -569,13 +890,11 @@ body {
 	<script type="text/javascript"src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js"charset="utf-8"></script>
 	<script type="text/javascript"src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
 		
-	<!-- 네이버 로그인 버튼 노출 영역 -->
-	<div id="naver_id_login"></div>
 	<!-- //네이버 로그인 버튼 노출 영역 -->
 	<script type="text/javascript">
 		var naver_id_login = new naver_id_login("G9mEXjeV6N3JKbzZvasQ", "http://localhost:8090");
 		var state = naver_id_login.getUniqState();
-		naver_id_login.setButton("white", 2,40);
+		naver_id_login.setButton("green",3,50);
 		naver_id_login.setDomain(".service.com");
 		naver_id_login.setState(state);
 		naver_id_login.init_naver_id_login();
@@ -638,9 +957,8 @@ body {
 					<!-- Input fields for 비밀번호찾기 -->
 					<form id="pwdRecoveryForm">
 						<div class="mb-3">
-							<label for="email" class="form-label">이메일</label> <input
-								type="email" class="form-control" id="email" name="email"
-								placeholder="이메일을 입력하세요">
+							<label for="email2" class="form-label">아이디</label>
+							<input type="text" class="form-control" id="email2" name="email2" placeholder="아이디를 입력하세요.">
 						</div>
 						<!-- Add more input fields if needed -->
 						<button type="submit" class="btn btn-primary">비밀번호 찾기</button>
@@ -652,7 +970,6 @@ body {
 		</div>
 	</div>
 
-	
 <c:if test='${loginChk=="wrong"}'>
     <script>
     </script>
@@ -665,12 +982,8 @@ body {
 </c:if>
 
     
-    
-    
-    
-    
     <footer class="footerHD" >
-    	<div> hi${loginChk}</div>
+    	<div> <span style="font-family:MBCM; color:rgba(255,255,255,0.8);">© 2023 캠핑 모임 & 명소 (Camping Meetups & Spots) /camping.do. 판권 소유. </span> </div>
     	<h1></h1>
     </footer>
 </body>

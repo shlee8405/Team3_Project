@@ -2,7 +2,17 @@ package com.team.user.vo;
 
 public class UserVO {
 
-	private String u_idx, u_id, u_nickname, u_pw, u_name,  u_email, u_birthday, u_phone, u_ban,u_terms, u_status;
+	private String u_idx, u_id, u_nickname, u_pw, u_name,  u_email, u_birthday, u_phone, u_ban,u_terms, u_status, u_date;
+
+	
+	
+	public String getU_date() {
+		return u_date;
+	}
+
+	public void setU_date(String u_date) {
+		this.u_date = u_date;
+	}
 
 	public String getU_id() {
 		return u_id;

@@ -99,7 +99,6 @@ color:#ffffff!important;
             <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li><a href="/adminHome.do" class="ps-4 link-dark rounded sidebar-link navtext">대시보드 홈</a></li>
                 <li><a href="/adminMainPageModifier.do" class="ps-4 link-dark rounded sidebar-link navtext">메인페이지 이미지 설정</a></li>
-                <li><a href="#" class="ps-4 link-dark rounded sidebar-link navtext">33</a></li>
             </ul>
             </div>
         </li>

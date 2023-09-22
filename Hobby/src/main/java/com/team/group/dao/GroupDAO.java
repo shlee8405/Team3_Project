@@ -22,6 +22,9 @@ public class GroupDAO {
 	public int getTotalCount() {
 		return sqlSessionTemplate.selectOne("group.count");
 	}
+	public int getGroupsToday() {
+		return sqlSessionTemplate.selectOne("group.groupsToday");
+	}
 	
 	public List<GroupVO> getAllGroups(){
 		return sqlSessionTemplate.selectList("group.allList");

@@ -1,5 +1,7 @@
 package com.team.counter.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +17,11 @@ public class ViewcounterService {
 		return viewcounterDAO.viewCount();
 	}
 	
-	public VCVO getViewCount() {
+	public List<VCVO> getViewCount() {
 		return viewcounterDAO.getViewCount();
+	}
+	
+	public int todayView() {
+		return viewcounterDAO.todayView();
 	}
 }
