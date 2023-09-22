@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -46,12 +47,15 @@ public class CampController {
 	 private final String serviceKey =
 	 "y0U8GEHxs%2FsrsVl%2FVW%2FZvc5mdDN%2Bpnw6ak%2BY3Y2c5VoBpmTaKUPEkUmhEaTrrnTcYq5I8pHh0NJ5k43p%2FoSoTQ%3D%3D";
 	 
+	 private final String serviceKey2 =
+			 "8uQ4gUl3L6XORKeCrIfIYnMZjwr0SKtgx%2F3OOWbtGXEQ0nB0fw%2B1lSw0MPSC85m5dlFX7S8N7p187kRaOJD3Tg%3D%3D";
+	 
 	private final String mobileOS = "ETC";
 	private final String mobileApp = "MobileApp";
 
 	// 캠핑장 리스트 가져오기(고캠핑 api basedList 호출)
 	@GetMapping("/campList.do")
-	public List<CampVO> getCampList(@RequestParam(defaultValue = "1") int pageNo) throws URISyntaxException {
+	public List<CampVO> getCampList(@RequestParam(defaultValue = "1") int pageNo, HttpSession session) throws URISyntaxException {
 
 		// 리퀘스트 파라미터
 		int numOfRows = 6; // 보여줄 리스트 개수
@@ -63,35 +67,52 @@ public class CampController {
 		URI uri = new URI(apiUrl);
 
 		ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+		System.out.println(response);
+		// response가 '{' 로 시작하면 json으로 정상으로 옴. 트래픽 이슈로 오류나면 XML으로 옴으로, '<'로 시작함.
+		if(response.toString().charAt(5)=='{') {
+			// Body 정보만 필요하기 때문에
+			JSONObject jsonResponse = new JSONObject(response.getBody());
+			JSONArray item = jsonResponse.getJSONObject("response").getJSONObject("body").getJSONObject("items")
+					.getJSONArray("item");
 
-		// Body 정보만 필요하기 때문에
-		JSONObject jsonResponse = new JSONObject(response.getBody());
+			// CampVO타입으로 dataList라는 빈 배열 선언
+			List<CampVO> dataList = new ArrayList<>();
 
-		JSONArray item = jsonResponse.getJSONObject("response").getJSONObject("body").getJSONObject("items")
-				.getJSONArray("item");
+			for (int i = 0; i < item.length(); i++) {
+				JSONObject oneItem = item.getJSONObject(i);
 
-		// CampVO타입으로 dataList라는 빈 배열 선언
-		List<CampVO> dataList = new ArrayList<>();
+				CampVO cvo = new CampVO();
+				cvo.setFacltNm(oneItem.getString("facltNm"));
 
-		for (int i = 0; i < item.length(); i++) {
-			JSONObject oneItem = item.getJSONObject(i);
+				// averageRating 값을 반올림하여 정수값으로 변환
+				double rawAverageRating = campService.getAverageRating(cvo.getFacltNm());
+				int averageRating = (int) Math.round(rawAverageRating);
 
-			CampVO cvo = new CampVO();
-			cvo.setFacltNm(oneItem.getString("facltNm"));
+				cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
+				cvo.setAddr1(oneItem.getString("addr1"));
+				cvo.setDoNm(oneItem.getString("doNm"));
+				cvo.setAverageRating(averageRating);
+				dataList.add(cvo);
 
-			// averageRating 값을 반올림하여 정수값으로 변환
-			double rawAverageRating = campService.getAverageRating(cvo.getFacltNm());
-			int averageRating = (int) Math.round(rawAverageRating);
-
-			cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
-			cvo.setAddr1(oneItem.getString("addr1"));
-			cvo.setDoNm(oneItem.getString("doNm"));
-			cvo.setAverageRating(averageRating);
-			dataList.add(cvo);
-
+			}
+			return dataList;
+		} else if (response.toString().charAt(5)=='<') {
+			List<CampVO> dataList = new ArrayList<>();
+			CampVO errorVO = new CampVO();
+			errorVO.setU_id("traffic");
+			dataList.add(errorVO);
+			return dataList;
+		} else {
+			List<CampVO> dataList = new ArrayList<>();
+			CampVO errorVO = new CampVO();
+			errorVO.setU_id("error");
+			dataList.add(errorVO);
+			return dataList;
 		}
-		return dataList;
 	}
+			
+			
+	
 
 	@GetMapping("/campMain.do")
 	public ModelAndView goCampMain() {
@@ -168,49 +189,105 @@ public class CampController {
 	// 캠핑장 베스트3
 	@GetMapping("/campBest.do")
 	public List<CampVO> getTop3Camps() throws URISyntaxException, UnsupportedEncodingException {
-		// Map<String, Object> response = new HashMap<>();
-		List<String> bestCampNames = campService.getBest3(); // 상위 3개 캠핑장 이름 가져오기
-
-		List<CampVO> bestDataList = new ArrayList<>();
-
-		for (String campName : bestCampNames) {
-			// API 호출 로직
-			String apiUrl = targetUrl + "/searchList" + "?numOfRows=" + 1 // 한 건만 가져올 것이므로 numOfRows는 1
-					+ "&pageNo=" + 1 + "&MobileOS=" + mobileOS + "&MobileApp=" + mobileApp + "&serviceKey=" + serviceKey
-					+ "&_type=json" + "&keyword=" + URLEncoder.encode(campName, StandardCharsets.UTF_8.toString());
-
-			URI uri = new URI(apiUrl);
-			ResponseEntity<String> apiResponse = restTemplate.getForEntity(uri, String.class);
-
-			JSONObject jsonResponse = new JSONObject(apiResponse.getBody());
-
-			JSONArray items = jsonResponse.getJSONObject("response").getJSONObject("body").getJSONObject("items")
-					.getJSONArray("item");
-
-			// 첫번째 아이템 가져오기 (우리는 numOfRows를 1로 설정했으므로 하나만 있다)
-			JSONObject oneItem = items.getJSONObject(0);
-
-			// 정보 추출 및 CampVO 객체 생성
-			CampVO cvo = new CampVO();
-			cvo.setFacltNm(oneItem.getString("facltNm"));
-
-			// averageRating 값을 반올림하여 정수값으로 변환
-			double rawAverageRating = campService.getAverageRating(cvo.getFacltNm());
-			int averageRating = (int) Math.round(rawAverageRating);
-
-			cvo.setIntro(oneItem.getString("intro"));
-			cvo.setAddr1(oneItem.getString("addr1"));
-			cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
-			cvo.setDoNm(oneItem.getString("doNm"));
-			cvo.setAverageRating(averageRating);
-
-			// CampVO 객체를 리스트에 추가
-			bestDataList.add(cvo);
+		try { /* 첫 serviceKey로 시도 */
+			// Map<String, Object> response = new HashMap<>();
+			List<String> bestCampNames = campService.getBest3(); // 상위 3개 캠핑장 이름 가져오기
+			
+			List<CampVO> bestDataList = new ArrayList<>();
+			
+			for (String campName : bestCampNames) {
+				// API 호출 로직
+				String apiUrl = targetUrl + "/searchList" + "?numOfRows=" + 1 // 한 건만 가져올 것이므로 numOfRows는 1
+						+ "&pageNo=" + 1 + "&MobileOS=" + mobileOS + "&MobileApp=" + mobileApp + "&serviceKey=" + serviceKey
+						+ "&_type=json" + "&keyword=" + URLEncoder.encode(campName, StandardCharsets.UTF_8.toString());
+				
+				URI uri = new URI(apiUrl);
+				ResponseEntity<String> apiResponse = restTemplate.getForEntity(uri, String.class);
+				
+				JSONObject jsonResponse = new JSONObject(apiResponse.getBody());
+				
+				JSONArray items = jsonResponse.getJSONObject("response").getJSONObject("body").getJSONObject("items")
+						.getJSONArray("item");
+				
+				// 첫번째 아이템 가져오기 (우리는 numOfRows를 1로 설정했으므로 하나만 있다)
+				JSONObject oneItem = items.getJSONObject(0);
+				
+				// 정보 추출 및 CampVO 객체 생성
+				CampVO cvo = new CampVO();
+				cvo.setFacltNm(oneItem.getString("facltNm"));
+				
+				// averageRating 값을 반올림하여 정수값으로 변환
+				double rawAverageRating = campService.getAverageRating(cvo.getFacltNm());
+				int averageRating = (int) Math.round(rawAverageRating);
+				
+				cvo.setIntro(oneItem.getString("intro"));
+				cvo.setAddr1(oneItem.getString("addr1"));
+				cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
+				cvo.setDoNm(oneItem.getString("doNm"));
+				cvo.setAverageRating(averageRating);
+				
+				// CampVO 객체를 리스트에 추가
+				bestDataList.add(cvo);
+			}
+			
+			// response.put("bestCamps", bestDataList);
+			return bestDataList;
+		} catch (Exception e) { /*첫번째 키가 오류나면 serviceKey2로 실행.*/
+			// Map<String, Object> response = new HashMap<>();
+			List<String> bestCampNames = campService.getBest3(); // 상위 3개 캠핑장 이름 가져오기
+	
+			List<CampVO> bestDataList = new ArrayList<>();
+	
+			for (String campName : bestCampNames) {
+				// API 호출 로직
+				String apiUrl = targetUrl + "/searchList" + "?numOfRows=" + 1 // 한 건만 가져올 것이므로 numOfRows는 1
+						+ "&pageNo=" + 1 + "&MobileOS=" + mobileOS + "&MobileApp=" + mobileApp + "&serviceKey=" + serviceKey2
+						+ "&_type=json" + "&keyword=" + URLEncoder.encode(campName, StandardCharsets.UTF_8.toString());
+	
+				URI uri = new URI(apiUrl);
+				ResponseEntity<String> apiResponse = restTemplate.getForEntity(uri, String.class);
+				
+				// API요청이 JSON으로 제대로 오는지 확인. '{'이면 제대로 옴. '<'이면 트래픽 이슈. else면 다른 오류
+				if(apiResponse.toString().charAt(5)=='{') {
+					JSONObject jsonResponse = new JSONObject(apiResponse.getBody());
+		
+					JSONArray items = jsonResponse.getJSONObject("response").getJSONObject("body").getJSONObject("items")
+							.getJSONArray("item");
+		
+					// 첫번째 아이템 가져오기 (우리는 numOfRows를 1로 설정했으므로 하나만 있다)
+					JSONObject oneItem = items.getJSONObject(0);
+		
+					// 정보 추출 및 CampVO 객체 생성
+					CampVO cvo = new CampVO();
+					cvo.setFacltNm(oneItem.getString("facltNm"));
+		
+					// averageRating 값을 반올림하여 정수값으로 변환
+					double rawAverageRating = campService.getAverageRating(cvo.getFacltNm());
+					int averageRating = (int) Math.round(rawAverageRating);
+		
+					cvo.setIntro(oneItem.getString("intro"));
+					cvo.setAddr1(oneItem.getString("addr1"));
+					cvo.setFirstImageUrl(oneItem.getString("firstImageUrl"));
+					cvo.setDoNm(oneItem.getString("doNm"));
+					cvo.setAverageRating(averageRating);
+		
+					// CampVO 객체를 리스트에 추가
+					bestDataList.add(cvo);
+				} else if (apiResponse.toString().charAt(5)=='<') {
+					CampVO errorVO = new CampVO();
+					errorVO.setU_id("traffic");
+					bestDataList.add(errorVO);
+					
+				} else {
+					CampVO errorVO = new CampVO();
+					errorVO.setU_id("error");
+					bestDataList.add(errorVO);
+				}
+			}
+			// response.put("bestCamps", bestDataList);
+			return bestDataList;
+			}
 		}
-
-		// response.put("bestCamps", bestDataList);
-		return bestDataList;
-	}
 
 	// 캠핑장 상세보기 호출하기
 	@GetMapping("/campDetail.do")

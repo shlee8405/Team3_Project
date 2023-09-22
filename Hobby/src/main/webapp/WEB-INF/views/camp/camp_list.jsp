@@ -160,66 +160,74 @@
 			method : "get",
 			data : dataObj,
 			dataType : "json", 
+			async: false,
 			success : function(data) {
-
-				// 검색결과가 없으면 dataList에 message 하나만 온다.
-		        if(data.length == 1 && data[0].message) {
-		            console.log('마지막 페이지입니다.');
-		            alert(data[0].message);
-		            msg = data[0].message;
-		            return;  // 메시지만 있으므로 추가 작업을 하지 않고 반환
-		        }
-								
-		        var list = "";
 				
-				$.each(data, function (index, dataList) {
+				// 컨트롤러에서 에러났는지 확인
+				if (data[0].u_id == "traffic") {
+					alert("트래픽 문제로 인해 불러올 수 없었습니다. 나중에 다시 시도하세요.");
+				} else if (data[0].u_id == "error") {
+					alert("공공데이터 접속에 문제가 생겼습니다. 개발자에게 문의하세요.")
+				} else {
+					// 검색결과가 없으면 dataList에 message 하나만 온다.
+			        if(data.length == 1 && data[0].message) {
+			            console.log('마지막 페이지입니다.');
+			            alert(data[0].message);
+			            msg = data[0].message;
+			            return;  // 메시지만 있으므로 추가 작업을 하지 않고 반환
+			        }
+									
+			        var list = "";
 					
-					// 제공 이미지 없을 시
-					var imageUrl = dataList.firstImageUrl == "" ? "resources/images/default_camp_img.jpg" : dataList.firstImageUrl;
-					
-					list += "<div class='product-grid'>"
-									+"<div class='product-image'>"
-									+"<a href='/campDetail.do?keyword=" + dataList.facltNm + "'>"
-									+"<img class='pic-1' src=" + imageUrl + ">" 
-									+"<img class='pic-2' src=" + imageUrl + ">" 
-									+"</a>" 
-									+"<span class='product-new-label'>" + dataList.doNm + "</span>" 
-								+"</div>" 
-								+"<div class='product-content'>" 
-									+"<div class='price'>" 
-										+"<a class='title' href='/campDetail.do?keyword=" + dataList.facltNm + "'>" + dataList.facltNm + "</a>" 
-										+"<span class='addr1'>" + dataList.addr1 + "</span>" 
+					$.each(data, function (index, dataList) {
+						
+						// 제공 이미지 없을 시
+						var imageUrl = dataList.firstImageUrl == "" ? "resources/images/default_camp_img.jpg" : dataList.firstImageUrl;
+						
+						list += "<div class='product-grid'>"
+										+"<div class='product-image'>"
+										+"<a href='/campDetail.do?keyword=" + dataList.facltNm + "'>"
+										+"<img class='pic-1' src=" + imageUrl + ">" 
+										+"<img class='pic-2' src=" + imageUrl + ">" 
+										+"</a>" 
+										+"<span class='product-new-label'>" + dataList.doNm + "</span>" 
 									+"</div>" 
-										+"<ul class='rating' data-rating='" + dataList.averageRating + "'>"  // data-rating 추가
-		                                    +"<li class='fa fa-star'></li>"
-		                                    +"<li class='fa fa-star'></li>"
-		                                    +"<li class='fa fa-star'></li>"
-		                                    +"<li class='fa fa-star'></li>"
-		                                    +"<li class='fa fa-star'></li>"
-                                		+"</ul>"
-									+"<a class='add-to-cart' href='#'>" + "View Details" + "</a>" 
-								+"</div>"
-							+"</div>"                  
-	                }); //each
-	                
-	                $("#camp_list").append(list); //append
-	                
-	             	// 별 색칠 로직
-	                $('.rating').each(function() {
-	                    var rating = $(this).data('rating');
-	                    $(this).find('.fa').each(function(index) {
-	                        if (index < rating) {
-	                        	$(this).removeClass('disable');  // 색칠된 별은 .disable 클래스 제거
-	                        } else {
-	                            $(this).addClass('disable');  // 색칠되지 않은 별은 .disable 클래스 추가
-	                        }
-	                    });
-	                });
-	                
-					pageNo++;
-	                loading = false; // 데이터 로드 완료
-	                
-	            },
+									+"<div class='product-content'>" 
+										+"<div class='price'>" 
+											+"<a class='title' href='/campDetail.do?keyword=" + dataList.facltNm + "'>" + dataList.facltNm + "</a>" 
+											+"<span class='addr1'>" + dataList.addr1 + "</span>" 
+										+"</div>" 
+											+"<ul class='rating' data-rating='" + dataList.averageRating + "'>"  // data-rating 추가
+			                                    +"<li class='fa fa-star'></li>"
+			                                    +"<li class='fa fa-star'></li>"
+			                                    +"<li class='fa fa-star'></li>"
+			                                    +"<li class='fa fa-star'></li>"
+			                                    +"<li class='fa fa-star'></li>"
+	                                		+"</ul>"
+										+"<a class='add-to-cart' href='#'>" + "View Details" + "</a>" 
+									+"</div>"
+								+"</div>"                  
+		                }); //each
+		                
+		                $("#camp_list").append(list); //append
+		                
+		             	// 별 색칠 로직
+		                $('.rating').each(function() {
+		                    var rating = $(this).data('rating');
+		                    $(this).find('.fa').each(function(index) {
+		                        if (index < rating) {
+		                        	$(this).removeClass('disable');  // 색칠된 별은 .disable 클래스 제거
+		                        } else {
+		                            $(this).addClass('disable');  // 색칠되지 않은 별은 .disable 클래스 추가
+		                        }
+		                    });
+		                });
+		                
+						pageNo++;
+		                loading = false; // 데이터 로드 완료
+		                
+		            }
+				},
 	            error: function() {
 	            	alert("에러");
 	            	loading = false;
@@ -282,54 +290,61 @@
 					// 'bestCamps'라는 키로 서버에서 보낸 데이터 리스트를 찾는다.
 					// var dataList = data.bestCamps;
 					var list = "";
-
+					if (data[0].u_id == "traffic") {
+						list += "<div class='product-grid' style='width:100%; height:auto;'><h1>트래픽 문제로 베스트 캠핑장을 불러오지 못했습니다. <br> 나중에 다시 시도해주세요.</h1></div>";
+						$('#camp_best3_list').append(list);
+						$('#camp_best3_list').css("grid-template-columns","repeat(1,1fr)");
+					} else if (data[0].u_id == "error") {
+						alert("베스트 3 캠핑장을 불러오는데 문제가 생겼습니다. 개발자에게 문의하세요.")
+					} else {
 					
-					$.each(data, function (index, response) {
-						// 제공 이미지 없을 시
-						var imageUrl = response.firstImageUrl == "" ? "resources/images/default_camp_img.jpg" : response.firstImageUrl;
-						
-						list += "<div class='product-grid'>"
-									+"<div class='product-image'>"
-										+"<a href='#'>"
-										+"<img class='pic-1' src=" + imageUrl + ">" 
-										+"<img class='pic-2' src=" + imageUrl + ">" 
-										+"</a>" 
-										+"<span class='product-new-label'>" + response.doNm + "</span>" 
-										+"<span class='product-discount-label'>" + "BEST" + "</span>"
-									+"</div>" 
-									+"<div class='product-content'>" 
-										+"<div class='price'>" 
-											+"<a class='title' href='/campDetail.do?keyword=" + response.facltNm + "'>" + response.facltNm + "</a>" 
-											+"<span class='addr1'>" + response.addr1 + "</span>" 
+						$.each(data, function (index, response) {
+							// 제공 이미지 없을 시
+							var imageUrl = response.firstImageUrl == "" ? "resources/images/default_camp_img.jpg" : response.firstImageUrl;
+							
+							list += "<div class='product-grid'>"
+										+"<div class='product-image'>"
+											+"<a href='#'>"
+											+"<img class='pic-1' src=" + imageUrl + ">" 
+											+"<img class='pic-2' src=" + imageUrl + ">" 
+											+"</a>" 
+											+"<span class='product-new-label'>" + response.doNm + "</span>" 
+											+"<span class='product-discount-label'>" + "BEST" + "</span>"
 										+"</div>" 
-										+"<ul class='rating' data-rating='" + response.averageRating + "'>"  // data-rating 추가
-		                                    +"<li class='fa fa-star'></li>"
-		                                    +"<li class='fa fa-star'></li>"
-		                                    +"<li class='fa fa-star'></li>"
-		                                    +"<li class='fa fa-star'></li>"
-		                                    +"<li class='fa fa-star'></li>"
-                            		+"</ul>"
-										+"<a class='add-to-cart' href='#'>" + "View Details" + "</a>" 
-									+"</div>"
-								+"</div>"                  
-		                }); //each
-		                
-		                $("#camp_best3_list").append(list); //append
-		                
-		             	// 별 색칠 로직
-		                $('.rating').each(function() {
-		                    var rating = $(this).data('rating');
-		                    $(this).find('.fa').each(function(index) {
-		                        if (index < rating) {
-		                        	$(this).removeClass('disable');  // 색칠된 별은 .disable 클래스 제거
-		                        } else {
-		                            $(this).addClass('disable');  // 색칠되지 않은 별은 .disable 클래스 추가
-		                        }
-		                    });
-		                });
-		                $(".small-title").show();
-		                
-		            },
+										+"<div class='product-content'>" 
+											+"<div class='price'>" 
+												+"<a class='title' href='/campDetail.do?keyword=" + response.facltNm + "'>" + response.facltNm + "</a>" 
+												+"<span class='addr1'>" + response.addr1 + "</span>" 
+											+"</div>" 
+											+"<ul class='rating' data-rating='" + response.averageRating + "'>"  // data-rating 추가
+			                                    +"<li class='fa fa-star'></li>"
+			                                    +"<li class='fa fa-star'></li>"
+			                                    +"<li class='fa fa-star'></li>"
+			                                    +"<li class='fa fa-star'></li>"
+			                                    +"<li class='fa fa-star'></li>"
+	                            		+"</ul>"
+											+"<a class='add-to-cart' href='#'>" + "View Details" + "</a>" 
+										+"</div>"
+									+"</div>"                  
+			                }); //each
+			                
+			                $("#camp_best3_list").append(list); //append
+			                
+			             	// 별 색칠 로직
+			                $('.rating').each(function() {
+			                    var rating = $(this).data('rating');
+			                    $(this).find('.fa').each(function(index) {
+			                        if (index < rating) {
+			                        	$(this).removeClass('disable');  // 색칠된 별은 .disable 클래스 제거
+			                        } else {
+			                            $(this).addClass('disable');  // 색칠되지 않은 별은 .disable 클래스 추가
+			                        }
+			                    });
+			                });
+			                $(".small-title").show();
+			                
+			            }
+					},
 		            error: function() {
 		            	alert("에러");
 		            	//loading = false;
