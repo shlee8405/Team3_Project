@@ -60,6 +60,11 @@ color:#ffffff!important;
 	        f.submit();
 	    }
 	
+	function list_go(f) {
+		location.href = "/Popup.do";
+		
+	}
+	
 </script>
 </head>
 <body>
@@ -96,7 +101,6 @@ color:#ffffff!important;
         <div class="text-center">
         	<input type="hidden" name="pop_idx" value="${vo.pop_idx}">
             <input type="button" class="btn btn-primary" value="보내기" onclick="sendData(this.form)"/>
-            <input type="reset" class="btn btn-secondary" value="다시"/>
             <input type="button" class="btn btn-secondary" value="목록" onclick="list_go(this.form)"/>
         </div>
     </form>
