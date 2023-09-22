@@ -145,7 +145,7 @@
         <br>	
         <br>
         
-        <div class="container-fluid align-self-center" style="max-height: 70vh;  width: 50%">
+        <div class="container-fluid align-self-center" style="max-height: 73vh;  width: 50%">
 		<ul class="nav nav-tabs nav-justified border-0" style="font-size: 30px;">
 		  <li class="nav-item">
 		    <a class="nav-link " aria-current="page" style="color: black;" href = "/cusSerFAQ.do">FAQ</a>
@@ -210,12 +210,12 @@
 				</tbody>
 
                 </table>
-                <div class="text-end" >
+                <!-- End Default Table Example -->
+            </div>
+                <div class="text-end"  style="padding: 10px;" >
                 <!-- 오른쪽 정렬 -->
 	                <button type="button" class="btn btn-success" onclick="go_inquiry()">문의하기</button>
 	            </div>
-                <!-- End Default Table Example -->
-            </div>
             
         </div>
 

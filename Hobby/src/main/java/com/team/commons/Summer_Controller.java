@@ -44,6 +44,15 @@ public class Summer_Controller {
 			}
 			// 비동기식 요청이므로 저장된 파일의 경로와 파일명을 보내야 한다.
 			
+			// 새로 추가한거 이상하면 지우기만 하면 됨
+			String serverName = request.getServerName();
+			int serverPort = request.getServerPort();
+			String contextPath = request.getContextPath();  // If your app is deployed in a non-root context
+			
+			String fullUrl = "http://" + serverName + ":" + serverPort + contextPath + "/resources/images/" + fname;
+			map.put("fullUrl", fullUrl);
+			// 여기까지
+			
 			map.put("fname", fname);
 			map.put("path", "resources/images");
 			return map;

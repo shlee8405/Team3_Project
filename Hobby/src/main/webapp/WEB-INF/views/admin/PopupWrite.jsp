@@ -132,11 +132,10 @@ color:#ffffff!important;
             processData : false,
             dataType : "json",
         }).done(function(data) {
-            var path = data.path;
-            var fname = data.fname;
-            alert("path : "+path+"\nfname : "+fname);
-            $("#pop_content").summernote("editor.insertImage",path+"/"+fname);
+            var fullUrl = data.fullUrl;  // 수정된 부분
+            $("#pop_content").summernote("editor.insertImage", fullUrl);  // 수정된 부분
         });
+
     }
     </script>
     </div>

@@ -307,9 +307,11 @@ public class CampController {
 		URI uri = new URI(apiUrl);
 
 		ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
+		System.out.println(response);
 
 		// Body 정보만 필요하기 때문에
 		JSONObject jsonResponse = new JSONObject(response.getBody());
+		System.out.println(jsonResponse);
 		// item을 받고
 		JSONArray item = jsonResponse.getJSONObject("response").getJSONObject("body").getJSONObject("items")
 				.getJSONArray("item");
