@@ -8,6 +8,10 @@
 		select * from QNA
 	</select>
 	
+	<select id="uncheckedList" resultType="qvo" >
+		select * from QNA where q_status = 2
+	</select>
+	
 	<select id="allListOrderByResponse" resultType="qvo">
 		SELECT * FROM QNA
 		ORDER BY CASE WHEN q_response IS NOT NULL THEN 1 ELSE 0 END, q_idx;
@@ -36,6 +40,10 @@
 	
 	<update id="update" parameterType="qvo">
 		update QNA set q_name = #{q_name} , q_content = #{q_content}, q_date = sysdate(), q_title = #{q_title} where q_idx = #{q_idx}
+	</update>
+	
+	<update id="checkList">
+		update QNA set q_status = 1 where q_status = 2
 	</update>
 	
 	<select id="QnAOne" parameterType="String" resultType="qvo">

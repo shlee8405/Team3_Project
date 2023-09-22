@@ -30,10 +30,10 @@ public class mainpagemodifier {
 		try {
 			String path = session.getServletContext().getRealPath("/resources/background");
 			MultipartFile vo_file = mpivo.getFile();
-			System.out.println("file name in /uploadMPImage.do is : " + vo_file.getName());
+//			System.out.println("file name in /uploadMPImage.do is : " + vo_file.getName());
 			
 			if(vo_file.isEmpty()) { // didn't receive file
-				System.out.println("file is empty in /uploadMPImage.do");
+//				System.out.println("file is empty in /uploadMPImage.do");
 				session.setAttribute("adminActionControl", "emptyfile");
 				return mv;
 			} else {
@@ -42,7 +42,7 @@ public class mainpagemodifier {
 					String idx = mpimgService.getMaxIdx();
 					String extension = FilenameUtils.getExtension(vo_file.getOriginalFilename());
 					String imgname = "background"+idx+"."+extension;
-					System.out.println("img name is : "+imgname);
+//					System.out.println("img name is : "+imgname);
 					mpivo.setMp_idx(idx);
 					mpivo.setMp_imgname(imgname);
 					int res2 = mpimgService.insertImgname(mpivo);
@@ -51,10 +51,10 @@ public class mainpagemodifier {
 					if(out.exists()) {
 						out.delete();
 						FileCopyUtils.copy(in, out);
-						System.out.println("file deleted and copied in : " + path );
+//						System.out.println("file deleted and copied in : " + path );
 					} else {
 						FileCopyUtils.copy(in, out);
-						System.out.println("file copied in : "+ path);
+//						System.out.println("file copied in : "+ path);
 					}
 				} else { // insert fail
 					System.out.println("insert failed in /uploadMPImage.do");

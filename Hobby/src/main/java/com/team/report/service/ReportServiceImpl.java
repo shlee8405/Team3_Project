@@ -21,6 +21,16 @@ public class ReportServiceImpl implements ReportService{
 	}
 	
 	@Override
+	public List<ReportVO> getUncheckedReport() {
+		return reportDAO.getUncheckedReport();
+	}
+	
+	@Override
+	public int checkReport() {
+		return reportDAO.checkReport();
+	}
+	
+	@Override
 	public int getReportInsert(ReportVO rvo,String u_idx) {
 		return reportDAO.getReportInsert(rvo,u_idx);
 	}

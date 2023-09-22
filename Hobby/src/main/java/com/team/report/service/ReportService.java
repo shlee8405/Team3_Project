@@ -3,12 +3,19 @@ package com.team.report.service;
 import java.util.List;
 
 import com.team.faq.vo.FaqVO;
+import com.team.qna.vo.QnaVO;
 import com.team.report.vo.ReportVO;
 
 public interface ReportService {
 
 	// 신고 전체보기
 	public List<ReportVO> getAllReports();
+	
+	// 관리자용 확인 안한 신고 전체보기 q_status==2
+	public List<ReportVO> getUncheckedReport();
+	
+	// 관리자용 Report status==2 일때 status=1 로 바꾸기
+	public int checkReport(); 
 	
 	// 신고하기
 	int getReportInsert(ReportVO rvo,String u_idx);

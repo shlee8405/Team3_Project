@@ -8,6 +8,14 @@
 		select * from REPORT
 	</select>
 	
+	<select id="uncheckedReport" resultType="rvo">
+		select * from REPORT where r_status = 2
+	</select>
+	
+	<update id="checkReport">
+		update REPORT set r_status = 1 where r_status = 2 
+	</update>
+	
 	<select id="getListWithTitle" parameterType="String" resultType="rvo">
 		select * from REPORT where r_title like #{r_title}
 	</select>

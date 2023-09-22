@@ -21,6 +21,10 @@ public class GroupServiceImpl implements GroupService {
 	public int getTotalCount() {
 		return groupDAO.getTotalCount();
 	}
+	@Override
+	public int getGroupsToday() {
+		return groupDAO.getGroupsToday();
+	}
 
 	@Override
 	public List<GroupVO> getAllGroups() {

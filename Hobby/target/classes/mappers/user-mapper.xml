@@ -8,6 +8,10 @@
 		select * from USERS 
 	</select>
 	
+	<select id="usersToday" resultType="int">
+		select COUNT(*) from USERS where u_date = CURDATE() 
+	</select>
+	
 	<select id="allListByNickname" parameterType="String" resultType="uvo">
 		select * from USERS where u_nickname like #{u_nickname}
 	</select>
@@ -22,13 +26,13 @@
 	
 	
 	<insert id="addUser" parameterType="uvo" >
-		insert INTO USERS(u_id, u_pw, u_name ,u_nickname, u_birthday, u_email, u_phone)
-		VALUES(#{u_id}, #{u_pw},#{u_name} ,#{u_nickname}, #{u_birthday}, #{u_email}, #{u_phone})
+		insert INTO USERS(u_id, u_pw, u_name ,u_nickname, u_birthday, u_email, u_phone, u_date)
+		VALUES(#{u_id}, #{u_pw},#{u_name} ,#{u_nickname}, #{u_birthday}, #{u_email}, #{u_phone}, CURDATE())
 	</insert>
 	
 	<insert id="addUserKakao" parameterType="uvo">
-		insert INTO USERS(u_id, u_pw, u_name ,u_nickname, u_birthday, u_email, u_phone, u_status)
-		VALUES(#{u_id}, #{u_pw},#{u_name} ,#{u_nickname}, #{u_birthday}, #{u_email}, #{u_phone}, 2)
+		insert INTO USERS(u_id, u_pw, u_name ,u_nickname, u_birthday, u_email, u_phone, u_status, u_date)
+		VALUES(#{u_id}, #{u_pw},#{u_name} ,#{u_nickname}, #{u_birthday}, #{u_email}, #{u_phone}, 2, CURDATE())
 	</insert>
 	
 	<!-- 인코딩 된 비밀번호 추출 -->
@@ -71,8 +75,8 @@
 
     
     <select id="insertAdmin" parameterType="uvo" resultType="int">
-    	INSERT INTO USERS(u_id, u_pw, u_nickname, u_status)
-    	VALUES(#{u_id}, #{u_pw}, #{u_nickname}, 9)
+    	INSERT INTO USERS(u_id, u_pw, u_nickname, u_status, u_date)
+    	VALUES(#{u_id}, #{u_pw}, #{u_nickname}, 9, CURDATE())
     </select>
     
     
@@ -122,7 +126,7 @@
     
     <!-- 네이버 로그인 -->
     <insert id="naver" parameterType="naverVO">
-    	insert into USERS(u_name, u_id, u_nickname, u_email) value(#{name},#{id},#{nickname},#{email})
+    	insert into USERS(u_name, u_id, u_nickname, u_email, u_date) value(#{name},#{id},#{nickname},#{email}, CURDATE())
     </insert>
     
     <select id="naverid" parameterType="String" resultType="String">

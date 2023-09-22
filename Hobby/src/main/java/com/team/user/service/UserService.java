@@ -12,6 +12,9 @@ public interface UserService {
 	//전체보기
 	public List<UserVO> getAllUsers();
 	
+	//오늘 생성한 유저 보기
+	public int getUsersToday();
+	
 	// 삽입
 	int getUserInsert(UserVO uvo);
 	

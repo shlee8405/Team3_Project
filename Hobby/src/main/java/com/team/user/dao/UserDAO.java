@@ -24,6 +24,13 @@ public class UserDAO {
 		List<UserVO> list = sqlSessionTemplate.selectList("user.allList");
 		return list;
 	}
+	
+	//오늘 생성한 유저 보기
+	public int getUsersToday() {
+		int count = sqlSessionTemplate.selectOne("user.usersToday");
+		return count;
+ 	}
+	
 	// 사용자 추가
 	public int getUserInsert(UserVO uvo) {
 		return sqlSessionTemplate.insert("user.addUser", uvo);

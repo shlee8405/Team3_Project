@@ -9,6 +9,12 @@ public interface QnaService {
 	// 문의 전체보기
 	public List<QnaVO> getAllQna();
 	
+	// 관리자용 확인 안한 문의 전체보기 q_status==2
+	public List<QnaVO> getUncheckedQna();
+	
+	// 관리자용 QNA status==2 일때 status=1 로 바꾸기
+	public int checkQna(); 
+	
 	// 문의 전체보기. 답변 없는것들 먼저 보임
 	List<QnaVO> getAllQnaOrderByResponse();
 	

@@ -16,6 +16,8 @@ public interface GroupService {
 	
 	// 전체 게시물의 수
 	public int getTotalCount() ;
+	// 오늘 생성된 그룹 수
+	public int getGroupsToday();
 	// 페이징처리를 위한 리스트
 	public List<GroupVO> getAllGroups(int offset, int limit);
 	//검색

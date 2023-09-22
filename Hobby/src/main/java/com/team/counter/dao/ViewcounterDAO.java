@@ -1,5 +1,7 @@
 package com.team.counter.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -16,7 +18,11 @@ public class ViewcounterDAO {
 		return res;
 	}
 	
-	public VCVO getViewCount() {
-		return sqlSessionTemplate.selectOne("counter.getViewCount");
+	public List<VCVO> getViewCount() {
+		return sqlSessionTemplate.selectList("counter.getViewCount");
+	}
+	
+	public int todayView() {
+		return sqlSessionTemplate.selectOne("counter.todayView");
 	}
 }

@@ -24,7 +24,10 @@ public class UserServiceImpl implements UserService{
 		return userDAO.getAllUsers();
 	}
 
-
+	@Override
+	public int getUsersToday() {
+		return userDAO.getUsersToday();
+	}
 
 	@Override
 	public int getUserInsert(UserVO uvo) {

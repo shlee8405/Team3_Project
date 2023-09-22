@@ -1260,10 +1260,6 @@ rotate(
 			</div>
 			<div id="mainListDiv" class="main_list">
 				<ul class="navlinks">
-					<li><a href="/checkSession.do"
-						style="text-family: sans-seriff; font-size: 1rem;">sysout
-							sessionIdx</a></li>
-
 					<li><a href="/campMain.do">/캠핑장.do</a></li>
 					<li><a href="/groupList.do">/캠핑모임.do</a></li>
 
@@ -1328,15 +1324,19 @@ rotate(
 	<!-- Function used to shrink nav bar removing paddings and adding black background -->
 	<script>
 		$(window).scroll(function() {
+			let flag = 0;
 			if ($(document).scrollTop() > 50) {
 				$('.navHD').addClass('affix');
 				console.log("OK");
 			} else {
 				$('.navHD').removeClass('affix');
 			}
-
-			var w = $(window).scrollTop();
-			var f = "translateX(" + w * 0.60 + "px)";
+/* 			if($(document).scrollTop() > 90 && flag==0) {
+				flag=flag+1;
+				$('.s1-text').text("/CAMPING.do");
+			}
+ */			var w = $(window).scrollTop();
+			var f = "translateX(" + w * (-0.30) + "px)";
 			console.log(w);
 			$('.s1-text').css({
 				transform : f
@@ -1377,7 +1377,7 @@ rotate(
 		<div class="row" style="left: 10%; right: 10%; top: 5%; z-index: 9;">
 			<div class="s1-text-title" style="translate: 0px -50%;">
 
-				<p class="s1-text">/CAMP.do</p>
+				<p class="s1-text">/CAMPING.do</p>
 				
 			</div>
 			<div class="s1-text-content ps-5"><span style="font-size: 2rem;"><b>안녕하세요!</b></span><br>
@@ -1719,15 +1719,14 @@ rotate(
 			<div class="s5-text-content">
 				<div class="row">
 					<div class="col">
-						© 2023 캠핑 모임 & 명소 (Camping Meetups & Spots) /camp.do. 판권 소유. <br><br> 
-		
-						개인 정보 보호 정책 (Privacy Policy) | 이용 약관 (Terms of Service) <br><br>
-						
-						문의하기 (Contact Us) | 자주 묻는 질문 (FAQ) <br><br>
+
 						
 						주소: [주소 입력]<br>
 						전화번호: [전화번호 입력]<br>
-						이메일: [이메일 주소 입력]<br>
+						이메일: [이메일 주소 입력]<br><br><br>
+						문의하기 (Contact Us) | 자주 묻는 질문 (FAQ) <br>
+						개인 정보 보호 정책 (Privacy Policy) | 이용 약관 (Terms of Service) <br>
+						© 2023 캠핑 모임 & 명소 (Camping Meetups & Spots) /camping.do. 판권 소유. <br><br> 
 					</div>
 					<div class="col"></div>
 					

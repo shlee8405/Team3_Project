@@ -6,6 +6,10 @@
 	<select id="count" resultType="int">
 		select count(*) from GROUPS where g_status != 0 
 	</select>
+	
+	<select id="groupsToday" resultType="int">
+		select count(*) from GROUPS where g_createdate = CURDATE() 
+	</select>
 
 	<select id="allList" parameterType="Map" resultType="gvo">
 		select *
@@ -84,15 +88,15 @@
 	<insert id="insert" parameterType="gvo">
 		insert into
 		GROUPS(g_title,g_intro, g_fname,g_maxPeople, g_date, g_cdo, g_gugun,
-		g_location, g_desc,g_status, u_idx)
-		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_cdo},#{g_gugun},#{g_location},#{g_desc},'1',#{u_idx})
+		g_location, g_desc,g_status, u_idx, g_createdate)
+		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_cdo},#{g_gugun},#{g_location},#{g_desc},'1',#{u_idx}, CURDATE())
 	</insert>
 
 	<insert id="insertAsAdmin" parameterType="gvo">
 		insert into
 		GROUPS(g_title,g_intro, g_fname,g_maxPeople, g_date, g_cdo, g_gugun,
-		g_location, g_desc,g_status, u_idx)
-		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_cdo},#{g_gugun},#{g_location},#{g_desc},'1',#{u_idx})
+		g_location, g_desc,g_status, u_idx, g_createdate)
+		values(#{g_title},#{g_intro},#{g_fname},#{g_maxPeople},#{g_date},#{g_cdo},#{g_gugun},#{g_location},#{g_desc},'1',#{u_idx},CURDATE())
 	</insert>
 
 	<update id="delete" parameterType="gvo">
