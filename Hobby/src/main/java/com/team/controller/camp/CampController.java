@@ -313,7 +313,7 @@ public class CampController {
 				+ mobileOS + "&MobileApp=" + mobileApp + "&serviceKey=" + serviceKey + "&_type=json" + "&keyword="
 				+ URLEncoder.encode(keyword, StandardCharsets.UTF_8.toString());
 
-		// 자바 URI클래스를 사용. URL전송 할 때 문자열 그대로 날아가는 것이 아닌 한번 인코딩 해서 보내준다.
+		// 자바 URI클래스를 사용. URL전송 할 때 문자열 그대로 날아가는 것이 아닌 한번 인코딩 해서 보내준다.	
 		URI uri = new URI(apiUrl);
 
 		ResponseEntity<String> response = restTemplate.getForEntity(uri, String.class);
