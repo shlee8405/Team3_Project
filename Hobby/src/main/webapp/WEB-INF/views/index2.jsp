@@ -318,6 +318,13 @@ animation: blinker 1.5s linear infinite;
 	cursor: pointer;
 }
 
+.imgdiverror {
+	width:100%;
+	position: relative;
+	display:flex;
+	justify-content:center;
+}
+
 
 .imgdiv:hover .placetitle{
 	opacity:1;
@@ -1025,17 +1032,24 @@ rotate(
 			// var dataList = data.bestCamps;
 			console.log('베스트캠핑장가져오기 inside function(data){}');
 			var list = "";
-
 			
-			$.each(data, function (index, response) {
+			if (data[0].u_id == "traffic") {
+				list += "<div class='imgdiverror'><h1>트래픽 문제로 베스트 캠핑장을 불러오지 못했습니다. <br> 나중에 다시 시도해주세요.</h1></div>";
+				$('#image_best3_list').append(list);
+			} else if (data[0].u_id == "error") {
+				alert("베스트 3 캠핑장을 불러오는데 문제가 생겼습니다. 개발자에게 문의하세요.")
+			} else {
+			
+			
+				$.each(data, function (index, response) {
 				// 제공 이미지 없을 시
-				var imageUrl = response.firstImageUrl == "" ? "resources/images/beach01.jpg" : response.firstImageUrl;
-				
-				list += "<div class='imgdiv' onclick=\"window.location.href='/campDetail.do?keyword="+response.facltNm+"'\">" 
-					+"<img class='img' src='"+imageUrl+"'alt='img1' width='100%' height='100%'" 
-						+ "style='width: 100%; object-fit: cover; position: relative; border-radius:1rem;'>"
-						+"<span class='placetitle'><h1>"+response.facltNm+"</h1></span>"
-						+"</div>"
+					var imageUrl = response.firstImageUrl == "" ? "resources/images/beach01.jpg" : response.firstImageUrl;
+					
+					list += "<div class='imgdiv' onclick=\"window.location.href='/campDetail.do?keyword="+response.facltNm+"'\">" 
+						+"<img class='img' src='"+imageUrl+"'alt='img1' width='100%' height='100%'" 
+							+ "style='width: 100%; object-fit: cover; position: relative; border-radius:1rem;'>"
+							+"<span class='placetitle'><h1>"+response.facltNm+"</h1></span>"
+							+"</div>"
 						
                 }); //each
                 
@@ -1054,7 +1068,8 @@ rotate(
                 });
                 $(".small-title").show();
                 
-            },
+            }
+		},
             error: function() {
             	alert("에러");
             	//loading = false;
