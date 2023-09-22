@@ -160,6 +160,7 @@
 			method : "get",
 			data : dataObj,
 			dataType : "json", 
+			async: false,
 			success : function(data) {
 
 				// 검색결과가 없으면 dataList에 message 하나만 온다.
@@ -221,7 +222,7 @@
 	                
 	            },
 	            error: function() {
-	            	alert("에러");
+	            	alert("에러11");
 	            	loading = false;
 	            }
 	        });
@@ -278,6 +279,7 @@
 				url : "/campBest.do",
 				method : "get",
 				dataType : "json", 
+				async: false,
 				success : function(data) {
 					// 'bestCamps'라는 키로 서버에서 보낸 데이터 리스트를 찾는다.
 					// var dataList = data.bestCamps;
@@ -331,7 +333,7 @@
 		                
 		            },
 		            error: function() {
-		            	alert("에러");
+		            	alert("에러22");
 		            	//loading = false;
 		            }
 		        });

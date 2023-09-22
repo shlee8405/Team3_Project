@@ -125,45 +125,6 @@
 		f.submit();
 	}
 	
-
-
-	
-	
-	var buttonStyles = {};
-
-	function applyHover(buttonId) {
-	    var button = document.getElementById(buttonId);
-	    buttonStyles[buttonId] = {
-	        backgroundColor: button.style.backgroundColor,
-	        color: button.style.color
-	    };
-
-	    button.style.backgroundColor = '#4f6d3a';
-	    button.style.color = 'white';
-
-	    // 다른 버튼들의 스타일을 초기 스타일로 설정
-	    for (var id in buttonStyles) {
-	        if (id !== buttonId) {
-	            var otherButton = document.getElementById(id);
-	            var style = buttonStyles[id];
-	            otherButton.style.backgroundColor = style.backgroundColor;
-	            otherButton.style.color = style.color;
-	        }
-	    }
-	}
-
-	function removeHover(buttonId) {
-	    // 호버 이벤트가 제거될 때 해당 버튼의 스타일을 초기 스타일로 복원
-	    var button = document.getElementById(buttonId);
-	    var style = buttonStyles[buttonId];
-	    if (style) {
-	        button.style.backgroundColor = style.backgroundColor;
-	        button.style.color = style.color;
-	    }
-	}
-/* function go_myPageEdit() {
-	location.href = "/myPageEdit2.do"?u_idx=" + u_idx;
-} */
 </script>
 </head>
 <body>
@@ -198,36 +159,7 @@
         <br>
         <br>
 	
-	<!-- 메뉴바 -->
-<!-- <div class="sidebar">
-    <ul>
-        <li>
-            <button id="button1" type="button" onmouseover="applyHover('button1');" onmouseout="removeHover('button1');" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myPagemain.do')">
-                <i class="fa fa-home fa-2x"></i>
-                <span class="nav-text">
-                   내가 찜한 캠핑장
-                </span>
-          </button>
-        </li>
-        <li>
-            <button id="button2" type="button" onmouseover="applyHover('button2');" onmouseout="removeHover('button2');" class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/myreview.do')">
-                <i class="fa fa-globe fa-2x"></i>
-                <span class="nav-text">
-                    내가 작성한 리뷰
-                </span>
-            </button>
-        </li>
-        <li>
-            <button id="button4" type="button" onmouseover="applyHover('button4');" onmouseout="removeHover('button4');"  class="btn btn-outline btn-custom btn-comp" onclick="goToPage('/mypage.do')">
-               <i class="fa fa-comments fa-2x"></i>
-                <span class="nav-text">
-                    내 정보
-                </span>
-            </button>
-        </li>
-    </ul>
-</div>
- -->
+	
     <div class="scrollable-content" style="width: 75%; margin: auto;">
     <div style="margin-top: 40px;"></div>
 		<form method="post">
