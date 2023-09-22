@@ -19,50 +19,76 @@
     padding-bottom: 80px;
 }
 
-/* 메뉴바 스타일 */
-.sidebar {
-    background: none; /* 검은색 네모 박스를 없애기 위해 배경을 없음으로 설정합니다. */
-    border: none; /* 테두리 제거 */
-    position: fixed;
-    top: 130px; /* 헤더의 높이만큼 여백 추가 */
-    bottom: 0;
-    height: 50%;
-    width: 250px; /* 사이드바의 넓이를 조정합니다. */
-    overflow: hidden;
-    -webkit-transition: width 0.05s linear;
-    transition: width 0.05s linear;
-    -webkit-transform: translateZ(0) scale(1, 1);
-    z-index: 1000;
-    left: 0;
-    display: grid;
-    grid-template-rows: repeat(3, 1fr); /* 세로로 세 칸으로 나눕니다. */
-    gap: 1px; /* 각 칸 사이의 간격 설정 */
+/* Toggle Styles */
+
+#viewport {
+  padding-left: 250px;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
-
-/* 메뉴 아이템 스타일 */
-.sidebar ul {
-    list-style: none;
-    padding: 0;
+#content {
+  width: 100%;
+  position: relative;
+  margin-right: 0;
 }
 
-.sidebar li {
-    text-align: center;
-    padding: 10px 0; /* 각 아이템의 여백 조정 */
+/* Sidebar Styles */
+
+#sidebar {
+  z-index: -1;
+  position: fixed;
+  left: 250px;
+  width: 250px;
+  height: 100%;
+  margin-left: -250px;
+  padding-top: 105px;
+  overflow-y: auto;
+  background: #37474F;
+  -webkit-transition: all 0.5s ease;
+  -moz-transition: all 0.5s ease;
+  -o-transition: all 0.5s ease;
+  transition: all 0.5s ease;
 }
 
-/* 각 메뉴 아이템의 스타일 */
-.sidebar a {
-    text-decoration: none;
-    color: #637F42; /* 글자 색상 설정 */
-    display: block;
-    transition: color 0.2s ease; /* 글자 색상 변화에 트랜지션 추가 */
-    font-size: 50px; 
+#sidebar header {
+  background-color: #263238;
+  font-size: 20px;
+  line-height: 52px;
+  text-align: center;
 }
 
-/* 마우스 호버 시 글자 색상 변경 */
-.sidebar a:hover {
-    color: #4f6d3a; /* 호버 시 글자 색상 변경 */
+#sidebar header a {
+  color: #fff;
+  display: block;
+  text-decoration: none;
+}
+
+#sidebar header a:hover {
+  color: #fff;
+}
+
+#sidebar .nav{
+  
+}
+
+#sidebar .nav a{
+  background: none;
+  border-bottom: 1px solid #455A64;
+  color: #CFD8DC;
+  font-size: 14px;
+  padding: 16px 24px;
+}
+
+#sidebar .nav a:hover{
+  background: none;
+  color: #ECEFF1;
+}
+
+#sidebar .nav a i{
+  margin-right: 16px;
 }
 
 /* 페이지 내용에 왼쪽 여백 추가 */
@@ -98,7 +124,7 @@ th {
 
 </style>
 <script type="text/javascript">
-var buttonStyles = {};
+/* var buttonStyles = {};
 
 function applyHover(buttonId) {
     var button = document.getElementById(buttonId);
@@ -129,17 +155,38 @@ function removeHover(buttonId) {
         button.style.backgroundColor = style.backgroundColor;
         button.style.color = style.color;
     }
-}
+} */
 </script>
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
-	<div style="position: relative; top: 200px; z-index: 1;"></div>
-	<div class="my-page-title">
-		<h1>내가 찜한 캠핑장</h1>
-	</div>
 	
-	<!-- 메뉴바 -->
+		<!-- <br>
+        <br>
+        <br>
+        <br>
+        <br>	
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+	
+	<div class="container-fluid align-self-center" style="max-height: 73vh;">
+		<ul class="nav nav-tabs nav-justified border-0" style="font-size: 30px; width: 50%; margin: auto;">
+		  <li class="nav-item">
+		    <a class="nav-link " aria-current="page" style="color: black;" href = "/myPagemain.do">내가 찜한 캠핑장</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link " aria-current="page" style="color: black;" href = "/myreview.do">내가 작성한 리뷰</a>
+		  </li>
+		  <li class="nav-item">
+		    <a class="nav-link active border border-4 rounded border-success" href="/mypage.do" style="color: black;">내 정보</a>
+		  </li>
+		</ul>
+        <br>
+        <br>	
+	메뉴바
 <div class="sidebar">
     <ul>
         <li>
@@ -167,7 +214,60 @@ function removeHover(buttonId) {
             </button>
         </li>
     </ul>
-</div>
+</div> -->
+
+<div id="viewport">
+  <!-- Sidebar -->
+  <div id="sidebar">
+    <ul class="nav">
+      <li>
+        <a href="#">
+          <i class="zmdi zmdi-view-dashboard"></i> Dashboard
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="zmdi zmdi-link"></i> Shortcuts
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="zmdi zmdi-widgets"></i> Overview
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="zmdi zmdi-calendar"></i> Events
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="zmdi zmdi-info-outline"></i> About
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="zmdi zmdi-settings"></i> Services
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="zmdi zmdi-comment-more"></i> Contact
+        </a>
+      </li>
+    </ul>
+  </div>
+		<br>
+        <br>
+        <br>
+        <br>
+        <br>	
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
     <div class="scrollable-content" style="width: 30%; margin: auto;">
     <div style="margin-top: 40px;"></div>
 		<table style="border-collapse: collapse; width: 100%; border: 2px solid black;">
@@ -200,6 +300,7 @@ function removeHover(buttonId) {
 	     		</c:choose>
 			</tbody>
 		</table>
+	</div>
 	</div>
     <script type="text/javascript">
 		function goToPage(url){
