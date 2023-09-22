@@ -293,6 +293,16 @@ public class CampController {
 	@GetMapping("/campDetail.do")
 	public ModelAndView getCampDetail(@RequestParam String keyword, HttpServletRequest request)
 			throws URISyntaxException, UnsupportedEncodingException {
+		try {
+			// serviceKey 사용
+			return getCampDetailMethod(keyword, request, serviceKey);
+		} catch (Exception e) {
+			// serviceKey 실패시 serviceKey2 사용
+			return getCampDetailMethod(keyword, request, serviceKey2);
+		} 
+	}
+	// /campDetail.do가 사용하는 메소드
+	private ModelAndView getCampDetailMethod(String keyword, HttpServletRequest request, String serviceKey) throws URISyntaxException, UnsupportedEncodingException {
 		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
 
 		// 리퀘스트 파라미터

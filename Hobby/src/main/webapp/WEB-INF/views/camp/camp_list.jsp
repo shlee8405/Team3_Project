@@ -160,7 +160,7 @@
 			method : "get",
 			data : dataObj,
 			dataType : "json", 
-			async: false,
+			
 			success : function(data) {
 				
 				// 컨트롤러에서 에러났는지 확인
