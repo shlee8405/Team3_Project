@@ -30,7 +30,7 @@ public class home {
 	
 	@GetMapping("/getviewcountlist")
 	public ResponseEntity<List<Object>> getVCVOlist() {
-		System.out.println("inside /getviewcountlist");
+//		System.out.println("inside /getviewcountlist");
 		//총 조회수 데이터 생성
 		List<VCVO> list = viewcounterService.getViewCount();
 		List<String> dates = new ArrayList<String>();

@@ -22,6 +22,16 @@ public class QnaServiceImpl implements QnaService {
 	}
 	
 	@Override
+	public List<QnaVO> getUncheckedQna() {
+		return qnaDAO.getUncheckedQna();
+	}
+	
+	@Override
+	public int checkQna() {
+		return qnaDAO.checkQna();
+	}
+	
+	@Override
 	public List<QnaVO> getAllQnaOrderByResponse() {
 		return qnaDAO.getAllQnaOrderByResponse();
 	}

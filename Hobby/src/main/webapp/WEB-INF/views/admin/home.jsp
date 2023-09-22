@@ -86,6 +86,20 @@ color:#ffffff!important;
 	padding:1rem;
 }
 
+.myBox4 {
+	background: rgb(147,188,136);
+	background: linear-gradient(90deg, rgba(147,188,136,0.24) 0%, rgba(180,188,136,0.24) 35%, rgba(200,180,146,0.24) 100%);
+	box-shadow: 0px 5px 2px rgba(0,0,0,0.25);
+	border-radius:10px;
+	padding:1rem;
+}
+
+.myBox4title{
+	font-family:MBCM;
+	font-size:3em;
+	
+}
+
 .col-title-text {
 background-color: transparent;height:100%;display: flex;align-items: center;font-size: 2em;border-bottom: 1px solid black;justify-content: center;
 }
@@ -186,11 +200,9 @@ canvas#myChart {
 	        	<!-- first inner container -->
 	        	<div class="container p-5">
 	        		<div class="row">
-	        			<div class="col"></div>
-	        			<div class="col">
-	        				<h1 style="font-family:MBCM;">대시보드</h1>
-	        			</div>
-	        			<div class="col"></div>
+	        				<h1 class="d-flex justify-content-center" style="font-family:MBCM; font-size:4em;">
+	        					/대시보드.do
+	        				</h1>
 	        		</div>
 	        	</div>
 	        	
@@ -297,8 +309,91 @@ canvas#myChart {
 		        </div>
 		
 	        	<!-- third inner container -->
-		        <div class="bottomcontainer ms-2 me-3 mt-1" style="height:auto;">
-		        
+		        <div class=" p-3" style="height:auto;">
+					<div class="myBox4 p-5">
+						<div class="row ">
+							<div class="d-flex justify-content-center myBox4title" >
+								확인 안 한 1대1문의 총 : ${fn:length(qnalist)}개
+							</div>
+						</div>
+		        		<div class="row p-5 flex-row flex-nowrap overflow-auto">
+		        			<c:choose>
+		        				<c:when test="${empty qnalist}">
+		        					<div class="col">
+		        						<h3 class="d-flex justify-content-center">
+		        							확인 안 한 1대1 문의가 없습니다!
+		        						</h3>
+		        					</div>
+		        				</c:when>
+		        				
+		        				<c:otherwise>
+		        					<c:forEach var="k" items="${qnalist}">
+		        						<div class="col-3">
+		        							<div class="card text-dark border-success mb-3">
+		        								<div class="card-header">
+														<c:forEach var="j" items="${userlist}">
+															<c:if test="${k.u_idx==j.u_idx}">
+																<a href="/adminQNA.do">[바로가기]</a> 작성자 : ${j.u_nickname}
+															</c:if>
+														</c:forEach>
+		        								</div>
+		        								<div class="card-body text-success">
+		        									<h5 class="card-title">
+		        										제목 : ${k.q_title}
+		        									</h5>
+		        									<p class="card-text">
+		        										내용 : ${k.q_content}
+		        									</p>
+		        								</div>
+		        							</div>
+		        						</div>
+		        					</c:forEach>
+		        				</c:otherwise>
+		        			</c:choose>
+		        		
+		        		</div>
+		        		<div class="row mt-5">
+							<div class="d-flex justify-content-center myBox4title">
+								확인 안 한 신고글 총 : ${fn:length(reportlist)}개
+							</div>
+						</div>
+		        		<div class="row  p-5 flex-row flex-nowrap overflow-auto">
+					        <c:choose>
+		        				<c:when test="${empty reportlist}">
+		        					<div class="col">
+		        						<h3 class="d-flex justify-content-center">
+		        							확인 안 한 신고가 문의가 없습니다!
+		        						</h3>
+		        					</div>
+		        				</c:when>
+		        				
+		        				<c:otherwise>
+		        					<c:forEach var="k" items="${reportlist}">
+		        					
+		        						<div class="col-3">
+		        							<div class="card text-dark border-success mb-3">
+		        								<div class="card-header">
+														<c:forEach var="j" items="${userlist}">
+															<c:if test="${k.u_idx1==j.u_idx}">
+																<a href="/adminReport.do">[바로가기]</a> 작성자 : ${j.u_nickname}
+															</c:if>
+														</c:forEach>
+		        								</div>
+		        								<div class="card-body text-success">
+		        									<h5 class="card-title">
+		        										제목 : ${k.r_title}
+		        									</h5>
+		        									<p class="card-text">
+		        										내용 : ${k.r_content}
+		        									</p>
+		        								</div>
+		        							</div>
+		        						</div>
+		        					</c:forEach>
+		        				</c:otherwise>
+		        			</c:choose>
+		        		</div>
+		        	</div>
 		        </div>
 			</div>
 	   </div>

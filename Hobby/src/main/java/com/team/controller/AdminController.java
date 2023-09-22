@@ -1,5 +1,6 @@
 package com.team.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -77,10 +78,19 @@ public class AdminController {
 		int groupsCountToday = groupService.getGroupsToday();
 		int todayView = viewcounterService.todayView();
 		int todayLogin = logincounterService.todayLogin();
+		List<QnaVO> qnalist = qnaService.getUncheckedQna();
+		List<ReportVO> reportlist = reportService.getUncheckedReport();
+//		List<QnaVO> qnalist = new ArrayList<QnaVO>();
+//		List<ReportVO> reportlist = new ArrayList<ReportVO>();
+		List<UserVO> userlist = userService.getAllUsers();
+		
 		mv.addObject("viewCount", todayView);
 		mv.addObject("loginCount", todayLogin);
 		mv.addObject("groupCount", groupsCountToday);
 		mv.addObject("userCount", userCountToday);
+		mv.addObject("qnalist", qnalist);
+		mv.addObject("reportlist" , reportlist);
+		mv.addObject("userlist",userlist);
 		return mv;
 	}
 
@@ -107,6 +117,10 @@ public class AdminController {
 
 	@GetMapping("/adminQNA.do")
 	public ModelAndView goAdminQNA() /* 愿�由ъ옄 1��1 */ {
+		int res = qnaService.checkQna();
+//		if (res>0) System.out.println("checked all q_status=2 to q_status=1");
+//		else System.out.println("failed to check all unchecked qna");
+		
 		ModelAndView mv = new ModelAndView("admin/qna");
 		List<QnaVO> list = qnaService.getAllQnaOrderByResponse();
 		List<UserVO> userlist = userService.getAllUsers();
@@ -117,6 +131,10 @@ public class AdminController {
 
 	@GetMapping("/adminReport.do")
 	public ModelAndView goAdminReport() /* 愿�由ъ옄 �떊怨� */ {
+		int res = reportService.checkReport();
+//		if(res>0) System.out.println("checked all r_status=2 to r_status=1");
+//		else System.out.println("failed to check all unchecked reports");
+		
 		ModelAndView mv = new ModelAndView("admin/report");
 		List<ReportVO> list = reportService.getAllReports();
 		List<UserVO> userlist = userService.getAllUsers();

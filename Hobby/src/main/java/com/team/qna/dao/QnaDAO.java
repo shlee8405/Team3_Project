@@ -22,6 +22,14 @@ public class QnaDAO {
 		return sqlSessionTemplate.selectList("qna.allList");
 	}
 	
+	public List<QnaVO> getUncheckedQna() {
+		return sqlSessionTemplate.selectList("qna.uncheckedList");
+	}
+	
+	public int checkQna() {
+		return sqlSessionTemplate.update("qna.checkList");
+	}
+	
 	public List<QnaVO> getAllQnaOrderByResponse() {
 		return sqlSessionTemplate.selectList("qna.allListOrderByResponse");
 	}

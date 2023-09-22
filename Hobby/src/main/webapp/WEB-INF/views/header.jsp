@@ -88,7 +88,7 @@ body {
     padding:0;
 	visibility: hidden;
 	opacity: 0;
-	transition: visibility 0s, opacity 0.3s linear;
+	transition: visibility 0s, opacity 0.5s linear;
 }
 .navHD, ::after, ::before {
     box-sizing: content-box;
@@ -669,7 +669,7 @@ body {
     
     
     <footer class="footerHD" >
-    	<div> hi${loginChk}</div>
+    	<div> <span style="font-family:MBCM; color:rgba(255,255,255,0.8);">© 2023 캠핑 모임 & 명소 (Camping Meetups & Spots) /camping.do. 판권 소유. </span> </div>
     	<h1></h1>
     </footer>
 </body>
