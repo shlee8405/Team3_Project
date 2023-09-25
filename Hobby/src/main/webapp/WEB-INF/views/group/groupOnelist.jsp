@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib    prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -92,12 +92,18 @@
                     // 참여한 상태로 버튼 변경
                     alert("참여했습니다!");
                     // 버튼의 텍스트와 이벤트 핸들러를 변경합니다.
-                    $("button").text("참여 취소").off('click').on('click', function() { joinGroup(g_idx, u_idx); });
+                    $(".chamBtn").removeClass('btn-primnary');
+                    $(".chamBtn").addClass('btn-danger');
+                    location.reload();
+                    // $("button").text("참여 취소").off('click').on('click', function() { joinGroup(g_idx, u_idx); });
                 } else {
                     // 참여 취소 상태로 버튼 변경
                     alert("참여를 취소했습니다!");
                     // 버튼의 텍스트와 이벤트 핸들러를 변경합니다.
-                    $("button").text("참여").off('click').on('click', function() { joinGroup(g_idx, u_idx); });
+                    $('.chamBtn').removeClass('btn-danger');
+                    $('.chamBtn').addClass('btn-primary');
+                    location.reload();
+                    //$("button").text("참여").off('click').on('click', function() { joinGroup(g_idx, u_idx); });
                 }
             },
             error: function(error) {
@@ -190,9 +196,9 @@
 						</c:if>
 					
 						    <div class="col-9">
-						        <c:set var="selectedUserIdxList" value="" />
+						        <%-- <c:set var="selectedUserIdxList" value="" /> --%>
 
-								<c:forEach var="user" items="${groupUsers}">
+								<%-- <c:forEach var="user" items="${groupUsers}">
 								    <c:if test="${user.g_idx eq g_idx}">
 								        <c:set var="selectedUserIdxList" value="${selectedUserIdxList},${user.u_idx}" />
 								    </c:if>
@@ -204,8 +210,32 @@
 								            <li>${user.u_nickname}</li>
 								        </ul>
 								    </c:if>
+								</c:forEach> --%>
+								<% int count = 0; %>
+								<c:forEach var="k" items="${groupUsers}">
+									<c:choose>
+										<c:when test="${k.g_idx==g_idx}">
+											<c:forEach var="j" items="${userlist}">
+												<c:choose>
+													<c:when test="${j.u_idx==k.u_idx }">
+														<c:set var="membercount" value="1" />
+														<li>${j.u_nickname}</li>
+														<% count=count+1; %>
+													</c:when>
+													<c:otherwise>
+													</c:otherwise>
+												</c:choose>
+											</c:forEach>
+										</c:when>
+										<c:otherwise>
+										</c:otherwise>
+									</c:choose>
 								</c:forEach>
-
+								
+								<% if(count==0) { %>
+									<li> 없음 </li>
+								<%} %>
+								
 						    </div>
 		   			<!-- 변수의 값 확인 -->
 					<p>gvo.g_date: ${gvo.g_date}</p>
@@ -219,13 +249,14 @@
 						    <c:when test="${isParticipated}">
 						        <!-- 사용자가 이미 참여한 상태 -->
 						        <c:if test="${gvo.g_date > now}">
-						            <button onclick="participateGroup(${gvo.g_idx})">참여 취소</button>
+						            <button class="btn btn-danger chamBtn" onclick="participateGroup(${gvo.g_idx})">참여 취소</button>
 						        </c:if>
+						        <h4>when</h4>
 						    </c:when>
 						    <c:otherwise>
 						        <!-- 사용자가 참여하지 않은 상태 -->
 						        <c:if test="${gvo.g_date > now && gvo.g_maxPeople > gvo.g_curPeople}">
-						            <button onclick="participateGroup(${gvo.g_idx})">참여</button>
+						            <button class="btn btn-primary chamBtn" onclick="participateGroup(${gvo.g_idx})">참여</button>
 						        </c:if>
 						    </c:otherwise>
 						</c:choose>

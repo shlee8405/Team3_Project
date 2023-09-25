@@ -6,7 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>캠핑 모임</title>
 <style>
 .fixed-position {
 	position: fixed;
@@ -201,6 +201,30 @@ ol.paging li a:hover {
 	margin: 5px; /* 상하좌우 마진을 모두 5px로 설정 */
 	cursor: pointer;
 }
+.container-top {
+	width:100vw!important;
+	margin-left:0px!important;
+	margin-right:0px!important;
+	height: 330px!imporant;
+	transform: translateY(9vh)!important;
+}
+
+.carousel-item {
+	height:380px!important;
+}
+.container-title {
+	font-family: MBCM;
+	font-size:10rem;
+	position:absolute;
+	z-index:9;
+	top:15vh;
+	margin: auto;
+	width:100%;
+	text-align:center;
+	color: rgba(205,205,205,0.8);
+	white-space: nowrap;
+} 
+
 </style>
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
@@ -209,14 +233,12 @@ ol.paging li a:hover {
 	rel="stylesheet"
 	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
 	crossorigin="anonymous">
-<script
-	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-	crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
 <script type="text/javascript">
 function group_write_go(f) {
+	
 	var sessionUidx = "${user.u_idx}";
 	
 	console.log('group_write_go function called');
@@ -354,7 +376,39 @@ function group_write_go(f) {
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
-	<div style="position: relative; top: 200px; z-index: 1;">
+	
+	<div class="container-top"  >
+			<section>
+	    		<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+	    		
+	        		<div class="carousel-inner">
+	            		<div class="carousel-item active">
+	               			 <img src="resources/images/camp_search_box1.jpg" class="d-block" alt="...">
+	           			</div>
+	            		<div class="carousel-item">
+	                		<img src="resources/images/camp_search_box2.jpg" class="d-block" alt="...">
+	            		</div>
+	            		<div class="carousel-item">
+	                		<img src="resources/images/camp_search_box3.jpg" class="d-block" alt="...">
+	            		</div>
+	            		<!--https://upload.wikimedia.org/wikipedia/commons/8/8d/Yarra_Night_Panorama%2C_Melbourne_-_Feb_2005.jpg-->
+	        		</div>
+	        		<button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+				      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				      <span class="visually-hidden">Previous</span>
+				    </button>
+				    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+				      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+				      <span class="visually-hidden">Next</span>
+				    </button>
+	    		</div>
+			</section>
+			<div class="container-title" style="font-family:MBCM; font-size:10rem; ">
+				/캠핑모임.do
+			</div>
+	</div>
+	<div class="container mb-5"  >
+		<div style="position: relative; top: 200px; z-index: 1; margin-bottom:200px;">
 		<form action="/search.do" method="get">
 			<div class="serch_all" style="width: 800px">
 				<h2 style="margin-top: 20px; text-align: left;">모임 검색</h2>
@@ -477,6 +531,7 @@ function group_write_go(f) {
 				</ol>
 			</div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>
