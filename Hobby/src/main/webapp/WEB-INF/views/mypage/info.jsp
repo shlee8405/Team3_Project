@@ -134,8 +134,6 @@
 	<div style="position: relative; top: 200px; z-index: 1;"></div>
 		<br>
         <br>
-        <br>
-        <br>
         <br>	
         <br>
         <br>
@@ -156,11 +154,8 @@
 		    <a class="nav-link active border border-4 rounded border-success" href="/mypage.do" style="color: black;">내 정보</a>
 		  </li>
 		</ul>
-        <br>
-        <br>
 	
-	
-    <div class="scrollable-content" style="width: 75%; margin: auto;">
+    <div class="scrollable-content" style="width: 80%; margin: auto;">
     <div style="margin-top: 40px;"></div>
 		<form method="post">
 		<table style="border-collapse: collapse; width: 100%; border: 2px solid black;">
