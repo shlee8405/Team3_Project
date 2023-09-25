@@ -17,6 +17,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="/resources/css/login.css">
     <link rel="stylesheet" href="/resources/css/bonfire.css">
+    <script src="https://kit.fontawesome.com/55da9ebea0.js" crossorigin="anonymous"></script>
 
 <style>
 
@@ -137,9 +138,10 @@ animation: blinker 1.5s linear infinite;
 	margin-bottom: 2rem;
 }
  .d-block {
-   object-fit:cover;
-	width:100%;
-	transform: translatey(-40%)
+   width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    object-position: 50% 50%;
   }
 
  
@@ -918,6 +920,20 @@ rotate(
     display: none;
 }
 
+#btn-back-to-top {
+  position: fixed;
+  bottom: 0px;
+  left: 49vw;
+  display:none;
+  z-index:9;
+}
+
+.btn-show {
+  display:block!important;
+  bottom:20px!important;
+}
+
+
 
 </style>
 
@@ -1078,7 +1094,7 @@ rotate(
 	}
 	);
 	
-	/* 로그인 안됬을시 돌아오는 세션 변수에 따른 에러 출력 */
+	/* 로그인 실패시 돌아오는 세션 변수에 따른 에러 출력 */
 	 $(document).ready(()=>{
 	    	var actionControl = "${loginChk}";
 	    	if(actionControl == "wrong") {
@@ -1095,7 +1111,6 @@ rotate(
 	    		alert("탈퇴한 계정입니다. 회원 가입을 해주세요.")
 	    		<% session.removeAttribute("loginChk"); %>
 	    	}
-	    	
     	});
 	
 </script>
@@ -1359,13 +1374,23 @@ rotate(
 
 	<!-- Function used to shrink nav bar removing paddings and adding black background -->
 	<script>
+		function backToTop() {
+			  document.body.scrollTop = 0;
+			  document.documentElement.scrollTop = 0;
+		}
+		
 		$(window).scroll(function() {
-			let flag = 0;
+			let mybutton = document.getElementById("btn-back-to-top");
+			mybutton.addEventListener("click", backToTop);
 			if ($(document).scrollTop() > 50) {
 				$('.navHD').addClass('affix');
 				console.log("OK");
+				if ($(document).scrollTop() > 1100) {
+					$('#btn-back-to-top').addClass('btn-show');
+				}
 			} else {
 				$('.navHD').removeClass('affix');
+				$('#btn-back-to-top').removeClass('btn-show');
 			}
 /* 			if($(document).scrollTop() > 90 && flag==0) {
 				flag=flag+1;
@@ -1763,6 +1788,7 @@ rotate(
 						문의하기 (Contact Us) | 자주 묻는 질문 (FAQ) <br>
 						개인 정보 보호 정책 (Privacy Policy) | 이용 약관 (Terms of Service) <br>
 						© 2023 캠핑 모임 & 명소 (Camping Meetups & Spots) /camping.do. 판권 소유. <br><br> 
+						
 					</div>
 					<div class="col"></div>
 					
@@ -1770,6 +1796,7 @@ rotate(
 								<a href="#" class="fa fa-facebook"></a>
 								<a href="#" class="fa fa-twitter"></a>
 								<a href="#" class="fa fa-google"></a>
+								
 					</div>
 				</div>	
 			</div>
@@ -1777,6 +1804,17 @@ rotate(
 	</div>
 
 
+	<!-- scroll to top 버튼 -->
+	<button
+	        type="button"
+	        class="btn btn-floating btn-lg"
+	        id="btn-back-to-top"
+	        style="background-color:rgba(0,0,0,0); border:0px;"
+	        >
+	  <i class="fas fa-arrow-up" style="color:black;"></i>
+	</button>
+	
+	
 	<!-- 로그인 모달 -->
 	<div class="modal fade" id="exampleModal" tabindex="-1"
 		aria-labelledby="exampleModalLabel" aria-hidden="true">

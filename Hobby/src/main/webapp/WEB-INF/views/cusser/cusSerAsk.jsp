@@ -148,13 +148,13 @@
         <div class="container-fluid align-self-center" style="max-height: 73vh;  width: 50%">
 		<ul class="nav nav-tabs nav-justified border-0" style="font-size: 30px;">
 		  <li class="nav-item">
-		    <a class="nav-link " aria-current="page" style="color: black;" href = "/cusSerFAQ.do">FAQ</a>
+		    <a class="nav-link " aria-current="page" style="color: black;" href = "/cusSerFAQ.do"><strong>FAQ</strong></a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link active border border-4 rounded border-success" href="/cusSerAsk.do" style="color: black;">QNA</a>
+		    <a class="nav-link active border border-4 rounded border-success" href="/cusSerAsk.do" style="color: black;"><strong>QnA</strong></a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="/cusSerReport.do" style="color: black;">REPORT</a>
+		    <a class="nav-link" href="/cusSerReport.do" style="color: black;"><strong>REPORT</strong></a>
 		  </li>
 		</ul>	
         

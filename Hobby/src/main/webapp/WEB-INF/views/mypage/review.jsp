@@ -75,8 +75,6 @@ a {
 
 table {
     margin: 0 auto; /* 가운데 정렬 */
-    width: 800px; /* 내용에 맞게 자동 조절 */
-    max-width: 100%; /* 최대 폭 설정 */
     border-collapse: collapse;
     text-align: center;
 }
@@ -96,9 +94,46 @@ th {
     overflow-y: hidden; /* 세로 스크롤바 활성화 */
 }
 
+.limited-text {
+    max-width: 150px;  /* 적절한 값으로 조절하세요 */
+    overflow: hidden; /* 칸 넘어가는거 안보이게*/
+    text-overflow: ellipsis; /* 칸 넘어가는 내용은 ... 으로 표시*/
+    white-space: nowrap; /* 줄 바꿈 삭제 */
+}
+
 </style>
 <script type="text/javascript">
+$(document).ready(function(){
+    
+    function executeSearch() {
+        var searchText = $("#search-input").val().toLowerCase();
 
+        // If the search text is empty, show all rows and return
+        if(!searchText) {
+            $("table tbody tr").show();
+            return;
+        }
+
+        $("table tbody tr").each(function(){
+            var campName = $(this).find('td:nth-child(2)').text().toLowerCase(); // Get the text of the second cell
+            if(campName.indexOf(searchText) !== -1){
+                $(this).show();
+            } else {
+                $(this).hide();
+            }
+        });
+    }
+
+    $("#search-button").click(executeSearch);
+
+    // Search on pressing Enter key in search input field
+    $("#search-input").on('keypress', function(e){
+        if (e.which == 13) {  // 13 is the code for Enter key
+            e.preventDefault();  // Prevent default form submission
+            executeSearch();
+        }
+    });
+});
 </script>
 </head>
 <body>
@@ -108,14 +143,12 @@ th {
         <br>
         <br>
         <br>
-        <br>	
-        <br>
         <br>
         <br>
         <br>
         <br>
 	
-	<div class="container-fluid align-self-center" style="max-height: 73vh; background-color: #d4ead7; padding: 20px; border-radius: 10px; width: 50%">
+	<div class="container-fluid align-self-center" style="max-height: 75vh; background-color: #d4ead7; padding: 20px; border-radius: 10px; width: 50%">
 	<div style="background-color: white; padding: 20px; border-radius: 10px;">
 		<ul class="nav nav-tabs nav-justified border-0" style="font-size: 30px; margin: auto;">
 		  <li class="nav-item">
@@ -128,42 +161,41 @@ th {
 		    <a class="nav-link" href="/mypage.do" style="color: black;">내 정보</a>
 		  </li>
 		</ul>
-        <br>
-        <br>
-	
+		<form class="d-flex justify-content-end mb-3" role="search" id="search-form" onsubmit="return false;" style="padding-top: 15px; width: 30%; margin-left: auto;">
+		    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" id="search-input">
+		    <button class="btn btn-success" type="button" id="search-button" style="white-space: nowrap;">검색</button>
+		</form>
 	<!-- 메뉴바 -->
-
-    <div class="scrollable-content" style="width: 75%; margin: auto;">
-    <div style="margin-top: 40px;"></div>
-		<table style="border-collapse: collapse; width: 100%; border: 2px solid black;">
-			<thead>
-			<tr>
-				<th style="border: 1px solid black; padding: 8px;">번호</th>
-				<th style="border: 1px solid black; padding: 8px;">캠핑장</th>
-				<th style="border: 1px solid black; padding: 8px;">내용</th>
-				<th style="border: 1px solid black; padding: 8px;">별점</th>
-				<th style="border: 1px solid black; padding: 8px;">작성날짜</th>
-			</tr>
-			</thead>
-			<tbody>
-				<c:choose>
-	     			<c:when test="${empty list}">
-	     				<tr><td colspan="4" style="border: 1px solid black; padding: 8px;"><h3>내가 찜한 캠핑장이 없습니다.</h3></td></tr>
-	     			</c:when>
-	     			<c:otherwise>
-	     			  <c:forEach var="k" items="${list}" varStatus="vs">
-	     			  	<tr>
-	     			  		<td style="border: 1px solid black; padding: 8px;">${vs.count }</td>
-	     			  		<td style="border: 1px solid black; padding: 8px;"><a href="/campDetail.do?keyword=${k.facltNm}">${k.facltNm}</a></td>
-	     			  		<td style="border: 1px solid black; padding: 8px;">${k.comment }</td>
-	     			  		<td style="border: 1px solid black; padding: 8px;">${k.rating }</td>
-	     			  		<td style="border: 1px solid black; padding: 8px;">${k.created_date }</td>
-	     			  	</tr>
-	     			  </c:forEach> 
-	     			</c:otherwise>
-	     		</c:choose>
-			</tbody>
-		</table>
+	    <div class="scrollable-content" style="width: 100%; margin: auto; height: 53vh; overflow-y: auto;">
+			<table style="border-collapse: collapse; width: 100%; border: 2px solid black;">
+				<thead>
+				<tr>
+					<th style="border: 1px solid black; padding: 8px;">번호</th>
+					<th style="border: 1px solid black; padding: 8px;">캠핑장</th>
+					<th style="border: 1px solid black; padding: 8px;">내용</th>
+					<th style="border: 1px solid black; padding: 8px;">별점</th>
+					<th style="border: 1px solid black; padding: 8px;">작성날짜</th>
+				</tr>
+				</thead>
+				<tbody>
+					<c:choose>
+		     			<c:when test="${empty list}">
+		     				<tr><td colspan="4" style="border: 1px solid black; padding: 8px;"><h3>내가 찜한 캠핑장이 없습니다.</h3></td></tr>
+		     			</c:when>
+		     			<c:otherwise>
+		     			  <c:forEach var="k" items="${list}" varStatus="vs">
+		     			  	<tr>
+		     			  		<td style="border: 1px solid black; padding: 8px;">${vs.count }</td>
+		     			  		<td style="border: 1px solid black; padding: 8px;"><a href="/campDetail.do?keyword=${k.facltNm}">${k.facltNm}</a></td>
+		     			  		<td class="limited-text" style="border: 1px solid black; padding: 8px;">${k.comment}</td>
+		     			  		<td style="border: 1px solid black; padding: 8px;">${k.rating }</td>
+		     			  		<td style="border: 1px solid black; padding: 8px; white-space: nowrap;">${k.created_date }</td>
+		     			  	</tr>
+		     			  </c:forEach> 
+		     			</c:otherwise>
+		     		</c:choose>
+				</tbody>
+			</table>
 		</div>
 	</div>
 	</div>

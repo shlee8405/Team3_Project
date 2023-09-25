@@ -74,7 +74,9 @@
 }
 
 .card-body .card-title {  /* 후기 내용 */
+	max-width: 100%;
     font-size: 25px;
+    word-wrap: break-word;
 }
 
 .card-body .card-subtitle { /* 작성자, 작성일 */
@@ -93,6 +95,7 @@
 
 .card-body .star.filled { /* 별 묶음 */
     font-size: 30px;  
+    
 }
 
 .card-body .delete-button { /* 삭제 버튼 */
@@ -103,6 +106,7 @@
     display: flex;
     justify-content: space-between;
 }
+
 </style>
 
 <!-- 평균 별점 -->
