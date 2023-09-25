@@ -190,9 +190,9 @@
 						</c:if>
 					
 						    <div class="col-9">
-						        <%-- <c:set var="selectedUserIdxList" value="" /> --%>
+						        <c:set var="selectedUserIdxList" value="" />
 
-								<%-- <c:forEach var="user" items="${groupUsers}">
+								<c:forEach var="user" items="${groupUsers}">
 								    <c:if test="${user.g_idx eq g_idx}">
 								        <c:set var="selectedUserIdxList" value="${selectedUserIdxList},${user.u_idx}" />
 								    </c:if>
@@ -204,31 +204,7 @@
 								            <li>${user.u_nickname}</li>
 								        </ul>
 								    </c:if>
-								</c:forEach> --%>
-								<% int count = 0; %>
-								<c:forEach var="k" items="${groupUsers}">
-									<c:choose>
-										<c:when test="${k.g_idx==g_idx}">
-											<c:forEach var="j" items="${userlist}">
-												<c:choose>
-													<c:when test="${j.u_idx==k.u_idx }">
-														<c:set var="membercount" value="1" />
-														<li>${j.u_nickname}</li>
-														<% count=count+1; %>
-													</c:when>
-													<c:otherwise>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-										</c:when>
-										<c:otherwise>
-										</c:otherwise>
-									</c:choose>
 								</c:forEach>
-								
-								<% if(count==0) { %>
-									<li> 없음 </li>
-								<%} %>
 
 						    </div>
 		   			<!-- 변수의 값 확인 -->

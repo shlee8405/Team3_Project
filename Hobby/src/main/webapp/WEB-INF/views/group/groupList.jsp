@@ -469,8 +469,7 @@ function group_write_go(f) {
 							<li class="hide">></li>
 						</c:when>
 						<c:otherwise>
-							<li><a
-								href="/groupList.do?cPage=${paging.nowPage+paging.pagePerBlock}">></a></li>
+							<li><a href="/groupList.do?cPage=${paging.nowPage+1}">></a></li>
 						</c:otherwise>
 					</c:choose>
 					<!-- 마지막 페이지 버튼 -->

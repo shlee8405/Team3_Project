@@ -10,7 +10,7 @@
 <link rel="stylesheet" href="resources/css/summernote-lite.css">
 <style type="text/css">
 	#bbs table {
-	    width:800px;
+	    width:1000px;
 	    margin:0 auto;
 	    margin-top:20px;
 	    border:1px solid black;
@@ -157,11 +157,12 @@
 </script>
 </head>
 <body>
-<h2>상세보기 수정폼</h2>
+<jsp:include page="../header.jsp"  />
+<div style="position:relative; top:200px; z-index:1;">
 <div id="bbs">
+<h2 style="margin: auto; text-align: center;">모임 글수정</h2>
 	<form method="post" encType="multipart/form-data">
 		<table summary="게시판 수정">
-			<caption>모임 수정</caption>
 			<tbody>
 				<tr>
 					<th>제목</th>
@@ -243,6 +244,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<br><br><br><br>
 	</form>
 	</div>
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>

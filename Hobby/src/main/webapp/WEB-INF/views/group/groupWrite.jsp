@@ -10,14 +10,13 @@
 <link rel="stylesheet" href="resources/css/summernote-lite.css">
 <style type="text/css">
 	#bbs table {
-	    width:900px;
+	    width:1000px;
 	    margin:0 auto;
 	    margin-top:20px;
 	    border:1px solid lightgray;
 	    border-radius: 10px; 
 	    border-collapse:collapse;
 	    font-size:14px;
-	    
 	}
 	
 	#bbs table caption {
@@ -175,9 +174,9 @@
 <jsp:include page="../header.jsp"  />
 <div style="position:relative; top:200px; z-index:1;">
 		<div id="bbs">
+		<h2 style="margin: auto; text-align: center;">모임 개설하기</h2>
 	<form method="post" enctype="multipart/form-data">
 		<table summary="게시판 글쓰기">
-			<caption>모임 개설하기</caption>
 			<tbody>
 				<tr>
 					<th>제목</th>	
@@ -235,8 +234,8 @@
 			          </td>
 				</tr>
 				<tr>
-					<th>내용</th>
-					<td><textarea name="g_desc" cols="60" rows="10" id="g_desc"></textarea></td>
+					<!-- <th>내용</th> -->
+					<td colspan="2"><textarea name="g_desc" cols="60" rows="10" id="g_desc"></textarea></td>
 				</tr>
 				<tr>
 					<td colspan="2">
@@ -246,6 +245,7 @@
 				</tr>
 			</tbody>
 		</table>
+		<br><br><br><br>
 	</form>
 	</div>
 		<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
