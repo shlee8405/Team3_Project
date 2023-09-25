@@ -1077,6 +1077,27 @@ rotate(
         });
 	}
 	);
+	
+	/* 로그인 안됬을시 돌아오는 세션 변수에 따른 에러 출력 */
+	 $(document).ready(()=>{
+	    	var actionControl = "${loginChk}";
+	    	if(actionControl == "wrong") {
+	    		alert("비밀번호가 틀렸습니다.");
+	    		alert(actionControl)
+	    		<% session.removeAttribute("loginChk"); %>
+	    	} else if (actionControl == "invalid") {
+	    		alert("존재하지 않는 아이디 입니다.");
+	    		<% session.removeAttribute("loginChk"); %>
+	    	} else if (actionControl == "ban") {
+	    		alert("관리자의 의하여 정지된 계정입니다.")
+	    		<% session.removeAttribute("loginChk"); %>
+	    	} else if (actionControl == "delete") {
+	    		alert("탈퇴한 계정입니다. 회원 가입을 해주세요.")
+	    		<% session.removeAttribute("loginChk"); %>
+	    	}
+	    	
+    	});
+	
 </script>
 
 <script type="text/javascript">

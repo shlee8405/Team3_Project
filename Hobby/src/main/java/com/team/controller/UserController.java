@@ -6,6 +6,7 @@ import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -103,13 +104,14 @@ public class UserController {
     public ModelAndView loginUser(UserVO uvo, 
     		HttpServletRequest request,
     		HttpServletResponse response,
+    		HttpSession session,
     		@RequestParam("url") String url) {
         ModelAndView mv = new ModelAndView(url);
         // 아이디 DB에 존재하는지 확인 
         int res = userService.getUserCount(uvo.getU_id());
         // 없으면 종료
         if(res == 0) {
-        	request.getSession().getServletContext().setAttribute("loginChk", "invalid");
+        	session.setAttribute("loginChk", "invalid");
         	mv.setViewName("redirect:"+url);
         	return mv;
         }
@@ -120,7 +122,7 @@ public class UserController {
         // 비밀번호 디코딩
         try {
 			if (!passwordEncoder.matches(uvo.getU_pw(), dbpw)) {
-				request.getSession().getServletContext().setAttribute("loginChk", "wrong");
+				session.setAttribute("loginChk", "wrong");
 				mv.setViewName("redirect:"+url);
 				return mv;
 			} else {
@@ -139,10 +141,14 @@ public class UserController {
 					return mv;
 				} else if (dbuvo.getU_ban().equals("1")) {
 				//밴 
-					
+					session.setAttribute("loginChk", "ban");
+					mv.setViewName("redirect:"+url);
+					return mv;
 				} else if (dbuvo.getU_status().equals("0")) {
 				//탈퇴회원
-					
+					session.setAttribute("loginChk", "delete");
+					mv.setViewName("redirect:"+url);
+					return mv;
 				} else {
 				//일반회원
 					mv.setViewName("redirect:"+url);
@@ -161,7 +167,6 @@ public class UserController {
 //				}
 //				session.setAttribute("loginChk", "ok");
 //				session.setAttribute("mvo", mvo);
-				return mv;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
