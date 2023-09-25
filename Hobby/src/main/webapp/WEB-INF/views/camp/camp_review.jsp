@@ -95,6 +95,7 @@
 
 .card-body .star.filled { /* 별 묶음 */
     font-size: 30px;  
+    
 }
 
 .card-body .delete-button { /* 삭제 버튼 */
