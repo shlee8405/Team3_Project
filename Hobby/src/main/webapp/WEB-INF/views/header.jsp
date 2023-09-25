@@ -890,7 +890,7 @@ body {
 			}
 		};
 		
-		/* 로그인 안됬을시 돌아오는 세션 변수에 따른 에러 출력 */
+		/* 로그인 실패시 돌아오는 세션 변수에 따른 에러 출력 */
 	    $(document).ready(()=>{
 	    	var actionControl = "${loginChk}";
 	    	if(actionControl == "wrong") {
