@@ -5,7 +5,14 @@
 <mapper namespace="counter">
 	
 	<select id="getViewCount" resultType="vcvo">
-		SELECT * FROM VIEWCOUNT ORDER BY vc_idx ASC LIMIT 7;
+		SELECT *
+		FROM (
+		  SELECT *
+		  FROM VIEWCOUNT
+		  ORDER BY vc_idx DESC
+		  LIMIT 7
+		) AS latest_records
+		ORDER BY vc_idx ASC
 	</select>
 	
 	<insert id="viewCount">
@@ -19,7 +26,14 @@
 	</select>
 	
 	<select id="getLoginCount" resultType="lcvo">
-		SELECT * FROM LOGINCOUNT ORDER BY lc_idx ASC LIMIT 7;
+		SELECT * 
+		FROM (
+			SELECT * 
+			FROM LOGINCOUNT 
+			ORDER BY lc_idx DESC 
+			LIMIT 7
+		) AS latest_records
+		ORDER BY lc_idx ASC
 	</select>
 	
 	<insert id="loginCount">
