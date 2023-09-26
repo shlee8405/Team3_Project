@@ -104,45 +104,13 @@
 </head>
 <body>
     <jsp:include page="../header.jsp"  />
-    
-    <div class="d-flex">
-    
-    <nav class="navbar navbar-dark" style="background-color: #637F42; width: 80px;">
-            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon" style="color: black;"></span>
-            </button>
-        </nav>
-        <!-- Offcanvas Navbar Content -->
-        <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel" style="background-color: #637F42;">
-            <div class="offcanvas-header">
-                <h5 class="offcanvas-title" id="offcanvasNavbarLabel" style="color: white;">고객센터</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-            </div>
-            <div class="offcanvas-body" >
-            	<div> <!-- 오른쪽 정렬 -->
-                	<a class="btn btn-light" href="/cusSerFAQ.do" role="button">FAQ</a>
-            	</div>
-                <!-- Offcanvas Navigation Links -->
-                <div class="dropdown">
-                    <button class="btn btn-light dropdown-toggle " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      QnA
-                    </button>
-                    <ul class="dropdown-menu">
-					  <li><a class="dropdown-item" href="/cusSerAsk.do">문의 목록 보기</a></li>
-					  <li><a class="dropdown-item" href="/go_inquiry.do">문의 하기</a></li>
-                    </ul>
-                  </div>
-                  <div class="dropdown">
-                    <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                      Report
-                    </button>
-                    <ul class="dropdown-menu">
-					  <li><a class="dropdown-item" href="/cusSerReport.do">신고 목록 보기</a></li>
-					  <li><a class="dropdown-item" href="/report.do">신고하기</a></li>
-                    </ul>
-                  </div>
-            </div>
-        </div>
+    <br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
     
 	    <div class="container-fluid align-self-end" style="width: 50%">
 	    <div class="report-form">

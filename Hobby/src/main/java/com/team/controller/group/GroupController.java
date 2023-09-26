@@ -151,16 +151,12 @@ public class GroupController {
 	    return modelAndView;
 	}
 
-
-	
 	@GetMapping("/group_writeForm.do")
 	public ModelAndView getGroupWriteForm(HttpServletRequest request) {
 		ModelAndView mv = new ModelAndView("group/groupWrite");
-		
 		String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
 		List<UserVO> Ulist = userService.getUsers(u_idx);
 		mv.addObject("user", Ulist.get(0));
-		
 		return mv;
 	}
     

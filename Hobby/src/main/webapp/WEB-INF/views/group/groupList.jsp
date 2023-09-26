@@ -229,26 +229,26 @@ ol.paging li a:hover {
 	-webkit-text-fill-color: transparent;
 } 
 
-/* 기본 버튼 색상 변경 */
+/* 페이지 기본 버튼 색상 변경 */
 .pagination .page-link {
     color: #4CAF50; /* 녹색 텍스트 */
     border: 1px solid #4CAF50; /* 녹색 테두리 */
 }
 
-/* 활성화된 버튼의 배경 및 텍스트 색상 변경 */
+/* 페이지 활성화된 버튼의 배경 및 텍스트 색상 변경 */
 .pagination .page-item.active .page-link {
     background-color: #4CAF50; /* 녹색 배경 */
     border-color: #4CAF50; /* 녹색 테두리 */
     color: white; /* 흰색 텍스트 */
 }
 
-/* 마우스 오버 시 버튼의 배경 및 텍스트 색상 변경 */
+/* 페이지 마우스 오버 시 버튼의 배경 및 텍스트 색상 변경 */
 .pagination .page-link:hover {
     background-color: #45a049; /* 조금 더 진한 녹색 배경 */
     color: white; /* 흰색 텍스트 */
 }
 
-/* 비활성화된 버튼의 텍스트 색상 변경 */
+/* 페이지 비활성화된 버튼의 텍스트 색상 변경 */
 .pagination .page-item.disabled .page-link {
     color: #a8d5a8; /* 연한 녹색 텍스트 */
 }

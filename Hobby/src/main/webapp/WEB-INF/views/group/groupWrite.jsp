@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="resources/css/summernote-lite.css">
 <style type="text/css">
-	#bbs table {
+	#container table {
 	    width:1000px;
 	    margin:0 auto;
 	    margin-top:20px;
@@ -19,19 +19,19 @@
 	    font-size:14px;
 	}
 	
-	#bbs table caption {
+	#container table caption {
 	    font-size:20px;
 	    font-weight:bold;
 	    margin-bottom:10px;
 	}
 	
-	#bbs table th {
+	#container table th {
 	    text-align:center;
 	    border:1px solid lightgray;
 	    padding:4px 10px;
 	}
 	
-	#bbs table td {
+	#container table td {
 	    text-align:left;
 	     border:1px solid lightgray;
 	    padding:4px 10px;
@@ -168,122 +168,129 @@
             alert("17자 이하로 작성해주세요");
         }
     }
+
 </script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0y5NLA313y5Ora0HXJz4C+KY4Ck4SOF4y4Ck4SOF4y4Ck4C2DgHfViXydVeLm+JDM" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-0y5NLA313y5Ora0HXJz4C+KY4Ck4SOF4y4Ck4SOF4y4Ck4C2DgHfViXydVeLm+JDM" crossorigin="anonymous"></script>
 </head>
 <body>
 <jsp:include page="../header.jsp"  />
 <div style="position:relative; top:200px; z-index:1;">
-		<div id="bbs">
+	
+		<div id="container" style="width: 50%; margin: auto; background-color: skyblue; height: 120vh; border-radius: 10px; padding: 15px;">
+    	<div id="container" style="background-color: white; height: 117.3vh; border-radius: 10px;">
+		
 		<h2 style="margin: auto; text-align: center;">모임 개설하기</h2>
-	<form method="post" enctype="multipart/form-data">
-		<table summary="게시판 글쓰기">
-			<tbody>
-				<tr>
-					<th>제목</th>	
-					<td><input type="text" name="g_title" size="45"/></td>
-				</tr>
-				<tr>
-					<th>작성자</th>
-					<td><input type="text" name="u_idx" value="<%=request.getSession().getServletContext().getAttribute("sessionUidx") %>" readonly /></td>
-				</tr>
-				<tr>
-					<th>모임 총인원</th>
-					<td><input type="number" name="g_maxPeople" /></td>
-				</tr>
-				<tr>
-					<th>썸네일 이미지</th>  <!-- 첨부파일 유효성검사 해주자 -->
-					<td><input type="file" name="file"/></td>
-				</tr>
-				<tr>
-					<th>모임 소개</th>  <!-- 첨부파일 유효성검사 해주자 -->
-					<td><input type="text" name="g_intro" size="60" oninput="limitInputLength(event)"/></td>
-				</tr>
-				<tr>
-					<th>캠핑 날짜</th>
-					<td><input type="datetime-local" name="g_date" size="10" id="g_date" /></td>
-				</tr>
-				<tr>
-					<th>캠핑 장소</th>
-					<td>
-						<div class="search_boxes">
-			            <select name="g_cdo" id="g_cdo" onchange="categoryChange(this)">
-			              <option>시/도 선택</option>
-			              <option value="강원">강원</option>
-			              <option value="경기">경기</option>
-			              <option value="경남">경남</option>
-			              <option value="경북">경북</option>
-			              <option value="광주">광주</option>
-			              <option value="대구">대구</option>
-			              <option value="대전">대전</option>
-			              <option value="부산">부산</option>
-			              <option value="서울">서울</option>
-			              <option value="울산">울산</option>
-			              <option value="인천">인천</option>
-			              <option value="전남">전남</option>
-			              <option value="전북">전북</option>
-			              <option value="제주">제주</option>
-			              <option value="충남">충남</option>
-			              <option value="충북">충북</option>
-			            </select>
-			          
-			            <select name="g_gugun" id="g_gugun">
-			              <option>군/구 선택</option>
-			            </select>
-			          	</div>
-			          	<input type="text" name="g_location" id="g_location" placeholder="캠핑장 이름을 입력하세요"/>
-			          </td>
-				</tr>
-				<tr>
-					<!-- <th>내용</th> -->
-					<td colspan="2"><textarea name="g_desc" cols="60" rows="10" id="g_desc"></textarea></td>
-				</tr>
-				<tr>
-					<td colspan="2">
-						<input type="button" value="완료" onclick="sendData(this.form)"/>
-						<input type="button" value="취소" onclick="list_go(this.form)"/>
-					</td>
-				</tr>
-			</tbody>
-		</table>
-		<br><br><br><br>
-	</form>
-	</div>
-		<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
-    	<script src="resources/js/summernote-lite.js"></script>
-    	<script src="resources/js/lang/summernote-ko-KR.js"></script>
-    	<script type="text/javascript">
-    	$(function(){
-    		$('#g_desc').summernote({
-    	        lang : 'ko-KR',
-    	        height : 300,
-    	        focus : true,
-    	        callbacks : {
-    	            onImageUpload :  function(files, editor){
-    	                for (var i = 0; i < files.length; i++) {
-    	                    sendImage(files[i], editor);
-    	                }
-    	            }
-    	        }
-			});
-    	});
-    	function sendImage(file, editor) {
-			var frm = new FormData();
-			frm.append("s_file",file);
-			$.ajax({
-				url : "/saveImage.do",
-				data : frm,
-				type : "post",
-				contentType : false,
-				processData : false,
-				dataType : "json",
-			}).done(function(data) {
-				var path = data.path;
-				var fname = data.fname;
-				alert("path : "+path+"\nfname : "+fname);
-				$("#g_desc").summernote("editor.insertImage",path+"/"+fname);
-			});
-		}
-    	</script>
+		
+			<form method="post" enctype="multipart/form-data">
+				<div class="container-fluid ask-form" summary="게시판 글쓰기">
+					<div>
+						<div class="mb-3">
+							<label class="form-label">제목</label>	
+							<div><input class="form-control" type="text" name="g_title" size="45"/></div>
+						</div>
+						<div class="mb-3" style="width: 20%;">
+							<label class="form-label">작성자</label>
+							<div><input class="form-control" type="text" name="u_idx" value="${user.u_nickname}" readonly /></div>
+						</div>
+						<div class="mb-3" style="width: 20%;">
+							<label class="form-label">모임 총인원</label>
+							<div><input class="form-control" type="number" name="g_maxPeople" /></div>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">썸네일 이미지</label>  <!-- 첨부파일 유효성검사 해주자 -->
+							<div><input class="form-control" type="file" name="file"/></div>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">모임 소개</label>  <!-- 첨부파일 유효성검사 해주자 -->
+							<div><input class="form-control" type="text" name="g_intro" size="60" oninput="limitInputLength(event)"/></div>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">캠핑 날짜</label>
+							<div style="width: 20%"><input class="form-control" type="datetime-local" name="g_date" size="10" id="g_date"/></div>
+						</div>
+						<div class="mb-3">
+							<label class="form-label">캠핑 장소</label>
+							<div style="width: 20%;">
+								<div class="search_boxes">
+					            <select class="form-control" name="g_cdo" id="g_cdo" onchange="categoryChange(this)">
+					              <option>시/도 선택</option>
+					              <option value="강원">강원</option>
+					              <option value="경기">경기</option>
+					              <option value="경남">경남</option>
+					              <option value="경북">경북</option>
+					              <option value="광주">광주</option>
+					              <option value="대구">대구</option>
+					              <option value="대전">대전</option>
+					              <option value="부산">부산</option>
+					              <option value="서울">서울</option>
+					              <option value="울산">울산</option>
+					              <option value="인천">인천</option>
+					              <option value="전남">전남</option>
+					              <option value="전북">전북</option>
+					              <option value="제주">제주</option>
+					              <option value="충남">충남</option>
+					              <option value="충북">충북</option>
+					            </select>
+					          
+					            <select class="form-control" name="g_gugun" id="g_gugun">
+					              <option>군/구 선택</option>
+					            </select>
+					          	</div>
+					          	<input class="form-control" type="text" name="g_location" id="g_location" placeholder="캠핑장 이름을 입력하세요"/>
+					          </div>
+						</div>
+						<div class="mb-3">
+							<!-- <label class="form-label">내용</label> -->
+							<div colspan="2"><textarea name="g_desc" cols="60" rows="10" id="g_desc"></textarea></div>
+						</div>
+						<div class="mb-3 d-flex justify-content-end">
+						    <input class="form-control me-2" type="button" value="완료" onclick="sendData(this.form)" style="width: 80px;"/>
+						    <input class="form-control" type="button" value="취소" onclick="list_go(this.form)" style="width: 80px;"/>
+						</div>
+					</div>
+				</div>
+				<br><br><br><br>
+			</form>
+			</div>
+			</div>
+				<script src="https://code.jquery.com/jquery-3.6.0.min.js" crossorigin="anonymous"></script>
+		    	<script src="resources/js/summernote-lite.js"></script>
+		    	<script src="resources/js/lang/summernote-ko-KR.js"></script>
+		    	<script type="text/javascript">
+		    	$(function(){
+		    		$('#g_desc').summernote({
+		    	        lang : 'ko-KR',
+		    	        height : 300,
+		    	        focus : true,
+		    	        callbacks : {
+		    	            onImageUpload :  function(files, editor){
+		    	                for (var i = 0; i < files.length; i++) {
+		    	                    sendImage(files[i], editor);
+		    	                }
+		    	            }
+		    	        }
+					});
+		    	});
+		    	function sendImage(file, editor) {
+					var frm = new FormData();
+					frm.append("s_file",file);
+					$.ajax({
+						url : "/saveImage.do",
+						data : frm,
+						type : "post",
+						contentType : false,
+						processData : false,
+						dataType : "json",
+					}).done(function(data) {
+						var path = data.path;
+						var fname = data.fname;
+						alert("path : "+path+"\nfname : "+fname);
+						$("#g_desc").summernote("editor.insertImage",path+"/"+fname);
+					});
+				}
+		    	</script>
+			</div>
     	
 </body>
 </html>
