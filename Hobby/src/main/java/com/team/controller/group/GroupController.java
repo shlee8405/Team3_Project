@@ -213,7 +213,7 @@ public class GroupController {
 	    
 	    // 상세보기
 	    GroupVO gvo = groupService.getGroupOnelist(g_idx);
-	    
+	    List<GroupVO> groupList = groupService.getAllGroups();
 	    // 참여자 카운트
 	    int maxPeople = Integer.parseInt(gvo.getG_maxPeople());
 	    int curPeople = Integer.parseInt(gvo.getG_curPeople());
@@ -226,7 +226,7 @@ public class GroupController {
 	    mv.addObject("userlist",userlist);
 	    mv.addObject("g_idx",g_idx);
 	    mv.addObject("gvo", gvo);
-	    
+	    mv.addObject("groupList",groupList);
 	    // 댓글 가져오기
 	    List<GroupCmtVO> gc_list = groupService.getCommList(g_idx);
 	    mv.addObject("gc_list", gc_list);

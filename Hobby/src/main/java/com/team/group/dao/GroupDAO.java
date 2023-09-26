@@ -27,7 +27,7 @@ public class GroupDAO {
 	}
 	
 	public List<GroupVO> getAllGroups(){
-		return sqlSessionTemplate.selectList("group.allList");
+		return sqlSessionTemplate.selectList("group.allListNoPaging");
 	}
 	
 	// group select * no paging
