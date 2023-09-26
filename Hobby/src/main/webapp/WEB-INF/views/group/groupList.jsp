@@ -132,7 +132,7 @@ ol.paging li a:hover {
 	border: 1px solid lightgray;
 	margin: auto;
 	border-radius: 10px;
-	background-color: rgba(128, 128, 0, 0.2);
+	background: linear-gradient(90deg, rgba(147,188,136,0.24) 0%, rgba(180,188,136,0.24) 35%, rgba(200,180,146,0.24) 100%);
 }
 .serch_all2 {
 	display: flex;
@@ -141,6 +141,7 @@ ol.paging li a:hover {
 	align-items: center; /* 이 부분은 중앙 정렬을 위해 추가한 것입니다. */
 	margin: auto;
 	border-radius: 10px;
+	
 }
 
 .search-container {
@@ -221,9 +222,20 @@ ol.paging li a:hover {
 	margin: auto;
 	width:100%;
 	text-align:center;
-	color: rgba(205,205,205,0.8);
 	white-space: nowrap;
+	font-size: 72px;
+	background: -webkit-linear-gradient(rgba(221,221,221,0.8), rgba(20,20,20,0.6));
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 } 
+
+#group_item{
+	transition : all .2s ease-in-out;
+}
+
+#group_item:hover{
+	transform: scale(1.05);
+}
 
 </style>
 <link rel="stylesheet"
@@ -383,13 +395,13 @@ function group_write_go(f) {
 	    		
 	        		<div class="carousel-inner">
 	            		<div class="carousel-item active">
-	               			 <img src="resources/images/camp_search_box1.jpg" class="d-block" alt="...">
+	               			 <img src="resources/images/camp_search_box2.jpg" class="d-block" alt="...">
 	           			</div>
 	            		<div class="carousel-item">
-	                		<img src="resources/images/camp_search_box2.jpg" class="d-block" alt="...">
+	                		<img src="resources/images/camp_search_box3.jpg" class="d-block" alt="...">
 	            		</div>
 	            		<div class="carousel-item">
-	                		<img src="resources/images/camp_search_box3.jpg" class="d-block" alt="...">
+	                		<img src="resources/images/camp_search_box1.jpg" class="d-block" alt="...">
 	            		</div>
 	            		<!--https://upload.wikimedia.org/wikipedia/commons/8/8d/Yarra_Night_Panorama%2C_Melbourne_-_Feb_2005.jpg-->
 	        		</div>
@@ -411,17 +423,17 @@ function group_write_go(f) {
 		<div style="position: relative; top: 200px; z-index: 1; margin-bottom:200px;">
 		<form action="/search.do" method="get">
 			<div class="serch_all" style="width: 800px">
-				<h2 style="margin-top: 20px; text-align: left;">모임 검색</h2>
+				<h2 style="margin-top: 20px; text-align: left; font-family:MBCM; font-size:3rem;">모임 검색</h2>
 				<br>
 				<div class="search-container">
-					<div class="search-box">
-						<input type="text" class="search-txt" name="title"
-							placeholder="제목을 입력하세요">
+					<div class="search-box ms-5" style="background-color:rgba(20,20,20,0.1);">
+						<input type="text" class="search-txt ms-2" name="title"
+							placeholder="제목을 입력하세요" style="font-family:TAEBAEK; font-weight:bold;" >
 					</div>
 					&nbsp;&nbsp; <br>
 					<div class="search_boxes">
 						<select name="city" id="" onchange="categoryChange(this)"
-							style="height: 40px; width: 120px; border-radius: 30px;">
+							style="height: 40px; width: 120px; border-radius: 30px;font-family:TAEBAEK; font-weight:bold;">
 							<option value="">시/도 선택</option>
 							<option value="강원">강원</option>
 							<option value="경기">경기</option>
@@ -440,7 +452,7 @@ function group_write_go(f) {
 							<option value="충남">충남</option>
 							<option value="충북">충북</option>
 						</select>&nbsp; <select name="state" id="state"
-							style="height: 40px; width: 120px; border-radius: 30px;">
+							style="height: 40px; width: 120px; border-radius: 30px;font-family:TAEBAEK;font-weight:bold; ">
 							<option value="">군/구 선택</option>
 						</select>
 					</div>
@@ -455,8 +467,8 @@ function group_write_go(f) {
 			</div>
 		</form>
 		<br>
-		<div id="listgroup" style="width: 1000px;">
-			<h3>모임</h3>
+		<div id="listgroup" class="mt-3 pt-3" style="width: 1000px; margin-bottom:250px; border:0px solid black; border-radius:10px; background-color: rgba(200, 180, 146, 0.24); ">
+			<h3 style="font-family: MBCM; text-align:center;">모임</h3>
 			<div class="board-container">
 				<c:choose>
 					<c:when test="${empty glist}">
@@ -467,7 +479,7 @@ function group_write_go(f) {
 					<c:otherwise>
 						<c:forEach var="k" items="${glist}">
 							<div id="group_item" class="board-item"
-								onclick="go_groupOnelist(${k.g_idx})">
+								onclick="go_groupOnelist(${k.g_idx})" style="border-radius:10px; background-color:rgba(150,200,100,0.15);">
 								<c:set var="thumbnailSrc" value="/resources/images/캠핑.png" />
 								<c:if test="${not empty k.g_fname}">
 									<c:set var="thumbnailSrc"
