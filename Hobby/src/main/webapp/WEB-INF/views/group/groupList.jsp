@@ -225,6 +225,32 @@ ol.paging li a:hover {
 	white-space: nowrap;
 } 
 
+
+/* 기본 버튼 색상 변경 */
+.pagination .page-link {
+    color: #4CAF50; /* 녹색 텍스트 */
+    border: 1px solid #4CAF50; /* 녹색 테두리 */
+}
+
+/* 활성화된 버튼의 배경 및 텍스트 색상 변경 */
+.pagination .page-item.active .page-link {
+    background-color: #4CAF50; /* 녹색 배경 */
+    border-color: #4CAF50; /* 녹색 테두리 */
+    color: white; /* 흰색 텍스트 */
+}
+
+/* 마우스 오버 시 버튼의 배경 및 텍스트 색상 변경 */
+.pagination .page-link:hover {
+    background-color: #45a049; /* 조금 더 진한 녹색 배경 */
+    color: white; /* 흰색 텍스트 */
+}
+
+/* 비활성화된 버튼의 텍스트 색상 변경 */
+.pagination .page-item.disabled .page-link {
+    color: #a8d5a8; /* 연한 녹색 텍스트 */
+}
+
+
 </style>
 <link rel="stylesheet"
 	href="https://use.fontawesome.com/releases/v5.6.1/css/all.css">
@@ -490,46 +516,67 @@ function group_write_go(f) {
 				<br>
 				<button id="allSearch" class="ser_btn" onclick="allSearch()">전체보기</button>
 			</div>
-			<div class="serch_all2" >
-				<ol class="paging">
-				 <!-- 첫 페이지 버튼 -->
-    				<li><a href="/groupList.do?cPage=1"><<</a></li>
-					<!-- 이전 버튼 -->
-					<c:choose>
-						<c:when test="${paging.beginBlock <= 1}">
-							<li class="hide"><</li>
-						</c:when>
-						<c:otherwise>
-							<li><a
-								href="/groupList.do?cPage=${paging.beginBlock-paging.pagePerBlock }"><</a></li>
-						</c:otherwise>
-					</c:choose>
-
-					<!-- 페이지번호들 -->
-					<c:forEach begin="${paging.beginBlock }" end="${paging.endBlock }"
-						step="1" var="k">
-						<!--  현재 페이지는 링크 X, 나머지 페이지는 해당 페이지로 이동하게 링크 처리 -->
-						<c:if test="${ k == paging.nowPage}">
-							<li class="now">${k}</li>
-						</c:if>
-						<c:if test="${ k != paging.nowPage}">
-							<li><a href="/groupList.do?cPage=${k}">${k}</a></li>
-						</c:if>
-					</c:forEach>
-
-					<!-- 이후 버튼 -->
-					<c:choose>
-						<c:when test="${paging.endBlock >= paging.totalPage }">
-							<li class="hide">></li>
-						</c:when>
-						<c:otherwise>
-							<li><a href="/groupList.do?cPage=${paging.nowPage+1}">></a></li>
-						</c:otherwise>
-					</c:choose>
-					<!-- 마지막 페이지 버튼 -->
-    				<li><a href="/groupList.do?cPage=${paging.totalPage}">>></a></li>
-				</ol>
+			
+			<div class="serch_all2">
+			    <nav aria-label="Page navigation example">
+			        <ul class="pagination">
+			            <!-- 첫 페이지 버튼 -->
+			            <li class="page-item">
+			                <a class="page-link" href="/groupList.do?cPage=1" aria-label="First">
+			                    <span aria-hidden="true">&laquo;&laquo;</span>
+			                </a>
+			            </li>
+			            <!-- 이전 버튼 -->
+						<c:choose>
+						    <c:when test="${paging.nowPage <= 1}">
+						        <li class="page-item disabled">
+						            <a class="page-link" href="#" tabindex="-1"><span aria-hidden="true">&laquo;</span></a>
+						        </li>
+						    </c:when>
+						    <c:otherwise>
+						        <li class="page-item">
+						            <a class="page-link" href="/groupList.do?cPage=${paging.nowPage - 1}">
+						                <span aria-hidden="true">&laquo;</span>
+						            </a>
+						        </li>
+						    </c:otherwise>
+						</c:choose>
+			
+			            <!-- 페이지번호들 -->
+			            <c:forEach begin="${paging.beginBlock}" end="${paging.endBlock}" step="1" var="k">
+			                <c:if test="${k == paging.nowPage}">
+			                    <li class="page-item active"><a class="page-link" href="#">${k}</a></li>
+			                </c:if>
+			                <c:if test="${k != paging.nowPage}">
+			                    <li class="page-item"><a class="page-link" href="/groupList.do?cPage=${k}">${k}</a></li>
+			                </c:if>
+			            </c:forEach>
+			
+			            <!-- 이후 버튼 -->
+			            <c:choose>
+			                <c:when test="${paging.endBlock >= paging.totalPage}">
+			                    <li class="page-item disabled">
+			                        <a class="page-link" href="#" tabindex="-1"><span aria-hidden="true">&raquo;</span></a>
+			                    </li>
+			                </c:when>
+			                <c:otherwise>
+			                    <li class="page-item">
+			                        <a class="page-link" href="/groupList.do?cPage=${paging.nowPage+1}">
+			                            <span aria-hidden="true">&raquo;</span>
+			                        </a>
+			                    </li>
+			                </c:otherwise>
+			            </c:choose>
+			            <!-- 마지막 페이지 버튼 -->
+			            <li class="page-item">
+			                <a class="page-link" href="/groupList.do?cPage=${paging.totalPage}" aria-label="Last">
+			                    <span aria-hidden="true">&raquo;&raquo;</span>
+			                </a>
+			            </li>
+			        </ul>
+			    </nav>
 			</div>
+
 		</div>
 	</div>
 	</div>
