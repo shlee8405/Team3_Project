@@ -9,7 +9,17 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style type="text/css">
+@font-face{
+        font-family: MBCM;
+        src: url(/resources/fonts/MBCM.ttf);
+    }
+    @font-face {
+        font-family: TAEBAEK;
+        src: url(/resources/fonts/TAEBAEK.ttf);
+    }
 	a { text-decoration: none;}
 	#onelist{width: 1000px; border-collapse:collapse; text-align: center;}
 	.allist{border-bottom: 1px solid lightgray; padding: 3px; height: 40px;}
@@ -23,6 +33,9 @@
 		border-radius: 10px; 
 		color: #FFFCFC;
 		cursor: pointer;
+	}
+	.onelistHeader{
+	font-family: MBCM;
 	}
 	#groupCount{
 	width:300px;
@@ -38,6 +51,52 @@
     max-height: 1200px;
     overflow-y: auto;
 	}
+	/* 댓글 */
+	.comment-container {
+	    display: flex; /* 플렉스 박스 레이아웃을 사용합니다. */
+	    align-items: center; /* 요소를 수직으로 중앙 정렬합니다. */
+	}
+	
+	#commId {
+	    flex: 1; /* <p> 요소가 사용 가능한 공간을 채우도록 합니다. */
+	    margin-right: 10px; /* <p> 요소와 <textarea> 사이의 간격을 조절합니다. */
+	}
+	/* 댓글 출력 양식을 지정하는 CSS 코드 */
+	.comment-container {
+	    border: 1px solid #4CAF50;
+	    width: 1000px;
+	    padding: 10px; /* 내용과 테두리 사이의 간격 조정 */
+	    margin: 10px 0; /* 댓글과 댓글 사이의 간격 조정 */
+	    background-color: #f5f5f5; /* 배경색 지정 (선택 사항) */
+	}
+	
+	.comment-header {
+		text-align: left;
+	    margin-bottom: 20px;
+	}
+	
+	.comment-content {
+		text-align: left;
+	    font-weight: bold;
+	    margin-bottom: 10px;
+	    margin-left: 30px;
+	}
+	
+	.comment-date {
+	    font-style: italic;
+	}
+	
+	.comment-delete-button {
+    background-color: #ff0000;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    float: right; /* 삭제 버튼을 오른쪽으로 배치 */
+    margin-left: 10px; /* 삭제 버튼과 내용 사이의 간격 조정 */
+}
+
+	
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
  <script>
@@ -139,7 +198,7 @@
 <div style="position:relative; top:200px; z-index:1;">
 <%-- <c:set var="sessionUidx" value="${sessionScope.sessionUidx}" /> --%>
 <div class="list">
-<h2>모임 상세보기</h2>
+<h2 class="onelistHeader">모임 상세보기</h2>
 <hr>
 <br>
 <form method="post">
@@ -158,42 +217,40 @@
         </div>&nbsp;&nbsp;&nbsp;&nbsp;
 			<table id="onelist" class="allist">
 				<tr align="center">
-					<th class="allist" bgcolor="#99ccff">제  목</th>
+					<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">제  목</th>
 					<td class="allist"><b>${gvo.g_title}</b></td>
 				</tr>
 				<tr align="center">
-					<th class="allist" bgcolor="#99ccff">작성자</th>
+					<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">작성자</th>
 					<td class="allist">
-						<c:forEach var="k" items="${groupList}" varStatus="vs">
 					  		<c:forEach var="j" items="${userlist}">
-							    <c:if test="${k.u_idx==j.u_idx}">
-							      <td>${j.u_nickname}</td>
+							    <c:if test="${gvo.u_idx==j.u_idx}">
+							      ${j.u_nickname}
 							    </c:if>
 					   		</c:forEach>
-					   </c:forEach>
 				   </td>
 				</tr>
 				<tr align="center">
-					<th class="allist" bgcolor="#99ccff">모임소개</th>
+					<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">모임소개</th>
 					<td class="allist">${gvo.g_intro }</td>
 				</tr>
 				<tr align="center">
-				    <th class="allist" bgcolor="#99ccff">캠핑 날짜</th>
+				    <th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">캠핑 날짜</th>
 				    <td class="allist">${gvo.g_date}</td>
 				</tr>
 				<tr align="center">
-					<th class="allist" bgcolor="#99ccff">캠핑 장소</th>
+					<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">캠핑 장소</th>
 					<td class="allist">${gvo.g_cdo} ${gvo.g_gugun} ${gvo.g_location}</td>
 				</tr>
 				<tr align="center">
-					<th class="allist" bgcolor="#99ccff">모임 정원</th>
+					<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">모임 정원</th>
 					<td class="allist">${gvo.g_maxPeople }</td>
 				</tr>
 				<tr>
-				<th class="allist" bgcolor="#99ccff"><b>참가자:</b> </th>
+				<th class="allist" bgcolor="#637F42" style="color: #fff; font-size: 18px;"><b>참가자:</b> </th>
 					<td  colspan="2">
-					<c:if test="${gvo.g_date <= now}">
 					<br>
+					<c:if test="${gvo.g_date <= now}">
 					    <p><b>이미 지난 모임입니다.</b></p>
 					</c:if>
 					<c:if test="${isParticipated}">
@@ -220,37 +277,33 @@
 										</c:otherwise>
 									</c:choose>
 								</c:forEach>
-								
 								<% if(count==0) { %>
 									<li> 없음 </li>
 								<%} %>
-								
+								<br>
 						    </div>
 		   			<!-- 변수의 값 확인 -->
-					<p>gvo.g_date: ${gvo.g_date}</p>
+					<%-- <p>gvo.g_date: ${gvo.g_date}</p>
 					<p>now: ${now}</p>
 					<p>gvo.g_maxPeople: ${gvo.g_maxPeople}</p>
-					<p>gvo.g_curPeople: ${gvo.g_curPeople}</p>
-
+					<p>gvo.g_curPeople: ${gvo.g_curPeople}</p> --%>
 						
 						<!-- 조건 비교를 위해 사용하기 -->
 						<c:choose>
 						    <c:when test="${isParticipated}">
 						        <!-- 사용자가 이미 참여한 상태 -->
 						        <c:if test="${gvo.g_date > now}">
-						            <button class="btn btn-danger chamBtn" onclick="participateGroup(${gvo.g_idx})">참여 취소</button>
+						            <button class="btn btn-danger chamBtn" onclick="participateGroup(${gvo.g_idx})">참여 취소</button><br>
 						        </c:if>
-						        <h4>when</h4>
 						    </c:when>
 						    <c:otherwise>
 						        <!-- 사용자가 참여하지 않은 상태 -->
 						        <c:if test="${gvo.g_date > now && gvo.g_maxPeople > gvo.g_curPeople}">
-						            <button class="btn btn-primary chamBtn" onclick="participateGroup(${gvo.g_idx})">참여</button>
+						            <button class="btn btn-primary chamBtn" onclick="participateGroup(${gvo.g_idx})">참여</button><br>
 						        </c:if>
 						    </c:otherwise>
 						</c:choose>
-
-
+						<br>
 		   			 </td>
 	   			</tr>
 			</table>
@@ -276,16 +329,21 @@
 		<br>
 		<br>
 		<%-- 댓글 입력 --%>
-	<div style="padding:50px; width:580px; margin: auto; ">
+	<div>
 		<form method="post">
 			<fieldset>
+				   <div class="comment-container">
 				<c:if test="${sessionUidx != null}">
-				    <p id="commId">아이디 : ${sessionUidx}</p>
+					    <p id="commId"><b>아이디 : 
+						    <c:forEach var="j" items="${userlist}">
+							    <c:if test="${sessionUidx==j.u_idx}">
+									  ${j.u_nickname}
+								</c:if>
+					   		</c:forEach></b></p>
 				</c:if>
-				<p >내용 : 
-					<textarea id="commentArea" rows="4" cols="40" name="gc_content"></textarea>
-				 </p>
+					    <textarea id="commentArea" placeholder="내용을 입력하세요" rows="4" cols="80" name="gc_content"></textarea>
 				 <input id="commIn" type="button" value="댓글저장" onclick="comment_go(this.form)">
+					</div>
 				 <input type="hidden" name="g_idx" value="${gvo.g_idx}">
 				 <input type="hidden" name="u_idx" value="<%=request.getSession().getServletContext().getAttribute("sessionUidx") %>">
 				 <input type="hidden" name="cPage" value="${cPage}">
@@ -308,33 +366,30 @@
         
     });
 </script>
-	
+	<br>
 	<%-- 댓글 출력 --%>
 	<div style="display: table;" >
 		<c:forEach var="k" items="${gc_list}">
-		 <div style="border: 1px solid #cc00cc; width: 400px; margin: 20px; padding: 20px;">
-		 	<form method="post">
-		 		<p>아이디 : ${k.u_idx}</p>
-		 		<p>내용 : ${k.gc_content }</p>
-		 		<p>날짜 : ${k.gc_date}</p>
-		 		<!-- 세션의 u_idx와 댓글의 u_idx를 문자열로 변환 -->
-				<c:set var="commentUidxStr" value="${k.u_idx}" />
-				
-				<!-- 문자열로 변환된 값들을 출력해서 확인 -->
-				<!-- Debugging lines -->
-				<%-- <c:out value="Session Uidx as String: ${sessionUidxStr}" />
-				<c:out value="Comment Uidx as String: ${commentUidxStr}" />
-				<c:out value="Session Uidx: ${sessionUidx}" /> --%>
-				
-				<!-- 문자열로 변환된 값을 비교 -->
-				<c:if test="${sessionUidx eq commentUidxStr}">
-				    <input type="button" value="삭제" onclick="comment_del(this.form)" />
-				</c:if>
-		 		<input type="hidden" value="${k.gc_idx}" name="gc_idx">
-		 		<input type="hidden" value="${k.g_idx}" name="g_idx">
-		 		<input type="hidden" name="cPage" value="${cPage}">
-		 	</form>
-		 </div>
+		 <div class="comment-container">
+		    <form class="container" method="post">
+		        <p class="comment-header"><b>아이디 : 
+		        	<c:forEach var="j" items="${userlist}">
+		        		<c:if test="${k.u_idx==j.u_idx}">
+		        			${j.u_nickname}
+		        		</c:if>
+					 </c:forEach></b> &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp; 날짜 : ${k.gc_date}</p>
+		        <p class="comment-content">내용 : ${k.gc_content }</p>
+		        <!-- 세션의 u_idx와 댓글의 u_idx를 문자열로 변환 -->
+		        <c:set var="commentUidxStr" value="${k.u_idx}" />
+		        <!-- 문자열로 변환된 값을 비교 -->
+		        <c:if test="${sessionUidx eq commentUidxStr}">
+		            <input type="button" value="삭제" class="comment-delete-button" onclick="comment_del(this.form)" />
+		        </c:if>
+		        <input type="hidden" value="${k.gc_idx}" name="gc_idx">
+		        <input type="hidden" value="${k.g_idx}" name="g_idx">
+		        <input type="hidden" name="cPage" value="${cPage}">
+		    </form>
+		</div>
 		</c:forEach>
 		</div>
 		<br>
