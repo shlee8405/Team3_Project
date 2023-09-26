@@ -253,7 +253,7 @@ import 'datatables.net-responsive-dt';
 	            	<label class="btn btn-success" for="btn-check3" id="btn-tab-3">관리자 리스트</label>
 	   
 	            	<input type="button" class="btn-check" id="btn-check4" autocomplete="off" onclick="hidetest4()">
-	            	<label class="btn btn-success" for="btn-check4" id="btn-tab-4">관지라 생성</label>
+	            	<label class="btn btn-success" for="btn-check4" id="btn-tab-4">관리자 생성</label>
 				</div>
 			</div>
 	
