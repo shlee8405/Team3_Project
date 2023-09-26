@@ -163,7 +163,15 @@
 				</tr>
 				<tr align="center">
 					<th class="allist" bgcolor="#99ccff">작성자</th>
-					<td class="allist">${gvo.u_idx}</td>
+					<td class="allist">
+						<c:forEach var="k" items="${groupList}" varStatus="vs">
+					  		<c:forEach var="j" items="${userlist}">
+							    <c:if test="${k.u_idx==j.u_idx}">
+							      <td>${j.u_nickname}</td>
+							    </c:if>
+					   		</c:forEach>
+					   </c:forEach>
+				   </td>
 				</tr>
 				<tr align="center">
 					<th class="allist" bgcolor="#99ccff">모임소개</th>
@@ -182,35 +190,16 @@
 					<td class="allist">${gvo.g_maxPeople }</td>
 				</tr>
 				<tr>
+				<th class="allist" bgcolor="#99ccff"><b>참가자:</b> </th>
 					<td  colspan="2">
 					<c:if test="${gvo.g_date <= now}">
 					<br>
 					    <p><b>이미 지난 모임입니다.</b></p>
 					</c:if>
-					
-						    <div class="col-3">
-						        <b>참가자:</b>  
-						    </div>
-						<c:if test="${isParticipated}">
-						    <p><b>당신은 이 그룹에 이미 참여하였습니다.</b></p>
-						</c:if>
-					
+					<c:if test="${isParticipated}">
+						<p><b>당신은 이 그룹에 이미 참여하였습니다.</b></p>
+					</c:if>
 						    <div class="col-9">
-						        <%-- <c:set var="selectedUserIdxList" value="" /> --%>
-
-								<%-- <c:forEach var="user" items="${groupUsers}">
-								    <c:if test="${user.g_idx eq g_idx}">
-								        <c:set var="selectedUserIdxList" value="${selectedUserIdxList},${user.u_idx}" />
-								    </c:if>
-								</c:forEach>
-								
-								<c:forEach var="user" items="${userlist}">
-								    <c:if test="${fn:contains(selectedUserIdxList, user.u_idx)}">
-								        <ul>
-								            <li>${user.u_nickname}</li>
-								        </ul>
-								    </c:if>
-								</c:forEach> --%>
 								<% int count = 0; %>
 								<c:forEach var="k" items="${groupUsers}">
 									<c:choose>
