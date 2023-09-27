@@ -501,6 +501,7 @@ function group_write_go(f) {
 							style="height: 40px; width: 120px; border-radius: 30px;font-family:TAEBAEK;font-weight:bold; border: 1px solid #51e3d4; background-color:rgba(20,20,20,0.01); ">
 							<option value="">군/구 선택</option>
 						</select>
+						<input type="hidden" name="cPage" value="${paging.nowPage}"/> 
 					</div>
 				</div>
 				&nbsp;&nbsp;
@@ -550,7 +551,7 @@ function group_write_go(f) {
 				<button id="allSearch" class="ser_btn" onclick="allSearch()">전체보기</button>
 			</div>
 			
-	
+
 			
 			
 			<div class="serch_all2">
@@ -558,7 +559,7 @@ function group_write_go(f) {
 			        <ul class="pagination">
 			            <!-- 첫 페이지 버튼 -->
 			            <li class="page-item">
-			                <a class="page-link" href="/groupList.do?cPage=1" aria-label="First">
+			                <a class="page-link" href="/search.do?title=${title}&city=${city }&state=${state }&cPage=1" aria-label="First">
 			                    <span aria-hidden="true">&laquo;&laquo;</span>
 			                </a>
 			            </li>
@@ -571,7 +572,7 @@ function group_write_go(f) {
 						    </c:when>
 						    <c:otherwise>
 						        <li class="page-item">
-						            <a class="page-link" href="/groupList.do?cPage=${paging.nowPage - 1}">
+						            <a class="page-link" href="/search.do?title=${title}&city=${city }&state=${state }&cPage=${paging.nowPage - 1}">
 						                <span aria-hidden="true">&laquo;</span>
 						            </a>
 						        </li>
@@ -584,7 +585,7 @@ function group_write_go(f) {
 			                    <li class="page-item active"><a class="page-link" href="#">${k}</a></li>
 			                </c:if>
 			                <c:if test="${k != paging.nowPage}">
-			                    <li class="page-item"><a class="page-link" href="/groupList.do?cPage=${k}">${k}</a></li>
+			                    <li class="page-item"><a class="page-link" href="/search.do?title=${title}&city=${city }&state=${state }&cPage=${k}">${k}</a></li>
 			                </c:if>
 			            </c:forEach>
 			
@@ -597,7 +598,7 @@ function group_write_go(f) {
 			                </c:when>
 			                <c:otherwise>
 			                    <li class="page-item">
-			                        <a class="page-link" href="/groupList.do?cPage=${paging.nowPage+1}">
+			                        <a class="page-link" href="/search.do?title=${title}&city=${city }&state=${state }&cPage=${paging.nowPage+1}">
 			                            <span aria-hidden="true">&raquo;</span>
 			                        </a>
 			                    </li>
@@ -605,7 +606,7 @@ function group_write_go(f) {
 			            </c:choose>
 			            <!-- 마지막 페이지 버튼 -->
 			            <li class="page-item">
-			                <a class="page-link" href="/groupList.do?cPage=${paging.totalPage}" aria-label="Last">
+			                <a class="page-link" href="/search.do?title=${title}&city=${city }&state=${state }&cPage=${paging.totalPage}" aria-label="Last">
 			                    <span aria-hidden="true">&raquo;&raquo;</span>
 			                </a>
 			            </li>

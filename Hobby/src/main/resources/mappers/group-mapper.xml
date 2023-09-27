@@ -42,7 +42,7 @@
 	<select id="searchGroupsCount" parameterType="gvo"
 		resultType="int">
 		SELECT COUNT(*) FROM GROUPS
-		WHERE g_status = '1'
+		WHERE g_status != 0
 		<if test="g_title != null and g_title != ''">
 			AND g_title LIKE CONCAT('%', #{g_title}, '%')
 		</if>

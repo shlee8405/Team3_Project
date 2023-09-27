@@ -46,9 +46,25 @@ public class GroupController {
 	private GroupuserService groupuserService;
 	
 	@RequestMapping("/groupList.do")
-	 public ModelAndView getAllGroups(HttpServletRequest request) {
+	 public ModelAndView getAllGroups(HttpServletRequest request, HttpSession session) {
 		ModelAndView mv = new ModelAndView("group/groupList");
 		
+		/*
+		 * String title = request.getParameter("title"); String city =
+		 * request.getParameter("city"); String state = request.getParameter("state");
+		 * String cPage = request.getParameter("cPage");
+		 * 
+		 * System.out.println(String.
+		 * format("title is %s, city is %s, state is %s, cPage is %s", title,city,state,
+		 * cPage));
+		 * 
+		 * if(title!=null|| city!=null|| state!=null) { session.setAttribute("search",
+		 * "yes"); return searchGroups(title, city, state, cPage); }
+		 * 
+		 * if(session.getAttribute("search")!=null) { session.removeAttribute("search");
+		 * }
+		 */
+		String cPage = request.getParameter("cPage");
 		// 전체 게시물의 수
 		int count = groupService.getTotalCount();
 		paging.setTotalRecord(count);
@@ -63,7 +79,6 @@ public class GroupController {
 			}
 		}
 		// 현재 페이지
-		String cPage = request.getParameter("cPage");
 		if (cPage == null) {
 			paging.setNowPage(1);
 			System.out.println("1페");
@@ -100,24 +115,24 @@ public class GroupController {
         return mv;
     }
 	
-	@RequestMapping("/search.do")
+	@RequestMapping("/search.do") 
 	public ModelAndView searchGroups(
-	        @RequestParam("title") String title, 
-	        @RequestParam("city") String city,
-	        @RequestParam("state") String state) {
+			 @RequestParam("title") String title, 
+			 @RequestParam("city")  String city,
+			 @RequestParam("state")  String state, 
+				String cPage) {
 		System.out.println("search");
 	    
 	    GroupVO gvo = new GroupVO();
 	    gvo.setG_title(title);
 	    gvo.setG_cdo(city);
 	    gvo.setG_gugun(state);
-	    gvo.setLimit(paging.getNumPerPage());
-	 	gvo.setOffset(paging.getOffset());
+	   
 	    
-	    List<GroupVO> resultGroups = groupService.searchGroups(gvo);
-	    
+	   
+	    System.out.println("total search count is + " + groupService.searchGroupsCount(gvo));
 	        // 전체 게시물의 수
-	 		paging.setTotalRecord(resultGroups.size());
+	 		paging.setTotalRecord(groupService.searchGroupsCount(gvo));
 	 		
 	 		// 전체 페이지의 수
 	 		if (paging.getTotalRecord() <= paging.getNumPerPage()) {
@@ -128,6 +143,14 @@ public class GroupController {
 	 				paging.setTotalPage(paging.getTotalPage() + 1);
 	 			}
 	 		}
+	 		
+	 		if (cPage == null) {
+				paging.setNowPage(1);
+				System.out.println("1페");
+			} else {
+				paging.setNowPage(Integer.parseInt(cPage));
+				System.out.println(cPage+"그외페");
+			}
 	 		
 
 	 		// offset = limit * (현재페이지-1);
@@ -144,10 +167,17 @@ public class GroupController {
 	 		}
 	    
 	    //ModelAndView modelAndView = new ModelAndView("group/groupSearchResult"); // Change to the new JSP page
-	    ModelAndView modelAndView = new ModelAndView("group/groupList");
-	    
+	 		
+	 		 gvo.setLimit(paging.getNumPerPage());
+	 	 	gvo.setOffset(paging.getOffset());	
+	 		
+	    ModelAndView modelAndView = new ModelAndView("group/groupList2");
+	    List<GroupVO> resultGroups = groupService.searchGroups(gvo);
 	    modelAndView.addObject("glist", resultGroups);
 	    modelAndView.addObject("paging", paging);
+	    modelAndView.addObject("title", title);
+	    modelAndView.addObject("city", city);
+	    modelAndView.addObject("state", state);
 	    return modelAndView;
 	}
 
@@ -162,7 +192,7 @@ public class GroupController {
     
 	@PostMapping("/groupInsert.do")
 	public ModelAndView getGroupWriteOk(@ModelAttribute ("file") MultipartFile file,
-			GroupVO gvo, HttpServletRequest request) {
+			GroupVO gvo, HttpServletRequest request, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/groupList.do");
 		try {
 			String path = request.getSession().getServletContext().getRealPath("/resources/images");
@@ -183,15 +213,21 @@ public class GroupController {
 				File out = new File(path, g_fname);
 				FileCopyUtils.copy(in, out);
 			}
+			String u_idx = (String) request.getSession().getServletContext().getAttribute("sessionUidx");
+			System.out.println(u_idx);
+			gvo.setU_idx(u_idx);
 			int res = groupService.getGroupWriteOk(gvo);
 			if(res >0) {
+				session.setAttribute("writeStatus", "ok");
 				 return mv;
 			}else {
-				return null;
+				session.setAttribute("writeStatus", "fail");
+				return mv;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
-			return null;
+			session.setAttribute("writeStatus", "fail");
+			return mv;
 		}
 	}
 	@RequestMapping("/group_onelist.do")

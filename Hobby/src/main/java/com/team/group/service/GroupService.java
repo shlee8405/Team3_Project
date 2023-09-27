@@ -22,6 +22,8 @@ public interface GroupService {
 	public List<GroupVO> getAllGroups(int offset, int limit);
 	//검색
 	public List<GroupVO> searchGroups(GroupVO gvo);
+	// 검색 count
+	public int searchGroupsCount(GroupVO gvo);
 	// 글쓰기
 	public int getGroupWriteOk(GroupVO gvo);
 	// 관리자로 모임 생성

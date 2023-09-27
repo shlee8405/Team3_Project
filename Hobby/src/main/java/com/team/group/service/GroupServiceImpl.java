@@ -131,6 +131,11 @@ public class GroupServiceImpl implements GroupService {
 		return groupDAO.searchGroups(gvo);
 	}
 	
+	@Override
+	public int searchGroupsCount(GroupVO gvo) {
+		return groupDAO.searchGroupsCount(gvo);
+	}
+	
 	/*	*/	
 	@Override
 	public List<GroupVO> getListByTitle(String title) {

@@ -192,7 +192,8 @@
 						</div>
 						<div class="mb-3" style="width: 20%;">
 							<label class="form-label">작성자</label>
-							<div><input class="form-control" type="text" name="u_idx" value="${user.u_nickname}" readonly /></div>
+							<div><input class="form-control" type="text" name="u_nickname" value="${user.u_nickname}" readonly /></div>
+							<input type="hidden" name="u_idx" value="${user.u_idx}"> 
 						</div>
 						<div class="mb-3" style="width: 20%;">
 							<label class="form-label">모임 총인원</label>

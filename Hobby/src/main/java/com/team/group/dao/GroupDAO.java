@@ -120,7 +120,9 @@ public class GroupDAO {
         return sqlSessionTemplate.selectList("group.searchGroups", gvo);
 	}
 	
-	
+	public int searchGroupsCount(GroupVO gvo) {
+		return sqlSessionTemplate.selectOne("group.searchGroupsCount", gvo);
+	}
 	
 	
 	public int insertMember(String g_idx, String u_idx) {
