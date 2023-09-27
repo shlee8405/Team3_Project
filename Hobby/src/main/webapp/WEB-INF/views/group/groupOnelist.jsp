@@ -13,7 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style type="text/css">
-@font-face{
+	@font-face{
         font-family: MBCM;
         src: url(/resources/fonts/MBCM.ttf);
     }
@@ -46,11 +46,12 @@
 	font-weight: bold;
 	}
 	.infoItem {
-		border: 1px solid gray;
-		width: 1000px;
-		min-height: 600px;
+	border: 1px solid gray;
+	width: 100%;
+	min-height: 300px;
     max-height: 1200px;
     overflow-y: auto;
+    background:rgba(255,255,255,0.8);
 	}
 	/* 댓글 */
 	.comment-container {
@@ -95,8 +96,39 @@
     cursor: pointer;
     float: right; /* 삭제 버튼을 오른쪽으로 배치 */
     margin-left: 10px; /* 삭제 버튼과 내용 사이의 간격 조정 */
-}
-
+	}
+	
+	.joinmembers li{ 
+		list-style-type:none;
+	}
+	
+	.descform{
+		font-family:TAEBAEK;
+		font-size:1.2rem;
+	}
+	
+	.section-one{
+		background: linear-gradient(90deg, rgba(147,188,136,0.24) 0%, rgba(180,188,136,0.24) 35%, rgba(200,180,146,0.24) 100%);
+		padding:15px;
+		box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.15);
+	}
+	
+	.returnbtn {
+		box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.15);
+	}
+	
+	.cmtsubmitbtn {
+		box-shadow: 0px 5px 2px rgba(0, 0, 0, 0.15);
+	}
+	.cmtsubmitbtn:hover {
+		background-color: #c6c9cb!important;
+	}
+	
+	
+	.returnbtn:hover{
+		padding:5px 15px;
+		background-color: #c6c9cb!important;
+	}
 	
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -203,121 +235,123 @@
 <hr>
 <br>
 <form method="post">
-<div style="display: flex; align-items: flex-start;">
-    <!-- 새로 추가된 썸네일 이미지 부분 -->
-    <div style="width: 300px; height: 300px;">
-        <c:choose>
-            <c:when test="${empty gvo.g_fname}">
-                <!-- 빈 공간 유지 --> 
-                <img src="resources/images/캠핑.png" style="width: 300px; height: 300px;">
-            </c:when>
-            <c:otherwise>
-                <img src="resources/images/${gvo.g_fname}" style="width: 300px; height: 300px;">
-            </c:otherwise>
-        </c:choose>
-        </div>&nbsp;&nbsp;&nbsp;&nbsp;
-			<table id="onelist" class="allist">
-				<tr align="center">
-					<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">제  목</th>
-					<td class="allist"><b>${gvo.g_title}</b></td>
-				</tr>
-				<tr align="center">
-					<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">작성자</th>
-					<td class="allist">
-					  		<c:forEach var="j" items="${userlist}">
-							    <c:if test="${gvo.u_idx==j.u_idx}">
-							      ${j.u_nickname}
-							    </c:if>
-					   		</c:forEach>
-				   </td>
-				</tr>
-				<tr align="center">
-					<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">모임소개</th>
-					<td class="allist">${gvo.g_intro }</td>
-				</tr>
-				<tr align="center">
-				    <th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">캠핑 날짜</th>
-				    <td class="allist">${gvo.g_date}</td>
-				</tr>
-				<tr align="center">
-					<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">캠핑 장소</th>
-					<td class="allist">${gvo.g_cdo} ${gvo.g_gugun} ${gvo.g_location}</td>
-				</tr>
-				<tr align="center">
-					<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">모임 정원</th>
-					<td class="allist">${gvo.g_maxPeople }</td>
-				</tr>
-				<tr>
-				<th class="allist" bgcolor="#637F42" style="color: #fff; font-size: 18px;"><b>참가자:</b> </th>
-					<td  colspan="2">
-					<br>
-					<c:if test="${gvo.g_date <= now}">
-					    <p><b>이미 지난 모임입니다.</b></p>
-					</c:if>
-					<c:if test="${isParticipated}">
-						<p><b>당신은 이 그룹에 이미 참여하였습니다.</b></p>
-					</c:if>
-						    <div class="col-9">
-								<% int count = 0; %>
-								<c:forEach var="k" items="${groupUsers}">
-									<c:choose>
-										<c:when test="${k.g_idx==g_idx}">
-											<c:forEach var="j" items="${userlist}">
-												<c:choose>
-													<c:when test="${j.u_idx==k.u_idx }">
-														<c:set var="membercount" value="1" />
-														<li>${j.u_nickname}</li>
-														<% count=count+1; %>
-													</c:when>
-													<c:otherwise>
-													</c:otherwise>
-												</c:choose>
-											</c:forEach>
-										</c:when>
-										<c:otherwise>
-										</c:otherwise>
-									</c:choose>
-								</c:forEach>
-								<% if(count==0) { %>
-									<li> 없음 </li>
-								<%} %>
-								<br>
-						    </div>
-		   			<!-- 변수의 값 확인 -->
-					<%-- <p>gvo.g_date: ${gvo.g_date}</p>
-					<p>now: ${now}</p>
-					<p>gvo.g_maxPeople: ${gvo.g_maxPeople}</p>
-					<p>gvo.g_curPeople: ${gvo.g_curPeople}</p> --%>
-						
-						<!-- 조건 비교를 위해 사용하기 -->
-						<c:choose>
-						    <c:when test="${isParticipated}">
-						        <!-- 사용자가 이미 참여한 상태 -->
-						        <c:if test="${gvo.g_date > now}">
-						            <button class="btn btn-danger chamBtn" onclick="participateGroup(${gvo.g_idx})">참여 취소</button><br>
-						        </c:if>
-						    </c:when>
-						    <c:otherwise>
-						        <!-- 사용자가 참여하지 않은 상태 -->
-						        <c:if test="${gvo.g_date > now && gvo.g_maxPeople > gvo.g_curPeople}">
-						            <button class="btn btn-primary chamBtn" onclick="participateGroup(${gvo.g_idx})">참여</button><br>
-						        </c:if>
-						    </c:otherwise>
-						</c:choose>
+<div class="section-one" style="border-radius:10px;"> 
+	<div class="descform" style="display: flex; align-items: flex-start; ">
+	    <!-- 새로 추가된 썸네일 이미지 부분 -->
+	    <div style="width: 300px; height: 300px;">
+	        <c:choose>
+	            <c:when test="${empty gvo.g_fname}">
+	                <!-- 빈 공간 유지 --> 
+	                <img src="resources/images/캠핑.png" style="width: 300px; height: 300px;">
+	            </c:when>
+	            <c:otherwise>
+	                <img src="resources/images/${gvo.g_fname}" style="width: 300px; height: 300px;">
+	            </c:otherwise>
+	        </c:choose>
+	      </div>&nbsp;&nbsp;&nbsp;&nbsp;
+				<table id="onelist" class="allist" style="border: 0.5px solid black; border-radius:10px;">
+					<tr align="center">
+						<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">제  목</th>
+						<td class="allist"><b>${gvo.g_title}</b></td>
+					</tr>
+					<tr align="center">
+						<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">작성자</th>
+						<td class="allist">
+						  		<c:forEach var="j" items="${userlist}">
+								    <c:if test="${gvo.u_idx==j.u_idx}">
+								      ${j.u_nickname}
+								    </c:if>
+						   		</c:forEach>
+					   </td>
+					</tr>
+					<tr align="center">
+						<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">모임소개</th>
+						<td class="allist">${gvo.g_intro }</td>
+					</tr>
+					<tr align="center">
+					    <th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">캠핑 날짜</th>
+					    <td class="allist">${gvo.g_date}</td>
+					</tr>
+					<tr align="center">
+						<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">캠핑 장소</th>
+						<td class="allist">${gvo.g_cdo} ${gvo.g_gugun} ${gvo.g_location}</td>
+					</tr>
+					<tr align="center">
+						<th class="allist" bgcolor="#637F42" style="color: #fff;font-size: 18px;">모임 정원</th>
+						<td class="allist">${gvo.g_maxPeople }</td>
+					</tr>
+					<tr>
+					<th class="allist" bgcolor="#637F42" style="color: #fff; font-size: 18px;"><b>참가자:</b> </th>
+						<td  colspan="2">
 						<br>
-		   			 </td>
-	   			</tr>
-			</table>
-			</div>
-		
-			<br>
-			 <div class="infoItem">
-        <span>${gvo.g_desc }</span>
+						<c:if test="${gvo.g_date <= now}">
+						    <p><b>이미 지난 모임입니다.</b></p>
+						</c:if>
+						<c:if test="${isParticipated}">
+							<p><b>당신은 이 그룹에 이미 참여하였습니다.</b></p>
+						</c:if>
+							    <div class="col-9 joinmembers">
+									<% int count = 0; %>
+									<c:forEach var="k" items="${groupUsers}">
+										<c:choose>
+											<c:when test="${k.g_idx==g_idx}">
+												<c:forEach var="j" items="${userlist}">
+													<c:choose>
+														<c:when test="${j.u_idx==k.u_idx }">
+															<c:set var="membercount" value="1" />
+															<li> - ${j.u_nickname}</li>
+															<% count=count+1; %>
+														</c:when>
+														<c:otherwise>
+														</c:otherwise>
+													</c:choose>
+												</c:forEach>
+											</c:when>
+											<c:otherwise>
+											</c:otherwise>
+										</c:choose>
+									</c:forEach>
+									<% if(count==0) { %>
+										<li> 없음 </li>
+									<%} %>
+									<br>
+							    </div>
+			   			<!-- 변수의 값 확인 -->
+						<%-- <p>gvo.g_date: ${gvo.g_date}</p>
+						<p>now: ${now}</p>
+						<p>gvo.g_maxPeople: ${gvo.g_maxPeople}</p>
+						<p>gvo.g_curPeople: ${gvo.g_curPeople}</p> --%>
+							
+							<!-- 조건 비교를 위해 사용하기 -->
+							<c:choose>
+							    <c:when test="${isParticipated}">
+							        <!-- 사용자가 이미 참여한 상태 -->
+							        <c:if test="${gvo.g_date > now}">
+							            <button class="btn btn-danger chamBtn" onclick="participateGroup(${gvo.g_idx})">참여 취소</button><br>
+							        </c:if>
+							    </c:when>
+							    <c:otherwise>
+							        <!-- 사용자가 참여하지 않은 상태 -->
+							        <c:if test="${gvo.g_date > now && gvo.g_maxPeople > gvo.g_curPeople}">
+							            <button class="btn btn-primary chamBtn" onclick="participateGroup(${gvo.g_idx})">참여</button><br>
+							        </c:if>
+							    </c:otherwise>
+							</c:choose>
+							<br>
+			   			 </td>
+		   			</tr>
+				</table>
+				</div>
+			
+				<br>
+				 <div class="infoItem">
+	        <span>${gvo.g_desc }</span>
+	    </div>
     </div>
     <br><br>
     <div class="infoActions">
         <input type="hidden" name="g_idx" value="${gvo.g_idx}">
-        <input type="button" value="목록" onclick="list_go(this.form)" />
+        <input type="button" class="btn btn-light returnbtn" style="font-family:TAEBAEK; font-weight:bold;" value="목록으로 돌아가기" onclick="list_go(this.form)" />
         <input type="hidden" name="cPage" value="${cPage }">
     <c:set var="groupUidxStr" value="${gvo.u_idx}" /> <!-- gvo는 그룹의 정보를 담고 있는 객체로 추정됩니다. -->
 		<c:if test="${sessionUidx eq groupUidxStr}">
@@ -343,7 +377,7 @@
 					   		</c:forEach></b></p>
 				</c:if>
 					    <textarea id="commentArea" placeholder="내용을 입력하세요" rows="4" cols="80" name="gc_content"></textarea>
-				 <input id="commIn" type="button" value="댓글저장" onclick="comment_go(this.form)">
+				 <input id="commIn" type="button" class="ms-2 btn btn-light cmtsubmitbtn" style="font-family:TAEBAEK; font-weight:bold;" value="댓글저장" onclick="comment_go(this.form)">
 					</div>
 				 <input type="hidden" name="g_idx" value="${gvo.g_idx}">
 				 <input type="hidden" name="u_idx" value="<%=request.getSession().getServletContext().getAttribute("sessionUidx") %>">
@@ -399,5 +433,6 @@
 		<br>
 		</div>
 		
+		</div>
 </body>
 </html>
