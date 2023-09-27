@@ -12,6 +12,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>내가 찜한 캠핑장</title>
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <style type="text/css">
 .my-page-title {
     text-align: center;
@@ -180,7 +181,7 @@ $(document).ready(function(){
 				<tbody>
 					<c:choose>
 		     			<c:when test="${empty list}">
-		     				<tr><td colspan="4" style="border: 1px solid black; padding: 8px;"><h3>내가 찜한 캠핑장이 없습니다.</h3></td></tr>
+		     				<tr><td colspan="5" style="border: 1px solid black; padding: 8px;"><h3>내가 찜한 캠핑장이 없습니다.</h3></td></tr>
 		     			</c:when>
 		     			<c:otherwise>
 		     			  <c:forEach var="k" items="${list}" varStatus="vs">

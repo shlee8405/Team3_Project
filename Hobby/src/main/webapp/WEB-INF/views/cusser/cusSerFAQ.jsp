@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>/고객센터.do</title>
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">

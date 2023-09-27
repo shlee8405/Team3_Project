@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>캠핑장후기</title>
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <style type="text/css">
 @font-face {
      font-family: Jua-Regular;

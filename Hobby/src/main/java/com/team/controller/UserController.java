@@ -88,7 +88,7 @@ public class UserController {
 	// 회원가입 DB 저장 실행
 	@PostMapping("/signupGo.do")
 	public ModelAndView getUserInsert(UserVO uvo) {
-		ModelAndView mv = new ModelAndView("index2");
+		ModelAndView mv = new ModelAndView("test/signup");
 		//비밀번호 암호화
 		String newPass = passwordEncoder.encode(uvo.getU_pw());
 		//setter in vo
@@ -96,6 +96,7 @@ public class UserController {
 		
 		//비밀번호 암호화 상태로 DB 저장
 		int result = userService.getUserInsert(uvo);
+		if (result>0) mv.setViewName("redirect:/home.do");
 		return mv;
 	}
 	

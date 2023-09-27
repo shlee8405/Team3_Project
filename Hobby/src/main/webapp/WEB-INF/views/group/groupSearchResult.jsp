@@ -6,7 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Document</title>
+<title>/캠핑모임.do</title>
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <style>
 .fixed-position {
 	position: fixed;

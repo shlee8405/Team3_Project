@@ -7,9 +7,9 @@
 <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>/CAMPING.do</title>
+	<link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -1346,7 +1346,7 @@ rotate(
 					%>
 					<% if(u_idx == null) { %>
 				
-					<li><a  data-bs-toggle="modal" data-bs-target="#exampleModal">/로그인.do</a></li> <!-- 로그인 모달 버튼 -->
+					<li><a style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">/로그인.do</a></li> <!-- 로그인 모달 버튼 -->
 					<% } %>
 					
 				</ul>
@@ -1714,8 +1714,8 @@ rotate(
 			
 			</div>
 			<div class="col">
-				<div class="s3-text-title"><span style="color:white!important;"> ﾟ☁︎｡ ⋆｡ ﾟ⋆ ☾⋆⁺₊ ⋆</span><br>/CAMPing 의 <span class="eublink">이유</span>.do<br>
-				<span style="color:white!important;">🏕🏔🏞🏖🏕🏔🏖</span></div>
+				<div class="s3-text-title"><!-- <span style="color:white!important;"> ﾟ☁︎｡ ⋆｡ ﾟ⋆ ☾⋆⁺₊ ⋆</span> --><br>/CAMPing 의 <span class="eublink">이유</span>.do<br>
+				<!-- <span style="color:white!important;">🏕🏔🏞🏖🏕🏔🏖</span> --></div>
 				<div class="s3-text-content pe-5">
 				
 				캠핑은 도시의 소음에서 벗어나 자연 속에서 신선한 공기를 마시며 <b><i>몸과 마음을 힐링</i></b>할 수 있는 최고의 방법입니다!<br> 

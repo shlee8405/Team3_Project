@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>내 정보</title>
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <style type="text/css">
 	.user-table {
 		width: 600px;

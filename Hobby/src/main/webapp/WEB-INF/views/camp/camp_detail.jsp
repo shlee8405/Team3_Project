@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>캠핑장 상세보기</title>
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <!-- <link> 태그(=스타일시트)는 <head> 내부에 위치한다. -->
    <!-- 부트스트랩 CDN 추가 -->
    <link rel="stylesheet" href="/resources/css/camp/camp_detail.css?after">

@@ -8,7 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>신고 관리</title>
-
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <style type="text/css">
 
 main {

@@ -50,6 +50,8 @@ public class CampController {
 	 private final String serviceKey2 =
 			 "8uQ4gUl3L6XORKeCrIfIYnMZjwr0SKtgx%2F3OOWbtGXEQ0nB0fw%2B1lSw0MPSC85m5dlFX7S8N7p187kRaOJD3Tg%3D%3D";
 	 
+	 private final String serviceKey3 = "vftwTJlsPgy8Zr4yGFWel%2B0e54Ai6wRKua4w26fGz03gC5HqPtaQzeqWerg0kCB8f%2FpRosqM4JRLUq5Xvjel9A%3D%3D";
+	 
 	private final String mobileOS = "ETC";
 	private final String mobileApp = "MobileApp";
 
@@ -122,7 +124,19 @@ public class CampController {
 
 	// 캠핑장 검색
 	@GetMapping("/campSearch.do")
-	public List<CampVO> getSearchList(@RequestParam(defaultValue = "1") int pageNo, @RequestParam String keyword)
+	public List<CampVO> getSearchList(@RequestParam(defaultValue = "1") int pageNo, @RequestParam String keyword) throws URISyntaxException, UnsupportedEncodingException{
+		try {
+			return getSearchListMethod(pageNo, keyword, serviceKey);
+		} catch (Exception e) {
+			try {
+				return getSearchListMethod(pageNo, keyword, serviceKey2);
+			} catch (Exception e2) {
+				return getSearchListMethod(pageNo, keyword, serviceKey3);
+			}
+		}
+	}
+	
+	private List<CampVO> getSearchListMethod(@RequestParam(defaultValue = "1") int pageNo, @RequestParam String keyword, String serviceKey)
 			throws URISyntaxException, UnsupportedEncodingException {
 
 		// 리퀘스트 파라미터
@@ -297,8 +311,11 @@ public class CampController {
 			// serviceKey 사용
 			return getCampDetailMethod(keyword, request, serviceKey);
 		} catch (Exception e) {
-			// serviceKey 실패시 serviceKey2 사용
-			return getCampDetailMethod(keyword, request, serviceKey2);
+			try {
+				return getCampDetailMethod(keyword, request, serviceKey2);
+			} catch (Exception e2) {
+				return getCampDetailMethod(keyword, request, serviceKey3);
+			}
 		} 
 	}
 	// /campDetail.do가 사용하는 메소드

@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>캠핑 모임 관리</title>
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <link rel="stylesheet" href="resources/css/summernote-lite.css">
 <style type="text/css">
 

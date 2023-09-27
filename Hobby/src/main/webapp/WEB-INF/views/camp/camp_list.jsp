@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>캠핑장 리스트</title>
-
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <!-- bootstrap cdn -->
 <link rel="stylesheet" href="/resources/css/camp/camp_list.css?after">
 <link rel="stylesheet"
@@ -61,7 +61,7 @@
                 	<input type="text" class="search-slt" placeholder="캠핑장 이름을 입력하세요." onkeyup="handleEnter(event)">
                 </div>
 				<div>
-                    <button type="button" class="btn btn-info wrn-btn" onclick="doSearch()">Search</button>
+                    <button type="button" class="btn btn-info wrn-btn" onclick="doSearch()" >검색</button>
 				</div>
 			 </div>
 		</section>
@@ -172,7 +172,7 @@
 					// 검색결과가 없으면 dataList에 message 하나만 온다.
 			        if(data.length == 1 && data[0].message) {
 			            console.log('마지막 페이지입니다.');
-			            alert(data[0].message);
+			            /* alert(data[0].message); */
 			            msg = data[0].message;
 			            return;  // 메시지만 있으므로 추가 작업을 하지 않고 반환
 			        }
@@ -229,7 +229,6 @@
 		            }
 				},
 	            error: function() {
-	            	alert("에러11");
 	            	loading = false;
 	            }
 	        });
@@ -286,7 +285,7 @@
 				url : "/campBest.do",
 				method : "get",
 				dataType : "json", 
-				async: false,
+				async: false, 
 				success : function(data) {
 					// 'bestCamps'라는 키로 서버에서 보낸 데이터 리스트를 찾는다.
 					// var dataList = data.bestCamps;

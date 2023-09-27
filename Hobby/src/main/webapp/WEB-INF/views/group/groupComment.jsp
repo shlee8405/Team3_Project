@@ -5,7 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>모임 댓글</title>
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <script type="text/javascript">
 function comment_go(f) {
 	 // 유효성 검사

@@ -6,7 +6,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>Insert /캠핑모임.do</title>
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <link rel="stylesheet" href="resources/css/summernote-lite.css">
 <style type="text/css">
 	#bbs table {

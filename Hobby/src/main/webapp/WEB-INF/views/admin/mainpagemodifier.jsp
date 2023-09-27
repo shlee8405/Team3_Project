@@ -7,6 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 이미지 설정</title>
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <style type="text/css">
 

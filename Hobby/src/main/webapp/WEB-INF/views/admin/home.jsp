@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>관리자 대시보드</title>
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 <script src="https://kit.fontawesome.com/55da9ebea0.js" crossorigin="anonymous"></script>
 <style type="text/css">
 

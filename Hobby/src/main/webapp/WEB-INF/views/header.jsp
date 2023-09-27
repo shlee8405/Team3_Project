@@ -399,56 +399,6 @@ body {
 								});
 			});
 	
-	$(document)
-	.ready(
-	function() {
-		console.log('베스트캠핑장가져오기 시작');
-	$.ajax({
-		url : "/campBest.do",
-		method : "get",
-		dataType : "json", 
-		success : function(data) {
-			// 'bestCamps'라는 키로 서버에서 보낸 데이터 리스트를 찾는다.
-			// var dataList = data.bestCamps;
-			console.log('베스트캠핑장가져오기 inside function(data){}');
-			var list = "";
-
-			
-			$.each(data, function (index, response) {
-				// 제공 이미지 없을 시
-				var imageUrl = response.firstImageUrl == "" ? "resources/images/beach01.jpg" : response.firstImageUrl;
-				
-				list += "<div class='imgdiv' onclick=\"window.location.href='/campDetail.do?keyword="+response.facltNm+"'\">" 
-					+"<img class='img' src='"+imageUrl+"'alt='img1' width='100%' height='100%'" 
-						+ "style='width: 100%; object-fit: cover; position: relative; border-radius:1rem;'>"
-						+"<span class='placetitle'><h1>"+response.facltNm+"</h1></span>"
-						+"</div>"
-						
-                }); //each
-                
-                $("#image_best3_list").append(list); //append
-                
-             	// 별 색칠 로직
-                $('.rating').each(function() {
-                    var rating = $(this).data('rating');
-                    $(this).find('.fa').each(function(index) {
-                        if (index < rating) {
-                        	$(this).removeClass('disable');  // 색칠된 별은 .disable 클래스 제거
-                        } else {
-                            $(this).addClass('disable');  // 색칠되지 않은 별은 .disable 클래스 추가
-                        }
-                    });
-                });
-                $(".small-title").show();
-                
-            },
-            error: function() {
-            	alert("에러");
-            	//loading = false;
-            }
-        });
-	}
-	);
 </script>
 
 <script type="text/javascript">
@@ -679,7 +629,7 @@ body {
 					}
 					%>
 					<% if(u_idx == null) { %>
-					<li><a data-bs-toggle="modal" data-bs-target="#exampleModal">/로그인.do</a></li> <!-- 로그인 모달 버튼 -->
+					<li><a  style="cursor:pointer;" data-bs-toggle="modal" data-bs-target="#exampleModal">/로그인.do</a></li> <!-- 로그인 모달 버튼 -->
 					<% } %>
                 </ul>
             </div>

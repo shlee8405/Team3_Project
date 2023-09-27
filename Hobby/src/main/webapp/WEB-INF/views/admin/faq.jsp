@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <title>FAQ 관리</title>
+ <link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 
 <style type="text/css">
 

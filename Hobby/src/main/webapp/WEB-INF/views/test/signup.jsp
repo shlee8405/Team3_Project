@@ -3,7 +3,8 @@
 		<!DOCTYPE html>
 		<html >
 			<head>
-				<title>Sign Up</title>
+				<title>회원가입</title>
+				<link rel="icon" type="image/x-icon" href="resources/images/favicon.ico">
 				<meta charset="UTF-8">
 				<meta name="viewport" content="width=device-width, initial-scale=1">
 				<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
