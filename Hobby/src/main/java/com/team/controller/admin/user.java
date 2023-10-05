@@ -100,11 +100,11 @@ public class user {
 	}
 	
 	@GetMapping("/adminUserPageDetailSearch")
-	public ModelAndView dEtAiLsEaRcHaDmInPaGe(@RequestParam("text") String text, @RequestParam("query") String subject, HttpSession session) {
+	public ModelAndView dEtAiLsEaRcHaDmInPaGe(
+			@RequestParam("text") String text, 
+			@RequestParam("query") String subject, 
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView("admin/user");
-		System.out.println("text is "+text);
-		System.out.println("subject is "+subject);
-		
 		if (subject.equals("1")) {
 			String newText = "%"+text+"%";
 			System.out.println("newText is "+ newText);

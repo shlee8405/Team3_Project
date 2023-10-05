@@ -28,22 +28,21 @@ public class report {
 	
 	// 상세 검색
 	@GetMapping("/adminReportDetailSearch")
-	public ModelAndView adminReportDetailSearch(@RequestParam("text") String text, @RequestParam("query") String subject, HttpSession session) {
+	public ModelAndView adminReportDetailSearch(
+			@RequestParam("text") String text, 
+			@RequestParam("query") String subject, 
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView("admin/report");
-		System.out.println("text is "+text);
-		System.out.println("subject is "+subject);
 		List<UserVO> userlist = userService.getAllUsers();
 		mv.addObject("userlist" , userlist);
 		
 		if (subject.equals("1")) {
 			String newText = "%"+text+"%";
-			System.out.println("newText is "+ newText);
 			List<ReportVO> list = reportService.getListByTitle(newText);
 			mv.addObject("list", list);
 			return mv;
 		} else if (subject.equals("2")) {
 			String newText = "%"+text+"%";
-			System.out.println("newText is "+ newText);
 			List<ReportVO> list = reportService.getListByNickname(newText);
 			mv.addObject("list",list);
 		} 

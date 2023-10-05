@@ -28,10 +28,11 @@ public class qna {
 	
 	// 상세 검색
 	@GetMapping("/adminQnaDetailSearch")
-	public ModelAndView adminQnaDetailSearch(@RequestParam("text") String text, @RequestParam("query") String subject, HttpSession session) {
+	public ModelAndView adminQnaDetailSearch(
+			@RequestParam("text") String text, 
+			@RequestParam("query") String subject, 
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView("admin/qna");
-		System.out.println("text is "+text);
-		System.out.println("subject is "+subject);
 		List<UserVO> userlist = userService.getAllUsers();
 		mv.addObject("userlist" , userlist);
 		
@@ -55,11 +56,6 @@ public class qna {
 	@RequestMapping("/deleteQnaAdmin")
 	public ModelAndView deleteQnaAdmin(QnaVO qvo , HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminQNA.do");
-		
-		System.out.println("/deleteQnaAdmin received q_content is : " + qvo.getQ_content());
-		System.out.println("/deleteQnaAdmin received q_response is : " + qvo.getQ_response());
-		System.out.println("/deleteQnaAdmin received q_idx is : " + qvo.getQ_idx());
-		
 		int res = qnaService.getDeleteQnaWithQVO(qvo);
 		if (res > 0)session.setAttribute("adminActionControl", "delete");
 		else session.setAttribute("adminActionControl", "error");
@@ -69,10 +65,6 @@ public class qna {
 	@RequestMapping("/updateQnaAdmin")
 	public ModelAndView updateQnaAdmin(QnaVO qvo, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminQNA.do");
-		System.out.println("/updateQnaAdmin received q_content is : " + qvo.getQ_content());
-		System.out.println("/updateQnaAdmin received q_response is : " + qvo.getQ_response());
-		System.out.println("/updateQnaAdmin received q_idx is : " + qvo.getQ_idx());
-
 		int res = qnaService.getUpdateQnaWithQVO(qvo);
 		if (res > 0) session.setAttribute("adminActionControl", "update");
 		else session.setAttribute("adminActionControl", "error");

@@ -25,36 +25,30 @@ public class mainpagemodifier {
 	private MpimgService mpimgService;
 	
 	@PostMapping("/uploadMPImage.do")
-	public ModelAndView uploadMPImage(MPIVO mpivo , HttpSession session) {
+	public ModelAndView uploadMPImage(MPIVO mpivo, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminMainPageModifier.do");
 		try {
 			String path = session.getServletContext().getRealPath("/resources/background");
 			MultipartFile vo_file = mpivo.getFile();
-//			System.out.println("file name in /uploadMPImage.do is : " + vo_file.getName());
-			
-			if(vo_file.isEmpty()) { // didn't receive file
-//				System.out.println("file is empty in /uploadMPImage.do");
+			if (vo_file.isEmpty()) { // didn't receive file
 				session.setAttribute("adminActionControl", "emptyfile");
 				return mv;
 			} else {
 				int res = mpimgService.uploadImage(mpivo);
-				if(res>0) {	// insert successful
+				if (res > 0) { // insert successful
 					String idx = mpimgService.getMaxIdx();
 					String extension = FilenameUtils.getExtension(vo_file.getOriginalFilename());
-					String imgname = "background"+idx+"."+extension;
-//					System.out.println("img name is : "+imgname);
+					String imgname = "background" + idx + "." + extension;
 					mpivo.setMp_idx(idx);
 					mpivo.setMp_imgname(imgname);
 					int res2 = mpimgService.insertImgname(mpivo);
 					byte[] in = vo_file.getBytes();
 					File out = new File(path, imgname);
-					if(out.exists()) {
+					if (out.exists()) {
 						out.delete();
 						FileCopyUtils.copy(in, out);
-//						System.out.println("file deleted and copied in : " + path );
 					} else {
 						FileCopyUtils.copy(in, out);
-//						System.out.println("file copied in : "+ path);
 					}
 				} else { // insert fail
 					System.out.println("insert failed in /uploadMPImage.do");
@@ -68,7 +62,8 @@ public class mainpagemodifier {
 	
 	
 	@GetMapping("/deleteMPImage.do")
-	public ModelAndView deleteMPImage(@RequestParam("idx") String idx,
+	public ModelAndView deleteMPImage(
+			@RequestParam("idx") String idx,
 			@RequestParam("imgname") String imgname ,
 			HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminMainPageModifier.do");

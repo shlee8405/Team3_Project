@@ -72,7 +72,7 @@ public class AdminController {
 	}
 	
 	@GetMapping("/adminHome.do")
-	public ModelAndView goAdminHome() /* 愿�由ъ옄 �솃 */ {
+	public ModelAndView goAdminHome() /* 관리자 홈 */ {
 		ModelAndView mv = new ModelAndView("admin/home");
 		int userCountToday = userService.getUsersToday();
 		int groupsCountToday = groupService.getGroupsToday();
@@ -80,10 +80,7 @@ public class AdminController {
 		int todayLogin = logincounterService.todayLogin();
 		List<QnaVO> qnalist = qnaService.getUncheckedQna();
 		List<ReportVO> reportlist = reportService.getUncheckedReport();
-//		List<QnaVO> qnalist = new ArrayList<QnaVO>();
-//		List<ReportVO> reportlist = new ArrayList<ReportVO>();
 		List<UserVO> userlist = userService.getAllUsers();
-		
 		mv.addObject("viewCount", todayView);
 		mv.addObject("loginCount", todayLogin);
 		mv.addObject("groupCount", groupsCountToday);
@@ -104,7 +101,7 @@ public class AdminController {
 	}
 
 	@GetMapping("/adminGroup.do")
-	public ModelAndView goAdminGroup() /* 愿�由ъ옄 洹몃９ */ {
+	public ModelAndView goAdminGroup() /* 관리자 캠핑모임 */ {
 		ModelAndView mv = new ModelAndView("admin/group");
 		List<GroupVO> list = groupService.getAllGroupsNoPaging();
 		List<UserVO> userlist = userService.getAllUsers();

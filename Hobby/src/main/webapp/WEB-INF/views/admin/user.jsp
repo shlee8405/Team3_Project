@@ -545,8 +545,8 @@ import 'datatables.net-responsive-dt';
 															<c:choose>
 																<c:when test="${k.u_status==2}">
 																	<c:choose>
-																		<c:when test="${not empty k.u_id}">
-																			<c:set var="inputString" value="${k.u_id}" /> <!-- Replace with your input string -->
+																		<c:when test="${not empty k.u_id}"> <!-- 카카오계정 -->
+																			<c:set var="inputString" value="${k.u_id}" /> 
 																		    <c:set var="firstLetter" value="${inputString.substring(0, 1)}" />
 																		    <c:set var="lastLetter" value="${inputString.substring(fn:length(inputString) - 1)}" />
 																		    <c:set var="middleAsterisks" value="" />
@@ -562,8 +562,8 @@ import 'datatables.net-responsive-dt';
 																</c:when>
 																<c:otherwise>
 																	<c:choose>
-																		<c:when test="${not empty k.u_id}">
-																			<c:set var="inputString" value="${k.u_id}" /> <!-- Replace with your input string -->
+																		<c:when test="${not empty k.u_id}"> <!-- 일반계정 -->
+																			<c:set var="inputString" value="${k.u_id}" /> 
 																		    <c:set var="firstLetter" value="${inputString.substring(0, 1)}" />
 																		    <c:set var="lastLetter" value="${inputString.substring(fn:length(inputString) - 1)}" />
 																		    <c:set var="middleAsterisks" value="" />
@@ -587,7 +587,7 @@ import 'datatables.net-responsive-dt';
 																<c:when test="${not empty k.u_name }">
 																	<c:choose>
 																		<c:when test="${k.u_name.length() >= 3}">  
-																			<c:set var="inputString" value="${k.u_name}" /> <!-- Replace with your input string -->
+																			<c:set var="inputString" value="${k.u_name}" /> 
 																		    <c:set var="firstLetter" value="${inputString.substring(0, 1)}" />
 																		    <c:set var="lastLetter" value="${inputString.substring(fn:length(inputString) - 1)}" />
 																		    <c:set var="middleAsterisks" value="" />
@@ -610,7 +610,7 @@ import 'datatables.net-responsive-dt';
 															<!-- 이메일 숨기기 -->
 															<c:choose>
 																<c:when test="${not empty k.u_email }">
-																	<c:set var="email" value="${k.u_email}" /> <!-- Replace with your email address -->
+																	<c:set var="email" value="${k.u_email}" />
 																    <c:set var="atIndex" value="${email.indexOf('@')}" />
 																    <c:set var="firstVisiblePart" value="${email.substring(0,2)}" />
 																    <c:set var="hiddenPart" value="${email.substring(2, atIndex)}" />
@@ -619,7 +619,7 @@ import 'datatables.net-responsive-dt';
 																    <c:forEach var="i" begin="0" end="${fn:length(hiddenPart) - 1}">
 																        <c:set var="maskedPart" value="${maskedPart}*"/>
 																    </c:forEach>
-																    <td>${k.u_email.substring(0, 2)}${maskedPart}${visiblePart}</td>
+																    <td>${firstVisiblePart}${maskedPart}${visiblePart}</td>
 																</c:when>
 																
 																<c:otherwise>
