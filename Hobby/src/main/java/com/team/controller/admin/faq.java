@@ -24,7 +24,7 @@ public class faq {
 	public FaqService faqService;
 	
 	// 상세 검색 list	
-	@GetMapping("/adminFaqDetailSearch")
+	@GetMapping("/adminFaqDetailSearch.do")
 	public ModelAndView dEtAiLsEaRcHaDmInPaGeFaQ(@RequestParam("text") String text, @RequestParam("query") String subject, HttpSession session) {
 		ModelAndView mv = new ModelAndView("admin/faq");
 		System.out.println("text is "+text);
@@ -44,7 +44,7 @@ public class faq {
 		} 
 		return mv;
 	}
-	@RequestMapping("/updateFaqAdmin")
+	@RequestMapping("/updateFaqAdmin.do")
 	public ModelAndView UpDaTeAdMiNFaQ(FaqVO fvo, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminFAQ.do");		
 		System.out.println("fvo idx is"+ fvo.getF_idx());
@@ -56,7 +56,7 @@ public class faq {
 		else session.setAttribute("adminActionControl", "error");
 		return mv;
 	}
-	@GetMapping("/hideFaqAdmin")
+	@GetMapping("/hideFaqAdmin.do")
 	public ModelAndView hideFaq(@RequestParam("idx") String idx, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminFAQ.do");
 		int res = faqService.getHideFaq(idx);
@@ -64,7 +64,7 @@ public class faq {
 		else session.setAttribute("adminActionControl", "error");
 		return mv;
 	}
-	@GetMapping("/unhideFaqAdmin")
+	@GetMapping("/unhideFaqAdmin.do")
 	public ModelAndView unhideFaq(@RequestParam("idx") String idx, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminFAQ.do");
 		int res = faqService.getUnhideFaq(idx);
@@ -73,7 +73,7 @@ public class faq {
 		return mv;
 	}
 	
-	@GetMapping("/deleteFaqAdmin")
+	@GetMapping("/deleteFaqAdmin.do")
 	public ModelAndView deleteFaq(@RequestParam("idx") String idx, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminFAQ.do");
 		int res = faqService.getDeleteFaq(idx);
@@ -82,7 +82,7 @@ public class faq {
 		return mv;
 	}
 	
-	@RequestMapping("/addFaqAdmin")
+	@RequestMapping("/addFaqAdmin.do")
 	public ModelAndView addFaq(FaqVO fvo, 
 			HttpServletResponse response,
 			HttpServletRequest request) {

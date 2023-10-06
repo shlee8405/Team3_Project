@@ -306,11 +306,11 @@ import 'datatables.net-responsive-dt';
 							else {
 								const subject = document.getElementById("searchTextSelect").value;
 								if (subject == '1') {
-									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminUserPageDetailSearch.do?text="+text+"&query="+subject;
 								} else if (subject == '2') {
-									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminUserPageDetailSearch.do?text="+text+"&query="+subject;
 								} else if (subject == '3') {
-									location.href = "/adminUserPageDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminUserPageDetailSearch.do?text="+text+"&query="+subject;
 								}
 							}
 						}
@@ -488,27 +488,27 @@ import 'datatables.net-responsive-dt';
 															      			// 상세 유저 CRUD
 															      			const banUser = (idx) => {
 															      				const response = confirm("정말로 밴하겠습니까?");
-															      				if(response) location.href = "/banUserAdmin?idx="+idx;
+															      				if(response) location.href = "/banUserAdmin.do?idx="+idx;
 															      				else alert("취소하셨습니다");
 															      			}
 															      			
 															      			const unbanUser = (idx) => {
 															      				const response = confirm("정말로 밴을 풀겠습니까?");
-															      				if(response) location.href = "/unbanUserAdmin?idx="+idx;
+															      				if(response) location.href = "/unbanUserAdmin.do?idx="+idx;
 															      				else alert("취소하셨습니다");
 															      			}
 															      			
 															      			
 															      			const deleteUser = (idx) => {
 															      				const response = confirm("정말로 삭제 하시겠습니까?");
-															      				if(response) location.href = "/deleteUserAdmin?idx="+idx;
+															      				if(response) location.href = "/deleteUserAdmin.do?idx="+idx;
 															      				else alert("취소하셨습니다");
 															      			}
 															      			
 															      			function updateUser(f) {
 															      				const response = confirm("정말로 수정 하시겠습니까?");
 															      				if(response) {
-															      					f.action = "/updateUserAdmin";
+															      					f.action = "/updateUserAdmin.do";
 															      					f.submit();
 															      				}
 															      				else alert("취소하셨습니다");

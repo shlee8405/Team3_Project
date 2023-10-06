@@ -406,7 +406,7 @@ canvas#myChart {
   const logincountctx = document.getElementById('logincountchart');
   $(document).ready(function() {
 	  $.ajax({
-		  url: '/getviewcountlist',
+		  url: '/getviewcountlist.do',
 		  type:'GET',
 		  dataType:'json',
 		  success:function(data){

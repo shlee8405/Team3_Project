@@ -1498,7 +1498,7 @@ rotate(
                     modalHtml += '</div></div></div></div>';
 
                     // 생성된 모달 HTML을 body에 추가합니다.
-                    if (popupClosedTime && new Date().getTime() - popupClosedTime < 30000) {
+                    if (popupClosedTime && new Date().getTime() - popupClosedTime < 3600000) {
                         // Do nothing for this specific popup, but continue to process the other logic.
                     } else {
                         // Only add the modal HTML and show the modal if the time condition is not met.
@@ -1895,7 +1895,8 @@ rotate(
 	<!-- 로그인 스크립트 KAKAO / NAVER -->
 	<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 	<script>
-		Kakao.init('c6915a815f664f1b0e24428d4202b72f'); // Initialize Kakao SDK with your API key
+		//Kakao.init('c6915a815f664f1b0e24428d4202b72f'); // Initialize Kakao SDK with your API key  - CU OR DP
+		Kakao.init('da22a12de94c832770e771b3a3691747'); // Initialize Kakao SDK with your API key - SHL
 		
 		//root url 일때에도 /home.do 보내기
 		var url = window.location.pathname;
@@ -1971,7 +1972,7 @@ rotate(
 		
 	<!-- //네이버 로그인 버튼 노출 영역 -->
 	<script type="text/javascript">
-		var naver_id_login = new naver_id_login("G9mEXjeV6N3JKbzZvasQ", "http://localhost:8090");
+		var naver_id_login = new naver_id_login("G9mEXjeV6N3JKbzZvasQ", "https://nohsam.store");
 		var state = naver_id_login.getUniqState();
 		naver_id_login.setButton("green",3,50);
 		naver_id_login.setDomain(".service.com");

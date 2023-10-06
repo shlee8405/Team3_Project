@@ -53,7 +53,7 @@ public class user {
 	}
 	
 	
-	@GetMapping("/banUserAdmin")
+	@GetMapping("/banUserAdmin.do")
 	public ModelAndView banUserAdmin(@RequestParam("idx") String idx, HttpSession session) {
 //		System.out.println("ban : " + idx);
 		ModelAndView mv = new ModelAndView("redirect:/adminUser.do");
@@ -63,7 +63,7 @@ public class user {
 		else session.setAttribute("adminActionControl", "error");
 		return mv;
 	}
-	@GetMapping("/unbanUserAdmin")
+	@GetMapping("/unbanUserAdmin.do")
 	public ModelAndView unbanUserAdmin(@RequestParam("idx") String idx, HttpSession session) {
 //		System.out.println("ban : " + idx);
 		ModelAndView mv = new ModelAndView("redirect:/adminUser.do");
@@ -73,7 +73,7 @@ public class user {
 		else session.setAttribute("adminActionControl", "error");
 		return mv;
 	}
-	@GetMapping("/deleteUserAdmin")
+	@GetMapping("/deleteUserAdmin.do")
 	public ModelAndView deleteUserAdmin(@RequestParam("idx") String idx, HttpSession session) {
 //		System.out.println("delete : " + idx);
 		ModelAndView mv = new ModelAndView("redirect:/adminUser.do");
@@ -83,7 +83,7 @@ public class user {
 		else session.setAttribute("adminActionControl", "error");
 		return mv;
 	}
-	@RequestMapping("/updateUserAdmin")
+	@RequestMapping("/updateUserAdmin.do")
 	public ModelAndView updateUserAdmin(UserVO uvo, HttpSession session) {
 //		System.out.println("update : " + idx);
 		ModelAndView mv = new ModelAndView("redirect:/adminUser.do");
@@ -99,7 +99,7 @@ public class user {
 		return mv;
 	}
 	
-	@GetMapping("/adminUserPageDetailSearch")
+	@GetMapping("/adminUserPageDetailSearch.do")
 	public ModelAndView dEtAiLsEaRcHaDmInPaGe(
 			@RequestParam("text") String text, 
 			@RequestParam("query") String subject, 

@@ -210,9 +210,9 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 								const subject = document.getElementById("searchTextSelect").value;
 								if (subject == '1') {
 									//TODO search
-									location.href = "/adminQnaDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminQnaDetailSearch.do?text="+text+"&query="+subject;
 								} else if (subject == '2') {
-									location.href = "/adminQnaDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminQnaDetailSearch.do?text="+text+"&query="+subject;
 								} 
 							}
 						}
@@ -302,7 +302,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 														function sendQna(f) {
 															const response = confirm("정말로 수정 하시겠습니까?");
 										      				if(response) {
-										      					f.action = "/updateQnaAdmin";
+										      					f.action = "/updateQnaAdmin.do";
 										      					f.submit();
 										      				}
 										      				else {
@@ -313,7 +313,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 														function deleteQna(f) {
 															const response = confirm("정말로 삭제 하시겠습니까?");
 										      				if(response) {
-										      					f.action = "/deleteQnaAdmin";
+										      					f.action = "/deleteQnaAdmin.do";
 										      					f.submit();
 										      				}
 										      				else {

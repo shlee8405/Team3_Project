@@ -27,7 +27,7 @@ public class report {
 	private UserService userService;
 	
 	// 상세 검색
-	@GetMapping("/adminReportDetailSearch")
+	@GetMapping("/adminReportDetailSearch.do")
 	public ModelAndView adminReportDetailSearch(
 			@RequestParam("text") String text, 
 			@RequestParam("query") String subject, 
@@ -49,7 +49,7 @@ public class report {
 		return mv;
 	}
 	
-	@RequestMapping("/updateReportAdmin")
+	@RequestMapping("/updateReportAdmin.do")
 	public ModelAndView updateReportAdmin(ReportVO rvo, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminReport.do");
 		int res = reportService.getUpdateReportByRVO(rvo);
@@ -58,7 +58,7 @@ public class report {
 		return mv;
 	}
 	
-	@RequestMapping("/deleteReportAdmin")
+	@RequestMapping("/deleteReportAdmin.do")
 	public ModelAndView deleteReportAdmin(ReportVO rvo, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminReport.do");
 		System.out.println("/deleteReportAdmin idx : "+rvo.getR_idx());
@@ -68,7 +68,7 @@ public class report {
 		return mv;
 	}
 	
-	@RequestMapping("/reviveReportAdmin")
+	@RequestMapping("/reviveReportAdmin.do")
 	public ModelAndView reviveReportAdmin(ReportVO rvo, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminReport.do");
 		System.out.println("/reviveReportAdmin idx : "+rvo.getR_idx());
@@ -78,7 +78,7 @@ public class report {
 		return mv;
 	}
 	
-	@RequestMapping("/banUserReportAdmin")
+	@RequestMapping("/banUserReportAdmin.do")
 	public ModelAndView banUserReportAdmin(ReportVO rvo, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminReport.do");
 		System.out.println(rvo.getU_idx2());

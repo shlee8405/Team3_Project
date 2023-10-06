@@ -207,7 +207,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 						function addFaq(f) {
 							const response = confirm("정말로 추가 하시겠습니까?");
 		      				if(response) {
-		      					f.action = "/addFaqAdmin";
+		      					f.action = "/addFaqAdmin.do";
 		      					f.submit();
 		      				}
 		      				else {
@@ -298,9 +298,9 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 								const subject = document.getElementById("searchTextSelect").value;
 								if (subject == '1') {
 									//TODO search
-									location.href = "/adminFaqDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminFaqDetailSearch.do?text="+text+"&query="+subject;
 								} else if (subject == '2') {
-									location.href = "/adminFaqDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminFaqDetailSearch.do?text="+text+"&query="+subject;
 								} 
 							}
 						}
@@ -386,25 +386,25 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 														function deleteFaq(idx){
 															const response = confirm("정말로 삭제하시겠습니까?");
 															if(response) {
-																location.href="/deleteFaqAdmin?idx="+idx;
+																location.href="/deleteFaqAdmin.do?idx="+idx;
 															}
 														}
 														function hideFaq(idx){
 															const response = confirm("정말로 숨기겠습니까?");
 															if(response) {
-																location.href="/hideFaqAdmin?idx="+idx;
+																location.href="/hideFaqAdmin.do?idx="+idx;
 															}
 														}
 														function unhideFaq(idx){
 															const response = confirm("정말로 표시하겠습니까?");
 															if(response) {
-																location.href="/unhideFaqAdmin?idx="+idx;
+																location.href="/unhideFaqAdmin.do?idx="+idx;
 															}	
 														}
 														function updateFaq(f) {
 															const response = confirm("정말로 수정 하시겠습니까?");
 										      				if(response) {
-										      					f.action = "/updateFaqAdmin";
+										      					f.action = "/updateFaqAdmin.do";
 										      					f.submit();
 										      				}
 										      				else {

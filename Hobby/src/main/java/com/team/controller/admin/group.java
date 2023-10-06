@@ -37,7 +37,7 @@ public class group {
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/adminGroupPageDetailSearch")
+	@GetMapping("/adminGroupPageDetailSearch.do")
 	public ModelAndView adminGroupPageDetailSearch(@RequestParam("text") String text, @RequestParam("query") String subject, HttpSession session) {
 		ModelAndView mv = new ModelAndView("admin/group");
 		System.out.println("text is "+text);
@@ -86,7 +86,7 @@ public class group {
 	}
 	
 	
-	@RequestMapping("/deleteGroupAdmin") 
+	@RequestMapping("/deleteGroupAdmin.do") 
 	public ModelAndView deleteGroupAdmin(GroupVO gvo, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminGroup.do");
 		int res = groupService.getGroupDelete(gvo);
@@ -95,7 +95,7 @@ public class group {
 		return mv;
 	}
 	
-	@RequestMapping("/reviveGroupAdmin")
+	@RequestMapping("/reviveGroupAdmin.do")
 	public ModelAndView reviveGroupAdmin(GroupVO gvo, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminGroup.do");
 		int res = groupService.getGroupRevive(gvo);

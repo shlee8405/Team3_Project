@@ -214,9 +214,9 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 							else {
 								const subject = document.getElementById("searchTextSelect").value;
 								if (subject == '1') {
-									location.href = "/adminReportDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminReportDetailSearch.do?text="+text+"&query="+subject;
 								} else if (subject == '2') {
-									location.href = "/adminReportDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminReportDetailSearch.do?text="+text+"&query="+subject;
 								} 
 							}
 						}
@@ -321,7 +321,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 														function sendReport(f) {
 															const response = confirm("정말로 수정 하시겠습니까?");
 										      				if(response) {
-										      					f.action = "/updateReportAdmin";
+										      					f.action = "/updateReportAdmin.do";
 										      					f.submit();
 										      				}
 										      				else {
@@ -365,7 +365,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																					function banUser(f) {
 																						const response = confirm("정말로 밴 하시겠습니까?");
 																						if(response) {
-																							f.action = "/banUserReportAdmin"
+																							f.action = "/banUserReportAdmin.do"
 																							f.submit();
 																						}
 																						else {
@@ -437,7 +437,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																				function reviveReport(f) {
 																					const response = confirm("정말로 복구 하시겠습니까?");
 																					if(response) {
-																						f.action = "/reviveReportAdmin";
+																						f.action = "/reviveReportAdmin.do";
 																						f.submit();
 																					} else {
 																						alert("취소하셨습니다");
@@ -448,7 +448,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																				function deleteReport(f) {
 																					const response = confirm("정말로 삭제 하시겠습니까?");
 																					if(response) {
-																						f.action = "/deleteReportAdmin";
+																						f.action = "/deleteReportAdmin.do";
 																						f.submit();
 																					} else {
 																						alert("취소하셨습니다");

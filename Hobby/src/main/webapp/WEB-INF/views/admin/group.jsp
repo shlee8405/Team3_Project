@@ -251,13 +251,13 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 							else {
 								const subject = document.getElementById("searchTextSelect").value;
 								if (subject == '1') {
-									location.href = "/adminGroupPageDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminGroupPageDetailSearch.do?text="+text+"&query="+subject;
 								} else if (subject == '2') {
-									location.href = "/adminGroupPageDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminGroupPageDetailSearch.do?text="+text+"&query="+subject;
 								} else if (subject == '3') {
-									location.href = "/adminGroupPageDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminGroupPageDetailSearch.do?text="+text+"&query="+subject;
 								} else if (subject == '4') {
-									location.href = "/adminGroupPageDetailSearch?text="+text+"&query="+subject;
+									location.href = "/adminGroupPageDetailSearch.do?text="+text+"&query="+subject;
 								}
 							}
 						}
@@ -526,7 +526,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																				function deleteGroup(f) {
 																					const response = confirm('정말로 삭제 하시겠습니까?')
 																					if(response) {
-																						f.action = "/deleteGroupAdmin"
+																						f.action = "/deleteGroupAdmin.do"
 																						f.submit();
 																					} else {
 																						alert("취소하셨습니다");
@@ -536,7 +536,7 @@ background-color: transparent;height:100%;display: flex;align-items: center;font
 																				function reviveGroup(f){
 																					const response = confirm('정말로 삭제를 복구 하시겠습니까?');
 																					if(response) {
-																						f.action = "/reviveGroupAdmin"
+																						f.action = "/reviveGroupAdmin.do"
 																						f.submit();
 																					} else {
 																						alert("취소하셨습니다");

@@ -178,7 +178,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=6a447b9339cfa86beab10e8ff569b495"></script>
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da22a12de94c832770e771b3a3691747"></script>
 <script type="text/javascript">
 	var mapX = ${cvo.mapX} //API로부터 받은 캠핑장의 X좌표
 	var mapY = ${cvo.mapY} //API로부터 받은 캠핑장의 Y좌표

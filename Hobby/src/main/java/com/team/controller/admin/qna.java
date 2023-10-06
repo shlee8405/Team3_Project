@@ -27,7 +27,7 @@ public class qna {
 	private UserService userService;
 	
 	// 상세 검색
-	@GetMapping("/adminQnaDetailSearch")
+	@GetMapping("/adminQnaDetailSearch.do")
 	public ModelAndView adminQnaDetailSearch(
 			@RequestParam("text") String text, 
 			@RequestParam("query") String subject, 
@@ -53,7 +53,7 @@ public class qna {
 	
 	
 	
-	@RequestMapping("/deleteQnaAdmin")
+	@RequestMapping("/deleteQnaAdmin.do")
 	public ModelAndView deleteQnaAdmin(QnaVO qvo , HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminQNA.do");
 		int res = qnaService.getDeleteQnaWithQVO(qvo);
@@ -62,7 +62,7 @@ public class qna {
 		return mv;
 	}
 
-	@RequestMapping("/updateQnaAdmin")
+	@RequestMapping("/updateQnaAdmin.do")
 	public ModelAndView updateQnaAdmin(QnaVO qvo, HttpSession session) {
 		ModelAndView mv = new ModelAndView("redirect:/adminQNA.do");
 		int res = qnaService.getUpdateQnaWithQVO(qvo);

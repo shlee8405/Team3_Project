@@ -28,7 +28,7 @@ public class home {
 	private LogincounterService logincounterService;
 	
 	
-	@GetMapping("/getviewcountlist")
+	@GetMapping("/getviewcountlist.do")
 	public ResponseEntity<List<Object>> getVCVOlist() {
 //		System.out.println("inside /getviewcountlist");
 		//총 조회수 데이터 생성
